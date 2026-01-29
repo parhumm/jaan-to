@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(context/**)",
+      "Read(skills/**)",
+      "Read(docs/**)",
+      "Write(.jaan-to/**)",
+      "Write(roadmaps/**)",
+      "Glob",
+      "Grep"
+    ],
+    "deny": [
+      "Write(src/**)",
+      "Write(.env*)",
+      "Bash(rm:*)"
+    ]
+  }
+}

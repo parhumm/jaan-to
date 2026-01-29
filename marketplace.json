@@ -1,0 +1,58 @@
+{
+  "name": "jaan-to",
+  "displayName": "jaan.to — Give soul to your workflow",
+  "version": "1.0.0",
+  "description": "AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.",
+  "categories": ["productivity", "workflow", "product-management"],
+  "icon": "assets/icon.png",
+  "publisher": {
+    "name": "parhumm",
+    "url": "https://github.com/parhumm"
+  },
+  "source": {
+    "type": "github",
+    "repo": "parhumm/jaan-to"
+  },
+  "skills": [
+    {
+      "name": "pm-prd-write",
+      "description": "Generate PRD from initiative"
+    },
+    {
+      "name": "data-gtm-datalayer",
+      "description": "Generate GTM tracking code"
+    },
+    {
+      "name": "skill-create",
+      "description": "Create new skill"
+    },
+    {
+      "name": "skill-update",
+      "description": "Update existing skill"
+    },
+    {
+      "name": "docs-create",
+      "description": "Create documentation"
+    },
+    {
+      "name": "docs-update",
+      "description": "Audit documentation"
+    },
+    {
+      "name": "learn-add",
+      "description": "Add lesson to LEARN.md"
+    },
+    {
+      "name": "research-about",
+      "description": "Deep research on topic"
+    },
+    {
+      "name": "research-add",
+      "description": "Add to research index"
+    },
+    {
+      "name": "roadmap-add",
+      "description": "Add task to roadmap"
+    }
+  ]
+}

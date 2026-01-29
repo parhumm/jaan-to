@@ -1,0 +1,87 @@
+# Changelog
+
+All notable changes to the jaan.to Claude Code Plugin will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.0] - 2026-01-29
+
+### Added
+
+#### Skills (10)
+- **pm-prd-write** - Generate comprehensive PRD from initiative with validation
+- **data-gtm-datalayer** - Generate GTM tracking code and dataLayer specification
+- **skill-create** - Create new skill with wizard and research integration
+- **skill-update** - Update existing skill with specification compliance
+- **docs-create** - Create documentation with templates and style guide
+- **docs-update** - Audit and update stale documentation with git-based detection
+- **learn-add** - Add lesson to project's LEARN.md knowledge base
+- **research-about** - Deep research on any topic with source citations
+- **research-add** - Add file/URL to research index for future reference
+- **roadmap-add** - Add task to roadmap with priority and scope
+
+#### Agents (2)
+- **quality-reviewer** - Reviews outputs for completeness, accuracy, and quality standards
+- **context-scout** - Gathers relevant context from codebase before generation
+
+#### Output Styles (2)
+- **enterprise-doc** - Formal, comprehensive documentation format
+- **concise-summary** - Brief, executive-level summaries
+
+#### Hooks
+- **PRD validation hook** - Skill-scoped PreToolUse on pm-prd-write ensures required sections
+- **Feedback capture hook** - Global PostToolUse captures user feedback for learning
+
+#### Context System
+- Context templates for tech stack (`context/tech.md`)
+- Context templates for team structure (`context/team.md`)
+- Context templates for integrations (`context/integrations.md`)
+- Boundary definitions for safe paths (`context/boundaries.md`)
+
+#### Learning System
+- Accumulated LEARN.md knowledge from 50+ skill runs
+- Automatic feedback routing to appropriate skill's LEARN.md
+- Project-level learning storage in `.jaan-to/learn/`
+
+#### Infrastructure
+- MCP scaffolding for future integrations
+- Bootstrap script for first-run setup
+- Plugin manifest (`.claude-plugin/plugin.json`)
+- Marketplace distribution metadata
+- Two-phase workflow with human approval checkpoints
+
+#### Documentation
+- Comprehensive README with installation and usage
+- Getting started guide
+- Skill creation specification
+- Style guide for documentation
+- Vision and roadmap documents
+- Migration guide from standalone setup
+
+### Changed
+- Migrated from standalone `.claude/skills/` setup to plugin architecture
+- Updated all skill command names to namespaced format (`/jaan-to:*`)
+- Moved context files from `jaan-to/context/` to plugin-relative `context/`
+- Moved hooks from shell scripts to JSON configuration
+- Output directory standardized to project-relative `.jaan-to/outputs/`
+- Learning files moved to project-relative `.jaan-to/learn/`
+
+### Security
+- Restricted write permissions to `.jaan-to/` directory only
+- Removed hooks section from settings.json (now plugin-managed)
+- Added permission tiers (Minimal, Standard, Power User)
+
+---
+
+## [Unreleased]
+
+### Planned for 1.1.0
+- Additional quick-win skills (qa-test-cases, data-sql-query, pm-story-write)
+- Enhanced MCP integrations (GA4, GitLab, Jira, Figma)
+- JSON export alongside markdown outputs
+- External notifications (Slack)
+
+---
+
+[1.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v1.0.0

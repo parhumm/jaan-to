@@ -1,0 +1,23 @@
+# Obsidian
+.obsidian/
+
+# AI OS artifacts (generated outputs)
+# Note: .aios/ is intentionally tracked for artifact history
+# Uncomment below to ignore:
+# .aios/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+
+# Environment files
+.env
+.env.local
+.env.*.local
+/.jaan-to
+.claude-plugin-cache/
