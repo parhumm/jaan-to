@@ -17,7 +17,22 @@
 
 ## Installation
 
-### Quick start (local development)
+### From GitHub (recommended)
+
+Add the marketplace and install:
+```
+/plugin marketplace add parhumm/jaan-to
+/plugin install jaan-to@parhumm/jaan-to
+```
+
+Or with scopes:
+```bash
+claude plugin install jaan-to@parhumm/jaan-to --scope user      # all projects
+claude plugin install jaan-to@parhumm/jaan-to --scope project   # team (in VCS)
+claude plugin install jaan-to@parhumm/jaan-to --scope local     # personal, gitignored
+```
+
+### Local development
 ```bash
 claude --plugin-dir /path/to/jaan-to
 ```

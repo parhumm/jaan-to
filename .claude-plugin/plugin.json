@@ -6,5 +6,9 @@
   "repository": "https://github.com/parhumm/jaan-to",
   "homepage": "https://jaan.to",
   "license": "MIT",
-  "keywords": ["workflow", "prd", "product-management", "analytics", "gtm", "skills"]
+  "keywords": ["workflow", "prd", "product-management", "analytics", "gtm", "skills"],
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "agents": "./agents/",
+  "outputStyles": "./outputStyles/"
 }

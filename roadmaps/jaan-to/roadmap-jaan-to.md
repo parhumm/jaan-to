@@ -60,7 +60,7 @@
 - [x] Output styles: `outputStyles/enterprise-doc.md`, `outputStyles/concise-summary.md`
 - [x] Command namespace: `/to-jaan-*` → `/jaan-to:*` (colon-separated)
 - [x] Documentation: 8 new docs created, 27 existing docs updated
-- [x] Marketplace distribution (`marketplace.json`, `README.md`, `CHANGELOG.md`)
+- [x] Marketplace distribution (`marketplace.json` catalog format, manifest component paths, README install instructions)
 - [x] Directory structure reference updated
 - [x] Clean plugin installation — exclude non-essential files; `scripts/build-dist.sh` produces clean distribution
 - [x] Store jaan.to output files in `.jaan-to/` inside the target project; bootstrap seeds context, templates, learn, docs
