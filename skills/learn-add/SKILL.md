@@ -4,7 +4,7 @@ description: |
   Add a lesson to a skill's LEARN.md file.
   Routes feedback to skill, template, or context learning.
   Maps to: jaan-to:learn-add
-allowed-tools: Read, Glob, Grep, Write(.jaan-to/learn/**), Write(context/**), Bash(git add:*), Bash(git commit:*)
+allowed-tools: Read, Glob, Grep, Write(.jaan-to/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: "[target] [lesson]"
 ---
 
@@ -15,19 +15,19 @@ argument-hint: "[target] [lesson]"
 ## Context Files
 
 - `.jaan-to/learn/*.learn.md` - Skill lessons
-- `context/*.md` - Context files and lessons
+- `.jaan-to/context/*.md` - Context files and lessons
 
 ## Input
 
 **Arguments**: $ARGUMENTS
 
 Expected format: `"target" "lesson"`
-- Target: skill name, `templates/name`, or `context/name`
+- Target: skill name, `.jaan-to/templates/name`, or `.jaan-to/context/name`
 - Lesson: the feedback to add
 
 Examples:
 - `/jaan-to:learn-add "pm-prd-write" "Always ask about rollback strategy"`
-- `/jaan-to:learn-add "context/tech" "All new tables need soft delete"`
+- `/jaan-to:learn-add ".jaan-to/context/tech" "All new tables need soft delete"`
 
 If no input provided, ask for target and lesson.
 
@@ -51,10 +51,10 @@ Route based on target:
 |----------------|-------------------|
 | Skill name (e.g., `pm-prd-write`) | `.jaan-to/learn/{skill}.learn.md` |
 | System skill (e.g., `skill-create`) | `.jaan-to/learn/{skill}.learn.md` |
-| `templates/{name}` | `jaan-to/templates/LEARN.md` |
-| `context/{name}` | `context/LEARN.md` |
-| `context/tech` | `context/tech.md` (constraints section) |
-| `context/team` | `context/team.md` (norms section) |
+| `.jaan-to/templates/{name}` | `.jaan-to/templates/LEARN.md` |
+| `.jaan-to/context/{name}` | `.jaan-to/context/LEARN.md` |
+| `.jaan-to/context/tech` | `.jaan-to/context/tech.md` (constraints section) |
+| `.jaan-to/context/team` | `.jaan-to/context/team.md` (norms section) |
 
 ## Step 3: Auto-Categorize Lesson
 

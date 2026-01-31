@@ -9,8 +9,8 @@
 - version: 0.1.0
 
 ## References
-- Skill Specification: [docs/extending/create-skill.md](../docs/extending/create-skill.md)
-- Style Guide: [docs/STYLE.md](../docs/STYLE.md)
+- Skill Specification: `.jaan-to/docs/create-skill.md` (project)
+- Style Guide: `.jaan-to/docs/STYLE.md` (project)
 
 ## Enabled Roles
 - pm (Product Manager)

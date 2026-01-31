@@ -16,7 +16,7 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 
 Read these before execution:
 - `.jaan-to/learn/data-gtm-datalayer.learn.md` - Past lessons
-- `skills/data-gtm-datalayer/template.md` - Output template
+- `.jaan-to/templates/data-gtm-datalayer.template.md` - Output template
 
 ## Input
 
@@ -330,7 +330,7 @@ EXAMPLE WITH VALUES
 If approved:
 1. Generate slug from feature-item (e.g., "player-pause")
 2. Create path: `.jaan-to/outputs/data/gtm/{slug}/tracking.md`
-3. Use template from `skills/data-gtm-datalayer/template.md`
+3. Use template from `.jaan-to/templates/data-gtm-datalayer.template.md`
 4. Write file
 5. Confirm: "Written to {path}"
 

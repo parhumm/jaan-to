@@ -4,7 +4,7 @@ description: |
   Deep research on any topic with structured markdown output.
   Auto-triggers on: research about, deep dive, investigate, research on
   Maps to: jaan-to:research-about
-allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write(docs/deepresearches/**), Edit, Bash(git add:*), Bash(git commit:*)
+allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write(.jaan-to/outputs/research/**), Edit, Bash(git add:*), Bash(git commit:*)
 argument-hint: <topic>
 ---
 
@@ -16,8 +16,8 @@ argument-hint: <topic>
 
 Read these before execution:
 - `.jaan-to/learn/research-about.learn.md` - Past lessons
-- `skills/research-about/template.md` - Output format template
-- `docs/deepresearches/README.md` - Current index structure
+- `.jaan-to/templates/research-about.template.md` - Output format template
+- `.jaan-to/outputs/research/README.md` - Current index structure
 
 ## Input
 
@@ -55,18 +55,18 @@ If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topi
 
 ## Step 0.3: Generate Filename
 
-1. Count existing files in `docs/deepresearches/` matching pattern `[0-9][0-9]-*.md`
+1. Count existing files in `.jaan-to/outputs/research/` matching pattern `[0-9][0-9]-*.md`
 2. Next number = count + 1 (pad to 2 digits)
 3. Slugify topic: lowercase, replace spaces with hyphens, remove special chars
 4. Format: `{NN}-{category}-{slug}.md`
-5. Path: `docs/deepresearches/{filename}`
+5. Path: `.jaan-to/outputs/research/{filename}`
 
 **Show user:**
 > **Research Setup**
 > - Topic: {topic}
 > - Category: {category}
 > - Filename: {filename}
-> - Path: docs/deepresearches/{filename}
+> - Path: .jaan-to/outputs/research/{filename}
 
 ---
 
@@ -662,8 +662,8 @@ SUBTOPICS DISCOVERED
 
 WILL CREATE
 ───────────
-□ docs/deepresearches/{filename}
-□ Update docs/deepresearches/README.md
+□ .jaan-to/outputs/research/{filename}
+□ Update .jaan-to/outputs/research/README.md
 ```
 
 > "Generate full research document? [y/n]"
@@ -676,7 +676,7 @@ WILL CREATE
 
 ## Step 7: Generate Document
 
-Use template from `skills/research-about/template.md`:
+Use template from `.jaan-to/templates/research-about.template.md`:
 
 1. Fill all sections with researched content
 2. Include specific facts, statistics, and citations
@@ -707,17 +707,17 @@ If any check fails, revise before preview.
 
 **If `{approval_mode}` = Interactive:**
 - Show complete document
-- Ask: > "Write to `docs/deepresearches/{filename}`? [y/n]"
+- Ask: > "Write to `.jaan-to/outputs/research/{filename}`? [y/n]"
 
 ## Step 10: Write Output
 
 If approved (or auto-mode):
 1. Write the research document
-2. Confirm: "Research written to `docs/deepresearches/{filename}`"
+2. Confirm: "Research written to `.jaan-to/outputs/research/{filename}`"
 
 ## Step 11: Update README Index
 
-Edit `docs/deepresearches/README.md`:
+Edit `.jaan-to/outputs/research/README.md`:
 
 1. **Add to Summary Index table:**
    Find the table under `## Summary Index` and add new row:
@@ -734,7 +734,7 @@ Edit `docs/deepresearches/README.md`:
 ## Step 12: Git Commit
 
 ```bash
-git add docs/deepresearches/{filename} docs/deepresearches/README.md
+git add .jaan-to/outputs/research/{filename} .jaan-to/outputs/research/README.md
 git commit -m "$(cat <<'EOF'
 docs(research): Add {title}
 
@@ -759,7 +759,7 @@ EOF
 ✅ Research Complete
 
 📁 Category: {category}
-📄 Document: docs/deepresearches/{filename}
+📄 Document: .jaan-to/outputs/research/{filename}
 📊 Sources: {N} unique sources consulted
 🔍 Queries: {M} search queries used
 📅 Date: {YYYY-MM-DD}

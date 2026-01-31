@@ -4,7 +4,7 @@ description: |
   [Internal] Add a task to the jaan.to development roadmap.
   For jaan.to project maintenance, not end-user use.
   Maps to: jaan-to:roadmap-add
-allowed-tools: Read, Glob, Grep, Write(roadmaps/**)
+allowed-tools: Read, Glob, Grep, Write(.jaan-to/**)
 argument-hint: [task-description]
 ---
 
@@ -14,8 +14,8 @@ argument-hint: [task-description]
 
 ## Context Files
 
-- `roadmaps/jaan-to/roadmap-jaan-to.md` - Current roadmap
-- `roadmaps/jaan-to/tasks/README.md` - Task standards
+- `.jaan-to/roadmap.md` - Current roadmap
+- `.jaan-to/tasks/` - Task standards
 
 ## Input
 
@@ -29,7 +29,7 @@ If no input provided, ask: "What task would you like to add to the roadmap?"
 
 ## Step 1: Read Current Roadmap
 
-Read `roadmaps/jaan-to/roadmap-jaan-to.md` to understand:
+Read `.jaan-to/roadmap.md` to understand:
 - Current phases and their status (Done/Pending)
 - Existing tasks in each phase
 - Formatting conventions
@@ -38,7 +38,7 @@ Read `roadmaps/jaan-to/roadmap-jaan-to.md` to understand:
 
 Extract keywords from the task description and search:
 ```
-grep -i "<keyword>" roadmaps/jaan-to/roadmap-jaan-to.md
+grep -i "<keyword>" .jaan-to/roadmap.md
 ```
 
 If potential duplicate found:
@@ -97,12 +97,12 @@ Format: `- [ ] {Task description}`
 1. Read current file for exact insertion point
 2. Append task to correct phase section
 3. Write using Edit tool
-4. If detail doc needed: create `roadmaps/jaan-to/tasks/{slug}.md` using template
+4. If detail doc needed: create `.jaan-to/tasks/{slug}.md` using template
 
 ## Step 7: Auto-Commit
 
 ```bash
-git add roadmaps/jaan-to/roadmap-jaan-to.md roadmaps/jaan-to/tasks/
+git add .jaan-to/roadmap.md .jaan-to/tasks/
 git commit -m "docs(roadmap): Add {task-title} to Phase {n}"
 ```
 

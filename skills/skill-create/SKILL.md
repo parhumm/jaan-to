@@ -4,7 +4,7 @@ description: |
   Guide users through creating new jaan.to skills step-by-step.
   Auto-triggers on: create skill, new skill, skill wizard, add skill.
   Maps to: jaan-to:skill-create
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Edit(context/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(.claude/skills/**), Write(docs/**), Write(.jaan-to/**), Edit(.jaan-to/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 ---
 
@@ -15,10 +15,10 @@ argument-hint: [optional-skill-idea]
 ## Context Files
 
 Read these before execution:
-- `docs/extending/create-skill.md` - Skill specification (REQUIRED)
+- `.jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
 - `.jaan-to/learn/skill-create.learn.md` - Past lessons
-- `skills/skill-create/template.md` - Generation templates
-- `context/config.md` - Current skill catalog
+- `.jaan-to/templates/skill-create.template.md` - Generation templates
+- `.jaan-to/context/config.md` - Current skill catalog
 
 ## Input
 
@@ -32,7 +32,7 @@ If provided, use as starting context. Otherwise, begin with identity questions.
 
 Before any creation, check for existing skills:
 
-1. **Glob** `skills/*/SKILL.md` to get all skills
+1. **Glob** `.claude/skills/*/SKILL.md` to get all skills
 2. **For each skill**, compare:
    - Role + domain match
    - Purpose description similarity
@@ -212,13 +212,13 @@ Best practices incorporated: {practice_count}
 
 FILES TO CREATE
 ───────────────
-□ skills/{name}/SKILL.md
-□ skills/{name}/LEARN.md
-□ skills/{name}/template.md (if needed)
+□ .claude/skills/{name}/SKILL.md
+□ .jaan-to/learn/{name}.learn.md
+□ .jaan-to/templates/{name}.template.md (if needed)
 
 WILL ALSO
 ─────────
-□ Register in context/config.md
+□ Register in .jaan-to/context/config.md
 □ Create docs/skills/{role}/{name}.md (via /jaan-to:docs-create)
 □ Commit to branch skill/{name}
 ```
@@ -241,7 +241,7 @@ Confirm: "Created branch `skill/{name}`. All work on this branch."
 
 ## Step 7: Generate SKILL.md
 
-Use template from `skills/skill-create/template.md`:
+Use template from `.jaan-to/templates/skill-create.template.md`:
 
 1. Fill YAML frontmatter:
    - name: {name}
@@ -306,7 +306,7 @@ Based on output format from Step 4:
 
 ## Step 10: Validate Against Specification
 
-Check against `docs/extending/create-skill.md`:
+Check against `.jaan-to/docs/create-skill.md`:
 
 **Frontmatter**:
 - [ ] Has `name` matching directory
@@ -344,16 +344,16 @@ Show complete content of:
 ## Step 12: Write Files
 
 If approved:
-1. Create directory: `skills/{name}/`
-2. Write SKILL.md
-3. Write LEARN.md
-4. Write template.md (if needed)
+1. Create directory: `.claude/skills/{name}/`
+2. Write SKILL.md to `.claude/skills/{name}/SKILL.md`
+3. Write LEARN.md to `.jaan-to/learn/{name}.learn.md`
+4. Write template.md to `.jaan-to/templates/{name}.template.md` (if needed)
 
-Confirm: "Skill files written to `skills/{name}/`"
+Confirm: "Skill files written to `.claude/skills/{name}/` and `.jaan-to/`"
 
 ## Step 13: Update Config Catalog
 
-Edit `context/config.md` to add skill to Available Skills table:
+Edit `.jaan-to/context/config.md` to add skill to Available Skills table:
 
 ```markdown
 | jaan-to-{role}-{domain}:{action} | `/{name}` | {short_description} |
@@ -369,7 +369,7 @@ This ensures documentation is always created with the skill.
 ## Step 15: Commit to Branch
 
 ```bash
-git add skills/{name}/ context/config.md docs/skills/{role}/{name}.md
+git add .claude/skills/{name}/ .jaan-to/ docs/skills/{role}/{name}.md
 git commit -m "feat(skill): Add {name} skill
 
 - {description}
@@ -428,9 +428,9 @@ Consulted {source_count} sources for best practices:
 
 ## Files Created
 
-- `skills/{name}/SKILL.md`
-- `skills/{name}/LEARN.md`
-- `skills/{name}/template.md` (if applicable)
+- `.claude/skills/{name}/SKILL.md`
+- `.jaan-to/learn/{name}.learn.md`
+- `.jaan-to/templates/{name}.template.md` (if applicable)
 - `docs/skills/{role}/{name}.md`
 
 ## Testing

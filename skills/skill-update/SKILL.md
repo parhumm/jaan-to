@@ -4,7 +4,7 @@ description: |
   Update an existing jaan.to skill following standards.
   Auto-triggers on: update skill, modify skill, improve skill, fix skill.
   Maps to: jaan-to:skill-update
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Edit, Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(.claude/skills/**), Write(docs/**), Write(.jaan-to/**), Edit, Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [skill-name]
 ---
 
@@ -15,9 +15,9 @@ argument-hint: [skill-name]
 ## Context Files
 
 Read these before execution:
-- `docs/extending/create-skill.md` - Skill specification (REQUIRED)
+- `.jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
 - `.jaan-to/learn/skill-update.learn.md` - Past lessons
-- `context/config.md` - Current skill catalog
+- `.jaan-to/context/config.md` - Current skill catalog
 
 ## Input
 
@@ -78,10 +78,10 @@ Read `.jaan-to/learn/skill-update.learn.md` if it exists:
 
 ## Step 1: Read Existing Skill
 
-Read all files in `skills/{name}/`:
-- `SKILL.md` - Current skill definition
-- `LEARN.md` - Accumulated lessons
-- `template.md` - Output template (if exists)
+Read all files for the skill:
+- `.claude/skills/{name}/SKILL.md` - Current skill definition
+- `.jaan-to/learn/{name}.learn.md` - Accumulated lessons
+- `.jaan-to/templates/{name}.template.md` - Output template (if exists)
 
 Display current structure:
 ```
@@ -100,7 +100,7 @@ FILES
 
 ## Step 2: Validate Against Specification
 
-Check current skill against `docs/extending/create-skill.md`:
+Check current skill against `.jaan-to/docs/create-skill.md`:
 
 **Frontmatter**:
 - [ ] Has `name` matching directory
@@ -258,11 +258,11 @@ Show final versions of all modified files.
 ## Step 11: Write Updated Files
 
 If approved:
-1. Write SKILL.md
-2. Write template.md (if modified)
-3. Write LEARN.md
+1. Write SKILL.md to `.claude/skills/{name}/SKILL.md`
+2. Write template.md to `.jaan-to/templates/{name}.template.md` (if modified)
+3. Write LEARN.md to `.jaan-to/learn/{name}.learn.md`
 
-Confirm: "Skill files updated in `skills/{name}/`"
+Confirm: "Skill files updated in `.claude/skills/{name}/` and `.jaan-to/`"
 
 ## Step 12: Auto-Invoke Documentation Sync
 
@@ -274,7 +274,7 @@ This ensures documentation stays in sync with skill changes.
 ## Step 13: Commit to Branch
 
 ```bash
-git add skills/{name}/ docs/skills/{role}/{name}.md
+git add .claude/skills/{name}/ .jaan-to/ docs/skills/{role}/{name}.md
 git commit -m "fix(skill): Update {name} skill
 
 - {change_summary}

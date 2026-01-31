@@ -10,7 +10,7 @@
 |-------|-------|--------|
 | 1 | Foundation & Optimization | Done |
 | 2 | Learning & Documentation | Done |
-| 2.5 | Plugin Migration | In Progress |
+| 2.5 | Plugin Migration | Done |
 | 3 | Development Workflow | Pending |
 | 4 | Quick Win Skills (18) | Pending |
 | 5 | MCP Connectors | Pending |
@@ -50,7 +50,7 @@
 - [x] Rename docs/skills/internal/ → docs/skills/core/ (`aad168c`)
 - [x] Skill creation specification for AI + humans
 
-## Phase 2.5: Plugin Migration (In Progress)
+## Phase 2.5: Plugin Migration (Done)
 
 - [x] Plugin manifest (`.claude-plugin/plugin.json`)
 - [x] Migrate 10 skills from `.claude/skills/` to `skills/` (flat structure)
@@ -62,9 +62,9 @@
 - [x] Documentation: 8 new docs created, 27 existing docs updated
 - [x] Marketplace distribution (`marketplace.json`, `README.md`, `CHANGELOG.md`)
 - [x] Directory structure reference updated
-- [ ] Clean plugin installation — exclude non-essential files (docs, deepresearch, roadmaps, etc.); only ship skills, hooks, scripts, agents, outputStyles, context, and manifest
-- [ ] Store jaan.to output files in a hidden folder (`.jaan-to/`) inside the target project that installs the plugin
-- [ ] End-to-end plugin install testing — verify full install flow works correctly
+- [x] Clean plugin installation — exclude non-essential files; `scripts/build-dist.sh` produces clean distribution
+- [x] Store jaan.to output files in `.jaan-to/` inside the target project; bootstrap seeds context, templates, learn, docs
+- [x] End-to-end plugin install testing — `scripts/verify-install.sh` validates all bootstrap artifacts
 
 ## Phase 3: Development Workflow
 
@@ -249,8 +249,9 @@
 | Path | Purpose |
 |------|---------|
 | `skills/` | Skill definitions (plugin-relative) |
-| `docs/extending/create-skill.md` | Skill creation specification |
-| `context/` | Context templates (plugin-relative) |
+| `.jaan-to/docs/create-skill.md` | Skill creation specification (project) |
+| `.jaan-to/context/` | Context templates (project-relative) |
+| `.jaan-to/templates/` | Output templates (project-relative) |
 | `.jaan-to/outputs/` | Generated outputs (project-relative) |
 | `.jaan-to/learn/` | Learning files (project-relative) |
 | `.claude-plugin/plugin.json` | Plugin manifest |

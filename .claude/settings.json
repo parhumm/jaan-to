@@ -1,11 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Read(context/**)",
-      "Read(skills/**)",
+      "Read(.jaan-to/**)",
       "Read(docs/**)",
+      "Read(.claude/skills/**)",
       "Write(.jaan-to/**)",
-      "Write(roadmaps/**)",
+      "Write(docs/**)",
+      "Write(.claude/skills/**)",
       "Glob",
       "Grep"
     ],

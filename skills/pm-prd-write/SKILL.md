@@ -21,12 +21,12 @@ hooks:
 
 ## Context Files
 Read these before execution:
-- `context/config.md` - Configuration
-- `context/boundaries.md` - Trust rules
-- `skills/pm-prd-write/template.md` - PRD template
+- `.jaan-to/context/config.md` - Configuration
+- `.jaan-to/context/boundaries.md` - Trust rules
+- `.jaan-to/templates/pm-prd-write.template.md` - PRD template
 - `.jaan-to/learn/pm-prd-write.learn.md` - Past lessons (if exists)
-- `context/tech.md` - Tech context (if exists)
-- `context/team.md` - Team context (if exists)
+- `.jaan-to/context/tech.md` - Tech context (if exists)
+- `.jaan-to/context/team.md` - Team context (if exists)
 
 ## Input
 
@@ -46,8 +46,8 @@ Read `.jaan-to/learn/pm-prd-write.learn.md` if it exists. Apply lessons:
 - Avoid mistakes listed in "Common Mistakes"
 
 Also read context files if available:
-- `context/tech.md` - Know the tech stack to reference
-- `context/team.md` - Know team structure and norms
+- `.jaan-to/context/tech.md` - Know the tech stack to reference
+- `.jaan-to/context/team.md` - Know team structure and norms
 
 ## Step 1: Gather Information
 You already have the initiative from the Input section above. Now ask these questions:
@@ -79,7 +79,7 @@ Before generating the PRD, confirm with the user:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate PRD
-Use the template from: `skills/pm-prd-write/template.md`
+Use the template from: `.jaan-to/templates/pm-prd-write.template.md`
 
 Fill all sections:
 - **Title**: From initiative

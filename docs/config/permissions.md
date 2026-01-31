@@ -23,10 +23,12 @@ Permissions control what Claude Code can do:
 **Allowed**:
 | Permission | Meaning |
 |------------|---------|
-| `Read(context/**)` | Read context files |
-| `Read(skills/**)` | Read skill definitions |
-| `Write(.jaan-to/**)` | Write to outputs |
-| `Write(roadmaps/**)` | Update roadmaps |
+| `Read(.jaan-to/**)` | Read context, templates, outputs |
+| `Read(docs/**)` | Read project documentation |
+| `Read(.claude/skills/**)` | Read project-level skills |
+| `Write(.jaan-to/**)` | Write outputs, learn, context |
+| `Write(docs/**)` | Write documentation |
+| `Write(.claude/skills/**)` | Write project-level skills |
 | `Glob` | Search file patterns |
 | `Grep` | Search file contents |
 

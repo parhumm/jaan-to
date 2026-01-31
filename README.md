@@ -15,17 +15,30 @@
 
 ---
 
-## Quick Install
+## Installation
 
+### Quick start (local development)
 ```bash
-# From marketplace (coming soon)
-claude plugin install jaan-to
+claude --plugin-dir /path/to/jaan-to
+```
 
-# From GitHub
-claude plugin install github:parhumm/jaan-to
+### Clean distribution
+```bash
+./scripts/build-dist.sh
+claude --plugin-dir ./dist/jaan-to
+```
 
-# Local development
-claude --plugin-dir ./path/to/jaan-to
+### First run
+The bootstrap hook automatically creates `.jaan-to/` in your project with:
+- `context/` — Config and boundary templates (customize for your project)
+- `templates/` — Output templates for each skill
+- `learn/` — Learning seeds (improve over time)
+- `outputs/` — Generated outputs (PRDs, tracking code, research, etc.)
+- `docs/` — Reference docs (style guide, skill spec)
+
+### Verify installation
+```bash
+./scripts/verify-install.sh /path/to/your-project
 ```
 
 ---
@@ -93,8 +106,8 @@ claude --plugin-dir ./path/to/jaan-to
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:roadmap-add` | Add task to roadmap | `roadmaps/` |
-| `/jaan-to:skill-create` | Create new skill with wizard | `skills/{name}/` |
+| `/jaan-to:roadmap-add` | Add task to roadmap | `.jaan-to/roadmap.md` |
+| `/jaan-to:skill-create` | Create new skill with wizard | `.claude/skills/{name}/` |
 | `/jaan-to:skill-update` | Update existing skill | Updates skill definition |
 
 **Example:**
@@ -204,7 +217,6 @@ Best for: Individual contributors generating specs, tracking, documentation
   "permissions": {
     "allow": [
       "Write(.jaan-to/**)",
-      "Write(roadmaps/**)",
       "Bash(npm run *)",
       "Bash(git status)",
       "Bash(git diff *)"
@@ -227,8 +239,8 @@ Best for: Team leads, PMs, architects managing documentation and workflows
   "permissions": {
     "allow": [
       "Write(.jaan-to/**)",
-      "Write(roadmaps/**)",
       "Write(docs/**)",
+      "Write(.claude/skills/**)",
       "Bash(npm run *)",
       "Bash(git *)"
     ],
@@ -295,11 +307,9 @@ Remove hooks from `.claude/settings.json` that reference `jaan-to/hooks/`:
 {
   "permissions": {
     "allow": [
-      "Read(context/**)",
-      "Read(skills/**)",
+      "Read(.jaan-to/**)",
       "Read(docs/**)",
       "Write(.jaan-to/**)",
-      "Write(roadmaps/**)",
       "Glob",
       "Grep"
     ],

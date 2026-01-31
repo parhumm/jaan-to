@@ -24,9 +24,10 @@ This is a Claude Code Plugin. All paths below are **relative to the plugin root*
 | Component | Location | Format |
 |-----------|----------|--------|
 | Skills | `skills/<name>/SKILL.md` | YAML frontmatter + markdown |
-| Skill Spec | `docs/extending/create-skill.md` | Specification for creating skills |
-| Context | `context/` | Markdown templates |
-| Boundaries | `context/boundaries.md` | Markdown |
+| Skill Spec | `.jaan-to/docs/create-skill.md` (project) | Specification for creating skills |
+| Context | `.jaan-to/context/` (project) | Markdown templates |
+| Boundaries | `.jaan-to/context/boundaries.md` (project) | Markdown |
+| Templates | `.jaan-to/templates/` (project) | Markdown templates |
 | Hooks | `hooks/hooks.json` | JSON |
 | Scripts | `scripts/` | Shell scripts |
 | Agents | `agents/` | Markdown |
@@ -55,10 +56,10 @@ When adding functionality, first check if a skill/command exists.
 ### Trust
 1. Output writes to project's `.jaan-to/outputs/` directory (project-relative)
 2. Learning files write to project's `.jaan-to/learn/` directory (project-relative)
-3. Always preview content before writing
-4. Ask for explicit approval before file operations
-5. Context files are in `context/` (plugin-relative)
-6. Skills are in `skills/` (plugin-relative)
+3. Context files live in project's `.jaan-to/context/` directory (project-relative)
+4. Templates live in project's `.jaan-to/templates/` directory (project-relative)
+5. Always preview content before writing
+6. Ask for explicit approval before file operations
 
 ### Two-Phase Workflow
 1. **Phase 1 (Analysis)**: Read context, gather input, plan structure

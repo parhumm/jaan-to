@@ -197,7 +197,7 @@ Things to avoid:
 | Web research | `WebSearch`, `Task` |
 | Write to artifacts | `Write(.jaan-to/**)` |
 | Write to docs | `Write(docs/**)` |
-| Write to skills | `Write(skills/**)` |
+| Write to skills | `Write(.claude/skills/**)` |
 | Edit existing | `Edit` |
 | Git stage | `Bash(git add:*)` |
 | Git commit | `Bash(git commit:*)` |

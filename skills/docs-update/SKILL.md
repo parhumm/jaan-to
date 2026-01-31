@@ -4,7 +4,7 @@ description: |
   Audit and maintain documentation quality.
   Default: Smart staleness check using git history.
   Maps to: jaan-to:docs-update
-allowed-tools: Read, Glob, Grep, Write(docs/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
+allowed-tools: Read, Glob, Grep, Write(docs/**), Write(.jaan-to/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 ---
 
@@ -15,19 +15,19 @@ argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 ## Context Files
 
 Read these before execution:
-- `docs/STYLE.md` - Documentation standards
+- `.jaan-to/docs/STYLE.md` - Documentation standards
 - `.jaan-to/learn/docs-update.learn.md` - Past lessons
 
 ## File Mapping (Code → Docs)
 
 | Code Path | Related Doc |
 |-----------|-------------|
-| `skills/{name}/SKILL.md` | `docs/skills/{role}/{slug}.md` |
-| `skills/{name}/LEARN.md` | (referenced in skill doc) |
-| `context/hooks/{name}.sh` | `docs/hooks/{name}.md` |
-| `context/config.md` | `docs/config/README.md` |
-| `context/*.md` | `docs/config/context.md` |
-| `context/boundaries.md` | `docs/config/boundaries.md` |
+| `.claude/skills/{name}/SKILL.md` | `docs/skills/{role}/{slug}.md` |
+| `.jaan-to/learn/{name}.learn.md` | (referenced in skill doc) |
+| `.jaan-to/context/hooks/{name}.sh` | `docs/hooks/{name}.md` |
+| `.jaan-to/context/config.md` | `docs/config/README.md` |
+| `.jaan-to/context/*.md` | `docs/config/context.md` |
+| `.jaan-to/context/boundaries.md` | `docs/config/boundaries.md` |
 
 **Slug extraction:** `jaan-to-pm-prd-write` → `prd-write` (remove role prefix)
 
@@ -57,7 +57,7 @@ Read these before execution:
 ## Step 0.2: Get Recent Code Changes
 
 ```bash
-git log --since="30 days ago" --name-only --pretty=format: -- skills/ context/hooks/ context/config.md context/ | sort -u | grep -v '^$'
+git log --since="30 days ago" --name-only --pretty=format: -- .claude/skills/ .jaan-to/context/hooks/ .jaan-to/context/config.md .jaan-to/context/ | sort -u | grep -v '^$'
 ```
 
 Extract unique changed files.
@@ -68,7 +68,7 @@ For each changed code file, find related doc:
 
 **Skills:**
 ```
-skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
+.claude/skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
 
 # Extract slug: remove brand prefix and role
 # jaan-to-pm-prd-write → prd-write
@@ -77,14 +77,14 @@ skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
 
 **Hooks:**
 ```
-context/hooks/{name}.sh → docs/hooks/{name}.md
+.jaan-to/context/hooks/{name}.sh → docs/hooks/{name}.md
 ```
 
 **Config:**
 ```
-context/config.md → docs/config/README.md
-context/*.md → docs/config/context.md
-context/boundaries.md → docs/config/boundaries.md
+.jaan-to/context/config.md → docs/config/README.md
+.jaan-to/context/*.md → docs/config/context.md
+.jaan-to/context/boundaries.md → docs/config/boundaries.md
 ```
 
 ## Step 0.4: Compare Timestamps
