@@ -4,7 +4,7 @@ description: |
   [Internal] Add a task to the jaan.to development roadmap.
   For jaan.to project maintenance, not end-user use.
   Maps to: to-jaan-roadmap-add
-allowed-tools: Read, Glob, Grep, Write(.jaan-to/**)
+allowed-tools: Read, Glob, Grep, Write(jaan-to/**)
 argument-hint: [task-description]
 ---
 
@@ -14,9 +14,9 @@ argument-hint: [task-description]
 
 ## Context Files
 
-- `.jaan-to/roadmap.md` - Current roadmap
-- `.jaan-to/tasks/` - Task standards
-- `.jaan-to/learn/to-jaan-roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
+- `jaan-to/roadmap.md` - Current roadmap
+- `jaan-to/tasks/` - Task standards
+- `jaan-to/learn/to-jaan-roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -29,7 +29,7 @@ If no input provided, ask: "What task would you like to add to the roadmap?"
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`.jaan-to/learn/to-jaan-roadmap-add.learn.md`
+`jaan-to/learn/to-jaan-roadmap-add.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -45,7 +45,7 @@ If the file does not exist, continue without it.
 
 ## Step 1: Read Current Roadmap
 
-Read `.jaan-to/roadmap.md` to understand:
+Read `jaan-to/roadmap.md` to understand:
 - Current phases and their status (Done/Pending)
 - Existing tasks in each phase
 - Formatting conventions
@@ -54,7 +54,7 @@ Read `.jaan-to/roadmap.md` to understand:
 
 Extract keywords from the task description and search:
 ```
-grep -i "<keyword>" .jaan-to/roadmap.md
+grep -i "<keyword>" jaan-to/roadmap.md
 ```
 
 If potential duplicate found:
@@ -113,12 +113,12 @@ Format: `- [ ] {Task description}`
 1. Read current file for exact insertion point
 2. Append task to correct phase section
 3. Write using Edit tool
-4. If detail doc needed: create `.jaan-to/tasks/{slug}.md` using template
+4. If detail doc needed: create `jaan-to/tasks/{slug}.md` using template
 
 ## Step 7: Auto-Commit
 
 ```bash
-git add .jaan-to/roadmap.md .jaan-to/tasks/
+git add jaan-to/roadmap.md jaan-to/tasks/
 git commit -m "docs(roadmap): Add {task-title} to Phase {n}"
 ```
 

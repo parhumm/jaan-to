@@ -35,8 +35,8 @@
 |-----------|-------------|
 | `skills/{name}/` | `docs/skills/{role}/{slug}.md` |
 | `scripts/{name}.sh` | `docs/hooks/{name}.md` |
-| `.jaan-to/context/config.md` | `docs/config/README.md` |
-| `.jaan-to/context/*.md` | `docs/config/context-system.md` |
+| `jaan-to/context/config.md` | `docs/config/README.md` |
+| `jaan-to/context/*.md` | `docs/config/context-system.md` |
 
 ---
 

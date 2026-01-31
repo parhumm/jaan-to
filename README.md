@@ -35,7 +35,7 @@ claude --plugin-dir ./dist/jaan-to
 ```
 
 ### First run
-The bootstrap hook automatically creates `.jaan-to/` in your project with:
+The bootstrap hook automatically creates `jaan-to/` in your project with:
 - `context/` — Config and boundary templates (customize for your project)
 - `templates/` — Output templates for each skill
 - `learn/` — Learning seeds (improve over time)
@@ -55,7 +55,7 @@ The bootstrap hook automatically creates `.jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to-pm-prd-write` | Generate comprehensive PRD from initiative | `.jaan-to/outputs/pm/spec/{slug}/prd.md` |
+| `/jaan-to-pm-prd-write` | Generate comprehensive PRD from initiative | `jaan-to/outputs/pm/{slug}/prd.md` |
 
 **Example:**
 ```
@@ -66,7 +66,7 @@ The bootstrap hook automatically creates `.jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `.jaan-to/outputs/data/gtm/{slug}/tracking.md` |
+| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `jaan-to/outputs/data/gtm/{slug}/tracking.md` |
 
 **Example:**
 ```
@@ -89,7 +89,7 @@ The bootstrap hook automatically creates `.jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/to-jaan-research-about` | Deep research on any topic with sources | `.jaan-to/outputs/research/{slug}/` |
+| `/to-jaan-research-about` | Deep research on any topic with sources | `jaan-to/outputs/research/{slug}/` |
 | `/to-jaan-research-add` | Add file/URL to research index | Updates research index |
 
 **Example:**
@@ -101,7 +101,7 @@ The bootstrap hook automatically creates `.jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/to-jaan-learn-add` | Add lesson to project's LEARN.md | `.jaan-to/learn/LEARN.md` |
+| `/to-jaan-learn-add` | Add lesson to project's LEARN.md | `jaan-to/learn/LEARN.md` |
 
 **Example:**
 ```
@@ -112,7 +112,7 @@ The bootstrap hook automatically creates `.jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/to-jaan-roadmap-add` | Add task to roadmap | `.jaan-to/roadmap.md` |
+| `/to-jaan-roadmap-add` | Add task to roadmap | `jaan-to/roadmap.md` |
 | `/to-jaan-skill-create` | Create new skill with wizard | `skills/{name}/` |
 | `/to-jaan-skill-update` | Update existing skill | Updates skill definition |
 
@@ -151,16 +151,16 @@ Customize how jaan.to formats outputs:
 
 jaan.to runs a bootstrap script automatically on your first session. This creates:
 
-- `.jaan-to/outputs/` directory for generated files
-- `.jaan-to/learn/` directory for accumulated knowledge
-- `.jaan-to/.gitignore` to exclude temporary files
+- `jaan-to/outputs/` directory for generated files
+- `jaan-to/learn/` directory for accumulated knowledge
+- `jaan-to/.gitignore` to exclude temporary files
 
 ### Optional: Customize Context
 
 Enhance jaan.to's understanding of your project by customizing these files in your project (after installing the plugin):
 
 ```markdown
-<!-- .jaan-to/context/tech.md -->
+<!-- jaan-to/context/tech.md -->
 ## Languages
 - Backend: Python 3.11, FastAPI
 - Frontend: TypeScript, React 18
@@ -171,7 +171,7 @@ Enhance jaan.to's understanding of your project by customizing these files in yo
 ```
 
 ```markdown
-<!-- .jaan-to/context/team.md -->
+<!-- jaan-to/context/team.md -->
 ## Team Size
 - 2 engineers, 1 PM, 1 designer
 
@@ -180,7 +180,7 @@ Enhance jaan.to's understanding of your project by customizing these files in yo
 ```
 
 ```markdown
-<!-- .jaan-to/context/integrations.md -->
+<!-- jaan-to/context/integrations.md -->
 ## Analytics
 - Google Analytics 4
 - GTM container ID: GTM-XXXXXXX
@@ -203,7 +203,7 @@ Best for: Reviewing generated outputs, learning from examples
 {
   "permissions": {
     "allow": [
-      "Write(.jaan-to/**)"
+      "Write(jaan-to/**)"
     ],
     "deny": [
       "Bash(*)",
@@ -222,7 +222,7 @@ Best for: Individual contributors generating specs, tracking, documentation
 {
   "permissions": {
     "allow": [
-      "Write(.jaan-to/**)",
+      "Write(jaan-to/**)",
       "Bash(npm run *)",
       "Bash(git status)",
       "Bash(git diff *)"
@@ -244,9 +244,9 @@ Best for: Team leads, PMs, architects managing documentation and workflows
 {
   "permissions": {
     "allow": [
-      "Write(.jaan-to/**)",
+      "Write(jaan-to/**)",
       "Write(docs/**)",
-      "Write(.jaan-to/outputs/**)",
+      "Write(jaan-to/outputs/**)",
       "Bash(npm run *)",
       "Bash(git *)"
     ],
@@ -262,10 +262,10 @@ Best for: Team leads, PMs, architects managing documentation and workflows
 
 ## Output Directory
 
-All generated files are written to `.jaan-to/outputs/` in your project directory:
+All generated files are written to `jaan-to/outputs/` in your project directory:
 
 ```
-.jaan-to/
+jaan-to/
 ├── outputs/
 │   ├── pm/spec/{slug}/prd.md
 │   ├── data/gtm/{slug}/tracking.md
@@ -277,11 +277,11 @@ All generated files are written to `.jaan-to/outputs/` in your project directory
 
 **Recommended `.gitignore` entry:**
 ```
-.jaan-to/outputs/
-.jaan-to/temp/
+jaan-to/outputs/
+jaan-to/temp/
 ```
 
-jaan.to automatically creates `.jaan-to/.gitignore` with sensible defaults on first run.
+jaan.to automatically creates `jaan-to/.gitignore` with sensible defaults on first run.
 
 ---
 
@@ -313,9 +313,9 @@ Remove hooks from `.claude/settings.json` that reference `jaan-to/hooks/`:
 {
   "permissions": {
     "allow": [
-      "Read(.jaan-to/**)",
+      "Read(jaan-to/**)",
       "Read(docs/**)",
-      "Write(.jaan-to/**)",
+      "Write(jaan-to/**)",
       "Glob",
       "Grep"
     ],
@@ -332,16 +332,16 @@ Remove hooks from `.claude/settings.json` that reference `jaan-to/hooks/`:
 
 ### Migrate Context Files
 
-If you customized context files in `jaan-to/context/`, migrate them to `.jaan-to/context/`:
+If you customized context files in `jaan-to/context/`, migrate them to `jaan-to/context/`:
 
 ```bash
 # Create new context directory
-mkdir -p .jaan-to/context
+mkdir -p jaan-to/context
 
 # Migrate your customizations
-cp jaan-to/context/tech.md .jaan-to/context/tech.md
-cp jaan-to/context/team.md .jaan-to/context/team.md
-cp jaan-to/context/integrations.md .jaan-to/context/integrations.md
+cp jaan-to/context/tech.md jaan-to/context/tech.md
+cp jaan-to/context/team.md jaan-to/context/team.md
+cp jaan-to/context/integrations.md jaan-to/context/integrations.md
 
 # Clean up old structure
 rm -rf jaan-to/
@@ -373,7 +373,7 @@ Every skill follows a **two-phase workflow** with human approval:
 │  - Generate output                                      │
 │  - Quality check (via quality-reviewer agent)           │
 │  - Preview                                              │
-│  - Write to .jaan-to/                                   │
+│  - Write to jaan-to/                                   │
 └─────────────────────────────────────────────────────────┘
 ```
 

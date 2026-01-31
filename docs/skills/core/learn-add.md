@@ -59,7 +59,7 @@ Lessons are auto-categorized based on keywords:
 
 Updates the target's `LEARN.md` file:
 ```
-.jaan-to/learn/{skill}.learn.md
+jaan-to/learn/{skill}.learn.md
 ```
 
 ---

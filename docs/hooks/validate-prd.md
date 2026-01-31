@@ -8,7 +8,7 @@
 
 - **Type**: PreToolUse
 - **Trigger**: Write operations
-- **Matches**: `.jaan-to/outputs/pm/spec/*/prd.md`
+- **Matches**: `jaan-to/outputs/pm/*/prd.md`
 
 ---
 

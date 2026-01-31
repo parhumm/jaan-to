@@ -17,7 +17,7 @@ fi
 # Only validate PRD files (check file path)
 FILE_PATH=$(echo "$INPUT" | python3 -c "import sys, json; data=json.load(sys.stdin); print(data.get('tool_input', {}).get('file_path', ''))" 2>/dev/null)
 
-if [[ ! "$FILE_PATH" =~ \.jaan-to/outputs/pm/spec/.*/prd\.md$ ]]; then
+if [[ ! "$FILE_PATH" =~ \jaan-to/outputs/pm/.*/prd\.md$ ]]; then
     # Not a PRD file, allow
     exit 0
 fi

@@ -63,7 +63,7 @@
 - [x] Marketplace distribution (`marketplace.json` catalog format, manifest component paths, README install instructions)
 - [x] Directory structure reference updated
 - [x] Clean plugin installation — exclude non-essential files; `scripts/build-dist.sh` produces clean distribution
-- [x] Store jaan.to output files in `.jaan-to/` inside the target project; bootstrap seeds context, templates, learn, docs
+- [x] Store jaan.to output files in `jaan-to/` inside the target project; bootstrap seeds context, templates, learn, docs
 - [x] End-to-end plugin install testing — `scripts/verify-install.sh` validates all bootstrap artifacts
 
 ## Phase 3: Development Workflow
@@ -249,11 +249,11 @@
 | Path | Purpose |
 |------|---------|
 | `skills/` | Skill definitions (plugin-relative) |
-| `.jaan-to/docs/create-skill.md` | Skill creation specification (project) |
-| `.jaan-to/context/` | Context templates (project-relative) |
-| `.jaan-to/templates/` | Output templates (project-relative) |
-| `.jaan-to/outputs/` | Generated outputs (project-relative) |
-| `.jaan-to/learn/` | Learning files (project-relative) |
+| `jaan-to/docs/create-skill.md` | Skill creation specification (project) |
+| `jaan-to/context/` | Context templates (project-relative) |
+| `jaan-to/templates/` | Output templates (project-relative) |
+| `jaan-to/outputs/` | Generated outputs (project-relative) |
+| `jaan-to/learn/` | Learning files (project-relative) |
 | `.claude-plugin/plugin.json` | Plugin manifest |
 | `roadmaps/jaan-to/tasks/` | Task details |
 

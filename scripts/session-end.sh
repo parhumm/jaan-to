@@ -5,7 +5,7 @@
 set -euo pipefail
 
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-.}"
-METRICS_DIR="$PROJECT_DIR/.jaan-to/metrics"
+METRICS_DIR="$PROJECT_DIR/jaan-to/metrics"
 
 # Create metrics directory if it doesn't exist
 mkdir -p "$METRICS_DIR"

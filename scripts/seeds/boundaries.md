@@ -10,7 +10,7 @@ Only these paths are permitted for artifact output:
 
 | Path | Purpose |
 |------|---------|
-| `.jaan-to/**` | All jaan.to generated outputs (project-relative hidden dir) |
+| `jaan-to/**` | All jaan.to generated outputs (project-relative dir) |
 | `docs/**` | Project documentation |
 
 ## Denied Locations
@@ -19,7 +19,7 @@ Everything else, specifically:
 - Source code directories (`src/`, `lib/`, etc.)
 - Configuration files (`.env`, `*.config.*`)
 - System directories
-- Hidden directories (except `.jaan-to/` and `.claude/`)
+- Hidden directories (except `.claude/`)
 - Package files (`package.json`, etc.)
 
 ## Enforcement
@@ -30,9 +30,9 @@ Everything else, specifically:
 
 ## Override
 
-Users can extend safe paths in `.jaan-to/context/config.md`:
+Users can extend safe paths in `jaan-to/context/config.md`:
 
 ```markdown
 ## Safety
-- safe_paths: [".jaan-to/", "docs/"]
+- safe_paths: ["jaan-to/", "docs/"]
 ```

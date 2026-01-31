@@ -23,7 +23,7 @@ Enforces lowercase-kebab-case naming and suggests improvements for clarity.
 
 **With PRD:**
 ```
-/jaan-to-data-gtm-datalayer .jaan-to/outputs/pm/spec/user-auth/prd.md
+/jaan-to-data-gtm-datalayer jaan-to/outputs/pm/user-auth/prd.md
 ```
 
 **With description:**
@@ -104,9 +104,9 @@ Unclear names (like "btn1") prompt for clarification.
 
 ## Output
 
-**Path**: `.jaan-to/outputs/data/gtm/{slug}/tracking.md`
+**Path**: `jaan-to/outputs/data/gtm/{slug}/tracking.md`
 
-**Example**: `.jaan-to/outputs/data/gtm/player-play/tracking.md`
+**Example**: `jaan-to/outputs/data/gtm/player-play/tracking.md`
 
 **Contains**:
 - Overview (feature, item, type)
@@ -168,7 +168,7 @@ Param types are auto-detected:
 
 This skill reads from:
 ```
-.jaan-to/learn/data-gtm-datalayer.learn.md
+jaan-to/learn/data-gtm-datalayer.learn.md
 ```
 
 Add feedback:

@@ -24,16 +24,16 @@ This is a Claude Code Plugin. All paths below are **relative to the plugin root*
 | Component | Location | Format |
 |-----------|----------|--------|
 | Skills | `skills/<name>/SKILL.md` | YAML frontmatter + markdown |
-| Skill Spec | `.jaan-to/docs/create-skill.md` (project) | Specification for creating skills |
-| Context | `.jaan-to/context/` (project) | Markdown templates |
-| Boundaries | `.jaan-to/context/boundaries.md` (project) | Markdown |
-| Templates | `.jaan-to/templates/` (project) | Markdown templates |
+| Skill Spec | `jaan-to/docs/create-skill.md` (project) | Specification for creating skills |
+| Context | `jaan-to/context/` (project) | Markdown templates |
+| Boundaries | `jaan-to/context/boundaries.md` (project) | Markdown |
+| Templates | `jaan-to/templates/` (project) | Markdown templates |
 | Hooks | `hooks/hooks.json` | JSON |
 | Scripts | `scripts/` | Shell scripts |
 | Agents | `agents/` | Markdown |
 | Output Styles | `outputStyles/` | Markdown |
-| Output | `.jaan-to/outputs/` (project) | Generated files |
-| Learning | `.jaan-to/learn/` (project) | Accumulated lessons |
+| Output | `jaan-to/outputs/` (project) | Generated files |
+| Learning | `jaan-to/learn/` (project) | Accumulated lessons |
 | Plugin Manifest | `.claude-plugin/plugin.json` | JSON |
 
 ---
@@ -54,10 +54,10 @@ When adding functionality, first check if a skill/command exists.
 ## AI Behavioral Rules
 
 ### Trust
-1. Output writes to project's `.jaan-to/outputs/` directory (project-relative)
-2. Learning files write to project's `.jaan-to/learn/` directory (project-relative)
-3. Context files live in project's `.jaan-to/context/` directory (project-relative)
-4. Templates live in project's `.jaan-to/templates/` directory (project-relative)
+1. Output writes to project's `jaan-to/outputs/` directory (project-relative)
+2. Learning files write to project's `jaan-to/learn/` directory (project-relative)
+3. Context files live in project's `jaan-to/context/` directory (project-relative)
+4. Templates live in project's `jaan-to/templates/` directory (project-relative)
 5. Always preview content before writing
 6. Ask for explicit approval before file operations
 
@@ -93,13 +93,13 @@ When adding functionality, first check if a skill/command exists.
 
 ### Output Paths (Project-Relative)
 ```
-.jaan-to/outputs/{role}/{domain}/{slug}/
+jaan-to/outputs/{role}/{domain}/{slug}/
 ```
 
 ### File Names
 - Skill definition: `SKILL.md` (uppercase)
 - Templates: `template.md` (lowercase)
-- Learning: `LEARN.md` (uppercase, in project's `.jaan-to/learn/`)
+- Learning: `LEARN.md` (uppercase, in project's `jaan-to/learn/`)
 
 ---
 
@@ -109,6 +109,16 @@ When adding functionality, first check if a skill/command exists.
 1. Update [roadmap-jaan-to.md](roadmaps/jaan-to/roadmap-jaan-to.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`
 3. For new tasks, use `/to-jaan-roadmap-add`
+
+### Releasing a Version
+Every version bump MUST be a single atomic operation:
+1. Update version in `.claude-plugin/plugin.json` and `.claude-plugin/marketplace.json`
+2. Add entry to [CHANGELOG.md](CHANGELOG.md) following Keep a Changelog format
+3. Commit with message: `release: vX.Y.Z — {summary}`
+4. Create git tag: `git tag vX.Y.Z`
+5. Push with tags: `git push origin main --tags`
+
+**Never** bump version without a CHANGELOG entry and git tag. These three are inseparable.
 
 ---
 

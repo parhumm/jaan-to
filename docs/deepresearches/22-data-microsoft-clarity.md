@@ -214,7 +214,7 @@ gtag.config({
 
 4. **Leverage Smart Events:** Start with auto-detected events (Purchase, Add to Cart); add custom events only if gaps remain
 
-5. **Cache Aggressively for MCP:** Use 7-day TTL for rate-limited API data; implement file-based persistent cache in `.jaan-to/cache/analytics/`
+5. **Cache Aggressively for MCP:** Use 7-day TTL for rate-limited API data; implement file-based persistent cache in `jaan-to/cache/analytics/`
 
 ## MCP Server Implementation Pattern
 
@@ -269,7 +269,7 @@ name: data-clarity-analyze
 description: |
   Analyze Microsoft Clarity heatmap and session data for UX insights.
   Auto-triggers on: clarity analysis, heatmap review, session patterns
-allowed-tools: Read, Glob, Grep, Write(.jaan-to/**), Bash(python:*)
+allowed-tools: Read, Glob, Grep, Write(jaan-to/**), Bash(python:*)
 argument-hint: [csv-path-or-session-url]
 ---
 ```
@@ -284,7 +284,7 @@ argument-hint: [csv-path-or-session-url]
 **Phase 2 (Generation):**
 1. Process data (parse CSV, query MCP, analyze screenshots)
 2. Generate insights with evidence
-3. Write report to `.jaan-to/outputs/data/clarity/`
+3. Write report to `jaan-to/outputs/data/clarity/`
 
 ## Comparisons
 

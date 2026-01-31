@@ -70,12 +70,12 @@ That's it. Every command follows this pattern.
 YOU USE:     /jaan-to-pm-prd-write "user import feature"
                     │
 SKILL READS: ├── skills/jaan-to-pm-prd-write/SKILL.md   (what to do)
-             ├── .jaan-to/learn/jaan-to-pm-prd-write.learn.md  (past lessons)
+             ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md  (past lessons)
              ├── context/tech.md                (your tech context)
              ├── skills/jaan-to-pm-prd-write/template.md (output format)
              └── MCP: Figma, Jira, GitLab       (real system data)
                     │
-OUTPUT:      .jaan-to/outputs/pm/spec/user-import/prd.md
+OUTPUT:      jaan-to/outputs/pm/user-import/prd.md
 ```
 
 ---
@@ -134,7 +134,7 @@ Plugin root:
 │   └── config.md              # Enabled roles, defaults
 │
 ├── scripts/                   # Hook scripts
-│   ├── bootstrap.sh           # Creates .jaan-to/ structure
+│   ├── bootstrap.sh           # Creates jaan-to/ structure
 │   ├── capture-feedback.sh    # Post-execution feedback
 │   └── validate-prd.sh        # PRD validation
 │
@@ -149,7 +149,7 @@ Plugin root:
 └── hooks/hooks.json           # Hook configuration
 
 Project side (created by bootstrap):
-.jaan-to/
+jaan-to/
 ├── learn/                     # Accumulated lessons (project-specific)
 │   └── {skill-name}.learn.md
 ├── outputs/                   # Generated outputs
@@ -171,7 +171,7 @@ Learning happens at three layers. Each layer improves different aspects.
 
 **What it improves:** How execution happens
 
-Every skill has a `LEARN.md` file in `skills/{name}/` (seed lessons) that bootstraps `.jaan-to/learn/{name}.learn.md` (project-specific):
+Every skill has a `LEARN.md` file in `skills/{name}/` (seed lessons) that bootstraps `jaan-to/learn/{name}.learn.md` (project-specific):
 - Better questions to ask
 - Edge cases to check
 - Workflow improvements
@@ -196,7 +196,7 @@ Every skill has a `LEARN.md` file in `skills/{name}/` (seed lessons) that bootst
 
 **What it improves:** How outputs are written
 
-Templates can have their own learning file in `.jaan-to/learn/template-{name}.learn.md`:
+Templates can have their own learning file in `jaan-to/learn/template-{name}.learn.md`:
 - Missing sections that users always add
 - Phrasing that causes confusion
 - Structure improvements
@@ -221,7 +221,7 @@ Templates can have their own learning file in `.jaan-to/learn/template-{name}.le
 
 **What it improves:** Which context matters
 
-Context files can have learning in `.jaan-to/learn/context-{name}.learn.md`:
+Context files can have learning in `jaan-to/learn/context-{name}.learn.md`:
 - Tech constraints that always apply
 - Team norms that affect output
 - Integration quirks to remember
@@ -248,9 +248,9 @@ Context files can have learning in `.jaan-to/learn/context-{name}.learn.md`:
 ┌─────────────────────────────────────────────────────────────┐
 │  BEFORE EXECUTION                                           │
 │  ───────────────────────────────────────────────────────    │
-│  1. Read .jaan-to/learn/{skill-name}.learn.md               │
-│  2. Read .jaan-to/learn/template-{name}.learn.md (if exists)│
-│  3. Read .jaan-to/learn/context-{name}.learn.md (if exists) │
+│  1. Read jaan-to/learn/{skill-name}.learn.md               │
+│  2. Read jaan-to/learn/template-{name}.learn.md (if exists)│
+│  3. Read jaan-to/learn/context-{name}.learn.md (if exists) │
 │  4. Apply all lessons to current execution                  │
 └─────────────────────────────────────────────────────────────┘
                            │
@@ -385,14 +385,14 @@ Skill: "I need to output a PRD"
 ### Template Override Priority
 
 ```
-1. .jaan-to/templates/prd.md        (repo-local, highest priority)
+1. jaan-to/templates/prd.md        (repo-local, highest priority)
 2. templates/prd.md              (plugin-level)
 3. Built-in default              (fallback)
 ```
 
 ### Custom Templates
 
-Want PRDs in a different format? Create `.jaan-to/templates/prd.md`:
+Want PRDs in a different format? Create `jaan-to/templates/prd.md`:
 
 ```markdown
 # {title}
@@ -475,8 +475,8 @@ Generate a PRD from initiative description.
 - initiative: What to build (required)
 
 ## Output
-- .jaan-to/outputs/pm/spec/{slug}/prd.md
-- .jaan-to/outputs/pm/spec/{slug}/prd.json
+- jaan-to/outputs/pm/{slug}/prd.md
+- jaan-to/outputs/pm/{slug}/prd.json
 
 ## MCP Context
 - Figma: Read linked designs
@@ -529,7 +529,7 @@ Every skill has tests. Tests live in `tests/`.
 - MCP: mocked responses
 
 ## Expected Output
-- File created: .jaan-to/outputs/pm/spec/user-import/prd.md
+- File created: jaan-to/outputs/pm/user-import/prd.md
 - Contains: Problem statement
 - Contains: Success metrics with numbers
 - Contains: Out of scope section
@@ -561,12 +561,12 @@ USER: /jaan-to-pm-prd-write "user import feature"
 
 1. LOAD
    ├── skills/jaan-to-pm-prd-write/SKILL.md
-   ├── .jaan-to/learn/jaan-to-pm-prd-write.learn.md (3 lessons)
+   ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md (3 lessons)
    ├── skills/jaan-to-pm-prd-write/template.md
-   ├── .jaan-to/learn/template-prd.learn.md (2 lessons)
+   ├── jaan-to/learn/template-prd.learn.md (2 lessons)
    ├── context/tech.md (Python, FastAPI, PostgreSQL)
    ├── context/team.md (2 BE, 2 FE, 2-week sprints)
-   └── .jaan-to/learn/context-tech.learn.md (1 lesson)
+   └── jaan-to/learn/context-tech.learn.md (1 lesson)
 
 2. MCP CONNECT
    ├── Figma: Found 2 linked designs
@@ -589,7 +589,7 @@ USER: /jaan-to-pm-prd-write "user import feature"
    └── "Write this PRD? [y/n]"
 
 7. WRITE
-   └── .jaan-to/outputs/pm/spec/user-import/prd.md
+   └── jaan-to/outputs/pm/user-import/prd.md
 
 8. COMPLETE DoD
    ├── ✓ JSON export created
@@ -608,7 +608,7 @@ USER: /jaan-to-pm-prd-write "user import feature"
 
 | Rule | Description |
 |------|-------------|
-| **Safe Paths** | Only write to `.jaan-to/` by default |
+| **Safe Paths** | Only write to `jaan-to/` by default |
 | **No Secrets** | Scan all output for credentials |
 | **Preview First** | Always show before writing |
 | **Approval for External** | Jira/GitLab/Slack needs explicit yes |
@@ -619,7 +619,7 @@ Add to `config.md`:
 
 ```markdown
 ## Trust Overrides
-- safe_paths: [".jaan-to/", "docs/"]
+- safe_paths: ["jaan-to/", "docs/"]
 - skip_preview: false
 - auto_approve_internal: true
 ```
@@ -649,7 +649,7 @@ One file: `config.md`
 - ga4: enabled
 
 ## Trust
-- safe_paths: [".jaan-to/", "docs/"]
+- safe_paths: ["jaan-to/", "docs/"]
 - require_preview: true
 - require_approval_external: true
 
@@ -676,7 +676,7 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 
 ```
 1. Create skills/jaan-to-{role}-{domain}-{action}/SKILL.md (or to-jaan-{domain}-{action}/)
-2. Add LEARN.md (starts empty, seeds .jaan-to/learn/)
+2. Add LEARN.md (starts empty, seeds jaan-to/learn/)
 3. Add template.md if needed
 4. Done (auto-discovered)
 ```
@@ -708,7 +708,7 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### Override Anything
 
 ```
-1. Create .jaan-to/context/[file].md or .jaan-to/templates/[file].md
+1. Create jaan-to/context/[file].md or jaan-to/templates/[file].md
 2. It takes priority over plugin version
 3. Done
 ```
@@ -728,7 +728,7 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ```
 Loading:
   ✓ skills/jaan-to-dev-plan-tech-approach/SKILL.md
-  ✓ .jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md (3 lessons)
+  ✓ jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md (3 lessons)
   ✓ skills/jaan-to-dev-plan-tech-approach/template.md
   ✓ context/tech.md (Python, FastAPI, PostgreSQL)
   ✓ context/team.md (2 BE, 2 FE, 2-week sprints)
@@ -758,7 +758,7 @@ A: "Must be backward compatible with v1 API"
 ### 5. Output Generated
 
 ```
-.jaan-to/outputs/dev/plan/payment-service/
+jaan-to/outputs/dev/plan/payment-service/
 ├── tech-approach.md
 ├── architecture.mermaid
 └── tasks.json
@@ -777,7 +777,7 @@ A: "Must be backward compatible with v1 API"
 
 ```
 User: "Good, but add performance testing section"
-→ Added to .jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md
+→ Added to jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md
 ```
 
 ---
@@ -800,8 +800,8 @@ User: "Good, but add performance testing section"
 | `scripts/` | Hook scripts (plugin) |
 | `agents/` | Sub-agents (plugin) |
 | `outputStyles/` | Formatting styles (plugin) |
-| `.jaan-to/outputs/` | All outputs (project) |
-| `.jaan-to/learn/` | Accumulated lessons (project) |
+| `jaan-to/outputs/` | All outputs (project) |
+| `jaan-to/learn/` | Accumulated lessons (project) |
 
 ### Key Files
 

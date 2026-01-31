@@ -38,9 +38,9 @@ The skill may ask follow-up questions based on your context.
 
 ## Output
 
-**Path**: `.jaan-to/outputs/pm/spec/{slug}/prd.md`
+**Path**: `jaan-to/outputs/pm/{slug}/prd.md`
 
-**Example**: `.jaan-to/outputs/pm/spec/user-auth/prd.md`
+**Example**: `jaan-to/outputs/pm/user-auth/prd.md`
 
 **Contains**:
 - Title
@@ -67,7 +67,7 @@ The skill may ask follow-up questions based on your context.
 - How will you measure success?
 - "Reduce support tickets by 30%"
 
-**Output** (`.jaan-to/outputs/pm/spec/password-reset/prd.md`):
+**Output** (`jaan-to/outputs/pm/password-reset/prd.md`):
 ```
 # Password Reset Flow
 
@@ -105,7 +105,7 @@ Users forget passwords and cannot access their accounts...
 
 This skill reads from:
 ```
-.jaan-to/learn/jaan-to-pm-prd-write.learn.md
+jaan-to/learn/jaan-to-pm-prd-write.learn.md
 ```
 
 Add feedback:

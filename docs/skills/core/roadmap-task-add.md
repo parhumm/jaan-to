@@ -6,7 +6,7 @@
 
 ## What It Does
 
-Adds a new task to `.jaan-to/roadmap.md`:
+Adds a new task to `jaan-to/roadmap.md`:
 - Checks for duplicates
 - Detects appropriate phase
 - Formats consistently
@@ -52,9 +52,9 @@ The skill auto-detects which phase based on keywords:
 
 ## Output
 
-Updates: `.jaan-to/roadmap.md`
+Updates: `jaan-to/roadmap.md`
 
-Optional: Creates `.jaan-to/tasks/{slug}.md` for complex tasks.
+Optional: Creates `jaan-to/tasks/{slug}.md` for complex tasks.
 
 ---
 

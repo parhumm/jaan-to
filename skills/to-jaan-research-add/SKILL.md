@@ -4,7 +4,7 @@ description: |
   Add research document to deepresearch index (from file or URL).
   Auto-triggers on: add research, index research, add to research
   Maps to: to-jaan-research-add
-allowed-tools: Read, Glob, Grep, Edit, Write(.jaan-to/outputs/research/**), WebFetch, Bash(git add:*), Bash(git commit:*)
+allowed-tools: Read, Glob, Grep, Edit, Write(jaan-to/outputs/research/**), WebFetch, Bash(git add:*), Bash(git commit:*)
 argument-hint: <file-path-or-URL>
 ---
 
@@ -14,8 +14,8 @@ argument-hint: <file-path-or-URL>
 
 ## Context Files
 
-- `.jaan-to/learn/to-jaan-research-add.learn.md` - Past lessons (loaded in Pre-Execution)
-- `.jaan-to/outputs/research/README.md` - Current index structure
+- `jaan-to/learn/to-jaan-research-add.learn.md` - Past lessons (loaded in Pre-Execution)
+- `jaan-to/outputs/research/README.md` - Current index structure
 
 ## Input
 
@@ -26,7 +26,7 @@ argument-hint: <file-path-or-URL>
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`.jaan-to/learn/to-jaan-research-add.learn.md`
+`jaan-to/learn/to-jaan-research-add.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -51,7 +51,7 @@ Extract the input from `$ARGUMENTS`:
    Usage: /to-jaan-research-add <file-path-or-URL>
 
    Examples:
-   - /to-jaan-research-add .jaan-to/outputs/research/my-research.md
+   - /to-jaan-research-add jaan-to/outputs/research/my-research.md
    - /to-jaan-research-add https://example.com/article
    ```
 
@@ -107,7 +107,7 @@ Extract the input from `$ARGUMENTS`:
 
 For URLs or files not already in research outputs:
 
-1. Count existing files in `.jaan-to/outputs/research/` matching `[0-9][0-9]-*.md`
+1. Count existing files in `jaan-to/outputs/research/` matching `[0-9][0-9]-*.md`
 2. Next number = count + 1 (pad to 2 digits)
 3. Slugify title: lowercase, replace spaces with hyphens, max 50 chars
 4. Format: `{NN}-{category}-{slug}.md`
@@ -134,8 +134,8 @@ Summary:
 
 FILES TO MODIFY
 ───────────────
-□ .jaan-to/outputs/research/README.md (add to index)
-{If URL: □ .jaan-to/outputs/research/{filename} (new file)}
+□ jaan-to/outputs/research/README.md (add to index)
+{If URL: □ jaan-to/outputs/research/{filename} (new file)}
 ```
 
 > "Proceed with adding to index? [y/n/edit]"
@@ -150,7 +150,7 @@ FILES TO MODIFY
 
 If the source is a web URL, create the new markdown file:
 
-**File path:** `.jaan-to/outputs/research/{NN}-{category}-{slug}.md`
+**File path:** `jaan-to/outputs/research/{NN}-{category}-{slug}.md`
 
 **File structure:**
 ```markdown
@@ -169,7 +169,7 @@ Use the Write tool to create this file.
 
 ## Step 4: Update README.md Index
 
-Edit `.jaan-to/outputs/research/README.md`:
+Edit `jaan-to/outputs/research/README.md`:
 
 ### 4.1: Add to Summary Index Table
 
@@ -210,8 +210,8 @@ Before committing, verify:
 ## Step 6: Git Commit
 
 ```bash
-git add .jaan-to/outputs/research/README.md
-git add .jaan-to/outputs/research/{filename}  # if URL source
+git add jaan-to/outputs/research/README.md
+git add jaan-to/outputs/research/{filename}  # if URL source
 git commit -m "$(cat <<'EOF'
 docs(research): Add {title} to index
 
@@ -241,8 +241,8 @@ Category: {category}
 File: {filename}
 
 Files modified:
-- .jaan-to/outputs/research/README.md
-{If URL: - .jaan-to/outputs/research/{filename} (new)}
+- jaan-to/outputs/research/README.md
+{If URL: - jaan-to/outputs/research/{filename} (new)}
 
 Summary:
 {Brief description of what was added}

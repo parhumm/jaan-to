@@ -21,7 +21,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - simple artifact, minimal MCP
 - **MCP Required**: GA4, Clarity (optional for evidence)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/pm/decision/{slug}/brief.md`
+- **Output**: `jaan-to/outputs/pm/decision/{slug}/brief.md`
 
 ### /jaan-to-pm-north-star
 
@@ -30,7 +30,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs baseline data
 - **MCP Required**: GA4 (baselines/segments)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/pm/metrics/{slug}/north-star.md`
+- **Output**: `jaan-to/outputs/pm/metrics/{slug}/north-star.md`
 
 ### /jaan-to-pm-scope-slice
 
@@ -39,7 +39,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - pairs with PRD
 - **MCP Required**: Jira (backlog), GitLab (complexity)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/pm/plan/{slug}/scope.md`
+- **Output**: `jaan-to/outputs/pm/plan/{slug}/scope.md`
 
 ### /jaan-to-pm-release-review
 
@@ -48,7 +48,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs post-launch data
 - **MCP Required**: GA4 (KPI deltas), Clarity (UX regressions), Sentry (optional)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/pm/release/{slug}/review.md`
+- **Output**: `jaan-to/outputs/pm/release/{slug}/review.md`
 
 ### /jaan-to-pm-story-write
 
@@ -58,7 +58,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #6
 - **MCP Required**: Jira (optional backlog context)
 - **Input**: [feature] [persona] [goal]
-- **Output**: `.jaan-to/outputs/pm/stories/{slug}/stories.md`
+- **Output**: `jaan-to/outputs/pm/stories/{slug}/stories.md`
 - **Failure Modes**: Too technical; missing "so that"; AC not testable
 - **Quality Gates**: INVEST criteria met; QA confirms testability
 
@@ -70,7 +70,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #15
 - **MCP Required**: None (text input), Jira/Intercom (optional)
 - **Input**: [feedback_sources] [date_range] [segment]
-- **Output**: `.jaan-to/outputs/pm/feedback/{slug}/synthesis.md`
+- **Output**: `jaan-to/outputs/pm/feedback/{slug}/synthesis.md`
 - **Failure Modes**: Feedback silos; recency bias; loud customers over-represented
 - **Quality Gates**: Multiple sources triangulated; connected to segments
 
@@ -85,7 +85,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - extends existing pattern
 - **MCP Required**: GitLab (modules/flags), Figma (optional constraints)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/dev/plan/{slug}/tech-plan.md`
+- **Output**: `jaan-to/outputs/dev/plan/{slug}/tech-plan.md`
 
 ### /jaan-to-dev-test-plan
 
@@ -94,7 +94,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - simple test plan
 - **MCP Required**: GitLab (diff impact)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/dev/test/{slug}/test-plan.md`
+- **Output**: `jaan-to/outputs/dev/test/{slug}/test-plan.md`
 
 ### /jaan-to-dev-api-contract
 
@@ -103,7 +103,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs OpenAPI MCP
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/dev/contract/{slug}/api.yaml`
+- **Output**: `jaan-to/outputs/dev/contract/{slug}/api.yaml`
 
 ### /jaan-to-dev-pr-review
 
@@ -112,7 +112,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs GitLab MCP
 - **MCP Required**: GitLab (MR + pipeline), Sentry (optional regressions)
 - **Input**: [pr-link-or-branch]
-- **Output**: `.jaan-to/outputs/dev/review/{slug}/pr-review.md`
+- **Output**: `jaan-to/outputs/dev/review/{slug}/pr-review.md`
 
 ### /jaan-to-dev-ship-check
 
@@ -121,7 +121,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs multiple MCPs
 - **MCP Required**: GitLab (pipelines), Sentry (health)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/dev/release/{slug}/ship-check.md`
+- **Output**: `jaan-to/outputs/dev/release/{slug}/ship-check.md`
 
 ### /jaan-to-dev-docs-generate
 
@@ -131,7 +131,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #14
 - **MCP Required**: GitLab (code context, optional)
 - **Input**: [component] [doc_type]
-- **Output**: `.jaan-to/outputs/dev/docs/{slug}/{doc_type}.md`
+- **Output**: `jaan-to/outputs/dev/docs/{slug}/{doc_type}.md`
 - **Failure Modes**: Documentation stale; inconsistent formatting; missing context
 - **Quality Gates**: Up-to-date with code; follows style guide; onboarding-friendly
 
@@ -146,7 +146,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - structured output
 - **MCP Required**: Figma (flow-states), GitLab (impacted areas)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/qa/matrix/{slug}/test-matrix.md`
+- **Output**: `jaan-to/outputs/qa/matrix/{slug}/test-matrix.md`
 
 ### /jaan-to-qa-bug-triage
 
@@ -155,7 +155,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - simple triage logic
 - **MCP Required**: Jira (bug list), Sentry (optional context)
 - **Input**: [issue-list]
-- **Output**: `.jaan-to/outputs/qa/triage/{slug}/bug-triage.md`
+- **Output**: `jaan-to/outputs/qa/triage/{slug}/bug-triage.md`
 
 ### /jaan-to-qa-automation-plan
 
@@ -164,7 +164,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - planning artifact
 - **MCP Required**: Playwright (direction), GitLab (automation MRs)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/qa/automation/{slug}/automation-plan.md`
+- **Output**: `jaan-to/outputs/qa/automation/{slug}/automation-plan.md`
 
 ### /jaan-to-qa-regression-runbook
 
@@ -173,7 +173,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - reusable checklist
 - **MCP Required**: GitLab (release branch), Playwright (optional)
 - **Input**: [release]
-- **Output**: `.jaan-to/outputs/qa/regression/{slug}/runbook.md`
+- **Output**: `jaan-to/outputs/qa/regression/{slug}/runbook.md`
 
 ### /jaan-to-qa-release-signoff
 
@@ -182,7 +182,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs multiple MCPs
 - **MCP Required**: GitLab (pipeline), Jira (test evidence)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/qa/signoff/{slug}/release-signoff.md`
+- **Output**: `jaan-to/outputs/qa/signoff/{slug}/release-signoff.md`
 
 ### /jaan-to-qa-test-cases
 
@@ -192,7 +192,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #1 (highest-leverage task)
 - **MCP Required**: Jira (user story context, optional)
 - **Input**: [user_story_id] or [acceptance_criteria]
-- **Output**: `.jaan-to/outputs/qa/cases/{slug}/test-cases.md`
+- **Output**: `jaan-to/outputs/qa/cases/{slug}/test-cases.md`
 - **Failure Modes**: Vague steps; missing edge cases; not traceable to requirements
 - **Quality Gates**: Peer review; traceable to requirements; reusable format
 
@@ -204,7 +204,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #10
 - **MCP Required**: Jira (duplicate detection, optional), Sentry (stack traces, optional)
 - **Input**: [observation] [test_case_id]
-- **Output**: `.jaan-to/outputs/qa/bugs/{slug}/bug-report.md`
+- **Output**: `jaan-to/outputs/qa/bugs/{slug}/bug-report.md`
 - **Failure Modes**: Vague descriptions; missing repro steps; incorrect severity
 - **Quality Gates**: Developer can reproduce in <5 min; linked to test case
 
@@ -219,7 +219,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - extends gtm-datalayer pattern
 - **MCP Required**: GA4 (measurement alignment)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/data/events/{slug}/event-spec.md`
+- **Output**: `jaan-to/outputs/data/events/{slug}/event-spec.md`
 
 ### /jaan-to-data-metric-spec
 
@@ -228,7 +228,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - simple definition
 - **MCP Required**: GA4 (dimension/metric checks)
 - **Input**: [metric]
-- **Output**: `.jaan-to/outputs/data/metrics/{slug}/metric-spec.md`
+- **Output**: `jaan-to/outputs/data/metrics/{slug}/metric-spec.md`
 
 ### /jaan-to-data-funnel-review
 
@@ -237,7 +237,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs GA4 MCP
 - **MCP Required**: GA4 (funnel analysis), Clarity (qualitative)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/data/insights/{slug}/funnel-review.md`
+- **Output**: `jaan-to/outputs/data/insights/{slug}/funnel-review.md`
 
 ### /jaan-to-data-experiment-design
 
@@ -246,7 +246,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - builds on metric-spec
 - **MCP Required**: GA4 (baseline + segments)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/data/experiments/{slug}/experiment-design.md`
+- **Output**: `jaan-to/outputs/data/experiments/{slug}/experiment-design.md`
 
 ### /jaan-to-data-anomaly-triage
 
@@ -255,7 +255,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs multiple MCPs
 - **MCP Required**: GA4 (anomaly detection), Sentry, Clarity (optional)
 - **Input**: [kpi]
-- **Output**: `.jaan-to/outputs/data/monitoring/{slug}/anomaly-triage.md`
+- **Output**: `jaan-to/outputs/data/monitoring/{slug}/anomaly-triage.md`
 
 ### /jaan-to-data-sql-query
 
@@ -265,7 +265,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #2 (2nd highest-leverage task)
 - **MCP Required**: None (schema context provided)
 - **Input**: [question] [tables/schema]
-- **Output**: `.jaan-to/outputs/data/queries/{slug}/query.sql`
+- **Output**: `jaan-to/outputs/data/queries/{slug}/query.sql`
 - **Failure Modes**: Misunderstanding question; wrong joins; incorrect filters
 - **Quality Gates**: Row count sanity checks; cross-reference dashboards
 
@@ -277,7 +277,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5
 - **MCP Required**: GA4 (cohort data), BigQuery (optional)
 - **Input**: [cohort_type] [retention_event] [periods]
-- **Output**: `.jaan-to/outputs/data/cohorts/{slug}/cohort-analysis.md`
+- **Output**: `jaan-to/outputs/data/cohorts/{slug}/cohort-analysis.md`
 - **Failure Modes**: Incomplete data; timezone issues; not accounting for seasonality
 - **Quality Gates**: Early cohorts stable; cross-reference with finance
 
@@ -289,7 +289,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #19
 - **MCP Required**: dbt Cloud (optional), BigQuery/Snowflake (schema)
 - **Input**: [source_table] [model_type]
-- **Output**: `.jaan-to/outputs/data/dbt/{slug}/model.sql`
+- **Output**: `jaan-to/outputs/data/dbt/{slug}/model.sql`
 - **Failure Modes**: Circular dependencies; missing tests; poor documentation
 - **Quality Gates**: dbt test passes; row counts match; code review
 
@@ -304,7 +304,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - content structure
 - **MCP Required**: GSC (opportunity pages + queries)
 - **Input**: [page]
-- **Output**: `.jaan-to/outputs/growth/content/{slug}/outline.md`
+- **Output**: `jaan-to/outputs/growth/content/{slug}/outline.md`
 
 ### /jaan-to-growth-keyword-brief
 
@@ -313,7 +313,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs GSC MCP
 - **MCP Required**: GSC (queries/pages)
 - **Input**: [topic]
-- **Output**: `.jaan-to/outputs/growth/seo/{slug}/keyword-brief.md`
+- **Output**: `jaan-to/outputs/growth/seo/{slug}/keyword-brief.md`
 
 ### /jaan-to-growth-seo-audit
 
@@ -322,7 +322,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs GSC MCP
 - **MCP Required**: GSC (page CTR/impressions), GitLab (optional route ownership)
 - **Input**: [url_or_route] [target_keyword]
-- **Output**: `.jaan-to/outputs/growth/seo/{slug}/seo-audit.md`
+- **Output**: `jaan-to/outputs/growth/seo/{slug}/seo-audit.md`
 
 ### /jaan-to-growth-seo-check
 
@@ -331,7 +331,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - technical checklist
 - **MCP Required**: GSC (coverage/index diagnostics)
 - **Input**: [site_or_app] [scope]
-- **Output**: `.jaan-to/outputs/growth/seo/{slug}/seo-check.md`
+- **Output**: `jaan-to/outputs/growth/seo/{slug}/seo-check.md`
 
 ### /jaan-to-growth-weekly-report
 
@@ -340,7 +340,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs multiple MCPs
 - **MCP Required**: GA4 (deltas), GSC (deltas)
 - **Input**: [period]
-- **Output**: `.jaan-to/outputs/growth/reports/{slug}/weekly-report.md`
+- **Output**: `jaan-to/outputs/growth/reports/{slug}/weekly-report.md`
 
 ### /jaan-to-growth-meta-write
 
@@ -350,7 +350,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #12
 - **MCP Required**: None (target keyword provided)
 - **Input**: [page_url] [target_keyword]
-- **Output**: `.jaan-to/outputs/growth/meta/{slug}/meta-tags.md`
+- **Output**: `jaan-to/outputs/growth/meta/{slug}/meta-tags.md`
 - **Failure Modes**: Truncation; keyword stuffing; generic descriptions
 - **Quality Gates**: Primary keyword included; compelling; proper length
 
@@ -362,7 +362,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #18
 - **MCP Required**: GSC (traffic decline reports), GA4 (engagement)
 - **Input**: [page_url]
-- **Output**: `.jaan-to/outputs/growth/optimization/{slug}/content-refresh.md`
+- **Output**: `jaan-to/outputs/growth/optimization/{slug}/content-refresh.md`
 - **Failure Modes**: Surface-level changes; breaking existing rankings
 - **Quality Gates**: Matches current intent; competitive depth; tracked 30/60/90 days
 
@@ -377,7 +377,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - flow documentation
 - **MCP Required**: Figma (flow/state extraction)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/ux/flows/{slug}/flow-spec.md`
+- **Output**: `jaan-to/outputs/ux/flows/{slug}/flow-spec.md`
 
 ### /jaan-to-ux-microcopy-write
 
@@ -386,7 +386,7 @@ Skills split into two phases by effort:
 - **Quick Win**: Yes - simple content
 - **MCP Required**: Figma (components + strings)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/ux/content/{slug}/microcopy.md`
+- **Output**: `jaan-to/outputs/ux/content/{slug}/microcopy.md`
 
 ### /jaan-to-ux-research-plan
 
@@ -395,7 +395,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - planning artifact
 - **MCP Required**: Clarity (pain signals), Figma (flow context)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/ux/research/{slug}/research-plan.md`
+- **Output**: `jaan-to/outputs/ux/research/{slug}/research-plan.md`
 
 ### /jaan-to-ux-heuristic-review
 
@@ -404,7 +404,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - structured review
 - **MCP Required**: Clarity (behavior evidence), Figma (screens)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/ux/review/{slug}/heuristic-review.md`
+- **Output**: `jaan-to/outputs/ux/review/{slug}/heuristic-review.md`
 
 ### /jaan-to-ux-competitive-review
 
@@ -413,7 +413,7 @@ Skills split into two phases by effort:
 - **Quick Win**: No - needs Figma MCP
 - **MCP Required**: Figma (optional), GA4/Clarity (validate assumptions)
 - **Input**: [initiative]
-- **Output**: `.jaan-to/outputs/ux/benchmark/{slug}/competitive-review.md`
+- **Output**: `jaan-to/outputs/ux/benchmark/{slug}/competitive-review.md`
 
 ### /jaan-to-ux-research-synthesize
 
@@ -423,7 +423,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #8
 - **MCP Required**: None (raw data input)
 - **Input**: [study_name] [data_sources]
-- **Output**: `.jaan-to/outputs/ux/research/{slug}/synthesis.md`
+- **Output**: `jaan-to/outputs/ux/research/{slug}/synthesis.md`
 - **Failure Modes**: Too long reports; no actionable recommendations
 - **Quality Gates**: Stakeholder feedback positive; action items tracked
 
@@ -435,7 +435,7 @@ Skills split into two phases by effort:
 - **AI Score**: 5 | **Rank**: #16
 - **MCP Required**: None (research data input), Clarity (optional)
 - **Input**: [research_data] [segment]
-- **Output**: `.jaan-to/outputs/ux/personas/{slug}/persona.md`
+- **Output**: `jaan-to/outputs/ux/personas/{slug}/persona.md`
 - **Failure Modes**: Based on assumptions; not validated; too many personas
 - **Quality Gates**: Validation interviews; periodic reviews; design decisions reference personas
 

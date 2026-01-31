@@ -11,7 +11,7 @@ A skill is a slash command that:
 2. Asks clarifying questions
 3. Generates an artifact
 4. Shows preview for approval
-5. Writes to `.jaan-to/outputs/`
+5. Writes to `jaan-to/outputs/`
 
 ---
 
@@ -66,7 +66,7 @@ Every skill follows this flow:
    - Wait for approval
 
 5. WRITE
-   - Save to .jaan-to/outputs/
+   - Save to jaan-to/outputs/
    - Trigger post-write hooks
 ```
 
@@ -77,7 +77,7 @@ Every skill follows this flow:
 All outputs go to:
 
 ```
-.jaan-to/outputs/{role}/{domain}/{slug}/
+jaan-to/outputs/{role}/{domain}/{slug}/
 ```
 
-Example: `.jaan-to/outputs/pm/spec/user-auth/prd.md`
+Example: `jaan-to/outputs/pm/user-auth/prd.md`

@@ -4,7 +4,7 @@ description: |
   Audit and maintain documentation quality.
   Default: Smart staleness check using git history.
   Maps to: to-jaan-docs-update
-allowed-tools: Read, Glob, Grep, Write(docs/**), Write(.jaan-to/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
+allowed-tools: Read, Glob, Grep, Write(docs/**), Write(jaan-to/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 ---
 
@@ -14,13 +14,13 @@ argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 
 ## Context Files
 
-- `.jaan-to/docs/STYLE.md` - Documentation standards
-- `.jaan-to/learn/to-jaan-docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `jaan-to/docs/STYLE.md` - Documentation standards
+- `jaan-to/learn/to-jaan-docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`.jaan-to/learn/to-jaan-docs-update.learn.md`
+`jaan-to/learn/to-jaan-docs-update.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Note common issues to check
@@ -36,11 +36,11 @@ If the file does not exist, continue without it.
 | Code Path | Related Doc |
 |-----------|-------------|
 | `skills/{name}/SKILL.md` | `docs/skills/{role}/{slug}.md` |
-| `.jaan-to/learn/{name}.learn.md` | (referenced in skill doc) |
-| `.jaan-to/context/hooks/{name}.sh` | `docs/hooks/{name}.md` |
-| `.jaan-to/context/config.md` | `docs/config/README.md` |
-| `.jaan-to/context/*.md` | `docs/config/context.md` |
-| `.jaan-to/context/boundaries.md` | `docs/config/boundaries.md` |
+| `jaan-to/learn/{name}.learn.md` | (referenced in skill doc) |
+| `jaan-to/context/hooks/{name}.sh` | `docs/hooks/{name}.md` |
+| `jaan-to/context/config.md` | `docs/config/README.md` |
+| `jaan-to/context/*.md` | `docs/config/context.md` |
+| `jaan-to/context/boundaries.md` | `docs/config/boundaries.md` |
 
 **Slug extraction:** `jaan-to-pm-prd-write` → `prd-write` (remove role prefix)
 
@@ -70,7 +70,7 @@ If the file does not exist, continue without it.
 ## Step 0.2: Get Recent Code Changes
 
 ```bash
-git log --since="30 days ago" --name-only --pretty=format: -- skills/ .jaan-to/context/hooks/ .jaan-to/context/config.md .jaan-to/context/ | sort -u | grep -v '^$'
+git log --since="30 days ago" --name-only --pretty=format: -- skills/ jaan-to/context/hooks/ jaan-to/context/config.md jaan-to/context/ | sort -u | grep -v '^$'
 ```
 
 Extract unique changed files.
@@ -90,14 +90,14 @@ skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
 
 **Hooks:**
 ```
-.jaan-to/context/hooks/{name}.sh → docs/hooks/{name}.md
+jaan-to/context/hooks/{name}.sh → docs/hooks/{name}.md
 ```
 
 **Config:**
 ```
-.jaan-to/context/config.md → docs/config/README.md
-.jaan-to/context/*.md → docs/config/context.md
-.jaan-to/context/boundaries.md → docs/config/boundaries.md
+jaan-to/context/config.md → docs/config/README.md
+jaan-to/context/*.md → docs/config/context.md
+jaan-to/context/boundaries.md → docs/config/boundaries.md
 ```
 
 ## Step 0.4: Compare Timestamps
@@ -176,7 +176,7 @@ Use Glob to count docs (don't read all):
 Glob: docs/**/*.md
 ```
 
-Exclude: `.jaan-to/`, `node_modules/`
+Exclude: `jaan-to/`, `node_modules/`
 
 ## Step 1.2: Check Recent Doc Changes
 
@@ -443,6 +443,6 @@ Commit: {hash}
 1. **NEVER** delete without approval (archive instead)
 2. **ALWAYS** preserve content when consolidating
 3. **ASK** before major changes
-4. **SKIP** generated files (.jaan-to/)
+4. **SKIP** generated files (jaan-to/)
 5. **BACKUP** before bulk operations
 6. **PREVIEW** all changes before applying

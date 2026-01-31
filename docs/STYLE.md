@@ -172,7 +172,7 @@ NOT for:
 
 ## Output
 
-**Path**: `.jaan-to/outputs/...`
+**Path**: `jaan-to/outputs/...`
 
 ---
 

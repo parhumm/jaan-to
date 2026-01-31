@@ -4,7 +4,7 @@ description: |
   Create new documentation with templates following STYLE.md.
   Supports: skill, hook, config, guide, concept, index.
   Maps to: to-jaan-docs-create
-allowed-tools: Read, Glob, Grep, Write(docs/**), Write(.jaan-to/**), Bash(git add:*), Bash(git commit:*)
+allowed-tools: Read, Glob, Grep, Write(docs/**), Write(jaan-to/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: "{type} {name}"
 ---
 
@@ -14,16 +14,16 @@ argument-hint: "{type} {name}"
 
 ## Context Files
 
-- `.jaan-to/docs/STYLE.md` - Documentation standards
-- `.jaan-to/templates/to-jaan-docs-create.template.md` - All templates
-- `.jaan-to/learn/to-jaan-docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `jaan-to/docs/STYLE.md` - Documentation standards
+- `jaan-to/templates/to-jaan-docs-create.template.md` - All templates
+- `jaan-to/learn/to-jaan-docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ---
 
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`.jaan-to/learn/to-jaan-docs-create.learn.md`
+`jaan-to/learn/to-jaan-docs-create.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -121,7 +121,7 @@ If potential duplicate found:
 
 ## Step 4: Read STYLE.md
 
-Read `.jaan-to/docs/STYLE.md` for:
+Read `jaan-to/docs/STYLE.md` for:
 - Structure rules (H1, tagline, ---)
 - Length limits
 - Formatting patterns
@@ -177,7 +177,7 @@ Proceed? [y/n/edit]
 
 ## Step 6: Load Template
 
-Read template for doc type from `.jaan-to/templates/to-jaan-docs-create.template.md`
+Read template for doc type from `jaan-to/templates/to-jaan-docs-create.template.md`
 
 ## Step 7: Fill Template
 
@@ -204,7 +204,7 @@ related: []
 
 ## Step 9: Validate
 
-Check against `.jaan-to/docs/STYLE.md`:
+Check against `jaan-to/docs/STYLE.md`:
 - [ ] Has H1 title
 - [ ] Has tagline (`>`)
 - [ ] Sections separated with `---`

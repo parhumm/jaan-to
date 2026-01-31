@@ -5,6 +5,25 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2026-01-31
+
+### Changed
+- **BREAKING: Project directory renamed** `.jaan-to/` → `jaan-to/` (non-hidden)
+  - All skill references, scripts, and documentation updated
+  - Bootstrap auto-migrates existing `.jaan-to/` directories
+
+### Added
+- **Version management rules** in CLAUDE.md — git tag + CHANGELOG required per release
+- **Auto-migration** in bootstrap.sh for existing `.jaan-to/` directories
+- **Retroactive git tags** for v1.0.0, v1.3.0, v1.3.1
+
+### Migration Notes
+- Existing projects: bootstrap auto-migrates on next session
+- Manual: `mv .jaan-to jaan-to` + update `.gitignore`
+- Update any custom `settings.json` permissions: `.jaan-to` → `jaan-to`
+
+---
+
 ## [1.3.1] - 2026-01-31
 
 ### Fixed
@@ -119,6 +138,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[2.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v2.0.0
 [1.3.1]: https://github.com/parhumm/jaan-to/releases/tag/v1.3.1
 [1.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v1.3.0
 [1.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v1.0.0

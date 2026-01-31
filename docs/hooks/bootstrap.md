@@ -23,9 +23,9 @@ related: [README.md, ../config/context-system.md]
 
 ## What It Does
 
-1. Creates `.jaan-to/outputs/` and `.jaan-to/learn/` directories
-2. Adds `.jaan-to/` to the project's `.gitignore`
-3. Copies seed LEARN.md files from plugin `skills/*/LEARN.md` to `.jaan-to/learn/{name}.learn.md`
+1. Creates `jaan-to/outputs/` and `jaan-to/learn/` directories
+2. Adds `jaan-to/` to the project's `.gitignore`
+3. Copies seed LEARN.md files from plugin `skills/*/LEARN.md` to `jaan-to/learn/{name}.learn.md`
 4. Detects old standalone skills (`.claude/skills/jaan-to-*` or `.claude/skills/to-jaan-*`)
 5. Checks for missing context files in the plugin
 
@@ -35,8 +35,8 @@ related: [README.md, ../config/context-system.md]
 
 | Result | Condition | Action |
 |--------|-----------|--------|
-| Creates directories | `.jaan-to/` doesn't exist | Makes `.jaan-to/outputs/` and `.jaan-to/learn/` |
-| Skips copy | `.jaan-to/learn/{name}.learn.md` already exists | Preserves existing project lessons |
+| Creates directories | `jaan-to/` doesn't exist | Makes `jaan-to/outputs/` and `jaan-to/learn/` |
+| Skips copy | `jaan-to/learn/{name}.learn.md` already exists | Preserves existing project lessons |
 | Warns | Old standalone skills detected | Reports migration needed |
 | Warns | Context files missing | Lists missing files |
 
@@ -48,7 +48,7 @@ related: [README.md, ../config/context-system.md]
 ```json
 {
   "status": "created",
-  "path": ".jaan-to/"
+  "path": "jaan-to/"
 }
 ```
 
@@ -56,8 +56,8 @@ related: [README.md, ../config/context-system.md]
 ```json
 {
   "status": "complete",
-  "output_dir": ".jaan-to/outputs",
-  "learn_dir": ".jaan-to/learn",
+  "output_dir": "jaan-to/outputs",
+  "learn_dir": "jaan-to/learn",
   "missing_context": [],
   "old_standalone_skills": [],
   "migration_needed": false

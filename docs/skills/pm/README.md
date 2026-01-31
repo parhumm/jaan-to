@@ -34,5 +34,5 @@ PM skills generate product outputs:
 ## Output Location
 
 ```
-.jaan-to/outputs/pm/spec/{slug}/prd.md
+jaan-to/outputs/pm/{slug}/prd.md
 ```

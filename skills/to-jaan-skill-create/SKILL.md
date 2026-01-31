@@ -4,7 +4,7 @@ description: |
   Guide users through creating new jaan.to skills step-by-step.
   Auto-triggers on: create skill, new skill, skill wizard, add skill.
   Maps to: to-jaan-skill-create
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write(.jaan-to/**), Edit(.jaan-to/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write(jaan-to/**), Edit(jaan-to/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 ---
 
@@ -14,10 +14,10 @@ argument-hint: [optional-skill-idea]
 
 ## Context Files
 
-- `.jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
-- `.jaan-to/learn/to-jaan-skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
-- `.jaan-to/templates/to-jaan-skill-create.template.md` - Generation templates
-- `.jaan-to/context/config.md` - Current skill catalog
+- `jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
+- `jaan-to/learn/to-jaan-skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `jaan-to/templates/to-jaan-skill-create.template.md` - Generation templates
+- `jaan-to/context/config.md` - Current skill catalog
 
 ## Input
 
@@ -30,7 +30,7 @@ If provided, use as starting context. Otherwise, begin with identity questions.
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`.jaan-to/learn/to-jaan-skill-create.learn.md`
+`jaan-to/learn/to-jaan-skill-create.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -219,12 +219,12 @@ Best practices incorporated: {practice_count}
 FILES TO CREATE
 ───────────────
 □ skills/{name}/SKILL.md
-□ .jaan-to/learn/{name}.learn.md
-□ .jaan-to/templates/{name}.template.md (if needed)
+□ jaan-to/learn/{name}.learn.md
+□ jaan-to/templates/{name}.template.md (if needed)
 
 WILL ALSO
 ─────────
-□ Register in .jaan-to/context/config.md
+□ Register in jaan-to/context/config.md
 □ Create docs/skills/{role}/{name}.md (via /to-jaan-docs-create)
 □ Commit to branch skill/{name}
 ```
@@ -247,7 +247,7 @@ Confirm: "Created branch `skill/{name}`. All work on this branch."
 
 ## Step 7: Generate SKILL.md
 
-Use template from `.jaan-to/templates/to-jaan-skill-create.template.md`:
+Use template from `jaan-to/templates/to-jaan-skill-create.template.md`:
 
 1. Fill YAML frontmatter:
    - name: {name}
@@ -312,7 +312,7 @@ Based on output format from Step 4:
 
 ## Step 10: Validate Against Specification
 
-Check against `.jaan-to/docs/create-skill.md`:
+Check against `jaan-to/docs/create-skill.md`:
 
 **Frontmatter**:
 - [ ] Has `name` matching directory
@@ -352,14 +352,14 @@ Show complete content of:
 If approved:
 1. Create directory: `skills/{name}/`
 2. Write SKILL.md to `skills/{name}/SKILL.md`
-3. Write LEARN.md to `.jaan-to/learn/{name}.learn.md`
-4. Write template.md to `.jaan-to/templates/{name}.template.md` (if needed)
+3. Write LEARN.md to `jaan-to/learn/{name}.learn.md`
+4. Write template.md to `jaan-to/templates/{name}.template.md` (if needed)
 
-Confirm: "Skill files written to `skills/{name}/` and `.jaan-to/`"
+Confirm: "Skill files written to `skills/{name}/` and `jaan-to/`"
 
 ## Step 13: Update Config Catalog
 
-Edit `.jaan-to/context/config.md` to add skill to Available Skills table:
+Edit `jaan-to/context/config.md` to add skill to Available Skills table:
 
 ```markdown
 | jaan-to-{role}-{domain}:{action} | `/{name}` | {short_description} |
@@ -375,7 +375,7 @@ This ensures documentation is always created with the skill.
 ## Step 15: Commit to Branch
 
 ```bash
-git add skills/{name}/ .jaan-to/ docs/skills/{role}/{name}.md
+git add skills/{name}/ jaan-to/ docs/skills/{role}/{name}.md
 git commit -m "feat(skill): Add {name} skill
 
 - {description}
@@ -435,8 +435,8 @@ Consulted {source_count} sources for best practices:
 ## Files Created
 
 - `skills/{name}/SKILL.md`
-- `.jaan-to/learn/{name}.learn.md`
-- `.jaan-to/templates/{name}.template.md` (if applicable)
+- `jaan-to/learn/{name}.learn.md`
+- `jaan-to/templates/{name}.template.md` (if applicable)
 - `docs/skills/{role}/{name}.md`
 
 ## Testing

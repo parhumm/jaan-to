@@ -24,7 +24,7 @@ cp "$PLUGIN_ROOT/.claude/settings.json" "$DIST/.claude/settings.json"
 # Essential root files
 cp "$PLUGIN_ROOT/CLAUDE.md" "$DIST/CLAUDE.md"
 
-# Docs needed by bootstrap (copied to .jaan-to/ on install)
+# Docs needed by bootstrap (copied to jaan-to/ on install)
 mkdir -p "$DIST/docs/extending"
 cp "$PLUGIN_ROOT/docs/STYLE.md" "$DIST/docs/STYLE.md"
 cp "$PLUGIN_ROOT/docs/extending/create-skill.md" "$DIST/docs/extending/create-skill.md"

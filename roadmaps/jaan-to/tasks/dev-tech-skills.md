@@ -129,7 +129,7 @@ PRD ─────────────────────────�
 ## Output Artifacts
 
 ```
-.jaan-to/outputs/dev/tech/{slug}/
+jaan-to/outputs/dev/tech/{slug}/
 ├── plan.md              # Technical approach (/dev-tech-plan)
 ├── research.md          # Decisions & rationale (/dev-tech-plan)
 ├── data-model.md        # Entity definitions (/dev-tech-plan)

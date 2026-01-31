@@ -30,7 +30,7 @@ Create immutable development principles (inspired by spec-kit's articles):
 | II | **Two-Phase** | Always: gather context → HARD STOP → generate |
 | III | **Preview-First** | Never write without showing preview and approval |
 | IV | **Learn-Always** | Capture feedback in LEARN.md for improvement |
-| V | **Safe-Paths** | Only write to `.jaan-to/` and approved paths |
+| V | **Safe-Paths** | Only write to `jaan-to/` and approved paths |
 | VI | **Human-Loop** | Humans make final decisions, AI assists |
 | VII | **Minimal-Questions** | Ask only necessary questions, use context |
 | VIII | **Real-Context** | Use MCP for actual data, never assume |

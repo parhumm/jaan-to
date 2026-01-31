@@ -9,8 +9,8 @@
 - version: 0.1.0
 
 ## References
-- Skill Specification: `.jaan-to/docs/create-skill.md` (project)
-- Style Guide: `.jaan-to/docs/STYLE.md` (project)
+- Skill Specification: `jaan-to/docs/create-skill.md` (project)
+- Style Guide: `jaan-to/docs/STYLE.md` (project)
 
 ## Enabled Roles
 - pm (Product Manager)
@@ -41,10 +41,10 @@
 | to-jaan-research-add | `/to-jaan-research-add` | Add file/URL to research index |
 
 ## Trust
-- trust_paths: [".jaan-to/"]
+- trust_paths: ["jaan-to/"]
 - require_preview: true
 - require_approval: true
 
 ## Defaults
-- output_dir: .jaan-to/outputs
+- output_dir: jaan-to/outputs
 - model: inherit

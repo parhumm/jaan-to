@@ -15,7 +15,7 @@ project-root/
 ├── outputStyles/           Output formatting styles
 ├── hooks/                  Hook configuration
 ├── scripts/                Hook scripts (bootstrap, validation, feedback) + seeds
-├── .jaan-to/               Project-local workspace (gitignored, bootstrapped)
+├── jaan-to/               Project-local workspace (gitignored, bootstrapped)
 ├── docs/                   Human documentation
 ├── roadmaps/               Project planning and vision
 ├── website/                Landing page
@@ -110,12 +110,12 @@ hooks/
 └── hooks.json              Hook configuration (SessionStart, PostToolUse)
 
 scripts/
-├── bootstrap.sh            Session initialization (creates .jaan-to/)
+├── bootstrap.sh            Session initialization (creates jaan-to/)
 ├── build-dist.sh           Build and install plugin to .claude/
 ├── verify-install.sh       Verify plugin installation
 ├── capture-feedback.sh     Post-write feedback capture
 ├── validate-prd.sh         PRD section validation
-└── seeds/                  Context templates (copied to .jaan-to/context/)
+└── seeds/                  Context templates (copied to jaan-to/context/)
     ├── boundaries.md
     ├── config.md
     ├── integrations.md
@@ -127,16 +127,16 @@ scripts/
 
 ## Context Seeds
 
-Project context templates located in `scripts/seeds/`. These are copied to `.jaan-to/context/` during bootstrap.
+Project context templates located in `scripts/seeds/`. These are copied to `jaan-to/context/` during bootstrap.
 
 ---
 
-## Project-Local (.jaan-to/)
+## Project-Local (jaan-to/)
 
 Generated at runtime by bootstrap hook. Gitignored.
 
 ```
-.jaan-to/
+jaan-to/
 ├── context/                Copies of context templates (editable)
 │   ├── tech.md
 │   ├── team.md
@@ -292,5 +292,5 @@ The following directories were removed after plugin migration:
 - `jaan-to/` - Old standalone structure, replaced by plugin architecture
 - Old skill names without prefixes (e.g., `pm-prd-write`, `data-gtm-datalayer`, `jaan-docs-create`) - Now use `jaan-to-` or `to-jaan-` prefixes
 - `skills/{role}/{domain}/` - Old nested structure, now flat `skills/{name}/`
-- `LEARN.md` alongside skills - Now bootstrapped to `.jaan-to/learn/{name}.learn.md`
-- `docs/deepresearches/` - Outputs now go to `.jaan-to/outputs/research/`
+- `LEARN.md` alongside skills - Now bootstrapped to `jaan-to/learn/{name}.learn.md`
+- `docs/deepresearches/` - Outputs now go to `jaan-to/outputs/research/`

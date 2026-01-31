@@ -10,7 +10,7 @@ Implement a three-layer learning system where skills remember lessons from past 
 
 ### Layer 1: Skill Learning
 
-**Location:** `skills/{name}/LEARN.md` (seed) → `.jaan-to/learn/{name}.learn.md` (project)
+**Location:** `skills/{name}/LEARN.md` (seed) → `jaan-to/learn/{name}.learn.md` (project)
 **What it improves:** How execution happens
 
 Captures:
@@ -34,7 +34,7 @@ Example:
 
 ### Layer 2: Template Learning
 
-**Location:** `.jaan-to/learn/template-{name}.learn.md`
+**Location:** `jaan-to/learn/template-{name}.learn.md`
 **What it improves:** How outputs are written
 
 Captures:
@@ -44,7 +44,7 @@ Captures:
 
 ### Layer 3: Context Learning
 
-**Location:** `.jaan-to/learn/context-{name}.learn.md`
+**Location:** `jaan-to/learn/context-{name}.learn.md`
 **What it improves:** Which context matters
 
 Captures:
@@ -65,7 +65,7 @@ Captures:
 ### 2.2 Skill LEARN.md
 - [x] Define LEARN.md file format
 - [x] Create LEARN.md for pm-prd-write
-- [x] Update SKILL.md to read .jaan-to/learn/{name}.learn.md
+- [x] Update SKILL.md to read jaan-to/learn/{name}.learn.md
 - [x] Update SKILL.md to read context
 
 ### 2.3 /to-jaan-learn-add Command
@@ -89,7 +89,7 @@ Captures:
 ## Acceptance Criteria
 
 - [x] `LEARN.md` file created for `pm-prd-write` skill
-- [x] Skills read `.jaan-to/learn/{name}.learn.md` before execution
+- [x] Skills read `jaan-to/learn/{name}.learn.md` before execution
 - [x] Skills read context files before execution
 - [x] `/to-jaan-learn-add` command to capture feedback
 - [x] Learning applies to subsequent executions
@@ -101,7 +101,7 @@ Captures:
 
 ### Functional
 - [x] LEARN.md format documented and implemented
-- [x] pm-prd-write reads and applies .jaan-to/learn/ lessons
+- [x] pm-prd-write reads and applies jaan-to/learn/ lessons
 - [x] Context directory exists with tech.md, team.md, integrations.md
 - [x] Skills read and incorporate context
 - [x] `/to-jaan-learn-add` routes feedback to correct .learn.md
@@ -126,21 +126,21 @@ Captures:
 
 ### Test 1: Learning Application
 ```
-Setup: Add "Always ask about API versioning" to .jaan-to/learn/jaan-to-pm-prd-write.learn.md
+Setup: Add "Always ask about API versioning" to jaan-to/learn/jaan-to-pm-prd-write.learn.md
 Execute: /jaan-to-pm-prd-write "new API endpoint"
 Verify: Skill asks about API versioning
 ```
 
 ### Test 2: Feedback Routing
 ```
-Setup: Clean .jaan-to/learn/jaan-to-pm-prd-write.learn.md
+Setup: Clean jaan-to/learn/jaan-to-pm-prd-write.learn.md
 Execute: /to-jaan-learn-add "jaan-to-pm-prd-write" "Check for i18n requirements"
-Verify: Lesson appears in .jaan-to/learn/jaan-to-pm-prd-write.learn.md under "Better Questions"
+Verify: Lesson appears in jaan-to/learn/jaan-to-pm-prd-write.learn.md under "Better Questions"
 ```
 
 ### Test 3: Context Integration
 ```
-Setup: Set .jaan-to/context/tech.md to Python/FastAPI
+Setup: Set jaan-to/context/tech.md to Python/FastAPI
 Execute: /jaan-to-pm-prd-write "backend service"
 Verify: PRD mentions Python/FastAPI context
 ```
@@ -184,23 +184,23 @@ Verify: Second run applies the lesson from step 3
 
 ```
 BEFORE EXECUTION
-├── Read .jaan-to/learn/{name}.learn.md (project-specific)
+├── Read jaan-to/learn/{name}.learn.md (project-specific)
 ├── Read skills/{name}/LEARN.md (seed lessons, if not bootstrapped)
-├── Read .jaan-to/context/tech.md (project-specific)
-├── Read .jaan-to/context/team.md (project-specific)
+├── Read jaan-to/context/tech.md (project-specific)
+├── Read jaan-to/context/team.md (project-specific)
 └── Apply all lessons to current execution
 
 AFTER EXECUTION
-└── User feedback → routes to appropriate .jaan-to/learn/*.learn.md
+└── User feedback → routes to appropriate jaan-to/learn/*.learn.md
 ```
 
 ### Feedback Routing
 
 | Feedback Type | Routes To |
 |---------------|-----------|
-| "Ask this earlier" | .jaan-to/learn/{skill}.learn.md |
-| "Missing section" | .jaan-to/learn/template-{name}.learn.md |
-| "Didn't know about X" | .jaan-to/learn/context-{name}.learn.md |
+| "Ask this earlier" | jaan-to/learn/{skill}.learn.md |
+| "Missing section" | jaan-to/learn/template-{name}.learn.md |
+| "Didn't know about X" | jaan-to/learn/context-{name}.learn.md |
 
 ### Auto-Categorization Keywords
 

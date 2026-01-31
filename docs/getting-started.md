@@ -59,10 +59,10 @@ Type `y` to approve.
 Output location:
 
 ```
-.jaan-to/outputs/pm/spec/user-login/prd.md
+jaan-to/outputs/pm/user-login/prd.md
 ```
 
-Pattern: `.jaan-to/outputs/{role}/{domain}/{slug}/`
+Pattern: `jaan-to/outputs/{role}/{domain}/{slug}/`
 
 ---
 

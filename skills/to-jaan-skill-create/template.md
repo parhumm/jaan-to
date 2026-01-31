@@ -24,7 +24,7 @@ argument-hint: {argument_format}
 ## Context Files
 
 Read these before execution:
-- `.jaan-to/learn/{skill_name}.learn.md` - Past lessons
+- `jaan-to/learn/{skill_name}.learn.md` - Past lessons
 {additional_context_files}
 
 ## Input
@@ -39,7 +39,7 @@ Read these before execution:
 
 ## Step 0: Apply Past Lessons
 
-Read `.jaan-to/learn/{skill_name}.learn.md` if it exists:
+Read `jaan-to/learn/{skill_name}.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -87,7 +87,7 @@ Show complete output and ask:
 
 If approved:
 1. Generate slug from input
-2. Create path: `.jaan-to/outputs/{role}/{domain}/{slug}/`
+2. Create path: `jaan-to/outputs/{role}/{domain}/{slug}/`
 3. Write file
 4. Confirm: "Written to {path}"
 
@@ -195,7 +195,7 @@ Things to avoid:
 | Find files | `Glob` |
 | Search content | `Grep` |
 | Web research | `WebSearch`, `Task` |
-| Write to artifacts | `Write(.jaan-to/**)` |
+| Write to artifacts | `Write(jaan-to/**)` |
 | Write to docs | `Write(docs/**)` |
 | Write to skills | `Write(skills/**)` |
 | Edit existing | `Edit` |

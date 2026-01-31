@@ -23,9 +23,9 @@ Permissions control what Claude Code can do:
 **Allowed**:
 | Permission | Meaning |
 |------------|---------|
-| `Read(.jaan-to/**)` | Read context, templates, outputs |
+| `Read(jaan-to/**)` | Read context, templates, outputs |
 | `Read(docs/**)` | Read project documentation |
-| `Write(.jaan-to/**)` | Write outputs, learn, context |
+| `Write(jaan-to/**)` | Write outputs, learn, context |
 | `Write(docs/**)` | Write documentation |
 | `Glob` | Search file patterns |
 | `Grep` | Search file contents |

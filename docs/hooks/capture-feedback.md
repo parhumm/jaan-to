@@ -8,7 +8,7 @@
 
 - **Type**: PostToolUse
 - **Trigger**: Write operations
-- **Matches**: `.jaan-to/outputs/*`
+- **Matches**: `jaan-to/outputs/*`
 
 ---
 
@@ -17,7 +17,7 @@
 After an artifact is written, displays a reminder:
 
 ```
-Artifact created: .jaan-to/outputs/pm/spec/user-auth/prd.md
+Artifact created: jaan-to/outputs/pm/user-auth/prd.md
 
 Have feedback? Run:
 /to-jaan-learn-add pm-prd-write "your feedback here"

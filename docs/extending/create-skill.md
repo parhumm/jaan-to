@@ -32,7 +32,7 @@ A skill is a reusable command that AI executes to produce outputs. This specific
 | Command | `/{name}` |
 | Directory | `skills/{name}/` |
 | Logical Name | `{role}:{domain-action}` |
-| Output | `.jaan-to/outputs/{role}/{domain}/{slug}/` |
+| Output | `jaan-to/outputs/{role}/{domain}/{slug}/` |
 
 ---
 
@@ -76,7 +76,7 @@ Every skill needs these files in `skills/{name}/`:
 | `SKILL.md` | Yes | Execution instructions |
 | `template.md` | No | Output format template |
 
-Learning lessons are stored in `.jaan-to/learn/{name}.learn.md` (managed by the system).
+Learning lessons are stored in `jaan-to/learn/{name}.learn.md` (managed by the system).
 
 ---
 
@@ -112,7 +112,7 @@ argument-hint: {expected-format}
 | `Read` | Read any file |
 | `Glob` | Find files by pattern |
 | `Grep` | Search file contents |
-| `Write(.jaan-to/**)` | Write outputs only |
+| `Write(jaan-to/**)` | Write outputs only |
 | `Write(docs/**)` | Documentation skills |
 | `Write(skills/**)` | Skill development |
 | `Edit` | Modify existing files |
@@ -144,7 +144,7 @@ Read these before execution:
 # PHASE 1: Analysis (Read-Only)
 
 ## Step 0: Apply Past Lessons
-Read `.jaan-to/learn/{name}.learn.md` if it exists:
+Read `jaan-to/learn/{name}.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -186,7 +186,7 @@ Show complete output and ask:
 ## Step 6: Write Output
 If approved:
 1. Generate slug from input
-2. Create path: `.jaan-to/outputs/{role}/{domain}/{slug}/`
+2. Create path: `jaan-to/outputs/{role}/{domain}/{slug}/`
 3. Write file
 4. Confirm: "Written to {path}"
 
@@ -374,7 +374,7 @@ Accumulated lessons from past executions.
 
 ### Trust Rules
 
-- Write paths must be sandboxed (`.jaan-to/**`, `docs/**`, etc.)
+- Write paths must be sandboxed (`jaan-to/**`, `docs/**`, etc.)
 - Never allow `Write(*)` or unrestricted write
 - Git operations must be pattern-restricted
 - Always require human approval before writes
@@ -390,9 +390,9 @@ Skills should read stack files when relevant:
 ```markdown
 ## Context Files
 Read these before execution:
-- `.jaan-to/context/tech.md` - Technology context
-- `.jaan-to/context/team.md` - Team structure and norms
-- `.jaan-to/context/integrations.md` - External tool config
+- `jaan-to/context/tech.md` - Technology context
+- `jaan-to/context/team.md` - Team structure and norms
+- `jaan-to/context/integrations.md` - External tool config
 ```
 
 ### Hook Integration
@@ -419,7 +419,7 @@ If yes:
 
 ### Config Registration
 
-Register new skills in `.jaan-to/context/config.md`:
+Register new skills in `jaan-to/context/config.md`:
 
 ```markdown
 ## Skills
@@ -446,7 +446,7 @@ name: example-minimal-demo
 description: |
   Demonstrate minimal skill structure.
   Maps to: example:minimal-demo
-allowed-tools: Read, Write(.jaan-to/**)
+allowed-tools: Read, Write(jaan-to/**)
 argument-hint: [topic]
 ---
 
@@ -455,7 +455,7 @@ argument-hint: [topic]
 > Demonstrate minimal skill structure.
 
 ## Context Files
-- `.jaan-to/learn/example-minimal-demo.learn.md` - Past lessons
+- `jaan-to/learn/example-minimal-demo.learn.md` - Past lessons
 
 ## Input
 
@@ -466,7 +466,7 @@ argument-hint: [topic]
 # PHASE 1: Analysis (Read-Only)
 
 ## Step 0: Apply Past Lessons
-Read `.jaan-to/learn/example-minimal-demo.learn.md` if it exists.
+Read `jaan-to/learn/example-minimal-demo.learn.md` if it exists.
 
 ## Step 1: Gather Information
 Ask: "What should the demo cover?"
@@ -491,7 +491,7 @@ Create simple markdown output.
 - [ ] Has content
 
 ## Step 5: Preview & Approval
-> "Write to `.jaan-to/outputs/example/minimal/{slug}/demo.md`? [y/n]"
+> "Write to `jaan-to/outputs/example/minimal/{slug}/demo.md`? [y/n]"
 
 ## Step 6: Write Output
 Write file if approved.
@@ -516,7 +516,7 @@ description: |
   Generate a test matrix from feature requirements.
   Auto-triggers on: test planning, QA coverage, test matrix requests.
   Maps to: qa:test-matrix
-allowed-tools: Read, Glob, Grep, Write(.jaan-to/**)
+allowed-tools: Read, Glob, Grep, Write(jaan-to/**)
 argument-hint: [feature-name-or-prd-path]
 ---
 
@@ -526,12 +526,12 @@ argument-hint: [feature-name-or-prd-path]
 
 ## Context Files
 Read these before execution:
-- `.jaan-to/context/config.md` - Configuration
-- `.jaan-to/context/boundaries.md` - Safety rules
-- `.jaan-to/templates/qa-test-matrix.template.md` - Output template
-- `.jaan-to/learn/qa-test-matrix.learn.md` - Past lessons
-- `.jaan-to/context/tech.md` - Test tools and frameworks
-- `.jaan-to/context/team.md` - QA capacity and norms
+- `jaan-to/context/config.md` - Configuration
+- `jaan-to/context/boundaries.md` - Safety rules
+- `jaan-to/templates/qa-test-matrix.template.md` - Output template
+- `jaan-to/learn/qa-test-matrix.learn.md` - Past lessons
+- `jaan-to/context/tech.md` - Test tools and frameworks
+- `jaan-to/context/team.md` - QA capacity and norms
 
 ## Input
 
@@ -544,7 +544,7 @@ If path to PRD provided, read it. Otherwise, ask for requirements.
 # PHASE 1: Analysis (Read-Only)
 
 ## Step 0: Apply Past Lessons
-Read `.jaan-to/learn/qa-test-matrix.learn.md`:
+Read `jaan-to/learn/qa-test-matrix.learn.md`:
 - Add questions from "Better Questions"
 - Check scenarios from "Edge Cases"
 - Follow process from "Workflow"
@@ -582,7 +582,7 @@ Show planned structure:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate Test Matrix
-Use template from `.jaan-to/templates/qa-test-matrix.template.md`:
+Use template from `jaan-to/templates/qa-test-matrix.template.md`:
 - Fill all test categories
 - Add priority levels
 - Include pass/fail criteria
@@ -599,12 +599,12 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 Show complete matrix and ask:
-> "Write to `.jaan-to/outputs/qa/test-matrix/{slug}/matrix.md`? [y/n]"
+> "Write to `jaan-to/outputs/qa/test-matrix/{slug}/matrix.md`? [y/n]"
 
 ## Step 6: Write Output
 If approved:
 1. Generate slug: lowercase, hyphens, max 50 chars
-2. Create path: `.jaan-to/outputs/qa/test-matrix/{slug}/matrix.md`
+2. Create path: `jaan-to/outputs/qa/test-matrix/{slug}/matrix.md`
 3. Write the test matrix
 4. Confirm: "Test matrix written to {path}"
 

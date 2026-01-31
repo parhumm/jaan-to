@@ -10,7 +10,7 @@ Commands that generate outputs.
 
 - Pattern: `/role-domain-action`
 - Example: `/jaan-to-pm-prd-write`
-- Output: Markdown files in `.jaan-to/outputs/`
+- Output: Markdown files in `jaan-to/outputs/`
 
 Skills follow a two-phase workflow:
 1. **Analysis** - Read context, ask questions
@@ -26,9 +26,9 @@ Your team and tech context.
 
 | File | Contains |
 |------|----------|
-| `.jaan-to/context/tech.md` | Languages, frameworks, tools |
-| `.jaan-to/context/team.md` | Team size, ceremonies, norms |
-| `.jaan-to/context/integrations.md` | Jira, GitLab, Slack setup |
+| `jaan-to/context/tech.md` | Languages, frameworks, tools |
+| `jaan-to/context/team.md` | Team size, ceremonies, norms |
+| `jaan-to/context/integrations.md` | Jira, GitLab, Slack setup |
 
 Skills read context to generate context-aware outputs.
 
@@ -40,7 +40,7 @@ Skills read context to generate context-aware outputs.
 
 Output formats for outputs.
 
-- Location: `.jaan-to/templates/{skill}.template.md`
+- Location: `jaan-to/templates/{skill}.template.md`
 - Contains: Section structure, placeholders
 - Override: Create your own version
 
@@ -86,7 +86,7 @@ Hooks run automatically. No action needed.
 
 Safety boundaries.
 
-- **Safe paths**: Only write to `.jaan-to/`
+- **Safe paths**: Only write to `jaan-to/`
 - **Preview first**: Always show before saving
 - **Approval required**: You confirm every write
 

@@ -51,9 +51,9 @@ Use the learn-add skill:
 
 | Target | Location |
 |--------|----------|
-| Skills | `.jaan-to/learn/{skill}.learn.md` |
-| Templates | `.jaan-to/learn/{skill}.learn.md` |
-| Stacks | `.jaan-to/learn/{skill}.learn.md` |
+| Skills | `jaan-to/learn/{skill}.learn.md` |
+| Templates | `jaan-to/learn/{skill}.learn.md` |
+| Stacks | `jaan-to/learn/{skill}.learn.md` |
 
 ---
 
@@ -94,7 +94,7 @@ Lessons are categorized by keywords:
 Read the LEARN.md file directly:
 
 ```
-.jaan-to/learn/jaan-to-pm-prd-write.learn.md
+jaan-to/learn/jaan-to-pm-prd-write.learn.md
 ```
 
 ---

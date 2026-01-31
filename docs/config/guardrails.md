@@ -14,7 +14,7 @@ Non-negotiable safety rules. Unlike permissions, boundaries cannot be overridden
 
 | Rule | Description |
 |------|-------------|
-| Safe Paths | Only write to `.jaan-to/` by default |
+| Safe Paths | Only write to `jaan-to/` by default |
 | Preview First | Always show content before writing |
 | Approval Required | User must confirm every write |
 | No Secrets | Scan output for credentials |
@@ -24,13 +24,13 @@ Non-negotiable safety rules. Unlike permissions, boundaries cannot be overridden
 ## Safe Paths
 
 **Default allowed**:
-- `.jaan-to/` - All outputs
-- `.jaan-to/outputs/` - Skill outputs
+- `jaan-to/` - All outputs
+- `jaan-to/outputs/` - Skill outputs
 
 **Always denied**:
 - `src/`, `lib/` - Source code
 - `.env`, `*.config.*` - Configuration
-- Hidden directories (except `.jaan-to/`)
+- Hidden directories (except `jaan-to/`)
 - `package.json` - Package files
 
 ---
@@ -53,14 +53,14 @@ You must explicitly approve.
 
 ## Extending Safe Paths
 
-Add to `.jaan-to/context/config.md`:
+Add to `jaan-to/context/config.md`:
 
 ```markdown
 ## Trust Overrides
-- safe_paths: [".jaan-to/", "docs/"]
+- safe_paths: ["jaan-to/", "docs/"]
 ```
 
-This allows writing to `docs/` in addition to `.jaan-to/`.
+This allows writing to `docs/` in addition to `jaan-to/`.
 
 ---
 
@@ -75,6 +75,6 @@ Skills generate outputs, not production code. Guardrails ensure:
 
 ## Guardrail File
 
-`.jaan-to/context/boundaries.md`
+`jaan-to/context/boundaries.md`
 
 Contains the detailed rules and enforcement logic.

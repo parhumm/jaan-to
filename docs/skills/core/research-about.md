@@ -85,7 +85,7 @@ Uses **5 adaptive waves** where each wave's focus is determined by findings from
 
 ## Output
 
-**Path**: `.jaan-to/outputs/research/{NN}-{category}-{slug}.md`
+**Path**: `jaan-to/outputs/research/{NN}-{category}-{slug}.md`
 
 **Naming**: `21-ai-workflow-topic-name.md`
 
@@ -125,7 +125,7 @@ Uses **5 adaptive waves** where each wave's focus is determined by findings from
 
 ## Also Does
 
-- Updates `.jaan-to/outputs/research/README.md` index
+- Updates `jaan-to/outputs/research/README.md` index
 - Git commits the result
 - Captures feedback via `/to-jaan-learn-add`
 
