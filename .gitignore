@@ -20,5 +20,7 @@ Thumbs.db
 .env.local
 .env.*.local
 /.jaan-to
+.claude/settings.json
+.claude/settings.local.json
 .claude-plugin-cache/
 dist/
