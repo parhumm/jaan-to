@@ -53,7 +53,7 @@ You must explicitly approve.
 
 ## Extending Safe Paths
 
-Add to `context/config.md`:
+Add to `.jaan-to/context/config.md`:
 
 ```markdown
 ## Trust Overrides
@@ -75,6 +75,6 @@ Skills generate outputs, not production code. Guardrails ensure:
 
 ## Guardrail File
 
-`context/boundaries.md`
+`.jaan-to/context/boundaries.md`
 
 Contains the detailed rules and enforcement logic.

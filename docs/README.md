@@ -62,8 +62,8 @@ See [Getting Started](getting-started.md) for full walkthrough.
 | `/jaan-to:docs-update` | Audit documentation | Fixes in-place |
 | `/jaan-to:learn-add` | Add feedback | `.jaan-to/learn/{name}.learn.md` |
 | `/jaan-to:research-about` | Deep research on topic | `.jaan-to/outputs/research/{slug}/` |
-| `/jaan-to:research-add` | Add to research index | `docs/deepresearches/` |
-| `/jaan-to:roadmap-add` | Add roadmap task | `roadmaps/` |
+| `/jaan-to:research-add` | Add to research index | `.jaan-to/outputs/research/` |
+| `/jaan-to:roadmap-add` | Add roadmap task | `.jaan-to/roadmap.md` |
 
 ---
 
@@ -72,6 +72,6 @@ See [Getting Started](getting-started.md) for full walkthrough.
 | Path | Purpose |
 |------|---------|
 | `.jaan-to/outputs/` | Generated outputs (project-relative) |
-| `context/` | Your context (tech, team) (project-relative) |
+| `.jaan-to/context/` | Your context (tech, team) (project-relative) |
 | `skills/` | Skill definitions (plugin-relative) |
 | `.claude-plugin/plugin.json` | Plugin manifest |

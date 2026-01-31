@@ -14,9 +14,9 @@ Stack files describe your environment. Instead of hardcoding context into skills
 
 | File | Purpose |
 |------|---------|
-| `context/tech.md` | Languages, frameworks, tools |
-| `context/team.md` | Team size, ceremonies, norms |
-| `context/integrations.md` | External tools config |
+| `.jaan-to/context/tech.md` | Languages, frameworks, tools |
+| `.jaan-to/context/team.md` | Team size, ceremonies, norms |
+| `.jaan-to/context/integrations.md` | External tools config |
 
 ---
 

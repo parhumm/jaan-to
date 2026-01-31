@@ -26,13 +26,13 @@ Your team and tech context.
 
 | File | Contains |
 |------|----------|
-| `context/tech.md` | Languages, frameworks, tools |
-| `context/team.md` | Team size, ceremonies, norms |
-| `context/integrations.md` | Jira, GitLab, Slack setup |
+| `.jaan-to/context/tech.md` | Languages, frameworks, tools |
+| `.jaan-to/context/team.md` | Team size, ceremonies, norms |
+| `.jaan-to/context/integrations.md` | Jira, GitLab, Slack setup |
 
 Skills read context to generate context-aware outputs.
 
-[Learn more](config/context.md)
+[Learn more](config/context-system.md)
 
 ---
 
@@ -40,7 +40,7 @@ Skills read context to generate context-aware outputs.
 
 Output formats for outputs.
 
-- Location: `skills/{skill}/template.md`
+- Location: `.jaan-to/templates/{skill}.template.md`
 - Contains: Section structure, placeholders
 - Override: Create your own version
 
@@ -92,4 +92,4 @@ Safety boundaries.
 
 Guardrails cannot be disabled.
 
-[Learn more](config/boundaries.md)
+[Learn more](config/guardrails.md)

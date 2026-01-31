@@ -384,9 +384,9 @@ Skills should read stack files when relevant:
 ```markdown
 ## Context Files
 Read these before execution:
-- `context/tech.md` - Technology context
-- `context/team.md` - Team structure and norms
-- `context/integrations.md` - External tool config
+- `.jaan-to/context/tech.md` - Technology context
+- `.jaan-to/context/team.md` - Team structure and norms
+- `.jaan-to/context/integrations.md` - External tool config
 ```
 
 ### Hook Integration
@@ -413,7 +413,7 @@ If yes:
 
 ### Config Registration
 
-Register new skills in `context/config.md`:
+Register new skills in `.jaan-to/context/config.md`:
 
 ```markdown
 ## Skills
@@ -520,12 +520,12 @@ argument-hint: [feature-name-or-prd-path]
 
 ## Context Files
 Read these before execution:
-- `context/config.md` - Configuration
-- `context/boundaries.md` - Safety rules
-- `skills/qa-test-matrix/template.md` - Output template
+- `.jaan-to/context/config.md` - Configuration
+- `.jaan-to/context/boundaries.md` - Safety rules
+- `.jaan-to/templates/qa-test-matrix.template.md` - Output template
 - `.jaan-to/learn/qa-test-matrix.learn.md` - Past lessons
-- `context/tech.md` - Test tools and frameworks
-- `context/team.md` - QA capacity and norms
+- `.jaan-to/context/tech.md` - Test tools and frameworks
+- `.jaan-to/context/team.md` - QA capacity and norms
 
 ## Input
 
@@ -576,7 +576,7 @@ Show planned structure:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate Test Matrix
-Use template from `skills/qa-test-matrix/template.md`:
+Use template from `.jaan-to/templates/qa-test-matrix.template.md`:
 - Fill all test categories
 - Add priority levels
 - Include pass/fail criteria

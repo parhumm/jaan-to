@@ -9,19 +9,18 @@
 ```
 project-root/
 ├── .claude-plugin/         Plugin manifest
-├── .claude/                Claude Code registry (settings, skills)
+├── .claude/                Claude Code registry (settings, skills - written at install)
 ├── skills/                 Skill definitions (plugin source)
 ├── agents/                 Sub-agent definitions
 ├── outputStyles/           Output formatting styles
 ├── hooks/                  Hook configuration
-├── scripts/                Hook scripts
-├── context/                Project context templates
-├── .jaan-to/               Project-local outputs (gitignored)
-├── jaan-to/                Legacy (deprecated)
+├── scripts/                Hook scripts (bootstrap, validation, feedback)
+├── context/                Context templates (copied to .jaan-to/context/)
+├── .jaan-to/               Project-local workspace (gitignored, bootstrapped)
 ├── docs/                   Human documentation
-├── roadmaps/               Project planning
+├── roadmaps/               Project planning and vision
 ├── website/                Landing page
-└── (root files)            CLAUDE.md, README.md, etc.
+└── (root files)            CLAUDE.md, README.md, LICENSE.md, etc.
 ```
 
 ---
@@ -111,6 +110,8 @@ hooks/
 
 scripts/
 ├── bootstrap.sh            Session initialization (creates .jaan-to/)
+├── build-dist.sh           Build and install plugin to .claude/
+├── verify-install.sh       Verify plugin installation
 ├── capture-feedback.sh     Post-write feedback capture
 └── validate-prd.sh         PRD section validation
 ```
@@ -138,8 +139,21 @@ Generated at runtime by bootstrap hook. Gitignored.
 
 ```
 .jaan-to/
+├── context/                Copies of context templates (editable)
+│   ├── tech.md
+│   ├── team.md
+│   ├── integrations.md
+│   ├── boundaries.md
+│   └── config.md
+├── templates/              Copies of skill templates (editable)
+│   └── {skill-name}-template.md
 ├── learn/                  Project-specific learning files
-│   └── {skill-name}.learn.md
+│   ├── {skill-name}.learn.md
+│   ├── template-{name}.learn.md
+│   └── context-{name}.learn.md
+├── docs/                   Plugin documentation copies
+│   ├── STYLE.md
+│   └── create-skill.md
 └── outputs/                Skill-generated outputs
     ├── pm/spec/{slug}/prd.md
     ├── data/gtm/{slug}/
@@ -150,23 +164,23 @@ Generated at runtime by bootstrap hook. Gitignored.
 
 ## Claude Registry (.claude/)
 
-Claude Code settings and skill registry (mirrors `skills/` with namespaced directories).
+Claude Code settings and skill registry (written during install by build-dist.sh).
 
 ```
 .claude/
 ├── settings.json           Permissions and tool allowlists
 ├── settings.local.json     Local overrides (gitignored)
-└── skills/                 10 skills (namespaced copies)
+└── skills/                 10 skills (namespaced for registry)
     ├── jaan-to-pm-prd-write/
     ├── jaan-to-data-gtm-datalayer/
-    ├── to-jaan-docs-create/
-    ├── to-jaan-docs-update/
-    ├── to-jaan-learn-add/
-    ├── to-jaan-research-about/
-    ├── to-jaan-research-add/
-    ├── to-jaan-roadmap-add/
-    ├── to-jaan-skill-create/
-    └── to-jaan-skill-update/
+    ├── jaan-to-docs-create/
+    ├── jaan-to-docs-update/
+    ├── jaan-to-learn-add/
+    ├── jaan-to-research-about/
+    ├── jaan-to-research-add/
+    ├── jaan-to-roadmap-add/
+    ├── jaan-to-skill-create/
+    └── jaan-to-skill-update/
 ```
 
 ---
@@ -273,20 +287,12 @@ marketplace.json            Plugin marketplace metadata
 
 ---
 
-## Legacy (Deprecated)
+## Removed (Post-Migration)
 
-Kept for backward compatibility detection by `scripts/bootstrap.sh`.
+The following directories were removed after plugin migration:
 
-```
-jaan-to/
-├── config.md               → replaced by context/config.md
-├── boundaries/
-│   └── safe-paths.md       → replaced by context/boundaries.md
-├── context/
-│   ├── integrations.md     → replaced by context/integrations.md
-│   ├── team.md             → replaced by context/team.md
-│   └── tech.md             → replaced by context/tech.md
-└── hooks/
-    ├── capture-feedback.sh → replaced by scripts/capture-feedback.sh
-    └── validate-prd.sh     → replaced by scripts/validate-prd.sh
-```
+- `jaan-to/` - Old standalone structure, replaced by plugin architecture
+- `.claude/skills/to-jaan-*` - Old command prefix, now uses `jaan-to:` namespace
+- `skills/{role}/{domain}/` - Old nested structure, now flat `skills/{name}/`
+- `LEARN.md` alongside skills - Now bootstrapped to `.jaan-to/learn/{name}.learn.md`
+- `docs/deepresearches/` - Outputs now go to `.jaan-to/outputs/research/`

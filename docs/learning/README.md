@@ -52,8 +52,8 @@ Use the learn-add skill:
 | Target | Location |
 |--------|----------|
 | Skills | `.jaan-to/learn/{skill}.learn.md` |
-| Templates | `jaan-to/templates/LEARN.md` |
-| Stacks | `context/LEARN.md` |
+| Templates | `.jaan-to/learn/{skill}.learn.md` |
+| Stacks | `.jaan-to/learn/{skill}.learn.md` |
 
 ---
 

@@ -29,17 +29,17 @@ Plugin ships templates in `context/` (plugin-relative). Fill them in for your pr
 
 | File | Purpose | Skills That Read It |
 |------|---------|---------------------|
-| `context/config.md` | Enabled roles, available skills, trust settings, defaults | All skills |
-| `context/boundaries.md` | Safe write paths, denied locations, enforcement rules | All skills (write operations) |
-| `context/tech.md` | Languages, frameworks, infrastructure, tools, constraints | pm-prd-write, skill-create |
-| `context/team.md` | Team structure, roles, communication channels | pm-prd-write |
-| `context/integrations.md` | External tools, APIs, third-party services | data-gtm-datalayer, pm-prd-write |
+| `.jaan-to/context/config.md` | Enabled roles, available skills, trust settings, defaults | All skills |
+| `.jaan-to/context/boundaries.md` | Safe write paths, denied locations, enforcement rules | All skills (write operations) |
+| `.jaan-to/context/tech.md` | Languages, frameworks, infrastructure, tools, constraints | pm-prd-write, skill-create |
+| `.jaan-to/context/team.md` | Team structure, roles, communication channels | pm-prd-write |
+| `.jaan-to/context/integrations.md` | External tools, APIs, third-party services | data-gtm-datalayer, pm-prd-write |
 
 ---
 
 ## How to Configure
 
-1. Open the context file you want to customize (e.g., `context/tech.md`)
+1. Open the context file you want to customize (e.g., `.jaan-to/context/tech.md`)
 2. Replace `{placeholder}` values with your project details
 3. Delete the example section at the bottom
 4. Skills automatically read updated files on next invocation
@@ -48,7 +48,7 @@ Plugin ships templates in `context/` (plugin-relative). Fill them in for your pr
 
 ## Examples
 
-**Tech stack** (`context/tech.md`):
+**Tech stack** (`.jaan-to/context/tech.md`):
 ```
 | Layer | Technology | Version |
 |-------|------------|---------|
@@ -56,7 +56,7 @@ Plugin ships templates in `context/` (plugin-relative). Fill them in for your pr
 | Frontend | TypeScript | 5.0 |
 ```
 
-**Boundaries** (`context/boundaries.md`):
+**Boundaries** (`.jaan-to/context/boundaries.md`):
 ```
 | Path | Purpose |
 |------|---------|

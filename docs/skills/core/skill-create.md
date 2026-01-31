@@ -54,7 +54,7 @@ If an idea is provided, uses it as starting context. Otherwise, starts with iden
 4. Gather purpose, input/output, quality criteria
 5. HARD STOP - preview skill structure
 6. Generate SKILL.md, LEARN.md, template.md
-7. Register in context/config.md
+7. Register in .jaan-to/context/config.md
 8. Create documentation
 9. User testing
 10. Create PR
@@ -68,7 +68,7 @@ If an idea is provided, uses it as starting context. Otherwise, starts with iden
 |------|------|
 | SKILL.md | `skills/{name}/SKILL.md` |
 | LEARN.md | `.jaan-to/learn/{name}.learn.md` |
-| template.md | `skills/{name}/template.md` |
+| template.md | `.jaan-to/templates/{name}.template.md` |
 | Documentation | `docs/skills/{role}/{name}.md` |
 
 ---

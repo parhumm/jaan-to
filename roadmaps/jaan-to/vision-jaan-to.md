@@ -67,12 +67,12 @@ That's it. Every command follows this pattern.
 ### Layers
 
 ```
-YOU USE:     /pm:prd-write "user import feature"
+YOU USE:     /jaan-to:pm-prd-write "user import feature"
                     │
-SKILL READS: ├── skills/pm/spec/SKILL.md        (what to do)
-             ├── skills/pm/spec/LEARN.md        (past lessons)
-             ├── context/current.md              (your tech context)  
-             ├── templates/prd.md               (output format)
+SKILL READS: ├── skills/pm-prd-write/SKILL.md   (what to do)
+             ├── .jaan-to/learn/pm-prd-write.learn.md  (past lessons)
+             ├── context/tech.md                (your tech context)
+             ├── skills/pm-prd-write/template.md (output format)
              └── MCP: Figma, Jira, GitLab       (real system data)
                     │
 OUTPUT:      .jaan-to/outputs/pm/spec/user-import/prd.md
@@ -98,7 +98,7 @@ Skills stay generic. MCP provides real context.
 ### How It Works
 
 ```
-Skill: /dev-plan:tech-approach "payment service"
+Skill: /jaan-to:dev-plan-tech-approach "payment service"
                 │
                 ├── MCP: GitLab → reads current repo structure
                 ├── MCP: OpenAPI → reads existing API contracts
@@ -114,39 +114,51 @@ No guessing. No "assuming you have a typical setup." Real data.
 ## Directory Structure
 
 ```
-jaan-to/
+Plugin root:
 │
-├── skills/                    # What to do (by role)
-│   ├── pm/
-│   │   ├── spec/
-│   │   │   ├── SKILL.md       # Skill definition
-│   │   │   └── LEARN.md       # Accumulated lessons
-│   │   └── .../
-│   ├── dev/
-│   ├── qa/
-│   └── [add-your-role]/       # Extensible
+├── skills/                    # What to do (flat structure)
+│   ├── pm-prd-write/
+│   │   ├── SKILL.md           # Skill definition
+│   │   ├── LEARN.md           # Seed lessons (bootstrap source)
+│   │   └── template.md        # Output template
+│   ├── data-gtm-datalayer/
+│   ├── learn-add/
+│   ├── skill-create/
+│   └── [skill-name]/          # Extensible
 │
-├── context/                    # Tech & team context (shared)
+├── context/                   # Tech & team context templates
 │   ├── tech.md                # Languages, frameworks, tools
 │   ├── team.md                # Team structure, ceremonies
 │   ├── integrations.md        # Jira, GitLab, Slack config
-│   └── [add-your-stack].md    # Extensible
+│   ├── boundaries.md          # Safe paths, denied locations
+│   └── config.md              # Enabled roles, defaults
 │
-├── templates/                 # Output formats (shared)
-│   ├── prd.md
-│   ├── test-plan.md
-│   ├── api-contract.md
-│   ├── LEARN.md               # Template-level lessons
-│   └── [add-your-template].md # Extensible
+├── scripts/                   # Hook scripts
+│   ├── bootstrap.sh           # Creates .jaan-to/ structure
+│   ├── capture-feedback.sh    # Post-execution feedback
+│   └── validate-prd.sh        # PRD validation
 │
-├── boundaries/                # Safety (don't touch)
-│   ├── safe-paths.md
-│   └── secrets.md
+├── agents/                    # Sub-agents
+│   ├── quality-reviewer.md
+│   └── context-scout.md
 │
-├── tests/                     # End-to-end skill tests
-│   └── [skill-name].test.md
+├── outputStyles/              # Formatting directives
+│   ├── enterprise-doc.md
+│   └── concise-summary.md
 │
-└── config.md                  # Simple settings
+└── hooks/hooks.json           # Hook configuration
+
+Project side (created by bootstrap):
+.jaan-to/
+├── learn/                     # Accumulated lessons (project-specific)
+│   └── {skill-name}.learn.md
+├── outputs/                   # Generated outputs
+│   ├── pm/spec/{slug}/
+│   ├── data/gtm/{slug}/
+│   └── research/{slug}/
+├── context/                   # Copies of context templates
+├── templates/                 # Copies of skill templates
+└── docs/                      # STYLE.md, create-skill.md
 ```
 
 ---
@@ -159,14 +171,14 @@ Learning happens at three layers. Each layer improves different aspects.
 
 **What it improves:** How execution happens
 
-Every skill has a `LEARN.md` file that captures:
+Every skill has a `LEARN.md` file in `skills/{name}/` (seed lessons) that bootstraps `.jaan-to/learn/{name}.learn.md` (project-specific):
 - Better questions to ask
 - Edge cases to check
 - Workflow improvements
 - Common mistakes to avoid
 
 ```markdown
-# Lessons: pm:prd-write
+# Lessons: pm-prd-write
 
 ## Better Questions
 - Always ask about internationalization requirements
@@ -184,14 +196,14 @@ Every skill has a `LEARN.md` file that captures:
 
 **What it improves:** How outputs are written
 
-Templates have their own `LEARN.md`:
+Templates can have their own learning file in `.jaan-to/learn/template-{name}.learn.md`:
 - Missing sections that users always add
 - Phrasing that causes confusion
 - Structure improvements
 - Consistency patterns
 
 ```markdown
-# Lessons: templates/prd.md
+# Lessons: template-prd
 
 ## Missing Sections
 - Added "Accessibility Considerations" — always needed
@@ -209,13 +221,13 @@ Templates have their own `LEARN.md`:
 
 **What it improves:** Which context matters
 
-Stacks learn what's actually relevant for your team:
+Context files can have learning in `.jaan-to/learn/context-{name}.learn.md`:
 - Tech constraints that always apply
 - Team norms that affect output
 - Integration quirks to remember
 
 ```markdown
-# Lessons: context/tech.md
+# Lessons: context-tech
 
 ## Constraints That Always Apply
 - All new tables need soft delete (company policy)
@@ -236,9 +248,9 @@ Stacks learn what's actually relevant for your team:
 ┌─────────────────────────────────────────────────────────────┐
 │  BEFORE EXECUTION                                           │
 │  ───────────────────────────────────────────────────────    │
-│  1. Read skills/[role]/[domain]/LEARN.md                    │
-│  2. Read templates/[output].LEARN.md (if exists)            │
-│  3. Read context/LEARN.md (if exists)                        │
+│  1. Read .jaan-to/learn/{skill-name}.learn.md               │
+│  2. Read .jaan-to/learn/template-{name}.learn.md (if exists)│
+│  3. Read .jaan-to/learn/context-{name}.learn.md (if exists) │
 │  4. Apply all lessons to current execution                  │
 └─────────────────────────────────────────────────────────────┘
                            │
@@ -253,7 +265,7 @@ Stacks learn what's actually relevant for your team:
 ┌─────────────────────────────────────────────────────────────┐
 │  AFTER EXECUTION                                            │
 │  ───────────────────────────────────────────────────────    │
-│  User feedback → routes to appropriate LEARN.md:            │
+│  User feedback → routes to appropriate .learn.md:           │
 │  • "Ask this earlier" → Skill learning                      │
 │  • "Missing section" → Template learning                    │
 │  • "Didn't know about X" → Stack learning                   │
@@ -264,17 +276,17 @@ Stacks learn what's actually relevant for your team:
 
 After any skill run:
 ```
-/learn:add "pm:prd-write" "Always ask about internationalization requirements"
+/jaan-to:learn-add "pm-prd-write" "Always ask about internationalization requirements"
 ```
 
 Or route to template:
 ```
-/learn:add "templates/prd" "Add rollback plan section"
+/jaan-to:learn-add "template-prd" "Add rollback plan section"
 ```
 
 Or route to stack:
 ```
-/learn:add "context/tech" "All new services need health check endpoint"
+/jaan-to:learn-add "context-tech" "All new services need health check endpoint"
 ```
 
 ---
@@ -333,7 +345,7 @@ Skills don't hardcode your tech stack. They read from `context/`.
 ## Jira
 - Project: ACME
 - Board: Sprint Board
-- Default labels: from-aios
+- Default labels: from-jaan-to
 
 ## GitLab
 - Group: acme/backend
@@ -425,16 +437,17 @@ Create folder, add skills:
 
 ```
 skills/
-└── devops/                    # New role
-    ├── infra/
-    │   ├── SKILL.md
-    │   └── LEARN.md
-    └── pipeline/
-        ├── SKILL.md
-        └── LEARN.md
+├── devops-infra-provision/    # New role-domain-action
+│   ├── SKILL.md
+│   ├── LEARN.md
+│   └── template.md
+└── devops-pipeline-setup/
+    ├── SKILL.md
+    ├── LEARN.md
+    └── template.md
 ```
 
-Register in `config.md`:
+Register in `context/config.md` if needed:
 
 ```markdown
 ## Roles
@@ -444,7 +457,7 @@ Register in `config.md`:
 - devops  # Added
 ```
 
-Done. Commands like `/devops-infra:provision` now work.
+Done. Commands like `/jaan-to:devops-infra-provision` now work.
 
 ---
 
@@ -535,8 +548,8 @@ Every skill has tests. Tests live in `tests/`.
 ### Running Tests
 
 ```
-/aios:test pm:prd-write
-/aios:test --all
+/jaan-to:test pm-prd-write
+/jaan-to:test --all
 ```
 
 ---
@@ -544,16 +557,16 @@ Every skill has tests. Tests live in `tests/`.
 ## Execution Flow
 
 ```
-USER: /pm:prd-write "user import feature"
+USER: /jaan-to:pm-prd-write "user import feature"
 
 1. LOAD
-   ├── skills/pm/spec/SKILL.md
-   ├── skills/pm/spec/LEARN.md (3 lessons)
-   ├── templates/prd.md
-   ├── templates/LEARN.md (2 lessons)
+   ├── skills/pm-prd-write/SKILL.md
+   ├── .jaan-to/learn/pm-prd-write.learn.md (3 lessons)
+   ├── skills/pm-prd-write/template.md
+   ├── .jaan-to/learn/template-prd.learn.md (2 lessons)
    ├── context/tech.md (Python, FastAPI, PostgreSQL)
    ├── context/team.md (2 BE, 2 FE, 2-week sprints)
-   └── context/LEARN.md (1 lesson)
+   └── .jaan-to/learn/context-tech.learn.md (1 lesson)
 
 2. MCP CONNECT
    ├── Figma: Found 2 linked designs
@@ -654,24 +667,24 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### Add a Role
 
 ```
-1. Create skills/[role]/
-2. Add skill folders with SKILL.md
-3. Add role to config.md
+1. Create skills/{role}-{domain}-{action}/
+2. Add SKILL.md with frontmatter
+3. Add to context/config.md if needed
 ```
 
 ### Add a Skill
 
 ```
-1. Create skills/[role]/[domain]/SKILL.md
-2. Add LEARN.md (starts empty)
-3. Add test in tests/
+1. Create skills/{skill-name}/SKILL.md
+2. Add LEARN.md (starts empty, seeds .jaan-to/learn/)
+3. Add template.md if needed
 4. Done (auto-discovered)
 ```
 
 ### Add a Template
 
 ```
-1. Create templates/[name].md
+1. Create skills/{skill-name}/template.md
 2. Reference in SKILL.md output section
 3. Done
 ```
@@ -695,7 +708,7 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### Override Anything
 
 ```
-1. Create .jaan-to/[path]/[file].md in your repo
+1. Create .jaan-to/context/[file].md or .jaan-to/templates/[file].md
 2. It takes priority over plugin version
 3. Done
 ```
@@ -707,16 +720,16 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### 1. User Runs Command
 
 ```
-/dev-plan:tech-approach "payment service"
+/jaan-to:dev-plan-tech-approach "payment service"
 ```
 
 ### 2. System Loads Context
 
 ```
 Loading:
-  ✓ skills/dev/plan/SKILL.md
-  ✓ skills/dev/plan/LEARN.md (3 lessons)
-  ✓ templates/tech-approach.md
+  ✓ skills/dev-plan-tech-approach/SKILL.md
+  ✓ .jaan-to/learn/dev-plan-tech-approach.learn.md (3 lessons)
+  ✓ skills/dev-plan-tech-approach/template.md
   ✓ context/tech.md (Python, FastAPI, PostgreSQL)
   ✓ context/team.md (2 BE, 2 FE, 2-week sprints)
 
@@ -764,7 +777,7 @@ A: "Must be backward compatible with v1 API"
 
 ```
 User: "Good, but add performance testing section"
-→ Added to skills/dev/plan/LEARN.md
+→ Added to .jaan-to/learn/dev-plan-tech-approach.learn.md
 ```
 
 ---
@@ -774,29 +787,30 @@ User: "Good, but add performance testing section"
 ### All Commands Pattern
 
 ```
-/[role]-[domain]:[action] [input]
+/jaan-to:{skill-name} [input]
 ```
 
 ### Key Paths
 
 | Path | Purpose |
 |------|---------|
-| `skills/` | What to do |
-| `context/` | Your context |
-| `templates/` | Output formats |
-| `boundaries/` | Safety rules |
-| `tests/` | Skill tests |
-| `.jaan-to/outputs/` | All outputs |
-| `*/LEARN.md` | Accumulated lessons |
+| `skills/` | What to do (plugin) |
+| `context/` | Your context templates (plugin) |
+| `scripts/` | Hook scripts (plugin) |
+| `agents/` | Sub-agents (plugin) |
+| `outputStyles/` | Formatting styles (plugin) |
+| `.jaan-to/outputs/` | All outputs (project) |
+| `.jaan-to/learn/` | Accumulated lessons (project) |
 
 ### Key Files
 
 | File | Purpose |
 |------|---------|
-| `config.md` | Global settings |
+| `context/config.md` | Global settings |
 | `context/tech.md` | Your technology |
 | `context/team.md` | Your team |
 | `context/integrations.md` | External tools |
+| `context/boundaries.md` | Safe paths and constraints |
 
 ---
 

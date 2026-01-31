@@ -17,7 +17,7 @@ Indexes an existing research document (local file or web URL) into the deepresea
 ```
 
 **Examples**:
-- `/jaan-to:research-add docs/deepresearches/my-research.md`
+- `/jaan-to:research-add .jaan-to/outputs/research/my-research.md`
 - `/jaan-to:research-add https://example.com/article`
 
 ---
@@ -62,7 +62,7 @@ Indexes an existing research document (local file or web URL) into the deepresea
 
 ## Output
 
-**For URLs**: Creates `docs/deepresearches/{NN}-{category}-{slug}.md`
+**For URLs**: Creates `.jaan-to/outputs/research/{NN}-{category}-{slug}.md`
 
 **File format**:
 ```markdown
@@ -97,7 +97,7 @@ Indexes an existing research document (local file or web URL) into the deepresea
 
 ## Also Does
 
-- Updates `docs/deepresearches/README.md` index
+- Updates `.jaan-to/outputs/research/README.md` index
 - Adds to Quick Topic Finder section
 - Git commits the result
 - Captures feedback via `/jaan-to:learn-add`

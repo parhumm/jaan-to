@@ -8,16 +8,16 @@
 
 | Area | File | Purpose |
 |------|------|---------|
-| [Stacks](stacks.md) | `context/*.md` | Your team and tech context |
-| [Context System](context-system.md) | `context/` | Context injection system |
+| [Stacks](stacks.md) | `.jaan-to/context/*.md` | Your team and tech context |
+| [Context System](context-system.md) | `.jaan-to/context/` | Context injection system |
 | [Permissions](permissions.md) | `.claude/settings.json` | Allow/deny rules |
-| [Guardrails](guardrails.md) | `context/boundaries.md` | Safety boundaries |
+| [Guardrails](guardrails.md) | `.jaan-to/context/boundaries.md` | Safety boundaries |
 
 ---
 
 ## Main Config
 
-**File**: `context/config.md`
+**File**: `.jaan-to/context/config.md`
 
 Contains:
 - Enabled roles
