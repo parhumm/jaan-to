@@ -1,4 +1,4 @@
-# Lessons: jaan-skill-create
+# Lessons: to-jaan-skill-create
 
 > Last updated: 2026-01-27
 

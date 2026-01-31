@@ -1,4 +1,4 @@
-# Lessons: pm:prd-write
+# Lessons: jaan-to-pm-prd-write
 
 > Last updated: 2026-01-26
 

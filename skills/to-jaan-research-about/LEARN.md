@@ -1,4 +1,4 @@
-# Lessons: jaan-research-about
+# Lessons: to-jaan-research-about
 
 > Last updated: 2026-01-27
 

@@ -1,5 +1,5 @@
 ---
-name: data-gtm-datalayer
+name: jaan-to-data-gtm-datalayer
 description: |
   Generate production-ready GTM tracking code (dataLayer pushes and HTML attributes).
   Auto-triggers on: gtm tracking, datalayer push, tracking code, impression tracking, click tracking gtm, al_tracker.
@@ -15,8 +15,8 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 ## Context Files
 
 Read these before execution:
-- `.jaan-to/learn/data-gtm-datalayer.learn.md` - Past lessons
-- `.jaan-to/templates/data-gtm-datalayer.template.md` - Output template
+- `.jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md` - Past lessons
+- `.jaan-to/templates/jaan-to-data-gtm-datalayer.template.md` - Output template
 
 ## Input
 
@@ -32,7 +32,7 @@ Read these before execution:
 
 ## Step 0: Apply Past Lessons
 
-Read `.jaan-to/learn/data-gtm-datalayer.learn.md` if it exists:
+Read `.jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -330,7 +330,7 @@ EXAMPLE WITH VALUES
 If approved:
 1. Generate slug from feature-item (e.g., "player-pause")
 2. Create path: `.jaan-to/outputs/data/gtm/{slug}/tracking.md`
-3. Use template from `.jaan-to/templates/data-gtm-datalayer.template.md`
+3. Use template from `.jaan-to/templates/jaan-to-data-gtm-datalayer.template.md`
 4. Write file
 5. Confirm: "Written to {path}"
 
@@ -342,7 +342,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/jaan-to:jaan-learn-add data-gtm-datalayer "{feedback}"`
+- **Option 2**: Run `/to-jaan-learn-add jaan-to-data-gtm-datalayer "{feedback}"`
 - **Option 3**: Do both
 
 ---

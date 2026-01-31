@@ -64,70 +64,70 @@ The bootstrap hook automatically creates `.jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:pm-prd-write` | Generate comprehensive PRD from initiative | `.jaan-to/outputs/pm/spec/{slug}/prd.md` |
+| `/jaan-to-pm-prd-write` | Generate comprehensive PRD from initiative | `.jaan-to/outputs/pm/spec/{slug}/prd.md` |
 
 **Example:**
 ```
-/jaan-to:pm-prd-write "user authentication with OAuth2"
+/jaan-to-pm-prd-write "user authentication with OAuth2"
 ```
 
 ### Data & Analytics
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `.jaan-to/outputs/data/gtm/{slug}/tracking.md` |
+| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `.jaan-to/outputs/data/gtm/{slug}/tracking.md` |
 
 **Example:**
 ```
-/jaan-to:data-gtm-datalayer "checkout flow tracking"
+/jaan-to-data-gtm-datalayer "checkout flow tracking"
 ```
 
 ### Documentation
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:jaan-docs-create` | Create documentation with templates | `docs/` |
-| `/jaan-to:jaan-docs-update` | Audit and update stale documentation | Updates existing docs |
+| `/to-jaan-docs-create` | Create documentation with templates | `docs/` |
+| `/to-jaan-docs-update` | Audit and update stale documentation | Updates existing docs |
 
 **Example:**
 ```
-/jaan-to:jaan-docs-create "API integration guide"
+/to-jaan-docs-create "API integration guide"
 ```
 
 ### Research
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:jaan-research-about` | Deep research on any topic with sources | `.jaan-to/outputs/research/{slug}/` |
-| `/jaan-to:jaan-research-add` | Add file/URL to research index | Updates research index |
+| `/to-jaan-research-about` | Deep research on any topic with sources | `.jaan-to/outputs/research/{slug}/` |
+| `/to-jaan-research-add` | Add file/URL to research index | Updates research index |
 
 **Example:**
 ```
-/jaan-to:jaan-research-about "React Server Components best practices"
+/to-jaan-research-about "React Server Components best practices"
 ```
 
 ### Learning & Feedback
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:jaan-learn-add` | Add lesson to project's LEARN.md | `.jaan-to/learn/LEARN.md` |
+| `/to-jaan-learn-add` | Add lesson to project's LEARN.md | `.jaan-to/learn/LEARN.md` |
 
 **Example:**
 ```
-/jaan-to:jaan-learn-add "Always validate email format before API submission"
+/to-jaan-learn-add "Always validate email format before API submission"
 ```
 
 ### Workflow Management
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:jaan-roadmap-add` | Add task to roadmap | `.jaan-to/roadmap.md` |
-| `/jaan-to:jaan-skill-create` | Create new skill with wizard | `skills/{name}/` |
-| `/jaan-to:jaan-skill-update` | Update existing skill | Updates skill definition |
+| `/to-jaan-roadmap-add` | Add task to roadmap | `.jaan-to/roadmap.md` |
+| `/to-jaan-skill-create` | Create new skill with wizard | `skills/{name}/` |
+| `/to-jaan-skill-update` | Update existing skill | Updates skill definition |
 
 **Example:**
 ```
-/jaan-to:jaan-roadmap-add "Implement dark mode toggle"
+/to-jaan-roadmap-add "Implement dark mode toggle"
 ```
 
 ---
@@ -301,17 +301,17 @@ If you previously used jaan.to as a standalone .claude/ setup, follow these step
 ### Cleanup Old Skills
 
 ```bash
-# Remove standalone skill definitions
-rm -rf .claude/skills/jaan-to-pm-prd-write
-rm -rf .claude/skills/jaan-to-data-gtm-datalayer
-rm -rf .claude/skills/to-jaan-skill-create
-rm -rf .claude/skills/to-jaan-skill-update
-rm -rf .claude/skills/to-jaan-docs-create
-rm -rf .claude/skills/to-jaan-docs-update
-rm -rf .claude/skills/to-jaan-learn-add
-rm -rf .claude/skills/to-jaan-research-about
-rm -rf .claude/skills/to-jaan-research-add
-rm -rf .claude/skills/to-jaan-roadmap-add
+# Remove standalone skill definitions (old naming)
+rm -rf .claude/skills/pm-prd-write
+rm -rf .claude/skills/data-gtm-datalayer
+rm -rf .claude/skills/jaan-skill-create
+rm -rf .claude/skills/jaan-skill-update
+rm -rf .claude/skills/jaan-docs-create
+rm -rf .claude/skills/jaan-docs-update
+rm -rf .claude/skills/jaan-learn-add
+rm -rf .claude/skills/jaan-research-about
+rm -rf .claude/skills/jaan-research-add
+rm -rf .claude/skills/jaan-roadmap-add
 ```
 
 ### Update Settings
@@ -409,7 +409,7 @@ Every skill follows a **two-phase workflow** with human approval:
 jaan.to is open source. To extend:
 
 1. Read [Creating Skills](docs/extending/create-skill.md)
-2. Use `/jaan-to:jaan-skill-create` to scaffold a new skill
+2. Use `/to-jaan-skill-create` to scaffold a new skill
 3. Submit a PR
 
 ---

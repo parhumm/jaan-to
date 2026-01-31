@@ -47,7 +47,7 @@ Update skill workflows to leverage LSP capabilities when available.
 
 ## Examples: How LSP Makes Skills More Powerful
 
-### `/jaan-to:dev-tech-plan`
+### `/jaan-to-dev-tech-plan`
 
 **Without LSP:** Relies on grep-based search to understand code structure. May miss indirect dependencies or misread type relationships.
 
@@ -57,7 +57,7 @@ Update skill workflows to leverage LSP capabilities when available.
 - **Call hierarchy** to map which services call what, informing decoupling decisions
 - **Result:** Tech plans cite actual dependency graphs, not guesses
 
-### `/jaan-to:qa-test-cases`
+### `/jaan-to-qa-test-cases`
 
 **Without LSP:** Generates test files that may have import errors or type mismatches. User has to fix manually.
 
@@ -67,7 +67,7 @@ Update skill workflows to leverage LSP capabilities when available.
 - **Hover** on function signatures to generate accurate mock types
 - **Result:** Test cases compile on first try
 
-### `/jaan-to:dev-api-contract`
+### `/jaan-to-dev-api-contract`
 
 **Without LSP:** Reads route files with text search. May miss overloaded handlers or middleware.
 
@@ -77,7 +77,7 @@ Update skill workflows to leverage LSP capabilities when available.
 - **Symbols** to list all exported types for request/response schemas
 - **Result:** OpenAPI contracts match actual code, not approximations
 
-### `/jaan-to:pm-prd-write`
+### `/jaan-to-pm-prd-write`
 
 **Without LSP:** The context-scout agent uses file search to understand the codebase. Limited to filename/content matching.
 
@@ -87,7 +87,7 @@ Update skill workflows to leverage LSP capabilities when available.
 - **Diagnostics** to surface existing tech debt relevant to the initiative
 - **Result:** More accurate technical feasibility and effort sections in PRDs
 
-### `/jaan-to:jaan-skill-create`
+### `/to-jaan-skill-create`
 
 **Without LSP:** New skill scaffolding is template-based. No validation against actual plugin structure.
 

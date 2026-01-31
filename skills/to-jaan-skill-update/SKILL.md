@@ -1,14 +1,14 @@
 ---
-name: jaan-skill-update
+name: to-jaan-skill-update
 description: |
   Update an existing jaan.to skill following standards.
   Auto-triggers on: update skill, modify skill, improve skill, fix skill.
-  Maps to: jaan-to:jaan-skill-update
+  Maps to: to-jaan-skill-update
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write(.jaan-to/**), Edit, Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [skill-name]
 ---
 
-# jaan-to:jaan-skill-update
+# to-jaan-skill-update
 
 > Update existing jaan.to skills with specification compliance and documentation sync.
 
@@ -16,7 +16,7 @@ argument-hint: [skill-name]
 
 Read these before execution:
 - `.jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
-- `.jaan-to/learn/skill-update.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-skill-update.learn.md` - Past lessons
 - `.jaan-to/context/config.md` - Current skill catalog
 
 ## Input
@@ -70,7 +70,7 @@ Ask up to 7 clarifying questions across Phase 1 if needed.
 
 ## Step 0: Apply Past Lessons
 
-Read `.jaan-to/learn/skill-update.learn.md` if it exists:
+Read `.jaan-to/learn/to-jaan-skill-update.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -87,7 +87,7 @@ Display current structure:
 ```
 CURRENT SKILL: {name}
 ────────────────────
-Command: /jaan-to:{name}
+Command: /{name}
 Logical: {logical_name}
 Description: {description}
 
@@ -266,7 +266,7 @@ Confirm: "Skill files updated in `skills/{name}/` and `.jaan-to/`"
 
 ## Step 12: Auto-Invoke Documentation Sync
 
-Run `/jaan-to:jaan-docs-update {name}` to sync:
+Run `/to-jaan-docs-update {name}` to sync:
 - `docs/skills/{role}/{name}.md`
 
 This ensures documentation stays in sync with skill changes.
@@ -294,12 +294,12 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 > "Please test the updated skill in a new session. Here's a copy-paste ready example:"
 >
 > ```
-> /jaan-to:{name} "{example_input_based_on_skill_purpose}"
+> /{name} "{example_input_based_on_skill_purpose}"
 > ```
 >
-> For example, if updating `jaan-docs-create`:
+> For example, if updating `to-jaan-docs-create`:
 > ```
-> /jaan-to:jaan-docs-create skill "my-new-feature"
+> /to-jaan-docs-create skill "my-new-feature"
 > ```
 >
 > "Did it work correctly? [y/n]"
@@ -353,7 +353,7 @@ If no:
 > "Any feedback on the skill update process? [y/n]"
 
 If yes:
-- Run `/jaan-to:jaan-learn-add jaan-skill-update "{feedback}"`
+- Run `/to-jaan-learn-add to-jaan-skill-update "{feedback}"`
 
 ---
 
@@ -363,7 +363,7 @@ If yes:
 - [ ] Specification compliance validated
 - [ ] User-selected updates applied
 - [ ] Passes specification validation after update
-- [ ] Documentation synced via /jaan-to:jaan-docs-update
+- [ ] Documentation synced via /to-jaan-docs-update
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
 - [ ] User approved final result

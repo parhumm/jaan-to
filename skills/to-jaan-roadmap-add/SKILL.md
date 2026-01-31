@@ -1,14 +1,14 @@
 ---
-name: jaan-roadmap-add
+name: to-jaan-roadmap-add
 description: |
   [Internal] Add a task to the jaan.to development roadmap.
   For jaan.to project maintenance, not end-user use.
-  Maps to: jaan-to:jaan-roadmap-add
+  Maps to: to-jaan-roadmap-add
 allowed-tools: Read, Glob, Grep, Write(.jaan-to/**)
 argument-hint: [task-description]
 ---
 
-# jaan-to:jaan-roadmap-add
+# to-jaan-roadmap-add
 
 > Add tasks to jaan.to roadmap with duplication check and proper formatting.
 
@@ -123,7 +123,7 @@ Push to remote? [y/n]
 ## Error Handling
 
 ### No Description
-> "No task description. Usage: `/jaan-to:jaan-roadmap-add Add LEARN.md files`"
+> "No task description. Usage: `/to-jaan-roadmap-add Add LEARN.md files`"
 
 ### Duplicate Found
 > "Similar task '{existing}' exists. Options: proceed / merge / cancel"

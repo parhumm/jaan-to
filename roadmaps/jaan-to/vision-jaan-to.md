@@ -67,12 +67,12 @@ That's it. Every command follows this pattern.
 ### Layers
 
 ```
-YOU USE:     /jaan-to:pm-prd-write "user import feature"
+YOU USE:     /jaan-to-pm-prd-write "user import feature"
                     │
-SKILL READS: ├── skills/pm-prd-write/SKILL.md   (what to do)
+SKILL READS: ├── skills/jaan-to-pm-prd-write/SKILL.md   (what to do)
              ├── .jaan-to/learn/pm-prd-write.learn.md  (past lessons)
              ├── context/tech.md                (your tech context)
-             ├── skills/pm-prd-write/template.md (output format)
+             ├── skills/jaan-to-pm-prd-write/template.md (output format)
              └── MCP: Figma, Jira, GitLab       (real system data)
                     │
 OUTPUT:      .jaan-to/outputs/pm/spec/user-import/prd.md
@@ -98,7 +98,7 @@ Skills stay generic. MCP provides real context.
 ### How It Works
 
 ```
-Skill: /jaan-to:dev-plan-tech-approach "payment service"
+Skill: /jaan-to-dev-plan-tech-approach "payment service"
                 │
                 ├── MCP: GitLab → reads current repo structure
                 ├── MCP: OpenAPI → reads existing API contracts
@@ -117,13 +117,13 @@ No guessing. No "assuming you have a typical setup." Real data.
 Plugin root:
 │
 ├── skills/                    # What to do (flat structure)
-│   ├── pm-prd-write/
+│   ├── jaan-to-pm-prd-write/
 │   │   ├── SKILL.md           # Skill definition
 │   │   ├── LEARN.md           # Seed lessons (bootstrap source)
 │   │   └── template.md        # Output template
-│   ├── data-gtm-datalayer/
-│   ├── jaan-learn-add/
-│   ├── jaan-skill-create/
+│   ├── jaan-to-data-gtm-datalayer/
+│   ├── to-jaan-learn-add/
+│   ├── to-jaan-skill-create/
 │   └── [skill-name]/          # Extensible
 │
 ├── scripts/seeds/             # Tech & team context templates
@@ -178,7 +178,7 @@ Every skill has a `LEARN.md` file in `skills/{name}/` (seed lessons) that bootst
 - Common mistakes to avoid
 
 ```markdown
-# Lessons: pm-prd-write
+# Lessons: jaan-to-pm-prd-write
 
 ## Better Questions
 - Always ask about internationalization requirements
@@ -276,17 +276,17 @@ Context files can have learning in `.jaan-to/learn/context-{name}.learn.md`:
 
 After any skill run:
 ```
-/jaan-to:jaan-learn-add "pm-prd-write" "Always ask about internationalization requirements"
+/to-jaan-learn-add "jaan-to-pm-prd-write" "Always ask about internationalization requirements"
 ```
 
 Or route to template:
 ```
-/jaan-to:jaan-learn-add "template-prd" "Add rollback plan section"
+/to-jaan-learn-add "template-prd" "Add rollback plan section"
 ```
 
 Or route to stack:
 ```
-/jaan-to:jaan-learn-add "context-tech" "All new services need health check endpoint"
+/to-jaan-learn-add "context-tech" "All new services need health check endpoint"
 ```
 
 ---
@@ -437,11 +437,11 @@ Create folder, add skills:
 
 ```
 skills/
-├── devops-infra-provision/    # New role-domain-action
+├── jaan-to-devops-infra-provision/    # New role-domain-action
 │   ├── SKILL.md
 │   ├── LEARN.md
 │   └── template.md
-└── devops-pipeline-setup/
+└── jaan-to-devops-pipeline-setup/
     ├── SKILL.md
     ├── LEARN.md
     └── template.md
@@ -457,7 +457,7 @@ Register in `context/config.md` if needed:
 - devops  # Added
 ```
 
-Done. Commands like `/jaan-to:devops-infra-provision` now work.
+Done. Commands like `/jaan-to-devops-infra-provision` now work.
 
 ---
 
@@ -466,7 +466,7 @@ Done. Commands like `/jaan-to:devops-infra-provision` now work.
 Keep it simple:
 
 ```markdown
-# pm:prd-write
+# jaan-to-pm-prd-write
 
 ## Purpose
 Generate a PRD from initiative description.
@@ -521,7 +521,7 @@ Every skill has tests. Tests live in `tests/`.
 ### Test Structure
 
 ```markdown
-# Test: pm:prd-write
+# Test: jaan-to-pm-prd-write
 
 ## Setup
 - Input: "user import feature"
@@ -548,8 +548,8 @@ Every skill has tests. Tests live in `tests/`.
 ### Running Tests
 
 ```
-/jaan-to:test pm-prd-write
-/jaan-to:test --all
+/to-jaan-test jaan-to-pm-prd-write
+/to-jaan-test --all
 ```
 
 ---
@@ -557,12 +557,12 @@ Every skill has tests. Tests live in `tests/`.
 ## Execution Flow
 
 ```
-USER: /jaan-to:pm-prd-write "user import feature"
+USER: /jaan-to-pm-prd-write "user import feature"
 
 1. LOAD
-   ├── skills/pm-prd-write/SKILL.md
-   ├── .jaan-to/learn/pm-prd-write.learn.md (3 lessons)
-   ├── skills/pm-prd-write/template.md
+   ├── skills/jaan-to-pm-prd-write/SKILL.md
+   ├── .jaan-to/learn/jaan-to-pm-prd-write.learn.md (3 lessons)
+   ├── skills/jaan-to-pm-prd-write/template.md
    ├── .jaan-to/learn/template-prd.learn.md (2 lessons)
    ├── context/tech.md (Python, FastAPI, PostgreSQL)
    ├── context/team.md (2 BE, 2 FE, 2-week sprints)
@@ -667,7 +667,7 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### Add a Role
 
 ```
-1. Create skills/{role}-{domain}-{action}/
+1. Create skills/jaan-to-{role}-{domain}-{action}/
 2. Add SKILL.md with frontmatter
 3. Add to context/config.md if needed
 ```
@@ -675,7 +675,7 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### Add a Skill
 
 ```
-1. Create skills/{skill-name}/SKILL.md
+1. Create skills/jaan-to-{role}-{domain}-{action}/SKILL.md (or to-jaan-{domain}-{action}/)
 2. Add LEARN.md (starts empty, seeds .jaan-to/learn/)
 3. Add template.md if needed
 4. Done (auto-discovered)
@@ -720,16 +720,16 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### 1. User Runs Command
 
 ```
-/jaan-to:dev-plan-tech-approach "payment service"
+/jaan-to-dev-plan-tech-approach "payment service"
 ```
 
 ### 2. System Loads Context
 
 ```
 Loading:
-  ✓ skills/dev-plan-tech-approach/SKILL.md
-  ✓ .jaan-to/learn/dev-plan-tech-approach.learn.md (3 lessons)
-  ✓ skills/dev-plan-tech-approach/template.md
+  ✓ skills/jaan-to-dev-plan-tech-approach/SKILL.md
+  ✓ .jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md (3 lessons)
+  ✓ skills/jaan-to-dev-plan-tech-approach/template.md
   ✓ context/tech.md (Python, FastAPI, PostgreSQL)
   ✓ context/team.md (2 BE, 2 FE, 2-week sprints)
 
@@ -777,7 +777,7 @@ A: "Must be backward compatible with v1 API"
 
 ```
 User: "Good, but add performance testing section"
-→ Added to .jaan-to/learn/dev-plan-tech-approach.learn.md
+→ Added to .jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md
 ```
 
 ---
@@ -787,7 +787,8 @@ User: "Good, but add performance testing section"
 ### All Commands Pattern
 
 ```
-/jaan-to:{skill-name} [input]
+/jaan-to-{role}-{domain}-{action} [input]
+/to-jaan-{domain}-{action} [input]
 ```
 
 ### Key Paths

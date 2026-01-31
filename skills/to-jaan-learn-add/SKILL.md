@@ -1,14 +1,14 @@
 ---
-name: jaan-learn-add
+name: to-jaan-learn-add
 description: |
   Add a lesson to a skill's LEARN.md file.
   Routes feedback to skill, template, or context learning.
-  Maps to: jaan-to:jaan-learn-add
+  Maps to: to-jaan-learn-add
 allowed-tools: Read, Glob, Grep, Write(.jaan-to/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: "[target] [lesson]"
 ---
 
-# jaan-to:jaan-learn-add
+# to-jaan-learn-add
 
 > Route feedback to the appropriate LEARN.md file.
 
@@ -26,8 +26,8 @@ Expected format: `"target" "lesson"`
 - Lesson: the feedback to add
 
 Examples:
-- `/jaan-to:jaan-learn-add "pm-prd-write" "Always ask about rollback strategy"`
-- `/jaan-to:jaan-learn-add ".jaan-to/context/tech" "All new tables need soft delete"`
+- `/to-jaan-learn-add "jaan-to-pm-prd-write" "Always ask about rollback strategy"`
+- `/to-jaan-learn-add ".jaan-to/context/tech" "All new tables need soft delete"`
 
 If no input provided, ask for target and lesson.
 

@@ -1,21 +1,21 @@
 ---
-name: jaan-research-add
+name: to-jaan-research-add
 description: |
   Add research document to deepresearch index (from file or URL).
   Auto-triggers on: add research, index research, add to research
-  Maps to: jaan-to:jaan-research-add
+  Maps to: to-jaan-research-add
 allowed-tools: Read, Glob, Grep, Edit, Write(.jaan-to/outputs/research/**), WebFetch, Bash(git add:*), Bash(git commit:*)
 argument-hint: <file-path-or-URL>
 ---
 
-# jaan-to:jaan-research-add
+# to-jaan-research-add
 
 > Add research document to deepresearch index (from file or URL).
 
 ## Context Files
 
 Read these before execution:
-- `.jaan-to/learn/research-add.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-research-add.learn.md` - Past lessons
 - `.jaan-to/outputs/research/README.md` - Current index structure
 
 ## Input
@@ -34,11 +34,11 @@ Extract the input from `$ARGUMENTS`:
    ```
    ❌ No input provided.
 
-   Usage: /jaan-to:jaan-research-add <file-path-or-URL>
+   Usage: /to-jaan-research-add <file-path-or-URL>
 
    Examples:
-   - /jaan-to:jaan-research-add .jaan-to/outputs/research/my-research.md
-   - /jaan-to:jaan-research-add https://example.com/article
+   - /to-jaan-research-add .jaan-to/outputs/research/my-research.md
+   - /to-jaan-research-add https://example.com/article
    ```
 
 2. **Detect input type:**
@@ -54,7 +54,7 @@ Extract the input from `$ARGUMENTS`:
 
 ## Step 0: Apply Past Lessons
 
-Read `.jaan-to/learn/research-add.learn.md` if it exists:
+Read `.jaan-to/learn/to-jaan-research-add.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -247,7 +247,7 @@ Summary:
 > "Any feedback on adding this research? [y/n]"
 
 If yes:
-- Run `/jaan-to:jaan-learn-add jaan-research-add "{feedback}"`
+- Run `/to-jaan-learn-add to-jaan-research-add "{feedback}"`
 
 ---
 

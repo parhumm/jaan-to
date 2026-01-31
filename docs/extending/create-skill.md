@@ -29,7 +29,7 @@ A skill is a reusable command that AI executes to produce outputs. This specific
 | Aspect | Pattern |
 |--------|---------|
 | Name | `{name}` |
-| Command | `/jaan-to:{name}` |
+| Command | `/{name}` |
 | Directory | `skills/{name}/` |
 | Logical Name | `{role}:{domain-action}` |
 | Output | `.jaan-to/outputs/{role}/{domain}/{slug}/` |
@@ -40,13 +40,19 @@ A skill is a reusable command that AI executes to produce outputs. This specific
 
 ### Pattern
 
+Role-based skills (for team use):
 ```
-{role}-{domain}-{action}
+jaan-to-{role}-{domain}-{action}
+```
+
+Internal skills (for plugin maintenance):
+```
+to-jaan-{domain}-{action}
 ```
 
 | Part | Description | Examples |
 |------|-------------|----------|
-| role | Team function | pm, dev, qa, ux, data, growth, core |
+| role | Team function | pm, dev, qa, ux, data, growth |
 | domain | Area of work | prd, plan, test, docs, learn |
 | action | What it does | write, add, review, create, update |
 
@@ -54,10 +60,10 @@ A skill is a reusable command that AI executes to produce outputs. This specific
 
 | Skill Name | Command | Logical Name |
 |------------|---------|--------------|
-| `pm-prd-write` | `/jaan-to:pm-prd-write` | `pm:prd-write` |
-| `qa-plan-test-matrix` | `/jaan-to:qa-plan-test-matrix` | `qa:plan-test-matrix` |
-| `docs-create` | `/jaan-to:docs-create` | `docs:create` |
-| `dev-api-contract` | `/jaan-to:dev-api-contract` | `dev:api-contract` |
+| `jaan-to-pm-prd-write` | `/jaan-to-pm-prd-write` | `pm:prd-write` |
+| `jaan-to-qa-plan-test-matrix` | `/jaan-to-qa-plan-test-matrix` | `qa:plan-test-matrix` |
+| `to-jaan-docs-create` | `/to-jaan-docs-create` | `docs:create` |
+| `jaan-to-dev-api-contract` | `/jaan-to-dev-api-contract` | `dev:api-contract` |
 
 ---
 
@@ -188,7 +194,7 @@ If approved:
 After writing:
 > "Any feedback? [y/n]"
 
-If yes, use `/jaan-to:learn-add {skill-name} "{feedback}"` to capture lessons.
+If yes, use `/to-jaan-learn-add {skill-name} "{feedback}"` to capture lessons.
 
 ---
 
@@ -304,7 +310,7 @@ Things to avoid:
 
 ### Auto-Categorization Keywords
 
-When adding lessons via `/jaan-to:learn-add`, category is detected by keywords:
+When adding lessons via `/to-jaan-learn-add`, category is detected by keywords:
 
 | Category | Trigger Keywords |
 |----------|------------------|
@@ -408,7 +414,7 @@ After writing:
 > "Any feedback? [y/n]"
 
 If yes:
-- Run `/jaan-to:learn-add {skill-name} "{feedback}"`
+- Run `/to-jaan-learn-add {skill-name} "{feedback}"`
 ```
 
 ### Config Registration
@@ -420,8 +426,8 @@ Register new skills in `.jaan-to/context/config.md`:
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| `pm:prd-write` | `/jaan-to:pm-prd-write` | Generate PRD |
-| `your:new-skill` | `/jaan-to:your-new-skill` | Your description |
+| `pm:prd-write` | `/jaan-to-pm-prd-write` | Generate PRD |
+| `your:new-skill` | `/your-new-skill` | Your description |
 ```
 
 ---
@@ -610,7 +616,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update matrix, re-preview, re-write
-- **Option 2**: Run `/jaan-to:learn-add qa-test-matrix "{feedback}"`
+- **Option 2**: Run `/to-jaan-learn-add qa-test-matrix "{feedback}"`
 - **Option 3**: Do both
 
 ---
@@ -643,7 +649,7 @@ If yes:
 
 ## Tips
 
-- Start with fewer questions—add more via `/jaan-to:learn-add`
+- Start with fewer questions—add more via `/to-jaan-learn-add`
 - Match output format to team expectations
 - Read stack context instead of asking redundant questions
 - Test with real scenarios before committing

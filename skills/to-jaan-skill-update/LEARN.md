@@ -1,4 +1,4 @@
-# Lessons: jaan-skill-update
+# Lessons: to-jaan-skill-update
 
 > Last updated: 2026-01-27
 

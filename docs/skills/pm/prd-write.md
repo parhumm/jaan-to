@@ -1,4 +1,4 @@
-# /jaan-to:pm-prd-write
+# /jaan-to-pm-prd-write
 
 > Generate a Product Requirements Document from an initiative.
 
@@ -19,7 +19,7 @@ The skill reads your tech stack and team context to generate relevant content.
 ## Usage
 
 ```
-/jaan-to:pm-prd-write "user authentication feature"
+/jaan-to-pm-prd-write "user authentication feature"
 ```
 
 ---
@@ -58,7 +58,7 @@ The skill may ask follow-up questions based on your context.
 
 **Input**:
 ```
-/jaan-to:pm-prd-write "password reset flow"
+/jaan-to-pm-prd-write "password reset flow"
 ```
 
 **Questions asked**:
@@ -110,5 +110,5 @@ This skill reads from:
 
 Add feedback:
 ```
-/jaan-to:learn-add pm-prd-write "Always ask about i18n"
+/to-jaan-learn-add pm-prd-write "Always ask about i18n"
 ```

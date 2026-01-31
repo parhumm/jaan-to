@@ -29,16 +29,16 @@
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| jaan-to:pm-prd-write | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
-| jaan-to:jaan-roadmap-add | `/jaan-to:jaan-roadmap-add` | [Internal] Add task to roadmap |
-| jaan-to:jaan-learn-add | `/jaan-to:jaan-learn-add` | Add lesson to skill's LEARN.md |
-| jaan-to:jaan-docs-create | `/jaan-to:jaan-docs-create` | [Internal] Create documentation |
-| jaan-to:jaan-docs-update | `/jaan-to:jaan-docs-update` | [Internal] Audit and fix documentation |
-| jaan-to:jaan-skill-create | `/jaan-to:jaan-skill-create` | [Internal] Create new skill with wizard |
-| jaan-to:jaan-skill-update | `/jaan-to:jaan-skill-update` | [Internal] Update existing skill |
-| jaan-to:data-gtm-datalayer | `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
-| jaan-to:jaan-research-about | `/jaan-to:jaan-research-about` | Deep research on any topic |
-| jaan-to:jaan-research-add | `/jaan-to:jaan-research-add` | Add file/URL to research index |
+| jaan-to-pm-prd-write | `/jaan-to-pm-prd-write` | Generate PRD from initiative |
+| to-jaan-roadmap-add | `/to-jaan-roadmap-add` | [Internal] Add task to roadmap |
+| to-jaan-learn-add | `/to-jaan-learn-add` | Add lesson to skill's LEARN.md |
+| to-jaan-docs-create | `/to-jaan-docs-create` | [Internal] Create documentation |
+| to-jaan-docs-update | `/to-jaan-docs-update` | [Internal] Audit and fix documentation |
+| to-jaan-skill-create | `/to-jaan-skill-create` | [Internal] Create new skill with wizard |
+| to-jaan-skill-update | `/to-jaan-skill-update` | [Internal] Update existing skill |
+| jaan-to-data-gtm-datalayer | `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code |
+| to-jaan-research-about | `/to-jaan-research-about` | Deep research on any topic |
+| to-jaan-research-add | `/to-jaan-research-add` | Add file/URL to research index |
 
 ## Trust
 - trust_paths: [".jaan-to/"]

@@ -14,7 +14,7 @@ Skills split into two phases by effort:
 
 ## PM Skills (6)
 
-### /jaan-to:pm-decision-brief
+### /jaan-to-pm-decision-brief
 
 - **Logical**: `pm:decision-brief`
 - **Description**: 1-page decision record with options, recommendation, risks, open questions
@@ -23,7 +23,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/pm/decision/{slug}/brief.md`
 
-### /jaan-to:pm-north-star
+### /jaan-to-pm-north-star
 
 - **Logical**: `pm:north-star`
 - **Description**: North star metric + drivers + boundaries + cadence (weekly/monthly)
@@ -32,7 +32,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/pm/metrics/{slug}/north-star.md`
 
-### /jaan-to:pm-scope-slice
+### /jaan-to-pm-scope-slice
 
 - **Logical**: `pm:scope-slice`
 - **Description**: MVP vs Later slicing with milestones and dependency list
@@ -41,7 +41,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/pm/plan/{slug}/scope.md`
 
-### /jaan-to:pm-release-review
+### /jaan-to-pm-release-review
 
 - **Logical**: `pm:release-review`
 - **Description**: Post-release review: KPI deltas, unexpected outcomes, learnings, follow-ups
@@ -50,7 +50,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/pm/release/{slug}/review.md`
 
-### /jaan-to:pm-story-write
+### /jaan-to-pm-story-write
 
 - **Logical**: `pm:story-write`
 - **Description**: User stories in standard format with Given/When/Then acceptance criteria
@@ -62,7 +62,7 @@ Skills split into two phases by effort:
 - **Failure Modes**: Too technical; missing "so that"; AC not testable
 - **Quality Gates**: INVEST criteria met; QA confirms testability
 
-### /jaan-to:pm-feedback-synthesize
+### /jaan-to-pm-feedback-synthesize
 
 - **Logical**: `pm:feedback-synthesize`
 - **Description**: Synthesize customer feedback into categorized themes with prioritized pain points
@@ -78,7 +78,7 @@ Skills split into two phases by effort:
 
 ## DEV Skills (6)
 
-### /jaan-to:dev-tech-plan
+### /jaan-to-dev-tech-plan
 
 - **Logical**: `dev:tech-plan`
 - **Description**: Tech approach with architecture, tradeoffs, risks, rollout/rollback, unknowns
@@ -87,7 +87,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/dev/plan/{slug}/tech-plan.md`
 
-### /jaan-to:dev-test-plan
+### /jaan-to-dev-test-plan
 
 - **Logical**: `dev:test-plan`
 - **Description**: Dev-owned test plan: unit/integration/e2e scope, fixtures, mocks, highest-risk scenarios
@@ -96,7 +96,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/dev/test/{slug}/test-plan.md`
 
-### /jaan-to:dev-api-contract
+### /jaan-to-dev-api-contract
 
 - **Logical**: `dev:api-contract`
 - **Description**: OpenAPI contract with payloads, errors, versioning, example requests/responses
@@ -105,7 +105,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/dev/contract/{slug}/api.yaml`
 
-### /jaan-to:dev-pr-review
+### /jaan-to-dev-pr-review
 
 - **Logical**: `dev:pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
@@ -114,7 +114,7 @@ Skills split into two phases by effort:
 - **Input**: [pr-link-or-branch]
 - **Output**: `.jaan-to/outputs/dev/review/{slug}/pr-review.md`
 
-### /jaan-to:dev-ship-check
+### /jaan-to-dev-ship-check
 
 - **Logical**: `dev:ship-check`
 - **Description**: Pre-ship checklist: flags, migrations, monitoring, rollback, Go/No-Go recommendation
@@ -123,7 +123,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/dev/release/{slug}/ship-check.md`
 
-### /jaan-to:dev-docs-generate
+### /jaan-to-dev-docs-generate
 
 - **Logical**: `dev:docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
@@ -139,7 +139,7 @@ Skills split into two phases by effort:
 
 ## QA Skills (7)
 
-### /jaan-to:qa-test-matrix
+### /jaan-to-qa-test-matrix
 
 - **Logical**: `qa:test-matrix`
 - **Description**: Risk-based matrix: P0/P1 flows × states × devices × env (staging/prod-like)
@@ -148,7 +148,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/qa/matrix/{slug}/test-matrix.md`
 
-### /jaan-to:qa-bug-triage
+### /jaan-to-qa-bug-triage
 
 - **Logical**: `qa:bug-triage`
 - **Description**: Dedupe + severity + repro hints + next action per issue, cluster by root cause
@@ -157,7 +157,7 @@ Skills split into two phases by effort:
 - **Input**: [issue-list]
 - **Output**: `.jaan-to/outputs/qa/triage/{slug}/bug-triage.md`
 
-### /jaan-to:qa-automation-plan
+### /jaan-to-qa-automation-plan
 
 - **Logical**: `qa:automation-plan`
 - **Description**: Automation plan: what to automate now vs later, flakiness risk, testability changes needed
@@ -166,7 +166,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/qa/automation/{slug}/automation-plan.md`
 
-### /jaan-to:qa-regression-runbook
+### /jaan-to-qa-regression-runbook
 
 - **Logical**: `qa:regression-runbook`
 - **Description**: Step-by-step regression runbook: smoke → critical → deep checks with timing/owners
@@ -175,7 +175,7 @@ Skills split into two phases by effort:
 - **Input**: [release]
 - **Output**: `.jaan-to/outputs/qa/regression/{slug}/runbook.md`
 
-### /jaan-to:qa-release-signoff
+### /jaan-to-qa-release-signoff
 
 - **Logical**: `qa:release-signoff`
 - **Description**: Go/No-Go summary with evidence, open risks, mitigations, rollback readiness
@@ -184,7 +184,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/qa/signoff/{slug}/release-signoff.md`
 
-### /jaan-to:qa-test-cases
+### /jaan-to-qa-test-cases
 
 - **Logical**: `qa:test-cases`
 - **Description**: Test cases from acceptance criteria with edge cases, preconditions, expected results
@@ -196,7 +196,7 @@ Skills split into two phases by effort:
 - **Failure Modes**: Vague steps; missing edge cases; not traceable to requirements
 - **Quality Gates**: Peer review; traceable to requirements; reusable format
 
-### /jaan-to:qa-bug-report
+### /jaan-to-qa-bug-report
 
 - **Logical**: `qa:bug-report`
 - **Description**: Structured bug reports with severity, priority, steps to reproduce, expected vs actual
@@ -212,7 +212,7 @@ Skills split into two phases by effort:
 
 ## DATA Skills (8)
 
-### /jaan-to:data-event-spec
+### /jaan-to-data-event-spec
 
 - **Logical**: `data:event-spec`
 - **Description**: GA4-ready event/param spec: naming, triggers, required properties, GTM implementation notes
@@ -221,7 +221,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/data/events/{slug}/event-spec.md`
 
-### /jaan-to:data-metric-spec
+### /jaan-to-data-metric-spec
 
 - **Logical**: `data:metric-spec`
 - **Description**: Metric definition: formula, caveats, segmentation rules, owner, gaming prevention
@@ -230,7 +230,7 @@ Skills split into two phases by effort:
 - **Input**: [metric]
 - **Output**: `.jaan-to/outputs/data/metrics/{slug}/metric-spec.md`
 
-### /jaan-to:data-funnel-review
+### /jaan-to-data-funnel-review
 
 - **Logical**: `data:funnel-review`
 - **Description**: Funnel baseline + top drop-offs + segments + 3-5 hypotheses ranked by impact × confidence
@@ -239,7 +239,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/data/insights/{slug}/funnel-review.md`
 
-### /jaan-to:data-experiment-design
+### /jaan-to-data-experiment-design
 
 - **Logical**: `data:experiment-design`
 - **Description**: Experiment plan: hypothesis, success metric, boundaries, ramp/kill criteria, analysis checklist
@@ -248,7 +248,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/data/experiments/{slug}/experiment-design.md`
 
-### /jaan-to:data-anomaly-triage
+### /jaan-to-data-anomaly-triage
 
 - **Logical**: `data:anomaly-triage`
 - **Description**: Triage pack: scope, likely causes, next checks, who to pull in, RCA starter template
@@ -257,7 +257,7 @@ Skills split into two phases by effort:
 - **Input**: [kpi]
 - **Output**: `.jaan-to/outputs/data/monitoring/{slug}/anomaly-triage.md`
 
-### /jaan-to:data-sql-query
+### /jaan-to-data-sql-query
 
 - **Logical**: `data:sql-query`
 - **Description**: Ad-hoc SQL queries from natural language with results summary
@@ -269,7 +269,7 @@ Skills split into two phases by effort:
 - **Failure Modes**: Misunderstanding question; wrong joins; incorrect filters
 - **Quality Gates**: Row count sanity checks; cross-reference dashboards
 
-### /jaan-to:data-cohort-analyze
+### /jaan-to-data-cohort-analyze
 
 - **Logical**: `data:cohort-analyze`
 - **Description**: Cohort/retention analysis with retention curves and churn risk identification
@@ -281,7 +281,7 @@ Skills split into two phases by effort:
 - **Failure Modes**: Incomplete data; timezone issues; not accounting for seasonality
 - **Quality Gates**: Early cohorts stable; cross-reference with finance
 
-### /jaan-to:data-dbt-model
+### /jaan-to-data-dbt-model
 
 - **Logical**: `data:dbt-model`
 - **Description**: dbt staging/mart models with tests, documentation (schema.yml)
@@ -297,7 +297,7 @@ Skills split into two phases by effort:
 
 ## GROWTH Skills (7)
 
-### /jaan-to:growth-content-outline
+### /jaan-to-growth-content-outline
 
 - **Logical**: `growth:content-outline`
 - **Description**: Writing-ready outline: H1-H3, FAQs, entities, internal links, intent matching
@@ -306,7 +306,7 @@ Skills split into two phases by effort:
 - **Input**: [page]
 - **Output**: `.jaan-to/outputs/growth/content/{slug}/outline.md`
 
-### /jaan-to:growth-keyword-brief
+### /jaan-to-growth-keyword-brief
 
 - **Logical**: `growth:keyword-brief`
 - **Description**: Keyword + intent map with primary/secondary targets, SERP notes, content angle, internal linking
@@ -315,7 +315,7 @@ Skills split into two phases by effort:
 - **Input**: [topic]
 - **Output**: `.jaan-to/outputs/growth/seo/{slug}/keyword-brief.md`
 
-### /jaan-to:growth-seo-audit
+### /jaan-to-growth-seo-audit
 
 - **Logical**: `growth:seo-audit`
 - **Description**: On-page checklist: title/meta, headings, content gaps, internal links, schema opportunities
@@ -324,7 +324,7 @@ Skills split into two phases by effort:
 - **Input**: [url_or_route] [target_keyword]
 - **Output**: `.jaan-to/outputs/growth/seo/{slug}/seo-audit.md`
 
-### /jaan-to:growth-seo-check
+### /jaan-to-growth-seo-check
 
 - **Logical**: `growth:seo-check`
 - **Description**: Technical audit: indexability, crawl signals, critical errors, remediation plan
@@ -333,7 +333,7 @@ Skills split into two phases by effort:
 - **Input**: [site_or_app] [scope]
 - **Output**: `.jaan-to/outputs/growth/seo/{slug}/seo-check.md`
 
-### /jaan-to:growth-weekly-report
+### /jaan-to-growth-weekly-report
 
 - **Logical**: `growth:weekly-report`
 - **Description**: Weekly wins/losses, top pages/queries, actions + owners, next experiments
@@ -342,7 +342,7 @@ Skills split into two phases by effort:
 - **Input**: [period]
 - **Output**: `.jaan-to/outputs/growth/reports/{slug}/weekly-report.md`
 
-### /jaan-to:growth-meta-write
+### /jaan-to-growth-meta-write
 
 - **Logical**: `growth:meta-write`
 - **Description**: Meta titles (<60 chars) and descriptions (<155 chars) with A/B variations
@@ -354,7 +354,7 @@ Skills split into two phases by effort:
 - **Failure Modes**: Truncation; keyword stuffing; generic descriptions
 - **Quality Gates**: Primary keyword included; compelling; proper length
 
-### /jaan-to:growth-content-optimize
+### /jaan-to-growth-content-optimize
 
 - **Logical**: `growth:content-optimize`
 - **Description**: Existing content optimization checklist with updated sections and internal links
@@ -370,7 +370,7 @@ Skills split into two phases by effort:
 
 ## UX Skills (7)
 
-### /jaan-to:ux-flow-spec
+### /jaan-to-ux-flow-spec
 
 - **Logical**: `ux:flow-spec`
 - **Description**: Flow spec: happy path + empty/loading/error states + edge cases + implementation notes
@@ -379,7 +379,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/ux/flows/{slug}/flow-spec.md`
 
-### /jaan-to:ux-microcopy-write
+### /jaan-to-ux-microcopy-write
 
 - **Logical**: `ux:microcopy-write`
 - **Description**: Microcopy pack: labels, helper text, errors, toasts, confirmations, empty states, tone rules
@@ -388,7 +388,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/ux/content/{slug}/microcopy.md`
 
-### /jaan-to:ux-research-plan
+### /jaan-to-ux-research-plan
 
 - **Logical**: `ux:research-plan`
 - **Description**: Research plan: questions, method, participants, script outline, timeline, deliverables
@@ -397,7 +397,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/ux/research/{slug}/research-plan.md`
 
-### /jaan-to:ux-heuristic-review
+### /jaan-to-ux-heuristic-review
 
 - **Logical**: `ux:heuristic-review`
 - **Description**: Heuristic review: issues, severity, recommended fixes, quick wins, usability principles
@@ -406,7 +406,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/ux/review/{slug}/heuristic-review.md`
 
-### /jaan-to:ux-competitive-review
+### /jaan-to-ux-competitive-review
 
 - **Logical**: `ux:competitive-review`
 - **Description**: Competitive teardown: step-by-step flows, patterns, strengths/weaknesses, opportunities
@@ -415,7 +415,7 @@ Skills split into two phases by effort:
 - **Input**: [initiative]
 - **Output**: `.jaan-to/outputs/ux/benchmark/{slug}/competitive-review.md`
 
-### /jaan-to:ux-research-synthesize
+### /jaan-to-ux-research-synthesize
 
 - **Logical**: `ux:research-synthesize`
 - **Description**: Synthesize research findings into themes, executive summary, and recommendations
@@ -427,7 +427,7 @@ Skills split into two phases by effort:
 - **Failure Modes**: Too long reports; no actionable recommendations
 - **Quality Gates**: Stakeholder feedback positive; action items tracked
 
-### /jaan-to:ux-persona-create
+### /jaan-to-ux-persona-create
 
 - **Logical**: `ux:persona-create`
 - **Description**: User personas with goals, pain points, behaviors, and Jobs-to-be-Done
@@ -456,15 +456,15 @@ Skills split into two phases by effort:
 
 ## Priority Order (by research rank)
 
-1. `/jaan-to:qa-test-cases` - Rank #1
-2. `/jaan-to:data-sql-query` - Rank #2
-3. `/jaan-to:pm-story-write` - Rank #6
-4. `/jaan-to:ux-research-synthesize` - Rank #8
-5. `/jaan-to:qa-bug-report` - Rank #10
-6. `/jaan-to:growth-meta-write` - Rank #12
-7. `/jaan-to:dev-docs-generate` - Rank #14
-8. `/jaan-to:pm-feedback-synthesize` - Rank #15
-9. `/jaan-to:ux-persona-create` - Rank #16
-10. `/jaan-to:growth-content-optimize` - Rank #18
-11. `/jaan-to:data-dbt-model` - Rank #19
-12. `/jaan-to:data-cohort-analyze` - (supports #11 funnel analysis)
+1. `/jaan-to-qa-test-cases` - Rank #1
+2. `/jaan-to-data-sql-query` - Rank #2
+3. `/jaan-to-pm-story-write` - Rank #6
+4. `/jaan-to-ux-research-synthesize` - Rank #8
+5. `/jaan-to-qa-bug-report` - Rank #10
+6. `/jaan-to-growth-meta-write` - Rank #12
+7. `/jaan-to-dev-docs-generate` - Rank #14
+8. `/jaan-to-pm-feedback-synthesize` - Rank #15
+9. `/jaan-to-ux-persona-create` - Rank #16
+10. `/jaan-to-growth-content-optimize` - Rank #18
+11. `/jaan-to-data-dbt-model` - Rank #19
+12. `/jaan-to-data-cohort-analyze` - (supports #11 funnel analysis)

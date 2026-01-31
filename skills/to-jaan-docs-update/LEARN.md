@@ -1,4 +1,4 @@
-# Lessons: jaan-docs-update
+# Lessons: to-jaan-docs-update
 
 > Last updated: 2026-01-26
 

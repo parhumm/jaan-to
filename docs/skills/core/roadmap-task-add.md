@@ -1,4 +1,4 @@
-# /jaan-to:jaan-roadmap-add
+# /to-jaan-roadmap-add
 
 > Add a task to the jaan.to development roadmap.
 
@@ -17,7 +17,7 @@ Adds a new task to `.jaan-to/roadmap.md`:
 ## Usage
 
 ```
-/jaan-to:jaan-roadmap-add "Task description"
+/to-jaan-roadmap-add "Task description"
 ```
 
 ---
@@ -26,7 +26,7 @@ Adds a new task to `.jaan-to/roadmap.md`:
 
 **Input**:
 ```
-/jaan-to:jaan-roadmap-add "Add MCP Figma connector"
+/to-jaan-roadmap-add "Add MCP Figma connector"
 ```
 
 **Result**:

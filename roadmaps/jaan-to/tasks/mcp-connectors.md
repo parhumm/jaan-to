@@ -165,10 +165,10 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with Notion subscription
 - **Capabilities**: Create pages, search workspace, manage databases, unified search
 - **Skills**:
-  - `/jaan-to:pm-prd-write` - PRD storage and templates
-  - `/pm-north-star` - OKR tracking
-  - `/ux-research-synthesize` - Research documentation
-  - `/ux-persona-create` - Persona storage
+  - `/jaan-to-pm-prd-write` - PRD storage and templates
+  - `/jaan-to-pm-north-star` - OKR tracking
+  - `/jaan-to-ux-research-synthesize` - Research documentation
+  - `/jaan-to-ux-persona-create` - Persona storage
   - All roles - Knowledge base access
 - **Setup**: ⭐ Easy - OAuth one-click
 
@@ -236,9 +236,9 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with Confluence subscription
 - **Capabilities**: Page creation, search, documentation management
 - **Skills**:
-  - `/jaan-to:pm-prd-write` - PRD storage
-  - `/dev-docs-generate` - Technical documentation
-  - `/pm-release-review` - Release notes
+  - `/jaan-to-pm-prd-write` - PRD storage
+  - `/jaan-to-dev-docs-generate` - Technical documentation
+  - `/jaan-to-pm-release-review` - Release notes
 - **Setup**: ⭐⭐ Medium - API token required
 
 ### Targeted Impact

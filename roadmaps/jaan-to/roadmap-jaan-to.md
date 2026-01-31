@@ -39,14 +39,14 @@
 - [x] LEARN.md files alongside skills (`d554fa6`)
 - [x] Stacks: `tech.md`, `team.md`, `integrations.md` (`bd0eff3`)
 - [x] PostToolUse feedback capture hook (`b2e7687`)
-- [x] `/jaan-to:jaan-learn-add` command for feedback routing (`5775df6`)
-- [x] Auto-commit option for `/jaan-to:jaan-learn-add` (`74e4163`)
-- [x] `/jaan-to:jaan-docs-create` skill for documentation authoring (`b3b2383`)
-- [x] `/jaan-to:jaan-docs-update` skill with git-based staleness detection (`b3b2383`, `df9cdea`)
-- [x] Auto-invoke `/jaan-to:jaan-learn-add` from `/jaan-to:pm-prd-write` (`9d9c7e1`)
+- [x] `/to-jaan-learn-add` command for feedback routing (`5775df6`)
+- [x] Auto-commit option for `/to-jaan-learn-add` (`74e4163`)
+- [x] `/to-jaan-docs-create` skill for documentation authoring (`b3b2383`)
+- [x] `/to-jaan-docs-update` skill with git-based staleness detection (`b3b2383`, `df9cdea`)
+- [x] Auto-invoke `/to-jaan-learn-add` from `/jaan-to-pm-prd-write` (`9d9c7e1`)
 - [x] Human-focused documentation structure (`48bf028`)
 - [x] Documentation style guide (`de92247`)
-- [x] Rename pm-spec-prd-write → pm-prd-write (`7c7c29d`)
+- [x] Rename pm-spec-prd-write → jaan-to-pm-prd-write (`7c7c29d`)
 - [x] Rename docs/skills/internal/ → docs/skills/core/ (`aad168c`)
 - [x] Skill creation specification for AI + humans
 
@@ -58,7 +58,7 @@
 - [x] Hook system: `jaan-to/hooks/` → `scripts/` + `hooks/hooks.json`
 - [x] Agents: `agents/context-scout.md`, `agents/quality-reviewer.md`
 - [x] Output styles: `outputStyles/enterprise-doc.md`, `outputStyles/concise-summary.md`
-- [x] Command namespace: `/to-jaan-*` → `/jaan-to:*` (colon-separated)
+- [x] Command namespace: `/jaan-to-*` (role-based) and `/to-jaan-*` (internal)
 - [x] Documentation: 8 new docs created, 27 existing docs updated
 - [x] Marketplace distribution (`marketplace.json` catalog format, manifest component paths, README install instructions)
 - [x] Directory structure reference updated
@@ -79,33 +79,33 @@
 
 > Details: [tasks/role-skills.md](tasks/role-skills.md) | No MCP required
 
-- [x] `/jaan-to:jaan-skill-create` skill with web research and PR workflow
-- [x] `/jaan-to:jaan-skill-update` skill with specification compliance
-- [ ] Update `/jaan-to:jaan-skill-create` to integrate `/jaan-to:jaan-research-about` (optional, recommended) for research-informed skill planning
+- [x] `/to-jaan-skill-create` skill with web research and PR workflow
+- [x] `/to-jaan-skill-update` skill with specification compliance
+- [ ] Update `/to-jaan-skill-create` to integrate `/to-jaan-research-about` (optional, recommended) for research-informed skill planning
 
 **Ranked by research impact (1-19):**
 
-- [ ] `/jaan-to:qa-test-cases` - Test cases from AC with edge cases (**Rank #1**)
-- [ ] `/jaan-to:data-sql-query` - Ad-hoc SQL from natural language (**Rank #2**)
-- [ ] `/jaan-to:pm-story-write` - User stories with Given/When/Then AC (Rank #6)
-- [ ] `/jaan-to:ux-research-synthesize` - Research findings synthesis with themes (Rank #8)
-- [ ] `/jaan-to:qa-bug-report` - Structured bug reports with repro steps (Rank #10)
-- [ ] `/jaan-to:growth-meta-write` - Meta titles/descriptions with CTR optimization (Rank #12)
-- [ ] `/jaan-to:dev-docs-generate` - Technical documentation: README, API docs, runbooks (Rank #14)
-- [ ] `/jaan-to:pm-feedback-synthesize` - Customer feedback synthesis with themes (Rank #15)
-- [ ] `/jaan-to:ux-persona-create` - User personas with goals, pain points, JTBD (Rank #16)
+- [ ] `/jaan-to-qa-test-cases` - Test cases from AC with edge cases (**Rank #1**)
+- [ ] `/jaan-to-data-sql-query` - Ad-hoc SQL from natural language (**Rank #2**)
+- [ ] `/jaan-to-pm-story-write` - User stories with Given/When/Then AC (Rank #6)
+- [ ] `/jaan-to-ux-research-synthesize` - Research findings synthesis with themes (Rank #8)
+- [ ] `/jaan-to-qa-bug-report` - Structured bug reports with repro steps (Rank #10)
+- [ ] `/jaan-to-growth-meta-write` - Meta titles/descriptions with CTR optimization (Rank #12)
+- [ ] `/jaan-to-dev-docs-generate` - Technical documentation: README, API docs, runbooks (Rank #14)
+- [ ] `/jaan-to-pm-feedback-synthesize` - Customer feedback synthesis with themes (Rank #15)
+- [ ] `/jaan-to-ux-persona-create` - User personas with goals, pain points, JTBD (Rank #16)
 
 **Additional quick wins (unranked):**
 
-- [ ] `/jaan-to:pm-decision-brief` - 1-page decision record with options, recommendation, risks
-- [ ] `/jaan-to:dev-tech-plan` - Tech approach with architecture, tradeoffs, risks
-- [ ] `/jaan-to:dev-test-plan` - Dev-owned test plan with unit/integration/e2e scope
-- [ ] `/jaan-to:qa-test-matrix` - Risk-based matrix: flows × states × devices × env
-- [ ] `/jaan-to:qa-bug-triage` - Dedupe + severity + repro hints + next action
-- [ ] `/jaan-to:data-event-spec` - GA4-ready event/param spec with naming, triggers
-- [ ] `/jaan-to:data-metric-spec` - Metric definition, formula, caveats, owner
-- [ ] `/jaan-to:ux-flow-spec` - Flow spec with happy path + error states
-- [ ] `/jaan-to:ux-microcopy-write` - Labels, helper text, errors, toasts, empty states
+- [ ] `/jaan-to-pm-decision-brief` - 1-page decision record with options, recommendation, risks
+- [ ] `/jaan-to-dev-tech-plan` - Tech approach with architecture, tradeoffs, risks
+- [ ] `/jaan-to-dev-test-plan` - Dev-owned test plan with unit/integration/e2e scope
+- [ ] `/jaan-to-qa-test-matrix` - Risk-based matrix: flows × states × devices × env
+- [ ] `/jaan-to-qa-bug-triage` - Dedupe + severity + repro hints + next action
+- [ ] `/jaan-to-data-event-spec` - GA4-ready event/param spec with naming, triggers
+- [ ] `/jaan-to-data-metric-spec` - Metric definition, formula, caveats, owner
+- [ ] `/jaan-to-ux-flow-spec` - Flow spec with happy path + error states
+- [ ] `/jaan-to-ux-microcopy-write` - Labels, helper text, errors, toasts, empty states
 
 ## Phase 5: MCP Connectors
 
@@ -173,44 +173,44 @@
 
 ### PM (3)
 
-- [ ] `/jaan-to:pm-north-star` - North star metric + drivers + boundaries + cadence
-- [ ] `/jaan-to:pm-scope-slice` - MVP vs Later slicing with milestones and dependencies
-- [ ] `/jaan-to:pm-release-review` - Post-release KPI deltas, learnings, follow-ups
+- [ ] `/jaan-to-pm-north-star` - North star metric + drivers + boundaries + cadence
+- [ ] `/jaan-to-pm-scope-slice` - MVP vs Later slicing with milestones and dependencies
+- [ ] `/jaan-to-pm-release-review` - Post-release KPI deltas, learnings, follow-ups
 
 ### DEV (3)
 
-- [ ] `/jaan-to:dev-api-contract` - OpenAPI contract with payloads, errors, examples
-- [ ] `/jaan-to:dev-pr-review` - PR review pack with risky files, hints, checklist
-- [ ] `/jaan-to:dev-ship-check` - Pre-ship checklist with go/no-go recommendation
+- [ ] `/jaan-to-dev-api-contract` - OpenAPI contract with payloads, errors, examples
+- [ ] `/jaan-to-dev-pr-review` - PR review pack with risky files, hints, checklist
+- [ ] `/jaan-to-dev-ship-check` - Pre-ship checklist with go/no-go recommendation
 
 ### QA (3)
 
-- [ ] `/jaan-to:qa-automation-plan` - What to automate now vs later + flakiness risk
-- [ ] `/jaan-to:qa-regression-runbook` - Step-by-step regression runbook with timing/owners
-- [ ] `/jaan-to:qa-release-signoff` - Go/No-Go summary with evidence and risks
+- [ ] `/jaan-to-qa-automation-plan` - What to automate now vs later + flakiness risk
+- [ ] `/jaan-to-qa-regression-runbook` - Step-by-step regression runbook with timing/owners
+- [ ] `/jaan-to-qa-release-signoff` - Go/No-Go summary with evidence and risks
 
 ### DATA (5)
 
-- [ ] `/jaan-to:data-funnel-review` - Funnel baseline + drop-offs + hypotheses
-- [ ] `/jaan-to:data-experiment-design` - Experiment plan: hypothesis, metrics, ramp criteria
-- [ ] `/jaan-to:data-anomaly-triage` - Triage pack: scope, causes, next checks
-- [ ] `/jaan-to:data-cohort-analyze` - Cohort/retention analysis with LTV projections
-- [ ] `/jaan-to:data-dbt-model` - dbt staging/mart models with tests (Rank #19)
+- [ ] `/jaan-to-data-funnel-review` - Funnel baseline + drop-offs + hypotheses
+- [ ] `/jaan-to-data-experiment-design` - Experiment plan: hypothesis, metrics, ramp criteria
+- [ ] `/jaan-to-data-anomaly-triage` - Triage pack: scope, causes, next checks
+- [ ] `/jaan-to-data-cohort-analyze` - Cohort/retention analysis with LTV projections
+- [ ] `/jaan-to-data-dbt-model` - dbt staging/mart models with tests (Rank #19)
 
 ### GROWTH (6)
 
-- [ ] `/jaan-to:growth-content-outline` - Writing-ready outline with H1-H3, FAQs, entities
-- [ ] `/jaan-to:growth-keyword-brief` - Keyword + intent map with content angle
-- [ ] `/jaan-to:growth-seo-audit` - On-page checklist: title/meta, headings, links
-- [ ] `/jaan-to:growth-seo-check` - Technical audit: indexability, crawl signals
-- [ ] `/jaan-to:growth-weekly-report` - Weekly wins/losses, top pages, actions
-- [ ] `/jaan-to:growth-content-optimize` - Existing content refresh for traffic recovery (Rank #18)
+- [ ] `/jaan-to-growth-content-outline` - Writing-ready outline with H1-H3, FAQs, entities
+- [ ] `/jaan-to-growth-keyword-brief` - Keyword + intent map with content angle
+- [ ] `/jaan-to-growth-seo-audit` - On-page checklist: title/meta, headings, links
+- [ ] `/jaan-to-growth-seo-check` - Technical audit: indexability, crawl signals
+- [ ] `/jaan-to-growth-weekly-report` - Weekly wins/losses, top pages, actions
+- [ ] `/jaan-to-growth-content-optimize` - Existing content refresh for traffic recovery (Rank #18)
 
 ### UX (3)
 
-- [ ] `/jaan-to:ux-research-plan` - Research plan: questions, method, participants
-- [ ] `/jaan-to:ux-heuristic-review` - Heuristic review with issues, severity, fixes
-- [ ] `/jaan-to:ux-competitive-review` - Competitive teardown with patterns + opportunities
+- [ ] `/jaan-to-ux-research-plan` - Research plan: questions, method, participants
+- [ ] `/jaan-to-ux-heuristic-review` - Heuristic review with issues, severity, fixes
+- [ ] `/jaan-to-ux-competitive-review` - Competitive teardown with patterns + opportunities
 
 ## Phase 7: Testing & Polish
 
@@ -236,13 +236,13 @@
 
 | Command | Description |
 |---------|-------------|
-| `/jaan-to:pm-prd-write` | Generate PRD from initiative |
-| `/jaan-to:jaan-roadmap-add` | [Internal] Add task to roadmap |
-| `/jaan-to:jaan-learn-add` | Add lesson to skill's LEARN.md |
-| `/jaan-to:jaan-docs-create` | Create documentation with templates |
-| `/jaan-to:jaan-docs-update` | Audit and update stale documentation |
-| `/jaan-to:jaan-skill-create` | Create new skill with wizard |
-| `/jaan-to:jaan-skill-update` | Update existing skill |
+| `/jaan-to-pm-prd-write` | Generate PRD from initiative |
+| `/to-jaan-roadmap-add` | [Internal] Add task to roadmap |
+| `/to-jaan-learn-add` | Add lesson to skill's LEARN.md |
+| `/to-jaan-docs-create` | Create documentation with templates |
+| `/to-jaan-docs-update` | Audit and update stale documentation |
+| `/to-jaan-skill-create` | Create new skill with wizard |
+| `/to-jaan-skill-update` | Update existing skill |
 
 ### Key Paths
 
@@ -262,5 +262,5 @@
 | Pattern | Example |
 |---------|---------|
 | Logical: `role-domain:action` | `pm-prd:write` |
-| Command: `/jaan-to:role-domain-action` | `/jaan-to:pm-prd-write` |
-| Directory: `skills/role-domain-action/` | `skills/pm-prd-write/` |
+| Command: `/jaan-to-role-domain-action` | `/jaan-to-pm-prd-write` |
+| Directory: `skills/jaan-to-role-domain-action/` | `skills/jaan-to-pm-prd-write/` |

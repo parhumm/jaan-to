@@ -5,21 +5,37 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-01-31
+
+### Changed
+- **Skill naming convention** - Renamed all skills to use consistent prefixes:
+  - Role-based skills: `jaan-to-{role}-{domain}-{action}` (e.g., `jaan-to-pm-prd-write`, `jaan-to-data-gtm-datalayer`)
+  - Internal skills: `to-jaan-{domain}-{action}` (e.g., `to-jaan-skill-create`, `to-jaan-docs-update`, `to-jaan-learn-add`)
+- **Directory structure** - Updated all skill directories to match new naming convention
+- **Documentation** - Updated all references across scripts, roadmaps, and documentation
+
+### Migration Notes
+- Old skill names (e.g., `pm-prd-write`, `jaan-docs-create`) are deprecated
+- Commands now use new format: `/jaan-to-pm-prd-write` instead of `/jaan-to:pm-prd-write`
+- Internal commands: `/to-jaan-skill-create` instead of `/jaan-to:jaan-skill-create`
+
+---
+
 ## [1.0.0] - 2026-01-29
 
 ### Added
 
 #### Skills (10)
-- **pm-prd-write** - Generate comprehensive PRD from initiative with validation
-- **data-gtm-datalayer** - Generate GTM tracking code and dataLayer specification
-- **jaan-skill-create** - Create new skill with wizard and research integration
-- **jaan-skill-update** - Update existing skill with specification compliance
-- **jaan-docs-create** - Create documentation with templates and style guide
-- **jaan-docs-update** - Audit and update stale documentation with git-based detection
-- **jaan-learn-add** - Add lesson to project's LEARN.md knowledge base
-- **jaan-research-about** - Deep research on any topic with source citations
-- **jaan-research-add** - Add file/URL to research index for future reference
-- **jaan-roadmap-add** - Add task to roadmap with priority and scope
+- **jaan-to-pm-prd-write** - Generate comprehensive PRD from initiative with validation
+- **jaan-to-data-gtm-datalayer** - Generate GTM tracking code and dataLayer specification
+- **to-jaan-skill-create** - Create new skill with wizard and research integration
+- **to-jaan-skill-update** - Update existing skill with specification compliance
+- **to-jaan-docs-create** - Create documentation with templates and style guide
+- **to-jaan-docs-update** - Audit and update stale documentation with git-based detection
+- **to-jaan-learn-add** - Add lesson to project's LEARN.md knowledge base
+- **to-jaan-research-about** - Deep research on any topic with source citations
+- **to-jaan-research-add** - Add file/URL to research index for future reference
+- **to-jaan-roadmap-add** - Add task to roadmap with priority and scope
 
 #### Agents (2)
 - **quality-reviewer** - Reviews outputs for completeness, accuracy, and quality standards
@@ -59,9 +75,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vision and roadmap documents
 - Migration guide from standalone setup
 
-### Changed
+### Changed (v1.0.0)
 - Migrated from standalone `.claude/skills/` setup to plugin architecture
-- Updated all skill command names to namespaced format (`/jaan-to:*`)
+- Updated all skill command names to namespaced format
 - Moved context files from `jaan-to/context/` to plugin-relative `scripts/seeds/`
 - Moved hooks from shell scripts to JSON configuration
 - Output directory standardized to project-relative `.jaan-to/outputs/`

@@ -1,14 +1,14 @@
 ---
-name: jaan-docs-update
+name: to-jaan-docs-update
 description: |
   Audit and maintain documentation quality.
   Default: Smart staleness check using git history.
-  Maps to: jaan-to:jaan-docs-update
+  Maps to: to-jaan-docs-update
 allowed-tools: Read, Glob, Grep, Write(docs/**), Write(.jaan-to/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 ---
 
-# jaan-to:jaan-docs-update
+# to-jaan-docs-update
 
 > Smart documentation auditing with git-based staleness detection.
 
@@ -16,7 +16,7 @@ argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 
 Read these before execution:
 - `.jaan-to/docs/STYLE.md` - Documentation standards
-- `.jaan-to/learn/docs-update.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-docs-update.learn.md` - Past lessons
 
 ## File Mapping (Code → Docs)
 
@@ -72,7 +72,7 @@ skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
 
 # Extract slug: remove brand prefix and role
 # jaan-to-pm-prd-write → prd-write
-# jaan-to:learn-add → learn-add (core role)
+# to-jaan-learn-add → learn-add (core role)
 ```
 
 **Hooks:**
@@ -212,7 +212,7 @@ Proceed with full audit? [yes/no/quick-fixes-only]
 
 ## Step 2.0: Apply Past Lessons
 
-Read `.jaan-to/learn/docs-update.learn.md`:
+Read `.jaan-to/learn/to-jaan-docs-update.learn.md`:
 - Note common issues to check
 - Apply workflow improvements
 - Avoid known mistakes

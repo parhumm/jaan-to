@@ -17,16 +17,15 @@ A skill is a slash command that:
 
 ## Naming Pattern
 
-```
-/jaan-to:{name}
-```
+Two naming conventions based on skill type:
 
-All skills use the unified namespace `/jaan-to:` followed by the skill name.
+- **Role-based**: `/jaan-to-{role}-{domain}-{action}` (e.g., `/jaan-to-pm-prd-write`)
+- **Internal**: `/to-jaan-{domain}-{action}` (e.g., `/to-jaan-docs-create`)
 
 **Examples:**
-- `/jaan-to:pm-prd-write`
-- `/jaan-to:jaan-skill-create`
-- `/jaan-to:jaan-learn-add`
+- `/jaan-to-pm-prd-write`
+- `/to-jaan-skill-create`
+- `/to-jaan-learn-add`
 
 ---
 

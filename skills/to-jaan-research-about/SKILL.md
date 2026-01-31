@@ -1,22 +1,22 @@
 ---
-name: jaan-research-about
+name: to-jaan-research-about
 description: |
   Deep research on any topic with structured markdown output.
   Auto-triggers on: research about, deep dive, investigate, research on
-  Maps to: jaan-to:jaan-research-about
+  Maps to: to-jaan-research-about
 allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write(.jaan-to/outputs/research/**), Edit, Bash(git add:*), Bash(git commit:*)
 argument-hint: <topic>
 ---
 
-# jaan-to:jaan-research-about
+# to-jaan-research-about
 
 > Deep research on any topic with structured markdown output.
 
 ## Context Files
 
 Read these before execution:
-- `.jaan-to/learn/research-about.learn.md` - Past lessons
-- `.jaan-to/templates/research-about.template.md` - Output format template
+- `.jaan-to/learn/to-jaan-research-about.learn.md` - Past lessons
+- `.jaan-to/templates/to-jaan-research-about.template.md` - Output format template
 - `.jaan-to/outputs/research/README.md` - Current index structure
 
 ## Input
@@ -74,7 +74,7 @@ If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topi
 
 ## Step 0: Apply Past Lessons
 
-Read `.jaan-to/learn/research-about.learn.md` if it exists:
+Read `.jaan-to/learn/to-jaan-research-about.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -676,7 +676,7 @@ WILL CREATE
 
 ## Step 7: Generate Document
 
-Use template from `.jaan-to/templates/research-about.template.md`:
+Use template from `.jaan-to/templates/to-jaan-research-about.template.md`:
 
 1. Fill all sections with researched content
 2. Include specific facts, statistics, and citations
@@ -780,7 +780,7 @@ README.md updated with new entry.
 > "Any feedback on this research? [y/n]"
 
 If yes:
-- Run `/jaan-to:jaan-learn-add jaan-research-about "{feedback}"`
+- Run `/to-jaan-learn-add to-jaan-research-about "{feedback}"`
 
 ---
 

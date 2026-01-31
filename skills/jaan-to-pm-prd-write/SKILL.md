@@ -1,5 +1,5 @@
 ---
-name: pm-prd-write
+name: jaan-to-pm-prd-write
 description: |
   Generate a Product Requirements Document from an initiative description.
   Auto-triggers on: feature requirements, PRD requests, product specifications.
@@ -23,8 +23,8 @@ hooks:
 Read these before execution:
 - `.jaan-to/context/config.md` - Configuration
 - `.jaan-to/context/boundaries.md` - Trust rules
-- `.jaan-to/templates/pm-prd-write.template.md` - PRD template
-- `.jaan-to/learn/pm-prd-write.learn.md` - Past lessons (if exists)
+- `.jaan-to/templates/jaan-to-pm-prd-write.template.md` - PRD template
+- `.jaan-to/learn/jaan-to-pm-prd-write.learn.md` - Past lessons (if exists)
 - `.jaan-to/context/tech.md` - Tech context (if exists)
 - `.jaan-to/context/team.md` - Team context (if exists)
 
@@ -39,7 +39,7 @@ IMPORTANT: The initiative above is your input. Use it directly. Do NOT ask for t
 # PHASE 1: Analysis (Read-Only)
 
 ## Step 0: Apply Past Lessons
-Read `.jaan-to/learn/pm-prd-write.learn.md` if it exists. Apply lessons:
+Read `.jaan-to/learn/jaan-to-pm-prd-write.learn.md` if it exists. Apply lessons:
 - Add questions from "Better Questions" to Step 1
 - Note edge cases to check from "Edge Cases"
 - Follow workflow improvements from "Workflow"
@@ -79,7 +79,7 @@ Before generating the PRD, confirm with the user:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate PRD
-Use the template from: `.jaan-to/templates/pm-prd-write.template.md`
+Use the template from: `.jaan-to/templates/jaan-to-pm-prd-write.template.md`
 
 Fill all sections:
 - **Title**: From initiative
@@ -129,12 +129,12 @@ After PRD is written, ask:
 - Write the updated PRD
 
 **Option 2 - Learn for future:**
-- Run: `/jaan-to:jaan-learn-add pm-prd-write "{feedback}"`
-- Follow /jaan-to:jaan-learn-add workflow (categorize → preview → commit)
+- Run: `/to-jaan-learn-add jaan-to-pm-prd-write "{feedback}"`
+- Follow /to-jaan-learn-add workflow (categorize → preview → commit)
 
 **Option 3 - Both:**
 - First: Apply fix to current PRD (Option 1)
-- Then: Run `/jaan-to:jaan-learn-add` (Option 2)
+- Then: Run `/to-jaan-learn-add` (Option 2)
 
 **If no:**
 - PRD workflow complete

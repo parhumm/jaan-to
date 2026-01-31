@@ -39,37 +39,39 @@ Plugin source definitions. Each skill has a `SKILL.md` (required), optional `LEA
 
 ```
 skills/
-├── jaan-docs-create/
+├── to-jaan-docs-create/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── jaan-docs-update/
+├── to-jaan-docs-update/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── jaan-learn-add/
-│   └── SKILL.md
-├── jaan-research-about/
-│   ├── LEARN.md
-│   ├── SKILL.md
-│   └── template.md
-├── jaan-research-add/
+├── to-jaan-learn-add/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── jaan-roadmap-add/
-│   ├── SKILL.md
-│   └── template.md
-├── jaan-skill-create/
+├── to-jaan-research-about/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── jaan-skill-update/
+├── to-jaan-research-add/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── pm-prd-write/
+├── to-jaan-roadmap-add/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-└── data-gtm-datalayer/
+├── to-jaan-skill-create/
+│   ├── LEARN.md
+│   ├── SKILL.md
+│   └── template.md
+├── to-jaan-skill-update/
+│   ├── LEARN.md
+│   └── SKILL.md
+├── jaan-to-pm-prd-write/
+│   ├── LEARN.md
+│   ├── SKILL.md
+│   └── template.md
+└── jaan-to-data-gtm-datalayer/
     ├── LEARN.md
     ├── SKILL.md
     └── template.md
@@ -169,14 +171,14 @@ Claude Code settings and skill registry (written during install by build-dist.sh
 └── skills/                 10 skills (namespaced for registry)
     ├── jaan-to-pm-prd-write/
     ├── jaan-to-data-gtm-datalayer/
-    ├── jaan-to-jaan-docs-create/
-    ├── jaan-to-jaan-docs-update/
-    ├── jaan-to-jaan-learn-add/
-    ├── jaan-to-jaan-research-about/
-    ├── jaan-to-jaan-research-add/
-    ├── jaan-to-jaan-roadmap-add/
-    ├── jaan-to-jaan-skill-create/
-    └── jaan-to-jaan-skill-update/
+    ├── to-jaan-docs-create/
+    ├── to-jaan-docs-update/
+    ├── to-jaan-learn-add/
+    ├── to-jaan-research-about/
+    ├── to-jaan-research-add/
+    ├── to-jaan-roadmap-add/
+    ├── to-jaan-skill-create/
+    └── to-jaan-skill-update/
 ```
 
 ---
@@ -288,7 +290,7 @@ marketplace.json            Plugin marketplace metadata
 The following directories were removed after plugin migration:
 
 - `jaan-to/` - Old standalone structure, replaced by plugin architecture
-- `.claude/skills/to-jaan-*` - Old command prefix, now uses `jaan-to:` namespace
+- Old skill names without prefixes (e.g., `pm-prd-write`, `data-gtm-datalayer`, `jaan-docs-create`) - Now use `jaan-to-` or `to-jaan-` prefixes
 - `skills/{role}/{domain}/` - Old nested structure, now flat `skills/{name}/`
 - `LEARN.md` alongside skills - Now bootstrapped to `.jaan-to/learn/{name}.learn.md`
 - `docs/deepresearches/` - Outputs now go to `.jaan-to/outputs/research/`

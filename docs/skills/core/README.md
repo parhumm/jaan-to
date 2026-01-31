@@ -8,14 +8,14 @@
 
 | Command | Description |
 |---------|-------------|
-| [/jaan-to:jaan-learn-add](learn-add.md) | Add lesson to skill's LEARN.md |
-| [/jaan-to:jaan-roadmap-add](roadmap-task-add.md) | Add task to roadmap |
-| [/jaan-to:jaan-docs-create](docs-create.md) | Create new documentation |
-| [/jaan-to:jaan-docs-update](docs-update.md) | Audit and fix documentation |
-| [/jaan-to:jaan-skill-create](skill-create.md) | Create new skill with wizard |
-| [/jaan-to:jaan-skill-update](skill-update.md) | Update existing skill |
-| [/jaan-to:jaan-research-about](research-about.md) | Deep research on any topic |
-| [/jaan-to:jaan-research-add](research-add.md) | Add file/URL to research index |
+| [/to-jaan-learn-add](learn-add.md) | Add lesson to skill's LEARN.md |
+| [/to-jaan-roadmap-add](roadmap-task-add.md) | Add task to roadmap |
+| [/to-jaan-docs-create](docs-create.md) | Create new documentation |
+| [/to-jaan-docs-update](docs-update.md) | Audit and fix documentation |
+| [/to-jaan-skill-create](skill-create.md) | Create new skill with wizard |
+| [/to-jaan-skill-update](skill-update.md) | Update existing skill |
+| [/to-jaan-research-about](research-about.md) | Deep research on any topic |
+| [/to-jaan-research-add](research-add.md) | Add file/URL to research index |
 
 ---
 

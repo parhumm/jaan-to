@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev, and more",
-    "version": "1.0.0"
+    "version": "1.3.0"
   },
   "plugins": [
     {
       "name": "jaan-to",
       "source": "./",
       "description": "AI-powered skills for PM, Data, QA, Dev workflows",
-      "version": "1.2.0",
+      "version": "1.3.0",
       "author": { "name": "jaan.to", "url": "https://github.com/parhumm/jaan-to" },
       "repository": "https://github.com/parhumm/jaan-to",
       "homepage": "https://jaan.to",

@@ -1,14 +1,14 @@
 ---
-name: jaan-docs-create
+name: to-jaan-docs-create
 description: |
   Create new documentation with templates following STYLE.md.
   Supports: skill, hook, config, guide, concept, index.
-  Maps to: jaan-to:jaan-docs-create
+  Maps to: to-jaan-docs-create
 allowed-tools: Read, Glob, Grep, Write(docs/**), Write(.jaan-to/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: "{type} {name}"
 ---
 
-# jaan-to:jaan-docs-create
+# to-jaan-docs-create
 
 > Create documentation with standard templates.
 
@@ -16,8 +16,8 @@ argument-hint: "{type} {name}"
 
 Read these before execution:
 - `.jaan-to/docs/STYLE.md` - Documentation standards
-- `.jaan-to/templates/docs-create.template.md` - All templates
-- `.jaan-to/learn/docs-create.learn.md` - Past lessons
+- `.jaan-to/templates/to-jaan-docs-create.template.md` - All templates
+- `.jaan-to/learn/to-jaan-docs-create.learn.md` - Past lessons
 
 ---
 
@@ -25,7 +25,7 @@ Read these before execution:
 
 ## Step 0: Apply Past Lessons
 
-Read `.jaan-to/learn/docs-create.learn.md` if it exists:
+Read `.jaan-to/learn/to-jaan-docs-create.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -171,7 +171,7 @@ Proceed? [y/n/edit]
 
 ## Step 6: Load Template
 
-Read template for doc type from `.jaan-to/templates/docs-create.template.md`
+Read template for doc type from `.jaan-to/templates/to-jaan-docs-create.template.md`
 
 ## Step 7: Fill Template
 
@@ -234,10 +234,10 @@ Show confirmation:
 **File:** {path}
 **Commit:** {hash}
 
-Run `/jaan-to:jaan-docs-update` to check related docs? [y/n]
+Run `/to-jaan-docs-update` to check related docs? [y/n]
 ```
 
-If yes, suggest running `/jaan-to:jaan-docs-update --quick` for related docs.
+If yes, suggest running `/to-jaan-docs-update --quick` for related docs.
 
 ---
 

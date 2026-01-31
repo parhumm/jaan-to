@@ -1,4 +1,4 @@
-# Lessons: jaan-docs-create
+# Lessons: to-jaan-docs-create
 
 > Last updated: 2026-01-26
 

@@ -1,14 +1,14 @@
 ---
-name: jaan-skill-create
+name: to-jaan-skill-create
 description: |
   Guide users through creating new jaan.to skills step-by-step.
   Auto-triggers on: create skill, new skill, skill wizard, add skill.
-  Maps to: jaan-to:jaan-skill-create
+  Maps to: to-jaan-skill-create
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write(.jaan-to/**), Edit(.jaan-to/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 ---
 
-# jaan-to:jaan-skill-create
+# to-jaan-skill-create
 
 > Guide users through creating new jaan.to skills with web research and best practices.
 
@@ -16,8 +16,8 @@ argument-hint: [optional-skill-idea]
 
 Read these before execution:
 - `.jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
-- `.jaan-to/learn/skill-create.learn.md` - Past lessons
-- `.jaan-to/templates/skill-create.template.md` - Generation templates
+- `.jaan-to/learn/to-jaan-skill-create.learn.md` - Past lessons
+- `.jaan-to/templates/to-jaan-skill-create.template.md` - Generation templates
 - `.jaan-to/context/config.md` - Current skill catalog
 
 ## Input
@@ -41,7 +41,7 @@ Before any creation, check for existing skills:
 3. **Decision tree**:
    - **Exact match exists**: "Skill '{name}' already does this. Use: `/{command}` [show example]"
    - **>70% overlap**: "'{name}' is similar ({n}% overlap). Update it instead? [update/new]"
-     - If update: Invoke `/jaan-to:jaan-skill-update {name}`
+     - If update: Invoke `/to-jaan-skill-update {name}`
      - If new: Continue with creation
    - **<70% overlap**: Continue with creation
 
@@ -84,7 +84,7 @@ Ask up to 7 clarifying questions across Phase 1 if needed.
 
 ## Step 0: Apply Past Lessons
 
-Read `.jaan-to/learn/skill-create.learn.md` if it exists:
+Read `.jaan-to/learn/to-jaan-skill-create.learn.md` if it exists:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
@@ -102,7 +102,7 @@ Ask these questions one at a time:
 
 **After answers**, validate and show:
 > "Skill name will be: `jaan-to-{role}-{domain}-{action}`"
-> "Command: `/jaan-to:{role}-{domain}-{action}`"
+> "Command: `/jaan-to-{role}-{domain}-{action}`"
 > "Logical name: `jaan-to-{role}-{domain}:{action}`"
 
 ## Step 2: Web Research (Token-Optimized)
@@ -201,7 +201,7 @@ Present complete skill structure:
 SKILL SUMMARY
 ─────────────
 Name: jaan-to-{role}-{domain}-{action}
-Command: /jaan-to:{role}-{domain}-{action}
+Command: /jaan-to-{role}-{domain}-{action}
 Logical: jaan-to-{role}-{domain}:{action}
 Description: {description}
 
@@ -219,7 +219,7 @@ FILES TO CREATE
 WILL ALSO
 ─────────
 □ Register in .jaan-to/context/config.md
-□ Create docs/skills/{role}/{name}.md (via /jaan-to:jaan-docs-create)
+□ Create docs/skills/{role}/{name}.md (via /to-jaan-docs-create)
 □ Commit to branch skill/{name}
 ```
 
@@ -241,7 +241,7 @@ Confirm: "Created branch `skill/{name}`. All work on this branch."
 
 ## Step 7: Generate SKILL.md
 
-Use template from `.jaan-to/templates/skill-create.template.md`:
+Use template from `.jaan-to/templates/to-jaan-skill-create.template.md`:
 
 1. Fill YAML frontmatter:
    - name: {name}
@@ -361,7 +361,7 @@ Edit `.jaan-to/context/config.md` to add skill to Available Skills table:
 
 ## Step 14: Auto-Invoke Documentation
 
-Run `/jaan-to:jaan-docs-create` to create:
+Run `/to-jaan-docs-create` to create:
 - `docs/skills/{role}/{name}.md`
 
 This ensures documentation is always created with the skill.
@@ -374,7 +374,7 @@ git commit -m "feat(skill): Add {name} skill
 
 - {description}
 - Research-informed: {source_count} sources consulted
-- Auto-generated with /jaan-to:jaan-skill-create
+- Auto-generated with /to-jaan-skill-create
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
@@ -390,12 +390,12 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 > "Please test the skill in a new session. Here's a copy-paste ready example:"
 >
 > ```
-> /jaan-to:{name} "{example_input_based_on_skill_purpose}"
+> /{name} "{example_input_based_on_skill_purpose}"
 > ```
 >
-> For example, if the skill is `pm-prd-write`:
+> For example, if the skill is `jaan-to-pm-prd-write`:
 > ```
-> /jaan-to:pm-prd-write "Add user authentication with OAuth support"
+> /jaan-to-pm-prd-write "Add user authentication with OAuth support"
 > ```
 >
 > "Did it work correctly? [y/n]"
@@ -418,7 +418,7 @@ gh pr create --title "feat(skill): Add {name} skill" --body "$(cat <<'EOF'
 ## Summary
 
 - **Skill**: `{name}`
-- **Command**: `/jaan-to:{name}`
+- **Command**: `/{name}`
 - **Purpose**: {description}
 
 ## Research Used
@@ -454,7 +454,7 @@ If no:
 > "Any feedback on the skill creation process? [y/n]"
 
 If yes:
-- Run `/jaan-to:jaan-learn-add jaan-skill-create "{feedback}"`
+- Run `/to-jaan-learn-add to-jaan-skill-create "{feedback}"`
 
 ---
 
@@ -465,7 +465,7 @@ If yes:
 - [ ] All skill files created (SKILL.md, LEARN.md, template.md)
 - [ ] Passes specification validation
 - [ ] Registered in context/config.md
-- [ ] Documentation created via /jaan-to:jaan-docs-create
+- [ ] Documentation created via /to-jaan-docs-create
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
 - [ ] User approved final result

@@ -1,4 +1,4 @@
-# Lessons: data-gtm-datalayer
+# Lessons: jaan-to-data-gtm-datalayer
 
 > Last updated: 2026-01-27
 
