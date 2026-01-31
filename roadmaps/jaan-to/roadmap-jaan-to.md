@@ -72,7 +72,8 @@
 
 - [ ] Project constitution document (`jaan-to/constitution.md`) - Immutable development principles
 - [ ] Complexity tracking in outputs - Document tradeoffs and exceptions
-- [ ] Support official Claude Code output styles format — migrate from `outputStyles/` to `.claude/output-styles/` with frontmatter ([docs](https://code.claude.com/docs/en/output-styles))
+- [ ] Support official Claude Code output styles format ([docs](https://code.claude.com/docs/en/output-styles))
+- [ ] Support LSP (Language Server Protocol) — bundle LSP configs + make skills LSP-aware → [details](tasks/lsp-support.md)
 
 ## Phase 4: Quick Win Skills (18)
 
