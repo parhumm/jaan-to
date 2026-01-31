@@ -5,6 +5,25 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.1] - 2026-01-31
+
+### Fixed
+- **Skills not reading LEARN files on installed projects** — 5 skills had a Phase 0
+  (Input Validation, Git Branch, Duplicate Detection) that ran before the learn-file
+  read step, causing Claude to skip it entirely. Moved learn-file reading to a
+  mandatory Pre-Execution block before all phases.
+- **Weak learn-file instructions** — 3 skills had the learn step in the right position
+  but used soft "if it exists" language. Upgraded to "MANDATORY FIRST ACTION" with
+  explicit Read tool instruction.
+- **Missing learn-file reference** — `to-jaan-roadmap-add` had a LEARN.md but its
+  SKILL.md never referenced it. Added Pre-Execution block and Context Files entry.
+
+### Changed
+- All 9 content-generating skills now use a consistent `## Pre-Execution: Apply Past
+  Lessons` block positioned before any Phase, ensuring learn files are always read first.
+
+---
+
 ## [1.3.0] - 2026-01-31
 
 ### Changed
@@ -100,4 +119,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[1.3.1]: https://github.com/parhumm/jaan-to/releases/tag/v1.3.1
+[1.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v1.3.0
 [1.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v1.0.0

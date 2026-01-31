@@ -14,14 +14,28 @@ argument-hint: <topic>
 
 ## Context Files
 
-Read these before execution:
-- `.jaan-to/learn/to-jaan-research-about.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
 - `.jaan-to/templates/to-jaan-research-about.template.md` - Output format template
 - `.jaan-to/outputs/research/README.md` - Current index structure
 
 ## Input
 
 **Topic**: $ARGUMENTS
+
+---
+
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/to-jaan-research-about.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions"
+- Note edge cases from "Edge Cases"
+- Follow improvements from "Workflow"
+- Avoid items in "Common Mistakes"
+
+If the file does not exist, continue without it.
 
 ---
 
@@ -71,14 +85,6 @@ If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topi
 ---
 
 # PHASE 1: Clarify & Plan
-
-## Step 0: Apply Past Lessons
-
-Read `.jaan-to/learn/to-jaan-research-about.learn.md` if it exists:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
 
 ## Step 1: Clarify Research Scope
 

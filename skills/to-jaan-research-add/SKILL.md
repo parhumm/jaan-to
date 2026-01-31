@@ -14,13 +14,27 @@ argument-hint: <file-path-or-URL>
 
 ## Context Files
 
-Read these before execution:
-- `.jaan-to/learn/to-jaan-research-add.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-research-add.learn.md` - Past lessons (loaded in Pre-Execution)
 - `.jaan-to/outputs/research/README.md` - Current index structure
 
 ## Input
 
 **Source**: $ARGUMENTS
+
+---
+
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/to-jaan-research-add.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions"
+- Note edge cases from "Edge Cases"
+- Follow improvements from "Workflow"
+- Avoid items in "Common Mistakes"
+
+If the file does not exist, continue without it.
 
 ---
 
@@ -51,14 +65,6 @@ Extract the input from `$ARGUMENTS`:
 ---
 
 # PHASE 1: Analysis (Read-Only)
-
-## Step 0: Apply Past Lessons
-
-Read `.jaan-to/learn/to-jaan-research-add.learn.md` if it exists:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
 
 ## Step 1: Extract Content Info
 

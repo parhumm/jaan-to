@@ -20,11 +20,11 @@ hooks:
 > Generate a PRD from initiative description.
 
 ## Context Files
-Read these before execution:
+
 - `.jaan-to/context/config.md` - Configuration
 - `.jaan-to/context/boundaries.md` - Trust rules
 - `.jaan-to/templates/jaan-to-pm-prd-write.template.md` - PRD template
-- `.jaan-to/learn/jaan-to-pm-prd-write.learn.md` - Past lessons (if exists)
+- `.jaan-to/learn/jaan-to-pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `.jaan-to/context/tech.md` - Tech context (if exists)
 - `.jaan-to/context/team.md` - Team context (if exists)
 
@@ -36,10 +36,12 @@ IMPORTANT: The initiative above is your input. Use it directly. Do NOT ask for t
 
 ---
 
-# PHASE 1: Analysis (Read-Only)
+## Pre-Execution: Apply Past Lessons
 
-## Step 0: Apply Past Lessons
-Read `.jaan-to/learn/jaan-to-pm-prd-write.learn.md` if it exists. Apply lessons:
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/jaan-to-pm-prd-write.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
 - Note edge cases to check from "Edge Cases"
 - Follow workflow improvements from "Workflow"
@@ -48,6 +50,12 @@ Read `.jaan-to/learn/jaan-to-pm-prd-write.learn.md` if it exists. Apply lessons:
 Also read context files if available:
 - `.jaan-to/context/tech.md` - Know the tech stack to reference
 - `.jaan-to/context/team.md` - Know team structure and norms
+
+If the file does not exist, continue without it.
+
+---
+
+# PHASE 1: Analysis (Read-Only)
 
 ## Step 1: Gather Information
 You already have the initiative from the Input section above. Now ask these questions:

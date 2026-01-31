@@ -16,12 +16,28 @@ argument-hint: [task-description]
 
 - `.jaan-to/roadmap.md` - Current roadmap
 - `.jaan-to/tasks/` - Task standards
+- `.jaan-to/learn/to-jaan-roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
 **Task**: $ARGUMENTS
 
 If no input provided, ask: "What task would you like to add to the roadmap?"
+
+---
+
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/to-jaan-roadmap-add.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions"
+- Note edge cases from "Edge Cases"
+- Follow improvements from "Workflow"
+- Avoid items in "Common Mistakes"
+
+If the file does not exist, continue without it.
 
 ---
 

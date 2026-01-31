@@ -14,9 +14,22 @@ argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 
 ## Context Files
 
-Read these before execution:
 - `.jaan-to/docs/STYLE.md` - Documentation standards
-- `.jaan-to/learn/to-jaan-docs-update.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
+
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/to-jaan-docs-update.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Note common issues to check
+- Apply workflow improvements
+- Avoid known mistakes
+
+If the file does not exist, continue without it.
+
+---
 
 ## File Mapping (Code → Docs)
 
@@ -209,13 +222,6 @@ Proceed with full audit? [yes/no/quick-fixes-only]
 ---
 
 # PHASE 2: Full Analysis
-
-## Step 2.0: Apply Past Lessons
-
-Read `.jaan-to/learn/to-jaan-docs-update.learn.md`:
-- Note common issues to check
-- Apply workflow improvements
-- Avoid known mistakes
 
 ## Step 2.1: Progressive File Loading
 

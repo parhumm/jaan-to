@@ -14,9 +14,8 @@ argument-hint: [skill-name]
 
 ## Context Files
 
-Read these before execution:
 - `.jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
-- `.jaan-to/learn/to-jaan-skill-update.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-skill-update.learn.md` - Past lessons (loaded in Pre-Execution)
 - `.jaan-to/context/config.md` - Current skill catalog
 
 ## Input
@@ -26,6 +25,21 @@ Read these before execution:
 The name of the skill to update (e.g., `jaan-to-pm-prd-write` or just `prd-write`).
 
 If not provided, list available skills and ask which to update.
+
+---
+
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/to-jaan-skill-update.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions"
+- Note edge cases from "Edge Cases"
+- Follow improvements from "Workflow"
+- Avoid items in "Common Mistakes"
+
+If the file does not exist, continue without it.
 
 ---
 
@@ -67,14 +81,6 @@ Ask up to 7 clarifying questions across Phase 1 if needed.
 - Reference user's input: "You said '{X}' — does that mean...?"
 - Build on existing skill: "The current skill does Y — should that change?"
 - Probe specifics: "What should happen when Z?"
-
-## Step 0: Apply Past Lessons
-
-Read `.jaan-to/learn/to-jaan-skill-update.learn.md` if it exists:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
 
 ## Step 1: Read Existing Skill
 

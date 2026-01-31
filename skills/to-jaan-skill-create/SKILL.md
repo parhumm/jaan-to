@@ -14,9 +14,8 @@ argument-hint: [optional-skill-idea]
 
 ## Context Files
 
-Read these before execution:
 - `.jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
-- `.jaan-to/learn/to-jaan-skill-create.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
 - `.jaan-to/templates/to-jaan-skill-create.template.md` - Generation templates
 - `.jaan-to/context/config.md` - Current skill catalog
 
@@ -25,6 +24,21 @@ Read these before execution:
 **Skill Idea**: $ARGUMENTS
 
 If provided, use as starting context. Otherwise, begin with identity questions.
+
+---
+
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/to-jaan-skill-create.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions"
+- Note edge cases from "Edge Cases"
+- Follow improvements from "Workflow"
+- Avoid items in "Common Mistakes"
+
+If the file does not exist, continue without it.
 
 ---
 
@@ -81,14 +95,6 @@ Ask up to 7 clarifying questions across Phase 1 if needed.
 - Reference user's input: "You said '{X}' — does that mean...?"
 - Build on research: "Best practices suggest Y — does that fit your case?"
 - Probe specifics: "What should happen when Z?"
-
-## Step 0: Apply Past Lessons
-
-Read `.jaan-to/learn/to-jaan-skill-create.learn.md` if it exists:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
 
 ## Step 1: Basic Identity
 

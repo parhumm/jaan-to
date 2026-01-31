@@ -14,22 +14,28 @@ argument-hint: "{type} {name}"
 
 ## Context Files
 
-Read these before execution:
 - `.jaan-to/docs/STYLE.md` - Documentation standards
 - `.jaan-to/templates/to-jaan-docs-create.template.md` - All templates
-- `.jaan-to/learn/to-jaan-docs-create.learn.md` - Past lessons
+- `.jaan-to/learn/to-jaan-docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ---
 
-# PHASE 1: Analysis (Read-Only)
+## Pre-Execution: Apply Past Lessons
 
-## Step 0: Apply Past Lessons
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/to-jaan-docs-create.learn.md`
 
-Read `.jaan-to/learn/to-jaan-docs-create.learn.md` if it exists:
+If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
 - Avoid items in "Common Mistakes"
+
+If the file does not exist, continue without it.
+
+---
+
+# PHASE 1: Analysis (Read-Only)
 
 ## Step 1: Parse Input & Smart Type Detection
 

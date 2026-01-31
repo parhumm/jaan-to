@@ -14,8 +14,7 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 
 ## Context Files
 
-Read these before execution:
-- `.jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md` - Past lessons
+- `.jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md` - Past lessons (loaded in Pre-Execution)
 - `.jaan-to/templates/jaan-to-data-gtm-datalayer.template.md` - Output template
 
 ## Input
@@ -28,15 +27,22 @@ Read these before execution:
 
 ---
 
-# PHASE 1: Analysis (Read-Only)
+## Pre-Execution: Apply Past Lessons
 
-## Step 0: Apply Past Lessons
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`.jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md`
 
-Read `.jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md` if it exists:
+If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
 - Note edge cases from "Edge Cases"
 - Follow improvements from "Workflow"
 - Avoid items in "Common Mistakes"
+
+If the file does not exist, continue without it.
+
+---
+
+# PHASE 1: Analysis (Read-Only)
 
 ## Step 1: Determine Input Mode
 
