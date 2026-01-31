@@ -3,7 +3,7 @@ name: jaan-to-pm-prd-write
 description: |
   Generate a Product Requirements Document from an initiative description.
   Auto-triggers on: feature requirements, PRD requests, product specifications.
-  Maps to: jaan-to-pm-prd:write
+  Maps to: jaan-to-pm-prd-write
 allowed-tools: Read, Glob, Grep, Write(.jaan-to/**)
 argument-hint: [initiative-description]
 hooks:
@@ -15,7 +15,7 @@ hooks:
           timeout: 5000
 ---
 
-# jaan-to-pm-prd:write
+# jaan-to-pm-prd-write
 
 > Generate a PRD from initiative description.
 

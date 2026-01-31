@@ -3,12 +3,12 @@ name: jaan-to-data-gtm-datalayer
 description: |
   Generate production-ready GTM tracking code (dataLayer pushes and HTML attributes).
   Auto-triggers on: gtm tracking, datalayer push, tracking code, impression tracking, click tracking gtm, al_tracker.
-  Maps to: jaan-to-data-gtm:datalayer
+  Maps to: jaan-to-data-gtm-datalayer
 allowed-tools: Read, Glob, Grep, Write(.jaan-to/**)
 argument-hint: [prd-path | tracking-description | (interactive)]
 ---
 
-# jaan-to-data-gtm:datalayer
+# jaan-to-data-gtm-datalayer
 
 > Generate production-ready GTM tracking code with enforced naming conventions.
 

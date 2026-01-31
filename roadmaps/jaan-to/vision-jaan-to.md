@@ -70,7 +70,7 @@ That's it. Every command follows this pattern.
 YOU USE:     /jaan-to-pm-prd-write "user import feature"
                     │
 SKILL READS: ├── skills/jaan-to-pm-prd-write/SKILL.md   (what to do)
-             ├── .jaan-to/learn/pm-prd-write.learn.md  (past lessons)
+             ├── .jaan-to/learn/jaan-to-pm-prd-write.learn.md  (past lessons)
              ├── context/tech.md                (your tech context)
              ├── skills/jaan-to-pm-prd-write/template.md (output format)
              └── MCP: Figma, Jira, GitLab       (real system data)

@@ -126,14 +126,14 @@ Captures:
 
 ### Test 1: Learning Application
 ```
-Setup: Add "Always ask about API versioning" to .jaan-to/learn/pm-prd-write.learn.md
+Setup: Add "Always ask about API versioning" to .jaan-to/learn/jaan-to-pm-prd-write.learn.md
 Execute: /jaan-to-pm-prd-write "new API endpoint"
 Verify: Skill asks about API versioning
 ```
 
 ### Test 2: Feedback Routing
 ```
-Setup: Clean .jaan-to/learn/pm-prd-write.learn.md
+Setup: Clean .jaan-to/learn/jaan-to-pm-prd-write.learn.md
 Execute: /to-jaan-learn-add "jaan-to-pm-prd-write" "Check for i18n requirements"
 Verify: Lesson appears in .jaan-to/learn/jaan-to-pm-prd-write.learn.md under "Better Questions"
 ```

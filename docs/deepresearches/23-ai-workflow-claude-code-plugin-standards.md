@@ -53,7 +53,7 @@ Examples:
 | ACTION | What happens | `write`, `check`, `run`, `create`, `sync` |
 
 **Stable command examples**:
-- `/jaan-to-pm-prd:write` — Create PRD
+- `/jaan-to-pm-prd-write` — Create PRD
 - `/dev-lint:check` — Run linting
 - `/qa-test:run` — Execute tests
 - `/devops-deploy:preview` — Deploy to preview

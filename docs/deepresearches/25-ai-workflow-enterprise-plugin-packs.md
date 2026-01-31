@@ -171,7 +171,7 @@ A stable, muscle-memory-friendly command interface requires consistent naming pa
 
 | Pattern | Example | Use Case |
 |---------|---------|----------|
-| Role-domain-action | `/jaan-to-pm-prd:write` | PRD creation by PM role |
+| Role-domain-action | `/jaan-to-pm-prd-write` | PRD creation by PM role |
 | Role-domain-action | `/dev-lint:check` | Lint check by developer |
 | Domain-action | `/review:pr` | PR review workflow |
 | Simple action | `/deploy` | Single-purpose commands |
@@ -483,7 +483,7 @@ For human-in-the-loop confirmation via Telegram:
 
 ## MVP Workflow: PRD Creation with Human Gates
 
-### Workflow Command (/jaan-to-pm-prd:write)
+### Workflow Command (/jaan-to-pm-prd-write)
 
 ```markdown
 ---
