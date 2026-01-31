@@ -1,10 +1,14 @@
 {
+  "name": "jaan-to",
+  "owner": {
+    "name": "Parhum Khoshbakht"
+  },
   "plugins": [
     {
       "name": "jaan-to",
-      "version": "1.0.0",
+      "source": ".",
       "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev workflows",
-      "path": "."
+      "version": "1.0.0"
     }
   ]
 }
