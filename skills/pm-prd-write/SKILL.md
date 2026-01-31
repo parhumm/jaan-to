@@ -129,12 +129,12 @@ After PRD is written, ask:
 - Write the updated PRD
 
 **Option 2 - Learn for future:**
-- Run: `/jaan-to:learn-add pm-prd-write "{feedback}"`
-- Follow /jaan-to:learn-add workflow (categorize → preview → commit)
+- Run: `/jaan-to:jaan-learn-add pm-prd-write "{feedback}"`
+- Follow /jaan-to:jaan-learn-add workflow (categorize → preview → commit)
 
 **Option 3 - Both:**
 - First: Apply fix to current PRD (Option 1)
-- Then: Run `/jaan-to:learn-add` (Option 2)
+- Then: Run `/jaan-to:jaan-learn-add` (Option 2)
 
 **If no:**
 - PRD workflow complete

@@ -3,16 +3,19 @@
     "allow": [
       "Read(.jaan-to/**)",
       "Read(docs/**)",
-      "Read(.claude/skills/**)",
       "Write(.jaan-to/**)",
       "Write(docs/**)",
-      "Write(.claude/skills/**)",
       "Glob",
       "Grep"
     ],
     "deny": [
       "Write(src/**)",
       "Write(.env*)",
+      "Read(.env*)",
+      "Write(**/secrets/*)",
+      "Read(**/secrets/*)",
+      "Write(*.key)",
+      "Write(*.pem)",
       "Bash(rm:*)"
     ]
   }

@@ -14,8 +14,7 @@ project-root/
 ├── agents/                 Sub-agent definitions
 ├── outputStyles/           Output formatting styles
 ├── hooks/                  Hook configuration
-├── scripts/                Hook scripts (bootstrap, validation, feedback)
-├── context/                Context templates (copied to .jaan-to/context/)
+├── scripts/                Hook scripts (bootstrap, validation, feedback) + seeds
 ├── .jaan-to/               Project-local workspace (gitignored, bootstrapped)
 ├── docs/                   Human documentation
 ├── roadmaps/               Project planning and vision
@@ -40,30 +39,30 @@ Plugin source definitions. Each skill has a `SKILL.md` (required), optional `LEA
 
 ```
 skills/
-├── docs-create/
+├── jaan-docs-create/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── docs-update/
+├── jaan-docs-update/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── learn-add/
+├── jaan-learn-add/
 │   └── SKILL.md
-├── research-about/
+├── jaan-research-about/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── research-add/
+├── jaan-research-add/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── roadmap-add/
+├── jaan-roadmap-add/
 │   ├── SKILL.md
 │   └── template.md
-├── skill-create/
+├── jaan-skill-create/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── skill-update/
+├── jaan-skill-update/
 │   ├── LEARN.md
 │   └── SKILL.md
 ├── pm-prd-write/
@@ -113,23 +112,20 @@ scripts/
 ├── build-dist.sh           Build and install plugin to .claude/
 ├── verify-install.sh       Verify plugin installation
 ├── capture-feedback.sh     Post-write feedback capture
-└── validate-prd.sh         PRD section validation
+├── validate-prd.sh         PRD section validation
+└── seeds/                  Context templates (copied to .jaan-to/context/)
+    ├── boundaries.md
+    ├── config.md
+    ├── integrations.md
+    ├── team.md
+    └── tech.md
 ```
 
 ---
 
-## Context
+## Context Seeds
 
-Project context templates. Skills read these to understand your environment.
-
-```
-context/
-├── boundaries.md           Safe write paths, denied locations
-├── config.md               Enabled roles, available skills, defaults
-├── integrations.md         External tools, APIs, third-party services
-├── team.md                 Team structure, roles, communication
-└── tech.md                 Languages, frameworks, infrastructure
-```
+Project context templates located in `scripts/seeds/`. These are copied to `.jaan-to/context/` during bootstrap.
 
 ---
 
@@ -173,14 +169,14 @@ Claude Code settings and skill registry (written during install by build-dist.sh
 └── skills/                 10 skills (namespaced for registry)
     ├── jaan-to-pm-prd-write/
     ├── jaan-to-data-gtm-datalayer/
-    ├── jaan-to-docs-create/
-    ├── jaan-to-docs-update/
-    ├── jaan-to-learn-add/
-    ├── jaan-to-research-about/
-    ├── jaan-to-research-add/
-    ├── jaan-to-roadmap-add/
-    ├── jaan-to-skill-create/
-    └── jaan-to-skill-update/
+    ├── jaan-to-jaan-docs-create/
+    ├── jaan-to-jaan-docs-update/
+    ├── jaan-to-jaan-learn-add/
+    ├── jaan-to-jaan-research-about/
+    ├── jaan-to-jaan-research-add/
+    ├── jaan-to-jaan-roadmap-add/
+    ├── jaan-to-jaan-skill-create/
+    └── jaan-to-jaan-skill-update/
 ```
 
 ---

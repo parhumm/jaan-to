@@ -8,5 +8,6 @@
   "license": "MIT",
   "keywords": ["workflow", "prd", "product-management", "analytics", "gtm", "skills"],
   "hooks": "./hooks/hooks.json",
-  "agents": ["./agents/quality-reviewer.md", "./agents/context-scout.md"]
+  "agents": ["./agents/quality-reviewer.md", "./agents/context-scout.md"],
+  "outputStyles": ["./outputStyles/enterprise-doc.md", "./outputStyles/concise-summary.md"]
 }

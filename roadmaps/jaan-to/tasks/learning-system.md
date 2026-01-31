@@ -68,8 +68,8 @@ Captures:
 - [x] Update SKILL.md to read .jaan-to/learn/{name}.learn.md
 - [x] Update SKILL.md to read context
 
-### 2.3 /jaan-to:learn-add Command
-- [x] Create learn-add skill
+### 2.3 /jaan-to:jaan-learn-add Command
+- [x] Create jaan-learn-add skill
 - [x] Implement routing logic (skill/template/context)
 - [x] Implement categorization logic
 - [x] Test feedback capture
@@ -91,7 +91,7 @@ Captures:
 - [x] `LEARN.md` file created for `pm-prd-write` skill
 - [x] Skills read `.jaan-to/learn/{name}.learn.md` before execution
 - [x] Skills read context files before execution
-- [x] `/jaan-to:learn-add` command to capture feedback
+- [x] `/jaan-to:jaan-learn-add` command to capture feedback
 - [x] Learning applies to subsequent executions
 - [x] PostToolUse hook prompts for feedback
 
@@ -104,8 +104,8 @@ Captures:
 - [x] pm-prd-write reads and applies .jaan-to/learn/ lessons
 - [x] Context directory exists with tech.md, team.md, integrations.md
 - [x] Skills read and incorporate context
-- [x] `/jaan-to:learn-add` routes feedback to correct .learn.md
-- [x] `/jaan-to:learn-add` auto-categorizes lessons
+- [x] `/jaan-to:jaan-learn-add` routes feedback to correct .learn.md
+- [x] `/jaan-to:jaan-learn-add` auto-categorizes lessons
 - [x] PostToolUse hook prompts for feedback after artifact creation
 
 ### Quality
@@ -116,7 +116,7 @@ Captures:
 
 ### Testing
 - [x] E2E: Skill reads .learn.md and applies lessons
-- [x] E2E: /jaan-to:learn-add routes correctly
+- [x] E2E: /jaan-to:jaan-learn-add routes correctly
 - [x] E2E: Context incorporated into output
 - [x] E2E: Feedback prompt after execution
 
@@ -134,7 +134,7 @@ Verify: Skill asks about API versioning
 ### Test 2: Feedback Routing
 ```
 Setup: Clean .jaan-to/learn/pm-prd-write.learn.md
-Execute: /jaan-to:learn-add "pm-prd-write" "Check for i18n requirements"
+Execute: /jaan-to:jaan-learn-add "pm-prd-write" "Check for i18n requirements"
 Verify: Lesson appears in .jaan-to/learn/pm-prd-write.learn.md under "Better Questions"
 ```
 
@@ -151,7 +151,7 @@ Setup: Fresh state
 Execute:
   1. Run /jaan-to:pm-prd-write "test feature"
   2. Complete PRD generation
-  3. Add lesson via /jaan-to:learn-add
+  3. Add lesson via /jaan-to:jaan-learn-add
   4. Run /jaan-to:pm-prd-write "another feature"
 Verify: Second run applies the lesson from step 3
 ```

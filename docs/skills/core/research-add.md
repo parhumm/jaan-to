@@ -1,4 +1,4 @@
-# /jaan-to:research-add
+# /jaan-to:jaan-research-add
 
 > Add research document to deepresearch index (from file or URL).
 
@@ -13,12 +13,12 @@ Indexes an existing research document (local file or web URL) into the deepresea
 ## Usage
 
 ```
-/jaan-to:research-add <file-path-or-URL>
+/jaan-to:jaan-research-add <file-path-or-URL>
 ```
 
 **Examples**:
-- `/jaan-to:research-add .jaan-to/outputs/research/my-research.md`
-- `/jaan-to:research-add https://example.com/article`
+- `/jaan-to:jaan-research-add .jaan-to/outputs/research/my-research.md`
+- `/jaan-to:jaan-research-add https://example.com/article`
 
 ---
 
@@ -100,10 +100,10 @@ Indexes an existing research document (local file or web URL) into the deepresea
 - Updates `.jaan-to/outputs/research/README.md` index
 - Adds to Quick Topic Finder section
 - Git commits the result
-- Captures feedback via `/jaan-to:learn-add`
+- Captures feedback via `/jaan-to:jaan-learn-add`
 
 ---
 
 ## Related
 
-- [/jaan-to:research-about](research-about.md) - Deep research on new topics
+- [/jaan-to:jaan-research-about](research-about.md) - Deep research on new topics

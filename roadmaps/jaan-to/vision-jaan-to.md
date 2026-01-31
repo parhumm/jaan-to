@@ -122,11 +122,11 @@ Plugin root:
 │   │   ├── LEARN.md           # Seed lessons (bootstrap source)
 │   │   └── template.md        # Output template
 │   ├── data-gtm-datalayer/
-│   ├── learn-add/
-│   ├── skill-create/
+│   ├── jaan-learn-add/
+│   ├── jaan-skill-create/
 │   └── [skill-name]/          # Extensible
 │
-├── context/                   # Tech & team context templates
+├── scripts/seeds/             # Tech & team context templates
 │   ├── tech.md                # Languages, frameworks, tools
 │   ├── team.md                # Team structure, ceremonies
 │   ├── integrations.md        # Jira, GitLab, Slack config
@@ -276,17 +276,17 @@ Context files can have learning in `.jaan-to/learn/context-{name}.learn.md`:
 
 After any skill run:
 ```
-/jaan-to:learn-add "pm-prd-write" "Always ask about internationalization requirements"
+/jaan-to:jaan-learn-add "pm-prd-write" "Always ask about internationalization requirements"
 ```
 
 Or route to template:
 ```
-/jaan-to:learn-add "template-prd" "Add rollback plan section"
+/jaan-to:jaan-learn-add "template-prd" "Add rollback plan section"
 ```
 
 Or route to stack:
 ```
-/jaan-to:learn-add "context-tech" "All new services need health check endpoint"
+/jaan-to:jaan-learn-add "context-tech" "All new services need health check endpoint"
 ```
 
 ---

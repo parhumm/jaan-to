@@ -86,48 +86,48 @@ The bootstrap hook automatically creates `.jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:docs-create` | Create documentation with templates | `docs/` |
-| `/jaan-to:docs-update` | Audit and update stale documentation | Updates existing docs |
+| `/jaan-to:jaan-docs-create` | Create documentation with templates | `docs/` |
+| `/jaan-to:jaan-docs-update` | Audit and update stale documentation | Updates existing docs |
 
 **Example:**
 ```
-/jaan-to:docs-create "API integration guide"
+/jaan-to:jaan-docs-create "API integration guide"
 ```
 
 ### Research
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:research-about` | Deep research on any topic with sources | `.jaan-to/outputs/research/{slug}/` |
-| `/jaan-to:research-add` | Add file/URL to research index | Updates research index |
+| `/jaan-to:jaan-research-about` | Deep research on any topic with sources | `.jaan-to/outputs/research/{slug}/` |
+| `/jaan-to:jaan-research-add` | Add file/URL to research index | Updates research index |
 
 **Example:**
 ```
-/jaan-to:research-about "React Server Components best practices"
+/jaan-to:jaan-research-about "React Server Components best practices"
 ```
 
 ### Learning & Feedback
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:learn-add` | Add lesson to project's LEARN.md | `.jaan-to/learn/LEARN.md` |
+| `/jaan-to:jaan-learn-add` | Add lesson to project's LEARN.md | `.jaan-to/learn/LEARN.md` |
 
 **Example:**
 ```
-/jaan-to:learn-add "Always validate email format before API submission"
+/jaan-to:jaan-learn-add "Always validate email format before API submission"
 ```
 
 ### Workflow Management
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:roadmap-add` | Add task to roadmap | `.jaan-to/roadmap.md` |
-| `/jaan-to:skill-create` | Create new skill with wizard | `.claude/skills/{name}/` |
-| `/jaan-to:skill-update` | Update existing skill | Updates skill definition |
+| `/jaan-to:jaan-roadmap-add` | Add task to roadmap | `.jaan-to/roadmap.md` |
+| `/jaan-to:jaan-skill-create` | Create new skill with wizard | `skills/{name}/` |
+| `/jaan-to:jaan-skill-update` | Update existing skill | Updates skill definition |
 
 **Example:**
 ```
-/jaan-to:roadmap-add "Implement dark mode toggle"
+/jaan-to:jaan-roadmap-add "Implement dark mode toggle"
 ```
 
 ---
@@ -255,7 +255,7 @@ Best for: Team leads, PMs, architects managing documentation and workflows
     "allow": [
       "Write(.jaan-to/**)",
       "Write(docs/**)",
-      "Write(.claude/skills/**)",
+      "Write(.jaan-to/outputs/**)",
       "Bash(npm run *)",
       "Bash(git *)"
     ],
@@ -409,7 +409,7 @@ Every skill follows a **two-phase workflow** with human approval:
 jaan.to is open source. To extend:
 
 1. Read [Creating Skills](docs/extending/create-skill.md)
-2. Use `/jaan-to:skill-create` to scaffold a new skill
+2. Use `/jaan-to:jaan-skill-create` to scaffold a new skill
 3. Submit a PR
 
 ---

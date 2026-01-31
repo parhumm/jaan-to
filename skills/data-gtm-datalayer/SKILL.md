@@ -342,7 +342,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/jaan-to:learn-add data-gtm-datalayer "{feedback}"`
+- **Option 2**: Run `/jaan-to:jaan-learn-add data-gtm-datalayer "{feedback}"`
 - **Option 3**: Do both
 
 ---

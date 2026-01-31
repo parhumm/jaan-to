@@ -12,14 +12,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Skills (10)
 - **pm-prd-write** - Generate comprehensive PRD from initiative with validation
 - **data-gtm-datalayer** - Generate GTM tracking code and dataLayer specification
-- **skill-create** - Create new skill with wizard and research integration
-- **skill-update** - Update existing skill with specification compliance
-- **docs-create** - Create documentation with templates and style guide
-- **docs-update** - Audit and update stale documentation with git-based detection
-- **learn-add** - Add lesson to project's LEARN.md knowledge base
-- **research-about** - Deep research on any topic with source citations
-- **research-add** - Add file/URL to research index for future reference
-- **roadmap-add** - Add task to roadmap with priority and scope
+- **jaan-skill-create** - Create new skill with wizard and research integration
+- **jaan-skill-update** - Update existing skill with specification compliance
+- **jaan-docs-create** - Create documentation with templates and style guide
+- **jaan-docs-update** - Audit and update stale documentation with git-based detection
+- **jaan-learn-add** - Add lesson to project's LEARN.md knowledge base
+- **jaan-research-about** - Deep research on any topic with source citations
+- **jaan-research-add** - Add file/URL to research index for future reference
+- **jaan-roadmap-add** - Add task to roadmap with priority and scope
 
 #### Agents (2)
 - **quality-reviewer** - Reviews outputs for completeness, accuracy, and quality standards
@@ -34,10 +34,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Feedback capture hook** - Global PostToolUse captures user feedback for learning
 
 #### Context System
-- Context templates for tech stack (`context/tech.md`)
-- Context templates for team structure (`context/team.md`)
-- Context templates for integrations (`context/integrations.md`)
-- Boundary definitions for safe paths (`context/boundaries.md`)
+- Context templates for tech stack (`scripts/seeds/tech.md`)
+- Context templates for team structure (`scripts/seeds/team.md`)
+- Context templates for integrations (`scripts/seeds/integrations.md`)
+- Boundary definitions for safe paths (`scripts/seeds/boundaries.md`)
 
 #### Learning System
 - Accumulated LEARN.md knowledge from 50+ skill runs
@@ -62,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Migrated from standalone `.claude/skills/` setup to plugin architecture
 - Updated all skill command names to namespaced format (`/jaan-to:*`)
-- Moved context files from `jaan-to/context/` to plugin-relative `context/`
+- Moved context files from `jaan-to/context/` to plugin-relative `scripts/seeds/`
 - Moved hooks from shell scripts to JSON configuration
 - Output directory standardized to project-relative `.jaan-to/outputs/`
 - Learning files moved to project-relative `.jaan-to/learn/`

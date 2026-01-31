@@ -25,8 +25,8 @@ All skills use the unified namespace `/jaan-to:` followed by the skill name.
 
 **Examples:**
 - `/jaan-to:pm-prd-write`
-- `/jaan-to:skill-create`
-- `/jaan-to:learn-add`
+- `/jaan-to:jaan-skill-create`
+- `/jaan-to:jaan-learn-add`
 
 ---
 

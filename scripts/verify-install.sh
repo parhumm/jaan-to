@@ -42,14 +42,14 @@ done
 # 3. Templates
 echo ""
 echo "3. Templates:"
-for skill in pm-prd-write data-gtm-datalayer docs-create skill-create research-about roadmap-add; do
+for skill in pm-prd-write data-gtm-datalayer jaan-docs-create jaan-skill-create jaan-research-about jaan-roadmap-add; do
   check "$([ -f "$PROJECT_DIR/.jaan-to/templates/${skill}.template.md" ] && echo true || echo false)" "templates/${skill}.template.md"
 done
 
 # 4. Learning seeds
 echo ""
 echo "4. Learning seeds:"
-for skill in pm-prd-write data-gtm-datalayer docs-create docs-update skill-create skill-update research-about research-add; do
+for skill in pm-prd-write data-gtm-datalayer jaan-docs-create jaan-docs-update jaan-skill-create jaan-skill-update jaan-research-about jaan-research-add; do
   check "$([ -f "$PROJECT_DIR/.jaan-to/learn/${skill}.learn.md" ] && echo true || echo false)" "learn/${skill}.learn.md"
 done
 

@@ -1,4 +1,4 @@
-# /jaan-to:research-about
+# /jaan-to:jaan-research-about
 
 > Deep research on any topic with structured markdown output.
 
@@ -13,13 +13,13 @@ Performs comprehensive web research on any topic using adaptive 5-wave research 
 ## Usage
 
 ```
-/jaan-to:research-about <topic>
+/jaan-to:jaan-research-about <topic>
 ```
 
 **Examples**:
-- `/jaan-to:research-about Claude Code hooks best practices`
-- `/jaan-to:research-about React state management 2025`
-- `/jaan-to:research-about MCP server authentication patterns`
+- `/jaan-to:jaan-research-about Claude Code hooks best practices`
+- `/jaan-to:jaan-research-about React state management 2025`
+- `/jaan-to:jaan-research-about MCP server authentication patterns`
 
 ---
 
@@ -127,10 +127,10 @@ Uses **5 adaptive waves** where each wave's focus is determined by findings from
 
 - Updates `.jaan-to/outputs/research/README.md` index
 - Git commits the result
-- Captures feedback via `/jaan-to:learn-add`
+- Captures feedback via `/jaan-to:jaan-learn-add`
 
 ---
 
 ## Related
 
-- [/jaan-to:research-add](research-add.md) - Add existing file or URL to index
+- [/jaan-to:jaan-research-add](research-add.md) - Add existing file or URL to index

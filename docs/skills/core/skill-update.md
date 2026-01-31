@@ -1,4 +1,4 @@
-# /jaan-to:skill-update
+# /jaan-to:jaan-skill-update
 
 > Update existing jaan.to skills with specification compliance.
 
@@ -13,7 +13,7 @@ Updates an existing skill while maintaining specification compliance. Validates 
 ## Usage
 
 ```
-/jaan-to:skill-update {skill-name}
+/jaan-to:jaan-skill-update {skill-name}
 ```
 
 If skill name not provided, lists available skills to choose from.
@@ -53,7 +53,7 @@ If skill name not provided, lists available skills to choose from.
 | **Diff Preview** | Shows current vs proposed changes |
 | **LEARN.md Sync** | Incorporates accumulated lessons |
 | **Web Research** | Optional search for updated practices |
-| **Auto-Documentation** | Invokes `/jaan-to:docs-update` automatically |
+| **Auto-Documentation** | Invokes `/jaan-to:jaan-docs-update` automatically |
 | **Git Workflow** | Creates branch, commits, offers PR creation |
 
 ---
@@ -94,7 +94,7 @@ When selecting option [5], lessons are incorporated:
 
 **Input**:
 ```
-/jaan-to:skill-update pm-prd-write
+/jaan-to:jaan-skill-update pm-prd-write
 ```
 
 **Interaction**:

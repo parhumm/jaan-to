@@ -1,4 +1,4 @@
-# /jaan-to:docs-update
+# /jaan-to:jaan-docs-update
 
 > Smart documentation auditing with git-based staleness detection.
 
@@ -15,7 +15,7 @@
 ## Usage
 
 ```
-/jaan-to:docs-update [path] [--full] [--fix] [--check-only] [--quick]
+/jaan-to:jaan-docs-update [path] [--full] [--fix] [--check-only] [--quick]
 ```
 
 | Argument | Effect |
@@ -99,22 +99,22 @@
 
 **Smart staleness check (default)**:
 ```
-/jaan-to:docs-update
+/jaan-to:jaan-docs-update
 ```
 
 **Full audit**:
 ```
-/jaan-to:docs-update --full
+/jaan-to:jaan-docs-update --full
 ```
 
 **Full audit with auto-fix**:
 ```
-/jaan-to:docs-update --full --fix
+/jaan-to:jaan-docs-update --full --fix
 ```
 
 **Check specific path**:
 ```
-/jaan-to:docs-update docs/skills/ --check-only
+/jaan-to:jaan-docs-update docs/skills/ --check-only
 ```
 
 ---

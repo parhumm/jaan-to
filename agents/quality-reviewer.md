@@ -1,6 +1,11 @@
 ---
 name: quality-reviewer
 description: Reviews skill outputs for completeness, formatting standards, and STYLE.md compliance
+capabilities:
+  - Review generated documents for required sections
+  - Check STYLE.md formatting compliance
+  - Detect placeholder text and TODO markers
+  - Validate LEARN.md patterns
 tools: Read, Glob, Grep
 model: haiku
 ---

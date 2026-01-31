@@ -87,7 +87,7 @@ Update skill workflows to leverage LSP capabilities when available.
 - **Diagnostics** to surface existing tech debt relevant to the initiative
 - **Result:** More accurate technical feasibility and effort sections in PRDs
 
-### `/jaan-to:skill-create`
+### `/jaan-to:jaan-skill-create`
 
 **Without LSP:** New skill scaffolding is template-based. No validation against actual plugin structure.
 

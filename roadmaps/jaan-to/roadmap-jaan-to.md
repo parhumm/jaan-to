@@ -39,11 +39,11 @@
 - [x] LEARN.md files alongside skills (`d554fa6`)
 - [x] Stacks: `tech.md`, `team.md`, `integrations.md` (`bd0eff3`)
 - [x] PostToolUse feedback capture hook (`b2e7687`)
-- [x] `/jaan-to:learn-add` command for feedback routing (`5775df6`)
-- [x] Auto-commit option for `/jaan-to:learn-add` (`74e4163`)
-- [x] `/jaan-to:docs-create` skill for documentation authoring (`b3b2383`)
-- [x] `/jaan-to:docs-update` skill with git-based staleness detection (`b3b2383`, `df9cdea`)
-- [x] Auto-invoke `/jaan-to:learn-add` from `/jaan-to:pm-prd-write` (`9d9c7e1`)
+- [x] `/jaan-to:jaan-learn-add` command for feedback routing (`5775df6`)
+- [x] Auto-commit option for `/jaan-to:jaan-learn-add` (`74e4163`)
+- [x] `/jaan-to:jaan-docs-create` skill for documentation authoring (`b3b2383`)
+- [x] `/jaan-to:jaan-docs-update` skill with git-based staleness detection (`b3b2383`, `df9cdea`)
+- [x] Auto-invoke `/jaan-to:jaan-learn-add` from `/jaan-to:pm-prd-write` (`9d9c7e1`)
 - [x] Human-focused documentation structure (`48bf028`)
 - [x] Documentation style guide (`de92247`)
 - [x] Rename pm-spec-prd-write → pm-prd-write (`7c7c29d`)
@@ -79,9 +79,9 @@
 
 > Details: [tasks/role-skills.md](tasks/role-skills.md) | No MCP required
 
-- [x] `/jaan-to:skill-create` skill with web research and PR workflow
-- [x] `/jaan-to:skill-update` skill with specification compliance
-- [ ] Update `/jaan-to:skill-create` to integrate `/jaan-to:research-about` (optional, recommended) for research-informed skill planning
+- [x] `/jaan-to:jaan-skill-create` skill with web research and PR workflow
+- [x] `/jaan-to:jaan-skill-update` skill with specification compliance
+- [ ] Update `/jaan-to:jaan-skill-create` to integrate `/jaan-to:jaan-research-about` (optional, recommended) for research-informed skill planning
 
 **Ranked by research impact (1-19):**
 
@@ -237,12 +237,12 @@
 | Command | Description |
 |---------|-------------|
 | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
-| `/jaan-to:roadmap-add` | [Internal] Add task to roadmap |
-| `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
-| `/jaan-to:docs-create` | Create documentation with templates |
-| `/jaan-to:docs-update` | Audit and update stale documentation |
-| `/jaan-to:skill-create` | Create new skill with wizard |
-| `/jaan-to:skill-update` | Update existing skill |
+| `/jaan-to:jaan-roadmap-add` | [Internal] Add task to roadmap |
+| `/jaan-to:jaan-learn-add` | Add lesson to skill's LEARN.md |
+| `/jaan-to:jaan-docs-create` | Create documentation with templates |
+| `/jaan-to:jaan-docs-update` | Audit and update stale documentation |
+| `/jaan-to:jaan-skill-create` | Create new skill with wizard |
+| `/jaan-to:jaan-skill-update` | Update existing skill |
 
 ### Key Paths
 

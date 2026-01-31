@@ -25,10 +25,8 @@ Permissions control what Claude Code can do:
 |------------|---------|
 | `Read(.jaan-to/**)` | Read context, templates, outputs |
 | `Read(docs/**)` | Read project documentation |
-| `Read(.claude/skills/**)` | Read project-level skills |
 | `Write(.jaan-to/**)` | Write outputs, learn, context |
 | `Write(docs/**)` | Write documentation |
-| `Write(.claude/skills/**)` | Write project-level skills |
 | `Glob` | Search file patterns |
 | `Grep` | Search file contents |
 
@@ -37,6 +35,11 @@ Permissions control what Claude Code can do:
 |------------|---------|
 | `Write(src/**)` | No source code changes |
 | `Write(.env*)` | No env file changes |
+| `Read(.env*)` | No env file reads |
+| `Write(**/secrets/*)` | No secrets writes |
+| `Read(**/secrets/*)` | No secrets reads |
+| `Write(*.key)` | No key file writes |
+| `Write(*.pem)` | No certificate writes |
 | `Bash(rm:*)` | No delete commands |
 
 ---

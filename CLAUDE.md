@@ -44,7 +44,7 @@ This is a Claude Code Plugin. All paths below are **relative to the plugin root*
 **No duplication or overlap allowed:**
 - One command per action (use existing skills, don't duplicate)
 - One location per data type (roadmap tasks → roadmap-jaan-to.md)
-- One skill per capability (learning → `/jaan-to:learn-add`)
+- One skill per capability (learning → `/jaan-to:jaan-learn-add`)
 - Reference, don't copy (link to sources, don't inline)
 
 When adding functionality, first check if a skill/command exists.
@@ -83,8 +83,10 @@ When adding functionality, first check if a skill/command exists.
 ## Naming Conventions
 
 ### Skills
-- System/meta skills: `{domain}:{action}` (command: `/jaan-to:{domain}-{action}`)
-- Role-based skills: `{role}-{domain}:{action}` (command: `/jaan-to:{role}-{domain}-{action}`)
+- Public: `{role}-{domain}-{action}` → `/jaan-to:{role}-{domain}-{action}`
+  Roles: pm, data, ux, qa, dev, devops
+- Internal: `jaan-{domain}-{action}` → `/jaan-to:jaan-{domain}-{action}`
+  For plugin development and maintenance
 - Directory: `skills/{skill-name}/`
 
 ### Output Paths (Project-Relative)
@@ -104,7 +106,7 @@ When adding functionality, first check if a skill/command exists.
 ### Before Every Commit
 1. Update [roadmap-jaan-to.md](roadmaps/jaan-to/roadmap-jaan-to.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`
-3. For new tasks, use `/jaan-to:roadmap-add`
+3. For new tasks, use `/jaan-to:jaan-roadmap-add`
 
 ---
 
@@ -114,14 +116,14 @@ When adding functionality, first check if a skill/command exists.
 |---------|-------------|
 | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
 | `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
-| `/jaan-to:roadmap-add` | Add task to roadmap |
-| `/jaan-to:learn-add` | Add lesson to LEARN.md |
-| `/jaan-to:skill-create` | Create new skill |
-| `/jaan-to:skill-update` | Update existing skill |
-| `/jaan-to:docs-create` | Create documentation |
-| `/jaan-to:docs-update` | Audit documentation |
-| `/jaan-to:research-about` | Deep research on topic |
-| `/jaan-to:research-add` | Add to research index |
+| `/jaan-to:jaan-roadmap-add` | Add task to roadmap |
+| `/jaan-to:jaan-learn-add` | Add lesson to LEARN.md |
+| `/jaan-to:jaan-skill-create` | Create new skill |
+| `/jaan-to:jaan-skill-update` | Update existing skill |
+| `/jaan-to:jaan-docs-create` | Create documentation |
+| `/jaan-to:jaan-docs-update` | Audit documentation |
+| `/jaan-to:jaan-research-about` | Deep research on topic |
+| `/jaan-to:jaan-research-add` | Add to research index |
 
 ---
 
