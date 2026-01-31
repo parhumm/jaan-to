@@ -10,7 +10,7 @@
 |-------|-------|--------|
 | 1 | Foundation & Optimization | Done |
 | 2 | Learning & Documentation | Done |
-| 2.5 | Plugin Migration | Done |
+| 2.5 | Plugin Migration | In Progress |
 | 3 | Development Workflow | Pending |
 | 4 | Quick Win Skills (18) | Pending |
 | 5 | MCP Connectors | Pending |
@@ -50,7 +50,7 @@
 - [x] Rename docs/skills/internal/ → docs/skills/core/ (`aad168c`)
 - [x] Skill creation specification for AI + humans
 
-## Phase 2.5: Plugin Migration (Done)
+## Phase 2.5: Plugin Migration (In Progress)
 
 - [x] Plugin manifest (`.claude-plugin/plugin.json`)
 - [x] Migrate 10 skills from `.claude/skills/` to `skills/` (flat structure)
@@ -62,6 +62,9 @@
 - [x] Documentation: 8 new docs created, 27 existing docs updated
 - [x] Marketplace distribution (`marketplace.json`, `README.md`, `CHANGELOG.md`)
 - [x] Directory structure reference updated
+- [ ] Clean plugin installation — exclude non-essential files (docs, deepresearch, roadmaps, etc.); only ship skills, hooks, scripts, agents, outputStyles, context, and manifest
+- [ ] Store jaan.to output files in a hidden folder (`.jaan-to/`) inside the target project that installs the plugin
+- [ ] End-to-end plugin install testing — verify full install flow works correctly
 
 ## Phase 3: Development Workflow
 
