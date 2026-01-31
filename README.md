@@ -17,19 +17,10 @@
 
 ## Installation
 
-### From GitHub (recommended)
-
-Add the marketplace and install:
 ```
+claude
 /plugin marketplace add parhumm/jaan-to
-/plugin install jaan-to@parhumm/jaan-to
-```
-
-Or with scopes:
-```bash
-claude plugin install jaan-to@parhumm/jaan-to --scope user      # all projects
-claude plugin install jaan-to@parhumm/jaan-to --scope project   # team (in VCS)
-claude plugin install jaan-to@parhumm/jaan-to --scope local     # personal, gitignored
+/plugin install jaan-to
 ```
 
 ### Local development

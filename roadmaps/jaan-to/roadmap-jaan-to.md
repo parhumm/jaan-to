@@ -223,7 +223,7 @@
 
 > Details: [tasks/distribution.md](tasks/distribution.md)
 
-- [ ] Installation via `claude plugin install` (pending marketplace submission)
+- [x] Installation via `/plugin marketplace add parhumm/jaan-to` + `/plugin install jaan-to`
 - [ ] Multi-agent compatibility research (Cursor, Copilot, Windsurf, Gemini)
 - [ ] CLI installer tool (`jaan-to-cli`) for easy setup
 - [ ] Public documentation site and branding guidelines

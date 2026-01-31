@@ -4,10 +4,13 @@
 
 ---
 
-## Prerequisites
+## Install
 
-- Claude Code installed and working
-- This repository cloned
+```
+claude
+/plugin marketplace add parhumm/jaan-to
+/plugin install jaan-to
+```
 
 ---
 

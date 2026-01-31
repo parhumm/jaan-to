@@ -45,28 +45,10 @@ Package jaan.to for public distribution, including multi-agent support, CLI inst
 
 **Goal:** One-command setup like spec-kit's `uv tool install specify-cli`
 
-```bash
-# Installation
-claude plugin install jaan-to
-
-# Or manual setup:
-git clone https://github.com/parhumm/jaan-to-claude-code
-# Creates:
-# .claude-plugin/
-# ├── plugin.json
-# skills/
-# ├── pm-prd-write/
-# ├── docs-create/
-# └── ... (10 skills)
-# context/
-# ├── config.md
-# ├── tech.md
-# └── ...
-# hooks/
-# └── hooks.json
-# scripts/
-# ├── bootstrap.sh
-# └── ...
+```
+claude
+/plugin marketplace add parhumm/jaan-to
+/plugin install jaan-to
 ```
 
 - [ ] Create Python package structure (`src/jaan_to_cli/`)
