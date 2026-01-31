@@ -40,7 +40,6 @@ See [Getting Started](getting-started.md) for full walkthrough.
 | [Concepts](concepts.md) | Core ideas explained |
 | [Skills](skills/README.md) | Available commands by role |
 | [Agents](agents/README.md) | Plugin agents |
-| [Output Styles](output-styles/README.md) | Formatting styles |
 | [Hooks](hooks/README.md) | Automated triggers |
 | [Config](config/README.md) | Settings and context |
 | [Learning](learning/README.md) | Feedback system |

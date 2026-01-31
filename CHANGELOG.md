@@ -79,10 +79,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **quality-reviewer** - Reviews outputs for completeness, accuracy, and quality standards
 - **context-scout** - Gathers relevant context from codebase before generation
 
-#### Output Styles (2)
-- **enterprise-doc** - Formal, comprehensive documentation format
-- **concise-summary** - Brief, executive-level summaries
-
 #### Hooks
 - **PRD validation hook** - Skill-scoped PreToolUse on pm-prd-write ensures required sections
 - **Feedback capture hook** - Global PostToolUse captures user feedback for learning

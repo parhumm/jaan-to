@@ -142,10 +142,6 @@ Plugin root:
 │   ├── quality-reviewer.md
 │   └── context-scout.md
 │
-├── outputStyles/              # Formatting directives
-│   ├── enterprise-doc.md
-│   └── concise-summary.md
-│
 └── hooks/hooks.json           # Hook configuration
 
 Project side (created by bootstrap):
@@ -799,7 +795,6 @@ User: "Good, but add performance testing section"
 | `context/` | Your context templates (plugin) |
 | `scripts/` | Hook scripts (plugin) |
 | `agents/` | Sub-agents (plugin) |
-| `outputStyles/` | Formatting styles (plugin) |
 | `jaan-to/outputs/` | All outputs (project) |
 | `jaan-to/learn/` | Accumulated lessons (project) |
 

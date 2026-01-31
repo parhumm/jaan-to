@@ -11,7 +11,7 @@ rm -rf "$PLUGIN_ROOT/dist"
 mkdir -p "$DIST"
 
 # Essential plugin directories
-for dir in .claude-plugin skills hooks scripts agents outputStyles; do
+for dir in .claude-plugin skills hooks scripts agents; do
   if [ -d "$PLUGIN_ROOT/$dir" ]; then
     cp -r "$PLUGIN_ROOT/$dir" "$DIST/$dir"
   fi

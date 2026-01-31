@@ -31,7 +31,6 @@ This is a Claude Code Plugin. All paths below are **relative to the plugin root*
 | Hooks | `hooks/hooks.json` | JSON |
 | Scripts | `scripts/` | Shell scripts |
 | Agents | `agents/` | Markdown |
-| Output Styles | `outputStyles/` | Markdown |
 | Output | `jaan-to/outputs/` (project) | Generated files |
 | Learning | `jaan-to/learn/` (project) | Accumulated lessons |
 | Plugin Manifest | `.claude-plugin/plugin.json` | JSON |
@@ -70,7 +69,6 @@ When adding functionality, first check if a skill/command exists.
 - All PRDs must have: Problem Statement, Success Metrics, Scope, User Stories
 - Validation hooks enforce required sections
 - Quality check before preview
-- Use available **Output Styles**: `enterprise-doc`, `concise-summary`
 - Use available **Agents**: `quality-reviewer`, `context-scout`
 
 ### Human-Centered
@@ -140,10 +138,6 @@ Every version bump MUST be a single atomic operation:
 ---
 
 ## Plugin Features
-
-### Output Styles
-- `enterprise-doc` - Formal, comprehensive documentation format
-- `concise-summary` - Brief, executive-level summaries
 
 ### Agents
 - `quality-reviewer` - Reviews outputs for completeness and quality

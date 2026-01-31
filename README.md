@@ -134,19 +134,6 @@ jaan.to includes specialized agents that enhance skill execution:
 
 ---
 
-## Available Output Styles
-
-Customize how jaan.to formats outputs:
-
-| Style | Description | Best For |
-|-------|-------------|----------|
-| **enterprise-doc** | Formal, comprehensive documentation format with full sections and details | PRDs, technical specs, formal documentation |
-| **concise-summary** | Brief, executive-level summaries with key points only | Quick reviews, status updates, decision briefs |
-
-**Usage:** Styles are automatically applied based on skill configuration. You can request a specific style by mentioning it in your command.
-
----
-
 ## First-Time Setup
 
 jaan.to runs a bootstrap script automatically on your first session. This creates:

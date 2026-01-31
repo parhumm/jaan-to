@@ -57,7 +57,6 @@
 - [x] Context files: `jaan-to/` → `context/` (config, boundaries, tech, team, integrations)
 - [x] Hook system: `jaan-to/hooks/` → `scripts/` + `hooks/hooks.json`
 - [x] Agents: `agents/context-scout.md`, `agents/quality-reviewer.md`
-- [x] Output styles: `outputStyles/enterprise-doc.md`, `outputStyles/concise-summary.md`
 - [x] Command namespace: `/jaan-to-*` (role-based) and `/to-jaan-*` (internal)
 - [x] Documentation: 8 new docs created, 27 existing docs updated
 - [x] Marketplace distribution (`marketplace.json` catalog format, manifest component paths, README install instructions)
@@ -72,7 +71,6 @@
 
 - [ ] Project constitution document (`jaan-to/constitution.md`) - Immutable development principles
 - [ ] Complexity tracking in outputs - Document tradeoffs and exceptions
-- [ ] Support official Claude Code output styles format ([docs](https://code.claude.com/docs/en/output-styles))
 - [ ] Support LSP (Language Server Protocol) — bundle LSP configs + make skills LSP-aware → [details](tasks/lsp-support.md)
 
 ## Phase 4: Quick Win Skills (18)

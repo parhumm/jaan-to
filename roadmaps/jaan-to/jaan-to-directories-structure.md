@@ -12,7 +12,6 @@ project-root/
 ├── .claude/                Claude Code registry (settings, skills - written at install)
 ├── skills/                 Skill definitions (plugin source)
 ├── agents/                 Sub-agent definitions
-├── outputStyles/           Output formatting styles
 ├── hooks/                  Hook configuration
 ├── scripts/                Hook scripts (bootstrap, validation, feedback) + seeds
 ├── jaan-to/               Project-local workspace (gitignored, bootstrapped)
@@ -87,18 +86,6 @@ Sub-agents that skills delegate to. Read-only, model-specific.
 agents/
 ├── context-scout.md        Gathers project context before generation
 └── quality-reviewer.md     Reviews outputs for completeness
-```
-
----
-
-## Output Styles
-
-Formatting directives skills apply to generated content.
-
-```
-outputStyles/
-├── concise-summary.md      Bullets and tables only, no prose
-└── enterprise-doc.md       YAML headers, numbered sections, decision logs
 ```
 
 ---
@@ -215,10 +202,6 @@ docs/
 │   └── validate-prd.md
 ├── learning/
 │   └── README.md
-├── output-styles/
-│   ├── README.md
-│   ├── concise-summary.md
-│   └── enterprise-doc.md
 └── skills/
     ├── README.md
     ├── core/
