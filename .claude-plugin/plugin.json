@@ -9,6 +9,5 @@
   "keywords": ["workflow", "prd", "product-management", "analytics", "gtm", "skills"],
   "skills": "./skills/",
   "hooks": "./hooks/hooks.json",
-  "agents": "./agents/",
-  "outputStyles": "./outputStyles/"
+  "agents": ["./agents/quality-reviewer.md", "./agents/context-scout.md"]
 }
