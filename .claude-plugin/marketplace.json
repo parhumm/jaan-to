@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "jaan-to",
-      "source": ".",
+      "source": "./",
       "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev workflows",
       "version": "1.0.0"
     }
