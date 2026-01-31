@@ -72,6 +72,7 @@
 
 - [ ] Project constitution document (`jaan-to/constitution.md`) - Immutable development principles
 - [ ] Complexity tracking in outputs - Document tradeoffs and exceptions
+- [ ] Support official Claude Code output styles format — migrate from `outputStyles/` to `.claude/output-styles/` with frontmatter ([docs](https://code.claude.com/docs/en/output-styles))
 
 ## Phase 4: Quick Win Skills (18)
 
