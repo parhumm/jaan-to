@@ -37,8 +37,7 @@
 | to-jaan-skill-create | `/to-jaan-skill-create` | [Internal] Create new skill with wizard |
 | to-jaan-skill-update | `/to-jaan-skill-update` | [Internal] Update existing skill |
 | jaan-to-data-gtm-datalayer | `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code |
-| to-jaan-research-about | `/to-jaan-research-about` | Deep research on any topic |
-| to-jaan-research-add | `/to-jaan-research-add` | Add file/URL to research index |
+| jaan-to-pm-research-about | `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
 
 ## Trust
 - trust_paths: ["jaan-to/"]

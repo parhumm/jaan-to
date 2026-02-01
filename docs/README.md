@@ -60,8 +60,7 @@ See [Getting Started](getting-started.md) for full walkthrough.
 | `/to-jaan-docs-create` | Create documentation | `docs/{type}/{name}.md` |
 | `/to-jaan-docs-update` | Audit documentation | Fixes in-place |
 | `/to-jaan-learn-add` | Add feedback | `jaan-to/learn/{name}.learn.md` |
-| `/to-jaan-research-about` | Deep research on topic | `jaan-to/outputs/research/{slug}/` |
-| `/to-jaan-research-add` | Add to research index | `jaan-to/outputs/research/` |
+| `/jaan-to-pm-research-about` | Deep research or add to index | `jaan-to/outputs/research/` |
 | `/to-jaan-roadmap-add` | Add roadmap task | `jaan-to/roadmap.md` |
 
 ---

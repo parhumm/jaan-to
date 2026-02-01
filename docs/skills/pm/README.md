@@ -9,6 +9,7 @@
 | Command | Description |
 |---------|-------------|
 | [/jaan-to-pm-prd-write](prd-write.md) | Generate PRD from initiative |
+| [/jaan-to-pm-research-about](research-about.md) | Deep research or add to index |
 
 ---
 

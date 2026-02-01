@@ -5,6 +5,25 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-02-01
+
+### Changed
+- **Research skills merged** — `to-jaan-research-about` and `to-jaan-research-add` combined into `jaan-to-pm-research-about`
+  - Auto-detects input type: topic string triggers deep research, file path or URL triggers add-to-index
+  - Renamed from internal (`to-jaan-*`) to role-based (`jaan-to-pm-*`) naming convention
+  - Documentation moved from `docs/skills/core/` to `docs/skills/pm/`
+
+### Removed
+- `to-jaan-research-about` skill (replaced by `jaan-to-pm-research-about`)
+- `to-jaan-research-add` skill (replaced by `jaan-to-pm-research-about`)
+
+### Migration Notes
+- `/to-jaan-research-about <topic>` → `/jaan-to-pm-research-about <topic>`
+- `/to-jaan-research-add <file-or-url>` → `/jaan-to-pm-research-about <file-or-url>`
+- Both commands now map to the same skill with automatic input detection
+
+---
+
 ## [2.0.1] - 2026-02-01
 
 ### Fixed
@@ -146,6 +165,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[2.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v2.1.0
 [2.0.1]: https://github.com/parhumm/jaan-to/releases/tag/v2.0.1
 [2.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v2.0.0
 [1.3.1]: https://github.com/parhumm/jaan-to/releases/tag/v1.3.1

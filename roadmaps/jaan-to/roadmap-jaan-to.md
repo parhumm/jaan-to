@@ -79,7 +79,8 @@
 
 - [x] `/to-jaan-skill-create` skill with web research and PR workflow
 - [x] `/to-jaan-skill-update` skill with specification compliance
-- [ ] Update `/to-jaan-skill-create` to integrate `/to-jaan-research-about` (optional, recommended) for research-informed skill planning
+- [x] Merge `/to-jaan-research-about` + `/to-jaan-research-add` → `/jaan-to-pm-research-about`
+- [ ] Update `/to-jaan-skill-create` to integrate `/jaan-to-pm-research-about` (optional, recommended) for research-informed skill planning
 
 **Ranked by research impact (1-19):**
 

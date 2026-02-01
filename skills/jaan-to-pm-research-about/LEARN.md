@@ -1,6 +1,6 @@
-# Lessons: to-jaan-research-about
+# Lessons: jaan-to-pm-research-about
 
-> Last updated: 2026-01-27
+> Last updated: 2026-02-01
 
 Accumulated lessons from past executions. Read this before researching topics to avoid past mistakes and apply learned improvements.
 

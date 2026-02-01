@@ -89,12 +89,12 @@ The bootstrap hook automatically creates `jaan-to/` in your project with:
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/to-jaan-research-about` | Deep research on any topic with sources | `jaan-to/outputs/research/{slug}/` |
-| `/to-jaan-research-add` | Add file/URL to research index | Updates research index |
+| `/jaan-to-pm-research-about` | Deep research or add file/URL to index | `jaan-to/outputs/research/{slug}/` |
 
-**Example:**
+**Examples:**
 ```
-/to-jaan-research-about "React Server Components best practices"
+/jaan-to-pm-research-about "React Server Components best practices"
+/jaan-to-pm-research-about https://example.com/article
 ```
 
 ### Learning & Feedback

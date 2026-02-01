@@ -132,8 +132,7 @@ Every version bump MUST be a single atomic operation:
 | `/to-jaan-skill-update` | Update existing skill |
 | `/to-jaan-docs-create` | Create documentation |
 | `/to-jaan-docs-update` | Audit documentation |
-| `/to-jaan-research-about` | Deep research on topic |
-| `/to-jaan-research-add` | Add to research index |
+| `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
 
 ---
 

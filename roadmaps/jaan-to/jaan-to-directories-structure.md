@@ -48,13 +48,10 @@ skills/
 ├── to-jaan-learn-add/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── to-jaan-research-about/
+├── jaan-to-pm-research-about/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── to-jaan-research-add/
-│   ├── LEARN.md
-│   └── SKILL.md
 ├── to-jaan-roadmap-add/
 │   ├── LEARN.md
 │   ├── SKILL.md
@@ -161,8 +158,7 @@ Claude Code settings and skill registry (written during install by build-dist.sh
     ├── to-jaan-docs-create/
     ├── to-jaan-docs-update/
     ├── to-jaan-learn-add/
-    ├── to-jaan-research-about/
-    ├── to-jaan-research-add/
+    ├── jaan-to-pm-research-about/
     ├── to-jaan-roadmap-add/
     ├── to-jaan-skill-create/
     └── to-jaan-skill-update/
@@ -209,8 +205,6 @@ docs/
     │   ├── docs-create.md
     │   ├── docs-update.md
     │   ├── learn-add.md
-    │   ├── research-about.md
-    │   ├── research-add.md
     │   ├── roadmap-task-add.md
     │   ├── skill-create.md
     │   └── skill-update.md
@@ -219,7 +213,8 @@ docs/
     │   └── gtm-datalayer.md
     └── pm/
         ├── README.md
-        └── prd-write.md
+        ├── prd-write.md
+        └── research-about.md
 ```
 
 ---
