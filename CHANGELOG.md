@@ -5,6 +5,18 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2026-02-01
+
+### Fixed
+- **Marketplace and plugin manifests** aligned to official Claude Code plugin schema
+  - Added `$schema` to marketplace.json
+  - Moved `version` and `description` to top-level (removed `metadata` wrapper)
+  - Replaced `owner.url` / `author.url` with `email`
+  - Removed non-standard fields (`repository`, `homepage`, `license`, `keywords`)
+  - Added `category: "development"` to plugin entry
+
+---
+
 ## [2.0.0] - 2026-01-31
 
 ### Changed
@@ -134,6 +146,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[2.0.1]: https://github.com/parhumm/jaan-to/releases/tag/v2.0.1
 [2.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v2.0.0
 [1.3.1]: https://github.com/parhumm/jaan-to/releases/tag/v1.3.1
 [1.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v1.3.0

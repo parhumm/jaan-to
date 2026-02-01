@@ -1,9 +1,9 @@
 {
   "name": "jaan-to",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev, and more",
   "author": {
-    "name": "jaan.to",
-    "url": "https://github.com/parhumm/jaan-to"
+    "name": "Parhum Khoshbakht",
+    "email": "parhum.kh@gmail.com"
   }
 }
