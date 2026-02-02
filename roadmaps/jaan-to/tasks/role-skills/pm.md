@@ -301,6 +301,7 @@ flowchart TD
 
 - **Logical**: `pm:acceptance-criteria`
 - **Description**: Testable acceptance criteria with edge cases + failure handling and analytics requirements
+- **Reference**: [Acceptance Criteria Best Practices: A Production-Ready Research Guide](../../../../jaan-to/outputs/research/49-pm-acceptance-criteria.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Start from problem + success metrics, not solutions
