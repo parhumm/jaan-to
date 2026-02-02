@@ -59,6 +59,8 @@ This directory contains structured summaries of research on Claude Code best pra
 | [49](49-pm-acceptance-criteria.md) | Acceptance Criteria Best Practices | Production-ready research on transforming PRDs into testable, actionable acceptance criteria with industry standards (IEEE, ISTQB, IIBA), BDD/Gherkin format specifications, edge case heuristics (SFDPOT), AI guardrails for LLM-generated AC, and analytics event requirements for core funnels. |
 | [50](50-qa-test-cases.md) | QA Test Case Generation Best Practices | Comprehensive standards-based framework for transforming acceptance criteria into test cases using BDD/Gherkin as primary format. Covers ISTQB/IEEE 829 specifications, boundary value analysis, equivalence partitioning, five priority edge case categories (empty/null, boundaries, errors, concurrency, state transitions), and AI failure mode mitigation patterns. |
 | [51](51-dev-fe-task-breakdown.md) | Frontend Task Breakdown: Complete Framework | Systematic framework for transforming UX handoffs into production-ready task breakdowns. Covers PMI WBS principles, Component-Driven Development, Atomic Design taxonomy, React 18/Next.js 14 patterns, 50+ item coverage checklist (accessibility, performance, SEO, testing), state machine definitions, implicit work identification, and AI failure mode mitigations. |
+| [52](52-dev-be-task-breakdown.md) | Backend Task Breakdown Skill: Complete Research Guide | Comprehensive methodology for transforming PRDs into Laravel/PHP backend tasks. Covers industry standards (IEEE, SAFe, Shape Up), INVEST criteria adaptation, vertical slicing vs horizontal layers, Laravel task types (migrations, models, controllers, jobs, actions), data model annotations, idempotency patterns, error taxonomy, T-shirt sizing, dependency management, quality validation, and AI guardrails. |
+| [53](53-dev-pr-review.md) | Building a Production-Ready PR/MR Code Review Skill | Complete technical foundation for GitLab-primary PR review automation targeting PHP/Laravel and TypeScript/React. Covers SmartBear effectiveness thresholds, risk-based file prioritization, Conventional Comments specification, security pattern detection (SQL injection, XSS, N+1 queries), secrets detection with entropy analysis, SARIF output format, LLM integration patterns with validation guardrails, and Dangerfile configurations. |
 
 ## Quick Topic Finder
 
@@ -100,6 +102,8 @@ This directory contains structured summaries of research on Claude Code best pra
 - [49-pm-acceptance-criteria.md](49-pm-acceptance-criteria.md) - Acceptance criteria standards & AI guardrails
 - [50-qa-test-cases.md](50-qa-test-cases.md) - Test case generation methodologies & BDD
 - [51-dev-fe-task-breakdown.md](51-dev-fe-task-breakdown.md) - Frontend task breakdown framework & coverage checklist
+- [52-dev-be-task-breakdown.md](52-dev-be-task-breakdown.md) - Backend task breakdown for Laravel/PHP with INVEST criteria
+- [53-dev-pr-review.md](53-dev-pr-review.md) - PR review automation with risk scoring & security patterns
 
 ### PR Review Automation
 - [04-laravel-pr-agents.md](04-laravel-pr-agents.md)

@@ -81,6 +81,7 @@ flowchart TD
 
 - **Logical**: `dev:be-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
+- **Reference**: [Backend Task Breakdown Skill: Complete Research Guide](../../../../jaan-to/outputs/research/52-dev-be-task-breakdown.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Data model constraints first (unique, indexes, retention)
@@ -254,6 +255,7 @@ flowchart TD
 
 - **Logical**: `dev:pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
+- **Reference**: [Building a Production-Ready PR/MR Code Review Skill](../../../../jaan-to/outputs/research/53-dev-pr-review.md)
 - **Quick Win**: No - needs GitLab MCP
 - **Key Points**:
   - Define schemas with examples
