@@ -4,7 +4,7 @@ description: |
   Generate a Product Requirements Document from an initiative description.
   Auto-triggers on: feature requirements, PRD requests, product specifications.
   Maps to: jaan-to-pm-prd-write
-allowed-tools: Read, Glob, Grep, Write(jaan-to/**)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**)
 argument-hint: [initiative-description]
 hooks:
   PreToolUse:
@@ -21,12 +21,12 @@ hooks:
 
 ## Context Files
 
-- `jaan-to/context/config.md` - Configuration
-- `jaan-to/context/boundaries.md` - Trust rules
-- `jaan-to/templates/jaan-to-pm-prd-write.template.md` - PRD template
-- `jaan-to/learn/jaan-to-pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
-- `jaan-to/context/tech.md` - Tech context (if exists)
-- `jaan-to/context/team.md` - Team context (if exists)
+- `$JAAN_CONTEXT_DIR/config.md` - Configuration
+- `$JAAN_CONTEXT_DIR/boundaries.md` - Trust rules
+- `$JAAN_TEMPLATES_DIR/jaan-to-pm-prd-write.template.md` - PRD template
+- `$JAAN_LEARN_DIR/jaan-to-pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech context (if exists)
+- `$JAAN_CONTEXT_DIR/team.md` - Team context (if exists)
 
 ## Input
 
@@ -39,7 +39,7 @@ IMPORTANT: The initiative above is your input. Use it directly. Do NOT ask for t
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/jaan-to-pm-prd-write.learn.md`
+`$JAAN_LEARN_DIR/jaan-to-pm-prd-write.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
@@ -48,8 +48,8 @@ If the file exists, apply its lessons throughout this execution:
 - Avoid mistakes listed in "Common Mistakes"
 
 Also read context files if available:
-- `jaan-to/context/tech.md` - Know the tech stack to reference
-- `jaan-to/context/team.md` - Know team structure and norms
+- `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack to reference
+- `$JAAN_CONTEXT_DIR/team.md` - Know team structure and norms
 
 If the file does not exist, continue without it.
 
@@ -87,7 +87,7 @@ Before generating the PRD, confirm with the user:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate PRD
-Use the template from: `jaan-to/templates/jaan-to-pm-prd-write.template.md`
+Use the template from: `$JAAN_TEMPLATES_DIR/jaan-to-pm-prd-write.template.md`
 
 Fill all sections:
 - **Title**: From initiative
@@ -109,12 +109,12 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 Show the complete PRD and ask:
-> "Here's the PRD preview. Write to `jaan-to/outputs/pm/{slug}/prd.md`? [y/n]"
+> "Here's the PRD preview. Write to `$JAAN_OUTPUTS_DIR/pm/{slug}/prd.md`? [y/n]"
 
 ## Step 6: Write Output
 If approved:
 1. Generate slug: lowercase, hyphens, no special chars, max 50 chars
-2. Create path: `jaan-to/outputs/pm/{slug}/prd.md`
+2. Create path: `$JAAN_OUTPUTS_DIR/pm/{slug}/prd.md`
 3. Write the PRD
 4. Confirm: "PRD written to {path}"
 
