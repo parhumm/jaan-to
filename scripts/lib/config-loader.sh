@@ -38,6 +38,11 @@ load_config() {
   local plugin_root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
   local project_dir="${PROJECT_DIR:-.}"
 
+  # Re-initialize CONFIG_CACHE_FILE if unset (for test scenarios)
+  if [ -z "${CONFIG_CACHE_FILE:-}" ]; then
+    CONFIG_CACHE_FILE="/tmp/jaan-to-config-$$"
+  fi
+
   # Initialize cache file
   : > "$CONFIG_CACHE_FILE"
 
@@ -62,7 +67,7 @@ get_config() {
   # Check project first, then plugin, then default
   local result=""
 
-  if [ -f "$CONFIG_CACHE_FILE" ]; then
+  if [ -n "${CONFIG_CACHE_FILE:-}" ] && [ -f "$CONFIG_CACHE_FILE" ]; then
     # Try project value first
     result=$(grep "^project\.${key}=" "$CONFIG_CACHE_FILE" 2>/dev/null | tail -1 | cut -d= -f2-)
 
@@ -116,7 +121,7 @@ validate_path() {
 
 # Cleanup temp file on exit
 cleanup_config() {
-  [ -f "$CONFIG_CACHE_FILE" ] && rm -f "$CONFIG_CACHE_FILE"
+  [ -n "${CONFIG_CACHE_FILE:-}" ] && [ -f "$CONFIG_CACHE_FILE" ] && rm -f "$CONFIG_CACHE_FILE"
 }
 
 trap cleanup_config EXIT
