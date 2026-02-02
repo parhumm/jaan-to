@@ -4,6 +4,27 @@
 
 **Chains**: Beta Rollout → Issue Log → Triage → Hotfix | Prod Runbook → War Room | Iterate → Changelog
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-release-beta-rollout-plan["Beta Rollout Plan\nPhased rollout + exit criteria"] --> jaan-to-release-beta-issue-log["Beta Issue Log\nCategorized issues + trends"]
+    jaan-to-release-beta-issue-log --> jaan-to-release-triage-decision["Triage Decision\nFix/defer + rationale + risk"]
+    jaan-to-release-beta-issue-log --> jaan-to-release-prod-runbook["Prod Runbook\nLaunch steps + rollback triggers"]
+    jaan-to-release-triage-decision --> jaan-to-release-triage-hotfix-scope["Triage Hotfix Scope\nMinimal scope + test focus"]
+    jaan-to-release-triage-hotfix-scope -.-> jaan-to-dev-pr-review["DEV: pr-review"]
+    jaan-to-release-prod-runbook --> jaan-to-release-prod-war-room-pack["Prod War Room Pack\nDashboard + roles + comms"]
+    jaan-to-release-prod-war-room-pack -.-> jaan-to-support-launch-monitor["SUPPORT: launch-monitor"]
+    jaan-to-release-iterate-top-fixes["Iterate Top Fixes\nImprovements + prioritization"] --> jaan-to-release-iterate-changelog["Iterate Changelog\nChangelog + user impact"]
+    jaan-to-release-iterate-changelog -.-> jaan-to-support-help-article["SUPPORT: help-article"]
+
+    style jaan-to-dev-pr-review fill:#f0f0f0,stroke:#999
+    style jaan-to-support-launch-monitor fill:#f0f0f0,stroke:#999
+    style jaan-to-support-help-article fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-release-beta-rollout-plan
 
 - **Logical**: `release:beta-rollout-plan`

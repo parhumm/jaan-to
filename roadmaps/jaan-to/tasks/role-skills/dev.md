@@ -4,6 +4,37 @@
 
 **Chains**: Discovery → Architecture → BE → API → FE → Integration → Test → Observability → Ship
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-dev-feasibility-check["Feasibility Check\nRisks + deps + complexity"] --> jaan-to-dev-arch-proposal["Arch Proposal\nArchitecture + tradeoffs + data flow"]
+    jaan-to-dev-arch-proposal --> jaan-to-dev-tech-plan["Tech Plan\nApproach + rollout/rollback"]
+    jaan-to-dev-tech-plan --> jaan-to-dev-be-task-breakdown["BE Task Breakdown\nBE tasks + data model notes"]
+    jaan-to-dev-tech-plan --> jaan-to-dev-fe-task-breakdown["FE Task Breakdown\nFE tasks + estimates + risks"]
+    jaan-to-dev-be-task-breakdown --> jaan-to-dev-be-data-model["BE Data Model\nTables + constraints + indexes"]
+    jaan-to-dev-be-data-model --> jaan-to-dev-api-contract["API Contract\nOpenAPI + payloads + errors"]
+    jaan-to-dev-api-contract --> jaan-to-dev-api-versioning["API Versioning\nCompatibility + deprecation plan"]
+    jaan-to-dev-api-versioning --> jaan-to-dev-docs-generate["Docs Generate\nREADME + API docs + runbooks"]
+    jaan-to-dev-api-contract --> jaan-to-dev-docs-generate
+    jaan-to-dev-fe-task-breakdown --> jaan-to-dev-fe-state-machine["FE State Machine\nUI states + transitions"]
+    jaan-to-dev-fe-state-machine --> jaan-to-dev-test-plan["Test Plan\nUnit/integration/e2e scope"]
+    jaan-to-dev-integration-plan["Integration Plan\nAPI sequence + retry + failures"] --> jaan-to-dev-integration-mock-stubs["Integration Mock Stubs\nStub interfaces + fake responses"]
+    jaan-to-dev-integration-mock-stubs --> jaan-to-dev-test-plan
+    jaan-to-dev-test-plan -.-> jaan-to-qa-test-cases["QA: test-cases"]
+    jaan-to-dev-observability-events["Observability Events\nLog fields + metrics + traces"] --> jaan-to-dev-observability-alerts["Observability Alerts\nThresholds + severity + noise"]
+    jaan-to-dev-observability-alerts -.-> jaan-to-sre-slo-setup["SRE: slo-setup"]
+    jaan-to-dev-ship-check["Ship Check\nFlags + migrations + Go/No-Go"] -.-> jaan-to-release-prod-runbook["RELEASE: prod-runbook"]
+    jaan-to-dev-ship-check -.-> jaan-to-qa-release-signoff["QA: release-signoff"]
+
+    style jaan-to-qa-test-cases fill:#f0f0f0,stroke:#999
+    style jaan-to-sre-slo-setup fill:#f0f0f0,stroke:#999
+    style jaan-to-release-prod-runbook fill:#f0f0f0,stroke:#999
+    style jaan-to-qa-release-signoff fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-dev-feasibility-check
 
 - **Logical**: `dev:feasibility-check`

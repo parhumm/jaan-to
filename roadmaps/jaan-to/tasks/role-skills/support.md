@@ -4,6 +4,25 @@
 
 **Chains**: Taxonomy → Digest | Article → Reply | CX Touchpoints → Friction | Monitor → Triage
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-support-tag-taxonomy["Tag Taxonomy\nTags + definitions + rules"] --> jaan-to-support-weekly-digest["Weekly Digest\nThemes + severity + actions"]
+    jaan-to-support-weekly-digest -.-> jaan-to-pm-feedback-synthesize["PM: feedback-synthesize"]
+    jaan-to-support-help-article["Help Article\nDraft + troubleshooting steps"] --> jaan-to-support-reply-pack["Reply Pack\nCanned replies + escalation tree"]
+    jaan-to-support-cx-touchpoints["CX Touchpoints\nTouchpoint map + gaps"] --> jaan-to-support-cx-friction-fixes["CX Friction Fixes\nPrioritized fixes + impact"]
+    jaan-to-support-cx-friction-fixes -.-> jaan-to-pm-priority-score["PM: priority-score"]
+    jaan-to-support-launch-monitor["Launch Monitor\nWatchlist + response plan"] --> jaan-to-support-triage-priority["Triage Priority\nSeverity + next action + comms"]
+    jaan-to-support-triage-priority -.-> jaan-to-qa-bug-report["QA: bug-report"]
+
+    style jaan-to-pm-feedback-synthesize fill:#f0f0f0,stroke:#999
+    style jaan-to-pm-priority-score fill:#f0f0f0,stroke:#999
+    style jaan-to-qa-bug-report fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-support-tag-taxonomy
 
 - **Logical**: `support:tag-taxonomy`

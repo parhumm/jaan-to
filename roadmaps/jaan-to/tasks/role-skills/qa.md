@@ -4,6 +4,33 @@
 
 **Chains**: Matrix → Cases → Data → E2E → Bug → Triage | Perf → Bottleneck | Automation → Smoke → Regression → Signoff
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-qa-test-matrix["Test Matrix\nP0/P1 flows × states × devices"] --> jaan-to-qa-test-cases["Test Cases\nCases + edge cases + preconditions"]
+    jaan-to-qa-test-cases --> jaan-to-qa-test-data["Test Data\nAccounts + permissions + seed data"]
+    jaan-to-qa-test-data --> jaan-to-qa-e2e-checklist["E2E Checklist\nChecklist + state coverage"]
+    jaan-to-qa-e2e-checklist --> jaan-to-qa-bug-report["Bug Report\nSeverity + repro steps + expected"]
+    jaan-to-qa-e2e-checklist --> jaan-to-qa-automation-plan["Automation Plan\nWhat to automate + flakiness risk"]
+    jaan-to-qa-bug-report --> jaan-to-qa-bug-triage["Bug Triage\nDedupe + severity + root cause"]
+    jaan-to-qa-bug-triage -.-> jaan-to-dev-pr-review["DEV: pr-review"]
+    jaan-to-qa-bug-triage -.-> jaan-to-release-triage-decision["RELEASE: triage-decision"]
+    jaan-to-qa-perf-plan["Perf Plan\nLoad scenarios + thresholds"] --> jaan-to-qa-perf-bottleneck["Perf Bottleneck\nBottlenecks + diagnostics + fixes"]
+    jaan-to-qa-perf-bottleneck -.-> jaan-to-dev-be-task-breakdown["DEV: be-task-breakdown"]
+    jaan-to-qa-automation-plan --> jaan-to-qa-smoke-suite["Smoke Suite\nCritical path tests + pass/fail"]
+    jaan-to-qa-smoke-suite --> jaan-to-qa-regression-runbook["Regression Runbook\nSmoke → critical → deep checks"]
+    jaan-to-qa-regression-runbook --> jaan-to-qa-release-signoff["Release Signoff\nGo/No-Go + evidence + risks"]
+    jaan-to-qa-release-signoff -.-> jaan-to-delivery-release-readiness["DELIVERY: release-readiness"]
+
+    style jaan-to-dev-pr-review fill:#f0f0f0,stroke:#999
+    style jaan-to-release-triage-decision fill:#f0f0f0,stroke:#999
+    style jaan-to-dev-be-task-breakdown fill:#f0f0f0,stroke:#999
+    style jaan-to-delivery-release-readiness fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-qa-test-matrix
 
 - **Logical**: `qa:test-matrix`

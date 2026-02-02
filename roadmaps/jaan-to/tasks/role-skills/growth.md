@@ -4,6 +4,34 @@
 
 **Chains**: SEO: Keyword → Outline → Meta → Audit → Check | Beta → Feedback | Lifecycle → Variants | Loop → Guards | Launch → FAQ
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-growth-keyword-brief["Keyword Brief\nKeyword + intent map + SERP"] --> jaan-to-growth-content-outline["Content Outline\nH1-H3 + FAQs + internal links"]
+    jaan-to-growth-content-outline --> jaan-to-growth-meta-write["Meta Write\nTitles + descriptions"]
+    jaan-to-growth-meta-write --> jaan-to-growth-seo-audit["SEO Audit\nTitle/meta + headings + gaps"]
+    jaan-to-growth-seo-audit --> jaan-to-growth-seo-check["SEO Check\nIndexability + crawl + errors"]
+    jaan-to-growth-content-optimize["Content Optimize\nRefresh checklist + links"] --> jaan-to-growth-meta-write
+    jaan-to-growth-beta-cohort-plan["Beta Cohort Plan\nCohort + eligibility + exit criteria"] --> jaan-to-growth-beta-feedback-script["Beta Feedback Script\nInterview prompts + probes"]
+    jaan-to-growth-beta-cohort-plan -.-> jaan-to-release-beta-rollout-plan["RELEASE: beta-rollout-plan"]
+    jaan-to-growth-beta-feedback-script -.-> jaan-to-pm-insights-synthesis["PM: insights-synthesis"]
+    jaan-to-growth-lifecycle-message-map["Lifecycle Message Map\nTriggers + timing + channels"] --> jaan-to-growth-lifecycle-copy-variants["Lifecycle Copy Variants\n3-5 variants + CTAs"]
+    jaan-to-growth-lifecycle-copy-variants -.-> jaan-to-data-experiment-design["DATA: experiment-design"]
+    jaan-to-growth-loop-design["Loop Design\nDiagram + incentives + metrics"] --> jaan-to-growth-loop-abuse-guards["Loop Abuse Guards\nAnti-fraud + limits + monitoring"]
+    jaan-to-growth-loop-abuse-guards -.-> jaan-to-data-event-spec["DATA: event-spec"]
+    jaan-to-growth-launch-announcement["Launch Announcement\nCopy pack + channel adaptations"] --> jaan-to-growth-launch-faq["Launch FAQ\nFAQ + objections + support notes"]
+    jaan-to-growth-launch-faq -.-> jaan-to-support-help-article["SUPPORT: help-article"]
+
+    style jaan-to-release-beta-rollout-plan fill:#f0f0f0,stroke:#999
+    style jaan-to-pm-insights-synthesis fill:#f0f0f0,stroke:#999
+    style jaan-to-data-experiment-design fill:#f0f0f0,stroke:#999
+    style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
+    style jaan-to-support-help-article fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-growth-keyword-brief
 
 - **Logical**: `growth:keyword-brief`

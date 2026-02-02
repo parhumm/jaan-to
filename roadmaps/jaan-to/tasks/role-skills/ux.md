@@ -4,6 +4,42 @@
 
 **Chains**: Research → Synthesize → Persona | Journey → Edge Cases → Flow | IA: Sitemap → Taxonomy | Wireframe → Review → UI → Handoff | Copy → Errors | A11y → ARIA | Onboarding → Tooltips
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-ux-research-plan["Research Plan\nQuestions + method + participants"] --> jaan-to-ux-research-synthesize["Research Synthesize\nThemes + recommendations"]
+    jaan-to-ux-research-synthesize --> jaan-to-ux-persona-create["Persona Create\nGoals + pains + JTBD"]
+    jaan-to-ux-persona-create -.-> jaan-to-pm-jtbd-map["PM: jtbd-map"]
+    jaan-to-ux-persona-create -.-> jaan-to-pm-persona-card["PM: persona-card"]
+    jaan-to-ux-competitive-review["Competitive Review\nFlows + patterns + opportunities"] -.-> jaan-to-pm-positioning-brief["PM: positioning-brief"]
+    jaan-to-ux-journey-map["Journey Map\nSteps + pain points + metrics"] --> jaan-to-ux-journey-edge-cases["Journey Edge Cases\nEdge cases + recovery paths"]
+    jaan-to-ux-journey-edge-cases --> jaan-to-ux-flow-spec["Flow Spec\nHappy path + all states"]
+    jaan-to-ux-flow-spec --> jaan-to-ux-microcopy-write["Microcopy Write\nLabels + errors + toasts + tone"]
+    jaan-to-ux-flow-spec -.-> jaan-to-dev-fe-state-machine["DEV: fe-state-machine"]
+    jaan-to-ux-heuristic-review["Heuristic Review\nIssues + severity + quick wins"] --> jaan-to-ux-flow-spec
+    jaan-to-ux-sitemap["Sitemap\nPages + entry points + IA risks"] --> jaan-to-ux-taxonomy["Taxonomy\nNaming rules + attributes"]
+    jaan-to-ux-taxonomy --> jaan-to-ux-wireframe-screens["Wireframe Screens\nScreen list + states + interactions"]
+    jaan-to-ux-wireframe-screens --> jaan-to-ux-wireframe-review["Wireframe Review\nUsability checklist + issues"]
+    jaan-to-ux-wireframe-review --> jaan-to-ux-ui-spec-states["UI Spec States\nState list + triggers + copy"]
+    jaan-to-ux-ui-spec-states --> jaan-to-ux-ui-handoff-notes["UI Handoff Notes\nComponents + tokens + animation"]
+    jaan-to-ux-ui-handoff-notes -.-> jaan-to-dev-fe-task-breakdown["DEV: fe-task-breakdown"]
+    jaan-to-ux-microcopy-write --> jaan-to-ux-error-messages["Error Messages\nUser-friendly errors + recovery"]
+    jaan-to-ux-a11y-audit["A11y Audit\nIssues + fix checklist"] --> jaan-to-ux-a11y-aria-notes["A11y ARIA Notes\nRoles/labels + focus management"]
+    jaan-to-ux-a11y-aria-notes -.-> jaan-to-dev-fe-task-breakdown
+    jaan-to-ux-onboarding-steps["Onboarding Steps\nSteps + activation + drop-offs"] --> jaan-to-ux-onboarding-tooltips["Onboarding Tooltips\nTooltip copy + skip/done patterns"]
+    jaan-to-ux-onboarding-tooltips -.-> jaan-to-data-event-spec["DATA: event-spec"]
+
+    style jaan-to-pm-jtbd-map fill:#f0f0f0,stroke:#999
+    style jaan-to-pm-persona-card fill:#f0f0f0,stroke:#999
+    style jaan-to-pm-positioning-brief fill:#f0f0f0,stroke:#999
+    style jaan-to-dev-fe-state-machine fill:#f0f0f0,stroke:#999
+    style jaan-to-dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
+    style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-ux-research-plan
 
 - **Logical**: `ux:research-plan`

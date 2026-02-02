@@ -4,6 +4,55 @@
 
 **Chains**: Discovery → Market → User → Metrics → Prioritize → Scope → PRD → Roadmap → Post-launch
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-pm-interview-guide["Interview Guide\nScript + hypotheses + bias reminders"] --> jaan-to-pm-insights-synthesis["Insights Synthesis\nPains ranked + quote bank"]
+    jaan-to-pm-insights-synthesis --> jaan-to-pm-problem-statement["Problem Statement\n1-3 statements + non-goals"]
+    jaan-to-pm-problem-statement --> jaan-to-pm-competitor-matrix["Competitor Matrix\nComparison table + gaps"]
+    jaan-to-pm-problem-statement -.-> jaan-to-pm-prd-write["PRD Write ★"]
+    jaan-to-pm-competitor-matrix --> jaan-to-pm-positioning-brief["Positioning Brief\nStatement + differentiators"]
+    jaan-to-pm-positioning-brief --> jaan-to-pm-persona-card["Persona Card\nGoals, pains, channels"]
+    jaan-to-pm-persona-card --> jaan-to-pm-jtbd-map["JTBD Map\nFunctional/emotional/social jobs"]
+    jaan-to-pm-jtbd-map --> jaan-to-pm-success-criteria["Success Criteria\nMeasurable done-means + guardrails"]
+    jaan-to-pm-success-criteria --> jaan-to-pm-north-star["North Star\nMetric + drivers + cadence"]
+    jaan-to-pm-success-criteria -.-> jaan-to-pm-prd-write
+    jaan-to-pm-north-star --> jaan-to-pm-kpi-tree["KPI Tree\nInput metrics + guardrails"]
+    jaan-to-pm-kpi-tree --> jaan-to-pm-measurement-plan["Measurement Plan\nEvents + triggers + validation"]
+    jaan-to-pm-measurement-plan -.-> jaan-to-data-event-spec["DATA: event-spec"]
+    jaan-to-pm-feedback-synthesize["Feedback Synthesize\nThemes + prioritized pains"] --> jaan-to-pm-priority-score
+    jaan-to-pm-decision-brief["Decision Brief\nOptions + risks + recommendation"] --> jaan-to-pm-priority-score
+    jaan-to-pm-priority-score["Priority Score\nRanked backlog + rationale"] --> jaan-to-pm-bet-sizing["Bet Sizing\nEffort bands + risk + sequencing"]
+    jaan-to-pm-bet-sizing --> jaan-to-pm-scope-slice["Scope Slice\nMVP vs Later + milestones"]
+    jaan-to-pm-scope-slice --> jaan-to-pm-experiment-plan["Experiment Plan\nHypothesis + thresholds + rollout"]
+    jaan-to-pm-scope-slice -.-> jaan-to-pm-prd-write
+    jaan-to-pm-experiment-plan -.-> jaan-to-data-experiment-design["DATA: experiment-design"]
+    jaan-to-pm-acceptance-criteria["Acceptance Criteria\nTestable AC + edge cases"] --> jaan-to-pm-story-write["Story Write\nGiven/When/Then stories"]
+    jaan-to-pm-acceptance-criteria -.-> jaan-to-qa-test-cases["QA: test-cases"]
+    jaan-to-pm-story-write -.-> jaan-to-dev-fe-task-breakdown["DEV: fe-task-breakdown"]
+    jaan-to-pm-story-write -.-> jaan-to-dev-be-task-breakdown["DEV: be-task-breakdown"]
+    jaan-to-pm-release-notes-draft["Release Notes Draft\nUser-facing changes + support notes"] -.-> jaan-to-support-help-article["SUPPORT: help-article"]
+    jaan-to-pm-release-notes-draft -.-> jaan-to-growth-launch-announcement["GROWTH: launch-announcement"]
+    jaan-to-pm-now-next-later["Now/Next/Later\nBoard + outcomes + confidence"] --> jaan-to-pm-milestones["Milestones\nOwners + deps + critical path"]
+    jaan-to-pm-milestones -.-> jaan-to-delivery-plan-milestones["DELIVERY: plan-milestones"]
+    jaan-to-pm-release-review["Release Review\nKPI deltas + learnings"] --> jaan-to-pm-feedback-synthesize
+    jaan-to-pm-release-review -.-> jaan-to-release-iterate-top-fixes["RELEASE: iterate-top-fixes"]
+
+    style jaan-to-pm-prd-write fill:#e8f5e9,stroke:#4caf50
+    style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
+    style jaan-to-data-experiment-design fill:#f0f0f0,stroke:#999
+    style jaan-to-qa-test-cases fill:#f0f0f0,stroke:#999
+    style jaan-to-dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
+    style jaan-to-dev-be-task-breakdown fill:#f0f0f0,stroke:#999
+    style jaan-to-support-help-article fill:#f0f0f0,stroke:#999
+    style jaan-to-growth-launch-announcement fill:#f0f0f0,stroke:#999
+    style jaan-to-delivery-plan-milestones fill:#f0f0f0,stroke:#999
+    style jaan-to-release-iterate-top-fixes fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-pm-interview-guide
 
 - **Logical**: `pm:interview-guide`

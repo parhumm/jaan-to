@@ -4,6 +4,23 @@
 
 **Chains**: Plan → Risks → Backlog → Ready → Sprint → Deps | Readiness → Comms
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-delivery-plan-milestones["Plan Milestones\nMilestones + owners + exit criteria"] --> jaan-to-delivery-plan-risks["Plan Risks\nRisk register + mitigations"]
+    jaan-to-delivery-plan-risks --> jaan-to-delivery-backlog-split["Backlog Split\nEpics/stories + dependencies"]
+    jaan-to-delivery-backlog-split --> jaan-to-delivery-backlog-ready-check["Backlog Ready Check\nDefinition-of-ready checklist"]
+    jaan-to-delivery-backlog-ready-check --> jaan-to-delivery-sprint-planning-pack["Sprint Planning Pack\nGoal + scope + capacity"]
+    jaan-to-delivery-sprint-planning-pack --> jaan-to-delivery-sprint-dependency-map["Sprint Dependency Map\nDeps graph + critical path"]
+    jaan-to-delivery-release-readiness["Release Readiness\nGo/no-go + approvals + roles"] --> jaan-to-delivery-release-comms-plan["Release Comms Plan\nNotifications + templates"]
+    jaan-to-delivery-release-comms-plan -.-> jaan-to-release-prod-runbook["RELEASE: prod-runbook"]
+
+    style jaan-to-release-prod-runbook fill:#f0f0f0,stroke:#999
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-delivery-plan-milestones
 
 - **Logical**: `delivery:plan-milestones`

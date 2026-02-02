@@ -4,6 +4,17 @@
 
 **Chain**: Threat Model → PII Map → Compliance → Evidence
 
+## Userflow Schema
+
+```mermaid
+flowchart TD
+    jaan-to-sec-threat-model-lite["Threat Model Lite\nThreats + mitigations checklist"] --> jaan-to-sec-pii-map["PII Map\nInventory + flows + retention"]
+    jaan-to-sec-pii-map --> jaan-to-sec-compliance-requirements["Compliance Requirements\nChecklist + data handling + gaps"]
+    jaan-to-sec-compliance-requirements --> jaan-to-sec-compliance-evidence-pack["Compliance Evidence Pack\nDocs + examples + ownership"]
+```
+
+**Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
+
 ### /jaan-to-sec-threat-model-lite
 
 - **Logical**: `sec:threat-model-lite`
