@@ -4,7 +4,7 @@ description: |
   Create new documentation with templates following STYLE.md.
   Supports: skill, hook, config, guide, concept, index.
   Maps to: to-jaan-docs-create
-allowed-tools: Read, Glob, Grep, Write(docs/**), Write(jaan-to/**), Bash(git add:*), Bash(git commit:*)
+allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: "{type} {name}"
 ---
 
@@ -15,15 +15,15 @@ argument-hint: "{type} {name}"
 ## Context Files
 
 - `jaan-to/docs/STYLE.md` - Documentation standards
-- `jaan-to/templates/to-jaan-docs-create.template.md` - All templates
-- `jaan-to/learn/to-jaan-docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/to-jaan-docs-create.template.md` - All templates
+- `$JAAN_LEARN_DIR/to-jaan-docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ---
 
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/to-jaan-docs-create.learn.md`
+`$JAAN_LEARN_DIR/to-jaan-docs-create.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -177,7 +177,7 @@ Proceed? [y/n/edit]
 
 ## Step 6: Load Template
 
-Read template for doc type from `jaan-to/templates/to-jaan-docs-create.template.md`
+Read template for doc type from `$JAAN_TEMPLATES_DIR/to-jaan-docs-create.template.md`
 
 ## Step 7: Fill Template
 

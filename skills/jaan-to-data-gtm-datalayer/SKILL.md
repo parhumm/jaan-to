@@ -4,7 +4,7 @@ description: |
   Generate production-ready GTM tracking code (dataLayer pushes and HTML attributes).
   Auto-triggers on: gtm tracking, datalayer push, tracking code, impression tracking, click tracking gtm, al_tracker.
   Maps to: jaan-to-data-gtm-datalayer
-allowed-tools: Read, Glob, Grep, Write(jaan-to/**)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**)
 argument-hint: [prd-path | tracking-description | (interactive)]
 ---
 
@@ -14,8 +14,8 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 
 ## Context Files
 
-- `jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md` - Past lessons (loaded in Pre-Execution)
-- `jaan-to/templates/jaan-to-data-gtm-datalayer.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-data-gtm-datalayer.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-data-gtm-datalayer.template.md` - Output template
 
 ## Input
 
@@ -30,7 +30,7 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/jaan-to-data-gtm-datalayer.learn.md`
+`$JAAN_LEARN_DIR/jaan-to-data-gtm-datalayer.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -49,7 +49,7 @@ If the file does not exist, continue without it.
 Check $ARGUMENTS:
 
 **Mode A - PRD Input:**
-If path to `jaan-to/outputs/` or PRD text provided:
+If path to `$JAAN_OUTPUTS_DIR/` or PRD text provided:
 1. Read/parse the PRD
 2. Identify trackable interactions (buttons, forms, modals, etc.)
 3. Suggest tracking points with types:
@@ -329,14 +329,14 @@ EXAMPLE WITH VALUES
 {example showing real values based on user input}
 ```
 
-> "Save to `jaan-to/outputs/data/gtm/{slug}/tracking.md`? [y/n]"
+> "Save to `$JAAN_OUTPUTS_DIR/data/gtm/{slug}/tracking.md`? [y/n]"
 
 ## Step 6: Write Output
 
 If approved:
 1. Generate slug from feature-item (e.g., "player-pause")
-2. Create path: `jaan-to/outputs/data/gtm/{slug}/tracking.md`
-3. Use template from `jaan-to/templates/jaan-to-data-gtm-datalayer.template.md`
+2. Create path: `$JAAN_OUTPUTS_DIR/data/gtm/{slug}/tracking.md`
+3. Use template from `$JAAN_TEMPLATES_DIR/jaan-to-data-gtm-datalayer.template.md`
 4. Write file
 5. Confirm: "Written to {path}"
 
@@ -357,5 +357,5 @@ If yes:
 
 - [ ] User confirmed tracking values
 - [ ] Code generated and displayed in conversation
-- [ ] Markdown file written to `jaan-to/outputs/data/gtm/{slug}/`
+- [ ] Markdown file written to `$JAAN_OUTPUTS_DIR/data/gtm/{slug}/`
 - [ ] User can copy-paste and use immediately

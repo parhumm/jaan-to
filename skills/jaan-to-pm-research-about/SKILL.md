@@ -14,9 +14,9 @@ argument-hint: <topic-or-file-path-or-URL>
 
 ## Context Files
 
-- `jaan-to/learn/jaan-to-pm-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
-- `jaan-to/templates/jaan-to-pm-research-about.template.md` - Output format template
-- `jaan-to/outputs/research/README.md` - Current index structure
+- `$JAAN_LEARN_DIR/jaan-to-pm-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-pm-research-about.template.md` - Output format template
+- `$JAAN_OUTPUTS_DIR/research/README.md` - Current index structure
 
 ## Input
 
@@ -27,7 +27,7 @@ argument-hint: <topic-or-file-path-or-URL>
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/jaan-to-pm-research-about.learn.md`
+`$JAAN_LEARN_DIR/jaan-to-pm-research-about.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -76,11 +76,11 @@ If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topi
 
 ## Step 0.3: Generate Filename
 
-1. Count existing files in `jaan-to/outputs/research/` matching pattern `[0-9][0-9]-*.md`
+1. Count existing files in `$JAAN_OUTPUTS_DIR/research/` matching pattern `[0-9][0-9]-*.md`
 2. Next number = count + 1 (pad to 2 digits)
 3. Slugify topic: lowercase, replace spaces with hyphens, remove special chars
 4. Format: `{NN}-{category}-{slug}.md`
-5. Path: `jaan-to/outputs/research/{filename}`
+5. Path: `$JAAN_OUTPUTS_DIR/research/{filename}`
 
 **Show user:**
 > **Research Setup**
@@ -689,7 +689,7 @@ WILL CREATE
 
 ## Step 7: Generate Document
 
-Use template from `jaan-to/templates/jaan-to-pm-research-about.template.md`:
+Use template from `$JAAN_TEMPLATES_DIR/jaan-to-pm-research-about.template.md`:
 
 1. Fill all sections with researched content
 2. Include specific facts, statistics, and citations
@@ -720,17 +720,17 @@ If any check fails, revise before preview.
 
 **If `{approval_mode}` = Interactive:**
 - Show complete document
-- Ask: > "Write to `jaan-to/outputs/research/{filename}`? [y/n]"
+- Ask: > "Write to `$JAAN_OUTPUTS_DIR/research/{filename}`? [y/n]"
 
 ## Step 10: Write Output
 
 If approved (or auto-mode):
 1. Write the research document
-2. Confirm: "Research written to `jaan-to/outputs/research/{filename}`"
+2. Confirm: "Research written to `$JAAN_OUTPUTS_DIR/research/{filename}`"
 
 ## Step 11: Update README Index
 
-Edit `jaan-to/outputs/research/README.md`:
+Edit `$JAAN_OUTPUTS_DIR/research/README.md`:
 
 1. **Add to Summary Index table:**
    Find the table under `## Summary Index` and add new row:
@@ -836,7 +836,7 @@ If yes:
 
 ## Generate Filename
 
-1. Count files matching `[0-9][0-9]-*.md` in `jaan-to/outputs/research/`
+1. Count files matching `[0-9][0-9]-*.md` in `$JAAN_OUTPUTS_DIR/research/`
 2. Next number = count + 1 (pad to 2 digits)
 3. Slugify title: lowercase, hyphens, max 50 chars
 4. Format: `{NN}-{category}-{slug}.md`
@@ -869,7 +869,7 @@ Do NOT proceed without approval.
 
 ## Create File (URLs only)
 
-Path: `jaan-to/outputs/research/{NN}-{category}-{slug}.md`
+Path: `$JAAN_OUTPUTS_DIR/research/{NN}-{category}-{slug}.md`
 
 ```markdown
 # {Title}

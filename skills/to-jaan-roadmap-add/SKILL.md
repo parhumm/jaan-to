@@ -4,7 +4,7 @@ description: |
   [Internal] Add a task to the jaan.to development roadmap.
   For jaan.to project maintenance, not end-user use.
   Maps to: to-jaan-roadmap-add
-allowed-tools: Read, Glob, Grep, Write(jaan-to/**)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**)
 argument-hint: [task-description]
 ---
 
@@ -16,7 +16,7 @@ argument-hint: [task-description]
 
 - `jaan-to/roadmap.md` - Current roadmap
 - `jaan-to/tasks/` - Task standards
-- `jaan-to/learn/to-jaan-roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/to-jaan-roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -29,7 +29,7 @@ If no input provided, ask: "What task would you like to add to the roadmap?"
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/to-jaan-roadmap-add.learn.md`
+`$JAAN_LEARN_DIR/to-jaan-roadmap-add.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"

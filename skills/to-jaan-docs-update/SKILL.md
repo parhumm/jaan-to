@@ -4,7 +4,7 @@ description: |
   Audit and maintain documentation quality.
   Default: Smart staleness check using git history.
   Maps to: to-jaan-docs-update
-allowed-tools: Read, Glob, Grep, Write(docs/**), Write(jaan-to/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
+allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 ---
 
@@ -15,12 +15,12 @@ argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 ## Context Files
 
 - `jaan-to/docs/STYLE.md` - Documentation standards
-- `jaan-to/learn/to-jaan-docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/to-jaan-docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/to-jaan-docs-update.learn.md`
+`$JAAN_LEARN_DIR/to-jaan-docs-update.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Note common issues to check
@@ -36,11 +36,11 @@ If the file does not exist, continue without it.
 | Code Path | Related Doc |
 |-----------|-------------|
 | `skills/{name}/SKILL.md` | `docs/skills/{role}/{slug}.md` |
-| `jaan-to/learn/{name}.learn.md` | (referenced in skill doc) |
-| `jaan-to/context/hooks/{name}.sh` | `docs/hooks/{name}.md` |
-| `jaan-to/context/config.md` | `docs/config/README.md` |
-| `jaan-to/context/*.md` | `docs/config/context.md` |
-| `jaan-to/context/boundaries.md` | `docs/config/boundaries.md` |
+| `$JAAN_LEARN_DIR/{name}.learn.md` | (referenced in skill doc) |
+| `$JAAN_CONTEXT_DIR/hooks/{name}.sh` | `docs/hooks/{name}.md` |
+| `$JAAN_CONTEXT_DIR/config.md` | `docs/config/README.md` |
+| `$JAAN_CONTEXT_DIR/*.md` | `docs/config/context.md` |
+| `$JAAN_CONTEXT_DIR/boundaries.md` | `docs/config/boundaries.md` |
 
 **Slug extraction:** `jaan-to-pm-prd-write` → `prd-write` (remove role prefix)
 

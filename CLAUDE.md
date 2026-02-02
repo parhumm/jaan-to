@@ -21,19 +21,21 @@ This is a Claude Code Plugin. All paths below are **relative to the plugin root*
 
 ## File Locations
 
-| Component | Location | Format |
-|-----------|----------|--------|
-| Skills | `skills/<name>/SKILL.md` | YAML frontmatter + markdown |
-| Skill Spec | `jaan-to/docs/create-skill.md` (project) | Specification for creating skills |
-| Context | `jaan-to/context/` (project) | Markdown templates |
-| Boundaries | `jaan-to/context/boundaries.md` (project) | Markdown |
-| Templates | `jaan-to/templates/` (project) | Markdown templates |
-| Hooks | `hooks/hooks.json` | JSON |
-| Scripts | `scripts/` | Shell scripts |
-| Agents | `agents/` | Markdown |
-| Output | `jaan-to/outputs/` (project) | Generated files |
-| Learning | `jaan-to/learn/` (project) | Accumulated lessons |
-| Plugin Manifest | `.claude-plugin/plugin.json` | JSON |
+| Component | Location | Format | Customizable |
+|-----------|----------|--------|--------------|
+| Skills | `skills/<name>/SKILL.md` | YAML frontmatter + markdown | No |
+| Skill Spec | `jaan-to/docs/create-skill.md` (project) | Specification for creating skills | No |
+| Config | `jaan-to/config/settings.yaml` (project) | YAML | Yes |
+| Context | `jaan-to/context/` (project) | Markdown templates | Yes |
+| Boundaries | `jaan-to/context/boundaries.md` (project) | Markdown | Yes |
+| Templates | `jaan-to/templates/` (project) | Markdown templates | Yes |
+| Hooks | `hooks/hooks.json` | JSON | No |
+| Scripts | `scripts/` | Shell scripts | No |
+| Agents | `agents/` | Markdown | No |
+| Output | `jaan-to/outputs/` (project) | Generated files | Via config |
+| Learning | `jaan-to/learn/` (project) | Accumulated lessons | Via config |
+| Plugin Manifest | `.claude-plugin/plugin.json` | JSON | No |
+| Plugin Defaults | `config/defaults.yaml` | YAML | No |
 
 ---
 
@@ -133,6 +135,49 @@ Every version bump MUST be a single atomic operation:
 | `/to-jaan-docs-create` | Create documentation |
 | `/to-jaan-docs-update` | Audit documentation |
 | `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
+
+---
+
+## Customization
+
+### Quick Start
+All customization happens in the project's `jaan-to/config/settings.yaml`:
+```yaml
+# Customize output paths
+paths_outputs: "artifacts/generated"
+
+# Customize templates
+templates_jaan_to_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
+
+# Merge learning from plugin + project
+learning_strategy: "merge"
+```
+
+### Tech Stack
+Edit `jaan-to/context/tech.md` to define:
+- Languages and frameworks
+- Technical constraints
+- Architecture patterns
+
+Skills like `/jaan-to-pm-prd-write` will automatically reference your stack in generated PRDs.
+
+### Environment Variables
+Override paths via `.claude/settings.json`:
+```json
+{
+  "env": {
+    "JAAN_OUTPUTS_DIR": "build/artifacts"
+  }
+}
+```
+
+### Examples
+- [Enterprise Template](examples/custom-template-enterprise.yaml)
+- [Monorepo Paths](examples/custom-paths-monorepo.yaml)
+- [Learning Override](examples/custom-learning-override.yaml)
+
+### Migration
+See [Migration Guide](docs/guides/migration-v3.md) for upgrading from v2.x.
 
 ---
 

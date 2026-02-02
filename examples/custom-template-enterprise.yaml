@@ -1,0 +1,8 @@
+# Example: Enterprise template customization
+version: "3.0"
+
+templates_jaan_to_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
+
+# Alternative: Use template inheritance (v3.1+ feature)
+# templates_jaan_to_pm_prd_write_extends: "plugin:jaan-to-pm-prd-write"
+# templates_jaan_to_pm_prd_write_overrides_sections_success_metrics: "./sections/okr-metrics.md"

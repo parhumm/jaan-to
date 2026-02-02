@@ -4,7 +4,7 @@ description: |
   Guide users through creating new jaan.to skills step-by-step.
   Auto-triggers on: create skill, new skill, skill wizard, add skill.
   Maps to: to-jaan-skill-create
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write(jaan-to/**), Edit(jaan-to/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 ---
 
@@ -15,9 +15,9 @@ argument-hint: [optional-skill-idea]
 ## Context Files
 
 - `jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
-- `jaan-to/learn/to-jaan-skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
-- `jaan-to/templates/to-jaan-skill-create.template.md` - Generation templates
-- `jaan-to/context/config.md` - Current skill catalog
+- `$JAAN_LEARN_DIR/to-jaan-skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/to-jaan-skill-create.template.md` - Generation templates
+- `$JAAN_CONTEXT_DIR/config.md` - Current skill catalog
 
 ## Input
 
@@ -30,7 +30,7 @@ If provided, use as starting context. Otherwise, begin with identity questions.
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/to-jaan-skill-create.learn.md`
+`$JAAN_LEARN_DIR/to-jaan-skill-create.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -247,7 +247,7 @@ Confirm: "Created branch `skill/{name}`. All work on this branch."
 
 ## Step 7: Generate SKILL.md
 
-Use template from `jaan-to/templates/to-jaan-skill-create.template.md`:
+Use template from `$JAAN_TEMPLATES_DIR/to-jaan-skill-create.template.md`:
 
 1. Fill YAML frontmatter:
    - name: {name}
@@ -435,8 +435,8 @@ Consulted {source_count} sources for best practices:
 ## Files Created
 
 - `skills/{name}/SKILL.md`
-- `jaan-to/learn/{name}.learn.md`
-- `jaan-to/templates/{name}.template.md` (if applicable)
+- `$JAAN_LEARN_DIR/{name}.learn.md`
+- `$JAAN_TEMPLATES_DIR/{name}.template.md` (if applicable)
 - `docs/skills/{role}/{name}.md`
 
 ## Testing

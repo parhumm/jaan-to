@@ -4,7 +4,7 @@ description: |
   Generate user stories with Given/When/Then acceptance criteria following INVEST principles.
   Auto-triggers on: write user story, create story, user story for, story write, generate story
   Maps to: jaan-to-pm-story:write
-allowed-tools: Read, Glob, Grep, Write(jaan-to/**), Task
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task
 argument-hint: [feature] [persona] [goal] OR [epic-id]
 ---
 
@@ -15,9 +15,9 @@ argument-hint: [feature] [persona] [goal] OR [epic-id]
 ## Context Files
 
 Read before execution:
-- `jaan-to/learn/jaan-to-pm-story-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-pm-story-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `skills/jaan-to-pm-story-write/template.md` - Story output template
-- `jaan-to/outputs/research/45-pm-insights-synthesis.md` - Reference research (optional)
+- `$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md` - Reference research (optional)
 - Jira epic/context (if MCP available and epic ID provided)
 
 ## Input
@@ -44,7 +44,7 @@ IMPORTANT: The input above is your starting point. Use it directly. Do NOT ask f
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`jaan-to/learn/jaan-to-pm-story-write.learn.md`
+`$JAAN_LEARN_DIR/jaan-to-pm-story-write.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
@@ -53,7 +53,7 @@ If the file exists, apply its lessons throughout this execution:
 - Avoid mistakes listed in "Common Mistakes"
 
 Also optionally reference research insights:
-`jaan-to/outputs/research/45-pm-insights-synthesis.md`
+`$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md`
 - INVEST checklist (Section 6)
 - 10 edge case categories (Section 6)
 - Splitting patterns if needed (Section 3)
@@ -478,7 +478,7 @@ Show complete story in markdown format:
 {complete story content with all 9 sections}
 ```
 
-> "📋 Preview complete. Write to `jaan-to/outputs/pm/stories/{slug}/stories.md`? [y/n]"
+> "📋 Preview complete. Write to `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`? [y/n]"
 
 If "n", ask what needs revision and return to Step 4.
 
@@ -488,10 +488,10 @@ If approved:
 
 1. **Generate slug**: lowercase, hyphens, no special chars, max 50 chars from title
    - Example: "Update Email Notification Preferences" → "update-email-notification-preferences"
-2. **Create directory**: `jaan-to/outputs/pm/stories/{slug}/`
-3. **Write file**: `jaan-to/outputs/pm/stories/{slug}/stories.md`
+2. **Create directory**: `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/`
+3. **Write file**: `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`
 4. **Confirm**:
-   > "✅ Story written to `jaan-to/outputs/pm/stories/{slug}/stories.md`"
+   > "✅ Story written to `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`"
 
 ### Export Formats
 
