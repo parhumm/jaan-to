@@ -8,9 +8,9 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-sec-threat-model-lite["Threat Model Lite\nThreats + mitigations checklist"] --> jaan-to-sec-pii-map["PII Map\nInventory + flows + retention"]
-    jaan-to-sec-pii-map --> jaan-to-sec-compliance-requirements["Compliance Requirements\nChecklist + data handling + gaps"]
-    jaan-to-sec-compliance-requirements --> jaan-to-sec-compliance-evidence-pack["Compliance Evidence Pack\nDocs + examples + ownership"]
+    jaan-to-sec-threat-model-lite["/jaan-to-sec-threat-model-lite\nThreat Model Lite\nThreats + mitigations checklist"] --> jaan-to-sec-pii-map["/jaan-to-sec-pii-map\nPII Map\nInventory + flows + retention"]
+    jaan-to-sec-pii-map["/jaan-to-sec-pii-map\nPII Map\nInventory + flows + retention"] --> jaan-to-sec-compliance-requirements["/jaan-to-sec-compliance-requirements\nCompliance Requirements\nChecklist + data handling + gaps"]
+    jaan-to-sec-compliance-requirements["/jaan-to-sec-compliance-requirements\nCompliance Requirements\nChecklist + data handling + gaps"] --> jaan-to-sec-compliance-evidence-pack["/jaan-to-sec-compliance-evidence-pack\nCompliance Evidence Pack\nDocs + examples + ownership"]
 ```
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles

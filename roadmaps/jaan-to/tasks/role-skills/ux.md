@@ -8,27 +8,27 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-ux-research-plan["Research Plan\nQuestions + method + participants"] --> jaan-to-ux-research-synthesize["Research Synthesize\nThemes + recommendations"]
-    jaan-to-ux-research-synthesize --> jaan-to-ux-persona-create["Persona Create\nGoals + pains + JTBD"]
-    jaan-to-ux-persona-create -.-> jaan-to-pm-jtbd-map["PM: jtbd-map"]
-    jaan-to-ux-persona-create -.-> jaan-to-pm-persona-card["PM: persona-card"]
-    jaan-to-ux-competitive-review["Competitive Review\nFlows + patterns + opportunities"] -.-> jaan-to-pm-positioning-brief["PM: positioning-brief"]
-    jaan-to-ux-journey-map["Journey Map\nSteps + pain points + metrics"] --> jaan-to-ux-journey-edge-cases["Journey Edge Cases\nEdge cases + recovery paths"]
-    jaan-to-ux-journey-edge-cases --> jaan-to-ux-flow-spec["Flow Spec\nHappy path + all states"]
-    jaan-to-ux-flow-spec --> jaan-to-ux-microcopy-write["Microcopy Write\nLabels + errors + toasts + tone"]
-    jaan-to-ux-flow-spec -.-> jaan-to-dev-fe-state-machine["DEV: fe-state-machine"]
-    jaan-to-ux-heuristic-review["Heuristic Review\nIssues + severity + quick wins"] --> jaan-to-ux-flow-spec
-    jaan-to-ux-sitemap["Sitemap\nPages + entry points + IA risks"] --> jaan-to-ux-taxonomy["Taxonomy\nNaming rules + attributes"]
-    jaan-to-ux-taxonomy --> jaan-to-ux-wireframe-screens["Wireframe Screens\nScreen list + states + interactions"]
-    jaan-to-ux-wireframe-screens --> jaan-to-ux-wireframe-review["Wireframe Review\nUsability checklist + issues"]
-    jaan-to-ux-wireframe-review --> jaan-to-ux-ui-spec-states["UI Spec States\nState list + triggers + copy"]
-    jaan-to-ux-ui-spec-states --> jaan-to-ux-ui-handoff-notes["UI Handoff Notes\nComponents + tokens + animation"]
-    jaan-to-ux-ui-handoff-notes -.-> jaan-to-dev-fe-task-breakdown["DEV: fe-task-breakdown"]
-    jaan-to-ux-microcopy-write --> jaan-to-ux-error-messages["Error Messages\nUser-friendly errors + recovery"]
-    jaan-to-ux-a11y-audit["A11y Audit\nIssues + fix checklist"] --> jaan-to-ux-a11y-aria-notes["A11y ARIA Notes\nRoles/labels + focus management"]
-    jaan-to-ux-a11y-aria-notes -.-> jaan-to-dev-fe-task-breakdown
-    jaan-to-ux-onboarding-steps["Onboarding Steps\nSteps + activation + drop-offs"] --> jaan-to-ux-onboarding-tooltips["Onboarding Tooltips\nTooltip copy + skip/done patterns"]
-    jaan-to-ux-onboarding-tooltips -.-> jaan-to-data-event-spec["DATA: event-spec"]
+    jaan-to-ux-research-plan["/jaan-to-ux-research-plan\nResearch Plan\nQuestions + method + participants"] --> jaan-to-ux-research-synthesize["/jaan-to-ux-research-synthesize\nResearch Synthesize\nThemes + recommendations"]
+    jaan-to-ux-research-synthesize["/jaan-to-ux-research-synthesize\nResearch Synthesize\nThemes + recommendations"] --> jaan-to-ux-persona-create["/jaan-to-ux-persona-create\nPersona Create\nGoals + pains + JTBD"]
+    jaan-to-ux-persona-create["/jaan-to-ux-persona-create\nPersona Create\nGoals + pains + JTBD"] -.-> jaan-to-pm-jtbd-map["/jaan-to-pm-jtbd-map\nPM: jtbd-map"]
+    jaan-to-ux-persona-create["/jaan-to-ux-persona-create\nPersona Create\nGoals + pains + JTBD"] -.-> jaan-to-pm-persona-card["/jaan-to-pm-persona-card\nPM: persona-card"]
+    jaan-to-ux-competitive-review["/jaan-to-ux-competitive-review\nCompetitive Review\nFlows + patterns + opportunities"] -.-> jaan-to-pm-positioning-brief["/jaan-to-pm-positioning-brief\nPM: positioning-brief"]
+    jaan-to-ux-journey-map["/jaan-to-ux-journey-map\nJourney Map\nSteps + pain points + metrics"] --> jaan-to-ux-journey-edge-cases["/jaan-to-ux-journey-edge-cases\nJourney Edge Cases\nEdge cases + recovery paths"]
+    jaan-to-ux-journey-edge-cases["/jaan-to-ux-journey-edge-cases\nJourney Edge Cases\nEdge cases + recovery paths"] --> jaan-to-ux-flow-spec["/jaan-to-ux-flow-spec\nFlow Spec\nHappy path + all states"]
+    jaan-to-ux-flow-spec["/jaan-to-ux-flow-spec\nFlow Spec\nHappy path + all states"] --> jaan-to-ux-microcopy-write["/jaan-to-ux-microcopy-write\nMicrocopy Write\nLabels + errors + toasts + tone"]
+    jaan-to-ux-flow-spec["/jaan-to-ux-flow-spec\nFlow Spec\nHappy path + all states"] -.-> jaan-to-dev-fe-state-machine["/jaan-to-dev-fe-state-machine\nDEV: fe-state-machine"]
+    jaan-to-ux-heuristic-review["/jaan-to-ux-heuristic-review\nHeuristic Review\nIssues + severity + quick wins"] --> jaan-to-ux-flow-spec["/jaan-to-ux-flow-spec\nFlow Spec\nHappy path + all states"]
+    jaan-to-ux-sitemap["/jaan-to-ux-sitemap\nSitemap\nPages + entry points + IA risks"] --> jaan-to-ux-taxonomy["/jaan-to-ux-taxonomy\nTaxonomy\nNaming rules + attributes"]
+    jaan-to-ux-taxonomy["/jaan-to-ux-taxonomy\nTaxonomy\nNaming rules + attributes"] --> jaan-to-ux-wireframe-screens["/jaan-to-ux-wireframe-screens\nWireframe Screens\nScreen list + states + interactions"]
+    jaan-to-ux-wireframe-screens["/jaan-to-ux-wireframe-screens\nWireframe Screens\nScreen list + states + interactions"] --> jaan-to-ux-wireframe-review["/jaan-to-ux-wireframe-review\nWireframe Review\nUsability checklist + issues"]
+    jaan-to-ux-wireframe-review["/jaan-to-ux-wireframe-review\nWireframe Review\nUsability checklist + issues"] --> jaan-to-ux-ui-spec-states["/jaan-to-ux-ui-spec-states\nUI Spec States\nState list + triggers + copy"]
+    jaan-to-ux-ui-spec-states["/jaan-to-ux-ui-spec-states\nUI Spec States\nState list + triggers + copy"] --> jaan-to-ux-ui-handoff-notes["/jaan-to-ux-ui-handoff-notes\nUI Handoff Notes\nComponents + tokens + animation"]
+    jaan-to-ux-ui-handoff-notes["/jaan-to-ux-ui-handoff-notes\nUI Handoff Notes\nComponents + tokens + animation"] -.-> jaan-to-dev-fe-task-breakdown["/jaan-to-dev-fe-task-breakdown\nDEV: fe-task-breakdown"]
+    jaan-to-ux-microcopy-write["/jaan-to-ux-microcopy-write\nMicrocopy Write\nLabels + errors + toasts + tone"] --> jaan-to-ux-error-messages["/jaan-to-ux-error-messages\nError Messages\nUser-friendly errors + recovery"]
+    jaan-to-ux-a11y-audit["/jaan-to-ux-a11y-audit\nA11y Audit\nIssues + fix checklist"] --> jaan-to-ux-a11y-aria-notes["/jaan-to-ux-a11y-aria-notes\nA11y ARIA Notes\nRoles/labels + focus management"]
+    jaan-to-ux-a11y-aria-notes["/jaan-to-ux-a11y-aria-notes\nA11y ARIA Notes\nRoles/labels + focus management"] -.-> jaan-to-dev-fe-task-breakdown["/jaan-to-dev-fe-task-breakdown\nDEV: fe-task-breakdown"]
+    jaan-to-ux-onboarding-steps["/jaan-to-ux-onboarding-steps\nOnboarding Steps\nSteps + activation + drop-offs"] --> jaan-to-ux-onboarding-tooltips["/jaan-to-ux-onboarding-tooltips\nOnboarding Tooltips\nTooltip copy + skip/done patterns"]
+    jaan-to-ux-onboarding-tooltips["/jaan-to-ux-onboarding-tooltips\nOnboarding Tooltips\nTooltip copy + skip/done patterns"] -.-> jaan-to-data-event-spec["/jaan-to-data-event-spec\nDATA: event-spec"]
 
     style jaan-to-pm-jtbd-map fill:#f0f0f0,stroke:#999
     style jaan-to-pm-persona-card fill:#f0f0f0,stroke:#999

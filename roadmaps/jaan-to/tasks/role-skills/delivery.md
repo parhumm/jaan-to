@@ -8,13 +8,13 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-delivery-plan-milestones["Plan Milestones\nMilestones + owners + exit criteria"] --> jaan-to-delivery-plan-risks["Plan Risks\nRisk register + mitigations"]
-    jaan-to-delivery-plan-risks --> jaan-to-delivery-backlog-split["Backlog Split\nEpics/stories + dependencies"]
-    jaan-to-delivery-backlog-split --> jaan-to-delivery-backlog-ready-check["Backlog Ready Check\nDefinition-of-ready checklist"]
-    jaan-to-delivery-backlog-ready-check --> jaan-to-delivery-sprint-planning-pack["Sprint Planning Pack\nGoal + scope + capacity"]
-    jaan-to-delivery-sprint-planning-pack --> jaan-to-delivery-sprint-dependency-map["Sprint Dependency Map\nDeps graph + critical path"]
-    jaan-to-delivery-release-readiness["Release Readiness\nGo/no-go + approvals + roles"] --> jaan-to-delivery-release-comms-plan["Release Comms Plan\nNotifications + templates"]
-    jaan-to-delivery-release-comms-plan -.-> jaan-to-release-prod-runbook["RELEASE: prod-runbook"]
+    jaan-to-delivery-plan-milestones["/jaan-to-delivery-plan-milestones\nPlan Milestones\nMilestones + owners + exit criteria"] --> jaan-to-delivery-plan-risks["/jaan-to-delivery-plan-risks\nPlan Risks\nRisk register + mitigations"]
+    jaan-to-delivery-plan-risks["/jaan-to-delivery-plan-risks\nPlan Risks\nRisk register + mitigations"] --> jaan-to-delivery-backlog-split["/jaan-to-delivery-backlog-split\nBacklog Split\nEpics/stories + dependencies"]
+    jaan-to-delivery-backlog-split["/jaan-to-delivery-backlog-split\nBacklog Split\nEpics/stories + dependencies"] --> jaan-to-delivery-backlog-ready-check["/jaan-to-delivery-backlog-ready-check\nBacklog Ready Check\nDefinition-of-ready checklist"]
+    jaan-to-delivery-backlog-ready-check["/jaan-to-delivery-backlog-ready-check\nBacklog Ready Check\nDefinition-of-ready checklist"] --> jaan-to-delivery-sprint-planning-pack["/jaan-to-delivery-sprint-planning-pack\nSprint Planning Pack\nGoal + scope + capacity"]
+    jaan-to-delivery-sprint-planning-pack["/jaan-to-delivery-sprint-planning-pack\nSprint Planning Pack\nGoal + scope + capacity"] --> jaan-to-delivery-sprint-dependency-map["/jaan-to-delivery-sprint-dependency-map\nSprint Dependency Map\nDeps graph + critical path"]
+    jaan-to-delivery-release-readiness["/jaan-to-delivery-release-readiness\nRelease Readiness\nGo/no-go + approvals + roles"] --> jaan-to-delivery-release-comms-plan["/jaan-to-delivery-release-comms-plan\nRelease Comms Plan\nNotifications + templates"]
+    jaan-to-delivery-release-comms-plan["/jaan-to-delivery-release-comms-plan\nRelease Comms Plan\nNotifications + templates"] -.-> jaan-to-release-prod-runbook["/jaan-to-release-prod-runbook\nRELEASE: prod-runbook"]
 
     style jaan-to-release-prod-runbook fill:#f0f0f0,stroke:#999
 ```

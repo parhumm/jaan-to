@@ -8,13 +8,13 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-support-tag-taxonomy["Tag Taxonomy\nTags + definitions + rules"] --> jaan-to-support-weekly-digest["Weekly Digest\nThemes + severity + actions"]
-    jaan-to-support-weekly-digest -.-> jaan-to-pm-feedback-synthesize["PM: feedback-synthesize"]
-    jaan-to-support-help-article["Help Article\nDraft + troubleshooting steps"] --> jaan-to-support-reply-pack["Reply Pack\nCanned replies + escalation tree"]
-    jaan-to-support-cx-touchpoints["CX Touchpoints\nTouchpoint map + gaps"] --> jaan-to-support-cx-friction-fixes["CX Friction Fixes\nPrioritized fixes + impact"]
-    jaan-to-support-cx-friction-fixes -.-> jaan-to-pm-priority-score["PM: priority-score"]
-    jaan-to-support-launch-monitor["Launch Monitor\nWatchlist + response plan"] --> jaan-to-support-triage-priority["Triage Priority\nSeverity + next action + comms"]
-    jaan-to-support-triage-priority -.-> jaan-to-qa-bug-report["QA: bug-report"]
+    jaan-to-support-tag-taxonomy["/jaan-to-support-tag-taxonomy\nTag Taxonomy\nTags + definitions + rules"] --> jaan-to-support-weekly-digest["/jaan-to-support-weekly-digest\nWeekly Digest\nThemes + severity + actions"]
+    jaan-to-support-weekly-digest["/jaan-to-support-weekly-digest\nWeekly Digest\nThemes + severity + actions"] -.-> jaan-to-pm-feedback-synthesize["/jaan-to-pm-feedback-synthesize\nPM: feedback-synthesize"]
+    jaan-to-support-help-article["/jaan-to-support-help-article\nHelp Article\nDraft + troubleshooting steps"] --> jaan-to-support-reply-pack["/jaan-to-support-reply-pack\nReply Pack\nCanned replies + escalation tree"]
+    jaan-to-support-cx-touchpoints["/jaan-to-support-cx-touchpoints\nCX Touchpoints\nTouchpoint map + gaps"] --> jaan-to-support-cx-friction-fixes["/jaan-to-support-cx-friction-fixes\nCX Friction Fixes\nPrioritized fixes + impact"]
+    jaan-to-support-cx-friction-fixes["/jaan-to-support-cx-friction-fixes\nCX Friction Fixes\nPrioritized fixes + impact"] -.-> jaan-to-pm-priority-score["/jaan-to-pm-priority-score\nPM: priority-score"]
+    jaan-to-support-launch-monitor["/jaan-to-support-launch-monitor\nLaunch Monitor\nWatchlist + response plan"] --> jaan-to-support-triage-priority["/jaan-to-support-triage-priority\nTriage Priority\nSeverity + next action + comms"]
+    jaan-to-support-triage-priority["/jaan-to-support-triage-priority\nTriage Priority\nSeverity + next action + comms"] -.-> jaan-to-qa-bug-report["/jaan-to-qa-bug-report\nQA: bug-report"]
 
     style jaan-to-pm-feedback-synthesize fill:#f0f0f0,stroke:#999
     style jaan-to-pm-priority-score fill:#f0f0f0,stroke:#999
