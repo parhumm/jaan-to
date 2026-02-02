@@ -1,0 +1,24 @@
+# jaan.to Plugin - Default Configuration
+# Version: 3.0.0
+# DO NOT EDIT - These are plugin defaults
+# Customize via jaan-to/config/settings.yaml in your project
+
+version: "3.0"
+
+# Paths (flattened for bash parsing)
+paths_templates: "jaan-to/templates"
+paths_learning: "jaan-to/learn"
+paths_context: "jaan-to/context"
+paths_outputs: "jaan-to/outputs"
+
+# Template settings
+templates_inheritance_enabled: true
+
+# Learning settings
+learning_strategy: "merge"
+learning_merge_order: "plugin,project"
+
+# Customization features
+customization_path_variables: true
+customization_template_variables: true
+customization_context_variables: true

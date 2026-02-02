@@ -8,24 +8,41 @@ set -euo pipefail
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-.}"
 PLUGIN_DIR="${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}"
 
+# Load configuration system
+if [ -f "${PLUGIN_DIR}/scripts/lib/config-loader.sh" ]; then
+  source "${PLUGIN_DIR}/scripts/lib/config-loader.sh"
+  load_config
+else
+  echo "WARNING: config-loader.sh not found, using defaults" >&2
+fi
+
+# Resolve paths from config (with fallback defaults)
+TEMPLATES_DIR=$(resolve_path "$(get_config 'paths_templates' 'jaan-to/templates')")
+LEARN_DIR=$(resolve_path "$(get_config 'paths_learning' 'jaan-to/learn')")
+CONTEXT_DIR=$(resolve_path "$(get_config 'paths_context' 'jaan-to/context')")
+OUTPUTS_DIR=$(resolve_path "$(get_config 'paths_outputs' 'jaan-to/outputs')")
+CONFIG_DIR="jaan-to/config"
+
 # Counters for reporting
 CONTEXT_COPIED=0
 TEMPLATES_COPIED=0
 DOCS_COPIED=0
 LEARN_COPIED=0
+CONFIG_COPIED=0
 
 # Migration: rename old .jaan-to/ to jaan-to/ if it exists
 if [ -d "$PROJECT_DIR/.jaan-to" ] && [ ! -d "$PROJECT_DIR/jaan-to" ]; then
   mv "$PROJECT_DIR/.jaan-to" "$PROJECT_DIR/jaan-to"
 fi
 
-# 1. Create all necessary directories
-mkdir -p "$PROJECT_DIR/jaan-to/outputs"
-mkdir -p "$PROJECT_DIR/jaan-to/learn"
-mkdir -p "$PROJECT_DIR/jaan-to/context"
-mkdir -p "$PROJECT_DIR/jaan-to/templates"
+# 1. Create all necessary directories (using resolved paths)
+mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR"
+mkdir -p "$PROJECT_DIR/$LEARN_DIR"
+mkdir -p "$PROJECT_DIR/$CONTEXT_DIR"
+mkdir -p "$PROJECT_DIR/$TEMPLATES_DIR"
+mkdir -p "$PROJECT_DIR/$CONFIG_DIR"
 mkdir -p "$PROJECT_DIR/jaan-to/docs"
-mkdir -p "$PROJECT_DIR/jaan-to/outputs/research"
+mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR/research"
 
 # 2. Add to .gitignore if not present
 if [ -f "$PROJECT_DIR/.gitignore" ]; then
@@ -39,12 +56,20 @@ else
   echo "jaan-to/" > "$PROJECT_DIR/.gitignore"
 fi
 
+# 2.5. Initialize project config if not exists
+if [ ! -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ]; then
+  if [ -f "$PLUGIN_DIR/scripts/seeds/settings.yaml" ]; then
+    cp "$PLUGIN_DIR/scripts/seeds/settings.yaml" "$PROJECT_DIR/$CONFIG_DIR/settings.yaml"
+    CONFIG_COPIED=1
+  fi
+fi
+
 # 3. Copy context files (skip if exists)
 if [ -d "$PLUGIN_DIR/scripts/seeds" ]; then
   for context_file in "$PLUGIN_DIR/scripts/seeds"/*.md; do
     [ -f "$context_file" ] || continue
     filename=$(basename "$context_file")
-    dest="$PROJECT_DIR/jaan-to/context/$filename"
+    dest="$PROJECT_DIR/$CONTEXT_DIR/$filename"
     if [ ! -f "$dest" ]; then
       cp "$context_file" "$dest"
       CONTEXT_COPIED=$((CONTEXT_COPIED + 1))
@@ -57,7 +82,7 @@ if [ -d "$PLUGIN_DIR/skills" ]; then
   for template_file in "$PLUGIN_DIR/skills"/*/template.md; do
     [ -f "$template_file" ] || continue
     skill_name=$(basename "$(dirname "$template_file")")
-    dest="$PROJECT_DIR/jaan-to/templates/${skill_name}.template.md"
+    dest="$PROJECT_DIR/$TEMPLATES_DIR/${skill_name}.template.md"
     if [ ! -f "$dest" ]; then
       cp "$template_file" "$dest"
       TEMPLATES_COPIED=$((TEMPLATES_COPIED + 1))
@@ -83,7 +108,7 @@ if [ -f "$PLUGIN_DIR/docs/extending/create-skill.md" ]; then
 fi
 
 # 6. Create research README if it doesn't exist
-research_readme="$PROJECT_DIR/jaan-to/outputs/research/README.md"
+research_readme="$PROJECT_DIR/$OUTPUTS_DIR/research/README.md"
 if [ ! -f "$research_readme" ]; then
   cat > "$research_readme" <<'EOF'
 # Research Index
@@ -101,7 +126,7 @@ if [ -d "$PLUGIN_DIR/skills" ]; then
   for skill_learn in "$PLUGIN_DIR/skills"/*/LEARN.md; do
     [ -f "$skill_learn" ] || continue
     skill_name=$(basename "$(dirname "$skill_learn")")
-    project_learn="$PROJECT_DIR/jaan-to/learn/${skill_name}.learn.md"
+    project_learn="$PROJECT_DIR/$LEARN_DIR/${skill_name}.learn.md"
     if [ ! -f "$project_learn" ]; then
       cp "$skill_learn" "$project_learn"
       LEARN_COPIED=$((LEARN_COPIED + 1))
@@ -149,12 +174,15 @@ fi
 cat <<RESULT
 {
   "status": "complete",
-  "output_dir": "jaan-to/outputs",
-  "learn_dir": "jaan-to/learn",
-  "context_dir": "jaan-to/context",
-  "templates_dir": "jaan-to/templates",
-  "docs_dir": "jaan-to/docs",
+  "config_loaded": true,
+  "output_dir": "${OUTPUTS_DIR}",
+  "learn_dir": "${LEARN_DIR}",
+  "context_dir": "${CONTEXT_DIR}",
+  "templates_dir": "${TEMPLATES_DIR}",
+  "config_dir": "${CONFIG_DIR}",
+  "paths_customized": $([ "$TEMPLATES_DIR" != "jaan-to/templates" ] && echo "true" || echo "false"),
   "files_copied": {
+    "config": ${CONFIG_COPIED},
     "context": ${CONTEXT_COPIED},
     "templates": ${TEMPLATES_COPIED},
     "docs": ${DOCS_COPIED},
