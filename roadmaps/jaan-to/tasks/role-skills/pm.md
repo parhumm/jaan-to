@@ -73,6 +73,7 @@ flowchart TD
 - **Logical**: `pm:insights-synthesis`
 - **Description**: Top pains ranked by frequency/impact, quote bank by theme, frequency table + unknowns
 - **Quick Win**: Yes
+- **Reference**: [Product Manager User Research Synthesis: Implementation Guide](../../../../jaan-to/outputs/research/45-pm-insights-synthesis.md)
 - **Key Points**:
   - Keep questions open + behavioral ("tell me about the last time…")
   - Capture verbatim quotes + context (who/when/where)

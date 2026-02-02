@@ -52,7 +52,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [42](42-ai-workflow-claude-code-interactive-mode.md) | Interactive Mode | Official reference for keyboard shortcuts, input modes (multiline, vim, bash), 30+ built-in commands, background tasks, task list management, PR review status, and command history with reverse search. |
 | [43](43-ai-workflow-claude-code-cli-reference.md) | CLI Reference | Official complete CLI reference: commands, 40+ flags, system prompt customization (replace/append), --agents JSON format, output formats (text/json/stream-json), and session management options. |
 | [44](44-pm-role-details-research-pm-ux-engineering.md) | Product Role Details Research — PM, UX & Engineering Skills | Comprehensive research on product team role capabilities covering PM discovery/strategy/PRDs, UX journeys/IA/wireframes/accessibility, and Engineering architecture/APIs/CI-CD/observability. |
-| [45](45-pm-user-research-synthesis-methods.md) | PM User Research Synthesis: Implementation Guide | Data organization, pain prioritization, and quote banking with practical templates. Covers nugget-based architecture, Frequency×Severity scoring, AI transcript tools, validation methods, and affinity mapping workshops. 60+ sources from 2025 research. |
+| [45](45-pm-insights-synthesis.md) | PM User Research Synthesis: Implementation Guide | Data organization, pain prioritization, and quote banking with practical templates. Covers nugget-based architecture, Frequency×Severity scoring, AI transcript tools, validation methods, and affinity mapping workshops. 60+ sources from 2025 research. |
 
 ## Quick Topic Finder
 
@@ -89,7 +89,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [26-ai-workflow-product-operations-60-tasks.md](26-ai-workflow-product-operations-60-tasks.md)
 - [32-ai-workflow-claude-code-common-workflows.md](32-ai-workflow-claude-code-common-workflows.md)
 - [44-pm-role-details-research-pm-ux-engineering.md](44-pm-role-details-research-pm-ux-engineering.md)
-- [45-pm-user-research-synthesis-methods.md](45-pm-user-research-synthesis-methods.md)
+- [45-pm-insights-synthesis.md](45-pm-insights-synthesis.md)
 
 ### PR Review Automation
 - [04-laravel-pr-agents.md](04-laravel-pr-agents.md)
