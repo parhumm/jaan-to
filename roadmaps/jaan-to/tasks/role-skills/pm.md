@@ -315,6 +315,7 @@ flowchart TD
 
 - **Logical**: `pm:story-write`
 - **Description**: User stories in standard format with Given/When/Then acceptance criteria
+- **Reference**: [Production-Ready PM Story-Write Skill: A Comprehensive Framework](../../../../jaan-to/outputs/research/45-pm-insights-synthesis.md)
 - **Quick Win**: Yes - highly structured, template-based
 - **AI Score**: 5 | **Rank**: #6
 - **Key Points**:
