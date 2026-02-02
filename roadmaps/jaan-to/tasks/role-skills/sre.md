@@ -8,14 +8,14 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-sre-slo-setup["/jaan-to-sre-slo-setup\nSLO Setup\nSLOs + error budgets + SLIs"] --> jaan-to-sre-alert-tuning["/jaan-to-sre-alert-tuning\nAlert Tuning\nNoise reduction + severity map"]
-    jaan-to-sre-alert-tuning["/jaan-to-sre-alert-tuning\nAlert Tuning\nNoise reduction + severity map"] -.-> jaan-to-dev-observability-alerts["/jaan-to-dev-observability-alerts\nDEV: observability-alerts"]
-    jaan-to-sre-pipeline-audit["/jaan-to-sre-pipeline-audit\nPipeline Audit\nWeak points + missing gates"] --> jaan-to-sre-env-check["/jaan-to-sre-env-check\nEnv Check\nConfig drift + readiness"]
-    jaan-to-sre-env-check["/jaan-to-sre-env-check\nEnv Check\nConfig drift + readiness"] -.-> jaan-to-dev-ship-check["/jaan-to-dev-ship-check\nDEV: ship-check"]
-    jaan-to-sre-toil-audit["/jaan-to-sre-toil-audit\nToil Audit\nToil list + automation candidates"] --> jaan-to-sre-hardening-plan["/jaan-to-sre-hardening-plan\nHardening Plan\nReliability backlog + steps"]
-    jaan-to-sre-hardening-plan["/jaan-to-sre-hardening-plan\nHardening Plan\nReliability backlog + steps"] -.-> jaan-to-delivery-backlog-split["/jaan-to-delivery-backlog-split\nDELIVERY: backlog-split"]
-    jaan-to-sre-incident-runbook["/jaan-to-sre-incident-runbook\nIncident Runbook\nRunbook + escalation + triage"] --> jaan-to-sre-incident-postmortem["/jaan-to-sre-incident-postmortem\nIncident Postmortem\nTimeline + actions + owners"]
-    jaan-to-sre-incident-postmortem["/jaan-to-sre-incident-postmortem\nIncident Postmortem\nTimeline + actions + owners"] --> jaan-to-sre-hardening-plan["/jaan-to-sre-hardening-plan\nHardening Plan\nReliability backlog + steps"]
+    jaan-to-sre-slo-setup["sre-slo-setup<br>SLO Setup<br>SLOs + error budgets + SLIs"] --> jaan-to-sre-alert-tuning["sre-alert-tuning<br>Alert Tuning<br>Noise reduction + severity map"]
+    jaan-to-sre-alert-tuning["sre-alert-tuning<br>Alert Tuning<br>Noise reduction + severity map"] -.-> jaan-to-dev-observability-alerts["dev-observability-alerts<br>DEV: observability-alerts"]
+    jaan-to-sre-pipeline-audit["sre-pipeline-audit<br>Pipeline Audit<br>Weak points + missing gates"] --> jaan-to-sre-env-check["sre-env-check<br>Env Check<br>Config drift + readiness"]
+    jaan-to-sre-env-check["sre-env-check<br>Env Check<br>Config drift + readiness"] -.-> jaan-to-dev-ship-check["dev-ship-check<br>DEV: ship-check"]
+    jaan-to-sre-toil-audit["sre-toil-audit<br>Toil Audit<br>Toil list + automation candidates"] --> jaan-to-sre-hardening-plan["sre-hardening-plan<br>Hardening Plan<br>Reliability backlog + steps"]
+    jaan-to-sre-hardening-plan["sre-hardening-plan<br>Hardening Plan<br>Reliability backlog + steps"] -.-> jaan-to-delivery-backlog-split["delivery-backlog-split<br>DELIVERY: backlog-split"]
+    jaan-to-sre-incident-runbook["sre-incident-runbook<br>Incident Runbook<br>Runbook + escalation + triage"] --> jaan-to-sre-incident-postmortem["sre-incident-postmortem<br>Incident Postmortem<br>Timeline + actions + owners"]
+    jaan-to-sre-incident-postmortem["sre-incident-postmortem<br>Incident Postmortem<br>Timeline + actions + owners"] --> jaan-to-sre-hardening-plan["sre-hardening-plan<br>Hardening Plan<br>Reliability backlog + steps"]
 
     style jaan-to-dev-observability-alerts fill:#f0f0f0,stroke:#999
     style jaan-to-dev-ship-check fill:#f0f0f0,stroke:#999

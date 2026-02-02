@@ -8,15 +8,15 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-release-beta-rollout-plan["/jaan-to-release-beta-rollout-plan\nBeta Rollout Plan\nPhased rollout + exit criteria"] --> jaan-to-release-beta-issue-log["/jaan-to-release-beta-issue-log\nBeta Issue Log\nCategorized issues + trends"]
-    jaan-to-release-beta-issue-log["/jaan-to-release-beta-issue-log\nBeta Issue Log\nCategorized issues + trends"] --> jaan-to-release-triage-decision["/jaan-to-release-triage-decision\nTriage Decision\nFix/defer + rationale + risk"]
-    jaan-to-release-beta-issue-log["/jaan-to-release-beta-issue-log\nBeta Issue Log\nCategorized issues + trends"] --> jaan-to-release-prod-runbook["/jaan-to-release-prod-runbook\nProd Runbook\nLaunch steps + rollback triggers"]
-    jaan-to-release-triage-decision["/jaan-to-release-triage-decision\nTriage Decision\nFix/defer + rationale + risk"] --> jaan-to-release-triage-hotfix-scope["/jaan-to-release-triage-hotfix-scope\nTriage Hotfix Scope\nMinimal scope + test focus"]
-    jaan-to-release-triage-hotfix-scope["/jaan-to-release-triage-hotfix-scope\nTriage Hotfix Scope\nMinimal scope + test focus"] -.-> jaan-to-dev-pr-review["/jaan-to-dev-pr-review\nDEV: pr-review"]
-    jaan-to-release-prod-runbook["/jaan-to-release-prod-runbook\nProd Runbook\nLaunch steps + rollback triggers"] --> jaan-to-release-prod-war-room-pack["/jaan-to-release-prod-war-room-pack\nProd War Room Pack\nDashboard + roles + comms"]
-    jaan-to-release-prod-war-room-pack["/jaan-to-release-prod-war-room-pack\nProd War Room Pack\nDashboard + roles + comms"] -.-> jaan-to-support-launch-monitor["/jaan-to-support-launch-monitor\nSUPPORT: launch-monitor"]
-    jaan-to-release-iterate-top-fixes["/jaan-to-release-iterate-top-fixes\nIterate Top Fixes\nImprovements + prioritization"] --> jaan-to-release-iterate-changelog["/jaan-to-release-iterate-changelog\nIterate Changelog\nChangelog + user impact"]
-    jaan-to-release-iterate-changelog["/jaan-to-release-iterate-changelog\nIterate Changelog\nChangelog + user impact"] -.-> jaan-to-support-help-article["/jaan-to-support-help-article\nSUPPORT: help-article"]
+    jaan-to-release-beta-rollout-plan["release-beta-rollout-plan<br>Beta Rollout Plan<br>Phased rollout + exit criteria"] --> jaan-to-release-beta-issue-log["release-beta-issue-log<br>Beta Issue Log<br>Categorized issues + trends"]
+    jaan-to-release-beta-issue-log["release-beta-issue-log<br>Beta Issue Log<br>Categorized issues + trends"] --> jaan-to-release-triage-decision["release-triage-decision<br>Triage Decision<br>Fix/defer + rationale + risk"]
+    jaan-to-release-beta-issue-log["release-beta-issue-log<br>Beta Issue Log<br>Categorized issues + trends"] --> jaan-to-release-prod-runbook["release-prod-runbook<br>Prod Runbook<br>Launch steps + rollback triggers"]
+    jaan-to-release-triage-decision["release-triage-decision<br>Triage Decision<br>Fix/defer + rationale + risk"] --> jaan-to-release-triage-hotfix-scope["release-triage-hotfix-scope<br>Triage Hotfix Scope<br>Minimal scope + test focus"]
+    jaan-to-release-triage-hotfix-scope["release-triage-hotfix-scope<br>Triage Hotfix Scope<br>Minimal scope + test focus"] -.-> jaan-to-dev-pr-review["dev-pr-review<br>DEV: pr-review"]
+    jaan-to-release-prod-runbook["release-prod-runbook<br>Prod Runbook<br>Launch steps + rollback triggers"] --> jaan-to-release-prod-war-room-pack["release-prod-war-room-pack<br>Prod War Room Pack<br>Dashboard + roles + comms"]
+    jaan-to-release-prod-war-room-pack["release-prod-war-room-pack<br>Prod War Room Pack<br>Dashboard + roles + comms"] -.-> jaan-to-support-launch-monitor["support-launch-monitor<br>SUPPORT: launch-monitor"]
+    jaan-to-release-iterate-top-fixes["release-iterate-top-fixes<br>Iterate Top Fixes<br>Improvements + prioritization"] --> jaan-to-release-iterate-changelog["release-iterate-changelog<br>Iterate Changelog<br>Changelog + user impact"]
+    jaan-to-release-iterate-changelog["release-iterate-changelog<br>Iterate Changelog<br>Changelog + user impact"] -.-> jaan-to-support-help-article["support-help-article<br>SUPPORT: help-article"]
 
     style jaan-to-dev-pr-review fill:#f0f0f0,stroke:#999
     style jaan-to-support-launch-monitor fill:#f0f0f0,stroke:#999

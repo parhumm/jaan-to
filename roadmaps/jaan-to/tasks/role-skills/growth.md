@@ -8,20 +8,20 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-growth-keyword-brief["/jaan-to-growth-keyword-brief\nKeyword Brief\nKeyword + intent map + SERP"] --> jaan-to-growth-content-outline["/jaan-to-growth-content-outline\nContent Outline\nH1-H3 + FAQs + internal links"]
-    jaan-to-growth-content-outline["/jaan-to-growth-content-outline\nContent Outline\nH1-H3 + FAQs + internal links"] --> jaan-to-growth-meta-write["/jaan-to-growth-meta-write\nMeta Write\nTitles + descriptions"]
-    jaan-to-growth-meta-write["/jaan-to-growth-meta-write\nMeta Write\nTitles + descriptions"] --> jaan-to-growth-seo-audit["/jaan-to-growth-seo-audit\nSEO Audit\nTitle/meta + headings + gaps"]
-    jaan-to-growth-seo-audit["/jaan-to-growth-seo-audit\nSEO Audit\nTitle/meta + headings + gaps"] --> jaan-to-growth-seo-check["/jaan-to-growth-seo-check\nSEO Check\nIndexability + crawl + errors"]
-    jaan-to-growth-content-optimize["/jaan-to-growth-content-optimize\nContent Optimize\nRefresh checklist + links"] --> jaan-to-growth-meta-write["/jaan-to-growth-meta-write\nMeta Write\nTitles + descriptions"]
-    jaan-to-growth-beta-cohort-plan["/jaan-to-growth-beta-cohort-plan\nBeta Cohort Plan\nCohort + eligibility + exit criteria"] --> jaan-to-growth-beta-feedback-script["/jaan-to-growth-beta-feedback-script\nBeta Feedback Script\nInterview prompts + probes"]
-    jaan-to-growth-beta-cohort-plan["/jaan-to-growth-beta-cohort-plan\nBeta Cohort Plan\nCohort + eligibility + exit criteria"] -.-> jaan-to-release-beta-rollout-plan["/jaan-to-release-beta-rollout-plan\nRELEASE: beta-rollout-plan"]
-    jaan-to-growth-beta-feedback-script["/jaan-to-growth-beta-feedback-script\nBeta Feedback Script\nInterview prompts + probes"] -.-> jaan-to-pm-insights-synthesis["/jaan-to-pm-insights-synthesis\nPM: insights-synthesis"]
-    jaan-to-growth-lifecycle-message-map["/jaan-to-growth-lifecycle-message-map\nLifecycle Message Map\nTriggers + timing + channels"] --> jaan-to-growth-lifecycle-copy-variants["/jaan-to-growth-lifecycle-copy-variants\nLifecycle Copy Variants\n3-5 variants + CTAs"]
-    jaan-to-growth-lifecycle-copy-variants["/jaan-to-growth-lifecycle-copy-variants\nLifecycle Copy Variants\n3-5 variants + CTAs"] -.-> jaan-to-data-experiment-design["/jaan-to-data-experiment-design\nDATA: experiment-design"]
-    jaan-to-growth-loop-design["/jaan-to-growth-loop-design\nLoop Design\nDiagram + incentives + metrics"] --> jaan-to-growth-loop-abuse-guards["/jaan-to-growth-loop-abuse-guards\nLoop Abuse Guards\nAnti-fraud + limits + monitoring"]
-    jaan-to-growth-loop-abuse-guards["/jaan-to-growth-loop-abuse-guards\nLoop Abuse Guards\nAnti-fraud + limits + monitoring"] -.-> jaan-to-data-event-spec["/jaan-to-data-event-spec\nDATA: event-spec"]
-    jaan-to-growth-launch-announcement["/jaan-to-growth-launch-announcement\nLaunch Announcement\nCopy pack + channel adaptations"] --> jaan-to-growth-launch-faq["/jaan-to-growth-launch-faq\nLaunch FAQ\nFAQ + objections + support notes"]
-    jaan-to-growth-launch-faq["/jaan-to-growth-launch-faq\nLaunch FAQ\nFAQ + objections + support notes"] -.-> jaan-to-support-help-article["/jaan-to-support-help-article\nSUPPORT: help-article"]
+    jaan-to-growth-keyword-brief["growth-keyword-brief<br>Keyword Brief<br>Keyword + intent map + SERP"] --> jaan-to-growth-content-outline["growth-content-outline<br>Content Outline<br>H1-H3 + FAQs + internal links"]
+    jaan-to-growth-content-outline["growth-content-outline<br>Content Outline<br>H1-H3 + FAQs + internal links"] --> jaan-to-growth-meta-write["growth-meta-write<br>Meta Write<br>Titles + descriptions"]
+    jaan-to-growth-meta-write["growth-meta-write<br>Meta Write<br>Titles + descriptions"] --> jaan-to-growth-seo-audit["growth-seo-audit<br>SEO Audit<br>Title/meta + headings + gaps"]
+    jaan-to-growth-seo-audit["growth-seo-audit<br>SEO Audit<br>Title/meta + headings + gaps"] --> jaan-to-growth-seo-check["growth-seo-check<br>SEO Check<br>Indexability + crawl + errors"]
+    jaan-to-growth-content-optimize["growth-content-optimize<br>Content Optimize<br>Refresh checklist + links"] --> jaan-to-growth-meta-write["growth-meta-write<br>Meta Write<br>Titles + descriptions"]
+    jaan-to-growth-beta-cohort-plan["growth-beta-cohort-plan<br>Beta Cohort Plan<br>Cohort + eligibility + exit criteria"] --> jaan-to-growth-beta-feedback-script["growth-beta-feedback-script<br>Beta Feedback Script<br>Interview prompts + probes"]
+    jaan-to-growth-beta-cohort-plan["growth-beta-cohort-plan<br>Beta Cohort Plan<br>Cohort + eligibility + exit criteria"] -.-> jaan-to-release-beta-rollout-plan["release-beta-rollout-plan<br>RELEASE: beta-rollout-plan"]
+    jaan-to-growth-beta-feedback-script["growth-beta-feedback-script<br>Beta Feedback Script<br>Interview prompts + probes"] -.-> jaan-to-pm-insights-synthesis["pm-insights-synthesis<br>PM: insights-synthesis"]
+    jaan-to-growth-lifecycle-message-map["growth-lifecycle-message-map<br>Lifecycle Message Map<br>Triggers + timing + channels"] --> jaan-to-growth-lifecycle-copy-variants["growth-lifecycle-copy-variants<br>Lifecycle Copy Variants<br>3-5 variants + CTAs"]
+    jaan-to-growth-lifecycle-copy-variants["growth-lifecycle-copy-variants<br>Lifecycle Copy Variants<br>3-5 variants + CTAs"] -.-> jaan-to-data-experiment-design["data-experiment-design<br>DATA: experiment-design"]
+    jaan-to-growth-loop-design["growth-loop-design<br>Loop Design<br>Diagram + incentives + metrics"] --> jaan-to-growth-loop-abuse-guards["growth-loop-abuse-guards<br>Loop Abuse Guards<br>Anti-fraud + limits + monitoring"]
+    jaan-to-growth-loop-abuse-guards["growth-loop-abuse-guards<br>Loop Abuse Guards<br>Anti-fraud + limits + monitoring"] -.-> jaan-to-data-event-spec["data-event-spec<br>DATA: event-spec"]
+    jaan-to-growth-launch-announcement["growth-launch-announcement<br>Launch Announcement<br>Copy pack + channel adaptations"] --> jaan-to-growth-launch-faq["growth-launch-faq<br>Launch FAQ<br>FAQ + objections + support notes"]
+    jaan-to-growth-launch-faq["growth-launch-faq<br>Launch FAQ<br>FAQ + objections + support notes"] -.-> jaan-to-support-help-article["support-help-article<br>SUPPORT: help-article"]
 
     style jaan-to-release-beta-rollout-plan fill:#f0f0f0,stroke:#999
     style jaan-to-pm-insights-synthesis fill:#f0f0f0,stroke:#999

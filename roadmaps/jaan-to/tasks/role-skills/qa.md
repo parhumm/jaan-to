@@ -8,20 +8,20 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-qa-test-matrix["/jaan-to-qa-test-matrix\nTest Matrix\nP0/P1 flows × states × devices"] --> jaan-to-qa-test-cases["/jaan-to-qa-test-cases\nTest Cases\nCases + edge cases + preconditions"]
-    jaan-to-qa-test-cases["/jaan-to-qa-test-cases\nTest Cases\nCases + edge cases + preconditions"] --> jaan-to-qa-test-data["/jaan-to-qa-test-data\nTest Data\nAccounts + permissions + seed data"]
-    jaan-to-qa-test-data["/jaan-to-qa-test-data\nTest Data\nAccounts + permissions + seed data"] --> jaan-to-qa-e2e-checklist["/jaan-to-qa-e2e-checklist\nE2E Checklist\nChecklist + state coverage"]
-    jaan-to-qa-e2e-checklist["/jaan-to-qa-e2e-checklist\nE2E Checklist\nChecklist + state coverage"] --> jaan-to-qa-bug-report["/jaan-to-qa-bug-report\nBug Report\nSeverity + repro steps + expected"]
-    jaan-to-qa-e2e-checklist["/jaan-to-qa-e2e-checklist\nE2E Checklist\nChecklist + state coverage"] --> jaan-to-qa-automation-plan["/jaan-to-qa-automation-plan\nAutomation Plan\nWhat to automate + flakiness risk"]
-    jaan-to-qa-bug-report["/jaan-to-qa-bug-report\nBug Report\nSeverity + repro steps + expected"] --> jaan-to-qa-bug-triage["/jaan-to-qa-bug-triage\nBug Triage\nDedupe + severity + root cause"]
-    jaan-to-qa-bug-triage["/jaan-to-qa-bug-triage\nBug Triage\nDedupe + severity + root cause"] -.-> jaan-to-dev-pr-review["/jaan-to-dev-pr-review\nDEV: pr-review"]
-    jaan-to-qa-bug-triage["/jaan-to-qa-bug-triage\nBug Triage\nDedupe + severity + root cause"] -.-> jaan-to-release-triage-decision["/jaan-to-release-triage-decision\nRELEASE: triage-decision"]
-    jaan-to-qa-perf-plan["/jaan-to-qa-perf-plan\nPerf Plan\nLoad scenarios + thresholds"] --> jaan-to-qa-perf-bottleneck["/jaan-to-qa-perf-bottleneck\nPerf Bottleneck\nBottlenecks + diagnostics + fixes"]
-    jaan-to-qa-perf-bottleneck["/jaan-to-qa-perf-bottleneck\nPerf Bottleneck\nBottlenecks + diagnostics + fixes"] -.-> jaan-to-dev-be-task-breakdown["/jaan-to-dev-be-task-breakdown\nDEV: be-task-breakdown"]
-    jaan-to-qa-automation-plan["/jaan-to-qa-automation-plan\nAutomation Plan\nWhat to automate + flakiness risk"] --> jaan-to-qa-smoke-suite["/jaan-to-qa-smoke-suite\nSmoke Suite\nCritical path tests + pass/fail"]
-    jaan-to-qa-smoke-suite["/jaan-to-qa-smoke-suite\nSmoke Suite\nCritical path tests + pass/fail"] --> jaan-to-qa-regression-runbook["/jaan-to-qa-regression-runbook\nRegression Runbook\nSmoke → critical → deep checks"]
-    jaan-to-qa-regression-runbook["/jaan-to-qa-regression-runbook\nRegression Runbook\nSmoke → critical → deep checks"] --> jaan-to-qa-release-signoff["/jaan-to-qa-release-signoff\nRelease Signoff\nGo/No-Go + evidence + risks"]
-    jaan-to-qa-release-signoff["/jaan-to-qa-release-signoff\nRelease Signoff\nGo/No-Go + evidence + risks"] -.-> jaan-to-delivery-release-readiness["/jaan-to-delivery-release-readiness\nDELIVERY: release-readiness"]
+    jaan-to-qa-test-matrix["qa-test-matrix<br>Test Matrix<br>P0/P1 flows × states × devices"] --> jaan-to-qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"]
+    jaan-to-qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"] --> jaan-to-qa-test-data["qa-test-data<br>Test Data<br>Accounts + permissions + seed data"]
+    jaan-to-qa-test-data["qa-test-data<br>Test Data<br>Accounts + permissions + seed data"] --> jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"]
+    jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"] --> jaan-to-qa-bug-report["qa-bug-report<br>Bug Report<br>Severity + repro steps + expected"]
+    jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"] --> jaan-to-qa-automation-plan["qa-automation-plan<br>Automation Plan<br>What to automate + flakiness risk"]
+    jaan-to-qa-bug-report["qa-bug-report<br>Bug Report<br>Severity + repro steps + expected"] --> jaan-to-qa-bug-triage["qa-bug-triage<br>Bug Triage<br>Dedupe + severity + root cause"]
+    jaan-to-qa-bug-triage["qa-bug-triage<br>Bug Triage<br>Dedupe + severity + root cause"] -.-> jaan-to-dev-pr-review["dev-pr-review<br>DEV: pr-review"]
+    jaan-to-qa-bug-triage["qa-bug-triage<br>Bug Triage<br>Dedupe + severity + root cause"] -.-> jaan-to-release-triage-decision["release-triage-decision<br>RELEASE: triage-decision"]
+    jaan-to-qa-perf-plan["qa-perf-plan<br>Perf Plan<br>Load scenarios + thresholds"] --> jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"]
+    jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"] -.-> jaan-to-dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
+    jaan-to-qa-automation-plan["qa-automation-plan<br>Automation Plan<br>What to automate + flakiness risk"] --> jaan-to-qa-smoke-suite["qa-smoke-suite<br>Smoke Suite<br>Critical path tests + pass/fail"]
+    jaan-to-qa-smoke-suite["qa-smoke-suite<br>Smoke Suite<br>Critical path tests + pass/fail"] --> jaan-to-qa-regression-runbook["qa-regression-runbook<br>Regression Runbook<br>Smoke → critical → deep checks"]
+    jaan-to-qa-regression-runbook["qa-regression-runbook<br>Regression Runbook<br>Smoke → critical → deep checks"] --> jaan-to-qa-release-signoff["qa-release-signoff<br>Release Signoff<br>Go/No-Go + evidence + risks"]
+    jaan-to-qa-release-signoff["qa-release-signoff<br>Release Signoff<br>Go/No-Go + evidence + risks"] -.-> jaan-to-delivery-release-readiness["delivery-release-readiness<br>DELIVERY: release-readiness"]
 
     style jaan-to-dev-pr-review fill:#f0f0f0,stroke:#999
     style jaan-to-release-triage-decision fill:#f0f0f0,stroke:#999

@@ -8,19 +8,19 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-data-event-spec["/jaan-to-data-event-spec\nEvent Spec\nGA4 events + params + triggers"] --> jaan-to-data-gtm-datalayer["/jaan-to-data-gtm-datalayer\nGTM DataLayer ★\nTracking code"]
-    jaan-to-data-event-spec["/jaan-to-data-event-spec\nEvent Spec\nGA4 events + params + triggers"] --> jaan-to-data-metric-spec["/jaan-to-data-metric-spec\nMetric Spec\nFormula + caveats + segmentation"]
-    jaan-to-data-metric-spec["/jaan-to-data-metric-spec\nMetric Spec\nFormula + caveats + segmentation"] --> jaan-to-data-metric-dictionary["/jaan-to-data-metric-dictionary\nMetric Dictionary\nDefinitions + SQL + pitfalls"]
-    jaan-to-data-metric-dictionary["/jaan-to-data-metric-dictionary\nMetric Dictionary\nDefinitions + SQL + pitfalls"] --> jaan-to-data-dashboard-spec["/jaan-to-data-dashboard-spec\nDashboard Spec\nLayout + filters + cadence"]
-    jaan-to-data-funnel-review["/jaan-to-data-funnel-review\nFunnel Review\nBaseline + drop-offs + hypotheses"] --> jaan-to-data-experiment-design["/jaan-to-data-experiment-design\nExperiment Design\nHypothesis + ramp/kill criteria"]
-    jaan-to-data-funnel-review["/jaan-to-data-funnel-review\nFunnel Review\nBaseline + drop-offs + hypotheses"] --> jaan-to-data-cohort-analyze["/jaan-to-data-cohort-analyze\nCohort Analyze\nRetention curves + churn risk"]
-    jaan-to-data-experiment-design["/jaan-to-data-experiment-design\nExperiment Design\nHypothesis + ramp/kill criteria"] --> jaan-to-data-analysis-plan["/jaan-to-data-analysis-plan\nAnalysis Plan\nSample sizing + decision rules"]
-    jaan-to-data-analysis-plan["/jaan-to-data-analysis-plan\nAnalysis Plan\nSample sizing + decision rules"] --> jaan-to-data-post-launch-report["/jaan-to-data-post-launch-report\nPost-Launch Report\nInsights + chart checklist"]
-    jaan-to-data-cohort-analyze["/jaan-to-data-cohort-analyze\nCohort Analyze\nRetention curves + churn risk"] --> jaan-to-data-post-launch-report["/jaan-to-data-post-launch-report\nPost-Launch Report\nInsights + chart checklist"]
-    jaan-to-data-post-launch-report["/jaan-to-data-post-launch-report\nPost-Launch Report\nInsights + chart checklist"] -.-> jaan-to-pm-release-review["/jaan-to-pm-release-review\nPM: release-review"]
-    jaan-to-data-attribution-plan["/jaan-to-data-attribution-plan\nAttribution Plan\nUTMs + governance + limits"] --> jaan-to-data-ltv-cac-model["/jaan-to-data-ltv-cac-model\nLTV/CAC Model\nInputs/outputs + sensitivity"]
-    jaan-to-data-anomaly-triage["/jaan-to-data-anomaly-triage\nAnomaly Triage\nScope + likely causes + RCA"] -.-> jaan-to-sre-incident-runbook["/jaan-to-sre-incident-runbook\nSRE: incident-runbook"]
-    jaan-to-data-dbt-model["/jaan-to-data-dbt-model\ndbt Model\nStaging/mart + tests + schema"] --> jaan-to-data-sql-query["/jaan-to-data-sql-query\nSQL Query\nAd-hoc SQL + results summary"]
+    jaan-to-data-event-spec["data-event-spec<br>Event Spec<br>GA4 events + params + triggers"] --> jaan-to-data-gtm-datalayer["data-gtm-datalayer<br>GTM DataLayer ★<br>Tracking code"]
+    jaan-to-data-event-spec["data-event-spec<br>Event Spec<br>GA4 events + params + triggers"] --> jaan-to-data-metric-spec["data-metric-spec<br>Metric Spec<br>Formula + caveats + segmentation"]
+    jaan-to-data-metric-spec["data-metric-spec<br>Metric Spec<br>Formula + caveats + segmentation"] --> jaan-to-data-metric-dictionary["data-metric-dictionary<br>Metric Dictionary<br>Definitions + SQL + pitfalls"]
+    jaan-to-data-metric-dictionary["data-metric-dictionary<br>Metric Dictionary<br>Definitions + SQL + pitfalls"] --> jaan-to-data-dashboard-spec["data-dashboard-spec<br>Dashboard Spec<br>Layout + filters + cadence"]
+    jaan-to-data-funnel-review["data-funnel-review<br>Funnel Review<br>Baseline + drop-offs + hypotheses"] --> jaan-to-data-experiment-design["data-experiment-design<br>Experiment Design<br>Hypothesis + ramp/kill criteria"]
+    jaan-to-data-funnel-review["data-funnel-review<br>Funnel Review<br>Baseline + drop-offs + hypotheses"] --> jaan-to-data-cohort-analyze["data-cohort-analyze<br>Cohort Analyze<br>Retention curves + churn risk"]
+    jaan-to-data-experiment-design["data-experiment-design<br>Experiment Design<br>Hypothesis + ramp/kill criteria"] --> jaan-to-data-analysis-plan["data-analysis-plan<br>Analysis Plan<br>Sample sizing + decision rules"]
+    jaan-to-data-analysis-plan["data-analysis-plan<br>Analysis Plan<br>Sample sizing + decision rules"] --> jaan-to-data-post-launch-report["data-post-launch-report<br>Post-Launch Report<br>Insights + chart checklist"]
+    jaan-to-data-cohort-analyze["data-cohort-analyze<br>Cohort Analyze<br>Retention curves + churn risk"] --> jaan-to-data-post-launch-report["data-post-launch-report<br>Post-Launch Report<br>Insights + chart checklist"]
+    jaan-to-data-post-launch-report["data-post-launch-report<br>Post-Launch Report<br>Insights + chart checklist"] -.-> jaan-to-pm-release-review["pm-release-review<br>PM: release-review"]
+    jaan-to-data-attribution-plan["data-attribution-plan<br>Attribution Plan<br>UTMs + governance + limits"] --> jaan-to-data-ltv-cac-model["data-ltv-cac-model<br>LTV/CAC Model<br>Inputs/outputs + sensitivity"]
+    jaan-to-data-anomaly-triage["data-anomaly-triage<br>Anomaly Triage<br>Scope + likely causes + RCA"] -.-> jaan-to-sre-incident-runbook["sre-incident-runbook<br>SRE: incident-runbook"]
+    jaan-to-data-dbt-model["data-dbt-model<br>dbt Model<br>Staging/mart + tests + schema"] --> jaan-to-data-sql-query["data-sql-query<br>SQL Query<br>Ad-hoc SQL + results summary"]
 
     style jaan-to-data-gtm-datalayer fill:#e8f5e9,stroke:#4caf50
     style jaan-to-pm-release-review fill:#f0f0f0,stroke:#999

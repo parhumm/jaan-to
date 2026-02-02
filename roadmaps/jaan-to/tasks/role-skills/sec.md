@@ -8,9 +8,9 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-sec-threat-model-lite["/jaan-to-sec-threat-model-lite\nThreat Model Lite\nThreats + mitigations checklist"] --> jaan-to-sec-pii-map["/jaan-to-sec-pii-map\nPII Map\nInventory + flows + retention"]
-    jaan-to-sec-pii-map["/jaan-to-sec-pii-map\nPII Map\nInventory + flows + retention"] --> jaan-to-sec-compliance-requirements["/jaan-to-sec-compliance-requirements\nCompliance Requirements\nChecklist + data handling + gaps"]
-    jaan-to-sec-compliance-requirements["/jaan-to-sec-compliance-requirements\nCompliance Requirements\nChecklist + data handling + gaps"] --> jaan-to-sec-compliance-evidence-pack["/jaan-to-sec-compliance-evidence-pack\nCompliance Evidence Pack\nDocs + examples + ownership"]
+    jaan-to-sec-threat-model-lite["sec-threat-model-lite<br>Threat Model Lite<br>Threats + mitigations checklist"] --> jaan-to-sec-pii-map["sec-pii-map<br>PII Map<br>Inventory + flows + retention"]
+    jaan-to-sec-pii-map["sec-pii-map<br>PII Map<br>Inventory + flows + retention"] --> jaan-to-sec-compliance-requirements["sec-compliance-requirements<br>Compliance Requirements<br>Checklist + data handling + gaps"]
+    jaan-to-sec-compliance-requirements["sec-compliance-requirements<br>Compliance Requirements<br>Checklist + data handling + gaps"] --> jaan-to-sec-compliance-evidence-pack["sec-compliance-evidence-pack<br>Compliance Evidence Pack<br>Docs + examples + ownership"]
 ```
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
