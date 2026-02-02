@@ -86,7 +86,7 @@
 
 - [ ] `/jaan-to-qa-test-cases` - Test cases from AC with edge cases (**Rank #1**)
 - [ ] `/jaan-to-data-sql-query` - Ad-hoc SQL from natural language (**Rank #2**)
-- [ ] `/jaan-to-pm-story-write` - User stories with Given/When/Then AC (Rank #6)
+- [x] `/jaan-to-pm-story-write` - User stories with Given/When/Then AC (Rank #6) (`800ff9d`)
 - [ ] `/jaan-to-ux-research-synthesize` - Research findings synthesis with themes (Rank #8)
 - [ ] `/jaan-to-qa-bug-report` - Structured bug reports with repro steps (Rank #10)
 - [ ] `/jaan-to-growth-meta-write` - Meta titles/descriptions with CTR optimization (Rank #12)

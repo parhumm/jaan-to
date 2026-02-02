@@ -235,6 +235,7 @@ flowchart TD
 
 - **Logical**: `dev:docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
+- **Research**: [Building a Production-Ready Documentation Generation Framework](../../../jaan-to/outputs/research/48-dev-docs-generate.md)
 - **Quick Win**: Yes - draft generation, format standardization
 - **AI Score**: 5 | **Rank**: #14
 - **Key Points**:
