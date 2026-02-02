@@ -38,6 +38,7 @@
 | to-jaan-skill-update | `/to-jaan-skill-update` | [Internal] Update existing skill |
 | jaan-to-data-gtm-datalayer | `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code |
 | jaan-to-pm-research-about | `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
+| jaan-to-pm-story-write | `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then ACs |
 
 ## Trust
 - trust_paths: ["jaan-to/"]

@@ -5,6 +5,21 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.2.0] - 2026-02-02
+
+### Added
+- **`/jaan-to-pm-story-write` skill** — Generate user stories with Given/When/Then acceptance criteria following INVEST principles
+  - Two-phase workflow: Analysis (read-only) → HARD STOP → Generation (write phase)
+  - Input formats: [feature] [persona] [goal], narrative text, or Jira ID (via MCP)
+  - Quality gates: INVEST compliance (6 criteria), AC testability, Definition of Ready (10 items)
+  - Edge case mapping: Auto-detects 10 categories based on feature type (CRUD, API, workflow, forms, etc.)
+  - Story splitting: Suggests 6 proven patterns when >7 ACs or >8 points
+  - Export formats: Jira CSV and Linear JSON for easy import
+  - Output: `jaan-to/outputs/pm/stories/{slug}/stories.md`
+  - Research-informed: Based on comprehensive [45-pm-insights-synthesis.md](jaan-to/outputs/research/45-pm-insights-synthesis.md) framework
+
+---
+
 ## [2.1.1] - 2026-02-02
 
 ### Fixed
