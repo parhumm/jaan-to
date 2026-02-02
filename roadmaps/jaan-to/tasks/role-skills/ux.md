@@ -58,6 +58,7 @@ flowchart TD
 
 - **Logical**: `ux:research-synthesize`
 - **Description**: Synthesize research findings into themes, executive summary, and recommendations
+- **Reference**: [Building a Production-Ready UX Research Synthesis Skill: Comprehensive Research Foundation](../../../../jaan-to/outputs/research/47-ux-research-synthesize.md)
 - **Quick Win**: Yes - pattern recognition, summarization
 - **AI Score**: 5 | **Rank**: #8
 - **Key Points**:

@@ -56,6 +56,7 @@ The bootstrap hook automatically creates `jaan-to/` in your project with:
 | Command | Description | Output |
 |---------|-------------|--------|
 | `/jaan-to-pm-prd-write` | Generate comprehensive PRD from initiative | `jaan-to/outputs/pm/{slug}/prd.md` |
+| `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then ACs following INVEST principles | `jaan-to/outputs/pm/stories/{slug}/stories.md` |
 
 **Example:**
 ```

@@ -219,12 +219,12 @@ Best practices incorporated: {practice_count}
 FILES TO CREATE
 ───────────────
 □ skills/{name}/SKILL.md
-□ jaan-to/learn/{name}.learn.md
-□ jaan-to/templates/{name}.template.md (if needed)
+□ skills/{name}/LEARN.md
+□ skills/{name}/template.md (if needed)
 
 WILL ALSO
 ─────────
-□ Register in jaan-to/context/config.md
+□ Register in scripts/seeds/config.md
 □ Create docs/skills/{role}/{name}.md (via /to-jaan-docs-create)
 □ Commit to branch skill/{name}
 ```
@@ -265,7 +265,7 @@ Use template from `jaan-to/templates/to-jaan-skill-create.template.md`:
    - Quality checks from Step 5
    - Definition of Done from Step 5
 
-## Step 8: Generate LEARN.md
+## Step 8: Generate LEARN.md (Plugin Source)
 
 Create with research insights as initial lessons:
 
@@ -303,7 +303,7 @@ Things to avoid:
 {If research found common pitfalls, add here}
 ```
 
-## Step 9: Generate template.md (if needed)
+## Step 9: Generate template.md (Plugin Source, if needed)
 
 Based on output format from Step 4:
 - Use researched report structure
@@ -352,14 +352,14 @@ Show complete content of:
 If approved:
 1. Create directory: `skills/{name}/`
 2. Write SKILL.md to `skills/{name}/SKILL.md`
-3. Write LEARN.md to `jaan-to/learn/{name}.learn.md`
-4. Write template.md to `jaan-to/templates/{name}.template.md` (if needed)
+3. Write LEARN.md to `skills/{name}/LEARN.md`
+4. Write template.md to `skills/{name}/template.md` (if needed)
 
-Confirm: "Skill files written to `skills/{name}/` and `jaan-to/`"
+Confirm: "Skill files written to `skills/{name}/`"
 
 ## Step 13: Update Config Catalog
 
-Edit `jaan-to/context/config.md` to add skill to Available Skills table:
+Edit `scripts/seeds/config.md` to add skill to Available Skills table:
 
 ```markdown
 | jaan-to-{role}-{domain}:{action} | `/{name}` | {short_description} |
