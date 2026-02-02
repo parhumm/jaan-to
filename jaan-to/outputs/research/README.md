@@ -55,6 +55,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [45](45-pm-insights-synthesis.md) | PM User Research Synthesis: Implementation Guide | Data organization, pain prioritization, and quote banking with practical templates. Covers nugget-based architecture, Frequency×Severity scoring, AI transcript tools, validation methods, and affinity mapping workshops. 60+ sources from 2025 research. |
 | [46](46-pm-story-write-skill.md) | Production-Ready PM Story-Write Skill | Complete framework for writing user stories with Given/When/Then acceptance criteria. Combines Scrum + Shape Up approaches with 8-section template structure, 6 splitting patterns, 10 edge case categories, INVEST quality gates, Jira/Linear integration schemas, and AI prompt patterns. |
 | [47](47-ux-research-synthesize.md) | UX Research Synthesis Framework | Production-ready synthesis methodology covering thematic analysis (Braun & Clarke), quote management, prioritization frameworks (Nielsen severity, Impact×Effort), bias mitigation, multi-audience reporting, AI-assisted workflows with human validation, and quality gates with traceability. |
+| [48](48-dev-docs-generate.md) | Building a Production-Ready Documentation Generation Framework | Technical guide for implementing automated documentation generation across PHP/Laravel, TypeScript/React, and Docusaurus. Covers Scramble + openapi-typescript + Docusaurus pipeline, OpenAPI as single source of truth, code-first generation, CI/CD quality gates, README/API/Component/Runbook/ADR documentation tiers, and validation automation. |
 
 ## Quick Topic Finder
 
@@ -112,6 +113,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [05-ai-os-gap-analysis.md](05-ai-os-gap-analysis.md)
 - [07-documentation-practices.md](07-documentation-practices.md)
 - [17-twelve-factor-app.md](17-twelve-factor-app.md)
+- [48-dev-docs-generate.md](48-dev-docs-generate.md)
 
 ### UX & Product Analytics
 - [20-ux-heatmap-analysis.md](20-ux-heatmap-analysis.md)
