@@ -53,6 +53,8 @@ This directory contains structured summaries of research on Claude Code best pra
 | [43](43-ai-workflow-claude-code-cli-reference.md) | CLI Reference | Official complete CLI reference: commands, 40+ flags, system prompt customization (replace/append), --agents JSON format, output formats (text/json/stream-json), and session management options. |
 | [44](44-pm-role-details-research-pm-ux-engineering.md) | Product Role Details Research — PM, UX & Engineering Skills | Comprehensive research on product team role capabilities covering PM discovery/strategy/PRDs, UX journeys/IA/wireframes/accessibility, and Engineering architecture/APIs/CI-CD/observability. |
 | [45](45-pm-insights-synthesis.md) | PM User Research Synthesis: Implementation Guide | Data organization, pain prioritization, and quote banking with practical templates. Covers nugget-based architecture, Frequency×Severity scoring, AI transcript tools, validation methods, and affinity mapping workshops. 60+ sources from 2025 research. |
+| [46](46-pm-story-write-skill.md) | Production-Ready PM Story-Write Skill | Complete framework for writing user stories with Given/When/Then acceptance criteria. Combines Scrum + Shape Up approaches with 8-section template structure, 6 splitting patterns, 10 edge case categories, INVEST quality gates, Jira/Linear integration schemas, and AI prompt patterns. |
+| [47](47-ux-research-synthesize.md) | UX Research Synthesis Framework | Production-ready synthesis methodology covering thematic analysis (Braun & Clarke), quote management, prioritization frameworks (Nielsen severity, Impact×Effort), bias mitigation, multi-audience reporting, AI-assisted workflows with human validation, and quality gates with traceability. |
 
 ## Quick Topic Finder
 
@@ -90,6 +92,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [32-ai-workflow-claude-code-common-workflows.md](32-ai-workflow-claude-code-common-workflows.md)
 - [44-pm-role-details-research-pm-ux-engineering.md](44-pm-role-details-research-pm-ux-engineering.md)
 - [45-pm-insights-synthesis.md](45-pm-insights-synthesis.md)
+- [46-pm-story-write-skill.md](46-pm-story-write-skill.md)
 
 ### PR Review Automation
 - [04-laravel-pr-agents.md](04-laravel-pr-agents.md)
@@ -114,6 +117,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [20-ux-heatmap-analysis.md](20-ux-heatmap-analysis.md)
 - [21-ai-workflow-claude-vision-csv-heatmap-analysis.md](21-ai-workflow-claude-vision-csv-heatmap-analysis.md)
 - [22-data-microsoft-clarity.md](22-data-microsoft-clarity.md)
+- [47-ux-research-synthesize.md](47-ux-research-synthesize.md)
 
 ## Related Resources
 
