@@ -5,6 +5,25 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2026-02-02
+
+### Fixed
+- **Research skill quality restored** — `/jaan-to-pm-research-about` restructured to match original focused workflow
+  - Removed A- prefixes from all steps and phases (PHASE 1 instead of A-PHASE 1)
+  - Removed SECTION A/B framing that buried the research workflow
+  - Reduced input detection from 35 lines to 8 lines (less noise before research starts)
+  - Moved add-to-index to compact appendix (118 lines vs 250 lines mixed in)
+  - File size: 1,080 lines → 933 lines (-147 lines, -14%)
+  - Research workflow now identical to pre-merge `to-jaan-research-about` (808-line version)
+
+### Technical Details
+- Step numbering: Clean `Step 0.1`, `Step 1`, `PHASE 1` (no A- prefixes)
+- Checkmarks restored: 10 ✓ and 4 □ for better UX
+- Add-to-index: Preserved as compact appendix at end of file
+- Both modes work: research topics via main flow, file/URL via appendix
+
+---
+
 ## [2.1.0] - 2026-02-01
 
 ### Changed
@@ -165,6 +184,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[2.1.1]: https://github.com/parhumm/jaan-to/releases/tag/v2.1.1
 [2.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v2.1.0
 [2.0.1]: https://github.com/parhumm/jaan-to/releases/tag/v2.0.1
 [2.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v2.0.0

@@ -22,11 +22,6 @@ argument-hint: <topic-or-file-path-or-URL>
 
 **Input**: $ARGUMENTS
 
-The input can be:
-- A **topic string** (e.g., "React Server Components best practices") → triggers deep research
-- A **file path** (e.g., `jaan-to/outputs/research/my-doc.md`) → adds to research index
-- A **URL** (e.g., `https://example.com/article`) → fetches and adds to research index
-
 ---
 
 ## Pre-Execution: Apply Past Lessons
@@ -44,43 +39,16 @@ If the file does not exist, continue without it.
 
 ---
 
-# PHASE 0: Input Detection & Validation
+# PHASE 0: Input Validation
 
-## Step 0.1: Detect Input Type
+## Step 0.0: Detect Input Type
 
-Analyze `$ARGUMENTS` to determine the mode:
+Quick-classify `$ARGUMENTS`:
+- Starts with `http://` or `https://` → jump to **Add to Index** (end of file)
+- Path exists as local file → jump to **Add to Index** (end of file)
+- Everything else (including empty) → continue below as research topic
 
-1. **If empty:** Ask user what they want:
-   > What would you like to do?
-   > - [A] Research a topic (e.g., "React Server Components best practices")
-   > - [B] Add an existing file or URL to the research index
-
-2. **Detect mode from input:**
-
-   | Condition | Mode |
-   |-----------|------|
-   | Starts with `http://` or `https://` | `add-url` |
-   | Path exists as a file | `add-file` |
-   | Ends with `.md` but file does NOT exist | `research-topic` (treat as topic, not missing file) |
-   | Otherwise | `research-topic` |
-
-3. **Confirm mode:**
-   > Detected mode: **{mode}** — {brief description}
-
-## Step 0.2: Branch by Mode
-
-- If mode = `research-topic` → proceed to **SECTION A: Deep Research Workflow**
-- If mode = `add-url` or `add-file` → jump to **SECTION B: Add to Index Workflow**
-
----
-
-# ════════════════════════════════════════════════════
-# SECTION A: Deep Research Workflow
-# ════════════════════════════════════════════════════
-
-# A-PHASE 0: Topic Validation
-
-## Step A-0.1: Check Topic
+## Step 0.1: Check Topic
 
 If no topic provided, ask:
 > What topic would you like me to research? Examples:
@@ -88,7 +56,7 @@ If no topic provided, ask:
 > - "React state management 2025"
 > - "MCP server authentication patterns"
 
-## Step A-0.2: Detect Category
+## Step 0.2: Detect Category
 
 Detect category from topic keywords:
 
@@ -106,7 +74,7 @@ Detect category from topic keywords:
 
 If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topics.
 
-## Step A-0.3: Generate Filename
+## Step 0.3: Generate Filename
 
 1. Count existing files in `jaan-to/outputs/research/` matching pattern `[0-9][0-9]-*.md`
 2. Next number = count + 1 (pad to 2 digits)
@@ -123,9 +91,9 @@ If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topi
 
 ---
 
-# A-PHASE 1: Clarify & Plan
+# PHASE 1: Clarify & Plan
 
-## Step A-1: Clarify Research Scope
+## Step 1: Clarify Research Scope
 
 **Assess topic clarity:**
 - Is the topic specific enough? (e.g., "React" → too broad, "React Server Components" → specific)
@@ -170,7 +138,7 @@ Each question offers **3 options + 1 recommendation**:
 > "I'll research: {refined topic with specifics}"
 > "Focus: {selected options summary}"
 
-## Step A-1.5: Choose Research Size
+## Step 1.5: Choose Research Size
 
 > **How comprehensive should the research be?**
 >
@@ -212,7 +180,7 @@ Each question offers **3 options + 1 recommendation**:
 **Confirm selection:**
 > "Research size: {selected} (~{N} sources, {M} agents)"
 
-## Step A-1.6: Choose Approval Mode
+## Step 1.6: Choose Approval Mode
 
 > **How much oversight do you want?**
 >
@@ -239,7 +207,7 @@ Each question offers **3 options + 1 recommendation**:
 
 **Store selection as `{approval_mode}` for use in later steps.**
 
-## Step A-2: Plan Initial Research Strategy
+## Step 2: Plan Initial Research Strategy
 
 ultrathink
 
@@ -292,9 +260,9 @@ WAVE 2-5: To be determined adaptively based on each wave's results
 
 ---
 
-# A-PHASE 2: Adaptive Wave Research
+# PHASE 2: Adaptive Wave Research
 
-## Step A-3: Wave 1 - Scout Research
+## Step 3: Wave 1 - Scout Research
 
 Launch **1 Scout Agent** to map the research landscape.
 
@@ -330,11 +298,11 @@ run_in_background: false  # WAIT for results before Wave 2
 **Collect Scout results.**
 
 **If `{approval_mode}` = Summary:** Show brief status:
-> "Wave 1 complete: {N} sources, {subtopics_count} subtopics found"
+> "✓ Wave 1 complete: {N} sources, {subtopics_count} subtopics found"
 
 **Proceed to Wave 2 planning.**
 
-## Step A-3.5: Wave 2 - Fill Primary Gaps
+## Step 3.5: Wave 2 - Fill Primary Gaps
 
 ultrathink
 
@@ -382,11 +350,11 @@ run_in_background: false  # Wait to analyze before Wave 3
 **Collect Wave 2 results.**
 
 **If `{approval_mode}` = Summary:** Show brief status:
-> "Wave 2 complete: {N} sources, gap '{primary_gap}' filled"
+> "✓ Wave 2 complete: {N} sources, gap '{primary_gap}' filled"
 
 **Proceed to Wave 3 planning.**
 
-## Step A-3.6: Wave 3 - Expand Coverage
+## Step 3.6: Wave 3 - Expand Coverage
 
 ultrathink
 
@@ -436,9 +404,9 @@ run_in_background: true
 **Launch Wave 3 agents in parallel, then collect with TaskOutput.**
 
 **If `{approval_mode}` = Summary:** Show brief status:
-> "Wave 3 complete: {N} sources, expanded {areas}"
+> "✓ Wave 3 complete: {N} sources, expanded {areas}"
 
-## Step A-3.7: Wave 4 - Verify & Cross-Reference (if size >= 60)
+## Step 3.7: Wave 4 - Verify & Cross-Reference (if size ≥ 60)
 
 **Skip Wave 4 if size = 20.**
 
@@ -490,9 +458,9 @@ run_in_background: true
 **Launch Wave 4 agents in parallel, then collect with TaskOutput.**
 
 **If `{approval_mode}` = Summary:** Show brief status:
-> "Wave 4 complete: {N} sources, verified {claims_count} claims"
+> "✓ Wave 4 complete: {N} sources, verified {claims_count} claims"
 
-## Step A-3.8: Wave 5 - Deep Dive Final (if size >= 60)
+## Step 3.8: Wave 5 - Deep Dive Final (if size ≥ 60)
 
 **Skip Wave 5 if size = 20.**
 
@@ -544,9 +512,9 @@ run_in_background: true
 **Launch Wave 5 agents in parallel, then collect with TaskOutput.**
 
 **If `{approval_mode}` = Summary:** Show brief status:
-> "Wave 5 complete: {N} sources, deep dived {areas}"
+> "✓ Wave 5 complete: {N} sources, deep dived {areas}"
 
-## Step A-4: Consolidate All Wave Results
+## Step 4: Consolidate All Wave Results
 
 Merge findings from all completed waves:
 
@@ -579,9 +547,9 @@ For consolidation:
 
 ---
 
-# A-PHASE 3: Synthesis & Planning
+# PHASE 3: Synthesis & Planning
 
-## Step A-5: Plan Document Structure
+## Step 5: Plan Document Structure
 
 ultrathink
 
@@ -635,7 +603,7 @@ Source Priority:
 - Reference (forums/discussions): [...]
 ```
 
-## Step A-6: Merge Findings
+## Step 6: Merge Findings
 
 1. **Combine all findings** from all agents into unified list
 2. **Deduplicate sources:**
@@ -654,9 +622,9 @@ Source Priority:
 
 ---
 
-# HARD STOP - Human Review Check (Section A)
+# HARD STOP - Human Review Check
 
-**If `{approval_mode}` = Auto or Summary:** Skip this check, proceed directly to A-Phase 4.
+**If `{approval_mode}` = Auto or Summary:** Skip this check, proceed directly to Phase 4.
 
 **If `{approval_mode}` = Interactive:** Present research summary:
 
@@ -680,11 +648,11 @@ Total:           {N} unique sources
 
 ADAPTATION DECISIONS
 ────────────────────
-W1 Scout identified: {key_subtopics}
-W2 Gaps targeted: {primary_gap}
-W3 Expand added: {expansion_areas}
-W4 Verify confirmed: {verified_claims}
-W5 Deep explored: {final_areas}
+✓ W1 Scout identified: {key_subtopics}
+✓ W2 Gaps targeted: {primary_gap}
+✓ W3 Expand added: {expansion_areas}
+✓ W4 Verify confirmed: {verified_claims}
+✓ W5 Deep explored: {final_areas}
 
 SOURCES CONSULTED
 ─────────────────
@@ -707,19 +675,19 @@ SUBTOPICS DISCOVERED
 
 WILL CREATE
 ───────────
-[] jaan-to/outputs/research/{filename}
-[] Update jaan-to/outputs/research/README.md
+□ jaan-to/outputs/research/{filename}
+□ Update jaan-to/outputs/research/README.md
 ```
 
 > "Generate full research document? [y/n]"
 
-**Do NOT proceed to A-Phase 4 without explicit approval.**
+**Do NOT proceed to Phase 4 without explicit approval.**
 
 ---
 
-# A-PHASE 4: Generation (Write Phase)
+# PHASE 4: Generation (Write Phase)
 
-## Step A-7: Generate Document
+## Step 7: Generate Document
 
 Use template from `jaan-to/templates/jaan-to-pm-research-about.template.md`:
 
@@ -729,7 +697,7 @@ Use template from `jaan-to/templates/jaan-to-pm-research-about.template.md`:
 4. List all sources with descriptions
 5. Mark verified facts (supported by 2+ sources)
 
-## Step A-8: Quality Check
+## Step 8: Quality Check
 
 Before preview, verify:
 - [ ] Has executive summary with 3-5 key insights
@@ -744,7 +712,7 @@ Before preview, verify:
 
 If any check fails, revise before preview.
 
-## Step A-9: Preview & Approval
+## Step 9: Preview & Approval
 
 **If `{approval_mode}` = Auto or Summary:**
 - Show brief summary (title, source count, key insights)
@@ -754,13 +722,13 @@ If any check fails, revise before preview.
 - Show complete document
 - Ask: > "Write to `jaan-to/outputs/research/{filename}`? [y/n]"
 
-## Step A-10: Write Output
+## Step 10: Write Output
 
 If approved (or auto-mode):
 1. Write the research document
 2. Confirm: "Research written to `jaan-to/outputs/research/{filename}`"
 
-## Step A-11: Update README Index
+## Step 11: Update README Index
 
 Edit `jaan-to/outputs/research/README.md`:
 
@@ -776,7 +744,7 @@ Edit `jaan-to/outputs/research/README.md`:
    - [{filename}]({filename})
    ```
 
-## Step A-12: Git Commit
+## Step 12: Git Commit
 
 ```bash
 git add jaan-to/outputs/research/{filename} jaan-to/outputs/research/README.md
@@ -798,136 +766,111 @@ EOF
 )"
 ```
 
-## Step A-13: Completion Report
+## Step 13: Completion Report
 
 ```
-Research Complete
+✅ Research Complete
 
-Category: {category}
-Document: jaan-to/outputs/research/{filename}
-Sources: {N} unique sources consulted
-Queries: {M} search queries used
-Date: {YYYY-MM-DD}
+📁 Category: {category}
+📄 Document: jaan-to/outputs/research/{filename}
+📊 Sources: {N} unique sources consulted
+🔍 Queries: {M} search queries used
+📅 Date: {YYYY-MM-DD}
 
 ADAPTIVE WAVES (5)
 ──────────────────
-W1 Scout:  {N1} sources - mapped landscape
-W2 Gaps:   {N2} sources - filled {gap}
-W3 Expand: {N3} sources - expanded {areas}
-W4 Verify: {N4} sources - verified {claims}
-W5 Deep:   {N5} sources - deep dived {final}
+🔭 W1 Scout:  {N1} sources - mapped landscape
+🎯 W2 Gaps:   {N2} sources - filled {gap}
+📈 W3 Expand: {N3} sources - expanded {areas}
+✅ W4 Verify: {N4} sources - verified {claims}
+🔬 W5 Deep:   {N5} sources - deep dived {final}
 
 README.md updated with new entry.
 ```
 
-→ Proceed to **Capture Feedback** (shared step below).
+## Step 14: Capture Feedback
+
+> "Any feedback on this research? [y/n]"
+
+If yes:
+- Run `/to-jaan-learn-add jaan-to-pm-research-about "{feedback}"`
+
+---
+
+## Definition of Done
+
+- [ ] Topic clarified (if needed)
+- [ ] Research size selected
+- [ ] Wave 1 Scout completed and analyzed
+- [ ] Wave 2 filled primary gap based on Scout
+- [ ] Wave 3 expanded coverage based on W1+W2
+- [ ] Wave 4 verified claims and resolved conflicts (if size ≥ 60)
+- [ ] Wave 5 deep dived remaining areas (if size ≥ 60)
+- [ ] All 5 wave findings merged and deduplicated
+- [ ] Document structure planned
+- [ ] Research document created with all sections
+- [ ] Quality checks pass
+- [ ] README.md updated with new entry
+- [ ] Git committed
+- [ ] User approved final result
 
 ---
 
 # ════════════════════════════════════════════════════
-# SECTION B: Add to Index Workflow
+# Add to Index (file path or URL input)
 # ════════════════════════════════════════════════════
 
-# B-PHASE 0: Input Validation
+> Jump here when input is a file path or URL (detected in Step 0.0)
 
-## Step B-0.1: Parse Input
+## Extract Content
 
-The input has already been classified as `add-url` or `add-file` in Step 0.1.
+**For local files:**
+1. Read first 50-100 lines
+2. Extract title (H1 or YAML `title:`) and summary
+3. Detect category using keywords table above
 
-**If mode = `add-file`:** The input is a local file path.
-**If mode = `add-url`:** The input starts with `http://` or `https://`.
+**For URLs:**
+1. WebFetch: "Extract: 1) Title 2) Brief summary (2-3 sentences) 3) Key topics 4) Full markdown content"
+2. Detect category from keywords
+3. Generate filename: `{NN}-{category}-{slug}.md`
 
----
+## Generate Filename
 
-# B-PHASE 1: Analysis (Read-Only)
-
-## Step B-1: Extract Content Info
-
-### For Local Files:
-
-1. Verify file exists using Read tool
-2. Read first 50-100 lines
-3. Extract:
-   - **Title:** First H1 heading (`# Title`) or YAML `title:` field
-   - **Summary:** First paragraph or executive summary section
-4. Detect category from content keywords:
-
-   | Category | Keywords |
-   |----------|----------|
-   | `ai-workflow` | claude, agent, workflow, prompt, token, MCP, LLM |
-   | `dev` | code, architecture, testing, API, backend, frontend |
-   | `pm` | product, PRD, roadmap, feature, requirement |
-   | `qa` | test, quality, automation, CI/CD |
-   | `ux` | design, UI, UX, accessibility, user |
-   | `data` | analytics, tracking, GTM, metrics |
-   | `growth` | SEO, content, marketing |
-   | `mcp` | MCP server, tool server |
-   | `other` | (fallback) |
-
-### For Web URLs:
-
-1. Use WebFetch with prompt:
-   ```
-   Extract from this page:
-   1. Title (main heading)
-   2. Brief summary (2-3 sentences)
-   3. 3-5 key topics covered
-   4. Full content as clean markdown
-   ```
-2. Determine category from content keywords
-3. Generate kebab-case filename from title
-4. Prepare content for new .md file
-
-## Step B-2: Generate Filename (if needed)
-
-For URLs or files not already in research outputs:
-
-1. Count existing files in `jaan-to/outputs/research/` matching `[0-9][0-9]-*.md`
+1. Count files matching `[0-9][0-9]-*.md` in `jaan-to/outputs/research/`
 2. Next number = count + 1 (pad to 2 digits)
-3. Slugify title: lowercase, replace spaces with hyphens, max 50 chars
+3. Slugify title: lowercase, hyphens, max 50 chars
 4. Format: `{NN}-{category}-{slug}.md`
 
 ---
 
-# HARD STOP - Human Review Check (Section B)
-
-Present the proposal:
+## HARD STOP - Approval
 
 ```
 RESEARCH DOCUMENT PROPOSAL
-─────────────────────────────
 
 Source: {file-path or URL}
 Type: {local file / web URL}
 Category: {category}
 Title: {extracted title}
+Filename: {NN}-{category}-{slug}.md (if URL)
 
-{If URL: Filename: {NN}-{category}-{slug}.md}
+Summary: {2-3 sentences}
 
-Summary:
-{2-3 sentence description}
-
-FILES TO MODIFY
-───────────────
-[] jaan-to/outputs/research/README.md (add to index)
-{If URL: [] jaan-to/outputs/research/{filename} (new file)}
+WILL MODIFY:
+□ jaan-to/outputs/research/README.md (add to index)
+□ jaan-to/outputs/research/{filename} (if URL: create new file)
 ```
 
-> "Proceed with adding to index? [y/n/edit]"
+> "Proceed with adding to index? [y/n]"
 
-**Do NOT proceed to B-Phase 2 without explicit approval.**
+Do NOT proceed without approval.
 
 ---
 
-# B-PHASE 2: Execution (Write Phase)
+## Create File (URLs only)
 
-## Step B-3: Create .md File (URLs Only)
+Path: `jaan-to/outputs/research/{NN}-{category}-{slug}.md`
 
-If the source is a web URL, create the new markdown file:
-
-**File path:** `jaan-to/outputs/research/{NN}-{category}-{slug}.md`
-
-**File structure:**
 ```markdown
 # {Title}
 
@@ -940,54 +883,16 @@ If the source is a web URL, create the new markdown file:
 {Full content from WebFetch}
 ```
 
-Use the Write tool to create this file.
+## Update README.md
 
-## Step B-4: Update README.md Index
+1. Add to Summary Index table: `| [{NN}]({filename}) | {Title} | {Brief description} |`
+2. Add to Quick Topic Finder under relevant category section
 
-Edit `jaan-to/outputs/research/README.md`:
-
-### 4.1: Add to Summary Index Table
-
-Find the table under `## Summary Index` and add new row at the end:
-
-```markdown
-| [{NN}]({filename}) | {Title} | {Brief one-line description} |
-```
-
-### 4.2: Add to Quick Topic Finder
-
-Find the most relevant section based on category:
-
-| Category | Section |
-|----------|---------|
-| ai-workflow | Claude Code Setup & Configuration OR AI-Powered Workflows |
-| dev | Tech Stack Best Practices |
-| pm | Documentation & Architecture |
-| qa | PR Review Automation |
-| data | Token & Cost Optimization |
-| other | Documentation & Architecture |
-
-Add link to the section:
-```markdown
-- [{filename}]({filename})
-```
-
-Use the Edit tool for both updates.
-
-## Step B-5: Quality Check
-
-Before committing, verify:
-- [ ] README.md has new entry in Summary Index
-- [ ] README.md has link in Quick Topic Finder
-- [ ] New file exists (if URL source)
-- [ ] No duplicate entries
-
-## Step B-6: Git Commit
+## Git Commit
 
 ```bash
-git add jaan-to/outputs/research/README.md
-git add jaan-to/outputs/research/{filename}  # if URL source
-git commit -m "$(cat <<'EOF'
+git add jaan-to/outputs/research/README.md jaan-to/outputs/research/{filename}
+git commit -m "$(cat <<'COMMITMSG'
 docs(research): Add {title} to index
 
 {If URL: Fetched from: {URL}}
@@ -996,84 +901,33 @@ Category: {category}
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude <noreply@anthropic.com>
-EOF
+COMMITMSG
 )"
 ```
 
-## Step B-7: Verify Commit
-
-```bash
-git status
-```
-
-## Step B-8: Completion Report
+## Completion
 
 ```
-Research Document Added
+✅ Research Document Added
 
-Commit: {hash}
 Category: {category}
 File: {filename}
 
 Files modified:
 - jaan-to/outputs/research/README.md
-{If URL: - jaan-to/outputs/research/{filename} (new)}
-
-Summary:
-{Brief description of what was added}
+- jaan-to/outputs/research/{filename} (if URL)
 ```
 
-→ Proceed to **Capture Feedback** (shared step below).
+> "Any feedback? [y/n]"
+
+If yes: Run `/to-jaan-learn-add jaan-to-pm-research-about "{feedback}"`
 
 ---
 
-# ════════════════════════════════════════════════════
-# SHARED: Capture Feedback
-# ════════════════════════════════════════════════════
+## Definition of Done (Add to Index)
 
-## Capture Feedback
-
-> "Any feedback on this research? [y/n]"
-
-If yes:
-- Run `/to-jaan-learn-add jaan-to-pm-research-about "{feedback}"`
-
----
-
-## Error Handling
-
-| Error | Response |
-|-------|----------|
-| No argument | Ask user to choose mode (research topic or add file/URL) |
-| File not found (add mode) | `File not found: {path}. Check the path and try again.` |
-| URL fetch fails | Retry once, then: `Could not fetch URL. Check connectivity.` |
-| README parse fails | `Could not parse README structure. Manual intervention needed.` |
-| Git commit fails | Show error, suggest manual commit |
-
----
-
-## Definition of Done
-
-### For Deep Research (Section A):
-- [ ] Topic clarified (if needed)
-- [ ] Research size selected
-- [ ] Wave 1 Scout completed and analyzed
-- [ ] Wave 2 filled primary gap based on Scout
-- [ ] Wave 3 expanded coverage based on W1+W2
-- [ ] Wave 4 verified claims and resolved conflicts (if size >= 60)
-- [ ] Wave 5 deep dived remaining areas (if size >= 60)
-- [ ] All wave findings merged and deduplicated
-- [ ] Document structure planned
-- [ ] Research document created with all sections
-- [ ] Quality checks pass
-- [ ] README.md updated with new entry
+- [ ] Source analyzed, metadata extracted
+- [ ] User approved proposal
+- [ ] File created (if URL)
+- [ ] README.md updated
 - [ ] Git committed
-- [ ] User approved final result
-
-### For Add to Index (Section B):
-- [ ] Source analyzed and metadata extracted
-- [ ] User approved the proposal
-- [ ] New file created (if URL source)
-- [ ] README.md updated with new entry
-- [ ] Git committed
-- [ ] User confirmed result
