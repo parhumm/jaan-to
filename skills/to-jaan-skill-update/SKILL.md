@@ -265,10 +265,10 @@ Show final versions of all modified files.
 
 If approved:
 1. Write SKILL.md to `skills/{name}/SKILL.md`
-2. Write template.md to `jaan-to/templates/{name}.template.md` (if modified)
-3. Write LEARN.md to `jaan-to/learn/{name}.learn.md`
+2. Write template.md to `skills/{name}/template.md` (if modified)
+3. Write LEARN.md to `skills/{name}/LEARN.md`
 
-Confirm: "Skill files updated in `skills/{name}/` and `jaan-to/`"
+Confirm: "Skill files updated in `skills/{name}/`"
 
 ## Step 12: Auto-Invoke Documentation Sync
 
