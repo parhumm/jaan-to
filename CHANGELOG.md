@@ -5,6 +5,57 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2026-02-02
+
+### Added
+- **Multi-layer configuration system** — Plugin defaults + project customization
+- **Path customization** — Configure templates, learning, context, output paths via `jaan-to/config/settings.yaml`
+- **Template inheritance** — Extend base templates, override sections (v3.1+ feature, scaffolded)
+- **Learning merge strategy** — Combine lessons from plugin + project sources
+- **Tech stack integration** — PRDs auto-reference your stack from `jaan-to/context/tech.md`
+- **Template variables** — Use `{{field}}`, `{{env:VAR}}`, `{{config:key}}`, `{{import:path#section}}` in templates
+- **Environment variables** — `JAAN_*` vars (`$JAAN_TEMPLATES_DIR`, `$JAAN_LEARN_DIR`, `$JAAN_CONTEXT_DIR`, `$JAAN_OUTPUTS_DIR`) for path overrides
+- **Configuration file** — `jaan-to/config/settings.yaml` for all customization
+- **Enhanced tech.md** — Structured sections with anchors: Current Stack, Frameworks, Technical Constraints, Versioning, Common Patterns, Tech Debt
+- **Migration guide** — Complete guide for upgrading from v2.x ([docs/guides/migration-v3.md](docs/guides/migration-v3.md))
+- **Configuration examples** — 3 example configs: enterprise template, monorepo paths, learning override
+
+### Changed
+- **BREAKING**: Paths now use environment variables (`$JAAN_TEMPLATES_DIR`, etc.) instead of hardcoded `jaan-to/` paths
+- **BREAKING**: Bootstrap creates `jaan-to/config/settings.yaml` on first run
+- All 10 skills updated to support path customization
+- Templates enhanced with variable support
+- `tech.md` structure improved with section anchors for imports
+- CLAUDE.md updated with customization documentation
+- File Locations table now includes "Customizable" column
+
+### Migration
+See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
+
+**Quick summary:**
+- Update plugin: `/plugin update jaan-to`
+- Review new config: `jaan-to/config/settings.yaml` (created automatically)
+- Customize if needed, or leave defaults (no action required)
+
+### Infrastructure
+- **Phase 1**: Configuration system with YAML-based 2-layer config (plugin + project)
+- **Phase 2**: Path resolution system with dynamic template/learning/context/output resolution
+- **Phase 3**: Template processor with variable substitution and section extraction
+- **Phase 4**: Learning merger for combining plugin + project lessons
+- **Phase 5**: Tech stack integration for tech-aware PRD generation
+- **Phase 6**: Full migration of all 10 skills + comprehensive documentation
+- **Phase 7**: Unified integration testing (38+ test assertions across 5 E2E suites)
+
+### Testing
+- ✓ Phase 1 E2E: 8 tests (configuration system)
+- ✓ Phase 2 E2E: 7 tests (path resolution)
+- ✓ Phases 3-5 E2E: 3 tests (template + learning + tech)
+- ✓ Phase 6 E2E: 5 tests (migration + docs)
+- ✓ Unified Integration: 15+ assertions (full workflow)
+- ✓ Master test suite: 5/5 passed, 0 failed
+
+---
+
 ## [2.2.0] - 2026-02-02
 
 ### Added
