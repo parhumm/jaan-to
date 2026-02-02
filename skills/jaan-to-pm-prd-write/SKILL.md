@@ -98,6 +98,25 @@ Fill all sections:
 - **User Stories**: Derived from problem + solution (minimum 3)
 - **Open Questions**: Any unresolved items
 
+### Tech Context Integration
+
+If `$JAAN_CONTEXT_DIR/tech.md` exists:
+1. **Read the file** to understand tech stack
+2. **When generating User Stories**:
+   - Reference appropriate backend framework (e.g., "API endpoint in FastAPI")
+   - Reference appropriate frontend framework (e.g., "React component with Redux state")
+   - Reference mobile platforms if applicable
+3. **When generating Technical Constraints**:
+   - Include relevant constraints from tech.md
+   - Reference specific technical requirements (e.g., "Must maintain sub-200ms p95 latency")
+4. **When generating Success Metrics**:
+   - Consider performance targets from tech.md
+   - Include technical success criteria where relevant
+
+If tech.md doesn't exist:
+- Generate generic technical references
+- Add note in PRD: "Update `$JAAN_CONTEXT_DIR/tech.md` for tech-aware PRDs"
+
 ## Step 4: Quality Check
 Before showing preview, verify:
 - [ ] Has clear problem statement

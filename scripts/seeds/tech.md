@@ -1,92 +1,106 @@
-# Tech Stack
+# Technology Stack
 
-> Your technology context - skills read this to understand your technical environment
-
----
-
-## Languages
-
-| Layer | Technology | Version |
-|-------|------------|---------|
-| Backend | {language} | {version} |
-| Frontend | {language} | {version} |
-| Mobile | {language} | {version} |
-
-## Frameworks
-
-| Type | Framework | Notes |
-|------|-----------|-------|
-| API | {framework} | {notes} |
-| Web | {framework} | {notes} |
-| Testing | {framework} | {notes} |
-
-## Infrastructure
-
-| Component | Technology | Notes |
-|-----------|------------|-------|
-| Cloud | {provider} | {region/notes} |
-| Database | {database} | {notes} |
-| Cache | {cache} | {notes} |
-| Queue | {queue} | {notes} |
-
-## Tools
-
-| Category | Tool | Notes |
-|----------|------|-------|
-| CI/CD | {tool} | {notes} |
-| Monitoring | {tool} | {notes} |
-| Feature Flags | {tool} | {notes} |
-| Error Tracking | {tool} | {notes} |
-
-## Constraints
-
-> Technical constraints that always apply to this stack
-
-- {constraint 1}
-- {constraint 2}
+> Project: {project-name}
+> Last updated: {date}
 
 ---
 
-## Example (delete after filling in)
+## Current Stack {#current-stack}
 
-```markdown
-## Languages
+### Backend
+- **Language**: Python 3.11
+- **Framework**: FastAPI 0.104
+- **Database**: PostgreSQL 15
+- **Cache**: Redis 7
+- **Queue**: Celery + RabbitMQ
 
-| Layer | Technology | Version |
-|-------|------------|---------|
-| Backend | Python | 3.11 |
-| Frontend | TypeScript | 5.0 |
-| Mobile | React Native | 0.72 |
+### Frontend
+- **Language**: TypeScript 5.2
+- **Framework**: React 18 + Next.js 14
+- **State**: Redux Toolkit
+- **Styling**: Tailwind CSS 3.3
+- **Build**: Vite 5.0
 
-## Frameworks
+### Mobile
+- **iOS**: Swift 5.9 + SwiftUI
+- **Android**: Kotlin 1.9 + Jetpack Compose
+- **Cross-platform**: None
 
-| Type | Framework | Notes |
-|------|-----------|-------|
-| API | FastAPI | async-first |
-| Web | React | with Next.js |
-| Testing | pytest | with coverage |
+### Infrastructure
+- **Cloud**: AWS (us-east-1, us-west-2)
+- **Container**: Docker + ECS
+- **CI/CD**: GitHub Actions
+- **Monitoring**: DataDog
+- **Logging**: CloudWatch
 
-## Infrastructure
+---
 
-| Component | Technology | Notes |
-|-----------|------------|-------|
-| Cloud | AWS | us-east-1 |
-| Database | PostgreSQL | RDS, 15.x |
-| Cache | Redis | ElastiCache |
-| Queue | SQS | with DLQ |
+## Frameworks {#frameworks}
 
-## Tools
+### API Development
+- FastAPI (REST endpoints)
+- Pydantic (validation)
+- SQLAlchemy (ORM)
 
-| Category | Tool | Notes |
-|----------|------|-------|
-| CI/CD | GitHub Actions | main branch deploys |
-| Monitoring | Datadog | APM enabled |
-| Feature Flags | LaunchDarkly | per-environment |
-| Error Tracking | Sentry | with source maps |
+### Web Development
+- Next.js App Router
+- React Server Components
+- TanStack Query (data fetching)
 
-## Constraints
+### Testing
+- **Backend**: pytest, pytest-cov
+- **Frontend**: Jest, React Testing Library
+- **E2E**: Playwright
 
-- All new tables must have soft delete (company policy)
-- React components must have Storybook stories
-- API endpoints must have OpenAPI docs
-```
+---
+
+## Technical Constraints {#constraints}
+
+1. **All APIs must return JSON:API format** - Company standard
+2. **Mobile apps must work offline** - Sync on reconnect
+3. **Sub-200ms p95 latency** - Performance requirement
+4. **SOC2 compliant** - Security/audit logging required
+5. **Multi-tenant architecture** - Data isolation enforced
+
+---
+
+## Versioning & Deprecation {#versioning}
+
+- **API versioning**: URL path (`/v1/`, `/v2/`)
+- **Breaking changes**: 6-month deprecation notice
+- **Mobile**: Support last 2 major versions
+
+---
+
+## Common Patterns {#patterns}
+
+### Authentication
+- OAuth2 + JWT (15min access, 7d refresh)
+- API keys for service-to-service
+
+### Error Handling
+- Structured errors with error codes
+- Client-friendly messages
+
+### Data Access
+- Repository pattern for data layer
+- No raw SQL in business logic
+
+---
+
+## Tech Debt {#tech-debt}
+
+- [ ] Migrate from Redux to Zustand (Q2 2024)
+- [ ] Upgrade Python 3.11 → 3.12 (Q3 2024)
+- [ ] Split monolith → microservices (Q4 2024)
+
+---
+
+**Delete this section after customizing:**
+
+This file is read by:
+- `/jaan-to-pm-prd-write` - References stack in PRD
+- `/jaan-to-dev-*` skills - Generates code matching conventions
+- `/jaan-to-data-*` skills - Uses correct event names
+
+Edit sections above to match your project. Use `#section-id` anchors for imports.
