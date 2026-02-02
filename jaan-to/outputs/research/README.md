@@ -58,6 +58,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [48](48-dev-docs-generate.md) | Building a Production-Ready Documentation Generation Framework | Technical guide for implementing automated documentation generation across PHP/Laravel, TypeScript/React, and Docusaurus. Covers Scramble + openapi-typescript + Docusaurus pipeline, OpenAPI as single source of truth, code-first generation, CI/CD quality gates, README/API/Component/Runbook/ADR documentation tiers, and validation automation. |
 | [49](49-pm-acceptance-criteria.md) | Acceptance Criteria Best Practices | Production-ready research on transforming PRDs into testable, actionable acceptance criteria with industry standards (IEEE, ISTQB, IIBA), BDD/Gherkin format specifications, edge case heuristics (SFDPOT), AI guardrails for LLM-generated AC, and analytics event requirements for core funnels. |
 | [50](50-qa-test-cases.md) | QA Test Case Generation Best Practices | Comprehensive standards-based framework for transforming acceptance criteria into test cases using BDD/Gherkin as primary format. Covers ISTQB/IEEE 829 specifications, boundary value analysis, equivalence partitioning, five priority edge case categories (empty/null, boundaries, errors, concurrency, state transitions), and AI failure mode mitigation patterns. |
+| [51](51-dev-fe-task-breakdown.md) | Frontend Task Breakdown: Complete Framework | Systematic framework for transforming UX handoffs into production-ready task breakdowns. Covers PMI WBS principles, Component-Driven Development, Atomic Design taxonomy, React 18/Next.js 14 patterns, 50+ item coverage checklist (accessibility, performance, SEO, testing), state machine definitions, implicit work identification, and AI failure mode mitigations. |
 
 ## Quick Topic Finder
 
@@ -98,6 +99,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [46-pm-story-write-skill.md](46-pm-story-write-skill.md)
 - [49-pm-acceptance-criteria.md](49-pm-acceptance-criteria.md) - Acceptance criteria standards & AI guardrails
 - [50-qa-test-cases.md](50-qa-test-cases.md) - Test case generation methodologies & BDD
+- [51-dev-fe-task-breakdown.md](51-dev-fe-task-breakdown.md) - Frontend task breakdown framework & coverage checklist
 
 ### PR Review Automation
 - [04-laravel-pr-agents.md](04-laravel-pr-agents.md)
