@@ -1,8 +1,10 @@
 #!/bin/bash
 # jaan.to Configuration Loader
 # Loads and merges configuration from plugin defaults and project settings
+# Compatible with bash 3.2+ (macOS default)
 
-declare -A CONFIG_CACHE
+# Use simple variables instead of associative arrays for bash 3 compatibility
+CONFIG_CACHE_FILE="/tmp/jaan-to-config-$$"
 
 load_yaml() {
   local file=$1
@@ -18,8 +20,8 @@ load_yaml() {
     [[ -z "$key" ]] && continue
 
     # Trim whitespace
-    key=$(echo "$key" | xargs)
-    value=$(echo "$value" | xargs)
+    key=$(echo "$key" | xargs 2>/dev/null || echo "$key")
+    value=$(echo "$value" | xargs 2>/dev/null || echo "$value")
 
     # Remove quotes from value if present
     value="${value#\"}"
@@ -27,14 +29,17 @@ load_yaml() {
     value="${value#\'}"
     value="${value%\'}"
 
-    # Cache the config value with prefix
-    CONFIG_CACHE["${prefix}.${key}"]="$value"
+    # Write to temp cache file: prefix.key=value
+    echo "${prefix}.${key}=${value}" >> "$CONFIG_CACHE_FILE"
   done < "$file"
 }
 
 load_config() {
   local plugin_root="${CLAUDE_PLUGIN_ROOT:-$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)}"
   local project_dir="${PROJECT_DIR:-.}"
+
+  # Initialize cache file
+  : > "$CONFIG_CACHE_FILE"
 
   # Layer 1: Plugin defaults
   if [ -f "${plugin_root}/config/defaults.yaml" ]; then
@@ -55,10 +60,21 @@ get_config() {
   key="${key//./_}"
 
   # Check project first, then plugin, then default
-  if [ -n "${CONFIG_CACHE[project.${key}]}" ]; then
-    echo "${CONFIG_CACHE[project.${key}]}"
-  elif [ -n "${CONFIG_CACHE[plugin.${key}]}" ]; then
-    echo "${CONFIG_CACHE[plugin.${key}]}"
+  local result=""
+
+  if [ -f "$CONFIG_CACHE_FILE" ]; then
+    # Try project value first
+    result=$(grep "^project\.${key}=" "$CONFIG_CACHE_FILE" 2>/dev/null | tail -1 | cut -d= -f2-)
+
+    # Fall back to plugin value
+    if [ -z "$result" ]; then
+      result=$(grep "^plugin\.${key}=" "$CONFIG_CACHE_FILE" 2>/dev/null | tail -1 | cut -d= -f2-)
+    fi
+  fi
+
+  # Return result or default
+  if [ -n "$result" ]; then
+    echo "$result"
   else
     echo "$default"
   fi
@@ -97,6 +113,13 @@ validate_path() {
 
   return 0
 }
+
+# Cleanup temp file on exit
+cleanup_config() {
+  [ -f "$CONFIG_CACHE_FILE" ] && rm -f "$CONFIG_CACHE_FILE"
+}
+
+trap cleanup_config EXIT
 
 # Export functions for use in other scripts
 export -f load_yaml
