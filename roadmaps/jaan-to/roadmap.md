@@ -124,13 +124,21 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 - Skill creation spec updated with "User Interaction Patterns" section
 - V3.8 AskUserQuestion compliance check in `/to-jaan-skill-update`
 
----
-
-## Unreleased
+### v3.3.0 — UX Heatmap Analysis, Dev Stack Detection (`1ad42e5`)
 
 - **New skill**: `/jaan-to-dev-stack-detect` — Detect project tech stack automatically (`d3dbb66`)
 - **New skill**: `/jaan-to-ux-heatmap-analyze` — Analyze heatmap CSV + screenshots for UX research reports (first UX role skill) (`2650ce7`)
 - Renamed roadmap and vision files to shorter names (`007b4b3`, `c05988b`)
+
+---
+
+## Unreleased
+
+- `/to-jaan-roadmap-update` enhanced with Unreleased management and branch merge in release mode (`db33d88`)
+- `/jaan-to-dev-pr-review` documentation added (`2750902`)
+- Specification compliance fixes for `/to-jaan-skill-update` and `/to-jaan-skill-create`: H1 logical names, broken path refs, AskUserQuestion conversion, step numbering, template v3.0.0 syntax (`426fcc1`)
+- `/to-jaan-skill-create` and `/to-jaan-skill-update` now auto-invoke `/to-jaan-roadmap-update` at end of workflow (`6400541`)
+- Fixed stale path references (`206dcfd`)
 
 ---
 
