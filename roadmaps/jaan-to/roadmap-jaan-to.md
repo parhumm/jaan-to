@@ -4,231 +4,185 @@
 
 ---
 
-## Phase Overview
+## Overview
 
 | Phase | Focus | Status |
 |-------|-------|--------|
-| 1 | Foundation & Optimization | Done |
-| 2 | Learning & Documentation | Done |
-| 2.5 | Plugin Migration | Done |
-| 3 | Development Workflow | Pending |
-| 4 | Quick Win Skills (18) | Pending |
-| 5 | MCP Connectors | Pending |
-| 6 | Advanced Role Skills (23) | Pending |
-| 7 | Testing & Polish | Pending |
-| 8 | Distribution | Pending |
+| v1.x | Foundation, plugin migration, stabilization | Done |
+| v2.x | Directory restructure, research, story writing | Done |
+| v3.0 | Multi-layer customization system | Done |
+| 4 | Development workflow | Planned |
+| 5 | Role skills (137 across 11 roles) | Planned |
+| 6 | MCP connectors | Planned |
+| 7 | Testing and polish | Planned |
+| 8 | Distribution | Planned |
 
 ---
 
-## Phase 1: Foundation & Optimization (Done)
+## v1.x — Foundation and Plugin Migration
 
-- [x] Directory structure (`1d9fd35`)
-- [x] Config `jaan-to/config.md` (`dd8e360`)
-- [x] Guardrails `jaan-to/boundaries/safe-paths.md` (`c233efe`)
-- [x] Settings `.claude/settings.json` (`9d0891e`)
-- [x] PRD skill + template (`85db425`, `fb0f826`)
-- [x] Two-phase workflow with hard stop (`ba1856e`)
-- [x] Validation hook for PRD (`363cbe9`)
-- [x] CLAUDE.md project context (`4bf9d5d`)
-- [x] Token optimization - model routing (`ba1856e`)
+### v1.0.0 — Initial Release (`fdbd152`)
 
-## Phase 2: Learning & Documentation (Done)
+All pre-plugin work landed in a single initial commit:
 
-> Details: [tasks/learning-system.md](tasks/learning-system.md)
+- 10 skills: pm-prd-write, data-gtm-datalayer, skill-create, skill-update, docs-create, docs-update, learn-add, research-about, research-add, roadmap-add
+- Two-phase workflow with human approval checkpoints
+- Validation hooks (PRD sections, feedback capture)
+- Learning system (LEARN.md per skill, three-layer learning)
+- Context system (tech.md, team.md, integrations.md, boundaries.md)
+- Agents: quality-reviewer, context-scout
+- Plugin manifest and bootstrap script
+- Documentation (README, guides, style guide, vision, roadmap)
 
-- [x] LEARN.md files alongside skills (`d554fa6`)
-- [x] Stacks: `tech.md`, `team.md`, `integrations.md` (`bd0eff3`)
-- [x] PostToolUse feedback capture hook (`b2e7687`)
-- [x] `/to-jaan-learn-add` command for feedback routing (`5775df6`)
-- [x] Auto-commit option for `/to-jaan-learn-add` (`74e4163`)
-- [x] `/to-jaan-docs-create` skill for documentation authoring (`b3b2383`)
-- [x] `/to-jaan-docs-update` skill with git-based staleness detection (`b3b2383`, `df9cdea`)
-- [x] Auto-invoke `/to-jaan-learn-add` from `/jaan-to-pm-prd-write` (`9d9c7e1`)
-- [x] Human-focused documentation structure (`48bf028`)
-- [x] Documentation style guide (`de92247`)
-- [x] Rename pm-spec-prd-write → jaan-to-pm-prd-write (`7c7c29d`)
-- [x] Rename docs/skills/internal/ → docs/skills/core/ (`aad168c`)
-- [x] Skill creation specification for AI + humans
+### v1.0.0 → v1.3.0 — Plugin Stabilization
 
-## Phase 2.5: Plugin Migration (Done)
+- Marketplace distribution (marketplace.json, plugin.json schema fixes)
+- Project-relative path resolution (`c5dbc1f`)
+- 66+ stale path references fixed across docs and roadmap files
+- Clean plugin installation (`scripts/build-dist.sh`, `scripts/verify-install.sh`)
+- Plugin format aligned to official Claude Code standards
 
-- [x] Plugin manifest (`.claude-plugin/plugin.json`)
-- [x] Migrate 10 skills from `.claude/skills/` to `skills/` (flat structure)
-- [x] Context files: `jaan-to/` → `context/` (config, boundaries, tech, team, integrations)
-- [x] Hook system: `jaan-to/hooks/` → `scripts/` + `hooks/hooks.json`
-- [x] Agents: `agents/context-scout.md`, `agents/quality-reviewer.md`
-- [x] Command namespace: `/jaan-to-*` (role-based) and `/to-jaan-*` (internal)
-- [x] Documentation: 8 new docs created, 27 existing docs updated
-- [x] Marketplace distribution (`marketplace.json` catalog format, manifest component paths, README install instructions)
-- [x] Directory structure reference updated
-- [x] Clean plugin installation — exclude non-essential files; `scripts/build-dist.sh` produces clean distribution
-- [x] Store jaan.to output files in `jaan-to/` inside the target project; bootstrap seeds context, templates, learn, docs
-- [x] End-to-end plugin install testing — `scripts/verify-install.sh` validates all bootstrap artifacts
-- [x] **Meta-skills v3.0.0 support** — Updated `/to-jaan-skill-create` and `/to-jaan-skill-update` for full v3.0.0 customization system:
-  - `/to-jaan-skill-create`: 8 components updated (frontmatter, context awareness, Step 12 expansion ~250 lines, tech integration, validation requirement, template.md v3.0.0 patterns)
-  - `/to-jaan-skill-update`: Added v3.0.0 validation (7 compliance checks), migration wizard (4 migration options: auto-fix, interactive, script, guidance), auto-fix script (`scripts/lib/v3-autofix.sh`)
-  - `docs/extending/create-skill.md`: Comprehensive v3.0.0 documentation (~1300 lines, up from 661) with configuration system, template variables (4 types), tech stack integration, learning merge strategy, migration checklist, updated examples
+### v1.3.0 — Naming Convention (`0e541a6`)
 
-## Phase 3: Development Workflow
+- Skill naming standardized: `jaan-to-{role}-{domain}-{action}` (role-based) and `to-jaan-{domain}-{action}` (internal)
+- All directories, scripts, and documentation updated
 
-> Details: [tasks/development-workflow.md](tasks/development-workflow.md)
+### v1.3.1 — LEARN File Fix (`8ea0a12`)
 
-- [ ] Project constitution document (`jaan-to/constitution.md`) - Immutable development principles
-- [ ] Complexity tracking in outputs - Document tradeoffs and exceptions
-- [ ] Support LSP (Language Server Protocol) — bundle LSP configs + make skills LSP-aware → [details](tasks/lsp-support.md)
+- All 9 content-generating skills reliably read LEARN files before execution
+- Introduced Pre-Execution block pattern (mandatory first action)
 
-## Phase 4: Quick Win Skills (18)
+---
 
-> Details: [tasks/role-skills.md](tasks/role-skills.md) | No MCP required
+## v2.x — Restructuring and New Skills
 
-- [x] `/to-jaan-skill-create` skill with web research and PR workflow
-- [x] `/to-jaan-skill-update` skill with specification compliance
-- [x] Merge `/to-jaan-research-about` + `/to-jaan-research-add` → `/jaan-to-pm-research-about`
-- [ ] Update `/to-jaan-skill-create` to integrate `/jaan-to-pm-research-about` (optional, recommended) for research-informed skill planning
+### v2.0.0 — Directory Rename (`852c3d9`)
 
-**Ranked by research impact (1-19):**
+- **Breaking**: `.jaan-to/` renamed to `jaan-to/` (non-hidden directory)
+- Bootstrap auto-migration for existing projects
+- Version management rules established (tag + changelog per release)
 
-- [ ] `/jaan-to-qa-test-cases` - Test cases from AC with edge cases (**Rank #1**)
-- [ ] `/jaan-to-data-sql-query` - Ad-hoc SQL from natural language (**Rank #2**)
-- [x] `/jaan-to-pm-story-write` - User stories with Given/When/Then AC (Rank #6) (`800ff9d`)
-- [ ] `/jaan-to-ux-research-synthesize` - Research findings synthesis with themes (Rank #8)
-- [ ] `/jaan-to-qa-bug-report` - Structured bug reports with repro steps (Rank #10)
-- [ ] `/jaan-to-growth-meta-write` - Meta titles/descriptions with CTR optimization (Rank #12)
-- [ ] `/jaan-to-dev-docs-generate` - Technical documentation: README, API docs, runbooks (Rank #14)
-- [ ] `/jaan-to-pm-feedback-synthesize` - Customer feedback synthesis with themes (Rank #15)
-- [ ] `/jaan-to-ux-persona-create` - User personas with goals, pain points, JTBD (Rank #16)
+### v2.0.1 — Schema Alignment (`1cc62ee`)
 
-**Additional quick wins (unranked):**
+- Marketplace and plugin manifests aligned to official Claude Code schema
+- Deprecated output styles removed
 
-- [ ] `/jaan-to-pm-decision-brief` - 1-page decision record with options, recommendation, risks
-- [ ] `/jaan-to-dev-tech-plan` - Tech approach with architecture, tradeoffs, risks
-- [ ] `/jaan-to-dev-test-plan` - Dev-owned test plan with unit/integration/e2e scope
-- [ ] `/jaan-to-qa-test-matrix` - Risk-based matrix: flows × states × devices × env
-- [ ] `/jaan-to-qa-bug-triage` - Dedupe + severity + repro hints + next action
-- [ ] `/jaan-to-data-event-spec` - GA4-ready event/param spec with naming, triggers
-- [ ] `/jaan-to-data-metric-spec` - Metric definition, formula, caveats, owner
-- [ ] `/jaan-to-ux-flow-spec` - Flow spec with happy path + error states
-- [ ] `/jaan-to-ux-microcopy-write` - Labels, helper text, errors, toasts, empty states
+### v2.1.0 — Research Consolidation (`bf9413e`)
 
-## Phase 5: MCP Connectors
+- Merged `to-jaan-research-about` + `to-jaan-research-add` into `/jaan-to-pm-research-about`
+- Auto-detects input type (topic string vs file/URL)
+- Renamed from internal (`to-jaan-*`) to role-based (`jaan-to-pm-*`) convention
+
+### v2.1.1 — Research Quality and Role Skills Catalog (`f5fd860`)
+
+- Research skill restructured to restore original focused workflow (-14% file size)
+- Role skills catalog expanded to 137 skills across 11 roles
+- Per-role skill files created (11 files in `tasks/role-skills/`)
+- Userflow schema diagrams added to all role-skill files
+
+### v2.2.0 — Story Writing and Research Infrastructure (`dd12b2e`)
+
+- **New skill**: `/jaan-to-pm-story-write` — User stories with Given/When/Then AC, INVEST principles, edge case mapping, Jira CSV and Linear JSON export
+- Deep research documents added: acceptance criteria, QA test cases, backend task breakdown, PR review, frontend task breakdown, UX research synthesis, documentation generation
+
+---
+
+## v3.0.0 — Multi-Layer Customization System (`ae91303`)
+
+The largest architectural change since v1.0.0. Introduced full project-level customization.
+
+**Configuration**:
+- Multi-layer config: plugin `config/defaults.yaml` + project `jaan-to/config/settings.yaml`
+- Path customization via `$JAAN_*` environment variables (`$JAAN_TEMPLATES_DIR`, `$JAAN_LEARN_DIR`, `$JAAN_CONTEXT_DIR`, `$JAAN_OUTPUTS_DIR`)
+
+**Templates and Learning**:
+- Template variables: `{{field}}`, `{{env:VAR}}`, `{{config:key}}`, `{{import:path#section}}`
+- Learning merge strategy (combine plugin + project lessons)
+
+**Tech Stack Integration**:
+- Skills auto-reference project tech stack from `jaan-to/context/tech.md`
+- Enhanced `tech.md` with structured sections and anchors
+
+**Migration**:
+- All 10 skills migrated to v3.0.0 patterns
+- Migration guide: [docs/guides/migration-v3.md](../../docs/guides/migration-v3.md)
+- 38+ E2E test assertions across 5 test suites
+
+---
+
+## Unreleased: Meta-Skills v3.0.0 Support
+
+> Branch: `feature/v3-customization-system` | Commit: `f77d4e6` | Not yet merged to main
+
+- **skill-create**: 8 components updated (frontmatter, context awareness, Step 12 expansion, tech integration, validation requirement, template.md v3.0.0 patterns)
+- **skill-update**: v3.0.0 validation (7 compliance checks), migration wizard (4 options), auto-fix script (`scripts/lib/v3-autofix.sh`)
+- **docs/extending/create-skill.md**: Expanded to ~1300 lines with v3.0.0 configuration system, template variables, tech stack integration, migration checklist
+
+---
+
+## Phase 4: Development Workflow
+
+> Details: [tasks/development-workflow.md](tasks/development-workflow.md) | [tasks/lsp-support.md](tasks/lsp-support.md)
+
+- [ ] Project constitution document (`context/constitution.md`) — 9 immutable development principles
+- [ ] Complexity tracking in outputs — `[NEEDS CLARIFICATION]`, `[COMPLEXITY]`, `[EXCEPTION]`, `[TRADEOFF]` markers
+- [ ] LSP support — Bundle TypeScript + Python language server configs, make skills LSP-aware
+
+---
+
+## Phase 5: Role Skills (137 across 11 roles)
+
+> Details: [tasks/role-skills.md](tasks/role-skills.md)
+
+137 skills cataloged across 11 roles. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
+
+All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/to-jaan-skill-update` validation.
+
+| Role | Total | Quick Wins | Advanced | File |
+|------|-------|------------|----------|------|
+| PM | 23 | 17 | 6 | [pm.md](tasks/role-skills/pm.md) |
+| DEV | 17 | 13 | 4 | [dev.md](tasks/role-skills/dev.md) |
+| QA | 12 | 8 | 4 | [qa.md](tasks/role-skills/qa.md) |
+| DATA | 14 | 8 | 6 | [data.md](tasks/role-skills/data.md) |
+| GROWTH | 15 | 9 | 6 | [growth.md](tasks/role-skills/growth.md) |
+| UX | 20 | 15 | 5 | [ux.md](tasks/role-skills/ux.md) |
+| SEC | 4 | 4 | 0 | [sec.md](tasks/role-skills/sec.md) |
+| DELIVERY | 8 | 8 | 0 | [delivery.md](tasks/role-skills/delivery.md) |
+| SRE | 8 | 4 | 4 | [sre.md](tasks/role-skills/sre.md) |
+| SUPPORT | 8 | 8 | 0 | [support.md](tasks/role-skills/support.md) |
+| RELEASE | 8 | 8 | 0 | [release.md](tasks/role-skills/release.md) |
+
+**Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
+
+---
+
+## Phase 6: MCP Connectors (24 documented)
 
 > Details: [tasks/mcp-connectors.md](tasks/mcp-connectors.md)
 
-### Core MCPs (11 - skill enablement priority)
+MCP connectors provide real system context to skills. Skills stay generic; MCP provides per-product data from actual tools.
 
-- [ ] GA4 MCP - Enables 12 skills (PM metrics, DATA funnels, GROWTH reports)
-- [ ] GitLab MCP - Enables 9 skills (DEV PRs/pipelines, QA automation)
-- [ ] Jira MCP - Enables 6 skills (PM backlog, QA bugs/triage)
-- [ ] Figma MCP - Enables 6 skills (UX flows, design specs, QA states)
-- [ ] GSC MCP - Enables 5 skills (GROWTH SEO/keywords)
-- [ ] Clarity MCP - Enables 5 skills (UX behavior, PM insights)
-- [ ] Sentry MCP - Enables 4 skills (DEV errors, QA regressions)
-- [ ] BigQuery MCP - Enables 2 skills (DATA cohorts, dbt)
-- [ ] Playwright MCP - Enables 2 skills (QA automation)
-- [ ] OpenAPI/Swagger MCP - Enables 1 skill (DEV api-contract)
-- [ ] dbt Cloud MCP - Enables 1 skill (DATA models)
+- **Core MCPs (11)**: GA4, GitLab, Jira, Figma, GSC, Clarity, Sentry, BigQuery, Playwright, OpenAPI, dbt Cloud
+- **Extended MCPs (13)**: Notion, Slack, GitHub, Linear, Mixpanel, Confluence, Snowflake, PostgreSQL, Ahrefs, Semrush, LambdaTest, Google Drive, Memory
+- **Infrastructure**: Deferred loading for token savings, Context7 integration, model routing per skill type
 
-### Extended MCPs (13 - from MCP research report)
+---
 
-**Cross-role high impact:**
+## Phase 7: Testing and Polish
 
-- [ ] Notion MCP - Enables PM (PRDs, OKRs), UX (research), All (knowledge base) | Free
-- [ ] Slack MCP - Enables All roles (feedback synthesis, notifications) | Free
-- [ ] GitHub MCP - Enables 9 skills (DEV PRs/code review, QA automation) | Free - GitLab alternative
+- [ ] E2E test framework in `tests/` with mocked MCP responses
+- [ ] JSON export alongside markdown for all skill outputs
+- [ ] External notifications (Slack integration)
 
-**Role-specific:**
-
-- [ ] Linear MCP - Enables 6 skills (PM backlog, QA bugs) | Free - Jira alternative
-- [ ] Mixpanel MCP (Official) - Enables PM metrics, DATA funnels/cohorts | Free
-- [ ] Confluence MCP - Enables PM docs, DEV technical docs | Free
-
-**Targeted:**
-
-- [ ] Snowflake MCP - Enables DATA warehouse queries, cohorts | Freemium - BigQuery alternative
-- [ ] PostgreSQL MCP - Enables DATA direct SQL queries | Free
-- [ ] Ahrefs MCP - Enables GROWTH keyword research, backlinks | Free server
-- [ ] Semrush MCP - Enables GROWTH competitive SEO analysis | Free server
-- [ ] LambdaTest MCP - Enables QA cross-browser testing | Freemium
-
-**Supporting:**
-
-- [ ] Google Drive MCP - Enables All (research files, docs access) | Free
-- [ ] Memory MCP - Enables All (persistent context across sessions) | Free
-
-### Community Plugins (from [firecrawl best-plugins list](https://www.firecrawl.dev/blog/best-claude-code-plugins)):
-
-- [ ] Firecrawl MCP - Turns websites into clean, LLM-ready data
-- [ ] Ralph Loop - Autonomous AI agent loop
-- [ ] Security Guidance MCP - Keeps code and secrets safe
-- [ ] Frontend Design MCP - Makes AI-generated UI look professional
-- [ ] Code Review MCP - Reviews PRs before merge
-- [ ] Chrome DevTools MCP - Debugs browser from Claude
-
-### Infrastructure:
-
-- [ ] MCP deferred loading for token savings
-- [ ] MCP Context7 integration → [details](tasks/mcp-context7.md)
-- [ ] Model routing per skill type
-
-## Phase 6: Advanced Role Skills (23)
-
-> Details: [tasks/role-skills.md](tasks/role-skills.md) | Requires MCP connectors
-
-### PM (3)
-
-- [ ] `/jaan-to-pm-north-star` - North star metric + drivers + boundaries + cadence
-- [ ] `/jaan-to-pm-scope-slice` - MVP vs Later slicing with milestones and dependencies
-- [ ] `/jaan-to-pm-release-review` - Post-release KPI deltas, learnings, follow-ups
-
-### DEV (3)
-
-- [ ] `/jaan-to-dev-api-contract` - OpenAPI contract with payloads, errors, examples
-- [ ] `/jaan-to-dev-pr-review` - PR review pack with risky files, hints, checklist
-- [ ] `/jaan-to-dev-ship-check` - Pre-ship checklist with go/no-go recommendation
-
-### QA (3)
-
-- [ ] `/jaan-to-qa-automation-plan` - What to automate now vs later + flakiness risk
-- [ ] `/jaan-to-qa-regression-runbook` - Step-by-step regression runbook with timing/owners
-- [ ] `/jaan-to-qa-release-signoff` - Go/No-Go summary with evidence and risks
-
-### DATA (5)
-
-- [ ] `/jaan-to-data-funnel-review` - Funnel baseline + drop-offs + hypotheses
-- [ ] `/jaan-to-data-experiment-design` - Experiment plan: hypothesis, metrics, ramp criteria
-- [ ] `/jaan-to-data-anomaly-triage` - Triage pack: scope, causes, next checks
-- [ ] `/jaan-to-data-cohort-analyze` - Cohort/retention analysis with LTV projections
-- [ ] `/jaan-to-data-dbt-model` - dbt staging/mart models with tests (Rank #19)
-
-### GROWTH (6)
-
-- [ ] `/jaan-to-growth-content-outline` - Writing-ready outline with H1-H3, FAQs, entities
-- [ ] `/jaan-to-growth-keyword-brief` - Keyword + intent map with content angle
-- [ ] `/jaan-to-growth-seo-audit` - On-page checklist: title/meta, headings, links
-- [ ] `/jaan-to-growth-seo-check` - Technical audit: indexability, crawl signals
-- [ ] `/jaan-to-growth-weekly-report` - Weekly wins/losses, top pages, actions
-- [ ] `/jaan-to-growth-content-optimize` - Existing content refresh for traffic recovery (Rank #18)
-
-### UX (3)
-
-- [ ] `/jaan-to-ux-research-plan` - Research plan: questions, method, participants
-- [ ] `/jaan-to-ux-heuristic-review` - Heuristic review with issues, severity, fixes
-- [ ] `/jaan-to-ux-competitive-review` - Competitive teardown with patterns + opportunities
-
-## Phase 7: Testing & Polish
-
-- [ ] E2E test framework in `tests/`
-- [ ] JSON export alongside markdown
-- [ ] External notifications (Slack)
-- [ ] Mocked MCP responses for testing
+---
 
 ## Phase 8: Distribution
 
 > Details: [tasks/distribution.md](tasks/distribution.md)
 
-- [x] Installation via `/plugin marketplace add parhumm/jaan-to` + `/plugin install jaan-to`
+- [x] Plugin marketplace installation (`/plugin marketplace add parhumm/jaan-to`)
 - [ ] Multi-agent compatibility research (Cursor, Copilot, Windsurf, Gemini)
-- [ ] CLI installer tool (`jaan-to-cli`) for easy setup
+- [ ] CLI installer (`jaan-to-cli`) for one-command setup
 - [ ] Public documentation site and branding guidelines
 
 ---
@@ -240,19 +194,22 @@
 | Command | Description |
 |---------|-------------|
 | `/jaan-to-pm-prd-write` | Generate PRD from initiative |
-| `/to-jaan-roadmap-add` | [Internal] Add task to roadmap |
-| `/to-jaan-learn-add` | Add lesson to skill's LEARN.md |
-| `/to-jaan-docs-create` | Create documentation with templates |
-| `/to-jaan-docs-update` | Audit and update stale documentation |
+| `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
+| `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then AC |
+| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code |
 | `/to-jaan-skill-create` | Create new skill with wizard |
 | `/to-jaan-skill-update` | Update existing skill |
+| `/to-jaan-docs-create` | Create documentation with templates |
+| `/to-jaan-docs-update` | Audit and update stale documentation |
+| `/to-jaan-learn-add` | Add lesson to skill's LEARN.md |
+| `/to-jaan-roadmap-add` | Add task to roadmap |
 
 ### Key Paths
 
 | Path | Purpose |
 |------|---------|
 | `skills/` | Skill definitions (plugin-relative) |
-| `jaan-to/docs/create-skill.md` | Skill creation specification (project) |
+| `jaan-to/config/settings.yaml` | Project configuration (v3.0.0+) |
 | `jaan-to/context/` | Context templates (project-relative) |
 | `jaan-to/templates/` | Output templates (project-relative) |
 | `jaan-to/outputs/` | Generated outputs (project-relative) |
@@ -264,6 +221,6 @@
 
 | Pattern | Example |
 |---------|---------|
-| Logical: `role-domain:action` | `pm-prd:write` |
-| Command: `/jaan-to-role-domain-action` | `/jaan-to-pm-prd-write` |
-| Directory: `skills/jaan-to-role-domain-action/` | `skills/jaan-to-pm-prd-write/` |
+| Role-based: `jaan-to-{role}-{domain}-{action}` | `/jaan-to-pm-prd-write` |
+| Internal: `to-jaan-{domain}-{action}` | `/to-jaan-skill-create` |
+| Directory: `skills/{skill-name}/` | `skills/jaan-to-pm-prd-write/` |
