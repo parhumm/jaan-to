@@ -5,6 +5,45 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.13.0] - 2026-02-03
+
+### Added
+- **Learning System Dashboard** — Make accumulated learning discoverable and actionable (`9f513c2`)
+  - `scripts/learning-summary.sh` — Scan all LEARN.md files, count lessons per skill, extract Common Mistakes and Edge Cases sections, generate markdown/JSON report with stats
+  - `/jaan-to-learn-report` command — Display formatted learning insights with skill coverage analysis and actionable next steps
+  - `docs/learning/LESSON-TEMPLATE.md` — Structured lesson format with Context, What Happened, Root Cause, Fix, and Prevention sections
+  - Quality-reviewer agent enhancement: Check if skill outputs reference existing LEARN.md lessons, suggest creating entries for repeated patterns
+- **Distribution Package for Marketplace** — Lower barrier to adoption and enable community contributions (`3c03529`)
+  - `examples/starter-project/` — Comprehensive EduStream Academy example with 37 markdown files (792KB) demonstrating 7+ skills across PM/Dev/UX/QA/Research roles
+    - 3 PRDs (live streaming classroom, course marketplace, AI recommendations)
+    - 6 user stories, backend/frontend task breakdowns, microcopy packs (7 languages), QA test cases
+    - Complete roadmap showing 4 completed phases with Node.js/Express/React/WebRTC stack
+  - `CONTRIBUTING.md` — Complete contribution guide with skill creation, LEARN.md improvement, code style, testing, and release process
+  - `docs/QUICKSTART-VIDEO.md` — 3-5 minute demo video script for marketplace promotion
+  - `scripts/verify-install.sh` enhancement — Added skill discovery checks, hook registration verification, and installation report generation
+- **Validation Utilities Documentation** — `docs/development/VALIDATION.md` with jq-based validation patterns for hooks.json and agent frontmatter (`3994ef5`)
+- **Skill Dependency Map** — `docs/skills/DEPENDENCIES.md` documenting skill call chains with visual dependency tree (`3108388`)
+
+### Changed
+- **Standards Compliance with Official Claude Code Patterns** — Align plugin with 13 official Anthropic plugins analysis (`3994ef5`)
+  - Removed `.claude/settings.json` from plugin distribution (0/13 official plugins have this)
+  - Enhanced agent descriptions with concrete `<example>` blocks showing triggering scenarios (quality-reviewer, context-scout)
+  - Removed non-standard "capabilities" field from agent frontmatter
+  - Added `.claude/` to .gitignore, documented optional project configuration in README
+  - Updated `scripts/build-dist.sh` to exclude .claude/ from distribution
+- **Command Naming Convention** — Renamed `learning-report` to `jaan-to-learn-report` following plugin naming standards (`369a36e`)
+- **README Enhancement** — Added badges, quick stats table (18 skills, 2 agents, 4 hooks), verification steps, real-world workflow examples (`c386766`)
+- **Marketplace Metadata** — Enhanced keywords (product-management, user-stories, gtm-tracking), updated plugin description with feature highlights (`c386766`)
+
+### Fixed
+- **Broken Skill References** — Removed references to non-existent follow-on skills (fe-state-machine, be-data-model) in task breakdown skills, added "Coming Soon" notes where appropriate (`3108388`)
+- **Template Documentation** — Added explicit notes in docs-create and docs-update skills explaining template references (`3108388`)
+
+### Documentation
+- **WordPress Development Research** — Added comprehensive WordPress Analytics Plugin Development guide to research index (`c27cbcd`)
+
+---
+
 ## [3.12.0] - 2026-02-03
 
 ### Added
