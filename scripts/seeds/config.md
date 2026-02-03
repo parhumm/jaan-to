@@ -42,6 +42,8 @@
 | to-jaan-roadmap-update | `/to-jaan-roadmap-update` | [Internal] Maintain and sync roadmap |
 | jaan-to-dev-stack-detect | `/jaan-to-dev-stack-detect` | Auto-detect tech stack and populate context |
 | jaan-to-ux-heatmap-analyze | `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
+| jaan-to-dev-fe-task-breakdown | `/jaan-to-dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
+| jaan-to-dev-be-task-breakdown | `/jaan-to-dev-be-task-breakdown` | Generate BE task breakdown from PRD |
 
 ## Trust
 - trust_paths: ["jaan-to/"]
