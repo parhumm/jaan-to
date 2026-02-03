@@ -63,6 +63,8 @@ This directory contains structured summaries of research on Claude Code best pra
 | [53](53-dev-pr-review.md) | Building a Production-Ready PR/MR Code Review Skill | Complete technical foundation for GitLab-primary PR review automation targeting PHP/Laravel and TypeScript/React. Covers SmartBear effectiveness thresholds, risk-based file prioritization, Conventional Comments specification, security pattern detection (SQL injection, XSS, N+1 queries), secrets detection with entropy analysis, SARIF output format, LLM integration patterns with validation guardrails, and Dangerfile configurations. |
 | [54](54-roles-wp-details.md) | WordPress Plugin Development: Complete Role-Based Skills Guide | Comprehensive WordPress plugin development guide covering 7+ role domains — PM (idea validation, monetization, specs), Engineering (architecture, scaffolding, data storage, hooks, Settings API, WP-Cron), Admin UX (WP-Admin patterns), Integrations (REST/AJAX/External), Security/Privacy/Compliance, QA/Compatibility, and Release/Distribution (WordPress.org packaging). Each section includes skill commands with detailed implementation guidance. |
 | [55](55-ai-workflow-claude-code-user-input.md) | Handle Approvals and User Input | Official Claude Agent SDK guide for surfacing tool approval requests and clarifying questions to users via canUseTool callback and AskUserQuestion tool, with Python/TypeScript examples for allow/deny/modify responses and multi-choice question handling. |
+| [56](56-ux-microcopy-write.md) | UX Microcopy Writing Skill | Production-ready skill for generating complete microcopy packs (labels, helper text, errors, toasts, confirmations, empty states) across seven languages with Persian (فارسی) as primary focus. Covers industry frameworks, formality systems, text expansion rates, RTL handling, and cultural tone expectations. |
+| [57](57-ai-workflow-claude-code-plugin-patterns-best-practices-standards.md) | Claude Code Plugin Patterns & Standards | Analysis of 13 official Claude Code plugins revealing highly consistent ecosystem patterns for structure, configuration, naming, and implementation. Covers auto-discovery, manifest standards, progressive disclosure, Python/Bash standards, security best practices, and quality checklists. |
 
 ## Quick Topic Finder
 
@@ -91,6 +93,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [42-ai-workflow-claude-code-interactive-mode.md](42-ai-workflow-claude-code-interactive-mode.md)
 - [43-ai-workflow-claude-code-cli-reference.md](43-ai-workflow-claude-code-cli-reference.md)
 - [55-ai-workflow-claude-code-user-input.md](55-ai-workflow-claude-code-user-input.md)
+- [57-ai-workflow-claude-code-plugin-patterns-best-practices-standards.md](57-ai-workflow-claude-code-plugin-patterns-best-practices-standards.md)
 
 ### AI-Powered Workflows
 - [02-ai-dev-maintenance.md](02-ai-dev-maintenance.md)
@@ -134,6 +137,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [21-ai-workflow-claude-vision-csv-heatmap-analysis.md](21-ai-workflow-claude-vision-csv-heatmap-analysis.md)
 - [22-data-microsoft-clarity.md](22-data-microsoft-clarity.md)
 - [47-ux-research-synthesize.md](47-ux-research-synthesize.md)
+- [56-ux-microcopy-write.md](56-ux-microcopy-write.md)
 
 ## Related Resources
 
