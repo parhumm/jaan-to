@@ -5,19 +5,46 @@
   "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev, and more",
   "owner": {
     "name": "Parhum Khoshbakht",
-    "email": "parhum.kh@gmail.com"
+    "email": "parhum.kh@gmail.com",
+    "url": "https://github.com/parhumm"
   },
   "plugins": [
     {
       "name": "jaan-to",
-      "description": "AI-powered skills for PM, Data, QA, Dev workflows",
+      "description": "AI-powered plugin with 18 skills for product management, development, UX research, QA testing, and data analytics. Generate PRDs, user stories, task breakdowns, test cases, GTM tracking, and more. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, LEARN.md continuous improvement system.",
       "version": "3.12.0",
       "author": {
         "name": "Parhum Khoshbakht",
         "email": "parhum.kh@gmail.com"
       },
       "source": "./",
-      "category": "development"
+      "category": "development",
+      "keywords": [
+        "product-management",
+        "prd",
+        "user-stories",
+        "task-breakdown",
+        "test-cases",
+        "gtm-tracking",
+        "analytics",
+        "ux-research",
+        "frontend",
+        "backend",
+        "qa",
+        "documentation",
+        "workflow",
+        "productivity",
+        "saas",
+        "agile",
+        "bdd",
+        "gherkin"
+      ],
+      "homepage": "https://github.com/parhumm/jaan-to",
+      "repository": {
+        "type": "git",
+        "url": "https://github.com/parhumm/jaan-to.git"
+      },
+      "license": "MIT"
     }
   ]
 }
