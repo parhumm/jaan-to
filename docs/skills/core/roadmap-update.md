@@ -58,15 +58,17 @@ Automates roadmap maintenance with 5 modes:
 
 A release is an atomic operation:
 
-1. Write CHANGELOG entry (Keep a Changelog format)
-2. Write roadmap version section
+1. Write CHANGELOG entry (incorporate Unreleased items, clear released items)
+2. Write roadmap version section (incorporate Unreleased items, clear released items)
 3. Update `.claude-plugin/plugin.json` version
 4. Update `.claude-plugin/marketplace.json` version
 5. Commit: `release: vX.Y.Z — summary`
 6. Tag: `git tag vX.Y.Z`
-7. Optional push
+7. Push and merge (branch-aware: direct push on main, merge flow on feature branches)
 
 All steps succeed or none are applied.
+
+Supports releasing from feature branches: pushes the branch, checks out main, merges, and pushes main with tags.
 
 ---
 

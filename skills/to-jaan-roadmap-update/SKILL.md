@@ -5,7 +5,7 @@ description: |
   Syncs git history, marks tasks done, creates version sections, validates links.
   Auto-triggers on: update roadmap, sync roadmap, release version, roadmap maintenance.
   Maps to: to-jaan-roadmap-update
-allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Write(roadmaps/**)
+allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(roadmaps/**)
 argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sync] [validate] [(no args)]"
 ---
 
@@ -136,7 +136,9 @@ Present report:
 1. Validate version format: `vN.N.N` (semver)
 2. Validate version > current version in plugin.json
 3. Check working tree is clean
-4. Check current branch (warn if not main)
+4. Check current branch:
+   - If on main: standard release flow
+   - If on feature branch: note branch name for merge flow (Step 4.7)
 5. Scan commits since last tag:
    ```bash
    git log --oneline --no-merges $(git describe --tags --abbrev=0)..HEAD
@@ -147,16 +149,26 @@ Present report:
    - `docs:` → Documentation
    - `refactor:` → Changed
    - `test:` → Testing
-7. Draft CHANGELOG entry (Keep a Changelog format)
-8. Draft roadmap version section
-9. Check if overview table needs status update
-10. Prepare full atomic operation list:
-    - CHANGELOG.md — new version entry
-    - roadmaps/jaan-to/roadmap.md — version section + overview table
+7. Parse Unreleased sections:
+   a. **Roadmap** (`## Unreleased`): Extract all bullet items with commit hashes
+   b. **CHANGELOG** (`## [Unreleased]`): Extract all sub-sections (Added, Changed, Fixed, etc.)
+   c. Cross-reference Unreleased items with commits since last tag — items matching this release go into the new version entry; `### Planned` items stay in Unreleased
+8. Draft CHANGELOG entry (Keep a Changelog format):
+   - Incorporate matching items from CHANGELOG `[Unreleased]` section
+   - Incorporate categorized commits not already covered by Unreleased items
+   - Draft cleared `[Unreleased]` section (keep `## [Unreleased]` header + `### Planned` sub-section, remove released items)
+9. Draft roadmap version section:
+   - Incorporate items from roadmap `## Unreleased` into the new `### {version}` subsection
+   - Draft cleared `## Unreleased` section (keep header, remove released items)
+10. Check if overview table needs status update
+11. Prepare full atomic operation list:
+    - CHANGELOG.md — new version entry + cleared Unreleased section
+    - roadmaps/jaan-to/roadmap.md — version section + cleared Unreleased + overview table
     - .claude-plugin/plugin.json — version bump
     - .claude-plugin/marketplace.json — version bump
     - Git commit: `release: {version} — {summary}`
     - Git tag: `{version}`
+    - (If on feature branch) Push branch, checkout main, merge, push main with tags
 
 ### Mode: sync
 
@@ -238,24 +250,33 @@ Use AskUserQuestion:
 ### For release:
 ```
 Release Preparation: {version}
+Branch: {current_branch}
 
 CHANGELOG Entry (draft):
 {changelog_draft}
 
+Unreleased Section After Release (CHANGELOG):
+{cleared_unreleased_changelog}
+
 Roadmap Version Section (draft):
 {roadmap_section_draft}
+
+Unreleased Section After Release (Roadmap):
+{cleared_unreleased_roadmap}
 
 Overview Table Changes:
 {table_changes}
 
 Full Atomic Operation:
-1. Write CHANGELOG entry
-2. Write roadmap version section + overview table
+1. Write CHANGELOG entry + clear released items from [Unreleased]
+2. Write roadmap version section + clear released items from Unreleased + overview table
 3. Update .claude-plugin/plugin.json version
 4. Update .claude-plugin/marketplace.json version
 5. Commit: release: {version} — {summary}
 6. Tag: git tag {version}
-7. (Optional) Push: git push origin main --tags
+7. Push and merge:
+   - (If on main) git push origin main --tags
+   - (If on feature branch) Push branch → checkout main → merge → push main --tags
 ```
 
 Use AskUserQuestion:
@@ -323,19 +344,27 @@ For each approved change:
 Execute atomic operation in order:
 
 **4.1: Write CHANGELOG entry**
-- Insert new version entry after latest version
-- Add link reference at bottom
+- Insert new version entry after `## [Unreleased]` section (before the previous latest version)
+- Add link reference at bottom of file
+- Clear released items from `## [Unreleased]` section:
+  - Keep `## [Unreleased]` header
+  - Keep `### Planned` sub-section (forward-looking items)
+  - Remove `### Added`, `### Changed`, `### Fixed` etc. sub-sections whose items are now in the new version entry
 
 **4.2: Write roadmap version section**
-- Insert H3 version subsection in correct phase
+- Insert H3 version subsection in correct phase section
 - Add bullet points for changes
-- Update overview table
+- Clear released items from `## Unreleased` section:
+  - Keep `## Unreleased` header and `---` separator
+  - Remove bullet items that were incorporated into the new version section
+  - If all items were released, leave the section with just the header
+- Update overview table if needed
 
 **4.3: Update plugin.json**
 - Update `"version"` field
 
 **4.4: Update marketplace.json**
-- Update version fields
+- Update top-level `"version"` field and `plugins[0].version` field
 
 **4.5: Commit**
 ```bash
@@ -348,13 +377,49 @@ git commit -m "release: {version} — {summary}"
 git tag {version}
 ```
 
-**4.7: Offer push**
+**4.7: Push and merge**
+
+Detect current branch:
+```bash
+git branch --show-current
+```
+
+**If on main:**
+
 Use AskUserQuestion:
 - Question: "Push to remote with tags?"
 - Header: "Push"
 - Options:
   - "Yes" — Push commit and tags to origin
   - "No" — Skip push (local only)
+
+If "Yes":
+```bash
+git push origin main --tags
+```
+
+**If on feature branch:**
+
+Use AskUserQuestion:
+- Question: "Push {branch}, merge to main, and push with tags?"
+- Header: "Merge & Push"
+- Options:
+  - "Yes" — Push branch, merge to main, push main with tags
+  - "Push only" — Push current branch only (merge manually later)
+  - "No" — Skip push (local only)
+
+If "Yes":
+```bash
+git push origin {branch}
+git checkout main
+git merge {branch}
+git push origin main --tags
+```
+
+If "Push only":
+```bash
+git push origin {branch} --tags
+```
 
 ### For validate (with fixes):
 
