@@ -10,7 +10,7 @@
 |-------|-------|--------|
 | v1.x | Foundation, plugin migration, stabilization | Done |
 | v2.x | Directory restructure, research, story writing | Done |
-| v3.0 | Multi-layer customization system | Done |
+| v3.x | Customization, roadmap tooling, interactive prompts | Done |
 | 4 | Development workflow | Planned |
 | 5 | Role skills (137 across 11 roles) | Planned |
 | 6 | MCP connectors | Planned |
@@ -87,7 +87,9 @@ All pre-plugin work landed in a single initial commit:
 
 ---
 
-## v3.0.0 — Multi-Layer Customization System (`ae91303`)
+## v3.x — Customization, Roadmap Tooling, Interactive Prompts
+
+### v3.0.0 — Multi-Layer Customization System (`ae91303`)
 
 The largest architectural change since v1.0.0. Introduced full project-level customization.
 
@@ -108,15 +110,25 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 - Migration guide: [docs/guides/migration-v3.md](../../docs/guides/migration-v3.md)
 - 38+ E2E test assertions across 5 test suites
 
+### v3.1.0 — Roadmap Tooling and Meta-Skills (`5745a6e`)
+
+- **New skill**: `/to-jaan-roadmap-update` — Sync roadmap with git history, mark tasks, manage releases, validate structure
+- Post-commit roadmap hook for automatic task status updates
+- Meta-skills v3.0.0 support: skill-create (8 components), skill-update (7 compliance checks + migration wizard), docs/extending expanded to ~1300 lines (`f77d4e6`)
+- Customization guide for v3.0.0 configuration system
+- Role-skills catalog updated for v3.0.0 compliance and WordPress skills
+
+### v3.2.0 — Interactive Prompts (`68bddb1`)
+
+- AskUserQuestion interactive prompts added to all 11 skills (~73 text prompts converted)
+- Skill creation spec updated with "User Interaction Patterns" section
+- V3.8 AskUserQuestion compliance check in `/to-jaan-skill-update`
+
 ---
 
-## Unreleased: Meta-Skills v3.0.0 Support
+## Unreleased
 
-> Branch: `feature/v3-customization-system` | Commit: `f77d4e6` | Not yet merged to main
-
-- **skill-create**: 8 components updated (frontmatter, context awareness, Step 12 expansion, tech integration, validation requirement, template.md v3.0.0 patterns)
-- **skill-update**: v3.0.0 validation (7 compliance checks), migration wizard (4 options), auto-fix script (`scripts/lib/v3-autofix.sh`)
-- **docs/extending/create-skill.md**: Expanded to ~1300 lines with v3.0.0 configuration system, template variables, tech stack integration, migration checklist
+- **New skill**: `/jaan-to-dev-stack-detect` — Detect project tech stack automatically (`d3dbb66`)
 
 ---
 
@@ -203,6 +215,8 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/to-jaan-docs-update` | Audit and update stale documentation |
 | `/to-jaan-learn-add` | Add lesson to skill's LEARN.md |
 | `/to-jaan-roadmap-add` | Add task to roadmap |
+| `/to-jaan-roadmap-update` | Maintain and sync roadmap |
+| `/jaan-to-dev-stack-detect` | Detect project tech stack |
 
 ### Key Paths
 

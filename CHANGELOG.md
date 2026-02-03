@@ -285,8 +285,11 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ## [Unreleased]
 
-### Planned for 1.1.0
-- Additional quick-win skills (qa-test-cases, data-sql-query, pm-story-write)
+### Added
+- **`/jaan-to-dev-stack-detect` skill** — Detect project tech stack automatically (`d3dbb66`)
+
+### Planned
+- Additional quick-win skills (qa-test-cases, data-sql-query)
 - Enhanced MCP integrations (GA4, GitLab, Jira, Figma)
 - JSON export alongside markdown outputs
 - External notifications (Slack)
