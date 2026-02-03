@@ -180,7 +180,7 @@ Use `/to-jaan-learn-add` which will:
 - **One File Per Skill:** `jaan-to/learn/{skill-name}.learn.md`
 - **Chronological Order:** Newest lessons at the top
 - **Cross-Reference:** Link related skills when lesson applies to multiple
-- **Regular Review:** Run `/jaan-to:learning-report` weekly to identify gaps
+- **Regular Review:** Run `/jaan-to-learn-report` weekly to identify gaps
 
 ---
 

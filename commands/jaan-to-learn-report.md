@@ -1,5 +1,5 @@
 ---
-name: learning-report
+name: jaan-to-learn-report
 description: Generate learning insights report from accumulated LEARN.md files
 args:
   format:
