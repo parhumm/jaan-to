@@ -210,7 +210,17 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ## Unreleased
 
-(none)
+- **New skill**: `/jaan-to-qa-test-cases` — Generate production-ready BDD/Gherkin test cases from acceptance criteria (`3f1a8a7`)
+  - ISTQB test design techniques: Equivalence Partitioning, Boundary Value Analysis (3-value BVA), edge case taxonomy
+  - Minimum 10 tests per AC (3 positive + 3 negative + 2 boundary + 2 edge case)
+  - 5 priority edge case categories based on production defect frequency (Empty/Null 32%, Boundary 28%, Error 22%, Concurrent 12%, State 6%)
+  - 4 input modes: direct AC text, PRD file path, Jira ID, interactive wizard
+  - Concrete test data (no placeholders) with standard test data library
+  - Quality validation: 10-point peer review checklist + 100-point scoring rubric
+  - ISTQB conversion notes for Xray/TestRail/Azure DevOps export
+  - Auxiliary quality checklist file with anti-patterns and coverage analysis
+  - Two-phase workflow with systematic test design and human approval gate
+  - Research-informed (880-line methodology guide)
 
 ---
 
@@ -302,6 +312,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to-dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
 | `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 | `/jaan-to-ux-microcopy-write` | Generate multi-language microcopy packs |
+| `/jaan-to-qa-test-cases` | Generate BDD/Gherkin test cases from acceptance criteria |
 
 ### Key Paths
 
