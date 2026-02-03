@@ -5,6 +5,22 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.7.0] - 2026-02-03
+
+### Added
+- **`/jaan-to-dev-fe-task-breakdown` skill** — Transform UX design handoffs into production-ready
+  frontend task breakdowns with component inventories, state matrices, estimate bands,
+  dependency graphs (Mermaid), performance budgets, and risk assessment (`af90d27`)
+  - Atomic Design taxonomy: Atoms (XS) → Pages (XL) with T-shirt size estimates
+  - 6-state enumeration per component: Default, Loading, Success, Error, Empty, Partial
+  - 50+ item coverage checklist: accessibility, responsive, interaction states, performance, SEO, testing
+  - Core Web Vitals 2025 targets: LCP ≤2.5s, INP ≤200ms, CLS ≤0.1
+  - State machine stubs for complex components
+  - Tech-aware: reads `$JAAN_CONTEXT_DIR/tech.md` for framework-specific patterns
+- **Dev role activated** — Second technical role after Data; `docs/skills/dev/` expanded
+
+---
+
 ## [3.6.0] - 2026-02-03
 
 ### Changed

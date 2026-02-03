@@ -14,14 +14,15 @@
 
 ## Enabled Roles
 - pm (Product Manager)
+- dev (Development)
 - data (Analytics)
 - ux (User Experience)
 - core (Internal)
 
 ## Planned Roles (Phase 5)
-- dev (Development) - 5 skills
-- qa (Quality Assurance) - 5 skills
-- growth (SEO + Content) - 5 skills
+- dev (Development) - 17 skills [2 active: fe-task-breakdown, be-task-breakdown]
+- qa (Quality Assurance) - 12 skills
+- growth (SEO + Content) - 15 skills
 
 > See [roadmaps/jaan-to/tasks/role-skills.md](../roadmaps/jaan-to/tasks/role-skills.md) for full catalog
 
