@@ -1,129 +1,107 @@
-# Technology Stack
+# Technology Stack {#tech-stack}
 
-> Project: TaskFlow SaaS (Example)
-> Last updated: 2026-02-03
-
-**This is a pre-configured example.** Edit sections below to match your actual project.
+> Manually configured for EduStream Academy integration testing
+> Last Updated: 2026-02-03
+> Status: **Sample Stack** - Representative EdTech platform architecture
 
 ---
 
 ## Current Stack {#current-stack}
 
 ### Backend
-- **Language**: Python 3.11
-- **Framework**: FastAPI 0.104
-- **Database**: PostgreSQL 15
-- **Cache**: Redis 7
-- **Queue**: Celery + RabbitMQ
+- **Language**: Node.js (v20.x LTS)
+- **Framework**: Express.js v4.18
+- **Version**: 4.18.2
+- **Additional**: Socket.io for WebRTC signaling
 
 ### Frontend
-- **Language**: TypeScript 5.2
-- **Framework**: React 18 + Next.js 14
-- **State**: Redux Toolkit
-- **Styling**: Tailwind CSS 3.3
-- **Build**: Vite 5.0
+- **Language**: TypeScript (v5.3)
+- **Framework**: React v18.2 with Next.js v14.1
+- **Version**: Next.js 14.1.0
+- **State Management**: Redux Toolkit v2.0
 
 ### Mobile
-- **iOS**: None (mobile-first web)
-- **Android**: None (mobile-first web)
-- **Cross-platform**: PWA with service workers
+- **Platform**: React Native (planned Phase 2)
+- **Framework**: React Native v0.73
 
 ### Infrastructure
-- **Cloud**: AWS (us-east-1, us-west-2)
-- **Container**: Docker + ECS Fargate
+- **Cloud Provider**: AWS
+- **Container**: Docker + ECS
 - **CI/CD**: GitHub Actions
-- **Monitoring**: DataDog
-- **Logging**: CloudWatch + Structured JSON logs
+
+---
+
+## Databases {#databases}
+
+- **Primary**: PostgreSQL 15.4 (RDS)
+- **Cache**: Redis 7.2 (ElastiCache)
+- **Queue**: RabbitMQ 3.12 (Amazon MQ)
 
 ---
 
 ## Frameworks {#frameworks}
 
-### API Development
-- FastAPI (REST endpoints)
-- Pydantic v2 (validation + serialization)
-- SQLAlchemy 2.0 (ORM with async support)
-- Alembic (database migrations)
+### Backend Frameworks
+- Express.js v4.18 (REST API)
+- Socket.io v4.6 (WebRTC signaling, real-time events)
+- Mediasoup v3.13 (SFU for video routing)
 
-### Web Development
-- Next.js App Router
-- React Server Components
-- TanStack Query v5 (data fetching)
-- React Hook Form (forms)
-- Zod (client-side validation)
+### Frontend Frameworks
+- React v18.2 with Next.js v14.1 (SSR + CSR)
+- Redux Toolkit v2.0 (state management)
+- TailwindCSS v3.4 (styling)
 
 ### Testing
-- **Backend**: pytest, pytest-asyncio, pytest-cov
-- **Frontend**: Vitest, React Testing Library
-- **E2E**: Playwright
-- **Load**: Locust
+- **Unit Testing**: Jest v29, React Testing Library v14
+- **E2E Testing**: Playwright v1.41
+- **Component Testing**: Storybook v7.6
 
 ---
 
-## Technical Constraints {#constraints}
+## Dependencies {#dependencies}
 
-1. **All APIs must return JSON:API format** - Standardized error responses
-2. **Sub-200ms p95 latency for API calls** - Performance SLA
-3. **SOC2 Type II compliant** - Audit logging required for all data access
-4. **Multi-tenant architecture** - Row-level security, tenant_id on all tables
-5. **WCAG 2.1 AA accessibility** - Required for all UI components
+### Package Management
+- **Tool**: {To be detected}
+- **Monorepo**: {To be detected}
 
----
-
-## Versioning & Deprecation {#versioning}
-
-- **API versioning**: URL path (`/api/v1/`, `/api/v2/`)
-- **Breaking changes**: 90-day deprecation notice
-- **Database**: Blue-green deployments for zero-downtime migrations
-- **Frontend**: Rolling deploys with feature flags
+### Key Libraries
+- {To be detected}
 
 ---
 
-## Common Patterns {#patterns}
+## Technical Constraints {#technical-constraints}
 
-### Authentication
-- OAuth2 + JWT (15min access token, 7d refresh token)
-- API keys for service-to-service (rotated quarterly)
-- MFA via TOTP (Google Authenticator, Authy)
+> Defined from PRD requirements (PRD-01, PRD-02)
 
-### Error Handling
-```python
-{
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "Email format is invalid",
-    "details": {"field": "email", "constraint": "format"}
-  }
-}
-```
+**Performance Requirements:**
+- WebRTC latency: <200ms p95 for 500 concurrent users
+- API response time: <100ms p95 for read operations
+- Session initialization: <10 seconds from button click to live
+- Video CDN delivery: <2 second buffering for 1080p
 
-### Data Access
-- Repository pattern for all database operations
-- No raw SQL in business logic (use SQLAlchemy queries)
-- Soft deletes (deleted_at timestamp, never hard delete)
+**Security Requirements:**
+- DTLS-SRTP encryption for all video/audio streams
+- JWT tokens with 1-hour expiration
+- PCI DSS compliance via Stripe integration
+- SOC 2 Type II certification (in progress)
 
-### API Design
-- RESTful resources with standard verbs (GET, POST, PATCH, DELETE)
-- Pagination: cursor-based (not offset)
-- Filtering: `?filter[status]=active&filter[created_after]=2024-01-01`
-- Sorting: `?sort=-created_at,name` (- prefix = descending)
+**Compliance Requirements:**
+- COPPA compliance for users <13 (parental consent, formal security programs)
+- FERPA compliance for educational records (vendor agreements, data retention)
+- Full compliance deadline: April 22, 2026
+
+**Browser/Platform Support:**
+- Desktop: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+- Mobile Web: iOS Safari 14+, Android Chrome 90+
+- Native Apps: React Native (Phase 2)
 
 ---
 
-## Tech Debt {#tech-debt}
+## Common Patterns {#common-patterns}
 
-- [ ] Migrate Redux → Zustand (Q2 2026) - Reduce bundle size
-- [ ] Split monolith API → domain-based services (Q3 2026)
-- [ ] Upgrade PostgreSQL 15 → 16 (Q4 2026)
-- [ ] Implement GraphQL for complex queries (Backlog)
+> **Manual Entry Required** - Requires code analysis
 
----
-
-**Skills that read this file:**
-- `/jaan-to-pm-prd-write` - References stack in Technical Approach section
-- `/jaan-to-dev-fe-task-breakdown` - Uses frontend patterns for component design
-- `/jaan-to-dev-be-task-breakdown` - Uses backend patterns for API design
-- `/jaan-to-data-gtm-datalayer` - Uses correct event naming conventions
-- `/jaan-to-qa-test-cases` - Tests against API error format standards
-
-**To auto-detect your stack:** Run `/jaan-to-dev-stack-detect` to scan your codebase.
+- API conventions
+- State management patterns
+- Error handling patterns
+- Authentication/authorization patterns

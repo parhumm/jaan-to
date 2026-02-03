@@ -1,0 +1,559 @@
+{
+  "metadata": {
+    "feature": "Live Classroom Control Labels & Tooltips",
+    "id": "02",
+    "languages": ["en", "fa", "tr", "de", "fr", "ru", "tg"],
+    "tone_profile": "Clear & Concise (Technical - Direct, Minimal, Action-oriented)",
+    "categories": ["Microphone Controls", "Camera Controls", "Hand Raise", "Screen Share", "Chat", "Participants", "Leave Class", "Breakout Rooms", "Polls", "Reactions", "Connection Quality"],
+    "total_items": 36,
+    "generated": "2026-02-03",
+    "version": "1.0.0",
+    "warnings": [
+      "Native speaker review required",
+      "Test icon label brevity (German compound words)",
+      "Test RTL layout for Persian (button order)"
+    ]
+  },
+  "microcopy": [
+    {
+      "id": "mic-mute",
+      "category": "Microphone Controls",
+      "item": "Mute Mic Label",
+      "context": "Button label to mute microphone (when currently unmuted)",
+      "translations": {
+        "en": {"text": "Mute Mic", "direction": "ltr", "chars": 8},
+        "fa": {"text": "خاموش کردن میکروفون", "direction": "rtl", "chars": 21, "script": "Perso-Arabic"},
+        "tr": {"text": "Mikrofonu Kapat", "direction": "ltr", "chars": 16},
+        "de": {"text": "Mikrofon stumm", "direction": "ltr", "chars": 15},
+        "fr": {"text": "Couper micro", "direction": "ltr", "chars": 12},
+        "ru": {"text": "Выкл. микрофон", "direction": "ltr", "chars": 15, "script": "Cyrillic"},
+        "tg": {"text": "Хомӯш кардани микрофон", "direction": "ltr", "chars": 22, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "mic-unmute",
+      "category": "Microphone Controls",
+      "item": "Unmute Mic Label",
+      "context": "Button label to unmute microphone (when currently muted)",
+      "translations": {
+        "en": {"text": "Unmute Mic", "direction": "ltr", "chars": 10},
+        "fa": {"text": "روشن کردن میکروفون", "direction": "rtl", "chars": 20, "script": "Perso-Arabic"},
+        "tr": {"text": "Mikrofonu Aç", "direction": "ltr", "chars": 13},
+        "de": {"text": "Mikrofon an", "direction": "ltr", "chars": 11},
+        "fr": {"text": "Activer micro", "direction": "ltr", "chars": 13},
+        "ru": {"text": "Вкл. микрофон", "direction": "ltr", "chars": 14, "script": "Cyrillic"},
+        "tg": {"text": "Равшан кардани микрофон", "direction": "ltr", "chars": 23, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "mic-tooltip",
+      "category": "Microphone Controls",
+      "item": "Mic Tooltip",
+      "context": "Tooltip explaining microphone control",
+      "translations": {
+        "en": {"text": "Toggle your microphone on/off", "direction": "ltr", "chars": 28},
+        "fa": {"text": "تغییر وضعیت میکروفون (روشن/خاموش)", "direction": "rtl", "chars": 39, "script": "Perso-Arabic"},
+        "tr": {"text": "Mikrofonu aç/kapat", "direction": "ltr", "chars": 19},
+        "de": {"text": "Mikrofon ein-/ausschalten", "direction": "ltr", "chars": 26},
+        "fr": {"text": "Activer/désactiver le micro", "direction": "ltr", "chars": 28},
+        "ru": {"text": "Включить/выключить микрофон", "direction": "ltr", "chars": 30, "script": "Cyrillic"},
+        "tg": {"text": "Равшан/хомӯш кардани микрофон", "direction": "ltr", "chars": 33, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "camera-on",
+      "category": "Camera Controls",
+      "item": "Turn On Camera Label",
+      "context": "Button label to enable camera (when currently off)",
+      "translations": {
+        "en": {"text": "Turn On Camera", "direction": "ltr", "chars": 14},
+        "fa": {"text": "روشن کردن دوربین", "direction": "rtl", "chars": 18, "script": "Perso-Arabic"},
+        "tr": {"text": "Kamerayı Aç", "direction": "ltr", "chars": 13},
+        "de": {"text": "Kamera an", "direction": "ltr", "chars": 9},
+        "fr": {"text": "Activer caméra", "direction": "ltr", "chars": 15},
+        "ru": {"text": "Вкл. камеру", "direction": "ltr", "chars": 12, "script": "Cyrillic"},
+        "tg": {"text": "Равшан кардани камера", "direction": "ltr", "chars": 21, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "camera-off",
+      "category": "Camera Controls",
+      "item": "Turn Off Camera Label",
+      "context": "Button label to disable camera (when currently on)",
+      "translations": {
+        "en": {"text": "Turn Off Camera", "direction": "ltr", "chars": 15},
+        "fa": {"text": "خاموش کردن دوربین", "direction": "rtl", "chars": 19, "script": "Perso-Arabic"},
+        "tr": {"text": "Kamerayı Kapat", "direction": "ltr", "chars": 16},
+        "de": {"text": "Kamera aus", "direction": "ltr", "chars": 10},
+        "fr": {"text": "Désactiver caméra", "direction": "ltr", "chars": 18},
+        "ru": {"text": "Выкл. камеру", "direction": "ltr", "chars": 13, "script": "Cyrillic"},
+        "tg": {"text": "Хомӯш кардани камера", "direction": "ltr", "chars": 20, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "camera-tooltip",
+      "category": "Camera Controls",
+      "item": "Camera Tooltip",
+      "context": "Tooltip explaining camera control",
+      "translations": {
+        "en": {"text": "Toggle your camera on/off", "direction": "ltr", "chars": 24},
+        "fa": {"text": "تغییر وضعیت دوربین (روشن/خاموش)", "direction": "rtl", "chars": 37, "script": "Perso-Arabic"},
+        "tr": {"text": "Kamerayı aç/kapat", "direction": "ltr", "chars": 19},
+        "de": {"text": "Kamera ein-/ausschalten", "direction": "ltr", "chars": 25},
+        "fr": {"text": "Activer/désactiver la caméra", "direction": "ltr", "chars": 32},
+        "ru": {"text": "Включить/выключить камеру", "direction": "ltr", "chars": 30, "script": "Cyrillic"},
+        "tg": {"text": "Равшан/хомӯш кардани камера", "direction": "ltr", "chars": 31, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "hand-raise",
+      "category": "Hand Raise",
+      "item": "Raise Hand Label",
+      "context": "Button label to raise hand for question/attention",
+      "translations": {
+        "en": {"text": "Raise Hand", "direction": "ltr", "chars": 10},
+        "fa": {"text": "بلند کردن دست", "direction": "rtl", "chars": 15, "script": "Perso-Arabic"},
+        "tr": {"text": "El Kaldır", "direction": "ltr", "chars": 10},
+        "de": {"text": "Hand heben", "direction": "ltr", "chars": 10},
+        "fr": {"text": "Lever la main", "direction": "ltr", "chars": 14},
+        "ru": {"text": "Поднять руку", "direction": "ltr", "chars": 13, "script": "Cyrillic"},
+        "tg": {"text": "Дастро баланд кардан", "direction": "ltr", "chars": 20, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "hand-lower",
+      "category": "Hand Raise",
+      "item": "Lower Hand Label",
+      "context": "Button label to lower raised hand",
+      "translations": {
+        "en": {"text": "Lower Hand", "direction": "ltr", "chars": 10},
+        "fa": {"text": "پایین آوردن دست", "direction": "rtl", "chars": 17, "script": "Perso-Arabic"},
+        "tr": {"text": "Eli İndir", "direction": "ltr", "chars": 10},
+        "de": {"text": "Hand senken", "direction": "ltr", "chars": 11},
+        "fr": {"text": "Baisser la main", "direction": "ltr", "chars": 16},
+        "ru": {"text": "Опустить руку", "direction": "ltr", "chars": 14, "script": "Cyrillic"},
+        "tg": {"text": "Дастро поён овардан", "direction": "ltr", "chars": 19, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "hand-tooltip",
+      "category": "Hand Raise",
+      "item": "Hand Raise Tooltip",
+      "context": "Tooltip explaining hand raise feature",
+      "translations": {
+        "en": {"text": "Raise your hand to ask a question", "direction": "ltr", "chars": 34},
+        "fa": {"text": "برای پرسیدن سؤال دست خود را بلند کنید", "direction": "rtl", "chars": 43, "script": "Perso-Arabic"},
+        "tr": {"text": "Soru sormak için elinizi kaldırın", "direction": "ltr", "chars": 36},
+        "de": {"text": "Heben Sie die Hand, um eine Frage zu stellen", "direction": "ltr", "chars": 48},
+        "fr": {"text": "Levez la main pour poser une question", "direction": "ltr", "chars": 42},
+        "ru": {"text": "Поднимите руку, чтобы задать вопрос", "direction": "ltr", "chars": 42, "script": "Cyrillic"},
+        "tg": {"text": "Барои савол пурсидан дастро баланд кунед", "direction": "ltr", "chars": 43, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "screen-share",
+      "category": "Screen Share",
+      "item": "Share Screen Label",
+      "context": "Button label to start screen sharing",
+      "translations": {
+        "en": {"text": "Share Screen", "direction": "ltr", "chars": 12},
+        "fa": {"text": "به اشتراک‌گذاری صفحه", "direction": "rtl", "chars": 25, "script": "Perso-Arabic"},
+        "tr": {"text": "Ekran Paylaş", "direction": "ltr", "chars": 13},
+        "de": {"text": "Bildschirm teilen", "direction": "ltr", "chars": 17},
+        "fr": {"text": "Partager écran", "direction": "ltr", "chars": 15},
+        "ru": {"text": "Показать экран", "direction": "ltr", "chars": 15, "script": "Cyrillic"},
+        "tg": {"text": "Мубодилаи экран", "direction": "ltr", "chars": 16, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "screen-stop",
+      "category": "Screen Share",
+      "item": "Stop Sharing Label",
+      "context": "Button label to stop screen sharing",
+      "translations": {
+        "en": {"text": "Stop Sharing", "direction": "ltr", "chars": 12},
+        "fa": {"text": "توقف اشتراک‌گذاری", "direction": "rtl", "chars": 21, "script": "Perso-Arabic"},
+        "tr": {"text": "Paylaşımı Durdur", "direction": "ltr", "chars": 17},
+        "de": {"text": "Teilen beenden", "direction": "ltr", "chars": 15},
+        "fr": {"text": "Arrêter partage", "direction": "ltr", "chars": 16},
+        "ru": {"text": "Прекратить показ", "direction": "ltr", "chars": 17, "script": "Cyrillic"},
+        "tg": {"text": "Қатъ кардани мубодила", "direction": "ltr", "chars": 22, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "screen-tooltip",
+      "category": "Screen Share",
+      "item": "Screen Share Tooltip",
+      "context": "Tooltip explaining screen share feature",
+      "translations": {
+        "en": {"text": "Share your screen with the class", "direction": "ltr", "chars": 32},
+        "fa": {"text": "صفحه خود را با کلاس به اشتراک بگذارید", "direction": "rtl", "chars": 44, "script": "Perso-Arabic"},
+        "tr": {"text": "Ekranınızı sınıfla paylaşın", "direction": "ltr", "chars": 29},
+        "de": {"text": "Teilen Sie Ihren Bildschirm mit der Klasse", "direction": "ltr", "chars": 47},
+        "fr": {"text": "Partagez votre écran avec la classe", "direction": "ltr", "chars": 40},
+        "ru": {"text": "Покажите свой экран классу", "direction": "ltr", "chars": 31, "script": "Cyrillic"},
+        "tg": {"text": "Экрани худро бо синф мубодила кунед", "direction": "ltr", "chars": 40, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "chat-open",
+      "category": "Chat",
+      "item": "Open Chat Label",
+      "context": "Button label to open chat panel",
+      "translations": {
+        "en": {"text": "Open Chat", "direction": "ltr", "chars": 9},
+        "fa": {"text": "باز کردن چت", "direction": "rtl", "chars": 12, "script": "Perso-Arabic"},
+        "tr": {"text": "Sohbeti Aç", "direction": "ltr", "chars": 11},
+        "de": {"text": "Chat öffnen", "direction": "ltr", "chars": 12},
+        "fr": {"text": "Ouvrir chat", "direction": "ltr", "chars": 11},
+        "ru": {"text": "Открыть чат", "direction": "ltr", "chars": 12, "script": "Cyrillic"},
+        "tg": {"text": "Кушодани чат", "direction": "ltr", "chars": 13, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "chat-close",
+      "category": "Chat",
+      "item": "Close Chat Label",
+      "context": "Button label to close chat panel",
+      "translations": {
+        "en": {"text": "Close Chat", "direction": "ltr", "chars": 10},
+        "fa": {"text": "بستن چت", "direction": "rtl", "chars": 9, "script": "Perso-Arabic"},
+        "tr": {"text": "Sohbeti Kapat", "direction": "ltr", "chars": 14},
+        "de": {"text": "Chat schließen", "direction": "ltr", "chars": 15},
+        "fr": {"text": "Fermer chat", "direction": "ltr", "chars": 11},
+        "ru": {"text": "Закрыть чат", "direction": "ltr", "chars": 12, "script": "Cyrillic"},
+        "tg": {"text": "Пӯшидани чат", "direction": "ltr", "chars": 14, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "chat-tooltip",
+      "category": "Chat",
+      "item": "Chat Tooltip",
+      "context": "Tooltip explaining chat feature",
+      "translations": {
+        "en": {"text": "Send messages to the class", "direction": "ltr", "chars": 27},
+        "fa": {"text": "ارسال پیام به کلاس", "direction": "rtl", "chars": 20, "script": "Perso-Arabic"},
+        "tr": {"text": "Sınıfa mesaj gönderin", "direction": "ltr", "chars": 24},
+        "de": {"text": "Nachrichten an die Klasse senden", "direction": "ltr", "chars": 35},
+        "fr": {"text": "Envoyer des messages à la classe", "direction": "ltr", "chars": 36},
+        "ru": {"text": "Отправить сообщения классу", "direction": "ltr", "chars": 31, "script": "Cyrillic"},
+        "tg": {"text": "Паёмҳоро ба синф ирсол кунед", "direction": "ltr", "chars": 33, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "participants-show",
+      "category": "Participants List",
+      "item": "Show Participants Label",
+      "context": "Button label to open participants panel",
+      "translations": {
+        "en": {"text": "Show Participants", "direction": "ltr", "chars": 17},
+        "fa": {"text": "نمایش شرکت‌کنندگان", "direction": "rtl", "chars": 20, "script": "Perso-Arabic"},
+        "tr": {"text": "Katılımcıları Göster", "direction": "ltr", "chars": 20},
+        "de": {"text": "Teilnehmer anzeigen", "direction": "ltr", "chars": 20},
+        "fr": {"text": "Afficher participants", "direction": "ltr", "chars": 21},
+        "ru": {"text": "Показать участников", "direction": "ltr", "chars": 19, "script": "Cyrillic"},
+        "tg": {"text": "Нишон додани иштирокчиён", "direction": "ltr", "chars": 26, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "participants-hide",
+      "category": "Participants List",
+      "item": "Hide Participants Label",
+      "context": "Button label to close participants panel",
+      "translations": {
+        "en": {"text": "Hide Participants", "direction": "ltr", "chars": 17},
+        "fa": {"text": "پنهان کردن شرکت‌کنندگان", "direction": "rtl", "chars": 28, "script": "Perso-Arabic"},
+        "tr": {"text": "Katılımcıları Gizle", "direction": "ltr", "chars": 20},
+        "de": {"text": "Teilnehmer ausblenden", "direction": "ltr", "chars": 22},
+        "fr": {"text": "Masquer participants", "direction": "ltr", "chars": 20},
+        "ru": {"text": "Скрыть участников", "direction": "ltr", "chars": 18, "script": "Cyrillic"},
+        "tg": {"text": "Пинҳон кардани иштирокчиён", "direction": "ltr", "chars": 27, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "participants-tooltip",
+      "category": "Participants List",
+      "item": "Participants Tooltip",
+      "context": "Tooltip explaining participants list",
+      "translations": {
+        "en": {"text": "View all class participants", "direction": "ltr", "chars": 26},
+        "fa": {"text": "مشاهده تمام شرکت‌کنندگان کلاس", "direction": "rtl", "chars": 36, "script": "Perso-Arabic"},
+        "tr": {"text": "Tüm sınıf katılımcılarını görüntüleyin", "direction": "ltr", "chars": 40},
+        "de": {"text": "Alle Kursteilnehmer anzeigen", "direction": "ltr", "chars": 28},
+        "fr": {"text": "Voir tous les participants au cours", "direction": "ltr", "chars": 37},
+        "ru": {"text": "Просмотр всех участников класса", "direction": "ltr", "chars": 34, "script": "Cyrillic"},
+        "tg": {"text": "Дидани ҳамаи иштирокчиёни синф", "direction": "ltr", "chars": 35, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "leave-button",
+      "category": "Leave Class",
+      "item": "Leave Class Label",
+      "context": "Button label to exit the live class",
+      "translations": {
+        "en": {"text": "Leave Class", "direction": "ltr", "chars": 11},
+        "fa": {"text": "ترک کلاس", "direction": "rtl", "chars": 9, "script": "Perso-Arabic"},
+        "tr": {"text": "Sınıftan Ayrıl", "direction": "ltr", "chars": 16},
+        "de": {"text": "Kurs verlassen", "direction": "ltr", "chars": 14},
+        "fr": {"text": "Quitter cours", "direction": "ltr", "chars": 13},
+        "ru": {"text": "Покинуть класс", "direction": "ltr", "chars": 15, "script": "Cyrillic"},
+        "tg": {"text": "Тарк кардани синф", "direction": "ltr", "chars": 18, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "leave-confirm",
+      "category": "Leave Class",
+      "item": "Leave Confirmation Dialog",
+      "context": "Confirmation message when user tries to leave class",
+      "translations": {
+        "en": {"text": "Are you sure you want to leave this class?", "direction": "ltr", "chars": 44},
+        "fa": {"text": "آیا مطمئن هستید که می‌خواهید این کلاس را ترک کنید؟", "direction": "rtl", "chars": 53, "script": "Perso-Arabic"},
+        "tr": {"text": "Bu sınıftan ayrılmak istediğinizden emin misiniz?", "direction": "ltr", "chars": 52},
+        "de": {"text": "Möchten Sie diesen Kurs wirklich verlassen?", "direction": "ltr", "chars": 45},
+        "fr": {"text": "Voulez-vous vraiment quitter ce cours ?", "direction": "ltr", "chars": 43},
+        "ru": {"text": "Вы уверены, что хотите покинуть этот класс?", "direction": "ltr", "chars": 49, "script": "Cyrillic"},
+        "tg": {"text": "Шумо мутмаин ҳастед, ки мехоҳед ин синфро тарк кунед?", "direction": "ltr", "chars": 57, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "leave-tooltip",
+      "category": "Leave Class",
+      "item": "Leave Tooltip",
+      "context": "Tooltip for leave class button",
+      "translations": {
+        "en": {"text": "Exit the live class", "direction": "ltr", "chars": 19},
+        "fa": {"text": "خروج از کلاس زنده", "direction": "rtl", "chars": 18, "script": "Perso-Arabic"},
+        "tr": {"text": "Canlı sınıftan çık", "direction": "ltr", "chars": 19},
+        "de": {"text": "Live-Kurs verlassen", "direction": "ltr", "chars": 19},
+        "fr": {"text": "Quitter le cours en direct", "direction": "ltr", "chars": 28},
+        "ru": {"text": "Выйти из живого класса", "direction": "ltr", "chars": 26, "script": "Cyrillic"},
+        "tg": {"text": "Хуруҷ аз синфи зинда", "direction": "ltr", "chars": 23, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "breakout-join",
+      "category": "Breakout Rooms",
+      "item": "Join Breakout Room Label",
+      "context": "Button label to join assigned breakout room",
+      "translations": {
+        "en": {"text": "Join Breakout Room", "direction": "ltr", "chars": 18},
+        "fa": {"text": "پیوستن به اتاق گروهی", "direction": "rtl", "chars": 22, "script": "Perso-Arabic"},
+        "tr": {"text": "Grup Odasına Katıl", "direction": "ltr", "chars": 19},
+        "de": {"text": "Gruppenraum beitreten", "direction": "ltr", "chars": 22},
+        "fr": {"text": "Rejoindre salle groupe", "direction": "ltr", "chars": 23},
+        "ru": {"text": "Присоединиться к комнате", "direction": "ltr", "chars": 26, "script": "Cyrillic"},
+        "tg": {"text": "Ба ҳуҷраи гурӯҳӣ пайвастан", "direction": "ltr", "chars": 28, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "breakout-return",
+      "category": "Breakout Rooms",
+      "item": "Return to Main Room Label",
+      "context": "Button label to return from breakout room to main class",
+      "translations": {
+        "en": {"text": "Return to Main Room", "direction": "ltr", "chars": 19},
+        "fa": {"text": "بازگشت به اتاق اصلی", "direction": "rtl", "chars": 20, "script": "Perso-Arabic"},
+        "tr": {"text": "Ana Odaya Dön", "direction": "ltr", "chars": 14},
+        "de": {"text": "Zurück zum Hauptraum", "direction": "ltr", "chars": 21},
+        "fr": {"text": "Retour salle principale", "direction": "ltr", "chars": 24},
+        "ru": {"text": "Вернуться в основную комнату", "direction": "ltr", "chars": 30, "script": "Cyrillic"},
+        "tg": {"text": "Бозгашт ба ҳуҷраи асосӣ", "direction": "ltr", "chars": 25, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "breakout-tooltip",
+      "category": "Breakout Rooms",
+      "item": "Breakout Room Tooltip",
+      "context": "Tooltip explaining breakout rooms",
+      "translations": {
+        "en": {"text": "Join a small group for discussion", "direction": "ltr", "chars": 34},
+        "fa": {"text": "پیوستن به گروه کوچک برای بحث", "direction": "rtl", "chars": 36, "script": "Perso-Arabic"},
+        "tr": {"text": "Tartışma için küçük bir gruba katılın", "direction": "ltr", "chars": 42},
+        "de": {"text": "Treten Sie einer kleinen Gruppe bei für Diskussionen", "direction": "ltr", "chars": 53},
+        "fr": {"text": "Rejoignez un petit groupe pour discuter", "direction": "ltr", "chars": 42},
+        "ru": {"text": "Присоединитесь к малой группе для обсуждения", "direction": "ltr", "chars": 48, "script": "Cyrillic"},
+        "tg": {"text": "Ба гурӯҳи хурд барои баҳс пайваст шавед", "direction": "ltr", "chars": 44, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "poll-open",
+      "category": "Polls",
+      "item": "Open Poll Label",
+      "context": "Button label to view and vote on active poll",
+      "translations": {
+        "en": {"text": "Open Poll", "direction": "ltr", "chars": 9},
+        "fa": {"text": "باز کردن نظرسنجی", "direction": "rtl", "chars": 19, "script": "Perso-Arabic"},
+        "tr": {"text": "Anketi Aç", "direction": "ltr", "chars": 10},
+        "de": {"text": "Umfrage öffnen", "direction": "ltr", "chars": 15},
+        "fr": {"text": "Ouvrir sondage", "direction": "ltr", "chars": 15},
+        "ru": {"text": "Открыть опрос", "direction": "ltr", "chars": 14, "script": "Cyrillic"},
+        "tg": {"text": "Кушодани пурсиш", "direction": "ltr", "chars": 17, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "poll-tooltip",
+      "category": "Polls",
+      "item": "Poll Tooltip",
+      "context": "Tooltip explaining poll feature",
+      "translations": {
+        "en": {"text": "Vote on instructor polls", "direction": "ltr", "chars": 24},
+        "fa": {"text": "رأی دادن در نظرسنجی مدرس", "direction": "rtl", "chars": 30, "script": "Perso-Arabic"},
+        "tr": {"text": "Eğitmen anketlerinde oy kullanın", "direction": "ltr", "chars": 35},
+        "de": {"text": "Abstimmen bei Kursleiter-Umfragen", "direction": "ltr", "chars": 36},
+        "fr": {"text": "Votez aux sondages de l'instructeur", "direction": "ltr", "chars": 39},
+        "ru": {"text": "Голосуйте в опросах преподавателя", "direction": "ltr", "chars": 37, "script": "Cyrillic"},
+        "tg": {"text": "Дар пурсишҳои муаллим овоз диҳед", "direction": "ltr", "chars": 37, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "reaction-send",
+      "category": "Reactions",
+      "item": "Send Reaction Label",
+      "context": "Button label to open reaction picker",
+      "translations": {
+        "en": {"text": "Send Reaction", "direction": "ltr", "chars": 13},
+        "fa": {"text": "ارسال واکنش", "direction": "rtl", "chars": 11, "script": "Perso-Arabic"},
+        "tr": {"text": "Tepki Gönder", "direction": "ltr", "chars": 13},
+        "de": {"text": "Reaktion senden", "direction": "ltr", "chars": 16},
+        "fr": {"text": "Envoyer réaction", "direction": "ltr", "chars": 17},
+        "ru": {"text": "Отправить реакцию", "direction": "ltr", "chars": 18, "script": "Cyrillic"},
+        "tg": {"text": "Ирсоли вокуниш", "direction": "ltr", "chars": 15, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "reaction-thumbsup",
+      "category": "Reactions",
+      "item": "Thumbs Up Reaction",
+      "context": "Label for 👍 reaction",
+      "translations": {
+        "en": {"text": "Thumbs Up", "direction": "ltr", "chars": 9},
+        "fa": {"text": "لایک", "direction": "rtl", "chars": 5, "script": "Perso-Arabic"},
+        "tr": {"text": "Beğen", "direction": "ltr", "chars": 5},
+        "de": {"text": "Daumen hoch", "direction": "ltr", "chars": 11},
+        "fr": {"text": "Pouce levé", "direction": "ltr", "chars": 10},
+        "ru": {"text": "Нравится", "direction": "ltr", "chars": 9, "script": "Cyrillic"},
+        "tg": {"text": "Писанд", "direction": "ltr", "chars": 6, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "reaction-applause",
+      "category": "Reactions",
+      "item": "Applause Reaction",
+      "context": "Label for 👏 reaction",
+      "translations": {
+        "en": {"text": "Applause", "direction": "ltr", "chars": 8},
+        "fa": {"text": "تشویق", "direction": "rtl", "chars": 6, "script": "Perso-Arabic"},
+        "tr": {"text": "Alkış", "direction": "ltr", "chars": 5},
+        "de": {"text": "Applaus", "direction": "ltr", "chars": 7},
+        "fr": {"text": "Applaudissements", "direction": "ltr", "chars": 17},
+        "ru": {"text": "Аплодисменты", "direction": "ltr", "chars": 13, "script": "Cyrillic"},
+        "tg": {"text": "Дастафшонӣ", "direction": "ltr", "chars": 10, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "reaction-heart",
+      "category": "Reactions",
+      "item": "Heart Reaction",
+      "context": "Label for ❤️ reaction",
+      "translations": {
+        "en": {"text": "Heart", "direction": "ltr", "chars": 5},
+        "fa": {"text": "قلب", "direction": "rtl", "chars": 3, "script": "Perso-Arabic"},
+        "tr": {"text": "Kalp", "direction": "ltr", "chars": 4},
+        "de": {"text": "Herz", "direction": "ltr", "chars": 4},
+        "fr": {"text": "Cœur", "direction": "ltr", "chars": 5},
+        "ru": {"text": "Сердце", "direction": "ltr", "chars": 7, "script": "Cyrillic"},
+        "tg": {"text": "Дил", "direction": "ltr", "chars": 3, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "connection-excellent",
+      "category": "Connection Quality",
+      "item": "Excellent Connection",
+      "context": "Status indicator for excellent connection quality",
+      "translations": {
+        "en": {"text": "Excellent", "direction": "ltr", "chars": 9},
+        "fa": {"text": "عالی", "direction": "rtl", "chars": 5, "script": "Perso-Arabic"},
+        "tr": {"text": "Mükemmel", "direction": "ltr", "chars": 9},
+        "de": {"text": "Ausgezeichnet", "direction": "ltr", "chars": 12},
+        "fr": {"text": "Excellent", "direction": "ltr", "chars": 9},
+        "ru": {"text": "Отлично", "direction": "ltr", "chars": 7, "script": "Cyrillic"},
+        "tg": {"text": "Аъло", "direction": "ltr", "chars": 5, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "connection-good",
+      "category": "Connection Quality",
+      "item": "Good Connection",
+      "context": "Status indicator for good connection quality",
+      "translations": {
+        "en": {"text": "Good", "direction": "ltr", "chars": 4},
+        "fa": {"text": "خوب", "direction": "rtl", "chars": 3, "script": "Perso-Arabic"},
+        "tr": {"text": "İyi", "direction": "ltr", "chars": 3},
+        "de": {"text": "Gut", "direction": "ltr", "chars": 3},
+        "fr": {"text": "Bon", "direction": "ltr", "chars": 3},
+        "ru": {"text": "Хорошо", "direction": "ltr", "chars": 7, "script": "Cyrillic"},
+        "tg": {"text": "Хуб", "direction": "ltr", "chars": 3, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "connection-fair",
+      "category": "Connection Quality",
+      "item": "Fair Connection",
+      "context": "Status indicator for fair/moderate connection quality",
+      "translations": {
+        "en": {"text": "Fair", "direction": "ltr", "chars": 4},
+        "fa": {"text": "متوسط", "direction": "rtl", "chars": 5, "script": "Perso-Arabic"},
+        "tr": {"text": "Orta", "direction": "ltr", "chars": 4},
+        "de": {"text": "Ausreichend", "direction": "ltr", "chars": 11},
+        "fr": {"text": "Moyen", "direction": "ltr", "chars": 6},
+        "ru": {"text": "Удовлетворительно", "direction": "ltr", "chars": 17, "script": "Cyrillic"},
+        "tg": {"text": "Миёна", "direction": "ltr", "chars": 6, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "connection-poor",
+      "category": "Connection Quality",
+      "item": "Poor Connection",
+      "context": "Status indicator for poor connection quality",
+      "translations": {
+        "en": {"text": "Poor", "direction": "ltr", "chars": 4},
+        "fa": {"text": "ضعیف", "direction": "rtl", "chars": 5, "script": "Perso-Arabic"},
+        "tr": {"text": "Zayıf", "direction": "ltr", "chars": 5},
+        "de": {"text": "Schlecht", "direction": "ltr", "chars": 8},
+        "fr": {"text": "Mauvais", "direction": "ltr", "chars": 7},
+        "ru": {"text": "Плохо", "direction": "ltr", "chars": 5, "script": "Cyrillic"},
+        "tg": {"text": "Заиф", "direction": "ltr", "chars": 5, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "connection-reconnecting",
+      "category": "Connection Quality",
+      "item": "Reconnecting Status",
+      "context": "Status indicator when attempting to reconnect",
+      "translations": {
+        "en": {"text": "Reconnecting...", "direction": "ltr", "chars": 15},
+        "fa": {"text": "...در حال اتصال مجدد", "direction": "rtl", "chars": 21, "script": "Perso-Arabic"},
+        "tr": {"text": "Yeniden bağlanıyor...", "direction": "ltr", "chars": 23},
+        "de": {"text": "Verbindung wird wiederhergestellt...", "direction": "ltr", "chars": 38},
+        "fr": {"text": "Reconnexion...", "direction": "ltr", "chars": 15},
+        "ru": {"text": "Переподключение...", "direction": "ltr", "chars": 18, "script": "Cyrillic"},
+        "tg": {"text": "...Дубора пайваст шудан", "direction": "ltr", "chars": 23, "script": "Cyrillic"}
+      }
+    },
+    {
+      "id": "connection-lost",
+      "category": "Connection Quality",
+      "item": "Connection Lost",
+      "context": "Status indicator when connection is completely lost",
+      "translations": {
+        "en": {"text": "Connection Lost", "direction": "ltr", "chars": 15},
+        "fa": {"text": "اتصال قطع شد", "direction": "rtl", "chars": 13, "script": "Perso-Arabic"},
+        "tr": {"text": "Bağlantı Kesildi", "direction": "ltr", "chars": 18},
+        "de": {"text": "Verbindung verloren", "direction": "ltr", "chars": 19},
+        "fr": {"text": "Connexion perdue", "direction": "ltr", "chars": 17},
+        "ru": {"text": "Соединение потеряно", "direction": "ltr", "chars": 20, "script": "Cyrillic"},
+        "tg": {"text": "Пайваст қатъ шуд", "direction": "ltr", "chars": 17, "script": "Cyrillic"}
+      }
+    }
+  ]
+}
