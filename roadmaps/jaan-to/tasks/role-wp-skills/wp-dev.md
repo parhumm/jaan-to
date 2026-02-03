@@ -4,6 +4,10 @@
 
 **Chain**: Architecture → Hooks → Data → Settings → Uninstall → Admin Menu → Assets → Block → REST → Cron → Cache
 
+**Research**:
+- [WordPress Plugin Development: Complete Role-Based Skills Guide](../../../jaan-to/outputs/research/54-roles-wp-details.md) - PM, Engineering, Admin UX, Integrations, Security, QA, Release
+- [WordPress Analytics Plugin Development](../../../jaan-to/outputs/research/58-role-wp-dev.md) - Privacy-compliant tracking, database patterns, competitor analysis, JavaScript beacons
+
 ## Userflow Schema
 
 ```mermaid
