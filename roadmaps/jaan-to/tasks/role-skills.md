@@ -96,6 +96,12 @@ Key dependency flows across roles:
 - [ ] Tested with sample inputs in v3.0.0 environment
 - [ ] Roles covered: PM, DEV, QA, DATA, GROWTH, UX, SEC, DELIVERY, SRE, SUPPORT, RELEASE
 
+## Domain-Specific Catalogs
+
+| Domain | Skills | File |
+|--------|--------|------|
+| WordPress Plugin Development | 25 | [roles-wp-skills.md](roles-wp-skills.md) |
+
 ## Dependencies
 
 - MCP connectors required for many skills (Phase 3 infrastructure)
