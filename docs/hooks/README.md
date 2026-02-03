@@ -20,6 +20,7 @@ You don't call hooks. They run automatically when triggered.
 |------|------|---------|
 | [validate-prd](validate-prd.md) | PreToolUse | Before writing PRD |
 | [capture-feedback](capture-feedback.md) | PostToolUse | After writing artifact |
+| [post-commit-roadmap](post-commit-roadmap.md) | PostToolUse | After git commit |
 | [bootstrap](bootstrap.md) | PreToolUse | Before skill execution |
 
 ---
