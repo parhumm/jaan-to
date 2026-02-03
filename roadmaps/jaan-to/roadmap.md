@@ -194,16 +194,23 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ---
 
+### v3.10.0 — Multi-Language UX Microcopy (`e4809b3`)
+
+- **New skill**: `/jaan-to-ux-microcopy-write` — Generate multi-language microcopy packs with cultural adaptation
+  - 7 languages: EN, FA (فارسی), TR (Türkçe), DE (Deutsch), FR (Français), RU (Русский), TG (Тоҷикӣ)
+  - RTL/LTR support with ZWNJ handling for Persian, Persian punctuation (؟ ، ؛ « »)
+  - Tone-of-voice management via context files (`localization.md`, `tone-of-voice.md`)
+  - 11 microcopy categories with smart detection: Labels, Helper Text, Error Messages, Success Messages, Toast Notifications, Confirmation Dialogs, Empty States, Loading States, Tooltips, Placeholders, CTAs
+  - Options iteration workflow: 3-5 rounds with custom user text support and style-matched variations
+  - Dual output: Human-readable markdown + JSON for i18n frameworks (React i18next, Vue i18n, ICU MessageFormat)
+  - Cultural adaptation (not literal translation): language-specific formality rules, text expansion rates (German +35%, Turkish +33%), 3-form pluralization for Russian
+  - Research-informed: 2 comprehensive sources consulted
+
+---
+
 ## Unreleased
 
-- **New skill**: `/jaan-to-ux-microcopy-write` — Generate multi-language microcopy packs with cultural adaptation (`e4809b3`)
-  - 7 languages: EN, FA (Persian), TR, DE, FR, RU, TG
-  - RTL/LTR support with ZWNJ handling, Persian punctuation
-  - Tone-of-voice management via context files
-  - 11 microcopy categories with smart detection
-  - Options iteration (3-5 rounds + custom input)
-  - Dual output: markdown + JSON for i18n frameworks
-  - Research-informed: 2 comprehensive sources consulted
+(none)
 
 ---
 

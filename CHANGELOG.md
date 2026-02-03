@@ -5,6 +5,21 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.0] - 2026-02-03
+
+### Added
+- **`/jaan-to-ux-microcopy-write` skill** — Generate multi-language microcopy packs with cultural adaptation (`e4809b3`)
+  - 7 languages: EN, FA (فارسی / Persian), TR (Türkçe), DE (Deutsch), FR (Français), RU (Русский), TG (Тоҷикӣ)
+  - RTL/LTR support with ZWNJ handling for Persian, Persian punctuation (؟ ، ؛ « »)
+  - Tone-of-voice management via context files (`localization.md`, `tone-of-voice.md`)
+  - 11 microcopy categories with smart detection: Labels, Helper Text, Error Messages, Success Messages, Toast Notifications, Confirmation Dialogs, Empty States, Loading States, Tooltips, Placeholders, CTAs
+  - Options iteration workflow: 3-5 rounds with custom user text support and style-matched variations
+  - Dual output: Human-readable markdown + JSON for i18n frameworks (React i18next, Vue i18n, ICU MessageFormat)
+  - Cultural adaptation (not literal translation): language-specific formality rules, text expansion rates (German +35%, Turkish +33%), 3-form pluralization for Russian
+  - Research-informed: 2 comprehensive sources consulted ([56-ux-ux-writing-persian.md](jaan-to/outputs/research/56-ux-ux-writing-persian.md), [57-ux-microcopy-write.md](jaan-to/outputs/research/57-ux-microcopy-write.md))
+
+---
+
 ## [3.9.0] - 2026-02-03
 
 ### Added
@@ -426,17 +441,6 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ## [Unreleased]
 
-### Added
-- **`/jaan-to-ux-microcopy-write` skill** — Generate multi-language microcopy packs with cultural adaptation (`e4809b3`)
-  - 7 languages: EN, FA (فارسی / Persian), TR (Türkçe), DE (Deutsch), FR (Français), RU (Русский), TG (Тоҷикӣ)
-  - RTL/LTR support with ZWNJ handling for Persian, Persian punctuation (؟ ، ؛ « »)
-  - Tone-of-voice management via context files (`localization.md`, `tone-of-voice.md`)
-  - 11 microcopy categories with smart detection: Labels, Helper Text, Error Messages, Success Messages, Toast Notifications, Confirmation Dialogs, Empty States, Loading States, Tooltips, Placeholders, CTAs
-  - Options iteration workflow: 3-5 rounds with custom user text support and style-matched variations
-  - Dual output: Human-readable markdown + JSON for i18n frameworks (React i18next, Vue i18n, ICU MessageFormat)
-  - Cultural adaptation (not literal translation): language-specific formality rules, text expansion rates (German +35%, Turkish +33%), 3-form pluralization for Russian
-  - Research-informed: 2 comprehensive sources consulted ([56-ux-ux-writing-persian.md](jaan-to/outputs/research/56-ux-ux-writing-persian.md), [57-ux-microcopy-write.md](jaan-to/outputs/research/57-ux-microcopy-write.md))
-
 ### Planned
 - Additional quick-win skills (qa-test-cases, data-sql-query)
 - Enhanced MCP integrations (GA4, GitLab, Jira, Figma)
@@ -445,6 +449,10 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.10.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.10.0
+[3.9.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.9.0
+[3.8.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.8.0
+[3.7.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.7.0
 [3.6.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.6.0
 [3.5.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.5.0
 [3.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.4.0
