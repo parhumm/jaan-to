@@ -187,13 +187,7 @@ If the file exists, apply its lessons throughout this execution:
 
 {Preview what will be done}
 
-Use AskUserQuestion to ask the user:
-- Question: "Ready to proceed with generation?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the output
-  - "No" — Cancel and start over
-  - "Edit" — Let me revise the inputs first
+> "Ready to proceed? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -218,12 +212,8 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 
-Show complete output, then use AskUserQuestion:
-- Question: "Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel
+Show complete output and ask:
+> "Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`? [y/n]"
 
 ## Step 6: Write Output
 
@@ -235,18 +225,14 @@ If approved:
 
 ## Step 7: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the output?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this output
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback? [y/n]"
 
-- **Fix now**: Update output, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add {skill-name} "{feedback}"`
-- **Both**: Do both
+If yes:
+> "[1] Fix now  [2] Learn for future  [3] Both"
+
+- **Option 1**: Update output, re-preview, re-write
+- **Option 2**: Run `/to-jaan-learn-add {skill-name} "{feedback}"`
+- **Option 3**: Do both
 
 ---
 
@@ -256,77 +242,6 @@ Use AskUserQuestion:
 - [ ] {Criterion 2}
 - [ ] User has approved final result
 ```
-
-### User Interaction Patterns
-
-Skills interact with users via two patterns. Choose the right one for each interaction:
-
-| Pattern | When to Use | Limit |
-|---------|-------------|-------|
-| `AskUserQuestion` | 2-4 fixed options, confirmations, mode selection | 1-4 questions per call, 2-4 options each |
-| Text prompt | Open-ended input, 5+ options, multi-line, key-value pairs | No limit |
-
-**Rules:**
-- **Use AskUserQuestion for:** HARD STOP confirmations, preview approvals, feedback handling, mode/type selection with 2-4 choices
-- **Use text prompts for:** Open-ended questions, menus with 5+ options, multi-line input, free-form parameters
-- **Grouping:** Batch related questions into a single AskUserQuestion call (max 4 questions)
-- **"Other" option:** Always include on non-binary choices for free-text escape hatch
-- **Descriptions required:** Every option needs a short description (not just a label)
-- **Header limit:** Max 12 characters
-
-**AskUserQuestion JSON schema:**
-```json
-{
-  "questions": [{
-    "question": "Full question text",
-    "header": "Short",
-    "options": [
-      { "label": "Yes", "description": "Proceed with generation" },
-      { "label": "No", "description": "Cancel and start over" }
-    ],
-    "multiSelect": false
-  }]
-}
-```
-
-**Instruction syntax in SKILL.md:**
-
-For single questions:
-```markdown
-Use AskUserQuestion to ask the user:
-- Question: "Ready to proceed with generation?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the output
-  - "No" — Cancel and start over
-  - "Edit" — Let me revise the inputs first
-```
-
-For grouped questions (max 4):
-```markdown
-Use a single AskUserQuestion call with these questions:
-
-1. Header: "Goal" | Question: "What's your primary goal?"
-   - "Learning" — Understand concepts and theory
-   - "Implementation" — Ready-to-use code and patterns
-   - "Comparison" — Evaluate alternatives
-
-2. Header: "Depth" | Question: "How deep should it go?"
-   - "Overview" — High-level summary
-   - "Detailed" — Balanced depth
-   - "Expert" — Expert-level detail
-```
-
-For questions that must stay as text:
-```markdown
-Ask the user (text response expected):
-> "What problem does this solve for users?"
-```
-
-**Edge case — too many options (5+):**
-- Split into 2-step interaction: broader category first (AskUserQuestion), then narrower choice
-- Or reduce to 3 options + "Other" for free-text escape
-- Or keep as numbered text menu if options can't be meaningfully grouped
 
 ### Required Sections
 
@@ -338,7 +253,7 @@ Ask the user (text response expected):
 | `## Input` | H2 | How to interpret $ARGUMENTS |
 | `# PHASE 1: Analysis` | H1 | Read-only operations |
 | `## Step 0: Apply Past Lessons` | H2 | LEARN.md integration |
-| `# HARD STOP` | H1 | Human approval gate (uses AskUserQuestion) |
+| `# HARD STOP` | H1 | Human approval gate |
 | `# PHASE 2: Generation` | H1 | Write operations |
 | `## Definition of Done` | H2 | Completion checklist |
 
@@ -1007,11 +922,6 @@ Accumulated lessons from past executions.
 - [ ] Has `# HARD STOP` section
 - [ ] Has `# PHASE 2: Generation` section
 - [ ] Has `## Definition of Done` section
-- [ ] HARD STOP uses AskUserQuestion (not text prompt)
-- [ ] Preview approval uses AskUserQuestion (not text prompt)
-- [ ] Feedback section uses AskUserQuestion with 3-4 options
-- [ ] Structured choices (2-4 options) use AskUserQuestion
-- [ ] Open-ended questions use text prompts
 
 ### Trust Rules
 
@@ -1051,23 +961,15 @@ Skills can trigger validation hooks:
 
 ### Feedback Capture
 
-End every skill with feedback option using AskUserQuestion:
+End every skill with feedback option:
 
 ```markdown
 ## Step 7: Capture Feedback
+After writing:
+> "Any feedback? [y/n]"
 
-Use AskUserQuestion:
-- Question: "Any feedback on the output?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this output
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
-
-- **Fix now**: Update output, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add {skill-name} "{feedback}"`
-- **Both**: Do both
+If yes:
+- Run `/to-jaan-learn-add {skill-name} "{feedback}"`
 ```
 
 ### Config Registration
@@ -1139,15 +1041,7 @@ Ask: "What should the demo cover?"
 
 # HARD STOP - Human Review Gate
 
-Preview: "Will generate demo about '{topic}'"
-
-Use AskUserQuestion to ask the user:
-- Question: "Ready to generate demo for '{topic}'?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the demo
-  - "No" — Cancel and start over
-  - "Edit" — Let me revise the topic first
+> "Ready to generate demo for '{topic}'? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -1172,12 +1066,8 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 
-Show complete output, then use AskUserQuestion:
-- Question: "Write to `$JAAN_OUTPUTS_DIR/example/minimal/{slug}/demo.md`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel
+Show complete output and ask:
+> "Write to `$JAAN_OUTPUTS_DIR/example/minimal/{slug}/demo.md`? [y/n]"
 
 ## Step 6: Write Output
 
@@ -1189,18 +1079,14 @@ If approved:
 
 ## Step 7: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the demo?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this output
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback? [y/n]"
 
-- **Fix now**: Update output, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add example-minimal-demo "{feedback}"`
-- **Both**: Do both
+If yes:
+> "[1] Fix now  [2] Learn for future  [3] Both"
+
+- **Option 1**: Update output, re-preview, re-write
+- **Option 2**: Run `/to-jaan-learn-add example-minimal-demo "{feedback}"`
+- **Option 3**: Do both
 
 ---
 
@@ -1302,7 +1188,7 @@ If tech.md exists, include:
 # HARD STOP - Human Review Gate
 
 Show planned structure:
-> Test matrix will cover:
+> "Test matrix will cover:
 > - {n} functional tests (P0: {x}, P1: {y}, P2: {z})
 > - {n} integration tests
 > - {n} edge case tests
@@ -1310,14 +1196,8 @@ Show planned structure:
 >
 > Test frameworks: {from tech.md or user input}
 > Browsers/devices: {from tech.md or user input}
-
-Use AskUserQuestion to ask the user:
-- Question: "Proceed with test matrix generation?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the test matrix
-  - "No" — Cancel and start over
-  - "Edit" — Let me revise the plan first
+>
+> Proceed with generation? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -1354,12 +1234,8 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 
-Show complete matrix, then use AskUserQuestion:
-- Question: "Write to `$JAAN_OUTPUTS_DIR/qa/test-matrix/{slug}/matrix.md`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel
+Show complete matrix and ask:
+> "Write to `$JAAN_OUTPUTS_DIR/qa/test-matrix/{slug}/matrix.md`? [y/n]"
 
 ## Step 6: Write Output
 
@@ -1371,18 +1247,14 @@ If approved:
 
 ## Step 7: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the test matrix?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this output
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback on the test matrix? [y/n]"
 
-- **Fix now**: Update matrix, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add jaan-to-qa-test-matrix "{feedback}"`
-- **Both**: Do both
+If yes:
+> "[1] Fix now  [2] Learn for future  [3] Both"
+
+- **Option 1**: Update matrix, re-preview, re-write
+- **Option 2**: Run `/to-jaan-learn-add jaan-to-qa-test-matrix "{feedback}"`
+- **Option 3**: Do both
 
 ---
 

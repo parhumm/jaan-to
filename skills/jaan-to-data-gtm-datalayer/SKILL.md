@@ -68,14 +68,10 @@ If text description of what to track:
 If no arguments, ask questions in order:
 
 ### Question 1: Tracking Type
-
-Use AskUserQuestion:
-- Question: "What type of tracking do you need?"
-- Header: "Type"
-- Options:
-  - "click-html" — HTML attributes (data-al-*) for simple clicks
-  - "click-datalayer" — dataLayer.push for flow-based clicks
-  - "impression" — dataLayer.push for visibility/exposure events
+> "What type of tracking do you need?"
+> 1. **click-html** - HTML attributes (data-al-*) for simple clicks
+> 2. **click-datalayer** - dataLayer.push for flow-based clicks
+> 3. **impression** - dataLayer.push for visibility/exposure events
 
 ### Question 2: Feature Name
 > "What is the feature name? (e.g., player, checkout, onboarding)"
@@ -84,12 +80,7 @@ Apply naming rules:
 - Convert to lowercase-kebab-case: "Play Button" → "play-button"
 - If unclear (e.g., "btn1", "x"), ask: "What does '{input}' represent?"
 - Suggest better name if abbreviated: "nav" → suggest "navigation" or "navbar"
-- Confirm conversion using AskUserQuestion:
-  - Question: "Feature '{input}' → '{kebab}' — OK?"
-  - Header: "Name"
-  - Options:
-    - "Yes" — Use this name
-    - "Edit" — Let me provide a different name
+- Confirm conversion: "Feature 'Play Button' → 'play-button' - OK? [y/edit]"
 
 ### Question 3: Item Name
 > "What is the item name? (e.g., play, pause, submit, modal-purchase)"
@@ -214,12 +205,7 @@ dataLayer.push({
 ────────────────────────────────────────
 ```
 
-Use AskUserQuestion:
-- Question: "Generate tracking code with these values?"
-- Header: "Values"
-- Options:
-  - "Yes" — Generate code
-  - "Edit" — Let me change the values
+> "Generate tracking code with these values? [y/edit]"
 
 ---
 
@@ -227,13 +213,7 @@ Use AskUserQuestion:
 
 Show the full dataLayer preview above (not just field summary).
 
-Use AskUserQuestion to ask the user:
-- Question: "Proceed with code generation?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the tracking code
-  - "No" — Cancel
-  - "Edit" — Let me revise the values first
+> "Proceed with code generation? [y/n/edit]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -349,12 +329,7 @@ EXAMPLE WITH VALUES
 {example showing real values based on user input}
 ```
 
-Use AskUserQuestion:
-- Question: "Save to `$JAAN_OUTPUTS_DIR/data/gtm/{slug}/tracking.md`?"
-- Header: "Save"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel
+> "Save to `$JAAN_OUTPUTS_DIR/data/gtm/{slug}/tracking.md`? [y/n]"
 
 ## Step 6: Write Output
 
@@ -367,18 +342,14 @@ If approved:
 
 ## Step 7: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the tracking code?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this output
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback? [y/n]"
 
-- **Fix now**: Update output, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add jaan-to-data-gtm-datalayer "{feedback}"`
-- **Both**: Do both
+If yes:
+> "[1] Fix now  [2] Learn for future  [3] Both"
+
+- **Option 1**: Update output, re-preview, re-write
+- **Option 2**: Run `/to-jaan-learn-add jaan-to-data-gtm-datalayer "{feedback}"`
+- **Option 3**: Do both
 
 ---
 

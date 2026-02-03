@@ -67,13 +67,11 @@ If column headers contain `timestamp`, `session_id`, `x_coordinate`, `y_coordina
 - Parse all columns, note available fields
 
 **Format Unknown:**
-If neither pattern matches, use AskUserQuestion:
-- Question: "Cannot auto-detect CSV format. What type of data is this?"
-- Header: "Format"
-- Options:
-  - "Aggregated" — Ranked elements with click counts (e.g., analytics tool export)
-  - "Raw events" — Individual click events with coordinates and timestamps
-  - "Other" — Let me describe the format
+If neither pattern matches:
+> "Cannot auto-detect CSV format. What type of data is this?
+> [1] Aggregated - Ranked elements with click counts (e.g., analytics tool export)
+> [2] Raw events - Individual click events with coordinates and timestamps
+> [3] Other - Let me describe the format"
 
 For each file, validate:
 - CSV is parseable with consistent columns
@@ -121,26 +119,20 @@ State clearly what analysis IS and IS NOT possible:
 
 ## Step 3: Clarify Analysis Goal
 
-Use AskUserQuestion:
-- Question: "What is the primary question this analysis should answer?"
-- Header: "Goal"
-- Options:
-  - "Find friction" — Identify frustration points and conversion barriers
-  - "Optimize CTA" — Evaluate button/link placement and visibility
-  - "Compare" — Desktop vs mobile or behavior segment differences
-  - "Other" — Let me describe my specific question
+> "What is the primary question this analysis should answer?
+> [1] Find friction - Identify frustration points and conversion barriers
+> [2] Optimize CTA - Evaluate button/link placement and visibility
+> [3] Compare - Desktop vs mobile or behavior segment differences
+> [4] Other - Let me describe my specific question"
 
 If "Other" selected, ask: "What specific question should this analysis answer?"
 
 If multiple CSV files provided (different devices or behavior segments), ask:
 
-Use AskUserQuestion:
-- Question: "You provided {N} CSV files. How should they be analyzed?"
-- Header: "Multi-file"
-- Options:
-  - "Compare" — Side-by-side comparison across files
-  - "Separate" — Independent analysis for each file
-  - "Combined" — Merge all data into single analysis
+> "You provided {N} CSV files. How should they be analyzed?
+> [1] Compare - Side-by-side comparison across files
+> [2] Separate - Independent analysis for each file
+> [3] Combined - Merge all data into single analysis"
 
 ## Step 4: Visual Analysis (Screenshots)
 
@@ -330,13 +322,7 @@ REPORT SECTIONS:
 ════════════════════════════════════════
 ```
 
-Use AskUserQuestion:
-- Question: "Proceed with full report generation?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the report
-  - "Edit" — Let me adjust the analysis focus
-  - "No" — Cancel
+> "Proceed with full report generation? [y/edit/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -392,12 +378,7 @@ If any check fails, revise the report before preview.
 
 Show the complete report in conversation.
 
-Use AskUserQuestion:
-- Question: "Write report to `$JAAN_OUTPUTS_DIR/ux/heatmap/{slug}/report.md`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel
+> "Here's the report preview. Write to `$JAAN_OUTPUTS_DIR/ux/heatmap/{slug}/report.md`? [y/n]"
 
 ## Step 12: Write Output
 
@@ -411,18 +392,19 @@ If approved:
 
 ## Step 13: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the heatmap analysis?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this report
-  - "Learn" — Save lesson for future analyses
-  - "Both" — Fix now AND save lesson
+> "Any feedback or improvements needed? [y/n]"
 
-- **Fix now**: Revise report, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add jaan-to-ux-heatmap-analyze "{feedback}"`
-- **Both**: Do both
+**If yes:**
+1. Ask: "What should be improved?"
+2. Offer options:
+   > "How should I handle this?
+   > [1] Fix now - Update this report
+   > [2] Learn - Save for future analyses
+   > [3] Both - Fix now AND save lesson"
+
+- **Option 1 - Fix now**: Revise report, re-preview, re-write
+- **Option 2 - Learn**: Run `/to-jaan-learn-add jaan-to-ux-heatmap-analyze "{feedback}"`
+- **Option 3 - Both**: Do both
 
 ---
 

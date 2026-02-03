@@ -89,14 +89,9 @@ Analyze `$ARGUMENTS` format:
 > "I understand you want to create a story about:
 > - **Feature**: {feature}
 > - **Persona**: {persona}
-> - **Goal**: {goal}"
-
-Use AskUserQuestion:
-- Question: "Is this correct?"
-- Header: "Parse"
-- Options:
-  - "Yes" — Proceed with these
-  - "No" — Let me clarify
+> - **Goal**: {goal}
+>
+> Is this correct? [y/n]"
 
 If "n", ask what needs clarification and reparse.
 
@@ -244,17 +239,11 @@ Categories addressed: {comma-separated list from Step 2}
 Minimum ACs required: {number}
 ```
 
-Use AskUserQuestion:
-- Question: "Ready to generate the full user story?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the story
-  - "No" — Cancel
-  - "Revise" — Let me change the plan first
+> "Ready to generate the full user story? [y/n/revise]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
-If "Revise", ask what needs to change and return to the relevant Phase 1 step.
+If "revise", ask what needs to change and return to the relevant Phase 1 step.
 
 ---
 
@@ -468,17 +457,14 @@ Verify each acceptance criterion:
 > **Pattern 6: Cross-Cutting Concerns** - Defer performance/security/scale
 > Example: Search works correctly now, fast search later, concurrent search later
 >
-Use AskUserQuestion:
-- Question: "Story may be too large. How to proceed?"
-- Header: "Split"
-- Options:
-  - "Split" — Split using suggested pattern
-  - "Refine" — Keep as single story but refine scope
-  - "Proceed" — Keep as-is (flag as >5 points)
+> Would you like to:
+> [1] Split now using pattern #{n}
+> [2] Refine and keep as single story
+> [3] Proceed as-is (will flag as >5 points)"
 
-If "Split", guide them through splitting and restart from Step 3 with split stories.
-If "Refine", ask what to refine and return to Step 4.
-If "Proceed", add note to story: "Note: Estimated >5 points—consider splitting during refinement."
+If user chooses [1], guide them through splitting and restart from Step 3 with split stories.
+If user chooses [2], ask what to refine and return to Step 4.
+If user chooses [3], add note to story: "Note: Estimated >5 points—consider splitting during refinement."
 
 ## Step 6: Preview & Approval
 
@@ -492,12 +478,7 @@ Show complete story in markdown format:
 {complete story content with all 9 sections}
 ```
 
-Use AskUserQuestion:
-- Question: "Write story to `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel and revise
+> "📋 Preview complete. Write to `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`? [y/n]"
 
 If "n", ask what needs revision and return to Step 4.
 
@@ -541,28 +522,32 @@ Also provide tool export formats (from research Section 7):
 
 ## Step 8: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the story?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this story
-  - "Learn" — Save lesson for future stories
-  - "Both" — Fix now AND save lesson
+After story is written, ask:
+> "Any feedback or improvements for this story? [y/n]"
 
-**Fix now:**
-- Ask: "What should be improved?" (text response)
+**If yes:**
+1. Ask: "What should be improved?"
+2. Offer options:
+   > "How should I handle this feedback?
+   > [1] Fix now - Update this story
+   > [2] Learn - Save for future stories via /to-jaan-learn-add
+   > [3] Both - Fix now AND save lesson"
+
+**Option 1 - Fix now:**
 - Apply the feedback to the current story
 - Re-run Step 6 (Preview & Approval) with updated content
 - Re-write the updated story
 
-**Learn:**
+**Option 2 - Learn for future:**
 - Run: `/to-jaan-learn-add jaan-to-pm-story-write "{feedback}"`
 - Let the learn-add skill categorize and save the lesson
 
-**Both:**
-- First: Apply fix to current story
+**Option 3 - Both:**
+- First: Apply fix to current story (Option 1)
 - Then: Run `/to-jaan-learn-add jaan-to-pm-story-write "{feedback}"`
+
+**If no:**
+- Story workflow complete
 
 ---
 

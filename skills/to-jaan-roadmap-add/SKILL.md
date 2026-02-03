@@ -57,13 +57,8 @@ Extract keywords from the task description and search:
 grep -i "<keyword>" jaan-to/roadmap.md
 ```
 
-If potential duplicate found, use AskUserQuestion:
-- Question: "Similar task exists: '{existing}' in Phase {n}. Proceed?"
-- Header: "Duplicate"
-- Options:
-  - "Yes" — Create a new task anyway
-  - "No" — Cancel
-  - "Merge" — Merge with existing task
+If potential duplicate found:
+> "Similar task exists: '{existing}' in Phase {n}. Proceed anyway? [y/n/merge]"
 
 ## Step 3: Phase Detection
 
@@ -80,24 +75,11 @@ Determine which phase the task belongs to:
 | Tests, polish, export | Phase 7 |
 | Distribution, plugin | Phase 8 |
 
-Use AskUserQuestion:
-- Question: "Add to Phase {suggested}?"
-- Header: "Phase"
-- Options:
-  - "Yes" — Add to suggested phase
-  - "Different" — Let me specify a different phase
-
-If "Different", ask (text response expected):
-> "Which phase? (1-8)"
+Ask: "Add to Phase {suggested}? Or specify different phase (1-8)"
 
 ## Step 4: Detail Check
 
-Use AskUserQuestion:
-- Question: "Does this need a detailed task doc in `tasks/`?"
-- Header: "Detail"
-- Options:
-  - "Yes" — Create a tasks/{slug}.md file
-  - "No" — Inline task only
+Ask: "Does this need a detailed task doc in `tasks/`? [y/n]"
 
 ---
 
@@ -111,15 +93,8 @@ Ready to Add
 **Task:** `- [ ] {formatted task}`
 **Detail doc:** {yes/no - tasks/{slug}.md}
 
+Confirm? [y/n/edit]
 ```
-
-Use AskUserQuestion:
-- Question: "Add this task to the roadmap?"
-- Header: "Add"
-- Options:
-  - "Yes" — Add the task
-  - "No" — Cancel
-  - "Edit" — Let me revise it
 
 **Do NOT proceed without explicit approval.**
 
@@ -156,14 +131,7 @@ Task Added
 **Task:** - [ ] {task}
 **Commit:** {hash}
 
-```
-
-Use AskUserQuestion:
-- Question: "Push to remote?"
-- Header: "Push"
-- Options:
-  - "Yes" — Push to origin
-  - "No" — Keep local only
+Push to remote? [y/n]
 ```
 
 ---

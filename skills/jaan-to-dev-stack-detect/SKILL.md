@@ -5,7 +5,7 @@ description: |
   Scans languages, frameworks, databases, infrastructure, CI/CD, and integrations.
   Auto-triggers on: detect stack, scan project, setup context, analyze tech
   Maps to: dev:stack-detect
-allowed-tools: Read, Glob, Grep, Bash(git remote:*), Bash(ls:*), Write($JAAN_CONTEXT_DIR/**), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_OUTPUTS_DIR/dev/**), AskUserQuestion
+allowed-tools: Read, Glob, Grep, Bash(git remote:*), Bash(ls:*), Write($JAAN_CONTEXT_DIR/**), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_OUTPUTS_DIR/dev/**)
 argument-hint: [optional-focus-area]
 ---
 
@@ -304,42 +304,26 @@ boundaries.md:   {action}
 config.md:       {action}
 ```
 
-## Step 11: AskUserQuestion — Merge Mode & File Selection
+## Step 11: Merge Mode & File Selection
 
-Use `AskUserQuestion` with two questions:
+Ask two questions:
 
 **Question 1 — Merge Mode:**
-```json
-{
-  "question": "How should detected values be applied to your context files?",
-  "header": "Merge Mode",
-  "options": [
-    { "label": "Auto-fill", "description": "Fill empty sections, skip customized ones" },
-    { "label": "Interactive", "description": "Fill empty, ask per customized section" },
-    { "label": "Overwrite", "description": "Replace all sections (shows full diff first)" },
-    { "label": "Cancel", "description": "Save report only, don't modify files" }
-  ],
-  "multiSelect": false
-}
-```
+> "How should detected values be applied to your context files?
+> [1] Auto-fill - Fill empty sections, skip customized ones
+> [2] Interactive - Fill empty, ask per customized section
+> [3] Overwrite - Replace all sections (shows full diff first)
+> [4] Cancel - Save report only, don't modify files"
 
 **Question 2 — File Selection:**
-```json
-{
-  "question": "Which context files should be updated?",
-  "header": "Target Files",
-  "options": [
-    { "label": "All detected", "description": "tech.md, integrations.md, boundaries.md, config.md" },
-    { "label": "tech.md only", "description": "Just the technology stack file" },
-    { "label": "tech + integrations", "description": "Stack and tools, skip boundaries/config" }
-  ],
-  "multiSelect": false
-}
-```
+> "Which context files should be updated?
+> [1] All detected - tech.md, integrations.md, boundaries.md, config.md
+> [2] tech.md only - Just the technology stack file
+> [3] tech + integrations - Stack and tools, skip boundaries/config"
 
 **If user selects "Cancel"**: Save detection report to `$JAAN_OUTPUTS_DIR/dev/stack-detect/` and stop.
 
-**Do NOT proceed to Phase 2 without explicit approval via AskUserQuestion.**
+**Do NOT proceed to Phase 2 without explicit approval.**
 
 ---
 
@@ -358,40 +342,22 @@ Based on merge mode selected in Step 11:
 
 ### Interactive mode
 1. Auto-fill all empty sections (same as above)
-2. For each **customized** section that has a different detected value, use `AskUserQuestion`:
+2. For each **customized** section that has a different detected value, ask:
 
-```json
-{
-  "question": "{section}: Current: {current_value} -> Detected: {detected_value} ({source}, {confidence}%)",
-  "header": "{short_name}",
-  "options": [
-    { "label": "Accept", "description": "Update to detected value" },
-    { "label": "Keep", "description": "Keep current value" },
-    { "label": "Skip all", "description": "Keep all remaining customized sections" }
-  ],
-  "multiSelect": false
-}
-```
-
-**Batch up to 4 section diffs per AskUserQuestion call** (API limit: max 4 questions per call).
+> "{section}: Current: {current_value} -> Detected: {detected_value} ({source}, {confidence}%)
+> [1] Accept - Update to detected value
+> [2] Keep - Keep current value
+> [3] Skip all - Keep all remaining customized sections"
 
 If user selects "Skip all" on any question, stop prompting and keep all remaining customized sections.
 
 ### Overwrite mode
 1. Show complete diff of proposed changes
-2. Use AskUserQuestion for final confirmation:
+2. Confirm with user:
 
-```json
-{
-  "question": "This will overwrite ALL sections in tech.md with detected values. Proceed?",
-  "header": "Confirm",
-  "options": [
-    { "label": "Overwrite", "description": "Replace all sections with detected values" },
-    { "label": "Cancel", "description": "Don't modify tech.md" }
-  ],
-  "multiSelect": false
-}
-```
+> "This will overwrite ALL sections in tech.md with detected values. Proceed?
+> [1] Overwrite - Replace all sections with detected values
+> [2] Cancel - Don't modify tech.md"
 
 3. If confirmed, write entire file with detected values
 
@@ -449,19 +415,11 @@ Auto-generate from detected structure:
 - Package files (`package.json`, `go.mod`, etc.)
 - Hidden directories (except `.claude/`)
 
-Show the proposed boundaries and use AskUserQuestion if they differ from current:
+Show the proposed boundaries and ask if they differ from current:
 
-```json
-{
-  "question": "Update safe write paths based on detected project structure?",
-  "header": "Boundaries",
-  "options": [
-    { "label": "Accept", "description": "Update denied locations list" },
-    { "label": "Keep", "description": "Keep current boundaries unchanged" }
-  ],
-  "multiSelect": false
-}
-```
+> "Update safe write paths based on detected project structure?
+> [1] Accept - Update denied locations list
+> [2] Keep - Keep current boundaries unchanged"
 
 ## Step 15: Update config.md
 
@@ -527,7 +485,7 @@ If yes:
 - [ ] Config files scanned across all detection layers
 - [ ] Confidence scores assigned to all detections
 - [ ] Detection report shown to user
-- [ ] User approved merge mode via AskUserQuestion
+- [ ] User approved merge mode
 - [ ] Context files updated per merge decisions
 - [ ] Detection report saved to outputs
 - [ ] Summary shown with manual review suggestions
