@@ -141,6 +141,10 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 - Fixed stale path references (`206dcfd`)
 - Roadmap synced: v3.3.0 section created (`04c958b`)
 
+### v3.5.0 — PRD-to-Story Pipeline
+
+- `/jaan-to-pm-prd-write` now auto-invokes `/jaan-to-pm-story-write` after PRD generation, letting users expand one-liner stories into full detailed user stories with INVEST validation and Gherkin ACs (`90d67c3`)
+
 ---
 
 ## Unreleased

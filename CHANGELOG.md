@@ -5,6 +5,15 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.5.0] - 2026-02-03
+
+### Added
+- **User story auto-invoke in `/jaan-to-pm-prd-write`** — After PRD is written,
+  optionally invoke `/jaan-to-pm-story-write` to expand user stories into full
+  detailed stories with INVEST validation and Gherkin acceptance criteria (`90d67c3`)
+
+---
+
 ## [3.4.0] - 2026-02-03
 
 ### Added
@@ -335,6 +344,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.5.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.5.0
 [3.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.4.0
 [3.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.3.0
 [3.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.2.0
