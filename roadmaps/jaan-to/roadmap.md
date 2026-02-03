@@ -196,7 +196,14 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ## Unreleased
 
-(none)
+- **New skill**: `/jaan-to-ux-microcopy-write` — Generate multi-language microcopy packs with cultural adaptation (`e4809b3`)
+  - 7 languages: EN, FA (Persian), TR, DE, FR, RU, TG
+  - RTL/LTR support with ZWNJ handling, Persian punctuation
+  - Tone-of-voice management via context files
+  - 11 microcopy categories with smart detection
+  - Options iteration (3-5 rounds + custom input)
+  - Dual output: markdown + JSON for i18n frameworks
+  - Research-informed: 2 comprehensive sources consulted
 
 ---
 
@@ -287,6 +294,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to-dev-stack-detect` | Detect project tech stack |
 | `/jaan-to-dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
 | `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
+| `/jaan-to-ux-microcopy-write` | Generate multi-language microcopy packs |
 
 ### Key Paths
 
