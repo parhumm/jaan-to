@@ -798,6 +798,14 @@ Example:
 
 ---
 
+## Step 17: Auto-Invoke Roadmap Update
+
+Run `/to-jaan-roadmap-update` to sync the skill update with the roadmap.
+
+This ensures the roadmap reflects the latest skill changes.
+
+---
+
 ## Definition of Done
 
 - [ ] Existing skill files read and analyzed
@@ -807,4 +815,5 @@ Example:
 - [ ] Documentation synced via /to-jaan-docs-update
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
+- [ ] Roadmap synced via /to-jaan-roadmap-update
 - [ ] User approved final result

@@ -868,6 +868,14 @@ Use AskUserQuestion:
 
 ---
 
+## Step 21: Auto-Invoke Roadmap Update
+
+Run `/to-jaan-roadmap-update` to sync the new skill with the roadmap.
+
+This ensures the roadmap reflects the latest skill additions.
+
+---
+
 ## Definition of Done
 
 - [ ] Duplicate check completed
@@ -878,4 +886,5 @@ Use AskUserQuestion:
 - [ ] Documentation created via /to-jaan-docs-create
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
+- [ ] Roadmap synced via /to-jaan-roadmap-update
 - [ ] User approved final result
