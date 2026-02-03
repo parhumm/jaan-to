@@ -91,10 +91,44 @@ When adding functionality, first check if a skill/command exists.
   Example: `to-jaan-docs-create` → `/to-jaan-docs-create`
 - Directory: `skills/{skill-name}/`
 
-### Output Paths (Project-Relative)
+### Output Structure
+
+All skills follow the standardized ID-based folder output pattern:
+
 ```
-jaan-to/outputs/{role}/{domain}/{slug}/
+jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/
+  ├── {id}-{report-type}-{slug}.md    # Main file
+  └── {id}-{aux-type}-{slug}.md       # Optional auxiliary files
 ```
+
+**Components:**
+- **ID**: Sequential per subdomain (01, 02, 03...) - Generated automatically
+- **Slug**: lowercase-kebab-case from title (max 50 chars)
+- **Report type**: Subdomain name (prd, story, gtm, tasks, etc.)
+- **Index**: Each subdomain has README.md with executive summaries
+
+**Key Features:**
+- **Per-subdomain IDs**: Each subdomain (pm/prd, pm/stories, data/gtm) has independent ID sequences
+- **Slug reusability**: Same slug can exist across different role/subdomain combinations
+  - Example: "user-auth" can appear in `pm/prd/01-user-auth/`, `data/gtm/01-user-auth/`, and `dev/frontend/01-user-auth/`
+- **Automatic indexing**: Skills update README.md indexes automatically after each output
+
+**Examples:**
+```
+jaan-to/outputs/pm/prd/01-user-auth/
+  ├── 01-prd-user-auth.md           # Main PRD
+  └── 01-prd-tasks-user-auth.md     # Optional task breakdown
+
+jaan-to/outputs/data/gtm/01-user-auth/
+  └── 01-gtm-user-auth.md           # GTM tracking for same feature
+
+jaan-to/outputs/pm/stories/01-login-validation/
+  └── 01-story-login-validation.md  # User story
+```
+
+**Exception:** Research outputs use flat files (`research/{id}-{category}-{slug}.md`) instead of folders.
+
+See [jaan-to/outputs/README.md](jaan-to/outputs/README.md) for complete documentation.
 
 ### File Names
 - Skill definition: `SKILL.md` (uppercase)

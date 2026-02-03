@@ -83,6 +83,193 @@ Learning lessons are stored in `jaan-to/learn/{name}.learn.md` (managed by the s
 
 ---
 
+## Skill Output Standards
+
+### Overview
+
+All jaan.to skills that generate user-facing outputs MUST follow the standardized structure to ensure consistency, discoverability, and maintainability.
+
+### Required Structure
+
+```
+jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/
+  ├── {id}-{report-type}-{slug}.md    # Main output file
+  └── {id}-{aux-type}-{slug}.md       # Optional auxiliary files
+```
+
+### Components
+
+#### 1. ID Generation
+
+**Requirement**: All outputs must have sequential IDs per subdomain.
+
+**Implementation**:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/{role}/{subdomain}"
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+```
+
+**Example Output**: `01`, `02`, `03`, etc.
+
+#### 2. Folder Structure
+
+**Requirement**: Each output must be in its own folder.
+
+**Format**: `{id}-{slug}/`
+- `id`: Two-digit sequential number
+- `slug`: lowercase-kebab-case from title (max 50 chars)
+
+**Example**: `01-user-authentication/`, `02-payment-flow/`
+
+#### 3. Slug Scoping
+
+**Requirement**: Slugs are unique per subdomain, NOT globally.
+
+**Cross-role reuse**: The same slug can be used across different role/subdomain combinations.
+
+**Example**: "user-auth" can exist in:
+- `pm/prd/01-user-auth/` (PRD for user authentication)
+- `data/gtm/01-user-auth/` (GTM tracking for user authentication)
+- `dev/frontend/01-user-auth/` (Frontend tasks for user authentication)
+
+**Benefit**: Natural feature/topic naming across different roles and output types.
+
+#### 4. File Naming
+
+**Requirement**: All files in folder must use ID prefix.
+
+**Main File Format**: `{id}-{report-type}-{slug}.md`
+- `report-type`: Subdomain name (prd, story, gtm, tasks, etc.)
+
+**Auxiliary File Format**: `{id}-{aux-type}-{slug}.md`
+- `aux-type`: Descriptive name (notes, appendix, data, etc.)
+
+**Examples**:
+- Main: `01-prd-user-authentication.md`
+- Auxiliary: `01-prd-tasks-user-authentication.md`
+
+#### 5. Index Management
+
+**Requirement**: Update subdomain README.md after each output.
+
+**Implementation**:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Title}" \
+  "{1-2 sentence executive summary}"
+```
+
+#### 6. Executive Summary
+
+**Requirement**: All outputs must include Executive Summary section.
+
+**Placement**: Near the top of the document (after title, before main content).
+
+**Format**:
+```markdown
+## Executive Summary
+
+{1-2 sentence high-level summary of the problem, solution, or findings}
+```
+
+**Purpose**: Enables quick scanning in index files and cross-referencing.
+
+### Implementation Checklist
+
+When creating a new output-generating skill:
+
+- [ ] Source `scripts/lib/id-generator.sh` in Step 5.5
+- [ ] Generate sequential ID using `generate_next_id()`
+- [ ] Create folder: `{subdomain}/{id}-{slug}/`
+- [ ] Name main file: `{id}-{report-type}-{slug}.md`
+- [ ] Source `scripts/lib/index-updater.sh` after output write
+- [ ] Call `add_to_index()` with ID, folder name, title, summary
+- [ ] Include Executive Summary in template
+- [ ] Preview ID, folder path, and file path before writing
+- [ ] Confirm index update after writing
+
+### Reference Implementation
+
+See [jaan-to-pm-prd-write/SKILL.md](../../skills/jaan-to-pm-prd-write/SKILL.md) for complete example.
+
+### Role and Subdomain Mapping
+
+| Role | Common Subdomains | Report Types |
+|------|-------------------|--------------|
+| `pm` | prd, stories, roadmap | prd, story, roadmap |
+| `data` | gtm, analytics | gtm, analytics |
+| `dev` | frontend, backend, stack | fe-tasks, be-tasks, stack |
+| `ux` | heatmap, research, design | heatmap, research, design |
+| `qa` | test-cases, reports | test-cases, report |
+
+### Exceptions
+
+**Research outputs** use flat file structure (not folders):
+```
+jaan-to/outputs/research/{id}-{category}-{slug}.md
+```
+
+This is intentional for research summaries due to high volume and simpler structure.
+
+### Validation
+
+Run validation script to check compliance:
+```bash
+bash scripts/validate-outputs.sh
+```
+
+### Common Mistakes
+
+❌ **Wrong**: Writing directly to file without folder
+```bash
+echo "$output" > "$JAAN_OUTPUTS_DIR/pm/my-prd.md"
+```
+
+✅ **Correct**: Create folder, write file with ID prefix
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+echo "$output" > "$OUTPUT_FOLDER/${NEXT_ID}-prd-${slug}.md"
+```
+
+❌ **Wrong**: Hardcoded ID or no ID
+```bash
+FILE="$JAAN_OUTPUTS_DIR/pm/01-my-prd.md"  # Hardcoded
+FILE="$JAAN_OUTPUTS_DIR/pm/my-prd.md"     # No ID
+```
+
+✅ **Correct**: Generate ID dynamically
+```bash
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+FILE="$OUTPUT_FOLDER/${NEXT_ID}-prd-${slug}.md"
+```
+
+❌ **Wrong**: Forgetting to update index
+```bash
+# Write file only
+cat > "$MAIN_FILE" <<EOF
+...
+EOF
+# Missing index update!
+```
+
+✅ **Correct**: Always update index after write
+```bash
+cat > "$MAIN_FILE" <<EOF
+...
+EOF
+
+add_to_index "$SUBDOMAIN_DIR/README.md" "$NEXT_ID" "..." "..." "..."
+```
+
+---
+
 ## SKILL.md Specification
 
 ### YAML Frontmatter Schema
