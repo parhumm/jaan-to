@@ -268,6 +268,40 @@ Check if skill is tech-aware (references project's tech stack):
 - [ ] ✓ Tech-aware (integrates with tech.md)
 - [ ] N/A (skill doesn't need tech context)
 
+### V3.8: AskUserQuestion Usage
+
+Check that structured interactions use AskUserQuestion instead of text prompts:
+
+**Expected patterns** (v3.8 compliant):
+```markdown
+# ✓ Uses AskUserQuestion
+Use AskUserQuestion to ask the user:
+- Question: "Ready to proceed?"
+- Header: "Proceed"
+- Options:
+  - "Yes" — Generate the output
+  - "No" — Cancel
+
+# ✗ Uses text prompt for structured choice
+> "Proceed? [y/n]"
+> "[1] Fix now  [2] Learn  [3] Both"
+```
+
+**Check these sections**:
+1. HARD STOP gate — must use AskUserQuestion
+2. Preview & Approval — must use AskUserQuestion
+3. Feedback section — must use AskUserQuestion with 3-4 options
+4. Any other 2-4 option choices — should use AskUserQuestion
+
+**Detection**: Grep for `> ".*\[y/n` and `> "\[1\]` patterns in SKILL.md.
+
+**Status**:
+- [ ] ✓ HARD STOP uses AskUserQuestion
+- [ ] ✓ Preview uses AskUserQuestion
+- [ ] ✓ Feedback uses AskUserQuestion
+- [ ] ✓ All structured choices (2-4 options) use AskUserQuestion
+- [ ] ✗ Text prompts used for structured choices (suggest option [9])
+
 ### v3.0.0 Compliance Summary
 
 Display results:
@@ -281,12 +315,14 @@ V3.4 Template path:          ✓ / ✗ / N/A
 V3.5 Output path:            ✓ / ✗ / N/A
 V3.6 Template variables:     ✓ / ✗ / N/A
 V3.7 Tech integration:       ✓ / N/A
+V3.8 AskUserQuestion:        ✓ / ✗
 
 VERDICT: v3.0.0 Compliant / Needs Migration
 ```
 
 If **any check fails (✗)**:
 - Add option [8] to Step 3: "Migrate to v3.0.0"
+- If V3.8 fails: Add option [9] to Step 3: "Convert text prompts to AskUserQuestion"
 
 ## Step 3: Ask Update Type
 
@@ -300,11 +336,41 @@ If **any check fails (✗)**:
 > [6] Fix specification compliance issues
 > [7] Other (describe)
 > [8] Migrate to v3.0.0 (if compliance check failed)
+> [9] Convert text prompts to AskUserQuestion (if V3.8 check failed)
+
+**Option 9 (Convert to AskUserQuestion)**:
+
+Scan the target skill for text-based prompts that should use AskUserQuestion:
+
+1. **Find all prompt patterns**: Grep for `> ".*\[y/n` and `> "\[1\]` and `> ".*? \[` patterns
+2. **Categorize each prompt**:
+   - **Convertible** (2-4 fixed options): HARD STOP [y/n/edit], Preview [y/n], Feedback [y/n] + [1-3], confirmations
+   - **Must stay as text** (5+ options, open-ended): menus with 5+ items, free-text input, multi-line
+3. **Show conversion plan**:
+   ```
+   ASKUSERQUESTION CONVERSION PLAN
+   ─────────────────────────────────
+   ✓ Convert (2-4 options):
+     Line {n}: "Proceed? [y/n]" → AskUserQuestion (Yes/No)
+     Line {n}: "[1] Fix [2] Learn [3] Both" → AskUserQuestion (3 options)
+
+   ✗ Keep as text:
+     Line {n}: "[1]...[2]...[8]..." → Too many options
+     Line {n}: "What is the...?" → Open-ended
+
+   Total: {x} convertible, {y} keep as text
+   ```
+4. **Apply conversions**: Replace text prompts with AskUserQuestion instruction blocks
+5. **Validate**: Ensure converted prompts follow the spec pattern from `docs/extending/create-skill.md` "User Interaction Patterns" section
 
 ## Step 4: Optional Web Research
 
-For options [1], [2], [3], or [7], offer:
-> "Search for updated best practices? [y/n]"
+For options [1], [2], [3], or [7], use AskUserQuestion:
+- Question: "Search for updated best practices?"
+- Header: "Research"
+- Options:
+  - "Yes" — Research current best practices
+  - "No" — Skip research
 
 If yes, use **Task tool with Explore subagent**:
 ```
@@ -396,7 +462,13 @@ Show preview of all transformations before applying.
 For each detected v2.x pattern:
 1. Show current code
 2. Show proposed v3.0.0 replacement
-3. Ask: "Apply this change? [y/n/skip-all]"
+3. Use AskUserQuestion:
+   - Question: "Apply this change?"
+   - Header: "Apply"
+   - Options:
+     - "Yes" — Apply this change
+     - "No" — Skip this change
+     - "Skip all" — Keep remaining as-is
 
 #### Option 8.3: Generate Auto-Fix Script
 
@@ -508,7 +580,13 @@ COMPLIANCE AFTER UPDATE
 ✓ Trust: sandboxed
 ```
 
-> "Apply these changes? [y/n/edit]"
+Use AskUserQuestion to ask the user:
+- Question: "Apply these changes?"
+- Header: "Apply"
+- Options:
+  - "Yes" — Apply all changes
+  - "No" — Cancel and discard
+  - "Edit" — Let me revise the plan first
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -557,7 +635,12 @@ If any check fails, fix before continuing.
 
 Show final versions of all modified files.
 
-> "Write these updates? [y/n]"
+Use AskUserQuestion:
+- Question: "Write these updates?"
+- Header: "Write"
+- Options:
+  - "Yes" — Write all updated files
+  - "No" — Cancel
 
 ## Step 11: Write Updated Files
 
@@ -606,7 +689,12 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 > /to-jaan-docs-create skill "my-new-feature"
 > ```
 >
-> "Did it work correctly? [y/n]"
+Use AskUserQuestion:
+- Question: "Did the skill work correctly?"
+- Header: "Test"
+- Options:
+  - "Yes" — Works as expected
+  - "No" — Has issues to fix
 
 If issues:
 1. Help debug the problem
@@ -616,8 +704,12 @@ If issues:
 
 ## Step 15: Create Pull Request
 
-When user confirms working:
-> "Create pull request to merge to main? [y/n]"
+When user confirms working, use AskUserQuestion:
+- Question: "Create pull request to merge to main?"
+- Header: "PR"
+- Options:
+  - "Yes" — Push branch and create PR
+  - "No" — Keep branch, merge manually later
 
 If yes:
 ```bash
@@ -654,10 +746,18 @@ If no:
 
 ## Step 16: Capture Feedback
 
-> "Any feedback on the skill update process? [y/n]"
+Use AskUserQuestion:
+- Question: "Any feedback on the skill update process?"
+- Header: "Feedback"
+- Options:
+  - "No" — All good, done
+  - "Fix now" — Update something in the skill
+  - "Learn" — Save lesson for future runs
+  - "Both" — Fix now AND save lesson
 
-If yes:
-- Run `/to-jaan-learn-add to-jaan-skill-update "{feedback}"`
+- **Fix now**: Update skill files, re-validate
+- **Learn**: Run `/to-jaan-learn-add to-jaan-skill-update "{feedback}"`
+- **Both**: Do both
 
 ### v3.0.0 Migration Feedback (if Option 8 was used)
 

@@ -62,7 +62,13 @@ If the file exists, apply its lessons throughout this execution:
 
 {preview_description}
 
-> "Ready to proceed? [y/n]"
+Use AskUserQuestion:
+- Question: "Ready to proceed with generation?"
+- Header: "Proceed"
+- Options:
+  - "Yes" — Generate the output
+  - "No" — Cancel
+  - "Edit" — Let me revise the inputs first
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -83,8 +89,12 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 
-Show complete output and ask:
-> "Write to `{output_path}`? [y/n]"
+Show complete output and use AskUserQuestion:
+- Question: "Write to `{output_path}`?"
+- Header: "Write"
+- Options:
+  - "Yes" — Write the file
+  - "No" — Cancel
 
 ## Step 6: Write Output
 
@@ -96,14 +106,18 @@ If approved:
 
 ## Step 7: Capture Feedback
 
-> "Any feedback? [y/n]"
+Use AskUserQuestion:
+- Question: "Any feedback on the output?"
+- Header: "Feedback"
+- Options:
+  - "No" — All good, done
+  - "Fix now" — Update this output
+  - "Learn" — Save lesson for future runs
+  - "Both" — Fix now AND save lesson
 
-If yes:
-> "[1] Fix now  [2] Learn for future  [3] Both"
-
-- **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/to-jaan-learn-add {skill_name} "{feedback}"`
-- **Option 3**: Do both
+- **Fix now**: Update output, re-preview, re-write
+- **Learn**: Run `/to-jaan-learn-add {skill_name} "{feedback}"`
+- **Both**: Do both
 
 ---
 

@@ -67,7 +67,14 @@ Detect category from lesson keywords:
 | Workflow | workflow, process, step, order, "before/after" |
 | Common Mistakes | avoid, mistake, wrong, don't, never, "should not" |
 
-If unclear, ask: "Which category? [questions/edge-cases/workflow/mistakes]"
+If unclear, use AskUserQuestion:
+- Question: "Which category fits this lesson?"
+- Header: "Category"
+- Options:
+  - "Questions" — Better questions to ask during gathering
+  - "Edge Cases" — Special cases to check and handle
+  - "Workflow" — Process improvements
+  - "Mistakes" — Things to avoid
 
 ## Step 4: Read Current LEARN.md
 
@@ -91,8 +98,15 @@ Preview:
 - {existing lessons...}
 - {new lesson}  <-- NEW
 
-Confirm? [y/n/edit]
 ```
+
+Use AskUserQuestion:
+- Question: "Add this lesson?"
+- Header: "Confirm"
+- Options:
+  - "Yes" — Add the lesson
+  - "No" — Cancel
+  - "Edit" — Let me revise the lesson
 
 **Do NOT proceed without explicit approval.**
 
@@ -146,10 +160,12 @@ Lesson Added
 
 ## Step 7: Offer to Commit
 
-Ask user:
-```
-Commit this lesson? [y/n]
-```
+Use AskUserQuestion:
+- Question: "Commit this lesson?"
+- Header: "Commit"
+- Options:
+  - "Yes" — Stage and commit
+  - "No" — Save locally without committing
 
 **If confirmed:**
 1. Stage: `git add {file_path}`

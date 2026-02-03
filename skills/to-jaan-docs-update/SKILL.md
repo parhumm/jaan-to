@@ -147,19 +147,23 @@ If code exists but doc doesn't → Flag as MISSING
 
 ---
 
-What would you like to do?
-[1] Review stale docs one by one
-[2] Full audit (check everything)
-[3] Quick fix (update dates only)
-[4] Exit
 ```
+
+Use AskUserQuestion:
+- Question: "What would you like to do?"
+- Header: "Action"
+- Options:
+  - "Review" — Review stale docs one by one
+  - "Full audit" — Check everything in detail
+  - "Quick fix" — Update dates only
+  - "Exit" — Stop here
 
 **HARD STOP:** Wait for user choice.
 
-**Option 1:** For each stale doc, show side-by-side what changed in code, ask what to update.
-**Option 2:** Continue to PHASE 1 (full audit).
-**Option 3:** Just update `updated_date` in stale docs.
-**Option 4:** Stop.
+**Review:** For each stale doc, show side-by-side what changed in code, ask what to update.
+**Full audit:** Continue to PHASE 1 (full audit).
+**Quick fix:** Just update `updated_date` in stale docs.
+**Exit:** Stop.
 
 ---
 
@@ -211,7 +215,15 @@ Grep: "^>" in docs/**/*.md
 - Missing tagline: X files
 - Potential issues: X files
 
-Proceed with full audit? [yes/no/quick-fixes-only]
+```
+
+Use AskUserQuestion:
+- Question: "Proceed with full audit?"
+- Header: "Audit"
+- Options:
+  - "Yes" — Full audit of all docs
+  - "No" — Stop here
+  - "Quick fixes" — Fix frontmatter/dates only
 ```
 
 **If `--quick`:** Stop here.
@@ -319,8 +331,15 @@ Show audit report:
 
 ---
 
-Apply fixes? [yes/no/selective]
 ```
+
+Use AskUserQuestion:
+- Question: "Apply fixes from audit?"
+- Header: "Fix"
+- Options:
+  - "Yes" — Apply all fixes
+  - "No" — Report only
+  - "Selective" — Choose which fixes to apply
 
 **If `--check-only`:** Stop here.
 **Do NOT proceed without explicit approval.**
@@ -390,7 +409,12 @@ Update any references to moved file.
 
 ## Step 4.1: Commit Changes
 
-Ask: "Commit documentation updates? [y/n]"
+Use AskUserQuestion:
+- Question: "Commit documentation updates?"
+- Header: "Commit"
+- Options:
+  - "Yes" — Stage and commit changes
+  - "No" — Keep changes uncommitted
 
 If yes:
 ```bash

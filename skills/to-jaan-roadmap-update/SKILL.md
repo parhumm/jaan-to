@@ -209,8 +209,13 @@ Present validation report:
 # HARD STOP - Human Review Gate
 
 ### For smart-default:
-Show sync report.
-> "Found {n} items to update. Apply changes? [y/n/selective]"
+Show sync report. Then use AskUserQuestion:
+- Question: "Found {n} items to update. Apply changes?"
+- Header: "Apply"
+- Options:
+  - "Yes" — Apply all changes
+  - "No" — Cancel
+  - "Selective" — Choose which changes to apply
 
 ### For mark:
 ```
@@ -221,9 +226,14 @@ Phase:  {phase}
 Commit: {hash} — {commit message}
 
 Change: - [ ] {task} → - [x] {task} (`{hash}`)
-
-Confirm? [y/n]
 ```
+
+Use AskUserQuestion:
+- Question: "Mark this task as done?"
+- Header: "Mark"
+- Options:
+  - "Yes" — Mark task done with commit hash
+  - "No" — Cancel
 
 ### For release:
 ```
@@ -246,18 +256,35 @@ Full Atomic Operation:
 5. Commit: release: {version} — {summary}
 6. Tag: git tag {version}
 7. (Optional) Push: git push origin main --tags
-
-Proceed? [y/n/edit]
 ```
 
+Use AskUserQuestion:
+- Question: "Proceed with release {version}?"
+- Header: "Release"
+- Options:
+  - "Yes" — Execute full atomic release
+  - "No" — Cancel release
+  - "Edit" — Let me revise the drafts first
+
 ### For sync:
-Show comprehensive sync report.
-> "Apply {n} fixes? [y/n/selective]"
+Show comprehensive sync report. Then use AskUserQuestion:
+- Question: "Apply {n} fixes?"
+- Header: "Apply"
+- Options:
+  - "Yes" — Apply all fixes
+  - "No" — Cancel
+  - "Selective" — Choose which fixes to apply
 
 ### For validate:
-Show validation report.
-> "Fix {n} issues? [y/n/selective]" (if issues found)
-> "All checks passed." (if clean)
+Show validation report. If issues found, use AskUserQuestion:
+- Question: "Fix {n} issues?"
+- Header: "Fix"
+- Options:
+  - "Yes" — Fix all issues
+  - "No" — Report only
+  - "Selective" — Choose which issues to fix
+
+If clean: "All checks passed."
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -322,7 +349,12 @@ git tag {version}
 ```
 
 **4.7: Offer push**
-> "Push to remote with tags? [y/n]"
+Use AskUserQuestion:
+- Question: "Push to remote with tags?"
+- Header: "Push"
+- Options:
+  - "Yes" — Push commit and tags to origin
+  - "No" — Skip push (local only)
 
 ### For validate (with fixes):
 
