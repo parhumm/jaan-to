@@ -78,12 +78,7 @@ After receiving answers, mentally outline:
 
 Before generating the PRD, confirm with the user:
 
-Use AskUserQuestion to ask the user:
-- Question: "Ready to generate the PRD for '{initiative}'?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the PRD
-  - "No" — Cancel and start over
+> "I have all the information needed. Ready to generate the PRD for '{initiative}'? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -133,12 +128,7 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 Show the complete PRD and ask:
-Use AskUserQuestion:
-- Question: "Write PRD to `$JAAN_OUTPUTS_DIR/pm/{slug}/prd.md`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel
+> "Here's the PRD preview. Write to `$JAAN_OUTPUTS_DIR/pm/{slug}/prd.md`? [y/n]"
 
 ## Step 6: Write Output
 If approved:
@@ -179,28 +169,32 @@ Gherkin acceptance criteria, and edge case mapping.
 
 ## Step 8: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the PRD?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this PRD
-  - "Learn" — Save lesson for future PRDs
-  - "Both" — Fix now AND save lesson
+After PRD is written, ask:
+> "Any feedback or improvements needed? [y/n]"
 
-**Fix now:**
-- Ask: "What should be improved?" (text response)
+**If yes:**
+1. Ask: "What should be improved?"
+2. Offer options:
+   > "How should I handle this?
+   > [1] Fix now - Update this PRD
+   > [2] Learn - Save for future PRDs
+   > [3] Both - Fix now AND save lesson"
+
+**Option 1 - Fix now:**
 - Apply the feedback to the current PRD
 - Re-run Step 5 (Preview & Approval) with updated content
 - Write the updated PRD
 
-**Learn:**
+**Option 2 - Learn for future:**
 - Run: `/to-jaan-learn-add jaan-to-pm-prd-write "{feedback}"`
 - Follow /to-jaan-learn-add workflow (categorize → preview → commit)
 
-**Both:**
-- First: Apply fix to current PRD
-- Then: Run `/to-jaan-learn-add`
+**Option 3 - Both:**
+- First: Apply fix to current PRD (Option 1)
+- Then: Run `/to-jaan-learn-add` (Option 2)
+
+**If no:**
+- PRD workflow complete
 
 ---
 

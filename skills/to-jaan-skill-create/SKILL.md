@@ -63,24 +63,13 @@ Before any creation, check for existing skills:
 
 3. **Decision tree**:
    - **Exact match exists**: "Skill '{name}' already does this. Use: `/{command}` [show example]"
-   - **>70% overlap**: Use AskUserQuestion:
-     - Question: "'{name}' is similar ({n}% overlap). Update it instead?"
-     - Header: "Overlap"
-     - Options:
-       - "Update" — Invoke `/to-jaan-skill-update {name}`
-       - "New" — Continue creating a new skill
+   - **>70% overlap**: "'{name}' is similar ({n}% overlap). Update it instead? [update/new]"
      - If update: Invoke `/to-jaan-skill-update {name}`
      - If new: Continue with creation
    - **<70% overlap**: Continue with creation
 
 4. **Fast-track option** for simple skills:
-
-   Use AskUserQuestion:
-   - Question: "This seems straightforward. Create minimal skill directly?"
-   - Header: "Fast-track"
-   - Options:
-     - "Yes" — Create minimal skill without full wizard
-     - "Wizard" — Go through full step-by-step process
+   > "This seems straightforward. Create minimal skill directly? [y/wizard]"
 
    Skip wizard for:
    - Single-purpose skills with obvious structure
@@ -219,13 +208,8 @@ Show research-based suggestions, then ask:
 2. "What files/outputs does it produce?"
    - [Suggested from templates]: {format} file with {sections}
 
-3. Use AskUserQuestion for output format:
-   - Question: "What output format?"
-   - Header: "Format"
-   - Options:
-     - "Markdown" — Standard .md output file
-     - "JSON" — Structured .json output file
-     - "Both" — Markdown + JSON output
+3. "What format? (markdown/json/both)"
+   - Determines template.md creation
 
 ## Step 5: Questions, Quality & Done
 
@@ -235,23 +219,13 @@ Present research-based suggestions, let user accept/modify/add:
    - [Pre-filled from research]:
      - {research_question1}
      - {research_question2}
-   - Use AskUserQuestion:
-     - Question: "Accept these questions or edit them?"
-     - Header: "Questions"
-     - Options:
-       - "Accept" — Use as-is
-       - "Edit" — Let me modify the list
+   - "Add more or modify? [accept/edit]"
 
 2. "What quality checks before writing?"
    - [Pre-filled from research]:
      - [ ] {research_check1}
      - [ ] {research_check2}
-   - Use AskUserQuestion:
-     - Question: "Accept these quality checks or edit them?"
-     - Header: "Checks"
-     - Options:
-       - "Accept" — Use as-is
-       - "Edit" — Let me modify the list
+   - "Add more or modify? [accept/edit]"
 
 3. "What defines 'done' for this skill?"
    - [Suggested]:
@@ -291,13 +265,7 @@ WILL ALSO
 □ Commit to branch skill/{name}
 ```
 
-Use AskUserQuestion to ask the user:
-- Question: "Create this skill?"
-- Header: "Create"
-- Options:
-  - "Yes" — Proceed with skill generation
-  - "No" — Cancel and start over
-  - "Edit" — Let me revise the plan first
+> "Create this skill? [y/n/edit]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -328,21 +296,10 @@ Use template from `$JAAN_TEMPLATES_DIR/to-jaan-skill-create.template.md`:
    - Context Files from gathered info
    - Input handling from Step 4
    - Phase 1 questions from Step 5
-   - HARD STOP section (**must use AskUserQuestion** — not text prompt)
+   - HARD STOP section
    - Phase 2 generation steps
-   - Preview & Approval step (**must use AskUserQuestion** — not text prompt)
    - Quality checks from Step 5
-   - Feedback section (**must use AskUserQuestion** with 3-4 options)
    - Definition of Done from Step 5
-
-3. **AskUserQuestion rules for generated skills:**
-   - For each question from Step 5: determine if it has fixed options (2-4 → AskUserQuestion) or needs free text (→ text prompt)
-   - HARD STOP: always AskUserQuestion with Yes/No/Edit options
-   - Preview approval: always AskUserQuestion with Yes/No options
-   - Feedback capture: always AskUserQuestion with No/Fix now/Learn/Both options
-   - Menus with 5+ options: keep as text or split into 2-step AskUserQuestion
-   - Open-ended questions: always text prompt
-   - See `docs/extending/create-skill.md` "User Interaction Patterns" section for full reference
 
 ## Step 8: Generate LEARN.md (Plugin Source)
 
@@ -411,14 +368,6 @@ Check against `jaan-to/docs/create-skill.md`:
 - [ ] Has `# PHASE 2: Generation`
 - [ ] Has `## Definition of Done`
 
-**AskUserQuestion Usage**:
-- [ ] HARD STOP uses AskUserQuestion (not text prompt)
-- [ ] Preview approval uses AskUserQuestion (not text prompt)
-- [ ] Feedback section uses AskUserQuestion with 3-4 options
-- [ ] Structured choices (2-4 options) use AskUserQuestion
-- [ ] Open-ended questions use text prompts
-- [ ] No `> "...? [y/n]"` patterns remain for structured choices
-
 **Trust**:
 - [ ] Tool permissions are sandboxed (not `Write(*)`)
 - [ ] Has human approval checks
@@ -432,12 +381,7 @@ Show complete content of:
 2. LEARN.md
 3. template.md (if created)
 
-Use AskUserQuestion:
-- Question: "Write these files?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write all files
-  - "No" — Cancel
+> "Write these files? [y/n]"
 
 ## Step 12: Write Files (v3.0.0-Compliant)
 
@@ -538,12 +482,8 @@ Standard tech.md anchors:
 
 1. Generate slug from title: lowercase, hyphens, no special chars
 2. Construct path: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
-3. Ask for approval using AskUserQuestion:
-   - Question: "Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`?"
-   - Header: "Write"
-   - Options:
-     - "Yes" — Write the file
-     - "No" — Cancel
+3. Ask for approval:
+   > "Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`? [y/n]"
 4. If approved:
    - Create directory: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
    - Write file: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`
@@ -791,12 +731,7 @@ This checks for:
 > /jaan-to-pm-prd-write "Add user authentication with OAuth support"
 > ```
 >
-Use AskUserQuestion:
-- Question: "Did the skill work correctly?"
-- Header: "Test"
-- Options:
-  - "Yes" — Works as expected
-  - "No" — Has issues to fix
+> "Did it work correctly? [y/n]"
 
 If issues:
 1. Help debug the problem
@@ -806,12 +741,8 @@ If issues:
 
 ## Step 19: Create Pull Request
 
-When user confirms working, use AskUserQuestion:
-- Question: "Create pull request to merge to main?"
-- Header: "PR"
-- Options:
-  - "Yes" — Push branch and create PR
-  - "No" — Keep branch, merge manually later
+When user confirms working:
+> "Create pull request to merge to main? [y/n]"
 
 If yes:
 ```bash
@@ -853,18 +784,10 @@ If no:
 
 ## Step 20: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the skill creation process?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update something in the skill
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback on the skill creation process? [y/n]"
 
-- **Fix now**: Update skill files, re-validate
-- **Learn**: Run `/to-jaan-learn-add to-jaan-skill-create "{feedback}"`
-- **Both**: Do both
+If yes:
+- Run `/to-jaan-learn-add to-jaan-skill-create "{feedback}"`
 
 ---
 

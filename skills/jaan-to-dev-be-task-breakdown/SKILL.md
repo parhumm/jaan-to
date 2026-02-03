@@ -5,7 +5,7 @@ description: |
   idempotency patterns, reliability considerations, and error taxonomy.
   Auto-triggers on: backend tasks, task breakdown, be tasks, dev task list, break down PRD
   Maps to: dev:be-task-breakdown
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, AskUserQuestion
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task
 argument-hint: [prd-path] OR [feature-description]
 ---
 
@@ -111,13 +111,10 @@ Unknown:   {areas needing clarification}
 Ask up to 5 smart questions based on what's unclear from Step 1. Skip questions already answered by the input or tech.md.
 
 **Slicing strategy** (always ask):
-1. Use AskUserQuestion:
-   - Question: "What task breakdown approach?"
-   - Header: "Slicing"
-   - Options:
-     - "Vertical" — Each task delivers complete functionality through all layers (recommended)
-     - "Horizontal" — Separate by layer (migrations, models, controllers)
-     - "Hybrid" — Foundation layer + vertical feature slices
+1. > "What task breakdown approach?
+   > [1] Vertical — Each task delivers complete functionality through all layers (recommended)
+   > [2] Horizontal — Separate by layer (migrations, models, controllers)
+   > [3] Hybrid — Foundation layer + vertical feature slices"
 
 **Framework questions** (ask if tech.md unavailable):
 2. "What backend framework?" — only if not in tech.md
@@ -481,13 +478,7 @@ VALIDATION
 ✗ Anti-pattern: {any warnings flagged}
 ```
 
-Use AskUserQuestion:
-- Question: "Proceed with generating the full task breakdown?"
-- Header: "Generate"
-- Options:
-  - "Yes" — Generate the full task breakdown document
-  - "No" — Cancel
-  - "Edit" — Let me revise the plan first (scope, entities, or tasks)
+> "Proceed with generating the full task breakdown? [y/n/edit]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -724,12 +715,7 @@ If any check fails, fix before preview.
 
 Show the complete task breakdown document.
 
-Use AskUserQuestion:
-- Question: "Write to `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the file
-  - "No" — Cancel
+> "Here's the task breakdown preview. Write to `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`? [y/n]"
 
 ## Step 10: Write Output
 
@@ -748,18 +734,19 @@ If approved:
 
 ## Step 12: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on the task breakdown?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update something in the breakdown
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback or improvements needed? [y/n]"
 
-- **Fix now**: Update the output file, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add jaan-to-dev-be-task-breakdown "{feedback}"`
-- **Both**: Do both
+**If yes:**
+1. Ask: "What should be improved?"
+2. Offer options:
+   > "How should I handle this?
+   > [1] Fix now - Update the breakdown
+   > [2] Learn - Save for future runs
+   > [3] Both - Fix now AND save lesson"
+
+- **Option 1 - Fix now**: Update the output file, re-preview, re-write
+- **Option 2 - Learn**: Run `/to-jaan-learn-add jaan-to-dev-be-task-breakdown "{feedback}"`
+- **Option 3 - Both**: Do both
 
 ---
 

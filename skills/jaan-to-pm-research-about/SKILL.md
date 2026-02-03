@@ -102,43 +102,32 @@ If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topi
 
 **If topic is unclear or broad, ask 3-5 clarifying questions.**
 
-Use a single AskUserQuestion call with these 4 questions:
+Each question offers **3 options + 1 recommendation**:
 
-1. Question: "What's your primary goal?"
-   Header: "Goal"
-   Options:
-   - "Learning" — Understand fundamentals and concepts
-   - "Implementation" — Ready-to-use patterns and code
-   - "Comparison" — Evaluate alternatives side by side
-
-2. Question: "What depth level?"
-   Header: "Depth"
-   Options:
-   - "Overview" — High-level concepts only
-   - "Intermediate" — Patterns and practices (recommended)
-   - "Advanced" — Internals and edge cases
-
-3. Question: "What's the context?"
-   Header: "Context"
-   Options:
-   - "New project" — Starting fresh
-   - "Existing codebase" — Migration or integration
-   - "General knowledge" — No specific project
-
-4. Question: "Which aspect matters most?"
-   Header: "Aspect"
-   Options:
-   - "Performance" — Speed, efficiency, optimization
-   - "Developer experience" — Ergonomics, tooling, DX
-   - "Ecosystem" — Community, libraries, support
-
-Then use a separate AskUserQuestion:
-- Question: "Include comparisons with alternatives?"
-- Header: "Compare"
-- Options:
-  - "Yes" — Full comparison with {X} and {Y}
-  - "Brief" — Brief mentions only
-  - "No" — Skip comparisons
+> **Q1: What's your primary goal?**
+> - [A] Learning fundamentals ← *Recommended for beginners*
+> - [B] Implementation guide
+> - [C] Comparison with alternatives
+>
+> **Q2: What depth level?**
+> - [A] Overview (high-level concepts)
+> - [B] Intermediate (patterns & practices) ← *Recommended*
+> - [C] Advanced (internals & edge cases)
+>
+> **Q3: What's the context?**
+> - [A] New project
+> - [B] Existing codebase ← *Recommended if migration mentioned*
+> - [C] General knowledge
+>
+> **Q4: Which aspect matters most?**
+> - [A] Performance
+> - [B] Developer experience ← *Recommended*
+> - [C] Ecosystem & community
+>
+> **Q5: Include comparisons?**
+> - [A] Yes, with {X} and {Y} ← *Recommended*
+> - [B] Brief mentions only
+> - [C] No comparisons needed
 
 **Skip questions if:**
 - Topic is already specific (e.g., "Claude Code hooks for pre-commit validation")
@@ -151,19 +140,17 @@ Then use a separate AskUserQuestion:
 
 ## Step 1.5: Choose Research Size
 
-Use AskUserQuestion:
-- Question: "How comprehensive should the research be?"
-- Header: "Size"
-- Options:
-  - "Quick (~20 sources)" — 3 agents, best for simple topics or quick overviews
-  - "Standard (~60 sources)" — 7 agents, solid research (recommended)
-  - "Deep (~100 sources)" — 10 agents, comprehensive coverage
-  - "Other" — Specify custom size (Extensive ~200 or Exhaustive ~500)
+> **How comprehensive should the research be?**
+>
+> | Size | Sources | Agents | Best For |
+> |------|---------|--------|----------|
+> | [A] Quick (20) | ~20 sources | 3 agents | Quick overview ← *Recommended for simple topics* |
+> | [B] Standard (60) | ~60 sources | 7 agents | Solid research ← *Recommended* |
+> | [C] Deep (100) | ~100 sources | 10 agents | Comprehensive coverage |
+> | [D] Extensive (200) | ~200 sources | 14 agents | In-depth analysis |
+> | [E] Exhaustive (500) | ~500 sources | 29 agents | Maximum coverage |
 
-If "Other" selected, ask (text response expected):
-> "How many sources? Options: 200 (Extensive, 14 agents) or 500 (Exhaustive, 29 agents)"
-
-**Default**: Standard (60) if user doesn't specify.
+**Default**: Standard (60) if user doesn't specify or just presses enter.
 
 **Agent Capacity:**
 ```
@@ -195,15 +182,15 @@ If "Other" selected, ask (text response expected):
 
 ## Step 1.6: Choose Approval Mode
 
-Use AskUserQuestion:
-- Question: "How much oversight do you want during research?"
-- Header: "Oversight"
-- Options:
-  - "Auto" — Run all waves automatically, show final document only (fastest)
-  - "Summary" — Brief progress after each wave, no approval needed
-  - "Interactive" — Ask for approval at each major step (default)
+> **How much oversight do you want?**
+>
+> | Mode | Description |
+> |------|-------------|
+> | [A] Auto | Run all waves automatically, show final document only ← *Faster* |
+> | [B] Summary | Show brief progress after each wave, no approval needed |
+> | [C] Interactive | Ask for approval at each major step ← *Default* |
 
-**Default**: Interactive if user doesn't specify.
+**Default**: Interactive (C) if user doesn't specify.
 
 **Mode Behaviors:**
 
@@ -692,12 +679,7 @@ WILL CREATE
 □ Update jaan-to/outputs/research/README.md
 ```
 
-Use AskUserQuestion:
-- Question: "Generate full research document?"
-- Header: "Generate"
-- Options:
-  - "Yes" — Proceed with document generation
-  - "No" — Cancel
+> "Generate full research document? [y/n]"
 
 **Do NOT proceed to Phase 4 without explicit approval.**
 
@@ -738,12 +720,7 @@ If any check fails, revise before preview.
 
 **If `{approval_mode}` = Interactive:**
 - Show complete document
-- Use AskUserQuestion:
-  - Question: "Write to `$JAAN_OUTPUTS_DIR/research/{filename}`?"
-  - Header: "Write"
-  - Options:
-    - "Yes" — Write the research document
-    - "No" — Cancel
+- Ask: > "Write to `$JAAN_OUTPUTS_DIR/research/{filename}`? [y/n]"
 
 ## Step 10: Write Output
 
@@ -813,18 +790,10 @@ README.md updated with new entry.
 
 ## Step 14: Capture Feedback
 
-Use AskUserQuestion:
-- Question: "Any feedback on this research?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update this output
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback on this research? [y/n]"
 
-- **Fix now**: Update output, re-preview, re-write
-- **Learn**: Run `/to-jaan-learn-add jaan-to-pm-research-about "{feedback}"`
-- **Both**: Do both
+If yes:
+- Run `/to-jaan-learn-add jaan-to-pm-research-about "{feedback}"`
 
 ---
 
@@ -892,12 +861,7 @@ WILL MODIFY:
 □ jaan-to/outputs/research/{filename} (if URL: create new file)
 ```
 
-Use AskUserQuestion:
-- Question: "Proceed with adding to index?"
-- Header: "Add"
-- Options:
-  - "Yes" — Add to research index
-  - "No" — Cancel
+> "Proceed with adding to index? [y/n]"
 
 Do NOT proceed without approval.
 
@@ -954,18 +918,9 @@ Files modified:
 - jaan-to/outputs/research/{filename} (if URL)
 ```
 
-Use AskUserQuestion:
-- Question: "Any feedback on this indexing?"
-- Header: "Feedback"
-- Options:
-  - "No" — All good, done
-  - "Fix now" — Update the index entry
-  - "Learn" — Save lesson for future runs
-  - "Both" — Fix now AND save lesson
+> "Any feedback? [y/n]"
 
-- **Fix now**: Update index entry
-- **Learn**: Run `/to-jaan-learn-add jaan-to-pm-research-about "{feedback}"`
-- **Both**: Do both
+If yes: Run `/to-jaan-learn-add jaan-to-pm-research-about "{feedback}"`
 
 ---
 

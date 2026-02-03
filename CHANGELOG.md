@@ -5,6 +5,29 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.8.0] - 2026-02-03
+
+### Removed
+- **AskUserQuestion from all skills** — Reverted to simple text-based prompts for better
+  compatibility and simpler skill implementation
+  - Removed AskUserQuestion documentation from [docs/extending/create-skill.md](docs/extending/create-skill.md)
+  - Removed AskUserQuestion conversion option from `/to-jaan-skill-update` tool
+  - All skills now use clean text prompts instead of structured question blocks
+
+### Changed
+- **All 16 skills now use text prompts** instead of AskUserQuestion API:
+  - **Simple prompts**: `> "Ready? [y/n]"`
+  - **Multiple choice**: `> "[1] Option A\n[2] Option B"`
+  - **Conditional**: `> "Confirm? [y/n/edit]"`
+  - Affected skills: `jaan-to-data-gtm-datalayer`, `jaan-to-pm-prd-write`,
+    `jaan-to-pm-research-about`, `jaan-to-pm-story-write`, `jaan-to-dev-be-task-breakdown`,
+    `jaan-to-ux-heatmap-analyze`, `jaan-to-dev-stack-detect`, `to-jaan-docs-create`,
+    `to-jaan-docs-update`, `to-jaan-learn-add`, `to-jaan-roadmap-add`,
+    `to-jaan-roadmap-update`, `to-jaan-skill-create`, `to-jaan-skill-update`,
+    and skill creation template
+
+---
+
 ## [3.7.0] - 2026-02-03
 
 ### Added

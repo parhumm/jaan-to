@@ -69,12 +69,7 @@ Analyze user input to understand their actual need:
 
 **If input is clear** (high confidence):
 - Auto-select type
-- Use AskUserQuestion:
-  - Question: "I recommend **{type}** documentation. {reasoning}."
-  - Header: "Type"
-  - Options:
-    - "Yes" — Use recommended type
-    - "Other" — Let me specify a different type
+- Confirm: "I recommend **{type}** documentation for this. Here's why: {reasoning}. Proceed? [y/n/other]"
 
 **If input is unclear** (ambiguous signals):
 - Ask up to 5 smart clarifying questions tailored to the specific ambiguity
@@ -111,17 +106,7 @@ After determining type, ask for name if not provided:
 | concept | `docs/{name}.md` |
 | index | `docs/{section}/README.md` |
 
-For skill type, use AskUserQuestion:
-- Question: "Which role does this skill belong to?"
-- Header: "Role"
-- Options:
-  - "pm" — Product Management
-  - "dev" — Development / Engineering
-  - "data" — Data / Analytics
-  - "Other" — Specify role (qa, ux, core, devops, etc.)
-
-If "Other" selected, ask (text response expected):
-> "Which role? (qa, ux, core, devops, etc.)"
+For skill type, ask: "Which role? [pm/dev/qa/ux/data/core]"
 
 ## Step 3: Check for Duplicates
 
@@ -131,13 +116,8 @@ Glob: docs/**/*{name}*.md
 Grep: "{name}" in docs/
 ```
 
-If potential duplicate found, use AskUserQuestion:
-- Question: "Similar doc exists: `{path}`. What would you like to do?"
-- Header: "Duplicate"
-- Options:
-  - "Proceed" — Create new doc anyway
-  - "Update" — Update existing doc instead
-  - "Cancel" — Stop, don't create
+If potential duplicate found:
+> "Similar doc exists: `{path}`. Options: [proceed/update-existing/cancel]"
 
 ## Step 4: Read STYLE.md
 
@@ -185,15 +165,9 @@ Ready to Create Documentation
 
 ## Content Preview:
 {first 20 lines of content}
-```
 
-Use AskUserQuestion:
-- Question: "Proceed with documentation creation?"
-- Header: "Proceed"
-- Options:
-  - "Yes" — Generate the documentation
-  - "No" — Cancel
-  - "Edit" — Let me revise the content first
+Proceed? [y/n/edit]
+```
 
 **Do NOT proceed without explicit approval.**
 
@@ -241,12 +215,8 @@ If validation fails, fix before proceeding.
 
 ## Step 10: Preview & Write
 
-Show full preview and use AskUserQuestion:
-- Question: "Write to `{path}`?"
-- Header: "Write"
-- Options:
-  - "Yes" — Write the documentation file
-  - "No" — Cancel
+Show full preview and ask:
+> "Write to `{path}`? [y/n]"
 
 If approved, write file.
 
@@ -269,16 +239,11 @@ Show confirmation:
 
 **File:** {path}
 **Commit:** {hash}
+
+Run `/to-jaan-docs-update` to check related docs? [y/n]
 ```
 
-Use AskUserQuestion:
-- Question: "Run `/to-jaan-docs-update` to check related docs?"
-- Header: "Follow-up"
-- Options:
-  - "Yes" — Run quick audit on related docs
-  - "No" — Done, skip follow-up
-
-If "Yes", run `/to-jaan-docs-update --quick` for related docs.
+If yes, suggest running `/to-jaan-docs-update --quick` for related docs.
 
 ---
 
