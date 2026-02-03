@@ -5,6 +5,20 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.6.0] - 2026-02-03
+
+### Changed
+- **`/jaan-to-ux-heatmap-analyze` output restructured** — Report format shifted from
+  research paper to action brief: insightful, practical, actionable
+  - "Executive Summary" (narrative) → **Action Summary** (bullets only)
+  - "Findings" (by severity) + "Recommendations" (separate table) → **Findings & Actions**
+    (self-contained cards with Insight, Do this, ICE score, Evidence)
+  - New **Test Ideas** section: A/B test and UX research suggestions derived from findings
+  - Methodology + Metadata sections collapsed to single-line footer blockquote
+  - 4 new quality checks: action bullets, insight lines, concrete actions, test ideas (`921a3f5`)
+
+---
+
 ## [3.5.0] - 2026-02-03
 
 ### Added
@@ -344,6 +358,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.6.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.6.0
 [3.5.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.5.0
 [3.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.4.0
 [3.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.3.0

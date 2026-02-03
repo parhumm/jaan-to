@@ -132,7 +132,7 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ---
 
-### v3.4.0 — Skill Compliance and Roadmap Integration
+### v3.4.0 — Skill Compliance and Roadmap Integration (`defa7d1`)
 
 - Specification compliance fixes for `/to-jaan-skill-update` and `/to-jaan-skill-create`: H1 logical names, broken path refs, AskUserQuestion conversion, step numbering, template v3.0.0 syntax (`426fcc1`)
 - `/to-jaan-skill-create` and `/to-jaan-skill-update` now auto-invoke `/to-jaan-roadmap-update` at end of workflow (`6400541`)
@@ -141,9 +141,20 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 - Fixed stale path references (`206dcfd`)
 - Roadmap synced: v3.3.0 section created (`04c958b`)
 
-### v3.5.0 — PRD-to-Story Pipeline
+### v3.5.0 — PRD-to-Story Pipeline (`be6e022`)
 
 - `/jaan-to-pm-prd-write` now auto-invokes `/jaan-to-pm-story-write` after PRD generation, letting users expand one-liner stories into full detailed user stories with INVEST validation and Gherkin ACs (`90d67c3`)
+
+---
+
+### v3.6.0 — Actionable Heatmap Reports
+
+- `/jaan-to-ux-heatmap-analyze` output restructured: research paper → action brief (`921a3f5`)
+  - Action Summary (bullets) replaces Executive Summary (narrative)
+  - Findings & Actions merge findings + recommendations into self-contained cards with Insight + Do this + ICE + Evidence
+  - New Test Ideas section: A/B tests and UX research suggestions derived from findings
+  - Methodology/Metadata collapsed to footer blockquote
+  - 4 new quality checks (action bullets, insight lines, concrete actions, test ideas)
 
 ---
 
