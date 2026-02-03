@@ -208,9 +208,9 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ---
 
-## Unreleased
+## v3.11.0 — QA Test Case Generation (`3f1a8a7`)
 
-- **New skill**: `/jaan-to-qa-test-cases` — Generate production-ready BDD/Gherkin test cases from acceptance criteria (`3f1a8a7`)
+- **New skill**: `/jaan-to-qa-test-cases` — Generate production-ready BDD/Gherkin test cases from acceptance criteria
   - ISTQB test design techniques: Equivalence Partitioning, Boundary Value Analysis (3-value BVA), edge case taxonomy
   - Minimum 10 tests per AC (3 positive + 3 negative + 2 boundary + 2 edge case)
   - 5 priority edge case categories based on production defect frequency (Empty/Null 32%, Boundary 28%, Error 22%, Concurrent 12%, State 6%)
@@ -221,6 +221,12 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
   - Auxiliary quality checklist file with anti-patterns and coverage analysis
   - Two-phase workflow with systematic test design and human approval gate
   - Research-informed (880-line methodology guide)
+
+---
+
+## Unreleased
+
+(none)
 
 ---
 

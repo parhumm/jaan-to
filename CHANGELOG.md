@@ -5,6 +5,23 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.11.0] - 2026-02-03
+
+### Added
+- **`/jaan-to-qa-test-cases` skill** — Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB methodology (`3f1a8a7`)
+  - ISTQB test design techniques: Equivalence Partitioning, Boundary Value Analysis (3-value BVA), and edge case taxonomy
+  - Minimum 10 tests per acceptance criterion (3 positive + 3 negative + 2 boundary + 2 edge case)
+  - 5 priority edge case categories based on production defect frequency: Empty/Null States (32%), Boundary Values (28%), Error Conditions (22%), Concurrent Operations (12%), State Transitions (6%)
+  - 4 input modes: direct AC text, PRD file path, Jira ID (via MCP), or interactive wizard
+  - Concrete test data (no placeholders) with standard test data library for reproducible scenarios
+  - Quality validation: 10-point peer review checklist + 100-point scoring rubric (6 dimensions)
+  - ISTQB conversion notes for traditional test management tools (Xray, TestRail, Azure DevOps)
+  - Auxiliary quality checklist file with anti-patterns reference and coverage sufficiency analysis
+  - Two-phase workflow with systematic test design techniques and human approval gate
+  - Research-informed: 880-line methodology guide ([50-qa-test-cases.md](jaan-to/outputs/research/50-qa-test-cases.md))
+
+---
+
 ## [3.10.0] - 2026-02-03
 
 ### Added
