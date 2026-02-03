@@ -1,6 +1,6 @@
 # jaan.to Roadmap
 
-> See [vision-jaan-to.md](vision-jaan-to.md) for philosophy and concepts
+> See [vision.md](vision.md) for philosophy and concepts
 
 ---
 
