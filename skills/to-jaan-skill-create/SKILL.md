@@ -8,7 +8,7 @@ allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/*
 argument-hint: [optional-skill-idea]
 ---
 
-# to-jaan-skill-create
+# skill:create
 
 > Guide users through creating new jaan.to skills with web research and best practices.
 
@@ -851,7 +851,7 @@ If no:
 
 ---
 
-## Step 18: Capture Feedback
+## Step 20: Capture Feedback
 
 Use AskUserQuestion:
 - Question: "Any feedback on the skill creation process?"

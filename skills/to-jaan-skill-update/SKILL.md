@@ -8,13 +8,13 @@ allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/*
 argument-hint: [skill-name]
 ---
 
-# to-jaan-skill-update
+# skill:update
 
 > Update existing jaan.to skills with specification compliance and documentation sync.
 
 ## Context Files
 
-- `jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
+- `docs/extending/create-skill.md` - Skill specification (REQUIRED)
 - `$JAAN_LEARN_DIR/to-jaan-skill-update.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/config.md` - Current skill catalog
 
@@ -406,10 +406,14 @@ Based on selected option, plan specific changes:
 
 Detected v2.x patterns. Choose migration approach:
 
-> [1] **Auto-fix all** — Apply all v3.0.0 patterns automatically
-> [2] **Interactive** — Review each change before applying
-> [3] **Manual script** — Generate `scripts/lib/v3-autofix.sh` for user to run
-> [4] **Guidance only** — Show what needs fixing, don't auto-apply
+Use AskUserQuestion to ask the user:
+- Question: "Choose migration approach:"
+- Header: "Migrate"
+- Options:
+  - "Auto-fix all" — Apply all v3.0.0 patterns automatically
+  - "Interactive" — Review each change before applying
+  - "Manual script" — Generate `scripts/lib/v3-autofix.sh` for user to run
+  - "Guidance only" — Show what needs fixing, don't auto-apply
 
 #### Option 8.1: Auto-Fix All
 
