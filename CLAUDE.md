@@ -135,6 +135,7 @@ Every version bump MUST be a single atomic operation:
 | `/to-jaan-docs-create` | Create documentation |
 | `/to-jaan-docs-update` | Audit documentation |
 | `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
+| `/to-jaan-roadmap-update` | Maintain and sync roadmap |
 
 ---
 
