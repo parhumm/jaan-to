@@ -77,7 +77,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/plan/{slug}/tech-plan.md`
 
-### /jaan-to-dev-be-task-breakdown
+### ✅ /jaan-to-dev-be-task-breakdown
 
 - **Logical**: `dev:be-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
@@ -134,7 +134,7 @@ flowchart TD
 - **Input**: [api]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/versioning-plan.md`
 
-### /jaan-to-dev-fe-task-breakdown
+### ✅ /jaan-to-dev-fe-task-breakdown
 
 - **Logical**: `dev:fe-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies
@@ -251,7 +251,7 @@ flowchart TD
 - **Failure Modes**: Documentation stale; inconsistent formatting; missing context
 - **Quality Gates**: Up-to-date with code; follows style guide; onboarding-friendly
 
-### /jaan-to-dev-pr-review
+### ✅ /jaan-to-dev-pr-review
 
 - **Logical**: `dev:pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
