@@ -64,6 +64,10 @@
 - [x] Clean plugin installation — exclude non-essential files; `scripts/build-dist.sh` produces clean distribution
 - [x] Store jaan.to output files in `jaan-to/` inside the target project; bootstrap seeds context, templates, learn, docs
 - [x] End-to-end plugin install testing — `scripts/verify-install.sh` validates all bootstrap artifacts
+- [x] **Meta-skills v3.0.0 support** — Updated `/to-jaan-skill-create` and `/to-jaan-skill-update` for full v3.0.0 customization system:
+  - `/to-jaan-skill-create`: 8 components updated (frontmatter, context awareness, Step 12 expansion ~250 lines, tech integration, validation requirement, template.md v3.0.0 patterns)
+  - `/to-jaan-skill-update`: Added v3.0.0 validation (7 compliance checks), migration wizard (4 migration options: auto-fix, interactive, script, guidance), auto-fix script (`scripts/lib/v3-autofix.sh`)
+  - `docs/extending/create-skill.md`: Comprehensive v3.0.0 documentation (~1300 lines, up from 661) with configuration system, template variables (4 types), tech stack integration, learning merge strategy, migration checklist, updated examples
 
 ## Phase 3: Development Workflow
 

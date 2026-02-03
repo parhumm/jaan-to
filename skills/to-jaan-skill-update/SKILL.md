@@ -137,6 +137,157 @@ SPECIFICATION COMPLIANCE
 ✓ Trust: sandboxed
 ```
 
+## Step 2.1: v3.0.0 Compliance Check
+
+Check the skill for v3.0.0 customization system compatibility:
+
+### V3.1: Frontmatter Permissions Use Environment Variables
+
+Check `allowed-tools` field:
+
+```yaml
+# ✓ v3.0.0 compliant
+allowed-tools: Write($JAAN_OUTPUTS_DIR/{role}/**), Read($JAAN_CONTEXT_DIR/**)
+
+# ✗ v2.x pattern (hardcoded)
+allowed-tools: Write(jaan-to/outputs/{role}/**), Read(jaan-to/context/**)
+```
+
+**Detection**: Search SKILL.md for hardcoded `jaan-to/` paths in frontmatter.
+
+**Status**:
+- [ ] ✓ All paths use `$JAAN_*` variables
+- [ ] ✗ Has hardcoded `jaan-to/` paths (v2.x pattern)
+
+### V3.2: Context Files Section Uses Environment Variables
+
+Check `## Context Files` section references:
+
+```markdown
+# ✓ v3.0.0 compliant
+- `$JAAN_CONTEXT_DIR/config.md` - Configuration
+- `$JAAN_TEMPLATES_DIR/{name}.template.md` - Template
+- `$JAAN_LEARN_DIR/{name}.learn.md` - Lessons
+
+# ✗ v2.x pattern (hardcoded)
+- `jaan-to/context/config.md` - Configuration
+- `skills/{name}/template.md` - Template
+- `jaan-to/learn/{name}.learn.md` - Lessons
+```
+
+**Detection**: Grep for `jaan-to/` in Context Files section.
+
+**Status**:
+- [ ] ✓ All context paths use `$JAAN_*` variables
+- [ ] ✗ Has hardcoded paths
+
+### V3.3: Pre-Execution Uses Learning Directory Variable
+
+Check Pre-Execution / Step 0 section:
+
+```markdown
+# ✓ v3.0.0 compliant
+Read: `$JAAN_LEARN_DIR/{name}.learn.md`
+
+# ✗ v2.x pattern
+Read: `jaan-to/learn/{name}.learn.md`
+```
+
+**Detection**: Check Pre-Execution and Step 0 for learning file references.
+
+**Status**:
+- [ ] ✓ Uses `$JAAN_LEARN_DIR`
+- [ ] ✗ Uses hardcoded path
+
+### V3.4: Template References Use Template Directory Variable
+
+Check any template read instructions (typically in generation phase):
+
+```markdown
+# ✓ v3.0.0 compliant
+Use template: `$JAAN_TEMPLATES_DIR/{name}.template.md`
+
+# ✗ v2.x pattern
+Use template: `skills/{name}/template.md`
+Use template: `jaan-to/templates/{name}.template.md` (old location)
+```
+
+**Detection**: Grep for template references in SKILL.md.
+
+**Status**:
+- [ ] ✓ Uses `$JAAN_TEMPLATES_DIR`
+- [ ] ✗ Uses hardcoded path
+- [ ] N/A (skill doesn't use templates)
+
+### V3.5: Output Paths Use Outputs Directory Variable
+
+Check write/output instructions (typically in Phase 2):
+
+```markdown
+# ✓ v3.0.0 compliant
+Write to: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+
+# ✗ v2.x pattern
+Write to: `jaan-to/outputs/{role}/{domain}/{slug}/`
+```
+
+**Detection**: Grep for output path instructions.
+
+**Status**:
+- [ ] ✓ Uses `$JAAN_OUTPUTS_DIR`
+- [ ] ✗ Uses hardcoded path
+- [ ] N/A (skill doesn't write outputs)
+
+### V3.6: template.md Uses Template Variable Syntax (if exists)
+
+If `template.md` exists, check for v3.0.0 template variables:
+
+**Expected patterns**:
+- Field variables: `{{title}}`, `{{date}}`, `{{author}}`
+- Environment variables: `{{env:JAAN_OUTPUTS_DIR}}`
+- Configuration variables: `{{config:paths_templates}}`
+- Section imports: `{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}`
+
+**Detection**: Read template.md and check for variable usage.
+
+**Status**:
+- [ ] ✓ Uses template variables
+- [ ] ✗ No variables (static template)
+- [ ] N/A (no template.md)
+
+### V3.7: Tech Stack Integration (Optional)
+
+Check if skill is tech-aware (references project's tech stack):
+
+**Indicators**:
+- Reads `$JAAN_CONTEXT_DIR/tech.md`
+- Uses section imports like `{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}`
+- PRD/spec generation mentions tech stack
+
+**Status**:
+- [ ] ✓ Tech-aware (integrates with tech.md)
+- [ ] N/A (skill doesn't need tech context)
+
+### v3.0.0 Compliance Summary
+
+Display results:
+```
+v3.0.0 COMPLIANCE
+─────────────────
+V3.1 Frontmatter env vars:  ✓ / ✗
+V3.2 Context paths:          ✓ / ✗
+V3.3 Learning path:          ✓ / ✗
+V3.4 Template path:          ✓ / ✗ / N/A
+V3.5 Output path:            ✓ / ✗ / N/A
+V3.6 Template variables:     ✓ / ✗ / N/A
+V3.7 Tech integration:       ✓ / N/A
+
+VERDICT: v3.0.0 Compliant / Needs Migration
+```
+
+If **any check fails (✗)**:
+- Add option [8] to Step 3: "Migrate to v3.0.0"
+
 ## Step 3: Ask Update Type
 
 > "What do you want to change?"
@@ -148,6 +299,7 @@ SPECIFICATION COMPLIANCE
 > [5] Incorporate LEARN.md lessons → SKILL.md
 > [6] Fix specification compliance issues
 > [7] Other (describe)
+> [8] Migrate to v3.0.0 (if compliance check failed)
 
 ## Step 4: Optional Web Research
 
@@ -181,6 +333,152 @@ Based on selected option, plan specific changes:
 
 **Option 6 (Compliance)**: List missing sections, propose additions
 **Option 7 (Other)**: Gather details, plan custom changes
+
+**Option 8 (Migrate to v3.0.0)**: Run automated migration wizard:
+
+### Migration Wizard (v2.x → v3.0.0)
+
+Detected v2.x patterns. Choose migration approach:
+
+> [1] **Auto-fix all** — Apply all v3.0.0 patterns automatically
+> [2] **Interactive** — Review each change before applying
+> [3] **Manual script** — Generate `scripts/lib/v3-autofix.sh` for user to run
+> [4] **Guidance only** — Show what needs fixing, don't auto-apply
+
+#### Option 8.1: Auto-Fix All
+
+Apply these transformations automatically:
+
+**Frontmatter**:
+```yaml
+# Transform
+allowed-tools: Write(jaan-to/outputs/**) → Write($JAAN_OUTPUTS_DIR/**)
+allowed-tools: Read(jaan-to/context/**) → Read($JAAN_CONTEXT_DIR/**)
+allowed-tools: Edit(jaan-to/templates/**) → Edit($JAAN_TEMPLATES_DIR/**)
+```
+
+**Context Files section**:
+```markdown
+# Transform
+- `jaan-to/context/config.md` → `$JAAN_CONTEXT_DIR/config.md`
+- `jaan-to/learn/{name}.learn.md` → `$JAAN_LEARN_DIR/{name}.learn.md`
+- `skills/{name}/template.md` → `$JAAN_TEMPLATES_DIR/{name}.template.md`
+```
+
+**Pre-Execution / Step 0**:
+```markdown
+# Transform
+Read: `jaan-to/learn/{name}.learn.md` → `$JAAN_LEARN_DIR/{name}.learn.md`
+```
+
+**Template references**:
+```markdown
+# Transform
+Use template from `skills/{name}/template.md` → `$JAAN_TEMPLATES_DIR/{name}.template.md`
+```
+
+**Output paths**:
+```markdown
+# Transform
+Write to `jaan-to/outputs/{role}/` → `$JAAN_OUTPUTS_DIR/{role}/`
+Create: `jaan-to/outputs/{role}/{slug}/` → `$JAAN_OUTPUTS_DIR/{role}/{slug}/`
+```
+
+**template.md** (if exists):
+- Add field variables: `{{title}}`, `{{date}}`
+- Add metadata table with `{{env:JAAN_OUTPUTS_DIR}}`
+- Suggest section imports for tech-aware skills
+
+Show preview of all transformations before applying.
+
+#### Option 8.2: Interactive
+
+For each detected v2.x pattern:
+1. Show current code
+2. Show proposed v3.0.0 replacement
+3. Ask: "Apply this change? [y/n/skip-all]"
+
+#### Option 8.3: Generate Auto-Fix Script
+
+Create `scripts/lib/v3-autofix.sh`:
+
+```bash
+#!/bin/bash
+# Auto-generated migration script for {skill-name}
+# v2.x → v3.0.0 migration
+
+SKILL_DIR="skills/{name}"
+
+# Backup
+cp "$SKILL_DIR/SKILL.md" "$SKILL_DIR/SKILL.md.v2.backup"
+
+# Transform frontmatter
+sed -i '' 's|Write(jaan-to/outputs/\*\*)|Write($JAAN_OUTPUTS_DIR/**)|g' "$SKILL_DIR/SKILL.md"
+sed -i '' 's|Read(jaan-to/context/\*\*)|Read($JAAN_CONTEXT_DIR/**)|g' "$SKILL_DIR/SKILL.md"
+
+# Transform context files section
+sed -i '' 's|jaan-to/context/|$JAAN_CONTEXT_DIR/|g' "$SKILL_DIR/SKILL.md"
+sed -i '' 's|jaan-to/learn/|$JAAN_LEARN_DIR/|g' "$SKILL_DIR/SKILL.md"
+sed -i '' 's|skills/{name}/template.md|$JAAN_TEMPLATES_DIR/{name}.template.md|g' "$SKILL_DIR/SKILL.md"
+
+# Transform output paths
+sed -i '' 's|jaan-to/outputs/|$JAAN_OUTPUTS_DIR/|g' "$SKILL_DIR/SKILL.md"
+
+# Validate
+if grep -q 'jaan-to/' "$SKILL_DIR/SKILL.md"; then
+  echo "⚠ WARNING: Some hardcoded paths remain. Review manually."
+else
+  echo "✓ Migration complete. Review and test before committing."
+fi
+
+# template.md (if exists)
+if [ -f "$SKILL_DIR/template.md" ]; then
+  cp "$SKILL_DIR/template.md" "$SKILL_DIR/template.md.v2.backup"
+  # Add template variables (manual step - template structure varies)
+  echo "⚠ template.md backed up. Add template variables manually."
+fi
+```
+
+> "Script created. Run it with:"
+> ```bash
+> bash scripts/lib/v3-autofix.sh
+> ```
+
+#### Option 8.4: Guidance Only
+
+Display migration checklist:
+
+```
+v3.0.0 MIGRATION CHECKLIST
+──────────────────────────
+□ Update frontmatter permissions:
+  - Replace jaan-to/outputs/** → $JAAN_OUTPUTS_DIR/**
+  - Replace jaan-to/context/** → $JAAN_CONTEXT_DIR/**
+  - Replace jaan-to/templates/** → $JAAN_TEMPLATES_DIR/**
+  - Replace jaan-to/learn/** → $JAAN_LEARN_DIR/**
+
+□ Update Context Files section (~ line {X}):
+  - Replace all `jaan-to/` → `$JAAN_*`
+
+□ Update Pre-Execution section (~ line {Y}):
+  - Replace `jaan-to/learn/` → `$JAAN_LEARN_DIR/`
+
+□ Update template references (~ line {Z}):
+  - Replace `skills/{name}/template.md` → `$JAAN_TEMPLATES_DIR/{name}.template.md`
+
+□ Update output paths throughout Phase 2:
+  - Replace `jaan-to/outputs/` → `$JAAN_OUTPUTS_DIR/`
+
+□ Update template.md (if exists):
+  - Add {{title}}, {{date}} field variables
+  - Add {{env:JAAN_OUTPUTS_DIR}} for path references
+  - Consider {{import:$JAAN_CONTEXT_DIR/tech.md#section}} for tech-aware skills
+
+□ Re-validate with:
+  `/to-jaan-skill-update {name}` → Check v3.0.0 compliance
+```
+
+> "Apply these changes manually, then re-run validation."
 
 ---
 
@@ -360,6 +658,39 @@ If no:
 
 If yes:
 - Run `/to-jaan-learn-add to-jaan-skill-update "{feedback}"`
+
+### v3.0.0 Migration Feedback (if Option 8 was used)
+
+If skill was migrated to v3.0.0, capture migration-specific learnings:
+
+**Suggested feedback categories**:
+
+1. **Migration approach effectiveness**:
+   - "Auto-fix worked perfectly for {skill-name}"
+   - "Interactive mode caught edge case: {description}"
+   - "Manual script needed adjustment: {what}"
+
+2. **Patterns the auto-fix missed**:
+   - "Auto-fix didn't catch: {pattern} in {location}"
+   - "New v2.x pattern detected: {pattern} → should transform to {v3.0.0}"
+
+3. **Template variable adoption**:
+   - "Skill would benefit from {{import:tech.md#section}}"
+   - "Template variables made {aspect} more flexible"
+
+4. **Tech stack integration opportunities**:
+   - "Skill {name} should reference tech.md for {reason}"
+   - "Added tech integration, improved PRD quality"
+
+**Auto-categorization**:
+- Patterns → Add to v3-autofix.sh transformations
+- Edge cases → Add to Step 2.1 validation checks
+- Workflow improvements → Update Migration Wizard options
+
+Example:
+```
+/to-jaan-learn-add to-jaan-skill-update "Auto-fix missed pattern: \`Read(jaan-to/docs/**)\` in doc-generation skills. Add to v3-autofix.sh transformations."
+```
 
 ---
 

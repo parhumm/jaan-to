@@ -24,7 +24,7 @@ argument-hint: {argument_format}
 ## Context Files
 
 Read these before execution:
-- `jaan-to/learn/{skill_name}.learn.md` - Past lessons
+- `$JAAN_LEARN_DIR/{skill_name}.learn.md` - Past lessons (loaded in Pre-Execution)
 {additional_context_files}
 
 ## Input
@@ -37,13 +37,16 @@ Read these before execution:
 
 # PHASE 1: Analysis (Read-Only)
 
-## Step 0: Apply Past Lessons
+## Pre-Execution: Apply Past Lessons
 
-Read `jaan-to/learn/{skill_name}.learn.md` if it exists:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`$JAAN_LEARN_DIR/{skill_name}.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions" to Step 1
+- Note edge cases to check from "Edge Cases"
+- Follow workflow improvements from "Workflow"
+- Avoid mistakes listed in "Common Mistakes"
 
 ## Step 1: Gather Information
 
@@ -87,8 +90,8 @@ Show complete output and ask:
 
 If approved:
 1. Generate slug from input
-2. Create path: `jaan-to/outputs/{role}/{domain}/{slug}/`
-3. Write file
+2. Create path: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+3. Write file: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`
 4. Confirm: "Written to {path}"
 
 ## Step 7: Capture Feedback
@@ -187,7 +190,7 @@ Things to avoid:
 
 ---
 
-## Tool Permission Patterns Reference
+## Tool Permission Patterns Reference (v3.0.0)
 
 | Need | Pattern |
 |------|---------|
@@ -195,14 +198,68 @@ Things to avoid:
 | Find files | `Glob` |
 | Search content | `Grep` |
 | Web research | `WebSearch`, `Task` |
-| Write to artifacts | `Write(jaan-to/**)` |
+| Write outputs | `Write($JAAN_OUTPUTS_DIR/{role}/**)` |
 | Write to docs | `Write(docs/**)` |
 | Write to skills | `Write(skills/**)` |
-| Edit existing | `Edit` |
+| Edit templates | `Edit($JAAN_TEMPLATES_DIR/**)` |
+| Read context | `Read($JAAN_CONTEXT_DIR/**)` |
+| Write learning | `Write($JAAN_LEARN_DIR/**)` |
 | Git stage | `Bash(git add:*)` |
 | Git commit | `Bash(git commit:*)` |
 | Git push | `Bash(git push:*)` |
 | Create PR | `Bash(gh pr create:*)` |
+
+**v3.0.0 Best Practices**:
+- ✓ Always use `$JAAN_*` environment variables
+- ✗ Never hardcode `jaan-to/` paths (not customizable)
+
+---
+
+## Template Variables Reference (v3.0.0)
+
+Use these in template.md files for dynamic content:
+
+### Field Variables
+- `{{title}}` - Document title
+- `{{date}}` - Current date
+- `{{author}}` - Author name
+- `{{problem}}`, `{{solution}}`, etc. - Custom fields from context
+
+### Environment Variables
+- `{{env:JAAN_OUTPUTS_DIR}}` - Output directory path
+- `{{env:JAAN_TEMPLATES_DIR}}` - Templates directory path
+- `{{env:CUSTOM_VAR}}` - Any shell environment variable
+
+### Configuration Variables
+- `{{config:paths_templates}}` - From settings.yaml
+- `{{config:custom_field}}` - Any config key from jaan-to/config/settings.yaml
+
+### Section Imports
+Import markdown sections from context files:
+- `{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}` - Import tech stack
+- `{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}` - Import constraints
+
+**Standard tech.md Anchors**:
+- `#current-stack` - Languages, frameworks, databases
+- `#frameworks` - Framework-specific details
+- `#constraints` - Technical constraints and requirements
+- `#versioning` - API versioning, deprecation policies
+- `#patterns` - Common patterns (auth, errors, data access)
+- `#tech-debt` - Known technical debt items
+
+**Example**:
+```markdown
+# {{title}}
+
+## Technical Context
+**Stack**: {{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+**Constraints**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}
+
+## Output Path
+Generated at: {{env:JAAN_OUTPUTS_DIR}}/{{role}}/{{domain}}/
+```
 
 ---
 

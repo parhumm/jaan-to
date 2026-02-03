@@ -26,13 +26,16 @@ A skill is a reusable command that AI executes to produce outputs. This specific
 
 ## Quick Reference
 
-| Aspect | Pattern |
-|--------|---------|
+| Aspect | Pattern (v3.0.0) |
+|--------|------------------|
 | Name | `{name}` |
 | Command | `/{name}` |
-| Directory | `skills/{name}/` |
+| Directory | `skills/{name}/` (plugin) |
 | Logical Name | `{role}:{domain-action}` |
-| Output | `jaan-to/outputs/{role}/{domain}/{slug}/` |
+| Output | `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/` (project) |
+| Templates | `$JAAN_TEMPLATES_DIR/{name}.template.md` (project) |
+| Learning | `$JAAN_LEARN_DIR/{name}.learn.md` (project) |
+| Context | `$JAAN_CONTEXT_DIR/*.md` (project) |
 
 ---
 
@@ -105,21 +108,36 @@ argument-hint: {expected-format}
 | `allowed-tools` | string | Yes | Comma-separated tool permissions |
 | `argument-hint` | string | Yes | Shows expected input format |
 
-### Tool Permission Patterns
+### Tool Permission Patterns (v3.0.0)
+
+**Always use environment variables** for path-based permissions:
 
 | Pattern | Use Case |
 |---------|----------|
 | `Read` | Read any file |
 | `Glob` | Find files by pattern |
 | `Grep` | Search file contents |
-| `Write(jaan-to/**)` | Write outputs only |
+| `WebSearch` | Research best practices |
+| `Task` | Launch specialized agents |
+| `Write($JAAN_OUTPUTS_DIR/{role}/**)` | Write outputs only |
+| `Write($JAAN_TEMPLATES_DIR/**)` | Update templates |
+| `Write($JAAN_LEARN_DIR/**)` | Update learning files |
+| `Read($JAAN_CONTEXT_DIR/**)` | Read project context |
 | `Write(docs/**)` | Documentation skills |
 | `Write(skills/**)` | Skill development |
 | `Edit` | Modify existing files |
 | `Bash(git add:*)` | Stage changes |
 | `Bash(git commit:*)` | Commit changes |
+| `Bash(git push:*)` | Push changes |
+| `Bash(gh pr create:*)` | Create pull requests |
 
-### Markdown Body Structure
+**v3.0.0 Best Practices**:
+- ✓ Use `$JAAN_*` environment variables (supports path customization)
+- ✗ Never use hardcoded `jaan-to/` paths (breaks customization)
+- ✓ Be specific: `Write($JAAN_OUTPUTS_DIR/pm/**)` not `Write($JAAN_OUTPUTS_DIR/**)`
+- ✗ Never use `Write(**)` (too broad, security risk)
+
+### Markdown Body Structure (v3.0.0)
 
 After frontmatter, SKILL.md follows this structure:
 
@@ -129,9 +147,12 @@ After frontmatter, SKILL.md follows this structure:
 > {One-line purpose}
 
 ## Context Files
+
 Read these before execution:
-- {file1} - {why}
-- {file2} - {why}
+- `$JAAN_CONTEXT_DIR/config.md` - Configuration
+- `$JAAN_TEMPLATES_DIR/{name}.template.md` - Output template
+- `$JAAN_LEARN_DIR/{name}.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if skill is tech-aware)
 
 ## Input
 
@@ -143,12 +164,16 @@ Read these before execution:
 
 # PHASE 1: Analysis (Read-Only)
 
-## Step 0: Apply Past Lessons
-Read `jaan-to/learn/{name}.learn.md` if it exists:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`$JAAN_LEARN_DIR/{name}.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions" to Step 1
+- Note edge cases to check from "Edge Cases"
+- Follow workflow improvements from "Workflow"
+- Avoid mistakes listed in "Common Mistakes"
 
 ## Step 1: Gather Information
 {Questions to ask user}
@@ -171,37 +196,51 @@ Read `jaan-to/learn/{name}.learn.md` if it exists:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate Content
+
+Use template from: `$JAAN_TEMPLATES_DIR/{name}.template.md`
+
 {How to create the output}
 
 ## Step 4: Quality Check
+
 Before preview, verify:
 - [ ] {Check 1}
 - [ ] {Check 2}
 - [ ] {Check 3}
 
+If any check fails, revise before preview.
+
 ## Step 5: Preview & Approval
+
 Show complete output and ask:
-> "Write to `{path}`? [y/n]"
+> "Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`? [y/n]"
 
 ## Step 6: Write Output
+
 If approved:
-1. Generate slug from input
-2. Create path: `jaan-to/outputs/{role}/{domain}/{slug}/`
-3. Write file
+1. Generate slug from input: lowercase, hyphens, no special chars
+2. Create path: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+3. Write file: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`
 4. Confirm: "Written to {path}"
 
 ## Step 7: Capture Feedback
-After writing:
+
 > "Any feedback? [y/n]"
 
-If yes, use `/to-jaan-learn-add {skill-name} "{feedback}"` to capture lessons.
+If yes:
+> "[1] Fix now  [2] Learn for future  [3] Both"
+
+- **Option 1**: Update output, re-preview, re-write
+- **Option 2**: Run `/to-jaan-learn-add {skill-name} "{feedback}"`
+- **Option 3**: Do both
 
 ---
 
 ## Definition of Done
+
 - [ ] {Criterion 1}
 - [ ] {Criterion 2}
-- [ ] User has approved
+- [ ] User has approved final result
 ```
 
 ### Required Sections
@@ -220,42 +259,554 @@ If yes, use `/to-jaan-learn-add {skill-name} "{feedback}"` to capture lessons.
 
 ---
 
-## template.md Specification
+## v3.0.0 Configuration System
 
-Templates define output format with placeholders.
+### Overview
 
-### Placeholder Syntax
+v3.0.0 introduces a multi-layer configuration system that allows path customization while maintaining backward compatibility.
 
-Use `{field_name}` for dynamic content:
+### Environment Variables
+
+Skills use environment variables for all paths:
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `$JAAN_OUTPUTS_DIR` | `jaan-to/outputs` | Generated files |
+| `$JAAN_TEMPLATES_DIR` | `jaan-to/templates` | Output templates |
+| `$JAAN_LEARN_DIR` | `jaan-to/learn` | Learning files |
+| `$JAAN_CONTEXT_DIR` | `jaan-to/context` | Project context |
+
+**Key Benefits**:
+- Users can customize paths via `jaan-to/config/settings.yaml`
+- Skills work in any project structure (monorepos, custom layouts)
+- Paths resolve automatically at runtime
+
+### Configuration Layers
+
+1. **Plugin Defaults** (`config/defaults.yaml`):
+   ```yaml
+   version: "3.0"
+   paths_templates: "jaan-to/templates"
+   paths_learning: "jaan-to/learn"
+   paths_context: "jaan-to/context"
+   paths_outputs: "jaan-to/outputs"
+   ```
+
+2. **Project Settings** (`jaan-to/config/settings.yaml`):
+   ```yaml
+   version: "3.0"
+
+   # Path customization (optional)
+   paths_outputs: "artifacts/generated"
+   paths_templates: "docs/templates"
+
+   # Template customization (optional)
+   templates_pm-prd-write_path: "./custom/enterprise-prd.md"
+
+   # Learning strategy (optional)
+   learning_strategy: "merge"  # Options: merge, override
+   ```
+
+3. **Runtime Resolution**:
+   - Project settings override plugin defaults
+   - Environment variables reflect final resolved paths
+   - Skills use variables, never hardcoded paths
+
+### Path Customization Example
+
+**Default behavior** (zero config):
+```bash
+# Skill writes to:
+$JAAN_OUTPUTS_DIR/pm/feature-name/prd.md
+# Resolves to:
+jaan-to/outputs/pm/feature-name/prd.md
+```
+
+**Custom paths** (via settings.yaml):
+```yaml
+paths_outputs: "build/artifacts"
+```
+
+```bash
+# Same skill command
+# Now writes to:
+build/artifacts/pm/feature-name/prd.md
+```
+
+### Migration from v2.x
+
+**v2.x pattern** (deprecated):
+```yaml
+allowed-tools: Write(jaan-to/outputs/**)
+```
 
 ```markdown
-# {title}
+Create path: `jaan-to/outputs/pm/{slug}/`
+```
 
-> Generated by jaan.to | {date}
+**v3.0.0 pattern** (current):
+```yaml
+allowed-tools: Write($JAAN_OUTPUTS_DIR/pm/**)
+```
+
+```markdown
+Create path: `$JAAN_OUTPUTS_DIR/pm/{slug}/`
+```
+
+**Auto-migration**:
+```bash
+# Use auto-fix script
+bash scripts/lib/v3-autofix.sh {skill-name}
+
+# Or use skill validator
+/to-jaan-skill-update {skill-name}
+# → Select option [8] Migrate to v3.0.0
+```
 
 ---
 
-## Section Name
+## Template Variables (v3.0.0)
 
-{section_content}
+### Overview
+
+Templates support four types of variables for dynamic content generation.
+
+### 1. Field Variables
+
+Basic placeholder substitution:
+
+```markdown
+# {{title}}
+
+> Generated by jaan.to | {{date}}
+> Author: {{author}}
+
+## Problem Statement
+
+{{problem}}
+
+## Solution Overview
+
+{{solution}}
+```
+
+**Usage in SKILL.md**:
+```markdown
+## Step 3: Generate Content
+
+Fill template variables:
+- `{{title}}` - Feature name from input
+- `{{date}}` - Current date (YYYY-MM-DD)
+- `{{author}}` - User's git name or "jaan.to"
+- `{{problem}}` - Problem statement from Step 1
+- `{{solution}}` - Solution overview from Step 1
+```
+
+### 2. Environment Variables
+
+Access runtime paths:
+
+```markdown
+## Output Location
+
+This file was generated at:
+{{env:JAAN_OUTPUTS_DIR}}/{{role}}/{{domain}}/
+
+Customizable via `jaan-to/config/settings.yaml`.
+```
+
+**Supported variables**:
+- `{{env:JAAN_OUTPUTS_DIR}}`
+- `{{env:JAAN_TEMPLATES_DIR}}`
+- `{{env:JAAN_CONTEXT_DIR}}`
+- `{{env:JAAN_LEARN_DIR}}`
+- `{{env:CUSTOM_VAR}}` - Any shell environment variable
+
+### 3. Configuration Variables
+
+Access project configuration:
+
+```markdown
+## Configuration
+
+Template source: {{config:paths_templates}}
+Learning strategy: {{config:learning_strategy}}
+```
+
+**Usage**:
+- `{{config:paths_templates}}` - From settings.yaml
+- `{{config:paths_outputs}}` - From settings.yaml
+- `{{config:custom_field}}` - Any key from settings.yaml
+
+### 4. Section Imports
+
+Import markdown sections from context files:
+
+```markdown
+## Technical Context
+
+**Stack**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+**Constraints**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}
+
+**Common Patterns**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#patterns}}
+```
+
+**Syntax**:
+```
+{{import:$JAAN_CONTEXT_DIR/{file}#{anchor}}}
+```
+
+**Standard Anchors** (tech.md):
+- `#current-stack` - Languages, frameworks, databases
+- `#frameworks` - Framework-specific details
+- `#constraints` - Technical constraints and requirements
+- `#versioning` - API versioning, deprecation policies
+- `#patterns` - Common patterns (auth, errors, data access)
+- `#tech-debt` - Known technical debt items
+
+### Complete Template Example
+
+```markdown
+# {{title}}
+
+> Generated by jaan.to | {{date}}
+> Author: {{author}}
+
+---
+
+## Problem Statement
+
+{{problem}}
+
+## Solution Overview
+
+{{solution}}
+
+## Success Metrics
+
+| Metric | Current | Target | Measurement |
+|--------|---------|--------|-------------|
+{{metrics_table}}
+
+## Technical Context
+
+**Stack**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+**Constraints**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}
+
+## Scope
+
+### In Scope
+{{in_scope}}
+
+### Out of Scope
+{{out_of_scope}}
+
+## User Stories
+
+{{user_stories}}
 
 ---
 
 ## Metadata
 
-- **Created**: {date}
-- **Skill**: {skill_name}
+| Field | Value |
+|-------|-------|
+| Generated | {{date}} |
+| Output Path | {{env:JAAN_OUTPUTS_DIR}}/{{role}}/{{domain}}/ |
+| Skill | {{skill_name}} |
+| Version | 3.0 |
+| Status | Draft |
+```
+
+---
+
+## Tech Stack Integration
+
+### When to Use
+
+Skills should be "tech-aware" when they:
+- Generate code or technical specifications
+- Reference frameworks or languages
+- Need to comply with technical constraints
+- Create implementation plans
+
+### Implementation Pattern
+
+**1. Declare in Context Files**:
+
+```markdown
+## Context Files
+
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if exists)
+```
+
+**2. Read in Pre-Execution or Step 1**:
+
+```markdown
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Read:
+1. `$JAAN_LEARN_DIR/{name}.learn.md`
+2. `$JAAN_CONTEXT_DIR/tech.md` (if exists)
+```
+
+**3. Use in Generation**:
+
+```markdown
+## Step 3: Generate PRD
+
+If tech.md exists:
+1. Reference appropriate tech stack in User Stories:
+   - Backend: "API endpoint in {{backend_framework}}"
+   - Frontend: "UI component in {{frontend_framework}}"
+   - Mobile: "{{mobile_platform}} screen"
+
+2. Include Technical Constraints section:
+   - Import: `{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}`
+
+3. Mention relevant frameworks from tech.md in Implementation Notes
+```
+
+**4. Update Template**:
+
+```markdown
+## Technical Context
+
+**Stack**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+**Constraints**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}
+
+**Relevant Patterns**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#patterns}}
+```
+
+### tech.md Structure
+
+Skills expect this structure:
+
+```markdown
+# Technology Stack
+
+## Current Stack {#current-stack}
+
+### Backend
+- **Language**: Python 3.11
+- **Framework**: FastAPI 0.104
+- **Database**: PostgreSQL 15
+
+### Frontend
+- **Language**: TypeScript 5.2
+- **Framework**: React 18 + Next.js 14
+
+### Mobile
+- **iOS**: Swift 5.9 + SwiftUI
+- **Android**: Kotlin 1.9 + Jetpack Compose
+
+## Frameworks {#frameworks}
+
+### API Development
+- FastAPI (REST endpoints)
+- Pydantic (validation)
+- SQLAlchemy (ORM)
+
+## Technical Constraints {#constraints}
+
+1. **All APIs must return JSON:API format**
+2. **Mobile apps must work offline**
+3. **Sub-200ms p95 latency**
+
+## Common Patterns {#patterns}
+
+### Authentication
+- OAuth2 + JWT (15min access, 7d refresh)
+
+### Error Handling
+- Structured errors with error codes
+
+## Tech Debt {#tech-debt}
+
+- [ ] Migrate Python 3.11 → 3.12 (Q3 2024)
+- [ ] Split monolith → microservices (Q4 2024)
+```
+
+### Benefits
+
+**Without tech integration**:
+```markdown
+## User Stories
+
+1. User can search for products
+2. User can add products to cart
+3. User can checkout
+```
+
+**With tech integration**:
+```markdown
+## User Stories
+
+1. **Search Products**
+   - Frontend: Search UI in React with debounced input
+   - Backend: GET /v1/products?q= endpoint in FastAPI
+   - Constraint: Sub-200ms response time
+
+2. **Add to Cart**
+   - Frontend: Redux cart state management
+   - Backend: POST /v1/cart/items in FastAPI
+   - Mobile: Offline-first with sync on reconnect
+
+3. **Checkout**
+   - Frontend: Next.js server components for SSR
+   - Backend: OAuth2 authentication required
+   - Constraint: JSON:API format response
+```
+
+---
+
+## Learning Merge Strategy
+
+### Overview
+
+v3.0.0 supports two learning strategies: **merge** (default) and **override**.
+
+### Merge Strategy (Default)
+
+Combines lessons from plugin defaults + project customizations:
+
+**Plugin LEARN.md** (`skills/{name}/LEARN.md`):
+```markdown
+## Better Questions
+
+- Plugin question 1
+- Plugin question 2
+
+## Workflow
+
+- Plugin workflow step 1
+```
+
+**Project LEARN.md** (`$JAAN_LEARN_DIR/{name}.learn.md`):
+```markdown
+## Better Questions
+
+- Project-specific question 1
+
+## Edge Cases
+
+- Project edge case 1
+```
+
+**Runtime merged view**:
+```markdown
+## Better Questions
+
+<!-- source: plugin -->
+- Plugin question 1
+- Plugin question 2
+
+<!-- source: project -->
+- Project-specific question 1
+
+## Edge Cases
+
+<!-- source: project -->
+- Project edge case 1
+
+## Workflow
+
+<!-- source: plugin -->
+- Plugin workflow step 1
+```
+
+### Override Strategy
+
+Project lessons completely replace plugin defaults:
+
+```yaml
+# jaan-to/config/settings.yaml
+learning_strategy: "override"
+```
+
+- If `$JAAN_LEARN_DIR/{name}.learn.md` exists: use project only
+- If not: fall back to plugin `LEARN.md`
+
+### Configuration
+
+**Enable merge** (default):
+```yaml
+# jaan-to/config/settings.yaml
+learning_strategy: "merge"
+```
+
+**Enable override**:
+```yaml
+learning_strategy: "override"
+```
+
+### Use Cases
+
+**Merge**: Teams want to keep plugin best practices + add company-specific lessons
+**Override**: Teams want full control over all lessons (replace plugin defaults)
+
+---
+
+## template.md Specification (v3.0.0)
+
+Templates define output format with variable placeholders.
+
+### Variable Syntax
+
+v3.0.0 uses `{{double-brace}}` syntax for all variables:
+
+```markdown
+# {{title}}
+
+> Generated by jaan.to | {{date}}
+> Author: {{author}}
+
+---
+
+## Section Name
+
+{{section_content}}
+
+## Technical Context
+
+**Stack**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+---
+
+## Metadata
+
+| Field | Value |
+|-------|-------|
+| Created | {{date}} |
+| Output Path | {{env:JAAN_OUTPUTS_DIR}}/{{role}}/{{domain}}/ |
+| Skill | {{skill_name}} |
+| Status | {{status}} |
+| Version | 3.0 |
 ```
 
 ### Required Metadata
 
-All templates should include an Appendix or Metadata section with:
+All templates should include a Metadata table with:
 
-| Field | Purpose |
-|-------|---------|
-| `{date}` | Creation date |
-| `{skill_name}` | Which skill generated this |
-| `{status}` | Draft/Review/Final |
+| Field | Variable | Purpose |
+|-------|----------|---------|
+| Created | `{{date}}` | Generation date (YYYY-MM-DD) |
+| Output Path | `{{env:JAAN_OUTPUTS_DIR}}/...` | Where file was written |
+| Skill | `{{skill_name}}` | Which skill generated this |
+| Status | `{{status}}` | Draft/Review/Final |
+| Version | `3.0` | Template version |
 
 ### Line Limits
 
@@ -381,18 +932,22 @@ Accumulated lessons from past executions.
 
 ---
 
-## Integration Patterns
+## Integration Patterns (v3.0.0)
 
 ### Stack Context
 
-Skills should read stack files when relevant:
+Skills should read context files when relevant:
 
 ```markdown
 ## Context Files
+
 Read these before execution:
-- `jaan-to/context/tech.md` - Technology context
-- `jaan-to/context/team.md` - Team structure and norms
-- `jaan-to/context/integrations.md` - External tool config
+- `$JAAN_CONTEXT_DIR/config.md` - Configuration
+- `$JAAN_CONTEXT_DIR/tech.md` - Technology context
+- `$JAAN_CONTEXT_DIR/team.md` - Team structure and norms
+- `$JAAN_CONTEXT_DIR/integrations.md` - External tool config
+- `$JAAN_TEMPLATES_DIR/{name}.template.md` - Output template
+- `$JAAN_LEARN_DIR/{name}.learn.md` - Past lessons
 ```
 
 ### Hook Integration
@@ -434,7 +989,7 @@ Register new skills in `jaan-to/context/config.md`:
 
 ## Examples
 
-### Minimal Skill
+### Minimal Skill (v3.0.0)
 
 Simplest valid skill structure:
 
@@ -445,8 +1000,9 @@ Simplest valid skill structure:
 name: example-minimal-demo
 description: |
   Demonstrate minimal skill structure.
+  Auto-triggers on: demo, example, test skill.
   Maps to: example:minimal-demo
-allowed-tools: Read, Write(jaan-to/**)
+allowed-tools: Read, Write($JAAN_OUTPUTS_DIR/example/**)
 argument-hint: [topic]
 ---
 
@@ -455,7 +1011,8 @@ argument-hint: [topic]
 > Demonstrate minimal skill structure.
 
 ## Context Files
-- `jaan-to/learn/example-minimal-demo.learn.md` - Past lessons
+
+- `$JAAN_LEARN_DIR/example-minimal-demo.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -465,10 +1022,19 @@ argument-hint: [topic]
 
 # PHASE 1: Analysis (Read-Only)
 
-## Step 0: Apply Past Lessons
-Read `jaan-to/learn/example-minimal-demo.learn.md` if it exists.
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`$JAAN_LEARN_DIR/example-minimal-demo.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions"
+- Note edge cases from "Edge Cases"
+- Follow improvements from "Workflow"
+- Avoid items in "Common Mistakes"
 
 ## Step 1: Gather Information
+
 Ask: "What should the demo cover?"
 
 ---
@@ -477,46 +1043,74 @@ Ask: "What should the demo cover?"
 
 > "Ready to generate demo for '{topic}'? [y/n]"
 
-**Do NOT proceed without approval.**
+**Do NOT proceed to Phase 2 without explicit approval.**
 
 ---
 
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate Content
-Create simple markdown output.
+
+Create simple markdown output with:
+- Title based on topic
+- Current date
+- Demo content
 
 ## Step 4: Quality Check
+
 - [ ] Has title
 - [ ] Has content
+- [ ] Has metadata section
+
+If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
-> "Write to `jaan-to/outputs/example/minimal/{slug}/demo.md`? [y/n]"
+
+Show complete output and ask:
+> "Write to `$JAAN_OUTPUTS_DIR/example/minimal/{slug}/demo.md`? [y/n]"
 
 ## Step 6: Write Output
-Write file if approved.
+
+If approved:
+1. Generate slug from topic: lowercase, hyphens
+2. Create path: `$JAAN_OUTPUTS_DIR/example/minimal/{slug}/`
+3. Write file: `$JAAN_OUTPUTS_DIR/example/minimal/{slug}/demo.md`
+4. Confirm: "Written to {path}"
+
+## Step 7: Capture Feedback
+
+> "Any feedback? [y/n]"
+
+If yes:
+> "[1] Fix now  [2] Learn for future  [3] Both"
+
+- **Option 1**: Update output, re-preview, re-write
+- **Option 2**: Run `/to-jaan-learn-add example-minimal-demo "{feedback}"`
+- **Option 3**: Do both
 
 ---
 
 ## Definition of Done
-- [ ] Demo file written
-- [ ] User approved
+
+- [ ] Demo file written to correct path
+- [ ] All quality checks pass
+- [ ] User approved final result
 ```
 
-### Full-Featured Skill
+### Full-Featured Skill (v3.0.0)
 
-Complete skill with all patterns:
+Complete skill with all v3.0.0 patterns:
 
-**`skills/qa-test-matrix/SKILL.md`**:
+**`skills/jaan-to-qa-test-matrix/SKILL.md`**:
 
 ```markdown
 ---
-name: qa-test-matrix
+name: jaan-to-qa-test-matrix
 description: |
-  Generate a test matrix from feature requirements.
+  Generate comprehensive test matrix from feature requirements.
   Auto-triggers on: test planning, QA coverage, test matrix requests.
   Maps to: qa:test-matrix
-allowed-tools: Read, Glob, Grep, Write(jaan-to/**)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write($JAAN_OUTPUTS_DIR/qa/**)
 argument-hint: [feature-name-or-prd-path]
 ---
 
@@ -525,13 +1119,14 @@ argument-hint: [feature-name-or-prd-path]
 > Generate comprehensive test matrix from feature requirements.
 
 ## Context Files
+
 Read these before execution:
-- `jaan-to/context/config.md` - Configuration
-- `jaan-to/context/boundaries.md` - Safety rules
-- `jaan-to/templates/qa-test-matrix.template.md` - Output template
-- `jaan-to/learn/qa-test-matrix.learn.md` - Past lessons
-- `jaan-to/context/tech.md` - Test tools and frameworks
-- `jaan-to/context/team.md` - QA capacity and norms
+- `$JAAN_CONTEXT_DIR/config.md` - Configuration
+- `$JAAN_CONTEXT_DIR/boundaries.md` - Safety rules
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-matrix.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-qa-test-matrix.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_CONTEXT_DIR/tech.md` - Test frameworks and tools (if exists)
+- `$JAAN_CONTEXT_DIR/team.md` - QA capacity and norms (if exists)
 
 ## Input
 
@@ -543,25 +1138,50 @@ If path to PRD provided, read it. Otherwise, ask for requirements.
 
 # PHASE 1: Analysis (Read-Only)
 
-## Step 0: Apply Past Lessons
-Read `jaan-to/learn/qa-test-matrix.learn.md`:
-- Add questions from "Better Questions"
-- Check scenarios from "Edge Cases"
-- Follow process from "Workflow"
-- Avoid items in "Common Mistakes"
+## Thinking Mode
+
+ultrathink
+
+Use extended reasoning for:
+- Analyzing test coverage gaps
+- Planning comprehensive test scenarios
+- Ensuring edge case coverage
+
+## Pre-Execution: Apply Past Lessons
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`$JAAN_LEARN_DIR/jaan-to-qa-test-matrix.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions" to Step 1
+- Note edge cases to check from "Edge Cases"
+- Follow workflow improvements from "Workflow"
+- Avoid mistakes listed in "Common Mistakes"
+
+Also read tech context if available:
+- `$JAAN_CONTEXT_DIR/tech.md` - Know test frameworks and tooling
 
 ## Step 1: Gather Information
-Ask these questions:
+
+Ask these questions (+ any from LEARN.md):
 1. "What are the critical user journeys?"
 2. "What browsers/devices need coverage?"
 3. "What's the priority order for test cases?"
 4. "Are there any known edge cases?"
+5. "What test automation frameworks are in use?" (if tech.md not available)
 
 ## Step 2: Plan Matrix Structure
+
 Organize by:
-- Test categories (functional, integration, edge cases)
-- Priority levels (P0, P1, P2)
-- Coverage areas (happy path, error handling, edge cases)
+- Test categories (functional, integration, edge cases, performance)
+- Priority levels (P0-Critical, P1-High, P2-Medium)
+- Coverage areas (happy path, error handling, edge cases, security)
+- Test types (manual, automated, E2E)
+
+If tech.md exists, include:
+- Framework-specific test patterns
+- Browser/device matrix from tech constraints
+- Performance targets from tech.md
 
 ---
 
@@ -569,62 +1189,260 @@ Organize by:
 
 Show planned structure:
 > "Test matrix will cover:
-> - {n} functional tests
+> - {n} functional tests (P0: {x}, P1: {y}, P2: {z})
 > - {n} integration tests
 > - {n} edge case tests
+> - {n} performance tests (if tech constraints exist)
+>
+> Test frameworks: {from tech.md or user input}
+> Browsers/devices: {from tech.md or user input}
 >
 > Proceed with generation? [y/n]"
 
-**Do NOT proceed without explicit approval.**
+**Do NOT proceed to Phase 2 without explicit approval.**
 
 ---
 
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate Test Matrix
-Use template from `jaan-to/templates/qa-test-matrix.template.md`:
-- Fill all test categories
-- Add priority levels
-- Include pass/fail criteria
-- Add browser/device matrix if applicable
+
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-matrix.template.md`
+
+Fill variables:
+- `{{title}}` - Feature name
+- `{{date}}` - Current date
+- `{{test_categories}}` - Generated test categories
+- `{{priority_breakdown}}` - P0/P1/P2 counts
+
+If tech.md exists, include:
+- `{{import:$JAAN_CONTEXT_DIR/tech.md#frameworks}}` in Test Tools section
+- `{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}` in Constraints section
 
 ## Step 4: Quality Check
+
 Before preview, verify:
 - [ ] Has at least 3 test categories
-- [ ] Has priority levels assigned
-- [ ] Has clear pass/fail criteria
+- [ ] Has priority levels assigned (P0/P1/P2)
+- [ ] Has clear pass/fail criteria for each test
 - [ ] Has coverage for happy path AND error cases
+- [ ] Has edge cases documented
+- [ ] If tech.md exists: references correct test frameworks
+- [ ] If tech.md exists: includes performance targets
 
 If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
+
 Show complete matrix and ask:
-> "Write to `jaan-to/outputs/qa/test-matrix/{slug}/matrix.md`? [y/n]"
+> "Write to `$JAAN_OUTPUTS_DIR/qa/test-matrix/{slug}/matrix.md`? [y/n]"
 
 ## Step 6: Write Output
+
 If approved:
-1. Generate slug: lowercase, hyphens, max 50 chars
-2. Create path: `jaan-to/outputs/qa/test-matrix/{slug}/matrix.md`
-3. Write the test matrix
+1. Generate slug from feature name: lowercase, hyphens, no special chars, max 50 chars
+2. Create path: `$JAAN_OUTPUTS_DIR/qa/test-matrix/{slug}/`
+3. Write file: `$JAAN_OUTPUTS_DIR/qa/test-matrix/{slug}/matrix.md`
 4. Confirm: "Test matrix written to {path}"
 
 ## Step 7: Capture Feedback
+
 > "Any feedback on the test matrix? [y/n]"
 
 If yes:
-> "What should be improved?"
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update matrix, re-preview, re-write
-- **Option 2**: Run `/to-jaan-learn-add qa-test-matrix "{feedback}"`
+- **Option 2**: Run `/to-jaan-learn-add jaan-to-qa-test-matrix "{feedback}"`
 - **Option 3**: Do both
 
 ---
 
 ## Definition of Done
-- [ ] Test matrix file exists
+
+- [ ] Test matrix file exists at correct path
 - [ ] All quality checks pass
-- [ ] User approved content
+- [ ] Tech stack integrated (if tech.md available)
+- [ ] Priority levels assigned to all tests
+- [ ] Edge cases documented
+- [ ] User approved final content
+```
+
+---
+
+## v3.0.0 Migration Checklist
+
+### Automated Migration
+
+Use the auto-fix script for quick migration:
+
+```bash
+# Migrate a single skill
+bash scripts/lib/v3-autofix.sh {skill-name}
+
+# Or use the skill validator
+/to-jaan-skill-update {skill-name}
+# → Select option [8] Migrate to v3.0.0
+# → Choose migration approach (auto-fix, interactive, script, guidance)
+```
+
+### Manual Migration Steps
+
+If migrating manually:
+
+#### 1. Update Frontmatter Permissions
+
+```yaml
+# Before (v2.x)
+allowed-tools: Write(jaan-to/outputs/**), Read(jaan-to/context/**)
+
+# After (v3.0.0)
+allowed-tools: Write($JAAN_OUTPUTS_DIR/**), Read($JAAN_CONTEXT_DIR/**)
+```
+
+**Find & Replace**:
+- `Write(jaan-to/outputs/**)` → `Write($JAAN_OUTPUTS_DIR/**)`
+- `Read(jaan-to/context/**)` → `Read($JAAN_CONTEXT_DIR/**)`
+- `Edit(jaan-to/templates/**)` → `Edit($JAAN_TEMPLATES_DIR/**)`
+- `Write(jaan-to/learn/**)` → `Write($JAAN_LEARN_DIR/**)`
+- `Edit(jaan-to/**)` → `Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**)`
+
+#### 2. Update Context Files Section
+
+```markdown
+# Before (v2.x)
+## Context Files
+- `jaan-to/context/config.md` - Configuration
+- `jaan-to/learn/{name}.learn.md` - Past lessons
+- `skills/{name}/template.md` - Template
+
+# After (v3.0.0)
+## Context Files
+- `$JAAN_CONTEXT_DIR/config.md` - Configuration
+- `$JAAN_LEARN_DIR/{name}.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/{name}.template.md` - Output template
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if tech-aware)
+```
+
+**Find & Replace**:
+- `` `jaan-to/context/ `` → `` `$JAAN_CONTEXT_DIR/ ``
+- `` `jaan-to/learn/ `` → `` `$JAAN_LEARN_DIR/ ``
+- `` `jaan-to/templates/ `` → `` `$JAAN_TEMPLATES_DIR/ ``
+- `` `skills/{name}/template.md` `` → `` `$JAAN_TEMPLATES_DIR/{name}.template.md` ``
+
+#### 3. Update Pre-Execution Section
+
+```markdown
+# Before (v2.x)
+## Step 0: Apply Past Lessons
+Read `jaan-to/learn/{name}.learn.md` if it exists:
+
+# After (v3.0.0)
+## Pre-Execution: Apply Past Lessons
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`$JAAN_LEARN_DIR/{name}.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions" to Step 1
+```
+
+**Changes**:
+- Rename "Step 0" → "Pre-Execution"
+- Add MANDATORY FIRST ACTION emphasis
+- Use `$JAAN_LEARN_DIR` variable
+- Expand explanation of how to apply lessons
+
+#### 4. Update Template References
+
+```markdown
+# Before (v2.x)
+Use template from `skills/{name}/template.md`
+
+# After (v3.0.0)
+Use template from: `$JAAN_TEMPLATES_DIR/{name}.template.md`
+```
+
+#### 5. Update Output Paths
+
+```markdown
+# Before (v2.x)
+Write to `jaan-to/outputs/{role}/{domain}/{slug}/`
+
+# After (v3.0.0)
+Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+```
+
+**Find & Replace**:
+- `` `jaan-to/outputs/ `` → `` `$JAAN_OUTPUTS_DIR/ ``
+- `Create path: jaan-to/outputs/` → `Create path: $JAAN_OUTPUTS_DIR/`
+
+#### 6. Update template.md (if exists)
+
+```markdown
+# Before (v2.x)
+## Metadata
+- Created: {date}
+- Skill: {skill_name}
+
+# After (v3.0.0)
+## Metadata
+| Field | Value |
+|-------|-------|
+| Created | {{date}} |
+| Output Path | {{env:JAAN_OUTPUTS_DIR}}/{{role}}/{{domain}}/ |
+| Skill | {{skill_name}} |
+| Version | 3.0 |
+```
+
+**Changes**:
+- Replace `{field}` → `{{field}}` (double braces)
+- Add environment variable: `{{env:JAAN_OUTPUTS_DIR}}`
+- Add version field
+- Convert to table format
+
+#### 7. Validate Migration
+
+After migration, run validation:
+
+```bash
+# Use skill validator
+/to-jaan-skill-update {skill-name}
+```
+
+Check v3.0.0 compliance:
+- [ ] ✓ V3.1: Frontmatter uses `$JAAN_*` variables
+- [ ] ✓ V3.2: Context paths use `$JAAN_*`
+- [ ] ✓ V3.3: Learning path uses `$JAAN_LEARN_DIR`
+- [ ] ✓ V3.4: Template path uses `$JAAN_TEMPLATES_DIR`
+- [ ] ✓ V3.5: Output paths use `$JAAN_OUTPUTS_DIR`
+- [ ] ✓ V3.6: template.md uses `{{double-brace}}` syntax
+- [ ] ✓ V3.7: Tech integration (if applicable)
+
+If all checks pass: **v3.0.0 Compliant** ✓
+
+### Rollback Plan
+
+If issues occur after migration:
+
+```bash
+# Restore backups created by auto-fix script
+mv skills/{name}/SKILL.md.v2.backup skills/{name}/SKILL.md
+mv skills/{name}/template.md.v2.backup skills/{name}/template.md
+```
+
+### Testing Post-Migration
+
+After migration, test the skill:
+
+```bash
+# Test with example input
+/{skill-name} "{example-input}"
+
+# Verify:
+# 1. Skill runs without errors
+# 2. Output written to correct path
+# 3. Template variables resolved correctly
+# 4. Tech integration works (if applicable)
 ```
 
 ---

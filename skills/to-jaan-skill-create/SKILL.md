@@ -4,7 +4,7 @@ description: |
   Guide users through creating new jaan.to skills step-by-step.
   Auto-triggers on: create skill, new skill, skill wizard, add skill.
   Maps to: to-jaan-skill-create
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 ---
 
@@ -14,7 +14,7 @@ argument-hint: [optional-skill-idea]
 
 ## Context Files
 
-- `jaan-to/docs/create-skill.md` - Skill specification (REQUIRED)
+- `docs/extending/create-skill.md` - Skill creation specification (v3.0.0)
 - `$JAAN_LEARN_DIR/to-jaan-skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_TEMPLATES_DIR/to-jaan-skill-create.template.md` - Generation templates
 - `$JAAN_CONTEXT_DIR/config.md` - Current skill catalog
@@ -33,12 +33,21 @@ If provided, use as starting context. Otherwise, begin with identity questions.
 `$JAAN_LEARN_DIR/to-jaan-skill-create.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
+- Add questions from "Better Questions" to Step 1
+- Note edge cases to check from "Edge Cases"
+- Follow workflow improvements from "Workflow"
+- Avoid mistakes listed in "Common Mistakes"
 
-If the file does not exist, continue without it.
+**v3.0.0 Common Mistakes to Avoid** (regardless of LEARN.md):
+- ✗ Using hardcoded `jaan-to/outputs/` instead of `$JAAN_OUTPUTS_DIR`
+- ✗ Using hardcoded `jaan-to/templates/` instead of `$JAAN_TEMPLATES_DIR`
+- ✗ Using hardcoded `jaan-to/learn/` instead of `$JAAN_LEARN_DIR`
+- ✗ Using hardcoded `jaan-to/context/` instead of `$JAAN_CONTEXT_DIR`
+- ✗ Forgetting `#anchor` syntax when importing tech.md sections
+- ✗ Using too-broad permissions like `Write(jaan-to/**)`
+- ✗ Not validating with `/to-jaan-skill-update` before user testing
+
+If the file does not exist, continue without it (but still avoid mistakes above).
 
 ---
 
@@ -110,6 +119,33 @@ Ask these questions one at a time:
 > "Skill name will be: `jaan-to-{role}-{domain}-{action}`"
 > "Command: `/jaan-to-{role}-{domain}-{action}`"
 > "Logical name: `jaan-to-{role}-{domain}:{action}`"
+
+## Step 1.5: Check Project Configuration (v3.0.0)
+
+Before proceeding with design, understand the project's configuration:
+
+1. **Check if configuration exists**:
+   - Read `jaan-to/config/settings.yaml` (if exists)
+   - Note any custom path configurations
+
+2. **Path customization check**:
+   - Are default paths customized?
+   - If `settings.yaml` has `paths:` section, note custom locations
+   - Skills should use `$JAAN_*` env vars (automatically resolve to correct paths)
+
+3. **Learning strategy**:
+   - Check `settings.yaml` for `learning.strategy: "merge"` or `"override"`
+   - **merge**: Combine plugin + project lessons (default, recommended)
+   - **override**: Use only project lessons (ignore plugin defaults)
+
+4. **Template customization**:
+   - Check if custom templates exist for similar skills
+   - Pattern: `templates.{skill-name}.path: "./custom/path.md"`
+   - If project has custom templates, new skill should follow same pattern
+
+**Information helps generate skills that work correctly with the project's configuration.**
+
+> "Configuration checked: [default paths / custom paths detected]"
 
 ## Step 2: Web Research (Token-Optimized)
 
@@ -347,17 +383,284 @@ Show complete content of:
 
 > "Write these files? [y/n]"
 
-## Step 12: Write Files
+## Step 12: Write Files (v3.0.0-Compliant)
 
-If approved:
-1. Create directory: `skills/{name}/`
-2. Write SKILL.md to `skills/{name}/SKILL.md`
-3. Write LEARN.md to `skills/{name}/LEARN.md`
-4. Write template.md to `skills/{name}/template.md` (if needed)
+### 12.1: SKILL.md Frontmatter
 
-Confirm: "Skill files written to `skills/{name}/`"
+Write to: `skills/{name}/SKILL.md`
 
-## Step 13: Update Config Catalog
+**v3.0.0 Best Practices for Frontmatter**:
+
+1. **Use Environment Variables in Permissions**:
+   ```yaml
+   # ✓ Correct (v3.0.0)
+   allowed-tools: Write($JAAN_OUTPUTS_DIR/{role}/**), Read($JAAN_CONTEXT_DIR/**)
+
+   # ✗ Deprecated (v2.x)
+   allowed-tools: Write(jaan-to/outputs/{role}/**), Read(jaan-to/context/**)
+   ```
+
+2. **Standard Permission Patterns**:
+   - Output writes: `Write($JAAN_OUTPUTS_DIR/{role}/**)`
+   - Template edits: `Edit($JAAN_TEMPLATES_DIR/**)`
+   - Learning writes: `Write($JAAN_LEARN_DIR/**)`
+   - Context reads: `Read($JAAN_CONTEXT_DIR/**)`
+
+3. **Anti-patterns to Avoid**:
+   - ✗ `Write(jaan-to/**)` - Too broad, doesn't respect configuration
+   - ✗ Hardcoded paths like `jaan-to/outputs/` - Not customizable
+   - ✗ Mixed v2.x and v3.0.0 patterns
+
+### 12.2: SKILL.md Context Files Section
+
+**Always include with environment variables**:
+```markdown
+## Context Files
+
+- `$JAAN_CONTEXT_DIR/config.md` - Project configuration (if applicable)
+- `$JAAN_CONTEXT_DIR/boundaries.md` - Trust boundaries (if applicable)
+- `$JAAN_TEMPLATES_DIR/{skill-name}.template.md` - Template for outputs
+- `$JAAN_LEARN_DIR/{skill-name}.learn.md` - Past lessons (loaded in Pre-Execution)
+```
+
+**For tech-aware skills, add**:
+```markdown
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (optional, auto-imported if exists)
+  - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
+```
+
+### 12.3: SKILL.md Pre-Execution Section
+
+**Standard pattern for all skills**:
+```markdown
+## Pre-Execution
+
+**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
+`$JAAN_LEARN_DIR/{skill-name}.learn.md`
+
+If the file exists, apply its lessons throughout this execution:
+- Add questions from "Better Questions" to Step 1
+- Note edge cases to check from "Edge Cases"
+- Follow workflow improvements from "Workflow"
+- Avoid mistakes listed in "Common Mistakes"
+```
+
+**For tech-aware skills, add**:
+```markdown
+Also read tech context if available:
+- `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack for relevant features
+```
+
+### 12.4: SKILL.md Template References
+
+**In generation steps, always use environment variables**:
+
+```markdown
+## Step {N}: Generate Output
+
+1. Read template: `$JAAN_TEMPLATES_DIR/{skill-name}.template.md`
+2. Apply context from: `$JAAN_CONTEXT_DIR/config.md` (if needed)
+```
+
+**For tech-aware skills, add section imports**:
+```markdown
+3. If tech stack needed, extract sections from tech.md:
+   - Current Stack: `#current-stack`
+   - Frameworks: `#frameworks`
+   - Constraints: `#constraints`
+
+Standard tech.md anchors:
+- `#current-stack`, `#frameworks`, `#constraints`
+- `#versioning`, `#patterns`, `#tech-debt`
+```
+
+### 12.5: SKILL.md Output Path Instructions
+
+**Standard output pattern**:
+```markdown
+## Step {N}: Write to File
+
+1. Generate slug from title: lowercase, hyphens, no special chars
+2. Construct path: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+3. Ask for approval:
+   > "Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`? [y/n]"
+4. If approved:
+   - Create directory: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+   - Write file: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`
+```
+
+**Never hardcode** `jaan-to/outputs/` - always use `$JAAN_OUTPUTS_DIR`.
+
+### 12.6: Write template.md (if needed)
+
+Write to: `skills/{name}/template.md`
+
+**v3.0.0 Template Variable Syntax**:
+
+1. **Field Variables** (standard placeholders):
+   ```markdown
+   # {{title}}
+
+   > Generated: {{date}}
+   > Author: {{author}}
+   ```
+
+2. **Environment Variables** (shell environment):
+   ```markdown
+   Output Path: {{env:JAAN_OUTPUTS_DIR}}
+   ```
+
+3. **Configuration Variables** (from settings.yaml):
+   ```markdown
+   Custom Setting: {{config:custom_field}}
+   ```
+
+4. **Section Imports** (from context files):
+   ```markdown
+   ## Tech Stack
+   {{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+   ## Constraints
+   {{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}
+   ```
+
+**Standard tech.md section anchors**:
+- `#current-stack` - Languages, frameworks, databases
+- `#frameworks` - Framework-specific details
+- `#constraints` - Technical constraints
+- `#versioning` - API versioning policies
+- `#patterns` - Common patterns (auth, errors)
+- `#tech-debt` - Known technical debt
+
+**Example template with all variable types**:
+```markdown
+# {{title}}
+
+## Problem Statement
+{{problem}}
+
+## Technical Context
+
+**Stack**: {{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+**Constraints**:
+{{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}
+
+## Implementation
+{{implementation_details}}
+```
+
+### 12.7: Write LEARN.md Seed
+
+Write to: `skills/{name}/LEARN.md` (plugin-side)
+
+**Standard structure**:
+```markdown
+# Lessons: {skill-name}
+
+> Plugin-side lessons. Project-specific lessons go in:
+> `$JAAN_LEARN_DIR/{skill-name}.learn.md`
+
+## Better Questions
+<!-- Questions that improve input quality -->
+
+## Edge Cases
+<!-- Special cases to check -->
+
+## Workflow
+<!-- Process improvements -->
+
+## Common Mistakes
+<!-- Pitfalls to avoid -->
+```
+
+**Document learning merge strategy**:
+- Plugin lessons (LEARN.md): Baseline best practices
+- Project lessons (`$JAAN_LEARN_DIR/{skill}.learn.md`): Team-specific lessons
+- Default strategy: **merge** (combine both sources)
+- Skills see merged view at runtime
+
+### 12.8: v3.0.0 Validation Checklist
+
+Before completing Step 12, verify:
+
+**v3.0.0 Compliance**:
+- [ ] All paths use `$JAAN_*` environment variables
+- [ ] No hardcoded `jaan-to/` paths in SKILL.md
+- [ ] Frontmatter permissions use environment variables
+- [ ] Context Files section references `$JAAN_CONTEXT_DIR`, `$JAAN_TEMPLATES_DIR`, `$JAAN_LEARN_DIR`
+- [ ] Pre-Execution reads from `$JAAN_LEARN_DIR/{skill-name}.learn.md`
+- [ ] Output paths use `$JAAN_OUTPUTS_DIR`
+- [ ] template.md uses variable syntax: `{{field}}`, `{{env:VAR}}`, `{{import:path#section}}`
+
+**Tech Stack Integration** (if applicable):
+- [ ] SKILL.md mentions reading `$JAAN_CONTEXT_DIR/tech.md`
+- [ ] Template imports relevant sections with `#anchor` syntax
+- [ ] Documentation explains which tech sections are used
+
+**Learning System**:
+- [ ] LEARN.md seed created in `skills/{name}/LEARN.md`
+- [ ] SKILL.md documents merge strategy
+- [ ] Pre-Execution step reads learning file
+
+**Quality**:
+- [ ] SKILL.md follows specification at `docs/extending/create-skill.md`
+- [ ] All required sections present
+- [ ] No TODOs or placeholders in generated files
+
+Confirm: "Skill files written to `skills/{name}/` (v3.0.0-compliant)"
+
+## Step 13: Tech Stack Integration (Optional)
+
+If the skill should be tech-aware (references the project's tech stack):
+
+### 13.1: Identify Tech Context Needs
+
+Ask: "Should this skill reference the project's tech stack?"
+
+**Tech-aware skills** (answer YES):
+- PRD generation → Reference stack in technical sections
+- Code generation → Use correct frameworks and patterns
+- Story writing → Mention implementation details
+- API documentation → Reference actual endpoints/frameworks
+
+**Tech-agnostic skills** (answer NO):
+- Research → General knowledge gathering
+- Documentation (non-technical) → General content
+- Roadmap planning → High-level features
+
+### 13.2: Update SKILL.md to Read tech.md
+
+If YES, add to Pre-Execution section:
+```markdown
+Also read tech context if available:
+- `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack for relevant features
+```
+
+### 13.3: Update template.md with Section Imports
+
+If YES, add imports for relevant sections:
+```markdown
+## Technical Context
+
+**Stack**: {{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}
+
+**Frameworks**: {{import:$JAAN_CONTEXT_DIR/tech.md#frameworks}}
+
+**Constraints**: {{import:$JAAN_CONTEXT_DIR/tech.md#constraints}}
+```
+
+### 13.4: Document Tech Integration
+
+If YES, add to SKILL.md Context Files section:
+```markdown
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (optional, auto-imported if exists)
+  - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
+```
+
+> "Tech integration: [enabled / not applicable]"
+
+## Step 14: Update Config Catalog
 
 Edit `scripts/seeds/config.md` to add skill to Available Skills table:
 
@@ -365,14 +668,14 @@ Edit `scripts/seeds/config.md` to add skill to Available Skills table:
 | jaan-to-{role}-{domain}:{action} | `/{name}` | {short_description} |
 ```
 
-## Step 14: Auto-Invoke Documentation
+## Step 15: Auto-Invoke Documentation
 
 Run `/to-jaan-docs-create` to create:
 - `docs/skills/{role}/{name}.md`
 
 This ensures documentation is always created with the skill.
 
-## Step 15: Commit to Branch
+## Step 16: Commit to Branch
 
 ```bash
 git add skills/{name}/ jaan-to/ docs/skills/{role}/{name}.md
@@ -391,7 +694,31 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 
 # PHASE 3: Testing & PR
 
-## Step 16: User Testing
+## Step 17: Validate v3.0.0 Compliance
+
+Before user testing, validate the created skill:
+
+```
+/to-jaan-skill-update {skill-name}
+```
+
+This checks for:
+- ✓ v3.0.0 compliance (all paths use `$JAAN_*` variables)
+- ✓ Required sections present
+- ✓ Frontmatter correctness
+- ✓ Template variable syntax
+- ✓ Learning file structure
+- ✓ Tech integration (if applicable)
+
+**If validation fails**:
+1. Review the validation output
+2. Return to appropriate step (usually Step 12)
+3. Fix identified issues
+4. Re-validate until all checks pass
+
+**Only proceed to user testing after validation passes.**
+
+## Step 18: User Testing
 
 > "Please test the skill in a new session. Here's a copy-paste ready example:"
 >
@@ -412,7 +739,7 @@ If issues:
 3. Commit fixes
 4. Repeat testing
 
-## Step 17: Create Pull Request
+## Step 19: Create Pull Request
 
 When user confirms working:
 > "Create pull request to merge to main? [y/n]"
