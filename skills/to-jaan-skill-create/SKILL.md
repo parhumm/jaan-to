@@ -474,22 +474,81 @@ Standard tech.md anchors:
 - `#versioning`, `#patterns`, `#tech-debt`
 ```
 
-### 12.5: SKILL.md Output Path Instructions
+### 12.5: SKILL.md Output Path Instructions (ID-Based Folder Pattern)
 
-**Standard output pattern**:
+**Standard output pattern with ID generation**:
 ```markdown
-## Step {N}: Write to File
+## Step 5.5: Generate ID and Folder Structure
 
-1. Generate slug from title: lowercase, hyphens, no special chars
-2. Construct path: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
-3. Ask for approval:
-   > "Write to `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`? [y/n]"
-4. If approved:
-   - Create directory: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
-   - Write file: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`
+1. Source ID generator utility:
+\`\`\`bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+\`\`\`
+
+2. Generate next ID and output paths:
+\`\`\`bash
+# Define your subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/{role}/{subdomain}"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate sequential ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Generate folder and file paths
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
+\`\`\`
+
+3. Preview for user:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-{report-type}-{slug}.md
+
+## Step {N}: Write Output
+
+1. Create output folder:
+\`\`\`bash
+mkdir -p "$OUTPUT_FOLDER"
+\`\`\`
+
+2. Write main output file:
+\`\`\`bash
+cat > "$MAIN_FILE" <<'EOF'
+# {Title}
+
+## Executive Summary
+{1-2 sentence summary}
+
+{rest of output content}
+EOF
+\`\`\`
+
+3. Update subdomain index:
+\`\`\`bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Title}" \
+  "{Executive summary text}"
+\`\`\`
+
+4. Confirm to user:
+> ✓ Output written to: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
+> ✓ Index updated: jaan-to/outputs/{role}/{subdomain}/README.md
 ```
 
+**Key Components**:
+- **ID**: Auto-generated sequential number per subdomain (01, 02, 03...)
+- **Slug**: lowercase-kebab-case from title (max 50 chars)
+- **Report-type**: Subdomain name (prd, story, gtm, tasks, etc.)
+- **Index**: Automatic README.md updates with executive summaries
+
 **Never hardcode** `jaan-to/outputs/` - always use `$JAAN_OUTPUTS_DIR`.
+
+**Exception**: Research outputs use flat files (`$JAAN_OUTPUTS_DIR/research/{id}-{category}-{slug}.md`) instead of folders.
 
 ### 12.6: Write template.md (if needed)
 
@@ -592,6 +651,15 @@ Before completing Step 12, verify:
 - [ ] Pre-Execution reads from `$JAAN_LEARN_DIR/{skill-name}.learn.md`
 - [ ] Output paths use `$JAAN_OUTPUTS_DIR`
 - [ ] template.md uses variable syntax: `{{field}}`, `{{env:VAR}}`, `{{import:path#section}}`
+
+**Output Structure Compliance** (for output-generating skills):
+- [ ] Uses `scripts/lib/id-generator.sh` for ID generation (Step 5.5)
+- [ ] Creates folder: `{subdomain}/{id}-{slug}/`
+- [ ] Main file named: `{id}-{report-type}-{slug}.md`
+- [ ] Updates index using `scripts/lib/index-updater.sh`
+- [ ] Includes Executive Summary section in template
+- [ ] Preview shows ID, folder path, and file path to user
+- [ ] Confirms index update after writing
 
 **Tech Stack Integration** (if applicable):
 - [ ] SKILL.md mentions reading `$JAAN_CONTEXT_DIR/tech.md`
