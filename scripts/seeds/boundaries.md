@@ -2,6 +2,8 @@
 
 > Non-negotiable safety rules for jaan.to
 
+**TIP**: Run `/jaan-to-dev-stack-detect` to auto-generate safe paths based on your project structure.
+
 ---
 
 ## Allowed Write Locations
