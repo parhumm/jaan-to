@@ -20,9 +20,9 @@
 - core (Internal)
 
 ## Planned Roles (Phase 5)
-- dev (Development) - 5 skills [1 active: fe-task-breakdown]
-- qa (Quality Assurance) - 5 skills
-- growth (SEO + Content) - 5 skills
+- dev (Development) - 17 skills [2 active: fe-task-breakdown, be-task-breakdown]
+- qa (Quality Assurance) - 12 skills
+- growth (SEO + Content) - 15 skills
 
 > See [roadmaps/jaan-to/tasks/role-skills.md](../roadmaps/jaan-to/tasks/role-skills.md) for full catalog
 
@@ -44,6 +44,7 @@
 | jaan-to-dev-stack-detect | `/jaan-to-dev-stack-detect` | Auto-detect tech stack and populate context |
 | jaan-to-ux-heatmap-analyze | `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 | jaan-to-dev-fe-task-breakdown | `/jaan-to-dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
+| jaan-to-dev-be-task-breakdown | `/jaan-to-dev-be-task-breakdown` | Generate BE task breakdown from PRD |
 
 ## Trust
 - trust_paths: ["jaan-to/"]
