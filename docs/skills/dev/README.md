@@ -9,6 +9,7 @@
 | Skill | Description |
 |-------|-------------|
 | [/jaan-to-dev-stack-detect](stack-detect.md) | Auto-detect tech stack and populate context |
+| [/jaan-to-dev-pr-review](pr-review.md) | Automated PR review: risk scoring, security hints, missing tests |
 
 ---
 
