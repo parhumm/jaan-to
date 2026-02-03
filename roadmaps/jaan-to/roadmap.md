@@ -239,6 +239,38 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ---
 
+## v3.13.0 — Standards Compliance & Distribution Readiness (`9fef818`)
+
+- **Learning System Dashboard** — Make accumulated learning discoverable and actionable (`9f513c2`)
+  - `scripts/learning-summary.sh` — Scan all LEARN.md files, count lessons per skill, extract Common Mistakes and Edge Cases, generate markdown/JSON report
+  - `/jaan-to-learn-report` command — Display formatted learning insights with skill coverage analysis and actionable next steps
+  - `docs/learning/LESSON-TEMPLATE.md` — Structured lesson format (Context, What Happened, Root Cause, Fix, Prevention)
+  - Quality-reviewer agent enhancement: Check if outputs reference existing lessons, suggest creating entries for repeated patterns
+- **Distribution Package for Marketplace** — Lower barrier to adoption, enable community contributions (`3c03529`)
+  - `examples/starter-project/` — Comprehensive EduStream Academy example (37 markdown files, 792KB) demonstrating 7+ skills across PM/Dev/UX/QA/Research
+    - 3 PRDs (live streaming, marketplace, AI), 6 user stories, BE/FE task breakdowns, microcopy packs (7 languages), QA test cases
+    - Complete roadmap with Node.js/Express/React/WebRTC stack
+  - `CONTRIBUTING.md` — Complete contribution guide (skill creation, LEARN.md improvement, code style, testing, release process)
+  - `docs/QUICKSTART-VIDEO.md` — 3-5 minute demo video script for marketplace promotion
+  - `scripts/verify-install.sh` enhancement — Added skill discovery checks, hook registration verification, installation report
+- **Standards Compliance with Official Claude Code Patterns** — Align with 13 official Anthropic plugins (`3994ef5`)
+  - Removed `.claude/settings.json` from plugin distribution (0/13 official plugins have this)
+  - Enhanced agent descriptions with concrete `<example>` blocks showing triggering scenarios (quality-reviewer, context-scout)
+  - Removed non-standard "capabilities" field from agent frontmatter
+  - Added `.claude/` to .gitignore, documented optional project configuration in README
+  - Updated `scripts/build-dist.sh` to exclude .claude/ from distribution
+- **Documentation Improvements**
+  - `docs/development/VALIDATION.md` — jq-based validation patterns for hooks.json and agent frontmatter (`3994ef5`)
+  - `docs/skills/DEPENDENCIES.md` — Skill call chains with visual dependency tree (`3108388`)
+  - Fixed broken skill references (removed non-existent fe-state-machine, be-data-model references) (`3108388`)
+  - Template documentation clarified in docs-create and docs-update skills (`3108388`)
+  - WordPress Development Research added to index (`c27cbcd`)
+- **Command Naming Convention** — Renamed `learning-report` to `jaan-to-learn-report` following plugin standards (`369a36e`)
+- **README Enhancement** — Added badges, quick stats table (18 skills, 2 agents, 4 hooks), verification steps, workflow examples (`c386766`)
+- **Marketplace Metadata** — Enhanced keywords (product-management, user-stories, gtm-tracking), updated plugin description with feature highlights (`c386766`)
+
+---
+
 ## Unreleased
 
 (none)
