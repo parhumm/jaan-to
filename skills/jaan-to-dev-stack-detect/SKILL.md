@@ -436,14 +436,56 @@ Enable roles based on detections:
 
 Only add roles not already in the Enabled Roles list.
 
+## Step 15.5: Generate ID and Folder Structure
+
+Set up the output structure:
+
+1. Source ID generator utility:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+```
+
+2. Generate sequential ID and output paths:
+```bash
+# Define subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/stack"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate next ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Create folder and file paths (date-based slug)
+date_slug=$(date +%Y-%m-%d)
+slug="stack-detect-${date_slug}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-stack-${slug}.md"
+```
+
 ## Step 16: Save Detection Report
 
-Save a detection report to `$JAAN_OUTPUTS_DIR/dev/stack-detect/`:
+1. Create output folder:
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
 
-1. Read template: `$JAAN_TEMPLATES_DIR/jaan-to-dev-stack-detect.template.md`
-2. Fill template variables with detection results
-3. Generate filename: `stack-detect-{YYYY-MM-DD}.md`
-4. Write to: `$JAAN_OUTPUTS_DIR/dev/stack-detect/stack-detect-{YYYY-MM-DD}.md`
+2. Read template and fill with detection results:
+```bash
+# Read template: $JAAN_TEMPLATES_DIR/jaan-to-dev-stack-detect.template.md
+cat > "$MAIN_FILE" <<'EOF'
+{generated stack detection with Executive Summary}
+EOF
+```
+
+3. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "Stack Detection ${date_slug}" \
+  "{1-2 sentence summary: detected stack technologies and confidence levels}"
+```
 
 ## Step 17: Show Summary
 

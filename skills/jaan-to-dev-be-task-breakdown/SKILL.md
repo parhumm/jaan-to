@@ -717,13 +717,64 @@ Show the complete task breakdown document.
 
 > "Here's the task breakdown preview. Write to `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`? [y/n]"
 
+## Step 9.5: Generate ID and Folder Structure
+
+If approved, set up the output structure:
+
+1. Source ID generator utility:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+```
+
+2. Generate sequential ID and output paths:
+```bash
+# Define subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/backend"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate next ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Create folder and file paths
+slug="{lowercase-hyphenated-from-prd-title-max-50-chars}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-be-tasks-${slug}.md"
+```
+
+3. Preview output configuration:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/dev/backend/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-be-tasks-{slug}.md
+
 ## Step 10: Write Output
 
-If approved:
-1. Generate slug from PRD/feature title: lowercase, hyphens, no special chars, max 50 chars
-2. Create directory: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/`
-3. Write file: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`
-4. Confirm: "Written to `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`"
+1. Create output folder:
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
+
+2. Write task breakdown to main file:
+```bash
+cat > "$MAIN_FILE" <<'EOF'
+{generated task breakdown with Executive Summary}
+EOF
+```
+
+3. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Feature Title}" \
+  "{1-2 sentence summary: backend task breakdown for feature}"
+```
+
+4. Confirm completion:
+> ✓ Task breakdown written to: jaan-to/outputs/dev/backend/{NEXT_ID}-{slug}/{NEXT_ID}-be-tasks-{slug}.md
+> ✓ Index updated: jaan-to/outputs/dev/backend/README.md
 
 ## Step 11: Suggest Next Skill
 

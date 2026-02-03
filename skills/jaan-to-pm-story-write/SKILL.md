@@ -478,20 +478,68 @@ Show complete story in markdown format:
 {complete story content with all 9 sections}
 ```
 
-> "📋 Preview complete. Write to `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`? [y/n]"
+> "📋 Preview complete. Approve writing to output? [y/n]"
 
 If "n", ask what needs revision and return to Step 4.
 
+## Step 6.5: Generate ID and Folder Structure
+
+If approved, set up the output structure:
+
+1. Source ID generator utility:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+```
+
+2. Generate sequential ID and output paths:
+```bash
+# Define subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/pm/stories"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate next ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Create folder and file paths
+slug="{lowercase-hyphenated-from-title-max-50-chars}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-story-${slug}.md"
+```
+
+3. Preview output configuration:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/pm/stories/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-story-{slug}.md
+
 ## Step 7: Write Output
 
-If approved:
+1. Create output folder:
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
 
-1. **Generate slug**: lowercase, hyphens, no special chars, max 50 chars from title
-   - Example: "Update Email Notification Preferences" → "update-email-notification-preferences"
-2. **Create directory**: `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/`
-3. **Write file**: `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`
-4. **Confirm**:
-   > "✅ Story written to `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`"
+2. Write story to main file:
+```bash
+cat > "$MAIN_FILE" <<'EOF'
+{generated story content with Executive Summary}
+EOF
+```
+
+3. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Story Title}" \
+  "{1-2 sentence executive summary from story}"
+```
+
+4. Confirm completion:
+> ✅ Story written to: jaan-to/outputs/pm/stories/{NEXT_ID}-{slug}/{NEXT_ID}-story-{slug}.md
+> ✅ Index updated: jaan-to/outputs/pm/stories/README.md
 
 ### Export Formats
 

@@ -329,16 +329,67 @@ EXAMPLE WITH VALUES
 {example showing real values based on user input}
 ```
 
-> "Save to `$JAAN_OUTPUTS_DIR/data/gtm/{slug}/tracking.md`? [y/n]"
+> "Save tracking code to output? [y/n]"
+
+## Step 5.5: Generate ID and Folder Structure
+
+If approved, set up the output structure:
+
+1. Source ID generator utility:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+```
+
+2. Generate sequential ID and output paths:
+```bash
+# Define subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/data/gtm"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate next ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Create folder and file paths (slug from feature-item, e.g., "player-pause")
+slug="{lowercase-hyphenated-feature-item}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-gtm-${slug}.md"
+```
+
+3. Preview output configuration:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/data/gtm/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-gtm-{slug}.md
 
 ## Step 6: Write Output
 
-If approved:
-1. Generate slug from feature-item (e.g., "player-pause")
-2. Create path: `$JAAN_OUTPUTS_DIR/data/gtm/{slug}/tracking.md`
-3. Use template from `$JAAN_TEMPLATES_DIR/jaan-to-data-gtm-datalayer.template.md`
-4. Write file
-5. Confirm: "Written to {path}"
+1. Create output folder:
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
+
+2. Write tracking code to main file using template:
+```bash
+# Use template from $JAAN_TEMPLATES_DIR/jaan-to-data-gtm-datalayer.template.md
+cat > "$MAIN_FILE" <<'EOF'
+{generated tracking documentation with Executive Summary}
+EOF
+```
+
+3. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Tracking Title}" \
+  "{1-2 sentence summary: feature-item tracking with event type}"
+```
+
+4. Confirm completion:
+> ✓ Tracking code written to: jaan-to/outputs/data/gtm/{NEXT_ID}-{slug}/{NEXT_ID}-gtm-{slug}.md
+> ✓ Index updated: jaan-to/outputs/data/gtm/README.md
 
 ## Step 7: Capture Feedback
 

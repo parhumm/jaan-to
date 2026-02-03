@@ -128,14 +128,66 @@ If any check fails, revise before preview.
 
 ## Step 5: Preview & Approval
 Show the complete PRD and ask:
-> "Here's the PRD preview. Write to `$JAAN_OUTPUTS_DIR/pm/{slug}/prd.md`? [y/n]"
+> "Here's the PRD preview. Approve writing to output? [y/n]"
+
+## Step 5.5: Generate ID and Folder Structure
+
+If approved, set up the output structure:
+
+1. Source ID generator utility:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+```
+
+2. Generate sequential ID and output paths:
+```bash
+# Define subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/pm/prd"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate next ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Create folder and file paths
+slug="{lowercase-hyphenated-from-title-max-50-chars}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-prd-${slug}.md"
+```
+
+3. Preview output configuration:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/pm/prd/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-prd-{slug}.md
 
 ## Step 6: Write Output
-If approved:
-1. Generate slug: lowercase, hyphens, no special chars, max 50 chars
-2. Create path: `$JAAN_OUTPUTS_DIR/pm/{slug}/prd.md`
-3. Write the PRD
-4. Confirm: "PRD written to {path}"
+
+1. Create output folder:
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
+
+2. Write PRD to main file:
+```bash
+cat > "$MAIN_FILE" <<'EOF'
+{generated PRD content with Executive Summary}
+EOF
+```
+
+3. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{PRD Title}" \
+  "{1-2 sentence executive summary from PRD}"
+```
+
+4. Confirm completion:
+> ✓ PRD written to: jaan-to/outputs/pm/prd/{NEXT_ID}-{slug}/{NEXT_ID}-prd-{slug}.md
+> ✓ Index updated: jaan-to/outputs/pm/prd/README.md
 
 ## Step 7: Auto-Invoke User Story Generation
 

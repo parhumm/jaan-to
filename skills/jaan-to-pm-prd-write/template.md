@@ -4,6 +4,12 @@
 
 ---
 
+## Executive Summary
+
+{1-2 sentence high-level summary of the problem and proposed solution}
+
+---
+
 ## Problem Statement
 
 {problem}

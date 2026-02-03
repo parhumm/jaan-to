@@ -21,6 +21,10 @@ component: ""
 
 # {story_id}: {title}
 
+## Executive Summary
+
+{1-2 sentence high-level summary of what this story delivers and why it matters}
+
 ## Context
 
 {context_paragraph}

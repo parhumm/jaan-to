@@ -4,6 +4,12 @@
 
 ---
 
+## Executive Summary
+
+{1-2 sentence summary: tracking {event_type} event for {feature}/{item} with dataLayer push}
+
+---
+
 ## Overview
 
 **Feature**: `{feature}`

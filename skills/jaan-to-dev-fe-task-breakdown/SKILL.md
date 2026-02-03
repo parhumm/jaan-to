@@ -487,19 +487,70 @@ If any check fails, fix before preview.
 Show the complete task breakdown document.
 
 Use AskUserQuestion:
-- Question: "Write to `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`?"
+- Question: "Write task breakdown to output?"
 - Header: "Write"
 - Options:
   - "Yes" — Write the file
   - "No" — Cancel
 
+## Step 10.5: Generate ID and Folder Structure
+
+If approved, set up the output structure:
+
+1. Source ID generator utility:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+```
+
+2. Generate sequential ID and output paths:
+```bash
+# Define subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/frontend"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate next ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Create folder and file paths (slug from feature name)
+slug="{lowercase-hyphenated-feature-name}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-fe-tasks-${slug}.md"
+```
+
+3. Preview output configuration:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/dev/frontend/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-fe-tasks-{slug}.md
+
 ## Step 11: Write Output
 
-If approved:
-1. Generate slug from feature name: lowercase, hyphens, no special chars
-2. Create directory: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/`
-3. Write file: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`
-4. Confirm: "Written to `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`"
+1. Create output folder:
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
+
+2. Write task breakdown to main file:
+```bash
+cat > "$MAIN_FILE" <<'EOF'
+{generated task breakdown with Executive Summary}
+EOF
+```
+
+3. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Feature Title}" \
+  "{1-2 sentence summary: frontend task breakdown for feature}"
+```
+
+4. Confirm completion:
+> ✓ Task breakdown written to: jaan-to/outputs/dev/frontend/{NEXT_ID}-{slug}/{NEXT_ID}-fe-tasks-{slug}.md
+> ✓ Index updated: jaan-to/outputs/dev/frontend/README.md
 
 ## Step 12: Suggest Next Skill
 

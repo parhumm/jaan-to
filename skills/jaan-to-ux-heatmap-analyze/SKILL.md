@@ -378,17 +378,66 @@ If any check fails, revise the report before preview.
 
 Show the complete report in conversation.
 
-> "Here's the report preview. Write to `$JAAN_OUTPUTS_DIR/ux/heatmap/{slug}/report.md`? [y/n]"
+> "Here's the report preview. Write to output? [y/n]"
+
+## Step 11.5: Generate ID and Folder Structure
+
+If approved, set up the output structure:
+
+1. Source ID generator utility:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+```
+
+2. Generate sequential ID and output paths:
+```bash
+# Define subdomain directory
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/ux/heatmap"
+mkdir -p "$SUBDOMAIN_DIR"
+
+# Generate next ID
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# Create folder and file paths (slug from URL/page name)
+slug="{lowercase-hyphenated-page-name-max-50-chars}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-heatmap-${slug}.md"
+```
+
+3. Preview output configuration:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/ux/heatmap/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-heatmap-{slug}.md
 
 ## Step 12: Write Output
 
-If approved:
-1. Generate slug from URL or page name: lowercase, hyphens, no special characters, max 50 chars
-   - Example: "Product Detail Page" → `product-detail-page`
-   - Example: "https://example.com/checkout" → `checkout`
-2. Create path: `$JAAN_OUTPUTS_DIR/ux/heatmap/{slug}/`
-3. Write file: `$JAAN_OUTPUTS_DIR/ux/heatmap/{slug}/report.md`
-4. Confirm: "Report written to {path}"
+1. Create output folder:
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
+
+2. Write heatmap analysis report:
+```bash
+cat > "$MAIN_FILE" <<'EOF'
+{generated heatmap analysis with Executive Summary}
+EOF
+```
+
+3. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Page/URL Title}" \
+  "{1-2 sentence summary: heatmap analysis findings and top priority issues}"
+```
+
+4. Confirm completion:
+> ✓ Heatmap report written to: jaan-to/outputs/ux/heatmap/{NEXT_ID}-{slug}/{NEXT_ID}-heatmap-{slug}.md
+> ✓ Index updated: jaan-to/outputs/ux/heatmap/README.md
 
 ## Step 13: Capture Feedback
 
