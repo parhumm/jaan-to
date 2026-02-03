@@ -62,6 +62,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [52](52-dev-be-task-breakdown.md) | Backend Task Breakdown Skill: Complete Research Guide | Comprehensive methodology for transforming PRDs into Laravel/PHP backend tasks. Covers industry standards (IEEE, SAFe, Shape Up), INVEST criteria adaptation, vertical slicing vs horizontal layers, Laravel task types (migrations, models, controllers, jobs, actions), data model annotations, idempotency patterns, error taxonomy, T-shirt sizing, dependency management, quality validation, and AI guardrails. |
 | [53](53-dev-pr-review.md) | Building a Production-Ready PR/MR Code Review Skill | Complete technical foundation for GitLab-primary PR review automation targeting PHP/Laravel and TypeScript/React. Covers SmartBear effectiveness thresholds, risk-based file prioritization, Conventional Comments specification, security pattern detection (SQL injection, XSS, N+1 queries), secrets detection with entropy analysis, SARIF output format, LLM integration patterns with validation guardrails, and Dangerfile configurations. |
 | [54](54-roles-wp-details.md) | WordPress Plugin Development: Complete Role-Based Skills Guide | Comprehensive WordPress plugin development guide covering 7+ role domains — PM (idea validation, monetization, specs), Engineering (architecture, scaffolding, data storage, hooks, Settings API, WP-Cron), Admin UX (WP-Admin patterns), Integrations (REST/AJAX/External), Security/Privacy/Compliance, QA/Compatibility, and Release/Distribution (WordPress.org packaging). Each section includes skill commands with detailed implementation guidance. |
+| [55](55-ai-workflow-claude-code-user-input.md) | Handle Approvals and User Input | Official Claude Agent SDK guide for surfacing tool approval requests and clarifying questions to users via canUseTool callback and AskUserQuestion tool, with Python/TypeScript examples for allow/deny/modify responses and multi-choice question handling. |
 
 ## Quick Topic Finder
 
@@ -89,6 +90,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [41-ai-workflow-claude-code-checkpointing.md](41-ai-workflow-claude-code-checkpointing.md)
 - [42-ai-workflow-claude-code-interactive-mode.md](42-ai-workflow-claude-code-interactive-mode.md)
 - [43-ai-workflow-claude-code-cli-reference.md](43-ai-workflow-claude-code-cli-reference.md)
+- [55-ai-workflow-claude-code-user-input.md](55-ai-workflow-claude-code-user-input.md)
 
 ### AI-Powered Workflows
 - [02-ai-dev-maintenance.md](02-ai-dev-maintenance.md)
