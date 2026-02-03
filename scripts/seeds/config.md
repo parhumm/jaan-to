@@ -46,6 +46,7 @@
 | jaan-to-ux-microcopy-write | `/jaan-to-ux-microcopy-write` | Generate multi-language microcopy packs |
 | jaan-to-dev-fe-task-breakdown | `/jaan-to-dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
 | jaan-to-dev-be-task-breakdown | `/jaan-to-dev-be-task-breakdown` | Generate BE task breakdown from PRD |
+| jaan-to-qa-test-cases | `/jaan-to-qa-test-cases` | Generate test cases from acceptance criteria |
 
 ## Trust
 - trust_paths: ["jaan-to/"]
