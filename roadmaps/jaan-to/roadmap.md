@@ -158,6 +158,16 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ---
 
+### v3.7.0 — Frontend Task Breakdown Skill
+
+- **New skill**: `/jaan-to-dev-fe-task-breakdown` — Transform UX handoffs into production-ready frontend task breakdowns (`af90d27`)
+  - Atomic Design taxonomy (Atoms → Pages) with T-shirt size estimates
+  - 6-state enumeration, 50+ item coverage checklist, Mermaid dependency graphs
+  - Core Web Vitals 2025 targets, state machine stubs, risk assessment
+  - Dev role activated; `docs/skills/dev/` expanded
+
+---
+
 ## Unreleased
 
 (none)
@@ -249,6 +259,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/to-jaan-roadmap-add` | Add task to roadmap |
 | `/to-jaan-roadmap-update` | Maintain and sync roadmap |
 | `/jaan-to-dev-stack-detect` | Detect project tech stack |
+| `/jaan-to-dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
 | `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 
 ### Key Paths
