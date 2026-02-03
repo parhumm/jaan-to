@@ -268,25 +268,121 @@ Check if skill is tech-aware (references project's tech stack):
 - [ ] ✓ Tech-aware (integrates with tech.md)
 - [ ] N/A (skill doesn't need tech context)
 
+### V3.8: Output Structure Compliance (For Output-Generating Skills)
+
+Check if skill follows ID-based folder output pattern:
+
+**1. ID Generation Check**:
+```bash
+# ✓ Compliant
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+
+# ✗ Non-compliant
+# Missing ID generation
+```
+
+**Detection**: Search for `scripts/lib/id-generator.sh` and `generate_next_id` calls.
+
+**Status**:
+- [ ] ✓ Uses ID generator
+- [ ] ✗ Missing ID generation
+- [ ] N/A (skill doesn't write outputs)
+
+**2. Folder Structure Check**:
+```bash
+# ✓ Compliant
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
+
+# ✗ Non-compliant
+OUTPUT_FILE="$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}.md"  # Direct file, no folder
+OUTPUT_FILE="$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}"  # No ID
+```
+
+**Detection**: Check output path construction pattern.
+
+**Status**:
+- [ ] ✓ Creates folder `{id}-{slug}/`
+- [ ] ✗ Direct file write or missing ID in folder name
+- [ ] N/A
+
+**3. Index Management Check**:
+```bash
+# ✓ Compliant
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index "$SUBDOMAIN_DIR/README.md" "$NEXT_ID" "..." "..." "..."
+
+# ✗ Non-compliant
+# No index management
+```
+
+**Detection**: Search for `scripts/lib/index-updater.sh` and `add_to_index` calls.
+
+**Status**:
+- [ ] ✓ Updates subdomain index
+- [ ] ✗ Missing index management
+- [ ] N/A
+
+**4. Executive Summary Check**:
+```markdown
+# ✓ Compliant template
+## Executive Summary
+{1-2 sentence summary}
+
+# ✗ Non-compliant
+Missing Executive Summary section
+```
+
+**Detection**: Read template.md and check for `## Executive Summary` section.
+
+**Status**:
+- [ ] ✓ Template has Executive Summary
+- [ ] ✗ Template missing Executive Summary
+- [ ] N/A (no template.md)
+
+**Migration Suggestion Format** (if any check fails):
+```
+❌ Output structure outdated
+   Current: {current pattern}
+   Standard: jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md
+
+   Required changes:
+   1. Add Step 5.5: Generate ID using scripts/lib/id-generator.sh
+   2. Update output step: Create folder instead of direct file
+   3. Add index management using scripts/lib/index-updater.sh
+   4. Add Executive Summary to template
+
+   Reference: skills/jaan-to-pm-prd-write/SKILL.md (compliant example)
+```
+
 ### v3.0.0 Compliance Summary
 
 Display results:
 ```
 v3.0.0 COMPLIANCE
 ─────────────────
-V3.1 Frontmatter env vars:  ✓ / ✗
-V3.2 Context paths:          ✓ / ✗
-V3.3 Learning path:          ✓ / ✗
-V3.4 Template path:          ✓ / ✗ / N/A
-V3.5 Output path:            ✓ / ✗ / N/A
-V3.6 Template variables:     ✓ / ✗ / N/A
-V3.7 Tech integration:       ✓ / N/A
+V3.1 Frontmatter env vars:     ✓ / ✗
+V3.2 Context paths:             ✓ / ✗
+V3.3 Learning path:             ✓ / ✗
+V3.4 Template path:             ✓ / ✗ / N/A
+V3.5 Output path:               ✓ / ✗ / N/A
+V3.6 Template variables:        ✓ / ✗ / N/A
+V3.7 Tech integration:          ✓ / N/A
 
-VERDICT: v3.0.0 Compliant / Needs Migration
+OUTPUT STRUCTURE COMPLIANCE
+───────────────────────────
+V3.8.1 ID generation:           ✓ / ✗ / N/A
+V3.8.2 Folder structure:        ✓ / ✗ / N/A
+V3.8.3 Index management:        ✓ / ✗ / N/A
+V3.8.4 Executive Summary:       ✓ / ✗ / N/A
+
+VERDICT: v3.0.0 Compliant / Needs Migration / Needs Output Migration
 ```
 
 If **any check fails (✗)**:
 - Add option [8] to Step 3: "Migrate to v3.0.0"
+- If V3.8 checks fail: Add option [9]: "Migrate output structure to ID-based folders"
 
 ## Step 3: Ask Update Type
 
@@ -299,7 +395,8 @@ If **any check fails (✗)**:
 > [5] Incorporate LEARN.md lessons → SKILL.md
 > [6] Fix specification compliance issues
 > [7] Other (describe)
-> [8] Migrate to v3.0.0 (if compliance check failed)
+> [8] Migrate to v3.0.0 (if v3.0.0 compliance check failed)
+> [9] Migrate output structure to ID-based folders (if V3.8 check failed)
 
 ## Step 4: Optional Web Research
 
@@ -562,6 +659,123 @@ If any check fails, fix before continuing.
 Show final versions of all modified files.
 
 > "Write these updates? [y/n]"
+
+## Step 10.5: Handle Output Structure Migration (If Option [9] Selected)
+
+If user selected option [9] "Migrate output structure to ID-based folders":
+
+### 10.5.1: Show Migration Plan
+
+Display migration summary:
+```
+OUTPUT STRUCTURE MIGRATION
+──────────────────────────
+This skill will be updated to use the standardized output pattern:
+
+Old: {current_pattern}
+New: {subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md
+
+Required changes:
+□ Add Step 5.5: Generate ID using scripts/lib/id-generator.sh
+□ Update output step: Create folder instead of direct file
+□ Add index management using scripts/lib/index-updater.sh
+□ Add Executive Summary to template (if template.md exists)
+□ Update validation checklist
+
+Reference: skills/jaan-to-pm-prd-write/SKILL.md (compliant example)
+```
+
+### 10.5.2: HARD STOP - Approve Migration
+
+> "Migrate output structure? This will modify SKILL.md and template.md. [y/n]"
+
+**Do NOT proceed without explicit approval.**
+
+### 10.5.3: Apply Migration (If Approved)
+
+If approved, apply these changes:
+
+**1. Insert Step 5.5 in SKILL.md** (after slug generation step):
+```markdown
+## Step 5.5: Generate ID and Folder Structure
+
+1. Source ID generator:
+\`\`\`bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+\`\`\`
+
+2. Generate paths:
+\`\`\`bash
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/{role}/{subdomain}"
+mkdir -p "$SUBDOMAIN_DIR"
+
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
+\`\`\`
+
+3. Preview:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-{report-type}-{slug}.md
+```
+
+**2. Update output writing step** (typically Step 6 or 7):
+
+Replace:
+```markdown
+Write file: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/{filename}`
+```
+
+With:
+```markdown
+1. Create folder:
+\`\`\`bash
+mkdir -p "$OUTPUT_FOLDER"
+\`\`\`
+
+2. Write main file:
+\`\`\`bash
+cat > "$MAIN_FILE" <<'EOF'
+{output content}
+EOF
+\`\`\`
+
+3. Update index:
+\`\`\`bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Title}" \
+  "{Executive summary}"
+\`\`\`
+
+4. Confirm:
+> ✓ Output written to: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
+> ✓ Index updated
+```
+
+**3. Update template.md** (if exists):
+
+Add Executive Summary section after title:
+```markdown
+## Executive Summary
+
+{1-2 sentence high-level summary of the problem, solution, or findings}
+```
+
+**4. Add validation checklist** (in quality check step):
+```markdown
+**Output Structure**:
+- [ ] ID generated using scripts/lib/id-generator.sh
+- [ ] Folder created: {subdomain}/{id}-{slug}/
+- [ ] File named: {id}-{report-type}-{slug}.md
+- [ ] Index updated
+- [ ] Executive Summary included
+```
 
 ## Step 11: Write Updated Files
 
