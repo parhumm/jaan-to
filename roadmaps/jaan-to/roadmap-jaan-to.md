@@ -129,6 +129,7 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 ## Unreleased
 
 - **New skill**: `/jaan-to-dev-stack-detect` — Detect project tech stack automatically (`d3dbb66`)
+- **New skill**: `/jaan-to-ux-heatmap-analyze` — Analyze heatmap CSV + screenshots for UX research reports (first UX role skill)
 
 ---
 
@@ -217,6 +218,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/to-jaan-roadmap-add` | Add task to roadmap |
 | `/to-jaan-roadmap-update` | Maintain and sync roadmap |
 | `/jaan-to-dev-stack-detect` | Detect project tech stack |
+| `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 
 ### Key Paths
 

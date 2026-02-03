@@ -38,7 +38,7 @@ Two naming conventions based on skill type:
 | [data](data/README.md) | Data/Analytics | Active |
 | [dev](dev/README.md) | Developer | Active |
 | qa | QA Engineer | Planned |
-| ux | UX Designer | Planned |
+| [ux](ux/README.md) | UX Designer | Active |
 | growth | Growth/SEO | Planned |
 
 ---

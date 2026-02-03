@@ -15,13 +15,13 @@
 ## Enabled Roles
 - pm (Product Manager)
 - data (Analytics)
+- ux (User Experience)
 - core (Internal)
 
-## Planned Roles (Phase 3)
+## Planned Roles (Phase 5)
 - dev (Development) - 5 skills
 - qa (Quality Assurance) - 5 skills
 - growth (SEO + Content) - 5 skills
-- ux (User Experience) - 5 skills
 
 > See [roadmaps/jaan-to/tasks/role-skills.md](../roadmaps/jaan-to/tasks/role-skills.md) for full catalog
 
@@ -41,6 +41,7 @@
 | jaan-to-pm-story-write | `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then ACs |
 | to-jaan-roadmap-update | `/to-jaan-roadmap-update` | [Internal] Maintain and sync roadmap |
 | jaan-to-dev-stack-detect | `/jaan-to-dev-stack-detect` | Auto-detect tech stack and populate context |
+| jaan-to-ux-heatmap-analyze | `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 
 ## Trust
 - trust_paths: ["jaan-to/"]
