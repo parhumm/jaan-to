@@ -17,10 +17,6 @@ for dir in .claude-plugin skills hooks scripts agents; do
   fi
 done
 
-# Copy .claude/settings.json only (not old standalone skills in .claude/skills/)
-mkdir -p "$DIST/.claude"
-cp "$PLUGIN_ROOT/.claude/settings.json" "$DIST/.claude/settings.json"
-
 # Essential root files
 cp "$PLUGIN_ROOT/CLAUDE.md" "$DIST/CLAUDE.md"
 
@@ -28,9 +24,6 @@ cp "$PLUGIN_ROOT/CLAUDE.md" "$DIST/CLAUDE.md"
 mkdir -p "$DIST/docs/extending"
 cp "$PLUGIN_ROOT/docs/STYLE.md" "$DIST/docs/STYLE.md"
 cp "$PLUGIN_ROOT/docs/extending/create-skill.md" "$DIST/docs/extending/create-skill.md"
-
-# Remove dev-only settings
-rm -f "$DIST/.claude/settings.local.json"
 
 # Count what was shipped
 FILE_COUNT=$(find "$DIST" -type f | wc -l | tr -d ' ')

@@ -778,10 +778,9 @@ add_to_index \
 
 ## Step 11: Suggest Next Skill
 
-> "Backend task breakdown complete. For detailed data model specification, run:"
-> ```
-> /jaan-to-dev-be-data-model "{slug}"
-> ```
+> "Backend task breakdown complete."
+>
+> *Note: For detailed data model specification skill (`/jaan-to-dev-be-data-model`), see roadmap - coming in future release.*
 
 ## Step 12: Capture Feedback
 

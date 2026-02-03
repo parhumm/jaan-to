@@ -2,8 +2,20 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
+[![Version](https://img.shields.io/badge/version-3.12.0-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-[![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-blue.svg)](https://claude.ai)
+[![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
+[![Skills](https://img.shields.io/badge/skills-18-orange.svg)](docs/skills/README.md)
+[![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
+
+### Plugin Contents
+
+| Component | Count | Description |
+|-----------|-------|-------------|
+| **Skills** | 18 | PM, Dev (FE/BE), UX, QA, Data, Documentation |
+| **Agents** | 2 | quality-reviewer, context-scout |
+| **Hooks** | 4 | Setup, SessionStart, PostToolUse, Stop |
+| **Output Styles** | 2 | enterprise-doc, concise-summary |
 
 ---
 
@@ -46,6 +58,16 @@ The bootstrap hook automatically creates `jaan-to/` in your project with:
 ```bash
 ./scripts/verify-install.sh /path/to/your-project
 ```
+
+---
+
+## Optional: Project-Level Configuration
+
+jaan.to follows Claude Code best practices by NOT shipping with configuration files. All settings are OPTIONAL and should be added to YOUR project's `.claude/settings.json` if needed.
+
+**Why?** Configuration is project-specific, not plugin-specific. This keeps the plugin portable and ensures you maintain full control over permissions and environment variables in your own codebase.
+
+See [Recommended Permissions](#recommended-permissions) below for examples of common permission patterns.
 
 ---
 
@@ -366,6 +388,110 @@ Every skill follows a **two-phase workflow** with human approval:
 ```
 
 **Why this matters:** No accidental writes. You review the plan before anything happens.
+
+---
+
+## Real-World Examples
+
+### Example 1: Feature Development (End-to-End)
+
+```
+Goal: Add OAuth2 authentication to your app
+
+1. Research & PRD
+   /jaan-to-pm-research-about "OAuth2 best practices for SaaS"
+   /jaan-to-pm-prd-write "OAuth2 authentication with Google and GitHub"
+
+2. User Stories
+   /jaan-to-pm-story-write from prd
+   → Generates: jaan-to/outputs/pm/stories/01-oauth2-auth/
+
+3. Task Breakdowns
+   /jaan-to-dev-fe-task-breakdown from prd
+   → Frontend tasks: Component inventory, state machines, estimates
+
+   /jaan-to-dev-be-task-breakdown from prd
+   → Backend tasks: API endpoints, data models, security
+
+4. QA & Analytics
+   /jaan-to-qa-test-cases from prd
+   → BDD scenarios with Given/When/Then
+
+   /jaan-to-data-gtm-datalayer "OAuth signup flow tracking"
+   → GTM dataLayer pushes for analytics
+```
+
+**Flow Diagram:**
+```
+Research → PRD → Stories → Tasks → QA + Tracking
+   ↓         ↓       ↓        ↓         ↓
+  Docs    Context  Tickets  Code   Analytics
+```
+
+### Example 2: UX Improvement
+
+```
+Goal: Improve homepage based on user behavior
+
+1. Analyze Heatmaps
+   /jaan-to-ux-heatmap-analyze "homepage-clicks.csv"
+   → Identifies: Low engagement on CTA, high scroll depth
+
+2. Synthesize Research
+   /jaan-to-ux-research-synthesize "UX interview transcripts"
+   → Themes: Users want clearer value prop
+
+3. Generate Microcopy
+   /jaan-to-ux-microcopy-write for homepage CTA
+   → 7 languages: English, Spanish, French, German, Arabic, Chinese, Japanese
+```
+
+### Example 3: Documentation Maintenance
+
+```
+Goal: Keep docs in sync with code changes
+
+1. Detect Stale Docs
+   /to-jaan-docs-update --check-only
+   → Reports: 3 stale skill docs, 1 outdated hook doc
+
+2. Fix Automatically
+   /to-jaan-docs-update --fix
+   → Updates docs based on code changes in last 7 days
+
+3. Add New Documentation
+   /to-jaan-docs-create guide "API Integration Tutorial"
+   → Creates: docs/guides/api-integration-tutorial.md
+```
+
+### Skill Chain Visualization
+
+```
+┌─────────────┐
+│   Initial   │
+│   Request   │
+└──────┬──────┘
+       │
+   ┌───▼────────────────────────────────────────────┐
+   │ Which workflow?                                │
+   ├────────────┬────────────┬──────────────┬───────┤
+   │            │            │              │       │
+┌──▼──┐   ┌────▼────┐  ┌────▼─────┐  ┌────▼─────┐ │
+│ PRD │   │Research │  │  UX Res  │  │   Docs   │ │
+└──┬──┘   └────┬────┘  └────┬─────┘  └────┬─────┘ │
+   │           │            │              │       │
+   ├─Stories   │            │              │       │
+   ├─Tasks     └─Learn      └─Microcopy    └─Update│
+   ├─Tests                                         │
+   └─GTM                                           │
+       │                                           │
+       └───────────────────────────────────────────┘
+                           │
+                      ┌────▼─────┐
+                      │  Output  │
+                      │  Files   │
+                      └──────────┘
+```
 
 ---
 

@@ -554,10 +554,9 @@ add_to_index \
 
 ## Step 12: Suggest Next Skill
 
-> "Task breakdown complete. For detailed state machine definitions per component, run:"
-> ```
-> /jaan-to-dev-fe-state-machine "{slug}"
-> ```
+> "Task breakdown complete."
+>
+> *Note: For detailed state machine definitions skill (`/jaan-to-dev-fe-state-machine`), see roadmap - coming in future release.*
 
 ## Step 13: Capture Feedback
 

@@ -65,6 +65,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [55](55-ai-workflow-claude-code-user-input.md) | Handle Approvals and User Input | Official Claude Agent SDK guide for surfacing tool approval requests and clarifying questions to users via canUseTool callback and AskUserQuestion tool, with Python/TypeScript examples for allow/deny/modify responses and multi-choice question handling. |
 | [56](56-ux-microcopy-write.md) | UX Microcopy Writing Skill | Production-ready skill for generating complete microcopy packs (labels, helper text, errors, toasts, confirmations, empty states) across seven languages with Persian (فارسی) as primary focus. Covers industry frameworks, formality systems, text expansion rates, RTL handling, and cultural tone expectations. |
 | [57](57-ai-workflow-claude-code-plugin-patterns-best-practices-standards.md) | Claude Code Plugin Patterns & Standards | Analysis of 13 official Claude Code plugins revealing highly consistent ecosystem patterns for structure, configuration, naming, and implementation. Covers auto-discovery, manifest standards, progressive disclosure, Python/Bash standards, security best practices, and quality checklists. |
+| [58](58-role-wp-dev.md) | WordPress Analytics Plugin Development | Complete best practices guide addressing critical gaps in WordPress plugin documentation—privacy-compliant tracking architectures, high-performance database patterns, competitor architecture analysis (WP Statistics, Koko Analytics, Independent Analytics), JavaScript beacon tracking, and dashboard implementation. |
 
 ## Quick Topic Finder
 
@@ -125,6 +126,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [12-react-nx-monorepo.md](12-react-nx-monorepo.md)
 - [16-react-monorepo-2025.md](16-react-monorepo-2025.md)
 - [54-roles-wp-details.md](54-roles-wp-details.md) - WordPress plugin development skills across 7+ roles
+- [58-role-wp-dev.md](58-role-wp-dev.md) - WordPress analytics plugin development with privacy compliance & performance patterns
 
 ### Documentation & Architecture
 - [05-ai-os-gap-analysis.md](05-ai-os-gap-analysis.md)
