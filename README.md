@@ -255,7 +255,7 @@ All generated files are written to `jaan-to/outputs/` in your project directory:
 ```
 jaan-to/
 ├── outputs/
-│   ├── pm/spec/{slug}/prd.md
+│   ├── pm/{slug}/prd.md
 │   ├── data/gtm/{slug}/tracking.md
 │   └── research/{slug}/report.md
 ├── learn/

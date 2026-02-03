@@ -137,7 +137,7 @@ jaan-to/
 │   ├── STYLE.md
 │   └── create-skill.md
 └── outputs/                Skill-generated outputs
-    ├── pm/spec/{slug}/prd.md
+    ├── pm/{slug}/prd.md
     ├── data/gtm/{slug}/
     └── research/{slug}/
 ```

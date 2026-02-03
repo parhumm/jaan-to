@@ -149,7 +149,7 @@ jaan-to/
 ├── learn/                     # Accumulated lessons (project-specific)
 │   └── {skill-name}.learn.md
 ├── outputs/                   # Generated outputs
-│   ├── pm/spec/{slug}/
+│   ├── pm/{slug}/
 │   ├── data/gtm/{slug}/
 │   └── research/{slug}/
 ├── context/                   # Copies of context templates
