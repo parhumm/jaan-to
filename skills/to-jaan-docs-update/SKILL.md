@@ -14,8 +14,10 @@ argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 
 ## Context Files
 
-- `jaan-to/docs/STYLE.md` - Documentation standards
+- `jaan-to/docs/STYLE.md` - Documentation standards (copied by bootstrap from plugin)
 - `$JAAN_LEARN_DIR/to-jaan-docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
+
+**Note:** Style guide is intentionally read from the project's `jaan-to/docs/` directory (not from the skill directory). The bootstrap hook copies it there on first run, allowing project-level customization.
 
 ## Pre-Execution: Apply Past Lessons
 
