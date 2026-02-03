@@ -129,7 +129,8 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 ## Unreleased
 
 - **New skill**: `/jaan-to-dev-stack-detect` — Detect project tech stack automatically (`d3dbb66`)
-- **New skill**: `/jaan-to-ux-heatmap-analyze` — Analyze heatmap CSV + screenshots for UX research reports (first UX role skill)
+- **New skill**: `/jaan-to-ux-heatmap-analyze` — Analyze heatmap CSV + screenshots for UX research reports (first UX role skill) (`2650ce7`)
+- Renamed roadmap and vision files to shorter names (`007b4b3`, `c05988b`)
 
 ---
 
