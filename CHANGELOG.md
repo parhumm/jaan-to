@@ -5,6 +5,32 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.0] - 2026-02-03
+
+### Added
+- **AskUserQuestion interactive prompts** — All 11 skills now use structured
+  multiple-choice UI instead of text-based `[y/n]` prompts
+  - HARD STOP gates with Yes/No/Edit options
+  - Preview approvals with Yes/No options
+  - Feedback capture with No/Fix now/Learn/Both options
+  - Mode selection with descriptive option labels
+- **"User Interaction Patterns" section** in skill creation spec
+  (`docs/extending/create-skill.md`) — documents when to use AskUserQuestion
+  vs text prompts, JSON schema reference, instruction syntax
+- **V3.8 AskUserQuestion compliance check** in `/to-jaan-skill-update`
+- **Option [9] "Convert to AskUserQuestion"** in `/to-jaan-skill-update`
+- **Skill factory AskUserQuestion support** — `/to-jaan-skill-create` now
+  generates new skills with AskUserQuestion patterns
+
+### Changed
+- ~73 text prompts converted to AskUserQuestion across all skills
+- Research size picker simplified: 5 options → 3 + "Other"
+- Role picker simplified: 6 options → 3 + "Other"
+- Feedback prompts consolidated: 2 sequential prompts → 1 AskUserQuestion
+- Skill template (`template.md`) updated with AskUserQuestion skeleton
+
+---
+
 ## [3.1.0] - 2026-02-03
 
 ### Added
@@ -267,6 +293,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.2.0
 [3.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.1.0
 [3.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.0.0
 [2.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v2.2.0
