@@ -283,13 +283,17 @@ Severity Levels:
 - LOW      (≥0.80): Low both → Monitor
 ```
 
-Draft executive summary with top 3-5 findings.
+Draft action summary: top 3-5 actions as bullets (action, impact, one-line evidence).
 
 For each finding, prepare:
 - Title (concise, action-oriented)
 - Evidence from each source (CSV data, vision observation, HTML context)
 - Confidence score and validation status
 - Recommended action with ICE score (Impact 1-10 × Confidence 1-10 × Ease 1-10)
+
+For each high-confidence finding (≥0.85), draft one A/B test or UX research idea:
+- A/B test: What variation to test, what metric to measure, which finding it validates
+- UX research: What method (usability test, survey, card sort, tree test), what question to answer
 
 ---
 
@@ -316,12 +320,12 @@ TOP FINDINGS:
 3. {finding_title} — {severity} ({confidence})
 
 REPORT SECTIONS:
-  ✓ Executive Summary
-  ✓ {N} Findings with evidence
-  ✓ {N} Recommendations (ICE scored)
+  ✓ Action Summary (top 3-5 actions)
+  ✓ {N} Findings & Actions (insight + action + evidence)
+  ✓ {N} Test Ideas (A/B tests + UX research)
   {✓ | ✗} Device/Segment Comparison
   ✓ Element Mapping Table
-  ✓ Limitations & Methodology
+  ✓ Limitations & Method (footer)
 
 ════════════════════════════════════════
 ```
@@ -344,26 +348,33 @@ Use AskUserQuestion:
 
 Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-ux-heatmap-analyze.template.md`
 
-Fill all template sections:
+Fill all template sections. Report must be **insightful, practical, and actionable** — lead with why it matters and what to do. Minimize descriptive narrative.
 
-1. **Data Sources table**: All metadata from Step 2
-2. **Executive Summary**: Top 3-5 findings narrative with business impact framing
-3. **Findings**: Each finding with:
-   - Severity badge and confidence score
-   - Evidence from each data source (quote specific CSV values, describe vision observations)
-   - Cross-reference validation status
-   - Recommended action
-4. **Recommendations table**: ICE scored, sorted by score descending
+1. **Header metadata**: URL, device, date range, page views, file paths — single-line format from Step 2
+2. **Action Summary**: Top 3-5 actions as bullets. Each bullet format:
+   - **Action** (what to change) — expected impact — one-line evidence with source tag [V], [C], or [H]
+   - No narrative paragraphs. Bullets only.
+3. **Findings & Actions**: Each finding as a self-contained card, ordered by ICE score descending:
+   - **Insight**: Why this matters — draw a deeper conclusion, don't just restate the number (e.g., "Users are hunting for navigation" not "40% of clicks go to arrows")
+   - **Do this**: Specific, implementable action (1-2 sentences max)
+   - ICE score table (Impact, Confidence, Ease, total) and confidence/validation status
+   - **Evidence**: 2-4 bullets citing specific data (CSV values, vision observations, HTML context) with source tags [V], [C], [H]
+   - No observation-only findings — every finding MUST have a concrete action
+4. **Test Ideas**: 3-5 suggested experiments derived from findings:
+   - **A/B Tests**: What variation to test, what metric to measure, which finding it validates (e.g., "Test sticky nav vs current: measure carousel arrow clicks — validates Finding #1")
+   - **UX Research**: What method + what question (e.g., "5-user usability test: Can users find the filter without scrolling? — explores Finding #3")
+   - Each idea: 1-2 lines, linked to a finding number
 5. **Element Mapping**: Full table from Step 6 (or note "HTML not provided" if skipped)
-6. **Comparison**: Desktop vs mobile or segment differences (if applicable)
-7. **Limitations**: What analysis was NOT possible and why (specific to detected data format)
-8. **Methodology**: Two-pass cross-reference, confidence model, data sources used
+6. **Comparison**: Desktop vs mobile or segment differences (if applicable, keep concise)
+7. **Footer notes**: Limitations as one-line list + methodology as one-line summary (both in blockquote)
 
 ## Step 10: Quality Check
 
 Before preview, verify every item:
 
-- [ ] Executive summary contains top 3-5 findings with specific data points
+- [ ] Action summary contains top 3-5 actions as bullets (no narrative paragraphs)
+- [ ] Every finding has an "Insight" line that explains WHY, not just WHAT
+- [ ] Every finding has a concrete "Do this" action (no observation-only findings)
 - [ ] Every finding has a confidence score and at least one evidence citation
 - [ ] Every finding attributes evidence to its source: [V], [C], or [H]
 - [ ] Contradictions between vision and CSV are explicitly flagged and explained
@@ -373,6 +384,7 @@ Before preview, verify every item:
 - [ ] CSS selectors are resolved to human-readable descriptions (or marked "unresolved")
 - [ ] No hallucinated findings — every claim is traceable to a CSV row or screenshot observation
 - [ ] Click counts are normalized by page views when comparing across files
+- [ ] Test Ideas section has 3-5 suggested A/B tests or UX research methods linked to findings
 
 If any check fails, revise the report before preview.
 

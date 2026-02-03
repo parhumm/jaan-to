@@ -107,14 +107,13 @@ All of the above, plus rage click detection, scroll analysis, hesitation zones, 
 **Example**: `jaan-to/outputs/ux/heatmap/checkout-page/report.md`
 
 **Contains**:
-- Executive summary with top 3-5 findings
-- Detailed findings organized by severity (Critical → Low)
-- Evidence from each data source (CSV, Vision, HTML)
+- Action summary with top 3-5 prioritized actions (bullets, no narrative)
+- Findings with insight, inline actions, ICE scores, and evidence
 - Confidence scores with validation status
-- ICE-scored recommendations
+- A/B test and UX research ideas derived from findings
 - Element mapping table (CSS selector → human-readable name)
 - Device/segment comparison (if applicable)
-- Limitations and methodology
+- Limitations and methodology (compact footer)
 
 ---
 
