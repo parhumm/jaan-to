@@ -225,8 +225,8 @@ docs/
 roadmaps/
 └── jaan-to/
     ├── jaan-to-directories-structure.md   (this file)
-    ├── roadmap-jaan-to.md
-    ├── vision-jaan-to.md
+    ├── roadmap.md
+    ├── vision.md
     └── tasks/
         ├── README.md
         ├── dev-tech-skills.md

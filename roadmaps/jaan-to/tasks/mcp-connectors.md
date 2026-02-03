@@ -376,5 +376,5 @@ Skills request context, MCP provides real data. No hallucinating file structures
 ## References
 
 - [MCP Documentation](https://modelcontextprotocol.io/)
-- [vision-jaan-to.md](../vision-jaan-to.md) - MCP philosophy section
+- [vision.md](../vision.md) - MCP philosophy section
 - [role-skills.md](role-skills.md) - Skill MCP requirements

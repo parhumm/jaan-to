@@ -10,8 +10,8 @@
 |----------|----------|
 | **Humans** | [docs/](docs/README.md) - Usage, examples, how-to |
 | **AI** | This file - Behavioral rules, file paths |
-| **Developers** | [vision-jaan-to.md](roadmaps/jaan-to/vision-jaan-to.md) - Philosophy, architecture |
-| **Progress** | [roadmap-jaan-to.md](roadmaps/jaan-to/roadmap-jaan-to.md) - Tasks, phases |
+| **Developers** | [vision.md](roadmaps/jaan-to/vision.md) - Philosophy, architecture |
+| **Progress** | [roadmap.md](roadmaps/jaan-to/roadmap.md) - Tasks, phases |
 
 ---
 
@@ -44,7 +44,7 @@ This is a Claude Code Plugin. All paths below are **relative to the plugin root*
 ### Single Source of Truth
 **No duplication or overlap allowed:**
 - One command per action (use existing skills, don't duplicate)
-- One location per data type (roadmap tasks → roadmap-jaan-to.md)
+- One location per data type (roadmap tasks → roadmap.md)
 - One skill per capability (learning → `/to-jaan-learn-add`)
 - Reference, don't copy (link to sources, don't inline)
 
@@ -106,7 +106,7 @@ jaan-to/outputs/{role}/{domain}/{slug}/
 ## Development Workflow
 
 ### Before Every Commit
-1. Update [roadmap-jaan-to.md](roadmaps/jaan-to/roadmap-jaan-to.md) with completed tasks
+1. Update [roadmap.md](roadmaps/jaan-to/roadmap.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`
 3. For new tasks, use `/to-jaan-roadmap-add`
 

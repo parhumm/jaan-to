@@ -10,7 +10,7 @@
 |----------|----------|-------|
 | `docs/*` | Humans | Usage, examples, how-to |
 | `CLAUDE.md` | AI | Behavioral rules, paths |
-| `vision-jaan-to.md` | Developers | Architecture concepts |
+| `vision.md` | Developers | Architecture concepts |
 
 ---
 

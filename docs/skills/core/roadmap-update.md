@@ -73,7 +73,7 @@ All steps succeed or none are applied.
 ## Output
 
 Updates:
-- `roadmaps/jaan-to/roadmap-jaan-to.md`
+- `roadmaps/jaan-to/roadmap.md`
 - `CHANGELOG.md` (release mode)
 - `.claude-plugin/plugin.json` (release mode)
 - `.claude-plugin/marketplace.json` (release mode)

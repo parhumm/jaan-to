@@ -378,8 +378,8 @@ Every skill follows a **two-phase workflow** with human approval:
 | [Skills Reference](docs/skills/README.md) | All available commands |
 | [Creating Skills](docs/extending/create-skill.md) | Build your own skills |
 | [Configuration](docs/config/README.md) | Settings and context |
-| [Vision](roadmaps/jaan-to/vision-jaan-to.md) | Philosophy and architecture |
-| [Roadmap](roadmaps/jaan-to/roadmap-jaan-to.md) | What's coming |
+| [Vision](roadmaps/jaan-to/vision.md) | Philosophy and architecture |
+| [Roadmap](roadmaps/jaan-to/roadmap.md) | What's coming |
 
 ---
 

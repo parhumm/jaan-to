@@ -172,4 +172,4 @@ jaan-to/outputs/dev/tech/{slug}/
 ## References
 
 - [spec-kit](https://github.com/github/spec-kit) - Inspiration
-- [vision-jaan-to.md](../vision-jaan-to.md) - Architecture philosophy
+- [vision.md](../vision.md) - Architecture philosophy
