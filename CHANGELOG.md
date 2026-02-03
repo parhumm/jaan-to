@@ -5,6 +5,26 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.3.0] - 2026-02-03
+
+### Added
+- **`/jaan-to-ux-heatmap-analyze` skill** — First UX role skill. Analyze heatmap CSV exports
+  and screenshots to generate prioritized UX research reports
+  - Two data formats: aggregated element-click (Format A) and raw coordinates (Format B)
+  - Claude Vision analysis of heatmap screenshots with cross-reference validation
+  - HTML cross-reference for CSS selector to human-readable element mapping
+  - Two-pass validation: corroborated findings (0.85-0.95), single-source (0.70-0.80)
+  - ICE-scored recommendations (Impact x Confidence x Ease)
+  - Output: `jaan-to/outputs/ux/heatmap/{slug}/report.md`
+- **`/jaan-to-dev-stack-detect` skill** — Auto-detect project tech stack and populate context
+- **UX role activated** — First role skill beyond PM and Data; `docs/skills/ux/` created
+
+### Changed
+- Renamed `roadmap-jaan-to.md` to `roadmap.md` and `vision-jaan-to.md` to `vision.md`
+- `scripts/seeds/config.md` — UX moved from Planned to Enabled Roles
+
+---
+
 ## [3.2.0] - 2026-02-03
 
 ### Added
@@ -285,9 +305,6 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ## [Unreleased]
 
-### Added
-- **`/jaan-to-dev-stack-detect` skill** — Detect project tech stack automatically (`d3dbb66`)
-
 ### Planned
 - Additional quick-win skills (qa-test-cases, data-sql-query)
 - Enhanced MCP integrations (GA4, GitLab, Jira, Figma)
@@ -296,6 +313,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.3.0
 [3.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.2.0
 [3.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.1.0
 [3.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.0.0
