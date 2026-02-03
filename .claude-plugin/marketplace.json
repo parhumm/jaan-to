@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev, and more",
   "owner": {
     "name": "Parhum Khoshbakht",
@@ -11,7 +11,7 @@
     {
       "name": "jaan-to",
       "description": "AI-powered skills for PM, Data, QA, Dev workflows",
-      "version": "3.3.0",
+      "version": "3.4.0",
       "author": {
         "name": "Parhum Khoshbakht",
         "email": "parhum.kh@gmail.com"

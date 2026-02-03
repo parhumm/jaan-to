@@ -5,6 +5,28 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.4.0] - 2026-02-03
+
+### Added
+- **Roadmap auto-invoke** — `/to-jaan-skill-create` and `/to-jaan-skill-update` now
+  automatically call `/to-jaan-roadmap-update` at end of workflow to keep roadmap in sync
+- **`/jaan-to-dev-pr-review` documentation** added (`2750902`)
+
+### Fixed
+- **Specification compliance** for `/to-jaan-skill-update` and `/to-jaan-skill-create`:
+  - H1 titles use logical name format (`skill:update`, `skill:create`)
+  - Broken spec path reference fixed (`jaan-to/docs/` → `docs/extending/`)
+  - Migration wizard converted to AskUserQuestion (4-option menu)
+  - Duplicate Step 18 numbering fixed (→ Step 20)
+  - template.md uses `{{double-brace}}` v3.0.0 syntax
+- **`/to-jaan-roadmap-update`** — Unreleased management and branch merge in release mode (`db33d88`)
+- Fixed stale path references (`206dcfd`)
+
+### Changed
+- Roadmap: Created v3.3.0 version section, refreshed Unreleased with post-tag commits
+
+---
+
 ## [3.3.0] - 2026-02-03
 
 ### Added
@@ -313,6 +335,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.4.0
 [3.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.3.0
 [3.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.2.0
 [3.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.1.0
