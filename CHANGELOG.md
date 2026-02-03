@@ -5,6 +5,43 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.9.0] - 2026-02-03
+
+### Added
+- **ID-based folder output structure** — All output-generating skills now use standardized structure:
+  `jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md` (`0364b4a`)
+  - Per-subdomain sequential IDs (independent sequences for each subdomain)
+  - Slug reusability across different role/subdomain combinations for cross-role feature tracking
+  - Automatic index management via `scripts/lib/index-updater.sh`
+  - Executive Summary requirement (1-2 sentence summaries in all outputs)
+  - 7 skills updated: pm-prd-write, pm-story-write, data-gtm-datalayer, dev-fe-task-breakdown,
+    dev-be-task-breakdown, ux-heatmap-analyze, dev-stack-detect
+- **Output validation script** — `scripts/validate-outputs.sh` with 4 compliance checks:
+  subdomain indexes, folder naming patterns, file naming consistency, ID matching (`c076da2`)
+- **Core utilities** — `scripts/lib/id-generator.sh` and `scripts/lib/index-updater.sh`
+  for sequential ID generation and automatic README.md index updates (`0364b4a`)
+
+### Changed
+- **`/to-jaan-skill-create` now generates compliant skills** — All new skills automatically
+  include ID generation (Step 5.5), folder structure, index management, and Executive Summary
+  sections in templates (`95d082e`)
+- **`/to-jaan-skill-update` detects legacy output patterns** — Added V3.8 compliance checks
+  and automatic migration handler for non-compliant skills (`68993d2`)
+
+### Documentation
+- **Comprehensive output standards** — Added complete "Skill Output Standards" specification
+  to [docs/extending/create-skill.md](docs/extending/create-skill.md) with 6 components,
+  implementation checklist, and common mistakes (`4d5631e`)
+- **Master output index** — Created [jaan-to/outputs/README.md](jaan-to/outputs/README.md)
+  with organization overview, navigation guide, and slug scoping rules (`4d5631e`)
+- **Updated AI behavioral rules** — Expanded "Output Structure" section in
+  [CLAUDE.md](CLAUDE.md) with standardized patterns (`4d5631e`)
+- **Meta-skill LEARN.md updates** — Added output structure standards to
+  `to-jaan-skill-create/LEARN.md` and compliance check patterns to
+  `to-jaan-skill-update/LEARN.md` (`978a077`)
+
+---
+
 ## [3.8.0] - 2026-02-03
 
 ### Removed

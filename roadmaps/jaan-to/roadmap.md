@@ -168,6 +168,32 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ---
 
+### v3.8.0 — Simplified Skill Prompts
+
+- **Removed AskUserQuestion from all skills** — Reverted to text-based prompts for better compatibility and simpler skill implementation
+  - All 16 skills now use clean text prompts instead of structured question blocks
+  - Simple prompts: `> "Ready? [y/n]"`, multiple choice: `> "[1] Option A\n[2] Option B"`, conditional: `> "Confirm? [y/n/edit]"`
+  - Documentation and tooling updated across `docs/extending/create-skill.md`, `/to-jaan-skill-create`, `/to-jaan-skill-update`
+
+---
+
+### v3.9.0 — ID-Based Output Structure
+
+- **ID-based folder output structure** — All output-generating skills now use standardized structure: `jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md` (`0364b4a`)
+  - Per-subdomain sequential IDs (independent sequences for each subdomain)
+  - Slug reusability across different role/subdomain combinations for cross-role feature tracking
+  - Automatic index management via `scripts/lib/index-updater.sh`
+  - Executive Summary requirement (1-2 sentence summaries in all outputs)
+  - 7 skills updated: pm-prd-write, pm-story-write, data-gtm-datalayer, dev-fe-task-breakdown, dev-be-task-breakdown, ux-heatmap-analyze, dev-stack-detect
+- **Output validation script** — `scripts/validate-outputs.sh` with 4 compliance checks (`c076da2`)
+- **Core utilities** — `scripts/lib/id-generator.sh` and `scripts/lib/index-updater.sh` for sequential ID generation and automatic README.md index updates (`0364b4a`)
+- **Meta-skills updated** — `/to-jaan-skill-create` now generates compliant skills automatically (`95d082e`), `/to-jaan-skill-update` detects legacy output patterns and offers migration (`68993d2`)
+- **Comprehensive documentation** — Added complete "Skill Output Standards" specification to `docs/extending/create-skill.md` (`4d5631e`)
+- **Master output index** — Created `jaan-to/outputs/README.md` with organization overview and navigation guide (`4d5631e`)
+- **LEARN.md updates** — Added output structure standards to `to-jaan-skill-create/LEARN.md` and compliance check patterns to `to-jaan-skill-update/LEARN.md` (`978a077`)
+
+---
+
 ## Unreleased
 
 (none)
