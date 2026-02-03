@@ -43,13 +43,13 @@ flowchart TD
 - **→ Next**: `qa-test-cases`
 - **MCP Required**: Figma (flow-states), GitLab (impacted areas)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/qa/matrix/{slug}/test-matrix.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/matrix/{slug}/test-matrix.md`
 
 ### /jaan-to-qa-test-cases
 
 - **Logical**: `qa:test-cases`
 - **Description**: Test cases from acceptance criteria with edge cases, preconditions, expected results
-- **Reference**: [Production-Ready QA Test Case Generation: A Comprehensive Standards and Methodology Guide](../../../../jaan-to/outputs/research/50-qa-test-cases.md)
+- **Reference**: [Production-Ready QA Test Case Generation: A Comprehensive Standards and Methodology Guide](../../../../$JAAN_OUTPUTS_DIR/research/50-qa-test-cases.md)
 - **Quick Win**: Yes - highly structured, template-based
 - **AI Score**: 5 | **Rank**: #1 (highest-leverage task)
 - **Key Points**:
@@ -59,7 +59,7 @@ flowchart TD
 - **→ Next**: `qa-test-data`
 - **MCP Required**: Jira (user story context, optional)
 - **Input**: [user_story_id] or [acceptance_criteria]
-- **Output**: `jaan-to/outputs/qa/cases/{slug}/test-cases.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/cases/{slug}/test-cases.md`
 - **Failure Modes**: Vague steps; missing edge cases; not traceable to requirements
 - **Quality Gates**: Peer review; traceable to requirements; reusable format
 
@@ -75,7 +75,7 @@ flowchart TD
 - **→ Next**: `qa-e2e-checklist`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/qa/data/{slug}/test-data.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/data/{slug}/test-data.md`
 
 ### /jaan-to-qa-e2e-checklist
 
@@ -89,7 +89,7 @@ flowchart TD
 - **→ Next**: `qa-automation-plan`, `qa-bug-report`
 - **MCP Required**: None
 - **Input**: [flow]
-- **Output**: `jaan-to/outputs/qa/e2e/{slug}/e2e-checklist.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/e2e/{slug}/e2e-checklist.md`
 
 ### /jaan-to-qa-bug-report
 
@@ -104,7 +104,7 @@ flowchart TD
 - **→ Next**: `qa-bug-triage`
 - **MCP Required**: Jira (duplicate detection, optional), Sentry (stack traces, optional)
 - **Input**: [observation] [test_case_id]
-- **Output**: `jaan-to/outputs/qa/bugs/{slug}/bug-report.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/bugs/{slug}/bug-report.md`
 - **Failure Modes**: Vague descriptions; missing repro steps; incorrect severity
 - **Quality Gates**: Developer can reproduce in <5 min; linked to test case
 
@@ -120,7 +120,7 @@ flowchart TD
 - **→ Next**: `dev-pr-review`, `release-triage-decision`
 - **MCP Required**: Jira (bug list), Sentry (optional context)
 - **Input**: [issue-list]
-- **Output**: `jaan-to/outputs/qa/triage/{slug}/bug-triage.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/triage/{slug}/bug-triage.md`
 
 ### /jaan-to-qa-perf-plan
 
@@ -134,7 +134,7 @@ flowchart TD
 - **→ Next**: `qa-perf-bottleneck`
 - **MCP Required**: None
 - **Input**: [service]
-- **Output**: `jaan-to/outputs/qa/perf/{slug}/perf-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/perf/{slug}/perf-plan.md`
 
 ### /jaan-to-qa-perf-bottleneck
 
@@ -148,7 +148,7 @@ flowchart TD
 - **→ Next**: `dev-be-task-breakdown`
 - **MCP Required**: None
 - **Input**: [metrics]
-- **Output**: `jaan-to/outputs/qa/perf/{slug}/bottleneck-hypotheses.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/perf/{slug}/bottleneck-hypotheses.md`
 
 ### /jaan-to-qa-automation-plan
 
@@ -162,7 +162,7 @@ flowchart TD
 - **→ Next**: `qa-smoke-suite`
 - **MCP Required**: Playwright (direction), GitLab (automation MRs)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/qa/automation/{slug}/automation-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/automation/{slug}/automation-plan.md`
 
 ### /jaan-to-qa-smoke-suite
 
@@ -176,7 +176,7 @@ flowchart TD
 - **→ Next**: `qa-regression-runbook`
 - **MCP Required**: None
 - **Input**: [product]
-- **Output**: `jaan-to/outputs/qa/regression/{slug}/smoke-suite.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/regression/{slug}/smoke-suite.md`
 
 ### /jaan-to-qa-regression-runbook
 
@@ -190,7 +190,7 @@ flowchart TD
 - **→ Next**: `qa-release-signoff`
 - **MCP Required**: GitLab (release branch), Playwright (optional)
 - **Input**: [release]
-- **Output**: `jaan-to/outputs/qa/regression/{slug}/runbook.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/regression/{slug}/runbook.md`
 
 ### /jaan-to-qa-release-signoff
 
@@ -204,4 +204,4 @@ flowchart TD
 - **→ Next**: `delivery-release-readiness`
 - **MCP Required**: GitLab (pipeline), Jira (test evidence)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/qa/signoff/{slug}/release-signoff.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/signoff/{slug}/release-signoff.md`

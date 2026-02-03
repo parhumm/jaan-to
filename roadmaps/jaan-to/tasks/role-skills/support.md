@@ -35,7 +35,7 @@ flowchart TD
 - **→ Next**: `support-weekly-digest`
 - **MCP Required**: None
 - **Input**: [product]
-- **Output**: `jaan-to/outputs/support/feedback/{slug}/tag-taxonomy.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/feedback/{slug}/tag-taxonomy.md`
 
 ### /jaan-to-support-help-article
 
@@ -49,7 +49,7 @@ flowchart TD
 - **→ Next**: `support-reply-pack`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/support/docs/{slug}/help-article.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/docs/{slug}/help-article.md`
 
 ### /jaan-to-support-reply-pack
 
@@ -63,7 +63,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None
 - **Input**: [issue-type]
-- **Output**: `jaan-to/outputs/support/docs/{slug}/reply-pack.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/docs/{slug}/reply-pack.md`
 
 ### /jaan-to-support-weekly-digest
 
@@ -77,7 +77,7 @@ flowchart TD
 - **→ Next**: `pm-feedback-synthesize`
 - **MCP Required**: None
 - **Input**: [tickets]
-- **Output**: `jaan-to/outputs/support/feedback/{slug}/weekly-digest.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/feedback/{slug}/weekly-digest.md`
 
 ### /jaan-to-support-cx-touchpoints
 
@@ -91,7 +91,7 @@ flowchart TD
 - **→ Next**: `support-cx-friction-fixes`
 - **MCP Required**: None
 - **Input**: [journey]
-- **Output**: `jaan-to/outputs/support/cx/{slug}/touchpoints.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/cx/{slug}/touchpoints.md`
 
 ### /jaan-to-support-cx-friction-fixes
 
@@ -105,7 +105,7 @@ flowchart TD
 - **→ Next**: `pm-priority-score`
 - **MCP Required**: None
 - **Input**: [feedback]
-- **Output**: `jaan-to/outputs/support/cx/{slug}/friction-fixes.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/cx/{slug}/friction-fixes.md`
 
 ### /jaan-to-support-launch-monitor
 
@@ -119,7 +119,7 @@ flowchart TD
 - **→ Next**: `support-triage-priority`
 - **MCP Required**: None
 - **Input**: [release]
-- **Output**: `jaan-to/outputs/support/watch/{slug}/launch-monitor.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/watch/{slug}/launch-monitor.md`
 
 ### /jaan-to-support-triage-priority
 
@@ -133,4 +133,4 @@ flowchart TD
 - **→ Next**: `qa-bug-report`
 - **MCP Required**: None
 - **Input**: [ticket]
-- **Output**: `jaan-to/outputs/support/triage/{slug}/priority.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/support/triage/{slug}/priority.md`

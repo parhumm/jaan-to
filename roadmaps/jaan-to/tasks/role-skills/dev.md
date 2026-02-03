@@ -47,7 +47,7 @@ flowchart TD
 - **→ Next**: `dev-arch-proposal`
 - **MCP Required**: None
 - **Input**: [prd]
-- **Output**: `jaan-to/outputs/dev/discovery/{slug}/feasibility-check.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{slug}/feasibility-check.md`
 
 ### /jaan-to-dev-arch-proposal
 
@@ -61,7 +61,7 @@ flowchart TD
 - **→ Next**: `dev-tech-plan`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/dev/discovery/{slug}/arch-proposal.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{slug}/arch-proposal.md`
 
 ### /jaan-to-dev-tech-plan
 
@@ -75,13 +75,13 @@ flowchart TD
 - **→ Next**: `dev-fe-task-breakdown`, `dev-be-task-breakdown`
 - **MCP Required**: GitLab (modules/flags), Figma (optional constraints)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/dev/plan/{slug}/tech-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/plan/{slug}/tech-plan.md`
 
 ### /jaan-to-dev-be-task-breakdown
 
 - **Logical**: `dev:be-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
-- **Reference**: [Backend Task Breakdown Skill: Complete Research Guide](../../../../jaan-to/outputs/research/52-dev-be-task-breakdown.md)
+- **Reference**: [Backend Task Breakdown Skill: Complete Research Guide](../../../../$JAAN_OUTPUTS_DIR/research/52-dev-be-task-breakdown.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Data model constraints first (unique, indexes, retention)
@@ -90,7 +90,7 @@ flowchart TD
 - **→ Next**: `dev-be-data-model`
 - **MCP Required**: None
 - **Input**: [prd]
-- **Output**: `jaan-to/outputs/dev/backend/{slug}/task-breakdown.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`
 
 ### /jaan-to-dev-be-data-model
 
@@ -104,7 +104,7 @@ flowchart TD
 - **→ Next**: `dev-api-contract`
 - **MCP Required**: None
 - **Input**: [entities]
-- **Output**: `jaan-to/outputs/dev/backend/{slug}/data-model.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/data-model.md`
 
 ### /jaan-to-dev-api-contract
 
@@ -118,7 +118,7 @@ flowchart TD
 - **→ Next**: `dev-api-versioning`, `dev-docs-generate`
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [entities]
-- **Output**: `jaan-to/outputs/dev/contract/{slug}/api.yaml`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
 
 ### /jaan-to-dev-api-versioning
 
@@ -132,13 +132,13 @@ flowchart TD
 - **→ Next**: `dev-docs-generate`
 - **MCP Required**: None
 - **Input**: [api]
-- **Output**: `jaan-to/outputs/dev/contract/{slug}/versioning-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/versioning-plan.md`
 
 ### /jaan-to-dev-fe-task-breakdown
 
 - **Logical**: `dev:fe-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies
-- **Reference**: [Frontend Task Breakdown Skill: Complete Framework Research](../../../../jaan-to/outputs/research/51-dev-fe-task-breakdown.md)
+- **Reference**: [Frontend Task Breakdown Skill: Complete Framework Research](../../../../$JAAN_OUTPUTS_DIR/research/51-dev-fe-task-breakdown.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Explicit state machine prevents "UI glitches"
@@ -147,7 +147,7 @@ flowchart TD
 - **→ Next**: `dev-fe-state-machine`
 - **MCP Required**: None
 - **Input**: [ux-handoff]
-- **Output**: `jaan-to/outputs/dev/frontend/{slug}/task-breakdown.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`
 
 ### /jaan-to-dev-fe-state-machine
 
@@ -161,7 +161,7 @@ flowchart TD
 - **→ Next**: `dev-test-plan`
 - **MCP Required**: None
 - **Input**: [screen]
-- **Output**: `jaan-to/outputs/dev/frontend/{slug}/state-machine.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/state-machine.md`
 
 ### /jaan-to-dev-integration-plan
 
@@ -175,7 +175,7 @@ flowchart TD
 - **→ Next**: `dev-integration-mock-stubs`
 - **MCP Required**: None
 - **Input**: [provider] [use-case]
-- **Output**: `jaan-to/outputs/dev/integration/{slug}/integration-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{slug}/integration-plan.md`
 
 ### /jaan-to-dev-integration-mock-stubs
 
@@ -189,7 +189,7 @@ flowchart TD
 - **→ Next**: `dev-test-plan`
 - **MCP Required**: None
 - **Input**: [provider]
-- **Output**: `jaan-to/outputs/dev/integration/{slug}/mock-stubs.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{slug}/mock-stubs.md`
 
 ### /jaan-to-dev-test-plan
 
@@ -203,7 +203,7 @@ flowchart TD
 - **→ Next**: `qa-test-cases`
 - **MCP Required**: GitLab (diff impact)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/dev/test/{slug}/test-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/test/{slug}/test-plan.md`
 
 ### /jaan-to-dev-observability-events
 
@@ -217,7 +217,7 @@ flowchart TD
 - **→ Next**: `dev-observability-alerts`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/dev/observability/{slug}/events.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{slug}/events.md`
 
 ### /jaan-to-dev-observability-alerts
 
@@ -231,13 +231,13 @@ flowchart TD
 - **→ Next**: `sre-slo-setup`
 - **MCP Required**: None
 - **Input**: [service]
-- **Output**: `jaan-to/outputs/dev/observability/{slug}/alert-rules.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{slug}/alert-rules.md`
 
 ### /jaan-to-dev-docs-generate
 
 - **Logical**: `dev:docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
-- **Research**: [Building a Production-Ready Documentation Generation Framework](../../../jaan-to/outputs/research/48-dev-docs-generate.md)
+- **Research**: [Building a Production-Ready Documentation Generation Framework](../../../$JAAN_OUTPUTS_DIR/research/48-dev-docs-generate.md)
 - **Quick Win**: Yes - draft generation, format standardization
 - **AI Score**: 5 | **Rank**: #14
 - **Key Points**:
@@ -247,7 +247,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: GitLab (code context, optional)
 - **Input**: [component] [doc_type]
-- **Output**: `jaan-to/outputs/dev/docs/{slug}/{doc_type}.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/docs/{slug}/{doc_type}.md`
 - **Failure Modes**: Documentation stale; inconsistent formatting; missing context
 - **Quality Gates**: Up-to-date with code; follows style guide; onboarding-friendly
 
@@ -255,7 +255,7 @@ flowchart TD
 
 - **Logical**: `dev:pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
-- **Reference**: [Building a Production-Ready PR/MR Code Review Skill](../../../../jaan-to/outputs/research/53-dev-pr-review.md)
+- **Reference**: [Building a Production-Ready PR/MR Code Review Skill](../../../../$JAAN_OUTPUTS_DIR/research/53-dev-pr-review.md)
 - **Quick Win**: No - needs GitLab MCP
 - **Key Points**:
   - Define schemas with examples
@@ -264,7 +264,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: GitLab (MR + pipeline), Sentry (optional regressions)
 - **Input**: [pr-link-or-branch]
-- **Output**: `jaan-to/outputs/dev/review/{slug}/pr-review.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/review/{slug}/pr-review.md`
 
 ### /jaan-to-dev-ship-check
 
@@ -278,4 +278,4 @@ flowchart TD
 - **→ Next**: `release-prod-runbook`, `qa-release-signoff`
 - **MCP Required**: GitLab (pipelines), Sentry (health)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/dev/release/{slug}/ship-check.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/release/{slug}/ship-check.md`

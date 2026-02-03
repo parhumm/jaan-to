@@ -66,14 +66,14 @@ flowchart TD
 - **→ Next**: `pm-insights-synthesis`
 - **MCP Required**: None
 - **Input**: [persona] [topic]
-- **Output**: `jaan-to/outputs/pm/discovery/{slug}/interview-guide.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/discovery/{slug}/interview-guide.md`
 
 ### /jaan-to-pm-insights-synthesis
 
 - **Logical**: `pm:insights-synthesis`
 - **Description**: Top pains ranked by frequency/impact, quote bank by theme, frequency table + unknowns
 - **Quick Win**: Yes
-- **Reference**: [Product Manager User Research Synthesis: Implementation Guide](../../../../jaan-to/outputs/research/45-pm-insights-synthesis.md)
+- **Reference**: [Product Manager User Research Synthesis: Implementation Guide](../../../../$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md)
 - **Key Points**:
   - Keep questions open + behavioral ("tell me about the last time…")
   - Capture verbatim quotes + context (who/when/where)
@@ -81,7 +81,7 @@ flowchart TD
 - **→ Next**: `pm-problem-statement`
 - **MCP Required**: None
 - **Input**: [notes]
-- **Output**: `jaan-to/outputs/pm/discovery/{slug}/insights-synthesis.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/discovery/{slug}/insights-synthesis.md`
 
 ### /jaan-to-pm-problem-statement
 
@@ -95,7 +95,7 @@ flowchart TD
 - **→ Next**: `pm-competitor-matrix`, `pm-prd-write`
 - **MCP Required**: None
 - **Input**: [insights]
-- **Output**: `jaan-to/outputs/pm/discovery/{slug}/problem-statement.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/discovery/{slug}/problem-statement.md`
 
 ### /jaan-to-pm-competitor-matrix
 
@@ -110,7 +110,7 @@ flowchart TD
 - **→ Next**: `pm-positioning-brief`
 - **MCP Required**: None
 - **Input**: [competitors] [criteria]
-- **Output**: `jaan-to/outputs/pm/market/{slug}/competitor-matrix.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/market/{slug}/competitor-matrix.md`
 
 ### /jaan-to-pm-positioning-brief
 
@@ -124,7 +124,7 @@ flowchart TD
 - **→ Next**: `pm-persona-card`
 - **MCP Required**: None
 - **Input**: [product] [audience]
-- **Output**: `jaan-to/outputs/pm/market/{slug}/positioning-brief.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/market/{slug}/positioning-brief.md`
 
 ### /jaan-to-pm-persona-card
 
@@ -138,7 +138,7 @@ flowchart TD
 - **→ Next**: `pm-jtbd-map`
 - **MCP Required**: None
 - **Input**: [segment]
-- **Output**: `jaan-to/outputs/pm/user/{slug}/persona-card.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/user/{slug}/persona-card.md`
 
 ### /jaan-to-pm-jtbd-map
 
@@ -152,7 +152,7 @@ flowchart TD
 - **→ Next**: `pm-success-criteria`
 - **MCP Required**: None
 - **Input**: [use-case]
-- **Output**: `jaan-to/outputs/pm/user/{slug}/jtbd-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/user/{slug}/jtbd-map.md`
 
 ### /jaan-to-pm-success-criteria
 
@@ -166,7 +166,7 @@ flowchart TD
 - **→ Next**: `pm-north-star`, `pm-prd-write`
 - **MCP Required**: None
 - **Input**: [persona] [goal]
-- **Output**: `jaan-to/outputs/pm/user/{slug}/success-criteria.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/user/{slug}/success-criteria.md`
 
 ### /jaan-to-pm-north-star
 
@@ -180,7 +180,7 @@ flowchart TD
 - **→ Next**: `pm-kpi-tree`
 - **MCP Required**: GA4 (baselines/segments)
 - **Input**: [product]
-- **Output**: `jaan-to/outputs/pm/metrics/{slug}/north-star.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/metrics/{slug}/north-star.md`
 
 ### /jaan-to-pm-kpi-tree
 
@@ -194,7 +194,7 @@ flowchart TD
 - **→ Next**: `pm-measurement-plan`
 - **MCP Required**: None
 - **Input**: [north-star]
-- **Output**: `jaan-to/outputs/pm/metrics/{slug}/kpi-tree.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/metrics/{slug}/kpi-tree.md`
 
 ### /jaan-to-pm-measurement-plan
 
@@ -208,7 +208,7 @@ flowchart TD
 - **→ Next**: `data-event-spec`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/pm/metrics/{slug}/measurement-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/metrics/{slug}/measurement-plan.md`
 
 ### /jaan-to-pm-feedback-synthesize
 
@@ -223,7 +223,7 @@ flowchart TD
 - **→ Next**: `pm-priority-score`
 - **MCP Required**: None (text input), Jira/Intercom (optional)
 - **Input**: [feedback_sources] [date_range] [segment]
-- **Output**: `jaan-to/outputs/pm/feedback/{slug}/synthesis.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/feedback/{slug}/synthesis.md`
 - **Failure Modes**: Feedback silos; recency bias; loud customers over-represented
 - **Quality Gates**: Multiple sources triangulated; connected to segments
 
@@ -239,7 +239,7 @@ flowchart TD
 - **→ Next**: `pm-priority-score`
 - **MCP Required**: GA4, Clarity (optional for evidence)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/pm/decision/{slug}/brief.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/decision/{slug}/brief.md`
 
 ### /jaan-to-pm-priority-score
 
@@ -253,7 +253,7 @@ flowchart TD
 - **→ Next**: `pm-bet-sizing`
 - **MCP Required**: None
 - **Input**: [ideas] [framework]
-- **Output**: `jaan-to/outputs/pm/priority/{slug}/priority-score.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/priority/{slug}/priority-score.md`
 
 ### /jaan-to-pm-bet-sizing
 
@@ -267,7 +267,7 @@ flowchart TD
 - **→ Next**: `pm-scope-slice`
 - **MCP Required**: None
 - **Input**: [top-ideas]
-- **Output**: `jaan-to/outputs/pm/priority/{slug}/bet-sizing.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/priority/{slug}/bet-sizing.md`
 
 ### /jaan-to-pm-scope-slice
 
@@ -281,7 +281,7 @@ flowchart TD
 - **→ Next**: `pm-experiment-plan`, `pm-prd-write`
 - **MCP Required**: Jira (backlog), GitLab (complexity)
 - **Input**: [idea]
-- **Output**: `jaan-to/outputs/pm/plan/{slug}/scope.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/plan/{slug}/scope.md`
 
 ### /jaan-to-pm-experiment-plan
 
@@ -295,13 +295,13 @@ flowchart TD
 - **→ Next**: `data-experiment-design`
 - **MCP Required**: None
 - **Input**: [mvp]
-- **Output**: `jaan-to/outputs/pm/plan/{slug}/experiment-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/plan/{slug}/experiment-plan.md`
 
 ### /jaan-to-pm-acceptance-criteria
 
 - **Logical**: `pm:acceptance-criteria`
 - **Description**: Testable acceptance criteria with edge cases + failure handling and analytics requirements
-- **Reference**: [Acceptance Criteria Best Practices: A Production-Ready Research Guide](../../../../jaan-to/outputs/research/49-pm-acceptance-criteria.md)
+- **Reference**: [Acceptance Criteria Best Practices: A Production-Ready Research Guide](../../../../$JAAN_OUTPUTS_DIR/research/49-pm-acceptance-criteria.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Start from problem + success metrics, not solutions
@@ -310,13 +310,13 @@ flowchart TD
 - **→ Next**: `qa-test-cases`, `pm-story-write`
 - **MCP Required**: None
 - **Input**: [prd]
-- **Output**: `jaan-to/outputs/pm/prd/{slug}/acceptance-criteria.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/prd/{slug}/acceptance-criteria.md`
 
 ### /jaan-to-pm-story-write
 
 - **Logical**: `pm:story-write`
 - **Description**: User stories in standard format with Given/When/Then acceptance criteria
-- **Reference**: [Production-Ready PM Story-Write Skill: A Comprehensive Framework](../../../../jaan-to/outputs/research/45-pm-insights-synthesis.md)
+- **Reference**: [Production-Ready PM Story-Write Skill: A Comprehensive Framework](../../../../$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md)
 - **Quick Win**: Yes - highly structured, template-based
 - **AI Score**: 5 | **Rank**: #6
 - **Key Points**:
@@ -326,7 +326,7 @@ flowchart TD
 - **→ Next**: `dev-fe-task-breakdown`, `dev-be-task-breakdown`
 - **MCP Required**: Jira (optional backlog context)
 - **Input**: [feature] [persona] [goal]
-- **Output**: `jaan-to/outputs/pm/stories/{slug}/stories.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`
 - **Failure Modes**: Too technical; missing "so that"; AC not testable
 - **Quality Gates**: INVEST criteria met; QA confirms testability
 
@@ -342,7 +342,7 @@ flowchart TD
 - **→ Next**: `support-help-article`, `growth-launch-announcement`
 - **MCP Required**: None
 - **Input**: [prd]
-- **Output**: `jaan-to/outputs/pm/prd/{slug}/release-notes.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/prd/{slug}/release-notes.md`
 
 ### /jaan-to-pm-now-next-later
 
@@ -356,7 +356,7 @@ flowchart TD
 - **→ Next**: `pm-milestones`
 - **MCP Required**: None
 - **Input**: [initiatives]
-- **Output**: `jaan-to/outputs/pm/roadmap/{slug}/now-next-later.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/roadmap/{slug}/now-next-later.md`
 
 ### /jaan-to-pm-milestones
 
@@ -370,7 +370,7 @@ flowchart TD
 - **→ Next**: `delivery-plan-milestones`
 - **MCP Required**: None
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/pm/roadmap/{slug}/milestones.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/roadmap/{slug}/milestones.md`
 
 ### /jaan-to-pm-release-review
 
@@ -384,4 +384,4 @@ flowchart TD
 - **→ Next**: `pm-feedback-synthesize`, `release-iterate-top-fixes`
 - **MCP Required**: GA4 (KPI deltas), Clarity (UX regressions), Sentry (optional)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/pm/release/{slug}/review.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/release/{slug}/review.md`

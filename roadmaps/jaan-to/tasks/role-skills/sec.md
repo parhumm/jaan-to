@@ -27,7 +27,7 @@ flowchart TD
 - **→ Next**: `sec-pii-map`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/sec/review/{slug}/threat-model.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sec/review/{slug}/threat-model.md`
 
 ### /jaan-to-sec-pii-map
 
@@ -41,7 +41,7 @@ flowchart TD
 - **→ Next**: `sec-compliance-requirements`
 - **MCP Required**: None
 - **Input**: [data]
-- **Output**: `jaan-to/outputs/sec/review/{slug}/pii-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sec/review/{slug}/pii-map.md`
 
 ### /jaan-to-sec-compliance-requirements
 
@@ -55,7 +55,7 @@ flowchart TD
 - **→ Next**: `sec-compliance-evidence-pack`
 - **MCP Required**: None
 - **Input**: [region] [domain]
-- **Output**: `jaan-to/outputs/sec/compliance/{slug}/requirements.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sec/compliance/{slug}/requirements.md`
 
 ### /jaan-to-sec-compliance-evidence-pack
 
@@ -69,4 +69,4 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None
 - **Input**: [controls]
-- **Output**: `jaan-to/outputs/sec/compliance/{slug}/evidence-pack.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sec/compliance/{slug}/evidence-pack.md`

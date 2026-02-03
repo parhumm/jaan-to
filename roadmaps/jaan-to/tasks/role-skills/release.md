@@ -37,7 +37,7 @@ flowchart TD
 - **→ Next**: `release-beta-issue-log`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/release/beta/{slug}/rollout-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/beta/{slug}/rollout-plan.md`
 
 ### /jaan-to-release-beta-issue-log
 
@@ -51,7 +51,7 @@ flowchart TD
 - **→ Next**: `release-triage-decision`, `release-prod-runbook`
 - **MCP Required**: None
 - **Input**: [reports]
-- **Output**: `jaan-to/outputs/release/beta/{slug}/issue-log.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/beta/{slug}/issue-log.md`
 
 ### /jaan-to-release-prod-runbook
 
@@ -65,7 +65,7 @@ flowchart TD
 - **→ Next**: `release-prod-war-room-pack`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/release/prod/{slug}/runbook.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/prod/{slug}/runbook.md`
 
 ### /jaan-to-release-prod-war-room-pack
 
@@ -79,7 +79,7 @@ flowchart TD
 - **→ Next**: `support-launch-monitor`
 - **MCP Required**: None
 - **Input**: [release]
-- **Output**: `jaan-to/outputs/release/prod/{slug}/war-room-pack.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/prod/{slug}/war-room-pack.md`
 
 ### /jaan-to-release-triage-decision
 
@@ -93,7 +93,7 @@ flowchart TD
 - **→ Next**: `release-triage-hotfix-scope`
 - **MCP Required**: None
 - **Input**: [bug]
-- **Output**: `jaan-to/outputs/release/triage/{slug}/decision.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/triage/{slug}/decision.md`
 
 ### /jaan-to-release-triage-hotfix-scope
 
@@ -107,7 +107,7 @@ flowchart TD
 - **→ Next**: `dev-pr-review`
 - **MCP Required**: None
 - **Input**: [bugs]
-- **Output**: `jaan-to/outputs/release/triage/{slug}/hotfix-scope.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/triage/{slug}/hotfix-scope.md`
 
 ### /jaan-to-release-iterate-top-fixes
 
@@ -121,7 +121,7 @@ flowchart TD
 - **→ Next**: `release-iterate-changelog`
 - **MCP Required**: None
 - **Input**: [insights]
-- **Output**: `jaan-to/outputs/release/iterate/{slug}/top-fixes.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/iterate/{slug}/top-fixes.md`
 
 ### /jaan-to-release-iterate-changelog
 
@@ -135,4 +135,4 @@ flowchart TD
 - **→ Next**: `support-help-article`
 - **MCP Required**: None
 - **Input**: [changes]
-- **Output**: `jaan-to/outputs/release/iterate/{slug}/changelog.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/release/iterate/{slug}/changelog.md`

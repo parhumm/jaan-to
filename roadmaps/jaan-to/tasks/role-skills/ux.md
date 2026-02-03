@@ -52,13 +52,13 @@ flowchart TD
 - **→ Next**: `ux-research-synthesize`
 - **MCP Required**: Clarity (pain signals), Figma (flow context)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/ux/research/{slug}/research-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/research/{slug}/research-plan.md`
 
 ### /jaan-to-ux-research-synthesize
 
 - **Logical**: `ux:research-synthesize`
 - **Description**: Synthesize research findings into themes, executive summary, and recommendations
-- **Reference**: [Building a Production-Ready UX Research Synthesis Skill: Comprehensive Research Foundation](../../../../jaan-to/outputs/research/47-ux-research-synthesize.md)
+- **Reference**: [Building a Production-Ready UX Research Synthesis Skill: Comprehensive Research Foundation](../../../../$JAAN_OUTPUTS_DIR/research/47-ux-research-synthesize.md)
 - **Quick Win**: Yes - pattern recognition, summarization
 - **AI Score**: 5 | **Rank**: #8
 - **Key Points**:
@@ -68,7 +68,7 @@ flowchart TD
 - **→ Next**: `ux-persona-create`
 - **MCP Required**: None (raw data input)
 - **Input**: [study_name] [data_sources]
-- **Output**: `jaan-to/outputs/ux/research/{slug}/synthesis.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/research/{slug}/synthesis.md`
 - **Failure Modes**: Too long reports; no actionable recommendations
 - **Quality Gates**: Stakeholder feedback positive; action items tracked
 
@@ -85,7 +85,7 @@ flowchart TD
 - **→ Next**: `pm-jtbd-map`, `pm-persona-card`
 - **MCP Required**: None (research data input), Clarity (optional)
 - **Input**: [research_data] [segment]
-- **Output**: `jaan-to/outputs/ux/personas/{slug}/persona.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/personas/{slug}/persona.md`
 - **Failure Modes**: Based on assumptions; not validated; too many personas
 - **Quality Gates**: Validation interviews; periodic reviews; design decisions reference personas
 
@@ -101,7 +101,7 @@ flowchart TD
 - **→ Next**: `pm-positioning-brief`
 - **MCP Required**: Figma (optional), GA4/Clarity (validate assumptions)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/ux/benchmark/{slug}/competitive-review.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/benchmark/{slug}/competitive-review.md`
 
 ### /jaan-to-ux-journey-map
 
@@ -115,7 +115,7 @@ flowchart TD
 - **→ Next**: `ux-journey-edge-cases`
 - **MCP Required**: None
 - **Input**: [persona] [task]
-- **Output**: `jaan-to/outputs/ux/journey/{slug}/journey-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/journey/{slug}/journey-map.md`
 
 ### /jaan-to-ux-journey-edge-cases
 
@@ -129,7 +129,7 @@ flowchart TD
 - **→ Next**: `ux-flow-spec`
 - **MCP Required**: None
 - **Input**: [flow]
-- **Output**: `jaan-to/outputs/ux/journey/{slug}/edge-cases.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/journey/{slug}/edge-cases.md`
 
 ### /jaan-to-ux-sitemap
 
@@ -143,7 +143,7 @@ flowchart TD
 - **→ Next**: `ux-taxonomy`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/ux/ia/{slug}/sitemap.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/ia/{slug}/sitemap.md`
 
 ### /jaan-to-ux-taxonomy
 
@@ -157,7 +157,7 @@ flowchart TD
 - **→ Next**: `ux-wireframe-screens`
 - **MCP Required**: None
 - **Input**: [content-types]
-- **Output**: `jaan-to/outputs/ux/ia/{slug}/taxonomy.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/ia/{slug}/taxonomy.md`
 
 ### /jaan-to-ux-wireframe-screens
 
@@ -171,7 +171,7 @@ flowchart TD
 - **→ Next**: `ux-wireframe-review`
 - **MCP Required**: None
 - **Input**: [journey]
-- **Output**: `jaan-to/outputs/ux/wireframe/{slug}/screens.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/wireframe/{slug}/screens.md`
 
 ### /jaan-to-ux-wireframe-review
 
@@ -185,7 +185,7 @@ flowchart TD
 - **→ Next**: `ux-ui-spec-states`
 - **MCP Required**: None
 - **Input**: [wireframes]
-- **Output**: `jaan-to/outputs/ux/wireframe/{slug}/review-checklist.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/wireframe/{slug}/review-checklist.md`
 
 ### /jaan-to-ux-flow-spec
 
@@ -199,7 +199,7 @@ flowchart TD
 - **→ Next**: `ux-microcopy-write`, `dev-fe-state-machine`
 - **MCP Required**: Figma (flow/state extraction)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/ux/flows/{slug}/flow-spec.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/flows/{slug}/flow-spec.md`
 
 ### /jaan-to-ux-heuristic-review
 
@@ -213,7 +213,7 @@ flowchart TD
 - **→ Next**: `ux-flow-spec`
 - **MCP Required**: Clarity (behavior evidence), Figma (screens)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/ux/review/{slug}/heuristic-review.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/review/{slug}/heuristic-review.md`
 
 ### /jaan-to-ux-ui-spec-states
 
@@ -227,7 +227,7 @@ flowchart TD
 - **→ Next**: `ux-ui-handoff-notes`
 - **MCP Required**: Figma (screens/states)
 - **Input**: [screen]
-- **Output**: `jaan-to/outputs/ux/ui/{slug}/spec-states.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/ui/{slug}/spec-states.md`
 
 ### /jaan-to-ux-ui-handoff-notes
 
@@ -241,7 +241,7 @@ flowchart TD
 - **→ Next**: `dev-fe-task-breakdown`
 - **MCP Required**: Figma (design specs)
 - **Input**: [design]
-- **Output**: `jaan-to/outputs/ux/ui/{slug}/handoff-notes.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/ui/{slug}/handoff-notes.md`
 
 ### /jaan-to-ux-microcopy-write
 
@@ -255,7 +255,7 @@ flowchart TD
 - **→ Next**: `ux-error-messages`
 - **MCP Required**: Figma (components + strings)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/ux/content/{slug}/microcopy.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/content/{slug}/microcopy.md`
 
 ### /jaan-to-ux-error-messages
 
@@ -269,7 +269,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None
 - **Input**: [errors]
-- **Output**: `jaan-to/outputs/ux/content/{slug}/error-messages.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/content/{slug}/error-messages.md`
 
 ### /jaan-to-ux-a11y-audit
 
@@ -283,7 +283,7 @@ flowchart TD
 - **→ Next**: `ux-a11y-aria-notes`
 - **MCP Required**: None
 - **Input**: [screens]
-- **Output**: `jaan-to/outputs/ux/a11y/{slug}/audit.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/a11y/{slug}/audit.md`
 
 ### /jaan-to-ux-a11y-aria-notes
 
@@ -297,7 +297,7 @@ flowchart TD
 - **→ Next**: `dev-fe-task-breakdown`
 - **MCP Required**: None
 - **Input**: [components]
-- **Output**: `jaan-to/outputs/ux/a11y/{slug}/aria-notes.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/a11y/{slug}/aria-notes.md`
 
 ### /jaan-to-ux-onboarding-steps
 
@@ -311,7 +311,7 @@ flowchart TD
 - **→ Next**: `ux-onboarding-tooltips`
 - **MCP Required**: None
 - **Input**: [product]
-- **Output**: `jaan-to/outputs/ux/onboarding/{slug}/steps.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/onboarding/{slug}/steps.md`
 
 ### /jaan-to-ux-onboarding-tooltips
 
@@ -325,4 +325,4 @@ flowchart TD
 - **→ Next**: `data-event-spec`
 - **MCP Required**: None
 - **Input**: [steps]
-- **Output**: `jaan-to/outputs/ux/onboarding/{slug}/tooltips.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/onboarding/{slug}/tooltips.md`

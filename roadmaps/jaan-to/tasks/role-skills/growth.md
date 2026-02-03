@@ -44,7 +44,7 @@ flowchart TD
 - **→ Next**: `growth-content-outline`
 - **MCP Required**: GSC (queries/pages)
 - **Input**: [topic]
-- **Output**: `jaan-to/outputs/growth/seo/{slug}/keyword-brief.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/seo/{slug}/keyword-brief.md`
 
 ### /jaan-to-growth-content-outline
 
@@ -58,7 +58,7 @@ flowchart TD
 - **→ Next**: `growth-meta-write`
 - **MCP Required**: GSC (opportunity pages + queries)
 - **Input**: [page]
-- **Output**: `jaan-to/outputs/growth/content/{slug}/outline.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/content/{slug}/outline.md`
 
 ### /jaan-to-growth-meta-write
 
@@ -73,7 +73,7 @@ flowchart TD
 - **→ Next**: `growth-seo-audit`
 - **MCP Required**: None (target keyword provided)
 - **Input**: [page_url] [target_keyword]
-- **Output**: `jaan-to/outputs/growth/meta/{slug}/meta-tags.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/meta/{slug}/meta-tags.md`
 - **Failure Modes**: Truncation; keyword stuffing; generic descriptions
 - **Quality Gates**: Primary keyword included; compelling; proper length
 
@@ -90,7 +90,7 @@ flowchart TD
 - **→ Next**: `growth-meta-write`
 - **MCP Required**: GSC (traffic decline reports), GA4 (engagement)
 - **Input**: [page_url]
-- **Output**: `jaan-to/outputs/growth/optimization/{slug}/content-refresh.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/optimization/{slug}/content-refresh.md`
 - **Failure Modes**: Surface-level changes; breaking existing rankings
 - **Quality Gates**: Matches current intent; competitive depth; tracked 30/60/90 days
 
@@ -106,7 +106,7 @@ flowchart TD
 - **→ Next**: `growth-seo-check`
 - **MCP Required**: GSC (page CTR/impressions), GitLab (optional route ownership)
 - **Input**: [url_or_route] [target_keyword]
-- **Output**: `jaan-to/outputs/growth/seo/{slug}/seo-audit.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/seo/{slug}/seo-audit.md`
 
 ### /jaan-to-growth-seo-check
 
@@ -120,7 +120,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: GSC (coverage/index diagnostics)
 - **Input**: [site_or_app] [scope]
-- **Output**: `jaan-to/outputs/growth/seo/{slug}/seo-check.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/seo/{slug}/seo-check.md`
 
 ### /jaan-to-growth-beta-cohort-plan
 
@@ -134,7 +134,7 @@ flowchart TD
 - **→ Next**: `growth-beta-feedback-script`, `release-beta-rollout-plan`
 - **MCP Required**: None
 - **Input**: [criteria]
-- **Output**: `jaan-to/outputs/growth/beta/{slug}/cohort-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/beta/{slug}/cohort-plan.md`
 
 ### /jaan-to-growth-beta-feedback-script
 
@@ -148,7 +148,7 @@ flowchart TD
 - **→ Next**: `pm-insights-synthesis`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/growth/beta/{slug}/feedback-script.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/beta/{slug}/feedback-script.md`
 
 ### /jaan-to-growth-lifecycle-message-map
 
@@ -162,7 +162,7 @@ flowchart TD
 - **→ Next**: `growth-lifecycle-copy-variants`
 - **MCP Required**: None
 - **Input**: [journey]
-- **Output**: `jaan-to/outputs/growth/lifecycle/{slug}/message-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/lifecycle/{slug}/message-map.md`
 
 ### /jaan-to-growth-lifecycle-copy-variants
 
@@ -176,7 +176,7 @@ flowchart TD
 - **→ Next**: `data-experiment-design`
 - **MCP Required**: None
 - **Input**: [message]
-- **Output**: `jaan-to/outputs/growth/lifecycle/{slug}/copy-variants.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/lifecycle/{slug}/copy-variants.md`
 
 ### /jaan-to-growth-loop-design
 
@@ -190,7 +190,7 @@ flowchart TD
 - **→ Next**: `growth-loop-abuse-guards`
 - **MCP Required**: None
 - **Input**: [mechanic]
-- **Output**: `jaan-to/outputs/growth/loop/{slug}/loop-design.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/loop/{slug}/loop-design.md`
 
 ### /jaan-to-growth-loop-abuse-guards
 
@@ -204,7 +204,7 @@ flowchart TD
 - **→ Next**: `data-event-spec`
 - **MCP Required**: None
 - **Input**: [loop]
-- **Output**: `jaan-to/outputs/growth/loop/{slug}/abuse-guards.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/loop/{slug}/abuse-guards.md`
 
 ### /jaan-to-growth-launch-announcement
 
@@ -218,7 +218,7 @@ flowchart TD
 - **→ Next**: `growth-launch-faq`
 - **MCP Required**: None
 - **Input**: [release]
-- **Output**: `jaan-to/outputs/growth/launch/{slug}/announcement.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/launch/{slug}/announcement.md`
 
 ### /jaan-to-growth-launch-faq
 
@@ -232,7 +232,7 @@ flowchart TD
 - **→ Next**: `support-help-article`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `jaan-to/outputs/growth/launch/{slug}/faq.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/launch/{slug}/faq.md`
 
 ### /jaan-to-growth-weekly-report
 
@@ -246,4 +246,4 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: GA4 (deltas), GSC (deltas)
 - **Input**: [period]
-- **Output**: `jaan-to/outputs/growth/reports/{slug}/weekly-report.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/growth/reports/{slug}/weekly-report.md`

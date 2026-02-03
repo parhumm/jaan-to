@@ -33,7 +33,7 @@ flowchart TD
 - **→ Next**: `delivery-plan-risks`
 - **MCP Required**: None
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/delivery/plan/{slug}/milestones.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/plan/{slug}/milestones.md`
 
 ### /jaan-to-delivery-plan-risks
 
@@ -47,7 +47,7 @@ flowchart TD
 - **→ Next**: `delivery-backlog-split`
 - **MCP Required**: None
 - **Input**: [plan]
-- **Output**: `jaan-to/outputs/delivery/plan/{slug}/risks.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/plan/{slug}/risks.md`
 
 ### /jaan-to-delivery-backlog-split
 
@@ -61,7 +61,7 @@ flowchart TD
 - **→ Next**: `delivery-backlog-ready-check`
 - **MCP Required**: None
 - **Input**: [prd]
-- **Output**: `jaan-to/outputs/delivery/backlog/{slug}/split.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/backlog/{slug}/split.md`
 
 ### /jaan-to-delivery-backlog-ready-check
 
@@ -75,7 +75,7 @@ flowchart TD
 - **→ Next**: `delivery-sprint-planning-pack`
 - **MCP Required**: None
 - **Input**: [story]
-- **Output**: `jaan-to/outputs/delivery/backlog/{slug}/ready-check.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/backlog/{slug}/ready-check.md`
 
 ### /jaan-to-delivery-sprint-planning-pack
 
@@ -89,7 +89,7 @@ flowchart TD
 - **→ Next**: `delivery-sprint-dependency-map`
 - **MCP Required**: None
 - **Input**: [backlog]
-- **Output**: `jaan-to/outputs/delivery/sprint/{slug}/planning-pack.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/sprint/{slug}/planning-pack.md`
 
 ### /jaan-to-delivery-sprint-dependency-map
 
@@ -103,7 +103,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None
 - **Input**: [items]
-- **Output**: `jaan-to/outputs/delivery/sprint/{slug}/dependency-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/sprint/{slug}/dependency-map.md`
 
 ### /jaan-to-delivery-release-readiness
 
@@ -117,7 +117,7 @@ flowchart TD
 - **→ Next**: `delivery-release-comms-plan`
 - **MCP Required**: None
 - **Input**: [release]
-- **Output**: `jaan-to/outputs/delivery/release/{slug}/readiness.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/release/{slug}/readiness.md`
 
 ### /jaan-to-delivery-release-comms-plan
 
@@ -131,4 +131,4 @@ flowchart TD
 - **→ Next**: `release-prod-runbook`
 - **MCP Required**: None
 - **Input**: [release]
-- **Output**: `jaan-to/outputs/delivery/release/{slug}/comms-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/delivery/release/{slug}/comms-plan.md`

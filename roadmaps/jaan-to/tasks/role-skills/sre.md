@@ -36,7 +36,7 @@ flowchart TD
 - **→ Next**: `sre-alert-tuning`
 - **MCP Required**: Monitoring tools (Datadog/Grafana)
 - **Input**: [service]
-- **Output**: `jaan-to/outputs/sre/monitor/{slug}/slo-setup.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/monitor/{slug}/slo-setup.md`
 
 ### /jaan-to-sre-alert-tuning
 
@@ -50,7 +50,7 @@ flowchart TD
 - **→ Next**: `dev-observability-alerts`
 - **MCP Required**: Monitoring tools (Datadog/Grafana)
 - **Input**: [alerts]
-- **Output**: `jaan-to/outputs/sre/monitor/{slug}/alert-tuning.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/monitor/{slug}/alert-tuning.md`
 
 ### /jaan-to-sre-pipeline-audit
 
@@ -64,7 +64,7 @@ flowchart TD
 - **→ Next**: `sre-env-check`
 - **MCP Required**: GitLab (pipeline config)
 - **Input**: [repo]
-- **Output**: `jaan-to/outputs/sre/cicd/{slug}/pipeline-audit.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/cicd/{slug}/pipeline-audit.md`
 
 ### /jaan-to-sre-env-check
 
@@ -78,7 +78,7 @@ flowchart TD
 - **→ Next**: `dev-ship-check`
 - **MCP Required**: GitLab (env config)
 - **Input**: [env]
-- **Output**: `jaan-to/outputs/sre/cicd/{slug}/env-check.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/cicd/{slug}/env-check.md`
 
 ### /jaan-to-sre-toil-audit
 
@@ -92,7 +92,7 @@ flowchart TD
 - **→ Next**: `sre-hardening-plan`
 - **MCP Required**: None
 - **Input**: [week]
-- **Output**: `jaan-to/outputs/sre/ops/{slug}/toil-audit.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/ops/{slug}/toil-audit.md`
 
 ### /jaan-to-sre-hardening-plan
 
@@ -106,7 +106,7 @@ flowchart TD
 - **→ Next**: `delivery-backlog-split`
 - **MCP Required**: None
 - **Input**: [service]
-- **Output**: `jaan-to/outputs/sre/ops/{slug}/hardening-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/ops/{slug}/hardening-plan.md`
 
 ### /jaan-to-sre-incident-runbook
 
@@ -120,7 +120,7 @@ flowchart TD
 - **→ Next**: `sre-incident-postmortem`
 - **MCP Required**: None
 - **Input**: [service]
-- **Output**: `jaan-to/outputs/sre/incident/{slug}/runbook.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/incident/{slug}/runbook.md`
 
 ### /jaan-to-sre-incident-postmortem
 
@@ -134,4 +134,4 @@ flowchart TD
 - **→ Next**: `sre-hardening-plan`
 - **MCP Required**: None
 - **Input**: [incident]
-- **Output**: `jaan-to/outputs/sre/incident/{slug}/postmortem.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/incident/{slug}/postmortem.md`

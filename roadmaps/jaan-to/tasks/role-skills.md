@@ -12,6 +12,44 @@ Skills within each role are **sorted by workflow dependency order** (topological
 
 **Research source**: [AI-Assisted Product Operations](../../docs/deepresearches/ai-assisted-product-operations-The-60-highest-leverage-tasks-across-SaaS-teams.md) - 60 highest-leverage tasks across SaaS teams. Skills marked with **Rank #N** are from the Top 20 list.
 
+## v3.0.0 Implementation Requirements
+
+**All 137 skills MUST use v3.0.0 patterns when implemented:**
+
+### Creation
+- Use `/to-jaan-skill-create {skill-name}` (generates v3.0.0-compliant skills)
+- Follow [docs/extending/create-skill.md](../../docs/extending/create-skill.md)
+- Validate with `/to-jaan-skill-update {skill-name}` before committing
+
+### Paths (Environment Variables)
+- **Outputs**: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+- **Templates**: `$JAAN_TEMPLATES_DIR/{skill-name}.template.md`
+- **Learning**: `$JAAN_LEARN_DIR/{skill-name}.learn.md`
+- **Context**: `$JAAN_CONTEXT_DIR/*.md`
+
+❌ **Never** use hardcoded `jaan-to/` paths
+
+### Tech-Aware Skills
+Skills that generate code/specs/PRDs should:
+1. Read `$JAAN_CONTEXT_DIR/tech.md` in Pre-Execution
+2. Use `{{import:$JAAN_CONTEXT_DIR/tech.md#section}}` in templates
+3. Reference frameworks from tech stack in outputs
+
+**Examples**: pm-prd-write, dev-*, qa-test-cases, data-event-spec
+
+### Template Variables
+Use v3.0.0 syntax in all template.md files:
+- `{{title}}`, `{{date}}`, `{{author}}` - Field variables
+- `{{env:JAAN_OUTPUTS_DIR}}` - Environment variables
+- `{{import:$JAAN_CONTEXT_DIR/tech.md#current-stack}}` - Section imports
+
+### Validation Checklist
+- [ ] Uses `$JAAN_*` variables (not `jaan-to/` paths)
+- [ ] Has SKILL.md + template.md + LEARN.md seed
+- [ ] Passes `/to-jaan-skill-update` v3.0.0 validation
+- [ ] Documented in `docs/skills/{role}/{skill-name}.md`
+- [ ] Tested with sample inputs
+
 ---
 
 ## Roles
@@ -48,11 +86,14 @@ Key dependency flows across roles:
 
 ## Acceptance Criteria
 
-- [ ] All 130 skills created with SKILL.md + LEARN.md
-- [ ] Each skill follows `docs/extending/create-skill.md` specification
+- [ ] All 137 skills created with SKILL.md + LEARN.md seed
+- [ ] Each skill follows `docs/extending/create-skill.md` v3.0.0 specification
+- [ ] **All skills use `$JAAN_*` environment variables (zero hardcoded paths)**
+- [ ] **Tech-aware skills integrate with `$JAAN_CONTEXT_DIR/tech.md`**
+- [ ] **All skills pass `/to-jaan-skill-update` v3.0.0 validation (7 checks)**
 - [ ] Documentation in docs/skills/{role}/
-- [ ] Registered in context/config.md
-- [ ] Tested with sample inputs
+- [ ] Registered in jaan-to/context/config.md
+- [ ] Tested with sample inputs in v3.0.0 environment
 - [ ] Roles covered: PM, DEV, QA, DATA, GROWTH, UX, SEC, DELIVERY, SRE, SUPPORT, RELEASE
 
 ## Dependencies

@@ -41,7 +41,7 @@ flowchart TD
 - **→ Next**: `data-gtm-datalayer`, `data-metric-spec`
 - **MCP Required**: GA4 (measurement alignment)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/data/events/{slug}/event-spec.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/events/{slug}/event-spec.md`
 
 ### /jaan-to-data-metric-spec
 
@@ -55,7 +55,7 @@ flowchart TD
 - **→ Next**: `data-metric-dictionary`
 - **MCP Required**: GA4 (dimension/metric checks)
 - **Input**: [metric]
-- **Output**: `jaan-to/outputs/data/metrics/{slug}/metric-spec.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/metrics/{slug}/metric-spec.md`
 
 ### /jaan-to-data-metric-dictionary
 
@@ -69,7 +69,7 @@ flowchart TD
 - **→ Next**: `data-dashboard-spec`
 - **MCP Required**: None
 - **Input**: [metrics]
-- **Output**: `jaan-to/outputs/data/metrics/{slug}/metric-dictionary.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/metrics/{slug}/metric-dictionary.md`
 
 ### /jaan-to-data-dashboard-spec
 
@@ -83,7 +83,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None
 - **Input**: [kpis]
-- **Output**: `jaan-to/outputs/data/dashboard/{slug}/dashboard-spec.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/dashboard/{slug}/dashboard-spec.md`
 
 ### /jaan-to-data-funnel-review
 
@@ -97,7 +97,7 @@ flowchart TD
 - **→ Next**: `data-experiment-design`, `data-cohort-analyze`
 - **MCP Required**: GA4 (funnel analysis), Clarity (qualitative)
 - **Input**: [initiative]
-- **Output**: `jaan-to/outputs/data/insights/{slug}/funnel-review.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/insights/{slug}/funnel-review.md`
 
 ### /jaan-to-data-experiment-design
 
@@ -111,7 +111,7 @@ flowchart TD
 - **→ Next**: `data-analysis-plan`
 - **MCP Required**: GA4 (baseline + segments)
 - **Input**: [hypothesis]
-- **Output**: `jaan-to/outputs/data/experiments/{slug}/experiment-design.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/experiments/{slug}/experiment-design.md`
 
 ### /jaan-to-data-analysis-plan
 
@@ -125,7 +125,7 @@ flowchart TD
 - **→ Next**: `data-postlaunch-report`
 - **MCP Required**: None
 - **Input**: [experiment]
-- **Output**: `jaan-to/outputs/data/experiments/{slug}/analysis-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/experiments/{slug}/analysis-plan.md`
 
 ### /jaan-to-data-cohort-analyze
 
@@ -140,7 +140,7 @@ flowchart TD
 - **→ Next**: `data-postlaunch-report`
 - **MCP Required**: GA4 (cohort data), BigQuery (optional)
 - **Input**: [cohort_type] [retention_event] [periods]
-- **Output**: `jaan-to/outputs/data/cohorts/{slug}/cohort-analysis.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/cohorts/{slug}/cohort-analysis.md`
 - **Failure Modes**: Incomplete data; timezone issues; not accounting for seasonality
 - **Quality Gates**: Early cohorts stable; cross-reference with finance
 
@@ -156,7 +156,7 @@ flowchart TD
 - **→ Next**: `pm-release-review`
 - **MCP Required**: GA4 (post-launch data)
 - **Input**: [metrics]
-- **Output**: `jaan-to/outputs/data/insights/{slug}/postlaunch-report.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/insights/{slug}/postlaunch-report.md`
 
 ### /jaan-to-data-attribution-plan
 
@@ -170,7 +170,7 @@ flowchart TD
 - **→ Next**: `data-ltv-cac-model`
 - **MCP Required**: GA4 (attribution data)
 - **Input**: [channels]
-- **Output**: `jaan-to/outputs/data/growth/{slug}/attribution-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/growth/{slug}/attribution-plan.md`
 
 ### /jaan-to-data-ltv-cac-model
 
@@ -184,7 +184,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None
 - **Input**: [assumptions]
-- **Output**: `jaan-to/outputs/data/growth/{slug}/ltv-cac-model.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/growth/{slug}/ltv-cac-model.md`
 
 ### /jaan-to-data-anomaly-triage
 
@@ -198,7 +198,7 @@ flowchart TD
 - **→ Next**: `sre-incident-runbook`
 - **MCP Required**: GA4 (anomaly detection), Sentry, Clarity (optional)
 - **Input**: [kpi]
-- **Output**: `jaan-to/outputs/data/monitoring/{slug}/anomaly-triage.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/monitoring/{slug}/anomaly-triage.md`
 
 ### /jaan-to-data-sql-query
 
@@ -213,7 +213,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None (schema context provided)
 - **Input**: [question] [tables/schema]
-- **Output**: `jaan-to/outputs/data/queries/{slug}/query.sql`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/queries/{slug}/query.sql`
 - **Failure Modes**: Misunderstanding question; wrong joins; incorrect filters
 - **Quality Gates**: Row count sanity checks; cross-reference dashboards
 
@@ -230,6 +230,6 @@ flowchart TD
 - **→ Next**: `data-sql-query`
 - **MCP Required**: dbt Cloud (optional), BigQuery/Snowflake (schema)
 - **Input**: [source_table] [model_type]
-- **Output**: `jaan-to/outputs/data/dbt/{slug}/model.sql`
+- **Output**: `$JAAN_OUTPUTS_DIR/data/dbt/{slug}/model.sql`
 - **Failure Modes**: Circular dependencies; missing tests; poor documentation
 - **Quality Gates**: dbt test passes; row counts match; code review
