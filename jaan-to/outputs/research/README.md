@@ -61,6 +61,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [51](51-dev-fe-task-breakdown.md) | Frontend Task Breakdown: Complete Framework | Systematic framework for transforming UX handoffs into production-ready task breakdowns. Covers PMI WBS principles, Component-Driven Development, Atomic Design taxonomy, React 18/Next.js 14 patterns, 50+ item coverage checklist (accessibility, performance, SEO, testing), state machine definitions, implicit work identification, and AI failure mode mitigations. |
 | [52](52-dev-be-task-breakdown.md) | Backend Task Breakdown Skill: Complete Research Guide | Comprehensive methodology for transforming PRDs into Laravel/PHP backend tasks. Covers industry standards (IEEE, SAFe, Shape Up), INVEST criteria adaptation, vertical slicing vs horizontal layers, Laravel task types (migrations, models, controllers, jobs, actions), data model annotations, idempotency patterns, error taxonomy, T-shirt sizing, dependency management, quality validation, and AI guardrails. |
 | [53](53-dev-pr-review.md) | Building a Production-Ready PR/MR Code Review Skill | Complete technical foundation for GitLab-primary PR review automation targeting PHP/Laravel and TypeScript/React. Covers SmartBear effectiveness thresholds, risk-based file prioritization, Conventional Comments specification, security pattern detection (SQL injection, XSS, N+1 queries), secrets detection with entropy analysis, SARIF output format, LLM integration patterns with validation guardrails, and Dangerfile configurations. |
+| [54](54-roles-wp-details.md) | WordPress Plugin Development: Complete Role-Based Skills Guide | Comprehensive WordPress plugin development guide covering 7+ role domains — PM (idea validation, monetization, specs), Engineering (architecture, scaffolding, data storage, hooks, Settings API, WP-Cron), Admin UX (WP-Admin patterns), Integrations (REST/AJAX/External), Security/Privacy/Compliance, QA/Compatibility, and Release/Distribution (WordPress.org packaging). Each section includes skill commands with detailed implementation guidance. |
 
 ## Quick Topic Finder
 
@@ -118,6 +119,7 @@ This directory contains structured summaries of research on Claude Code best pra
 ### Tech Stack Best Practices
 - [12-react-nx-monorepo.md](12-react-nx-monorepo.md)
 - [16-react-monorepo-2025.md](16-react-monorepo-2025.md)
+- [54-roles-wp-details.md](54-roles-wp-details.md) - WordPress plugin development skills across 7+ roles
 
 ### Documentation & Architecture
 - [05-ai-os-gap-analysis.md](05-ai-os-gap-analysis.md)
