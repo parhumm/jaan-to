@@ -54,7 +54,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/research/{slug}/research-plan.md`
 
-### /jaan-to-ux-research-synthesize
+### ✅ /jaan-to-ux-research-synthesize
 
 - **Logical**: `ux:research-synthesize`
 - **Description**: Synthesize research findings into themes, executive summary, and recommendations
@@ -243,10 +243,11 @@ flowchart TD
 - **Input**: [design]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/ui/{slug}/handoff-notes.md`
 
-### /jaan-to-ux-microcopy-write
+### ✅ /jaan-to-ux-microcopy-write
 
 - **Logical**: `ux:microcopy-write`
 - **Description**: Microcopy pack: labels, helper text, errors, toasts, confirmations, empty states, tone rules
+- **Reference**: [UX Microcopy Writing Skill: Comprehensive Research Document](../../../../jaan-to/outputs/research/56-ux-microcopy-write.md)
 - **Quick Win**: Yes - simple content
 - **Key Points**:
   - Use verbs, be specific, avoid blame
