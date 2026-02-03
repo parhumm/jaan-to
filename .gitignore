@@ -19,7 +19,8 @@ Thumbs.db
 .env
 .env.local
 .env.*.local
-.claude/settings.json
-.claude/settings.local.json
+
+# Plugin local configuration (project-specific, not for distribution)
+.claude/
 .claude-plugin-cache/
 dist/

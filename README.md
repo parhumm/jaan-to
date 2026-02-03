@@ -49,6 +49,16 @@ The bootstrap hook automatically creates `jaan-to/` in your project with:
 
 ---
 
+## Optional: Project-Level Configuration
+
+jaan.to follows Claude Code best practices by NOT shipping with configuration files. All settings are OPTIONAL and should be added to YOUR project's `.claude/settings.json` if needed.
+
+**Why?** Configuration is project-specific, not plugin-specific. This keeps the plugin portable and ensures you maintain full control over permissions and environment variables in your own codebase.
+
+See [Recommended Permissions](#recommended-permissions) below for examples of common permission patterns.
+
+---
+
 ## Available Skills
 
 ### Product Management
