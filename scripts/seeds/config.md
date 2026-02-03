@@ -41,6 +41,7 @@
 | jaan-to-pm-story-write | `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then ACs |
 | to-jaan-roadmap-update | `/to-jaan-roadmap-update` | [Internal] Maintain and sync roadmap |
 | jaan-to-dev-stack-detect | `/jaan-to-dev-stack-detect` | Auto-detect tech stack and populate context |
+| jaan-to-dev-pr-review | `/jaan-to-dev-pr-review` | Automated PR review: risk scoring, security hints, missing tests |
 | jaan-to-ux-heatmap-analyze | `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 
 ## Trust
