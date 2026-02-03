@@ -147,7 +147,37 @@ If approved:
 3. Write the PRD
 4. Confirm: "PRD written to {path}"
 
-## Step 7: Capture Feedback
+## Step 7: Auto-Invoke User Story Generation
+
+Use AskUserQuestion:
+- Question: "Generate detailed user stories from this PRD?"
+- Header: "Stories"
+- Options:
+  - "Yes" — Choose stories to expand
+  - "No" — Skip, done with PRD only
+
+If "No", skip to Step 8.
+
+If "Yes":
+
+List the user stories from the generated PRD:
+
+> "Which stories to expand into full user stories?"
+>
+> [1] As a {persona}, I want {action} so that {benefit}
+> [2] As a {persona}, I want {action} so that {benefit}
+> [3] As a {persona}, I want {action} so that {benefit}
+> [All] Generate all stories
+>
+> Enter numbers (e.g., "1,3" or "all"):
+
+For each selected story, run:
+`/jaan-to-pm-story-write "{story_statement}"`
+
+This invokes the full story-write skill with INVEST validation,
+Gherkin acceptance criteria, and edge case mapping.
+
+## Step 8: Capture Feedback
 
 Use AskUserQuestion:
 - Question: "Any feedback on the PRD?"
@@ -178,3 +208,4 @@ Use AskUserQuestion:
 - [ ] PRD file exists at correct path
 - [ ] All quality checks pass
 - [ ] User has approved the content
+- [ ] User stories generated via /jaan-to-pm-story-write (if selected)
