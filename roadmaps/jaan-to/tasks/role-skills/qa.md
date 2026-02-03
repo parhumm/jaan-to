@@ -49,7 +49,7 @@ flowchart TD
 
 - **Logical**: `qa:test-cases`
 - **Description**: Test cases from acceptance criteria with edge cases, preconditions, expected results
-- **Reference**: [Production-Ready QA Test Case Generation: A Comprehensive Standards and Methodology Guide](../../../../$JAAN_OUTPUTS_DIR/research/50-qa-test-cases.md)
+- **Reference**: [Production-Ready QA Test Case Generation: A Comprehensive Standards and Methodology Guide/jaan-to/outputs/research/50-qa-test-cases.md)
 - **Quick Win**: Yes - highly structured, template-based
 - **AI Score**: 5 | **Rank**: #1 (highest-leverage task)
 - **Key Points**:

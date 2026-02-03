@@ -73,7 +73,7 @@ flowchart TD
 - **Logical**: `pm:insights-synthesis`
 - **Description**: Top pains ranked by frequency/impact, quote bank by theme, frequency table + unknowns
 - **Quick Win**: Yes
-- **Reference**: [Product Manager User Research Synthesis: Implementation Guide](../../../../$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md)
+- **Reference**: [Product Manager User Research Synthesis: Implementation Guide/jaan-to/outputs/research/45-pm-insights-synthesis.md)
 - **Key Points**:
   - Keep questions open + behavioral ("tell me about the last time…")
   - Capture verbatim quotes + context (who/when/where)
@@ -301,7 +301,7 @@ flowchart TD
 
 - **Logical**: `pm:acceptance-criteria`
 - **Description**: Testable acceptance criteria with edge cases + failure handling and analytics requirements
-- **Reference**: [Acceptance Criteria Best Practices: A Production-Ready Research Guide](../../../../$JAAN_OUTPUTS_DIR/research/49-pm-acceptance-criteria.md)
+- **Reference**: [Acceptance Criteria Best Practices: A Production-Ready Research Guide/jaan-to/outputs/research/49-pm-acceptance-criteria.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Start from problem + success metrics, not solutions
@@ -316,7 +316,7 @@ flowchart TD
 
 - **Logical**: `pm:story-write`
 - **Description**: User stories in standard format with Given/When/Then acceptance criteria
-- **Reference**: [Production-Ready PM Story-Write Skill: A Comprehensive Framework](../../../../$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md)
+- **Reference**: [Production-Ready PM Story-Write Skill: A Comprehensive Framework/jaan-to/outputs/research/45-pm-insights-synthesis.md)
 - **Quick Win**: Yes - highly structured, template-based
 - **AI Score**: 5 | **Rank**: #6
 - **Key Points**:

@@ -81,7 +81,7 @@ flowchart TD
 
 - **Logical**: `dev:be-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
-- **Reference**: [Backend Task Breakdown Skill: Complete Research Guide](../../../../$JAAN_OUTPUTS_DIR/research/52-dev-be-task-breakdown.md)
+- **Reference**: [Backend Task Breakdown Skill: Complete Research Guide/jaan-to/outputs/research/52-dev-be-task-breakdown.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Data model constraints first (unique, indexes, retention)
@@ -138,7 +138,7 @@ flowchart TD
 
 - **Logical**: `dev:fe-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies
-- **Reference**: [Frontend Task Breakdown Skill: Complete Framework Research](../../../../$JAAN_OUTPUTS_DIR/research/51-dev-fe-task-breakdown.md)
+- **Reference**: [Frontend Task Breakdown Skill: Complete Framework Research](/jaan-to/outputs/research/51-dev-fe-task-breakdown.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Explicit state machine prevents "UI glitches"
@@ -255,7 +255,7 @@ flowchart TD
 
 - **Logical**: `dev:pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
-- **Reference**: [Building a Production-Ready PR/MR Code Review Skill](../../../../$JAAN_OUTPUTS_DIR/research/53-dev-pr-review.md)
+- **Reference**: [Building a Production-Ready PR/MR Code Review Skill/jaan-to/outputs/research/53-dev-pr-review.md)
 - **Quick Win**: No - needs GitLab MCP
 - **Key Points**:
   - Define schemas with examples
