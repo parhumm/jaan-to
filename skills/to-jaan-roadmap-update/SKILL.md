@@ -456,7 +456,97 @@ Roadmap Updated
 Mode:    {mode}
 Changes: {change_count}
 Commit:  {hash}
+
+Checking if release is warranted...
 ```
+
+---
+
+## Step 8: Check Release Need
+
+**For all non-release modes** (smart-default, mark, sync, validate):
+
+After successful update, check if accumulated work warrants a release.
+
+### 8.1: Detect Release-Worthy Changes
+
+Read recent commits since last tag:
+```bash
+git log --oneline $(git describe --tags --abbrev=0)..HEAD
+```
+
+Count by type:
+- `feat:` commits → Features added
+- `fix:` commits → Bugs fixed
+- `docs:` commits → Documentation only
+- `refactor:` commits → Code changes
+
+Based on commit types, suggest semver bump:
+- `feat:` commits → Minor version bump (X.Y.0 → X.(Y+1).0)
+- Only `fix:` commits → Patch version bump (X.Y.Z → X.Y.(Z+1))
+- `BREAKING:` in commit body → Major version bump (X.Y.Z → (X+1).0.0)
+
+### 8.2: Suggest Release
+
+If **any** of these conditions are true:
+- ≥ 1 `feat:` commit (new feature)
+- ≥ 3 `fix:` commits (multiple bug fixes)
+- ≥ 5 commits total since last tag
+- User explicitly marked a "Release X.Y.Z" task as done
+
+Show suggestion:
+```
+Release Suggestion
+
+Since last tag ({{last_tag}}):
+- Features: {{feat_count}} feat: commits
+- Bug fixes: {{fix_count}} fix: commits
+- Other: {{other_count}} commits
+- Total: {{total_count}} commits
+
+Suggested version: {{suggested_version}}
+(Current: {{current_version}}, Reason: {{reason}})
+
+This work may warrant a release.
+```
+
+> "Create a release now? [y/n]"
+
+### 8.3: Guide Release Creation
+
+If "y":
+
+Ask for confirmation:
+> "Invoke release mode with version {{suggested_version}}? [y/n/custom]"
+>
+> - **y** — Use suggested version
+> - **n** — Skip release for now
+> - **custom** — Enter different version
+
+If "y" or "custom":
+1. Get version (use suggested or ask for custom)
+2. Ask for summary: "One-line release summary: "
+3. Show command:
+   ```
+   Running: /to-jaan-roadmap-update release {{version}} "{{summary}}"
+   ```
+4. Re-invoke: `/to-jaan-roadmap-update release {{version}} "{{summary}}"`
+
+If "n":
+> "Skipped release. Run this command when ready:"
+> ```
+> /to-jaan-roadmap-update release vX.Y.Z "summary"
+> ```
+>
+> This will:
+> 1. Update .claude-plugin/plugin.json version
+> 2. Update .claude-plugin/marketplace.json version
+> 3. Add CHANGELOG.md entry
+> 4. Create git commit: release: vX.Y.Z — summary
+> 5. Create git tag: vX.Y.Z
+> 6. Push to remote with tags
+
+**Skip this step entirely if in release mode** (prevents recursion).
 
 ---
 
@@ -488,4 +578,5 @@ Commit:  {hash}
 - [ ] All modifications applied correctly
 - [ ] Post-update verification passed
 - [ ] Changes committed (if approved)
+- [ ] Release need checked (if applicable)
 - [ ] User approved final result
