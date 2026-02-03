@@ -224,6 +224,21 @@ The largest architectural change since v1.0.0. Introduced full project-level cus
 
 ---
 
+## v3.12.0 — UX Research Synthesis (`550bf0f`)
+
+- **New skill**: `/jaan-to-ux-research-synthesize` — Transform raw UX research data into actionable insights
+  - Three synthesis modes: Speed (1-2h), Standard (1-2d), Cross-Study (meta-analysis)
+  - AI-assisted analysis with human validation (Braun & Clarke's Six-Phase Thematic Analysis, Atomic Research Framework)
+  - 15-step workflow with HARD STOP gate between analysis and generation
+  - Quality gates: 14-point validation checklist, participant coverage tracking (prevents >25% single-participant bias)
+  - Evidence traceability (every claim → verbatim quote + participant ID)
+  - Dual outputs: main synthesis report + 1-page executive brief (auto-generated)
+  - Methodologies: Braun & Clarke, Atomic Research, Nielsen Severity Ratings, Impact × Effort Matrix, ISO 9241-11:2018
+  - Research-informed (877-line methodology foundation)
+- `/to-jaan-roadmap-update` enhanced with automatic release detection (`602d651`)
+
+---
+
 ## Unreleased
 
 (none)

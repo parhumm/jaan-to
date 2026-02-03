@@ -5,6 +5,25 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.12.0] - 2026-02-03
+
+### Added
+- **`/jaan-to-ux-research-synthesize` skill** — Transform raw UX research data (interviews, usability tests, surveys) into actionable insights using validated methodologies (`550bf0f`)
+  - Three synthesis modes: Speed (1-2h quick findings), Standard (1-2d full thematic analysis), Cross-Study (meta-analysis across multiple studies)
+  - AI-assisted analysis with human validation checkpoints implementing Braun & Clarke's Six-Phase Thematic Analysis and Atomic Research Framework
+  - 15-step workflow with HARD STOP between analysis (read-only) and generation (write phase)
+  - Quality gates: 14-point validation checklist covering executive summary length, theme quality, evidence traceability, participant coverage balance
+  - Participant coverage tracking prevents >25% single-participant bias
+  - Evidence traceability ensures every claim traces to verbatim quote with participant ID
+  - Dual outputs: main synthesis report + 1-page executive brief (auto-generated)
+  - Methodologies: Braun & Clarke Six-Phase, Atomic Research (Experiments → Facts → Insights → Recommendations), Nielsen Severity Ratings (0-4 scale), Impact × Effort Matrix (Quick Wins, Big Bets, Fill-Ins, Money Pits), ISO 9241-11:2018 usability dimensions
+  - Research-informed: 877-line methodology foundation ([jaan-to/outputs/research/47-ux-research-synthesize.md](jaan-to/outputs/research/47-ux-research-synthesize.md))
+
+### Changed
+- **`/to-jaan-roadmap-update` enhanced** — Automatic release detection from git history when running in smart-default mode (`602d651`)
+
+---
+
 ## [3.11.0] - 2026-02-03
 
 ### Added
@@ -466,6 +485,8 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.12.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.12.0
+[3.11.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.11.0
 [3.10.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.10.0
 [3.9.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.9.0
 [3.8.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.8.0
