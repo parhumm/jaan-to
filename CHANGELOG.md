@@ -5,6 +5,22 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.0] - 2026-02-03
+
+### Added
+- **Frontend Component Design Skill** — `/jaan-to-dev-fe-design` generates distinctive, production-grade frontend component code (`48284c7`)
+  - Creates working components in React, Vue, or vanilla JS/HTML based on tech.md detection
+  - Generates bold, distinctive designs that avoid generic "AI slop" aesthetics (no Inter/Roboto, no purple gradients, unexpected layouts)
+  - Full accessibility (WCAG AA minimum) with semantic HTML, ARIA, keyboard navigation, visible focus indicators
+  - Responsive design (mobile-first) using modern CSS: Grid, Container Queries, Custom Properties, `:has()`, `prefers-color-scheme`
+  - Complete deliverables: component code + documentation with design rationale + standalone preview file
+  - Output structure: `dev/components/{id}-{slug}/` with ID-based folders and index management
+  - Reads settings.yaml for design direction defaults, design.md for existing patterns, brand.md for guidelines
+  - Complements `/jaan-to-dev-fe-task-breakdown`: task-breakdown plans what to build, fe-design builds the actual code
+  - 478-line SKILL.md with two-phase workflow, 137-line template with variable syntax, 47-line LEARN.md with best practices
+
+---
+
 ## [3.13.0] - 2026-02-03
 
 ### Added
@@ -524,6 +540,8 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.14.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.14.0
+[3.13.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.13.0
 [3.12.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.12.0
 [3.11.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.11.0
 [3.10.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.10.0
