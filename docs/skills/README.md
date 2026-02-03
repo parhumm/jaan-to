@@ -36,7 +36,7 @@ Two naming conventions based on skill type:
 | [pm](pm/README.md) | Product Manager | Active |
 | [core](core/README.md) | System utilities | Active |
 | [data](data/README.md) | Data/Analytics | Active |
-| dev | Developer | Planned |
+| [dev](dev/README.md) | Developer | Active |
 | qa | QA Engineer | Planned |
 | ux | UX Designer | Planned |
 | growth | Growth/SEO | Planned |

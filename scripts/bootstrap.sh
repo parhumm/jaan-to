@@ -158,7 +158,15 @@ for f in tech.md team.md integrations.md config.md boundaries.md; do
   fi
 done
 
-# 10. Output structured result
+# 10. Check if stack detection should be suggested (context files still have placeholders)
+SUGGEST_STACK_DETECT="false"
+if [ -f "$PROJECT_DIR/$CONTEXT_DIR/tech.md" ]; then
+  if grep -q '{project-name}' "$PROJECT_DIR/$CONTEXT_DIR/tech.md" 2>/dev/null; then
+    SUGGEST_STACK_DETECT="true"
+  fi
+fi
+
+# 11. Output structured result
 if [ ${#OLD_SKILLS[@]} -gt 0 ]; then
   OLD_LIST=$(printf '"%s",' "${OLD_SKILLS[@]}" | sed 's/,$//')
 else
@@ -190,6 +198,7 @@ cat <<RESULT
   },
   "missing_context": [${MISSING_LIST}],
   "old_standalone_skills": [${OLD_LIST}],
-  "migration_needed": $([ ${#OLD_SKILLS[@]} -gt 0 ] && echo "true" || echo "false")
+  "migration_needed": $([ ${#OLD_SKILLS[@]} -gt 0 ] && echo "true" || echo "false"),
+  "suggest_stack_detect": ${SUGGEST_STACK_DETECT}
 }
 RESULT

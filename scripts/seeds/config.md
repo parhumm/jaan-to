@@ -40,6 +40,7 @@
 | jaan-to-pm-research-about | `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
 | jaan-to-pm-story-write | `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then ACs |
 | to-jaan-roadmap-update | `/to-jaan-roadmap-update` | [Internal] Maintain and sync roadmap |
+| jaan-to-dev-stack-detect | `/jaan-to-dev-stack-detect` | Auto-detect tech stack and populate context |
 
 ## Trust
 - trust_paths: ["jaan-to/"]
