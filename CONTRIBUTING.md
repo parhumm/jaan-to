@@ -493,6 +493,14 @@ jaan.to follows [Semantic Versioning](https://semver.org/):
    git push origin dev
    ```
 
+7. **Verify installation works:**
+   ```
+   /plugin uninstall jaan-to
+   /plugin marketplace add parhumm/jaan-to
+   /plugin install jaan-to
+   ```
+   Confirm skills appear with `/jaan-to-pm-prd-write --help` or similar.
+
 **IMPORTANT:** Version bump, CHANGELOG entry, and git tag are inseparable. Never do one without the others.
 
 ---
