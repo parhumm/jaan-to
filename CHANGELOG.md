@@ -5,6 +5,39 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.0] - 2026-02-07
+
+### Added
+- **Two-Branch Development Workflow** — `main` for stable releases, `dev` for development/preview (`ba9c061`)
+  - Users can install stable: `/plugin marketplace add parhumm/jaan-to`
+  - Users can install dev: `/plugin marketplace add parhumm/jaan-to#dev`
+  - Stable versions: `X.Y.Z` (e.g., `3.15.0`)
+  - Dev versions: `X.Y.Z-dev` (e.g., `3.15.0-dev`)
+- **Version Management Scripts**
+  - `scripts/bump-version.sh` — Update version in all 3 required locations atomically (plugin.json, marketplace.json top-level, marketplace.json plugins[0])
+  - `scripts/setup-branch-protection.sh` — Configure GitHub branch protection (main: require PR + approval, dev: direct pushes allowed)
+- **CI Release Validation** — `.github/workflows/release-check.yml` for PRs to main
+  - Validates no `-dev` suffix in version
+  - Ensures all 3 version fields match
+  - Checks CHANGELOG entry exists
+  - Validates plugin.json has required component paths (skills, agents, hooks)
+
+### Changed
+- **Skill Workflow Alignment** — `/to-jaan-skill-create` and `/to-jaan-skill-update` now follow two-branch workflow (`ba9c061`)
+  - Feature branches checkout from `dev` instead of `main`
+  - PRs target `dev` branch (not `main`)
+  - `gh pr create` uses `--base dev` flag
+- **Documentation Updates**
+  - README.md: Added stable/dev installation instructions, version switching guide
+  - CONTRIBUTING.md: Added two-branch workflow documentation, release process checklist
+
+### Fixed
+- **Plugin Loading Issue** — Fixed skills not loading after marketplace installation (`d56ea2f`)
+  - Root cause: plugin.json was missing component paths (`skills`, `agents`, `hooks`)
+  - Added CI check to prevent regression
+
+---
+
 ## [3.14.1] - 2026-02-07
 
 ### Fixed

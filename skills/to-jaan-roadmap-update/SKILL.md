@@ -6,7 +6,7 @@ description: |
   Auto-triggers on: update roadmap, sync roadmap, release version, roadmap maintenance.
   Maps to: to-jaan-roadmap-update
 allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(roadmaps/**)
-argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sync] [validate] [(no args)]"
+argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [bump-dev] [sync] [validate] [(no args)]"
 ---
 
 # to-jaan-roadmap-update
@@ -32,11 +32,12 @@ argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sy
 | (no args) | `smart-default` | Scan git log since last tag, compare with roadmap, report gaps |
 | `mark "<task>" done <hash>` | `mark` | Mark a specific task as complete with commit hash |
 | `release vX.Y.Z "<summary>"` | `release` | Create version section + CHANGELOG entry + full atomic release |
+| `bump-dev` | `bump-dev` | After release on main, bump dev branch to next -dev version |
 | `sync` | `sync` | Full cross-reference: git history vs roadmap |
 | `validate` | `validate` | Check all links, task file refs, version section completeness |
 
 If no input provided, default to `smart-default` mode.
-If input doesn't match any pattern, ask: "Which mode? [smart-default / mark / release / sync / validate]"
+If input doesn't match any pattern, ask: "Which mode? [smart-default / mark / release / bump-dev / sync / validate]"
 
 ---
 
@@ -134,7 +135,13 @@ Present report:
 ### Mode: release
 
 1. Validate version format: `vN.N.N` (semver)
-2. Validate version > current version in plugin.json
+2. Validate version:
+   - Strip `-dev` suffix from current version for comparison
+   - New version must NOT have `-dev` suffix (releasing to main)
+   - New version semver >= current version (ignoring -dev suffix)
+   - Example: `3.15.0-dev` → `3.15.0` ✓ (releasing dev)
+   - Example: `3.15.0-dev` → `3.15.1` ✓ (patch during release)
+   - Example: `3.15.0` → `3.15.0-dev` ✗ (use bump-dev mode instead)
 3. Check working tree is clean
 4. Check current branch:
    - If on main: standard release flow
@@ -215,6 +222,21 @@ Present validation report:
 | File | Referenced in Roadmap | Exists |
 |------|----------------------|--------|
 ```
+
+### Mode: bump-dev
+
+Used after a release to bump the dev branch to the next -dev version.
+
+1. Check current branch is `dev`
+   - If not on dev: "Switch to dev branch first: `git checkout dev`"
+2. Read current version from plugin.json
+3. If version already has `-dev` suffix → error: "Already on dev version"
+4. Parse version: extract major.minor.patch
+5. Calculate next version: minor + 1, patch = 0, add `-dev`
+   - `3.15.0` → `3.16.0-dev`
+   - `3.15.2` → `3.16.0-dev`
+6. Check if dev is up to date with main (should have been merged after release)
+7. Prepare update to all 3 version fields using `./scripts/bump-version.sh`
 
 ---
 
@@ -304,6 +326,27 @@ Show validation report. If issues found, use AskUserQuestion:
   - "Yes" — Fix all issues
   - "No" — Report only
   - "Selective" — Choose which issues to fix
+
+### For bump-dev:
+```
+Bump Dev Version
+
+Current version: {current_version}
+New version:     {next_version}-dev
+Branch:          dev
+
+Operations:
+1. Run ./scripts/bump-version.sh {next_version}-dev
+2. Commit: chore: bump dev to {next_version}-dev
+3. Push to origin dev
+```
+
+Use AskUserQuestion:
+- Question: "Bump dev to {next_version}-dev?"
+- Header: "Bump"
+- Options:
+  - "Yes" — Bump version and push
+  - "No" — Cancel
 
 If clean: "All checks passed."
 
@@ -421,6 +464,40 @@ If "Push only":
 git push origin {branch} --tags
 ```
 
+**4.8: Prompt to bump dev**
+
+After successful release on main, prompt to bump the dev branch:
+
+```
+Release Complete: {version}
+
+Next: Bump dev branch to {next_version}-dev?
+
+This will:
+  git checkout dev
+  git merge main
+  ./scripts/bump-version.sh {next_version}-dev
+  git commit -m "chore: bump dev to {next_version}-dev"
+  git push origin dev
+```
+
+Use AskUserQuestion:
+- Question: "Bump dev to {next_version}-dev?"
+- Header: "Bump Dev"
+- Options:
+  - "Yes" — Checkout dev, merge main, bump version, push
+  - "No" — Skip (do manually later)
+
+If "Yes":
+```bash
+git checkout dev
+git merge main
+./scripts/bump-version.sh {next_version}-dev
+git add .claude-plugin/plugin.json .claude-plugin/marketplace.json
+git commit -m "chore: bump dev to {next_version}-dev"
+git push origin dev
+```
+
 ### For validate (with fixes):
 
 Apply fixes for each approved issue:
@@ -428,6 +505,26 @@ Apply fixes for each approved issue:
 - Overview table mismatches: update status cells
 - Missing commit hashes: search git log for matching commit
 - Orphan task files: suggest removal or adding reference
+
+### For bump-dev:
+
+Execute version bump:
+
+**4.1: Run bump-version script**
+```bash
+./scripts/bump-version.sh {next_version}-dev
+```
+
+**4.2: Commit**
+```bash
+git add .claude-plugin/plugin.json .claude-plugin/marketplace.json
+git commit -m "chore: bump dev to {next_version}-dev"
+```
+
+**4.3: Push**
+```bash
+git push origin dev
+```
 
 ## Step 5: Post-Update Verification
 

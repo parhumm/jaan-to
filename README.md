@@ -29,18 +29,43 @@
 
 ## Installation
 
+### Stable Version (Recommended)
 ```
 claude
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
 ```
 
-### Local development
+### Development Version (Preview)
+For testing latest features before release:
+```
+claude
+/plugin marketplace add parhumm/jaan-to#dev
+/plugin install jaan-to
+```
+
+### Switching Versions
+To switch from dev to stable (or vice versa):
+```
+/plugin uninstall jaan-to
+/plugin marketplace add parhumm/jaan-to       # stable
+/plugin marketplace add parhumm/jaan-to#dev   # dev
+/plugin install jaan-to
+```
+
+### Check Installed Version
+```
+/plugin list
+```
+- Stable versions: `3.15.0`, `3.16.0`, etc.
+- Dev versions: `3.15.0-dev`, `3.16.0-dev`, etc. (includes `-dev` suffix)
+
+### Local Development
 ```bash
 claude --plugin-dir /path/to/jaan-to
 ```
 
-### Clean distribution
+### Clean Distribution
 ```bash
 ./scripts/build-dist.sh
 claude --plugin-dir ./dist/jaan-to

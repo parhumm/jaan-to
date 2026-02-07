@@ -1,0 +1,78 @@
+name: Release Check
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check version format (no -dev suffix)
+        run: |
+          VERSION=$(jq -r '.version' .claude-plugin/plugin.json)
+          if [[ "$VERSION" == *-dev* ]]; then
+            echo "::error::Version contains -dev suffix: $VERSION"
+            echo "Release versions must not contain -dev suffix."
+            echo "Run: ./scripts/bump-version.sh X.Y.Z (without -dev)"
+            exit 1
+          fi
+          echo "✓ Version format valid: $VERSION"
+
+      - name: Check all 3 version fields match
+        run: |
+          V1=$(jq -r '.version' .claude-plugin/plugin.json)
+          V2=$(jq -r '.version' .claude-plugin/marketplace.json)
+          V3=$(jq -r '.plugins[0].version' .claude-plugin/marketplace.json)
+
+          echo "Checking version consistency..."
+          echo "  plugin.json:                  $V1"
+          echo "  marketplace.json (top):       $V2"
+          echo "  marketplace.json (plugins[0]): $V3"
+
+          if [[ "$V1" != "$V2" ]] || [[ "$V1" != "$V3" ]]; then
+            echo ""
+            echo "::error::Version mismatch detected!"
+            echo "All 3 version fields must match."
+            echo "Run: ./scripts/bump-version.sh $V1"
+            exit 1
+          fi
+          echo ""
+          echo "✓ All versions match: $V1"
+
+      - name: Check CHANGELOG entry exists
+        run: |
+          VERSION=$(jq -r '.version' .claude-plugin/plugin.json)
+          if ! grep -q "## \[$VERSION\]" CHANGELOG.md; then
+            echo "::error::No CHANGELOG entry for v$VERSION"
+            echo "Add an entry to CHANGELOG.md with header: ## [$VERSION]"
+            exit 1
+          fi
+          echo "✓ CHANGELOG entry found for v$VERSION"
+
+      - name: Check plugin.json has required component paths
+        run: |
+          echo "Checking plugin.json component paths..."
+          for field in skills agents hooks; do
+            VALUE=$(jq -r ".$field // empty" .claude-plugin/plugin.json)
+            if [ -z "$VALUE" ]; then
+              echo "::error::plugin.json missing required field: $field"
+              echo "Skills won't load without component paths!"
+              exit 1
+            fi
+            echo "  ✓ $field: $VALUE"
+          done
+          echo ""
+          echo "✓ All required component paths present"
+
+      - name: Summary
+        run: |
+          VERSION=$(jq -r '.version' .claude-plugin/plugin.json)
+          echo ""
+          echo "═══════════════════════════════════════"
+          echo "  Release Check Passed: v$VERSION"
+          echo "═══════════════════════════════════════"
+          echo ""
+          echo "Ready to merge to main and tag."

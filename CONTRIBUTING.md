@@ -6,6 +6,7 @@ Thank you for your interest in contributing to jaan.to! This document outlines h
 
 ## Table of Contents
 
+- [Branching Strategy](#branching-strategy)
 - [Code of Conduct](#code-of-conduct)
 - [Ways to Contribute](#ways-to-contribute)
 - [Adding New Skills](#adding-new-skills)
@@ -14,6 +15,59 @@ Thank you for your interest in contributing to jaan.to! This document outlines h
 - [Testing Guidelines](#testing-guidelines)
 - [Submitting Changes](#submitting-changes)
 - [Release Process](#release-process)
+
+---
+
+## Branching Strategy
+
+jaan.to uses a two-branch development model:
+
+### Branches
+
+| Branch | Purpose | Version Format | Install Command |
+|--------|---------|----------------|-----------------|
+| `main` | Stable releases | `3.15.0` | `/plugin marketplace add parhumm/jaan-to` |
+| `dev` | Development/preview | `3.15.0-dev` | `/plugin marketplace add parhumm/jaan-to#dev` |
+
+### Workflow
+
+```
+feature/* ───> dev ───> main
+                │         │
+                │    (PR + review)
+                │         │
+                │    (release tag)
+                │         │
+                └─────────┘
+              auto-bump dev
+```
+
+1. **Daily development**: Work on `dev` branch (direct pushes allowed)
+2. **Feature work**: Create feature branches from `dev`, merge back to `dev`
+3. **Releases**: Create PR from `dev` → `main` (requires review + CI checks)
+4. **After release**: Bump `dev` to next version (e.g., `3.15.0` → `3.16.0-dev`)
+
+### Contributing to dev
+
+```bash
+# Clone and switch to dev
+git clone https://github.com/parhumm/jaan-to.git
+cd jaan-to
+git checkout dev
+
+# Make changes, test locally
+claude --plugin-dir .
+
+# Push to dev (no PR required for small changes)
+git push origin dev
+```
+
+### Hotfixes
+
+All fixes go through `dev` first:
+1. Fix on `dev`
+2. Test
+3. Create expedited PR: `dev` → `main`
 
 ---
 
@@ -313,9 +367,12 @@ cd jaan-to
 git remote add upstream https://github.com/parhumm/jaan-to.git
 ```
 
-### 2. Create a Branch
+### 2. Create a Branch from dev
 
 ```bash
+# Always branch from dev, not main
+git checkout dev
+git pull upstream dev
 git checkout -b feature/your-skill-name
 # or
 git checkout -b fix/issue-description
@@ -392,27 +449,48 @@ jaan.to follows [Semantic Versioning](https://semver.org/):
 - **Minor (v1.1.0):** New features (backward compatible)
 - **Patch (v1.0.1):** Bug fixes
 
+**Branch versions:**
+- `main`: `X.Y.Z` (e.g., `3.15.0`)
+- `dev`: `X.Y.Z-dev` (e.g., `3.15.0-dev`)
+
 ### Release Checklist (Maintainers Only)
 
-1. Update version in:
-   - `.claude-plugin/plugin.json`
-   - `.claude-plugin/marketplace.json`
-
-2. Add entry to [CHANGELOG.md](CHANGELOG.md) following [Keep a Changelog](https://keepachangelog.com/)
-
-3. Commit with message:
-   ```
-   release: vX.Y.Z — Brief summary
-   ```
-
-4. Create git tag:
+1. **Prepare release branch from dev:**
    ```bash
-   git tag vX.Y.Z
+   git checkout dev
+   git checkout -b release/3.15.0
    ```
 
-5. Push with tags:
+2. **Update version in 3 places** (remove `-dev` suffix):
    ```bash
+   ./scripts/bump-version.sh 3.15.0
+   ```
+   This updates:
+   - `.claude-plugin/plugin.json` → `"version": "3.15.0"`
+   - `.claude-plugin/marketplace.json` → `"version": "3.15.0"` (top-level)
+   - `.claude-plugin/marketplace.json` → `"plugins[0].version": "3.15.0"`
+
+3. **Add entry to [CHANGELOG.md](CHANGELOG.md)** following [Keep a Changelog](https://keepachangelog.com/)
+
+4. **Create PR: `release/3.15.0` → `main`**
+   - CI checks: no `-dev` suffix, all 3 versions match, CHANGELOG entry exists
+   - Requires review and approval
+
+5. **After merge, tag and push:**
+   ```bash
+   git checkout main
+   git pull origin main
+   git tag v3.15.0
    git push origin main --tags
+   ```
+
+6. **Bump dev to next version:**
+   ```bash
+   git checkout dev
+   git merge main
+   ./scripts/bump-version.sh 3.16.0-dev
+   git commit -m "chore: bump dev to 3.16.0-dev"
+   git push origin dev
    ```
 
 **IMPORTANT:** Version bump, CHANGELOG entry, and git tag are inseparable. Never do one without the others.
