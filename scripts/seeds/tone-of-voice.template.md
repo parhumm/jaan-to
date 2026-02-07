@@ -166,4 +166,4 @@ Different languages have different pronoun systems for formal/informal address:
 
 ---
 
-> This file is auto-created by `/jaan-to-ux-microcopy-write` and can be manually edited to match your brand voice.
+> This file is auto-created by `/jaan-to:ux-microcopy-write` and can be manually edited to match your brand voice.

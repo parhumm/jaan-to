@@ -4,7 +4,7 @@ description: Use this agent when skills need to understand the user's project st
 
 <example>
 Context: User just installed jaan.to and is starting their first PRD
-user: "/jaan-to-pm-prd-write authentication system"
+user: "/jaan-to:pm-prd-write authentication system"
 assistant: "Let me first use the context-scout to understand your project's tech stack and structure, so I can generate a PRD that matches your environment."
 <commentary>
 First time using skills in a new project - trigger context-scout to gather tech stack info (languages, frameworks, infrastructure) that will inform the PRD.
@@ -13,7 +13,7 @@ First time using skills in a new project - trigger context-scout to gather tech 
 
 <example>
 Context: User wants to generate backend task breakdown but hasn't customized context files
-user: "/jaan-to-dev-be-task-breakdown from this PRD"
+user: "/jaan-to:dev-be-task-breakdown from this PRD"
 assistant: "I'll use the context-scout to detect your database, API framework, and testing patterns before breaking down the tasks."
 <commentary>
 Skill needs project-specific context (database type, API framework, test setup) to generate accurate task breakdown. Scout the project first.

@@ -27,9 +27,9 @@ Skills within each role are **sorted by workflow dependency order** (topological
 ❌ **Never** use hardcoded `jaan-to/` paths
 
 ### Creation
-- Use `/to-jaan-skill-create {skill-name}` (generates v3.0.0-compliant skills)
+- Use `/jaan-to:skill-create {skill-name}` (generates v3.0.0-compliant skills)
 - Follow [docs/extending/create-skill.md](../../docs/extending/create-skill.md)
-- Validate with `/to-jaan-skill-update {skill-name}` before committing
+- Validate with `/jaan-to:skill-update {skill-name}` before committing
 
 ---
 
@@ -106,7 +106,7 @@ WP skills are WordPress-specific specializations. They do NOT duplicate generic 
 - [ ] Each skill follows `docs/extending/create-skill.md` v3.0.0 specification
 - [ ] **All skills use `$JAAN_*` environment variables (zero hardcoded paths)**
 - [ ] **Cross-ref fields link to generic skills where overlap exists**
-- [ ] **All skills pass `/to-jaan-skill-update` v3.0.0 validation (7 checks)**
+- [ ] **All skills pass `/jaan-to:skill-update` v3.0.0 validation (7 checks)**
 - [ ] Documentation in docs/skills/wp/
 - [ ] Tested with sample inputs in v3.0.0 environment
 - [ ] Roles covered: WP-PM, WP-DEV, WP-SEC, WP-RELEASE, WP-QA

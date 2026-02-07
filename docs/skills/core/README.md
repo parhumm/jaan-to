@@ -8,13 +8,13 @@
 
 | Command | Description |
 |---------|-------------|
-| [/to-jaan-learn-add](learn-add.md) | Add lesson to skill's LEARN.md |
-| [/to-jaan-roadmap-add](roadmap-task-add.md) | Add task to roadmap |
-| [/to-jaan-roadmap-update](roadmap-update.md) | Maintain and sync roadmap |
-| [/to-jaan-docs-create](docs-create.md) | Create new documentation |
-| [/to-jaan-docs-update](docs-update.md) | Audit and fix documentation |
-| [/to-jaan-skill-create](skill-create.md) | Create new skill with wizard |
-| [/to-jaan-skill-update](skill-update.md) | Update existing skill |
+| [/jaan-to:learn-add](learn-add.md) | Add lesson to skill's LEARN.md |
+| [/jaan-to:roadmap-add](roadmap-task-add.md) | Add task to roadmap |
+| [/jaan-to:roadmap-update](roadmap-update.md) | Maintain and sync roadmap |
+| [/jaan-to:docs-create](docs-create.md) | Create new documentation |
+| [/jaan-to:docs-update](docs-update.md) | Audit and fix documentation |
+| [/jaan-to:skill-create](skill-create.md) | Create new skill with wizard |
+| [/jaan-to:skill-update](skill-update.md) | Update existing skill |
 
 ---
 

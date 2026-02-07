@@ -19,7 +19,7 @@ if [[ "$COMMAND" == *"docs(roadmap)"* ]] || [[ "$COMMAND" == *"docs(changelog)"*
     exit 0
 fi
 
-# Skip release commits (handled by /to-jaan-roadmap-update release)
+# Skip release commits (handled by /jaan-to:roadmap-update release)
 if [[ "$COMMAND" == *"release:"* ]]; then
     exit 0
 fi
@@ -45,8 +45,8 @@ echo "---" >&2
 echo "Commit: $HASH — $SUBJECT" >&2
 echo "" >&2
 echo "Consider syncing the roadmap:" >&2
-echo "  /to-jaan-roadmap-update" >&2
-echo "  /to-jaan-roadmap-update mark \"<task>\" done $HASH" >&2
+echo "  /jaan-to:roadmap-update" >&2
+echo "  /jaan-to:roadmap-update mark \"<task>\" done $HASH" >&2
 echo "---" >&2
 
 exit 0

@@ -1,4 +1,4 @@
-# /jaan-to-dev-be-task-breakdown
+# /jaan-to:dev-be-task-breakdown
 
 > Convert PRDs into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
 
@@ -21,17 +21,17 @@ Uses vertical slicing by default (user-facing features, not technical layers).
 ## Usage
 
 ```bash
-/jaan-to-dev-be-task-breakdown "path/to/prd.md"
+/jaan-to:dev-be-task-breakdown "path/to/prd.md"
 ```
 
 Or with a feature description:
 ```bash
-/jaan-to-dev-be-task-breakdown "User can subscribe to premium features"
+/jaan-to:dev-be-task-breakdown "User can subscribe to premium features"
 ```
 
 Or with a tech plan (from upstream skill):
 ```bash
-/jaan-to-dev-be-task-breakdown "path/to/tech-plan.md"
+/jaan-to:dev-be-task-breakdown "path/to/tech-plan.md"
 ```
 
 ---
@@ -89,7 +89,7 @@ Each task includes:
 
 **Input:**
 ```bash
-/jaan-to-dev-be-task-breakdown "$JAAN_OUTPUTS_DIR/pm/user-subscriptions/prd.md"
+/jaan-to:dev-be-task-breakdown "$JAAN_OUTPUTS_DIR/pm/user-subscriptions/prd.md"
 ```
 
 **Extracts:**
@@ -116,7 +116,7 @@ Each task includes:
 - **Vertical slicing wins** - "Add subscription" (migration + model + controller + tests) beats "Create all migrations"
 - **Implicit tasks matter** - PRDs forget indexes, error handling, security
 - **HARD STOP is critical** - Catching entity extraction mistakes early saves hours
-- **Use tech plan upstream** - `/jaan-to-dev-tech-plan` → this skill = better task breakdown
+- **Use tech plan upstream** - `/jaan-to:dev-tech-plan` → this skill = better task breakdown
 - **Export all 3 formats** - Costs nothing, saves time when switching project trackers
 - **Watch for XXL warnings** - Tasks >800 LOC should be decomposed
 
@@ -124,7 +124,7 @@ Each task includes:
 
 ## Related
 
-- [/jaan-to-dev-fe-task-breakdown](../dev/jaan-to-dev-fe-task-breakdown.md) - Frontend counterpart
-- [/jaan-to-pm-prd-write](../pm/jaan-to-pm-prd-write.md) - Upstream: PRD generation
-- [/jaan-to-pm-story-write](../pm/jaan-to-pm-story-write.md) - Upstream: User stories
+- [/jaan-to:dev-fe-task-breakdown](../dev/jaan-to:dev-fe-task-breakdown.md) - Frontend counterpart
+- [/jaan-to:pm-prd-write](../pm/jaan-to:pm-prd-write.md) - Upstream: PRD generation
+- [/jaan-to:pm-story-write](../pm/jaan-to:pm-story-write.md) - Upstream: User stories
 - [Tech Stack Context](../../config/context-system.md) - How tech.md works

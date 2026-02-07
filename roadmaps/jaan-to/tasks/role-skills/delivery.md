@@ -23,7 +23,7 @@ flowchart TD
 
 ### /jaan-to-delivery-plan-milestones
 
-- **Logical**: `delivery:plan-milestones`
+- **Logical**: `delivery-plan-milestones`
 - **Description**: Milestone plan + owners, exit criteria per milestone, dependency notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -37,7 +37,7 @@ flowchart TD
 
 ### /jaan-to-delivery-plan-risks
 
-- **Logical**: `delivery:plan-risks`
+- **Logical**: `delivery-plan-risks`
 - **Description**: Risk register + mitigations, early warning signals, escalation suggestions
 - **Quick Win**: Yes
 - **Key Points**:
@@ -51,7 +51,7 @@ flowchart TD
 
 ### /jaan-to-delivery-backlog-split
 
-- **Logical**: `delivery:backlog-split`
+- **Logical**: `delivery-backlog-split`
 - **Description**: Epics/stories/tasks, dependencies + sequencing, unknowns and spikes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -65,7 +65,7 @@ flowchart TD
 
 ### /jaan-to-delivery-backlog-ready-check
 
-- **Logical**: `delivery:backlog-ready-check`
+- **Logical**: `delivery-backlog-ready-check`
 - **Description**: Definition-of-ready checklist, missing details/questions, risk flags
 - **Quick Win**: Yes
 - **Key Points**:
@@ -79,7 +79,7 @@ flowchart TD
 
 ### /jaan-to-delivery-sprint-planning-pack
 
-- **Logical**: `delivery:sprint-planning-pack`
+- **Logical**: `delivery-sprint-planning-pack`
 - **Description**: Sprint goal + selected scope, capacity notes, risks + contingency items
 - **Quick Win**: Yes
 - **Key Points**:
@@ -93,7 +93,7 @@ flowchart TD
 
 ### /jaan-to-delivery-sprint-dependency-map
 
-- **Logical**: `delivery:sprint-dependency-map`
+- **Logical**: `delivery-sprint-dependency-map`
 - **Description**: Dependency list/graph, critical path callouts, suggested ordering
 - **Quick Win**: Yes
 - **Key Points**:
@@ -107,7 +107,7 @@ flowchart TD
 
 ### /jaan-to-delivery-release-readiness
 
-- **Logical**: `delivery:release-readiness`
+- **Logical**: `delivery-release-readiness`
 - **Description**: Go/no-go checklist, required approvals, launch-day roles
 - **Quick Win**: Yes
 - **Key Points**:
@@ -121,7 +121,7 @@ flowchart TD
 
 ### /jaan-to-delivery-release-comms-plan
 
-- **Logical**: `delivery:release-comms-plan`
+- **Logical**: `delivery-release-comms-plan`
 - **Description**: Who to notify + when, templates (Slack/email snippets), support/CS readiness prompts
 - **Quick Win**: Yes
 - **Key Points**:

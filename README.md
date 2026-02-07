@@ -102,71 +102,71 @@ See [Recommended Permissions](#recommended-permissions) below for examples of co
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to-pm-prd-write` | Generate comprehensive PRD from initiative | `jaan-to/outputs/pm/{slug}/prd.md` |
-| `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then ACs following INVEST principles | `jaan-to/outputs/pm/stories/{slug}/stories.md` |
+| `/jaan-to:pm-prd-write` | Generate comprehensive PRD from initiative | `jaan-to/outputs/pm/{slug}/prd.md` |
+| `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs following INVEST principles | `jaan-to/outputs/pm/stories/{slug}/stories.md` |
 
 **Example:**
 ```
-/jaan-to-pm-prd-write "user authentication with OAuth2"
+/jaan-to:pm-prd-write "user authentication with OAuth2"
 ```
 
 ### Data & Analytics
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `jaan-to/outputs/data/gtm/{slug}/tracking.md` |
+| `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `jaan-to/outputs/data/gtm/{slug}/tracking.md` |
 
 **Example:**
 ```
-/jaan-to-data-gtm-datalayer "checkout flow tracking"
+/jaan-to:data-gtm-datalayer "checkout flow tracking"
 ```
 
 ### Documentation
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/to-jaan-docs-create` | Create documentation with templates | `docs/` |
-| `/to-jaan-docs-update` | Audit and update stale documentation | Updates existing docs |
+| `/jaan-to:docs-create` | Create documentation with templates | `docs/` |
+| `/jaan-to:docs-update` | Audit and update stale documentation | Updates existing docs |
 
 **Example:**
 ```
-/to-jaan-docs-create "API integration guide"
+/jaan-to:docs-create "API integration guide"
 ```
 
 ### Research
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to-pm-research-about` | Deep research or add file/URL to index | `jaan-to/outputs/research/{slug}/` |
+| `/jaan-to:pm-research-about` | Deep research or add file/URL to index | `jaan-to/outputs/research/{slug}/` |
 
 **Examples:**
 ```
-/jaan-to-pm-research-about "React Server Components best practices"
-/jaan-to-pm-research-about https://example.com/article
+/jaan-to:pm-research-about "React Server Components best practices"
+/jaan-to:pm-research-about https://example.com/article
 ```
 
 ### Learning & Feedback
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/to-jaan-learn-add` | Add lesson to project's LEARN.md | `jaan-to/learn/LEARN.md` |
+| `/jaan-to:learn-add` | Add lesson to project's LEARN.md | `jaan-to/learn/LEARN.md` |
 
 **Example:**
 ```
-/to-jaan-learn-add "Always validate email format before API submission"
+/jaan-to:learn-add "Always validate email format before API submission"
 ```
 
 ### Workflow Management
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/to-jaan-roadmap-add` | Add task to roadmap | `jaan-to/roadmap.md` |
-| `/to-jaan-skill-create` | Create new skill with wizard | `skills/{name}/` |
-| `/to-jaan-skill-update` | Update existing skill | Updates skill definition |
+| `/jaan-to:roadmap-add` | Add task to roadmap | `jaan-to/roadmap.md` |
+| `/jaan-to:skill-create` | Create new skill with wizard | `skills/{name}/` |
+| `/jaan-to:skill-update` | Update existing skill | Updates skill definition |
 
 **Example:**
 ```
-/to-jaan-roadmap-add "Implement dark mode toggle"
+/jaan-to:roadmap-add "Implement dark mode toggle"
 ```
 
 ---
@@ -424,25 +424,25 @@ Every skill follows a **two-phase workflow** with human approval:
 Goal: Add OAuth2 authentication to your app
 
 1. Research & PRD
-   /jaan-to-pm-research-about "OAuth2 best practices for SaaS"
-   /jaan-to-pm-prd-write "OAuth2 authentication with Google and GitHub"
+   /jaan-to:pm-research-about "OAuth2 best practices for SaaS"
+   /jaan-to:pm-prd-write "OAuth2 authentication with Google and GitHub"
 
 2. User Stories
-   /jaan-to-pm-story-write from prd
+   /jaan-to:pm-story-write from prd
    → Generates: jaan-to/outputs/pm/stories/01-oauth2-auth/
 
 3. Task Breakdowns
-   /jaan-to-dev-fe-task-breakdown from prd
+   /jaan-to:dev-fe-task-breakdown from prd
    → Frontend tasks: Component inventory, state machines, estimates
 
-   /jaan-to-dev-be-task-breakdown from prd
+   /jaan-to:dev-be-task-breakdown from prd
    → Backend tasks: API endpoints, data models, security
 
 4. QA & Analytics
-   /jaan-to-qa-test-cases from prd
+   /jaan-to:qa-test-cases from prd
    → BDD scenarios with Given/When/Then
 
-   /jaan-to-data-gtm-datalayer "OAuth signup flow tracking"
+   /jaan-to:data-gtm-datalayer "OAuth signup flow tracking"
    → GTM dataLayer pushes for analytics
 ```
 
@@ -459,15 +459,15 @@ Research → PRD → Stories → Tasks → QA + Tracking
 Goal: Improve homepage based on user behavior
 
 1. Analyze Heatmaps
-   /jaan-to-ux-heatmap-analyze "homepage-clicks.csv"
+   /jaan-to:ux-heatmap-analyze "homepage-clicks.csv"
    → Identifies: Low engagement on CTA, high scroll depth
 
 2. Synthesize Research
-   /jaan-to-ux-research-synthesize "UX interview transcripts"
+   /jaan-to:ux-research-synthesize "UX interview transcripts"
    → Themes: Users want clearer value prop
 
 3. Generate Microcopy
-   /jaan-to-ux-microcopy-write for homepage CTA
+   /jaan-to:ux-microcopy-write for homepage CTA
    → 7 languages: English, Spanish, French, German, Arabic, Chinese, Japanese
 ```
 
@@ -477,15 +477,15 @@ Goal: Improve homepage based on user behavior
 Goal: Keep docs in sync with code changes
 
 1. Detect Stale Docs
-   /to-jaan-docs-update --check-only
+   /jaan-to:docs-update --check-only
    → Reports: 3 stale skill docs, 1 outdated hook doc
 
 2. Fix Automatically
-   /to-jaan-docs-update --fix
+   /jaan-to:docs-update --fix
    → Updates docs based on code changes in last 7 days
 
 3. Add New Documentation
-   /to-jaan-docs-create guide "API Integration Tutorial"
+   /jaan-to:docs-create guide "API Integration Tutorial"
    → Creates: docs/guides/api-integration-tutorial.md
 ```
 
@@ -539,7 +539,7 @@ Goal: Keep docs in sync with code changes
 jaan.to is open source. To extend:
 
 1. Read [Creating Skills](docs/extending/create-skill.md)
-2. Use `/to-jaan-skill-create` to scaffold a new skill
+2. Use `/jaan-to:skill-create` to scaffold a new skill
 3. Submit a PR
 
 ---

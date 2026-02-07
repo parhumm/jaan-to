@@ -38,36 +38,36 @@ Plugin source definitions. Each skill has a `SKILL.md` (required), optional `LEA
 
 ```
 skills/
-├── to-jaan-docs-create/
+├── docs-create/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── to-jaan-docs-update/
+├── docs-update/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── to-jaan-learn-add/
+├── learn-add/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── jaan-to-pm-research-about/
+├── pm-research-about/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── to-jaan-roadmap-add/
+├── roadmap-add/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── to-jaan-skill-create/
+├── skill-create/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-├── to-jaan-skill-update/
+├── skill-update/
 │   ├── LEARN.md
 │   └── SKILL.md
-├── jaan-to-pm-prd-write/
+├── pm-prd-write/
 │   ├── LEARN.md
 │   ├── SKILL.md
 │   └── template.md
-└── jaan-to-data-gtm-datalayer/
+└── data-gtm-datalayer/
     ├── LEARN.md
     ├── SKILL.md
     └── template.md
@@ -153,15 +153,15 @@ Claude Code settings and skill registry (written during install by build-dist.sh
 ├── settings.json           Permissions and tool allowlists
 ├── settings.local.json     Local overrides (gitignored)
 └── skills/                 10 skills (namespaced for registry)
-    ├── jaan-to-pm-prd-write/
-    ├── jaan-to-data-gtm-datalayer/
-    ├── to-jaan-docs-create/
-    ├── to-jaan-docs-update/
-    ├── to-jaan-learn-add/
-    ├── jaan-to-pm-research-about/
-    ├── to-jaan-roadmap-add/
-    ├── to-jaan-skill-create/
-    └── to-jaan-skill-update/
+    ├── pm-prd-write/
+    ├── data-gtm-datalayer/
+    ├── docs-create/
+    ├── docs-update/
+    ├── learn-add/
+    ├── pm-research-about/
+    ├── roadmap-add/
+    ├── skill-create/
+    └── skill-update/
 ```
 
 ---
@@ -268,7 +268,7 @@ marketplace.json            Plugin marketplace metadata
 The following directories were removed after plugin migration:
 
 - `jaan-to/` - Old standalone structure, replaced by plugin architecture
-- Old skill names without prefixes (e.g., `pm-prd-write`, `data-gtm-datalayer`, `jaan-docs-create`) - Now use `jaan-to-` or `to-jaan-` prefixes
+- Old skill names without prefixes (e.g., `pm-prd-write`, `data-gtm-datalayer`, `jaan-docs-create`) - Now use `{role}-{domain}-{action}` or `{domain}-{action}` naming
 - `skills/{role}/{domain}/` - Old nested structure, now flat `skills/{name}/`
 - `LEARN.md` alongside skills - Now bootstrapped to `jaan-to/learn/{name}.learn.md`
 - `docs/deepresearches/` - Outputs now go to `jaan-to/outputs/research/`

@@ -19,7 +19,7 @@ claude
 Type this command:
 
 ```
-/jaan-to-pm-prd-write "user login feature"
+/jaan-to:pm-prd-write "user login feature"
 ```
 
 ---
@@ -71,7 +71,7 @@ Pattern: `jaan-to/outputs/{role}/{domain}/{slug}/`
 If something could be better, add a lesson:
 
 ```
-/to-jaan-learn-add pm-prd-write "Always ask about password requirements"
+/jaan-to:learn-add pm-prd-write "Always ask about password requirements"
 ```
 
 Next time, the skill remembers.

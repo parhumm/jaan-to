@@ -2,7 +2,7 @@
 
 > External tool configurations - skills read this to understand your tool ecosystem
 
-**TIP**: Run `/jaan-to-dev-stack-detect` to auto-detect source control and CI/CD integrations.
+**TIP**: Run `/jaan-to:dev-stack-detect` to auto-detect source control and CI/CD integrations.
 
 ---
 

@@ -6,7 +6,7 @@
 
 ## Overview
 
-The `/jaan-to-ux-microcopy-write` skill generates production-ready microcopy for UI components in up to 7 languages with full cultural adaptation, tone-of-voice consistency, and RTL/LTR support.
+The `/jaan-to:ux-microcopy-write` skill generates production-ready microcopy for UI components in up to 7 languages with full cultural adaptation, tone-of-voice consistency, and RTL/LTR support.
 
 **Supported Languages**:
 - **EN** (English) - LTR, Latin
@@ -56,19 +56,19 @@ Use this skill when you need microcopy for:
 ### Basic Usage
 
 ```bash
-/jaan-to-ux-microcopy-write "user authentication feature"
+/jaan-to:ux-microcopy-write "user authentication feature"
 ```
 
 ### With Feature Description
 
 ```bash
-/jaan-to-ux-microcopy-write "Login form with email/password, forgot password link, and sign up CTA. Need error messages for invalid credentials and empty fields."
+/jaan-to:ux-microcopy-write "Login form with email/password, forgot password link, and sign up CTA. Need error messages for invalid credentials and empty fields."
 ```
 
 ### Multi-Category Example
 
 ```bash
-/jaan-to-ux-microcopy-write "E-commerce checkout flow: payment form, shipping address, order summary, empty cart state, success confirmation"
+/jaan-to:ux-microcopy-write "E-commerce checkout flow: payment form, shipping address, order summary, empty cart state, success confirmation"
 ```
 
 ---
@@ -377,7 +377,7 @@ As your brand voice evolves, update `jaan-to/context/tone-of-voice.md` manually 
 
 **Command**:
 ```bash
-/jaan-to-ux-microcopy-write "Login form with email and password fields"
+/jaan-to:ux-microcopy-write "Login form with email and password fields"
 ```
 
 **Generated Files**:

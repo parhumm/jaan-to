@@ -3,7 +3,7 @@ name: quality-reviewer
 description: Use this agent when you need to review generated documents for quality, completeness, and standards compliance. Trigger after generating PRDs, stories, research, test cases, or any skill output that needs validation before committing.
 
 <example>
-Context: User just completed generating a PRD with /jaan-to-pm-prd-write
+Context: User just completed generating a PRD with /jaan-to:pm-prd-write
 user: "Can you review this PRD before I commit it?"
 assistant: "I'll use the quality-reviewer agent to check your PRD for completeness and STYLE.md compliance."
 <commentary>

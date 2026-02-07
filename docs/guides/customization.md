@@ -133,7 +133,7 @@ Key sections to fill in:
 | Constraints | Hard rules (latency, compliance, API format) |
 | Patterns | Auth, error handling, data access conventions |
 
-When you run `/jaan-to-pm-prd-write`, the PRD references your stack in technical sections. When you run `/jaan-to-data-gtm-datalayer`, it uses your event naming conventions.
+When you run `/jaan-to:pm-prd-write`, the PRD references your stack in technical sections. When you run `/jaan-to:data-gtm-datalayer`, it uses your event naming conventions.
 
 ---
 
@@ -179,7 +179,7 @@ Result: PRDs land in `artifacts/product/pm/`, use the enterprise template, merge
 
 After customizing, verify your setup:
 
-1. Run any skill (e.g., `/jaan-to-pm-prd-write "test feature"`)
+1. Run any skill (e.g., `/jaan-to:pm-prd-write "test feature"`)
 2. Check the output lands in your custom path
 3. Confirm the template matches your custom file
 4. Review the learning merge in the skill's output header

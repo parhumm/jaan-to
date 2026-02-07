@@ -1,4 +1,4 @@
-# /to-jaan-skill-create
+# /jaan-to:skill-create
 
 > Create new jaan.to skills with interactive wizard and web research.
 
@@ -13,7 +13,7 @@ Guides you through creating new skills step-by-step. Performs web research to ga
 ## Usage
 
 ```
-/to-jaan-skill-create [optional-skill-idea]
+/jaan-to:skill-create [optional-skill-idea]
 ```
 
 If an idea is provided, uses it as starting context. Otherwise, starts with identity questions.
@@ -41,7 +41,7 @@ If an idea is provided, uses it as starting context. Otherwise, starts with iden
 | **Smart Defaults** | Pre-fills suggestions from research findings |
 | **Specification Compliant** | Validates against `docs/extending/create-skill.md` |
 | **Git Workflow** | Creates branch, commits, offers PR creation |
-| **Auto-Documentation** | Invokes `/to-jaan-docs-create` automatically |
+| **Auto-Documentation** | Invokes `/jaan-to:docs-create` automatically |
 
 ---
 
@@ -77,7 +77,7 @@ If an idea is provided, uses it as starting context. Otherwise, starts with iden
 
 **Input**:
 ```
-/to-jaan-skill-create
+/jaan-to:skill-create
 ```
 
 **Interaction**:
@@ -118,4 +118,4 @@ The skill offers a fast-track option for simple cases.
 - Have a clear idea of role/domain/action before starting
 - Accept research suggestions unless you have specific requirements
 - Test the skill thoroughly before creating PR
-- Use `/to-jaan-skill-update` for modifications after creation
+- Use `/jaan-to:skill-update` for modifications after creation

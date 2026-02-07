@@ -1,5 +1,5 @@
 ---
-title: /jaan-to-dev-stack-detect
+title: /jaan-to:dev-stack-detect
 doc_type: skill
 created_date: 2026-02-03
 updated_date: 2026-02-03
@@ -7,7 +7,7 @@ tags: [dev, stack, detection, context, auto-detect]
 related: [customization]
 ---
 
-# /jaan-to-dev-stack-detect
+# /jaan-to:dev-stack-detect
 
 > Auto-detect project tech stack and populate jaan.to context files.
 
@@ -22,9 +22,9 @@ Scans your project's codebase to detect languages, frameworks, databases, infras
 ## Usage
 
 ```
-/jaan-to-dev-stack-detect
-/jaan-to-dev-stack-detect backend
-/jaan-to-dev-stack-detect infrastructure
+/jaan-to:dev-stack-detect
+/jaan-to:dev-stack-detect backend
+/jaan-to:dev-stack-detect infrastructure
 ```
 
 | Argument | Required | Description |

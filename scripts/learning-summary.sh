@@ -177,7 +177,7 @@ else
   echo ""
 
   if [ $TOTAL_FILES -eq 0 ]; then
-    echo "⚠️  **No learning files found.** Start capturing lessons with \`/to-jaan-learn-add\`"
+    echo "⚠️  **No learning files found.** Start capturing lessons with \`/jaan-to:learn-add\`"
   elif [ $TOTAL_LESSONS -lt 10 ]; then
     echo "⚠️  **Low lesson count ($TOTAL_LESSONS total).** Consider capturing more insights as you use skills."
   else
@@ -217,7 +217,7 @@ else
   echo ""
   echo "## Next Steps"
   echo ""
-  echo "1. **Capture lessons:** Use \`/to-jaan-learn-add\` after each skill execution"
+  echo "1. **Capture lessons:** Use \`/jaan-to:learn-add\` after each skill execution"
   echo "2. **Fill gaps:** Add Common Mistakes and Edge Cases to skills with missing insights"
   echo "3. **Review regularly:** Run this report weekly to track learning growth"
   echo ""

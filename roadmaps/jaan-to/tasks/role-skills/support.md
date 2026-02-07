@@ -25,7 +25,7 @@ flowchart TD
 
 ### /jaan-to-support-tag-taxonomy
 
-- **Logical**: `support:tag-taxonomy`
+- **Logical**: `support-tag-taxonomy`
 - **Description**: Support tags + definitions, tagging rules + examples, "do not use" cases
 - **Quick Win**: Yes
 - **Key Points**:
@@ -39,7 +39,7 @@ flowchart TD
 
 ### /jaan-to-support-help-article
 
-- **Logical**: `support:help-article`
+- **Logical**: `support-help-article`
 - **Description**: Help-center article draft, step-by-step troubleshooting, "when to contact support" section
 - **Quick Win**: Yes
 - **Key Points**:
@@ -53,7 +53,7 @@ flowchart TD
 
 ### /jaan-to-support-reply-pack
 
-- **Logical**: `support:reply-pack`
+- **Logical**: `support-reply-pack`
 - **Description**: Canned replies + tone rules, decision tree for escalation, required fields to collect
 - **Quick Win**: Yes
 - **Key Points**:
@@ -67,7 +67,7 @@ flowchart TD
 
 ### /jaan-to-support-weekly-digest
 
-- **Logical**: `support:weekly-digest`
+- **Logical**: `support-weekly-digest`
 - **Description**: Themes + top asks, severity + trend notes, suggested product actions
 - **Quick Win**: Yes
 - **Key Points**:
@@ -81,7 +81,7 @@ flowchart TD
 
 ### /jaan-to-support-cx-touchpoints
 
-- **Logical**: `support:cx-touchpoints`
+- **Logical**: `support-cx-touchpoints`
 - **Description**: Touchpoint map + gaps, ownership per touchpoint, risk points
 - **Quick Win**: Yes
 - **Key Points**:
@@ -95,7 +95,7 @@ flowchart TD
 
 ### /jaan-to-support-cx-friction-fixes
 
-- **Logical**: `support:cx-friction-fixes`
+- **Logical**: `support-cx-friction-fixes`
 - **Description**: Prioritized CX fixes, expected impact + effort band, coordination needs
 - **Quick Win**: Yes
 - **Key Points**:
@@ -109,7 +109,7 @@ flowchart TD
 
 ### /jaan-to-support-launch-monitor
 
-- **Logical**: `support:launch-monitor`
+- **Logical**: `support-launch-monitor`
 - **Description**: Watchlist + response plan, roles + escalation steps, daily summary template
 - **Quick Win**: Yes
 - **Key Points**:
@@ -123,7 +123,7 @@ flowchart TD
 
 ### /jaan-to-support-triage-priority
 
-- **Logical**: `support:triage-priority`
+- **Logical**: `support-triage-priority`
 - **Description**: Severity + next action, escalation rules, suggested user messaging
 - **Quick Win**: Yes
 - **Key Points**:

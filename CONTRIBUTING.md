@@ -129,7 +129,7 @@ The easiest way to create a new skill:
 
 ```bash
 # From Claude Code
-/to-jaan-skill-create
+/jaan-to:skill-create
 ```
 
 This wizard will guide you through:
@@ -153,8 +153,8 @@ If you prefer to create skills manually, follow the [Creating Skills Guide](docs
    ```
 
 2. **Naming convention:**
-   - Public skills: `jaan-to-{role}-{domain}-{action}`
-   - Internal skills: `to-jaan-{domain}-{action}`
+   - Public skills: `{role}-{domain}-{action}`
+   - Internal skills: `{domain}-{action}`
 
 3. **Two-phase workflow:**
    - Phase 1: Read-only analysis (context, requirements, planning)
@@ -193,7 +193,7 @@ If you prefer to create skills manually, follow the [Creating Skills Guide](docs
 
 3. **Test execution:**
    ```bash
-   /jaan-to-your-skill-name "test input"
+   /jaan-to:your-skill-name "test input"
    ```
 
 4. **Run verification:**
@@ -211,7 +211,7 @@ Learning files (`LEARN.md`) capture accumulated wisdom from skill usage. These f
 
 **Via Command (Recommended):**
 ```bash
-/to-jaan-learn-add "lesson content here"
+/jaan-to:learn-add "lesson content here"
 ```
 
 **Manual Edit:**
@@ -262,10 +262,10 @@ Learning files (`LEARN.md`) capture accumulated wisdom from skill usage. These f
 ### Naming
 
 **Skills:**
-- Directory: `skills/jaan-to-pm-prd-write/`
+- Directory: `skills/jaan-to:pm-prd-write/`
 - File: `SKILL.md` (uppercase)
-- Command: `/jaan-to-pm-prd-write`
-- Logical name: `jaan-to:pm:prd-write`
+- Command: `/jaan-to:pm-prd-write`
+- Logical name: `jaan-to:pm-prd-write`
 
 **Files:**
 - Markdown: `README.md`, `CHANGELOG.md`, `CONTRIBUTING.md` (uppercase for root docs)
@@ -344,9 +344,9 @@ Test skills work together:
 
 ```bash
 # Example: PRD → Stories → Tasks workflow
-/jaan-to-pm-prd-write "user authentication"
-/jaan-to-pm-story-write from prd
-/jaan-to-dev-fe-task-breakdown from prd
+/jaan-to:pm-prd-write "user authentication"
+/jaan-to:pm-story-write from prd
+/jaan-to:dev-fe-task-breakdown from prd
 ```
 
 Verify:
@@ -412,7 +412,7 @@ Co-authored-by: Name <email@example.com>
 
 **Examples:**
 ```
-feat(skill): Add /jaan-to-qa-test-cases skill
+feat(skill): Add /jaan-to:qa-test-cases skill
 
 Generate BDD test cases from PRD acceptance criteria.
 
@@ -499,7 +499,7 @@ jaan.to follows [Semantic Versioning](https://semver.org/):
    /plugin marketplace add parhumm/jaan-to
    /plugin install jaan-to
    ```
-   Confirm skills appear with `/jaan-to-pm-prd-write --help` or similar.
+   Confirm skills appear with `/jaan-to:pm-prd-write --help` or similar.
 
 **IMPORTANT:** Version bump, CHANGELOG entry, and git tag are inseparable. Never do one without the others.
 

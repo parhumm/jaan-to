@@ -20,7 +20,7 @@ After an artifact is written, displays a reminder:
 Artifact created: jaan-to/outputs/pm/user-auth/prd.md
 
 Have feedback? Run:
-/to-jaan-learn-add pm-prd-write "your feedback here"
+/jaan-to:learn-add pm-prd-write "your feedback here"
 ```
 
 ---
@@ -46,13 +46,13 @@ Good feedback improves future skill runs.
 After the prompt, you might add:
 
 ```
-/to-jaan-learn-add pm-prd-write "Ask about rollback strategy"
+/jaan-to:learn-add pm-prd-write "Ask about rollback strategy"
 ```
 
 ```
-/to-jaan-learn-add pm-prd-write "Include accessibility section"
+/jaan-to:learn-add pm-prd-write "Include accessibility section"
 ```
 
 ```
-/to-jaan-learn-add pm-prd-write "Don't assume mobile support"
+/jaan-to:learn-add pm-prd-write "Don't assume mobile support"
 ```

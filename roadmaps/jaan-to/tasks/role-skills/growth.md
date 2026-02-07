@@ -34,7 +34,7 @@ flowchart TD
 
 ### /jaan-to-growth-keyword-brief
 
-- **Logical**: `growth:keyword-brief`
+- **Logical**: `growth-keyword-brief`
 - **Description**: Keyword + intent map with primary/secondary targets, SERP notes, content angle, internal linking
 - **Quick Win**: No - needs GSC MCP
 - **Key Points**:
@@ -48,7 +48,7 @@ flowchart TD
 
 ### /jaan-to-growth-content-outline
 
-- **Logical**: `growth:content-outline`
+- **Logical**: `growth-content-outline`
 - **Description**: Writing-ready outline: H1-H3, FAQs, entities, internal links, intent matching
 - **Quick Win**: Yes - content structure
 - **Key Points**:
@@ -62,7 +62,7 @@ flowchart TD
 
 ### /jaan-to-growth-meta-write
 
-- **Logical**: `growth:meta-write`
+- **Logical**: `growth-meta-write`
 - **Description**: Meta titles (<60 chars) and descriptions (<155 chars) with A/B variations
 - **Quick Win**: Yes - structured output, character limits
 - **AI Score**: 5 | **Rank**: #12
@@ -79,7 +79,7 @@ flowchart TD
 
 ### /jaan-to-growth-content-optimize
 
-- **Logical**: `growth:content-optimize`
+- **Logical**: `growth-content-optimize`
 - **Description**: Existing content optimization checklist with updated sections and internal links
 - **Quick Win**: No - needs traffic analysis
 - **AI Score**: 5 | **Rank**: #18
@@ -96,7 +96,7 @@ flowchart TD
 
 ### /jaan-to-growth-seo-audit
 
-- **Logical**: `growth:seo-audit`
+- **Logical**: `growth-seo-audit`
 - **Description**: On-page checklist: title/meta, headings, content gaps, internal links, schema opportunities
 - **Quick Win**: No - needs GSC MCP
 - **Key Points**:
@@ -110,7 +110,7 @@ flowchart TD
 
 ### /jaan-to-growth-seo-check
 
-- **Logical**: `growth:seo-check`
+- **Logical**: `growth-seo-check`
 - **Description**: Technical audit: indexability, crawl signals, critical errors, remediation plan
 - **Quick Win**: No - technical checklist
 - **Key Points**:
@@ -124,7 +124,7 @@ flowchart TD
 
 ### /jaan-to-growth-beta-cohort-plan
 
-- **Logical**: `growth:beta-cohort-plan`
+- **Logical**: `growth-beta-cohort-plan`
 - **Description**: Target cohort + rollout steps, eligibility rules, exit criteria
 - **Quick Win**: Yes
 - **Key Points**:
@@ -138,7 +138,7 @@ flowchart TD
 
 ### /jaan-to-growth-beta-feedback-script
 
-- **Logical**: `growth:beta-feedback-script`
+- **Logical**: `growth-beta-feedback-script`
 - **Description**: Interview/survey prompts, success/failure probes, follow-up sequencing
 - **Quick Win**: Yes
 - **Key Points**:
@@ -152,7 +152,7 @@ flowchart TD
 
 ### /jaan-to-growth-lifecycle-message-map
 
-- **Logical**: `growth:lifecycle-message-map`
+- **Logical**: `growth-lifecycle-message-map`
 - **Description**: Triggers + messages + timing, channel selection guidance, guardrails (fatigue limits)
 - **Quick Win**: Yes
 - **Key Points**:
@@ -166,7 +166,7 @@ flowchart TD
 
 ### /jaan-to-growth-lifecycle-copy-variants
 
-- **Logical**: `growth:lifecycle-copy-variants`
+- **Logical**: `growth-lifecycle-copy-variants`
 - **Description**: 3–5 variants, tone + CTA options, personalization fields list
 - **Quick Win**: Yes
 - **Key Points**:
@@ -180,7 +180,7 @@ flowchart TD
 
 ### /jaan-to-growth-loop-design
 
-- **Logical**: `growth:loop-design`
+- **Logical**: `growth-loop-design`
 - **Description**: Loop diagram + steps, incentives + risks, metrics per step
 - **Quick Win**: Yes
 - **Key Points**:
@@ -194,7 +194,7 @@ flowchart TD
 
 ### /jaan-to-growth-loop-abuse-guards
 
-- **Logical**: `growth:loop-abuse-guards`
+- **Logical**: `growth-loop-abuse-guards`
 - **Description**: Anti-fraud checks, limits and cooldowns, monitoring signals
 - **Quick Win**: Yes
 - **Key Points**:
@@ -208,7 +208,7 @@ flowchart TD
 
 ### /jaan-to-growth-launch-announcement
 
-- **Logical**: `growth:launch-announcement`
+- **Logical**: `growth-launch-announcement`
 - **Description**: Announcement copy pack (short/long), channel adaptations (email/in-app), key benefits bullets
 - **Quick Win**: Yes
 - **Key Points**:
@@ -222,7 +222,7 @@ flowchart TD
 
 ### /jaan-to-growth-launch-faq
 
-- **Logical**: `growth:launch-faq`
+- **Logical**: `growth-launch-faq`
 - **Description**: FAQ + objection handling, known limits + workarounds, support escalation notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -236,7 +236,7 @@ flowchart TD
 
 ### /jaan-to-growth-weekly-report
 
-- **Logical**: `growth:weekly-report`
+- **Logical**: `growth-weekly-report`
 - **Description**: Weekly wins/losses, top pages/queries, actions + owners, next experiments
 - **Quick Win**: No - needs multiple MCPs
 - **Key Points**:

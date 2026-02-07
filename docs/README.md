@@ -23,7 +23,7 @@ jaan.to adds structured commands to Claude Code that generate consistent, high-q
 ## Quick Start
 
 ```
-/jaan-to-pm-prd-write "user authentication feature"
+/jaan-to:pm-prd-write "user authentication feature"
 ```
 
 Output: `jaan-to/outputs/pm/user-auth/prd.md`
@@ -53,15 +53,15 @@ See [Getting Started](getting-started.md) for full walkthrough.
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to-pm-prd-write` | Generate PRD | `jaan-to/outputs/pm/{slug}/prd.md` |
-| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code | `jaan-to/outputs/data/gtm/{slug}/` |
-| `/to-jaan-skill-create` | Create new skill | `skills/{name}/` |
-| `/to-jaan-skill-update` | Update existing skill | `skills/{name}/SKILL.md` |
-| `/to-jaan-docs-create` | Create documentation | `docs/{type}/{name}.md` |
-| `/to-jaan-docs-update` | Audit documentation | Fixes in-place |
-| `/to-jaan-learn-add` | Add feedback | `jaan-to/learn/{name}.learn.md` |
-| `/jaan-to-pm-research-about` | Deep research or add to index | `jaan-to/outputs/research/` |
-| `/to-jaan-roadmap-add` | Add roadmap task | `jaan-to/roadmap.md` |
+| `/jaan-to:pm-prd-write` | Generate PRD | `jaan-to/outputs/pm/{slug}/prd.md` |
+| `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code | `jaan-to/outputs/data/gtm/{slug}/` |
+| `/jaan-to:skill-create` | Create new skill | `skills/{name}/` |
+| `/jaan-to:skill-update` | Update existing skill | `skills/{name}/SKILL.md` |
+| `/jaan-to:docs-create` | Create documentation | `docs/{type}/{name}.md` |
+| `/jaan-to:docs-update` | Audit documentation | Fixes in-place |
+| `/jaan-to:learn-add` | Add feedback | `jaan-to/learn/{name}.learn.md` |
+| `/jaan-to:pm-research-about` | Deep research or add to index | `jaan-to/outputs/research/` |
+| `/jaan-to:roadmap-add` | Add roadmap task | `jaan-to/roadmap.md` |
 
 ---
 
