@@ -14,8 +14,8 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/data-gtm-datalayer.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/data-gtm-datalayer.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:data-gtm-datalayer.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:data-gtm-datalayer.template.md` - Output template
 
 ## Input
 
@@ -30,7 +30,7 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/data-gtm-datalayer.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:data-gtm-datalayer.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -370,7 +370,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 2. Write tracking code to main file using template:
 ```bash
-# Use template from $JAAN_TEMPLATES_DIR/data-gtm-datalayer.template.md
+# Use template from $JAAN_TEMPLATES_DIR/jaan-to:data-gtm-datalayer.template.md
 cat > "$MAIN_FILE" <<'EOF'
 {generated tracking documentation with Executive Summary}
 EOF
@@ -399,7 +399,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/learn-add data-gtm-datalayer "{feedback}"`
+- **Option 2**: Run `/jaan-to:learn-add data-gtm-datalayer "{feedback}"`
 - **Option 3**: Do both
 
 ---

@@ -18,8 +18,8 @@ argument-hint: [ux-handoff-description-or-figma-link]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (optional, auto-imported if exists)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/dev-fe-task-breakdown.template.md` - Output template
-- `$JAAN_LEARN_DIR/dev-fe-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:dev-fe-task-breakdown.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:dev-fe-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -39,7 +39,7 @@ If no input provided, ask: "What feature or UX handoff should I break down?"
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/dev-fe-task-breakdown.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:dev-fe-task-breakdown.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 2
@@ -389,7 +389,7 @@ Use AskUserQuestion:
 
 ## Step 8: Generate Task Breakdown Document
 
-1. Read template: `$JAAN_TEMPLATES_DIR/dev-fe-task-breakdown.template.md`
+1. Read template: `$JAAN_TEMPLATES_DIR/jaan-to:dev-fe-task-breakdown.template.md`
 2. If tech stack needed, extract sections from tech.md:
    - Current Stack: `#current-stack`
    - Frameworks: `#frameworks`
@@ -570,7 +570,7 @@ Use AskUserQuestion:
   - "Both" — Fix now AND save lesson
 
 - **Fix now**: Update the output file, re-preview, re-write
-- **Learn**: Run `/learn-add dev-fe-task-breakdown "{feedback}"`
+- **Learn**: Run `/jaan-to:learn-add dev-fe-task-breakdown "{feedback}"`
 - **Both**: Do both
 
 ---

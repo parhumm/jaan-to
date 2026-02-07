@@ -35,7 +35,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### /jaan-to-dev-feasibility-check
+### /jaan-to:dev-feasibility-check
 
 - **Logical**: `dev-feasibility-check`
 - **Description**: Risks + dependencies, unknowns + spike recommendations, rough complexity estimate
@@ -49,7 +49,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{slug}/feasibility-check.md`
 
-### /jaan-to-dev-arch-proposal
+### /jaan-to:dev-arch-proposal
 
 - **Logical**: `dev-arch-proposal`
 - **Description**: Architecture outline, key choices + tradeoffs, data flow + failure modes
@@ -63,7 +63,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{slug}/arch-proposal.md`
 
-### /jaan-to-dev-tech-plan
+### /jaan-to:dev-tech-plan
 
 - **Logical**: `dev-tech-plan`
 - **Description**: Tech approach with architecture, tradeoffs, risks, rollout/rollback, unknowns
@@ -77,7 +77,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/plan/{slug}/tech-plan.md`
 
-### ✅ /dev-be-task-breakdown
+### ✅ /jaan-to:dev-be-task-breakdown
 
 - **Logical**: `dev-be-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
@@ -92,7 +92,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`
 
-### /jaan-to-dev-be-data-model
+### /jaan-to:dev-be-data-model
 
 - **Logical**: `dev-be-data-model`
 - **Description**: Tables/collections + fields, constraints + indexes, retention + migration notes
@@ -106,7 +106,7 @@ flowchart TD
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/data-model.md`
 
-### /jaan-to-dev-api-contract
+### /jaan-to:dev-api-contract
 
 - **Logical**: `dev-api-contract`
 - **Description**: OpenAPI contract with payloads, errors, versioning, example requests/responses
@@ -120,7 +120,7 @@ flowchart TD
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
 
-### /jaan-to-dev-api-versioning
+### /jaan-to:dev-api-versioning
 
 - **Logical**: `dev-api-versioning`
 - **Description**: Compatibility strategy, migration notes + timeline, deprecation communication plan
@@ -134,7 +134,7 @@ flowchart TD
 - **Input**: [api]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/versioning-plan.md`
 
-### ✅ /dev-fe-task-breakdown
+### ✅ /jaan-to:dev-fe-task-breakdown
 
 - **Logical**: `dev-fe-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies
@@ -149,7 +149,7 @@ flowchart TD
 - **Input**: [ux-handoff]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`
 
-### /jaan-to-dev-fe-state-machine
+### /jaan-to:dev-fe-state-machine
 
 - **Logical**: `dev-fe-state-machine`
 - **Description**: UI states + transitions, events that trigger transitions, edge-case behavior
@@ -163,7 +163,7 @@ flowchart TD
 - **Input**: [screen]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/state-machine.md`
 
-### /jaan-to-dev-integration-plan
+### /jaan-to:dev-integration-plan
 
 - **Logical**: `dev-integration-plan`
 - **Description**: API call sequence, retry policy + failure modes, observability events
@@ -177,7 +177,7 @@ flowchart TD
 - **Input**: [provider] [use-case]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{slug}/integration-plan.md`
 
-### /jaan-to-dev-integration-mock-stubs
+### /jaan-to:dev-integration-mock-stubs
 
 - **Logical**: `dev-integration-mock-stubs`
 - **Description**: Stub interfaces, fake responses (success/fail), test harness guidance
@@ -191,7 +191,7 @@ flowchart TD
 - **Input**: [provider]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{slug}/mock-stubs.md`
 
-### /jaan-to-dev-test-plan
+### /jaan-to:dev-test-plan
 
 - **Logical**: `dev-test-plan`
 - **Description**: Dev-owned test plan: unit/integration/e2e scope, fixtures, mocks, highest-risk scenarios
@@ -205,7 +205,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/test/{slug}/test-plan.md`
 
-### /jaan-to-dev-observability-events
+### /jaan-to:dev-observability-events
 
 - **Logical**: `dev-observability-events`
 - **Description**: Log fields + metric names, trace spans suggestions, dashboard checklist
@@ -219,7 +219,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{slug}/events.md`
 
-### /jaan-to-dev-observability-alerts
+### /jaan-to:dev-observability-alerts
 
 - **Logical**: `dev-observability-alerts`
 - **Description**: Suggested alerts + thresholds, severity levels, noise reduction ideas
@@ -233,7 +233,7 @@ flowchart TD
 - **Input**: [service]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{slug}/alert-rules.md`
 
-### /jaan-to-dev-docs-generate
+### /jaan-to:dev-docs-generate
 
 - **Logical**: `dev-docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
@@ -251,7 +251,7 @@ flowchart TD
 - **Failure Modes**: Documentation stale; inconsistent formatting; missing context
 - **Quality Gates**: Up-to-date with code; follows style guide; onboarding-friendly
 
-### ✅ /jaan-to-dev-pr-review
+### ✅ /jaan-to:dev-pr-review
 
 - **Logical**: `dev-pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
@@ -266,7 +266,7 @@ flowchart TD
 - **Input**: [pr-link-or-branch]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/review/{slug}/pr-review.md`
 
-### /jaan-to-dev-ship-check
+### /jaan-to:dev-ship-check
 
 - **Logical**: `dev-ship-check`
 - **Description**: Pre-ship checklist: flags, migrations, monitoring, rollback, Go/No-Go recommendation

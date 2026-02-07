@@ -135,4 +135,4 @@ Plan UI layouts to accommodate text expansion:
 
 ---
 
-> This file is auto-created by `/ux-microcopy-write` and can be manually edited.
+> This file is auto-created by `/jaan-to:ux-microcopy-write` and can be manually edited.

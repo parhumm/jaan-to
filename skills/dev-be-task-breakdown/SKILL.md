@@ -18,8 +18,8 @@ argument-hint: [prd-path] OR [feature-description]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL: determines framework patterns)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/dev-be-task-breakdown.template.md` - Output template
-- `$JAAN_LEARN_DIR/dev-be-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:dev-be-task-breakdown.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:dev-be-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -37,7 +37,7 @@ If no input provided, ask: "What PRD or feature should I break down into backend
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/dev-be-task-breakdown.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:dev-be-task-breakdown.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 2
@@ -488,7 +488,7 @@ VALIDATION
 
 ## Step 6: Generate Task Breakdown Document
 
-1. Read template: `$JAAN_TEMPLATES_DIR/dev-be-task-breakdown.template.md`
+1. Read template: `$JAAN_TEMPLATES_DIR/jaan-to:dev-be-task-breakdown.template.md`
 2. If tech stack needed, extract sections from tech.md:
    - Current Stack: `#current-stack`
    - Frameworks: `#frameworks`
@@ -795,7 +795,7 @@ add_to_index \
    > [3] Both - Fix now AND save lesson"
 
 - **Option 1 - Fix now**: Update the output file, re-preview, re-write
-- **Option 2 - Learn**: Run `/learn-add dev-be-task-breakdown "{feedback}"`
+- **Option 2 - Learn**: Run `/jaan-to:learn-add dev-be-task-breakdown "{feedback}"`
 - **Option 3 - Both**: Do both
 
 ---

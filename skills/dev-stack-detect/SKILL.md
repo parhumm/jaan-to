@@ -19,8 +19,8 @@ argument-hint: [optional-focus-area]
 - `$JAAN_CONTEXT_DIR/integrations.md` - External tools and integrations
 - `$JAAN_CONTEXT_DIR/boundaries.md` - Safe write paths
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_LEARN_DIR/dev-stack-detect.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/dev-stack-detect.template.md` - Detection report template
+- `$JAAN_LEARN_DIR/jaan-to:dev-stack-detect.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:dev-stack-detect.template.md` - Detection report template
 
 ## Input
 
@@ -33,7 +33,7 @@ If a focus area is provided (e.g., "backend", "frontend", "infrastructure"), lim
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/dev-stack-detect.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:dev-stack-detect.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add detection patterns from "Better Questions"
@@ -470,7 +470,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 2. Read template and fill with detection results:
 ```bash
-# Read template: $JAAN_TEMPLATES_DIR/dev-stack-detect.template.md
+# Read template: $JAAN_TEMPLATES_DIR/jaan-to:dev-stack-detect.template.md
 cat > "$MAIN_FILE" <<'EOF'
 {generated stack detection with Executive Summary}
 EOF
@@ -517,7 +517,7 @@ MANUAL REVIEW SUGGESTED
 > "Any feedback on the detection? Anything missed or incorrect? [y/n]"
 
 If yes:
-- Run `/learn-add dev-stack-detect "{feedback}"`
+- Run `/jaan-to:learn-add dev-stack-detect "{feedback}"`
 
 ---
 

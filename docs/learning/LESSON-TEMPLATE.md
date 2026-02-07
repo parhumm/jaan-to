@@ -1,6 +1,6 @@
 # Lesson Template
 
-Standard format for capturing lessons learned from skill usage. Use this template when adding entries to skill-specific `.learn.md` files via `/learn-add`.
+Standard format for capturing lessons learned from skill usage. Use this template when adding entries to skill-specific `.learn.md` files via `/jaan-to:learn-add`.
 
 ---
 
@@ -139,7 +139,7 @@ cat docs/learning/LESSON-TEMPLATE.md
 ```
 
 ### Via Command (Recommended)
-Use `/learn-add` which will:
+Use `/jaan-to:learn-add` which will:
 1. Prompt for key fields (Context, What Happened, Fix)
 2. Auto-fill Date, Skill from current session
 3. Suggest Severity based on impact
@@ -147,7 +147,7 @@ Use `/learn-add` which will:
 
 **Example:**
 ```
-/learn-add "Always validate email format before API submission - user entered 'john@' without domain, API returned 500 error instead of validation error. Added regex check before API call."
+/jaan-to:learn-add "Always validate email format before API submission - user entered 'john@' without domain, API returned 500 error instead of validation error. Added regex check before API call."
 ```
 
 ---
@@ -180,7 +180,7 @@ Use `/learn-add` which will:
 - **One File Per Skill:** `jaan-to/learn/{skill-name}.learn.md`
 - **Chronological Order:** Newest lessons at the top
 - **Cross-Reference:** Link related skills when lesson applies to multiple
-- **Regular Review:** Run `/jaan-to-learn-report` weekly to identify gaps
+- **Regular Review:** Run `/jaan-to:learn-report` weekly to identify gaps
 
 ---
 
@@ -204,7 +204,7 @@ Skill Execution
      ↓
 User Feedback / Error
      ↓
-Capture Lesson (/learn-add)
+Capture Lesson (/jaan-to:learn-add)
      ↓
 Update Skill Logic
      ↓

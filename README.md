@@ -2,10 +2,10 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-3.12.0-blue.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-3.16.2-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-18-orange.svg)](docs/skills/README.md)
+[![Skills](https://img.shields.io/badge/skills-19-orange.svg)](docs/skills/README.md)
 [![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
 
 ### Plugin Contents
@@ -102,71 +102,71 @@ See [Recommended Permissions](#recommended-permissions) below for examples of co
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/pm-prd-write` | Generate comprehensive PRD from initiative | `jaan-to/outputs/pm/{slug}/prd.md` |
-| `/pm-story-write` | Generate user stories with Given/When/Then ACs following INVEST principles | `jaan-to/outputs/pm/stories/{slug}/stories.md` |
+| `/jaan-to:pm-prd-write` | Generate comprehensive PRD from initiative | `jaan-to/outputs/pm/{slug}/prd.md` |
+| `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs following INVEST principles | `jaan-to/outputs/pm/stories/{slug}/stories.md` |
 
 **Example:**
 ```
-/pm-prd-write "user authentication with OAuth2"
+/jaan-to:pm-prd-write "user authentication with OAuth2"
 ```
 
 ### Data & Analytics
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `jaan-to/outputs/data/gtm/{slug}/tracking.md` |
+| `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code and dataLayer spec | `jaan-to/outputs/data/gtm/{slug}/tracking.md` |
 
 **Example:**
 ```
-/data-gtm-datalayer "checkout flow tracking"
+/jaan-to:data-gtm-datalayer "checkout flow tracking"
 ```
 
 ### Documentation
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/docs-create` | Create documentation with templates | `docs/` |
-| `/docs-update` | Audit and update stale documentation | Updates existing docs |
+| `/jaan-to:docs-create` | Create documentation with templates | `docs/` |
+| `/jaan-to:docs-update` | Audit and update stale documentation | Updates existing docs |
 
 **Example:**
 ```
-/docs-create "API integration guide"
+/jaan-to:docs-create "API integration guide"
 ```
 
 ### Research
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/pm-research-about` | Deep research or add file/URL to index | `jaan-to/outputs/research/{slug}/` |
+| `/jaan-to:pm-research-about` | Deep research or add file/URL to index | `jaan-to/outputs/research/{slug}/` |
 
 **Examples:**
 ```
-/pm-research-about "React Server Components best practices"
-/pm-research-about https://example.com/article
+/jaan-to:pm-research-about "React Server Components best practices"
+/jaan-to:pm-research-about https://example.com/article
 ```
 
 ### Learning & Feedback
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/learn-add` | Add lesson to project's LEARN.md | `jaan-to/learn/LEARN.md` |
+| `/jaan-to:learn-add` | Add lesson to project's LEARN.md | `jaan-to/learn/LEARN.md` |
 
 **Example:**
 ```
-/learn-add "Always validate email format before API submission"
+/jaan-to:learn-add "Always validate email format before API submission"
 ```
 
 ### Workflow Management
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/roadmap-add` | Add task to roadmap | `jaan-to/roadmap.md` |
-| `/skill-create` | Create new skill with wizard | `skills/{name}/` |
-| `/skill-update` | Update existing skill | Updates skill definition |
+| `/jaan-to:roadmap-add` | Add task to roadmap | `jaan-to/roadmap.md` |
+| `/jaan-to:skill-create` | Create new skill with wizard | `skills/{name}/` |
+| `/jaan-to:skill-update` | Update existing skill | Updates skill definition |
 
 **Example:**
 ```
-/roadmap-add "Implement dark mode toggle"
+/jaan-to:roadmap-add "Implement dark mode toggle"
 ```
 
 ---
@@ -424,25 +424,25 @@ Every skill follows a **two-phase workflow** with human approval:
 Goal: Add OAuth2 authentication to your app
 
 1. Research & PRD
-   /pm-research-about "OAuth2 best practices for SaaS"
-   /pm-prd-write "OAuth2 authentication with Google and GitHub"
+   /jaan-to:pm-research-about "OAuth2 best practices for SaaS"
+   /jaan-to:pm-prd-write "OAuth2 authentication with Google and GitHub"
 
 2. User Stories
-   /pm-story-write from prd
+   /jaan-to:pm-story-write from prd
    → Generates: jaan-to/outputs/pm/stories/01-oauth2-auth/
 
 3. Task Breakdowns
-   /dev-fe-task-breakdown from prd
+   /jaan-to:dev-fe-task-breakdown from prd
    → Frontend tasks: Component inventory, state machines, estimates
 
-   /dev-be-task-breakdown from prd
+   /jaan-to:dev-be-task-breakdown from prd
    → Backend tasks: API endpoints, data models, security
 
 4. QA & Analytics
-   /qa-test-cases from prd
+   /jaan-to:qa-test-cases from prd
    → BDD scenarios with Given/When/Then
 
-   /data-gtm-datalayer "OAuth signup flow tracking"
+   /jaan-to:data-gtm-datalayer "OAuth signup flow tracking"
    → GTM dataLayer pushes for analytics
 ```
 
@@ -459,15 +459,15 @@ Research → PRD → Stories → Tasks → QA + Tracking
 Goal: Improve homepage based on user behavior
 
 1. Analyze Heatmaps
-   /ux-heatmap-analyze "homepage-clicks.csv"
+   /jaan-to:ux-heatmap-analyze "homepage-clicks.csv"
    → Identifies: Low engagement on CTA, high scroll depth
 
 2. Synthesize Research
-   /ux-research-synthesize "UX interview transcripts"
+   /jaan-to:ux-research-synthesize "UX interview transcripts"
    → Themes: Users want clearer value prop
 
 3. Generate Microcopy
-   /ux-microcopy-write for homepage CTA
+   /jaan-to:ux-microcopy-write for homepage CTA
    → 7 languages: English, Spanish, French, German, Arabic, Chinese, Japanese
 ```
 
@@ -477,15 +477,15 @@ Goal: Improve homepage based on user behavior
 Goal: Keep docs in sync with code changes
 
 1. Detect Stale Docs
-   /docs-update --check-only
+   /jaan-to:docs-update --check-only
    → Reports: 3 stale skill docs, 1 outdated hook doc
 
 2. Fix Automatically
-   /docs-update --fix
+   /jaan-to:docs-update --fix
    → Updates docs based on code changes in last 7 days
 
 3. Add New Documentation
-   /docs-create guide "API Integration Tutorial"
+   /jaan-to:docs-create guide "API Integration Tutorial"
    → Creates: docs/guides/api-integration-tutorial.md
 ```
 
@@ -539,7 +539,7 @@ Goal: Keep docs in sync with code changes
 jaan.to is open source. To extend:
 
 1. Read [Creating Skills](docs/extending/create-skill.md)
-2. Use `/skill-create` to scaffold a new skill
+2. Use `/jaan-to:skill-create` to scaffold a new skill
 3. Submit a PR
 
 ---

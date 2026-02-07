@@ -14,8 +14,8 @@ argument-hint: <topic-or-file-path-or-URL>
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/pm-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/pm-research-about.template.md` - Output format template
+- `$JAAN_LEARN_DIR/jaan-to:pm-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:pm-research-about.template.md` - Output format template
 - `$JAAN_OUTPUTS_DIR/research/README.md` - Current index structure
 
 ## Input
@@ -27,7 +27,7 @@ argument-hint: <topic-or-file-path-or-URL>
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/pm-research-about.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:pm-research-about.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -689,7 +689,7 @@ WILL CREATE
 
 ## Step 7: Generate Document
 
-Use template from `$JAAN_TEMPLATES_DIR/pm-research-about.template.md`:
+Use template from `$JAAN_TEMPLATES_DIR/jaan-to:pm-research-about.template.md`:
 
 1. Fill all sections with researched content
 2. Include specific facts, statistics, and citations
@@ -793,7 +793,7 @@ README.md updated with new entry.
 > "Any feedback on this research? [y/n]"
 
 If yes:
-- Run `/learn-add pm-research-about "{feedback}"`
+- Run `/jaan-to:learn-add pm-research-about "{feedback}"`
 
 ---
 
@@ -920,7 +920,7 @@ Files modified:
 
 > "Any feedback? [y/n]"
 
-If yes: Run `/learn-add pm-research-about "{feedback}"`
+If yes: Run `/jaan-to:learn-add pm-research-about "{feedback}"`
 
 ---
 

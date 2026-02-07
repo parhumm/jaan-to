@@ -8,7 +8,7 @@
 
 | Skill | Description |
 |-------|-------------|
-| [/ux-heatmap-analyze](heatmap-analyze.md) | Analyze heatmap data for UX insights |
+| [/jaan-to:ux-heatmap-analyze](heatmap-analyze.md) | Analyze heatmap data for UX insights |
 
 ---
 

@@ -194,9 +194,9 @@ if [ "$CHECKS_FAILED" -eq 0 ]; then
   echo "✅ All checks passed! Plugin is installed correctly."
   echo ""
   echo "Next steps:"
-  echo "  1. Try a skill: /pm-prd-write 'user authentication'"
+  echo "  1. Try a skill: /jaan-to:pm-prd-write 'user authentication'"
   echo "  2. Customize context: vim jaan-to/context/tech.md"
-  echo "  3. Run stack detection: /dev-stack-detect"
+  echo "  3. Run stack detection: /jaan-to:dev-stack-detect"
 else
   echo "❌ Some checks failed. See details above."
   echo ""

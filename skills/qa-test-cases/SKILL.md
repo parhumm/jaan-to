@@ -15,9 +15,9 @@ argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)]
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/qa-test-cases.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/qa-test-cases.template.md` - BDD/Gherkin template
-- `$JAAN_TEMPLATES_DIR/qa-test-cases-quality-checklist.template.md` - Quality checklist template
+- `$JAAN_LEARN_DIR/jaan-to:qa-test-cases.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases.template.md` - BDD/Gherkin template
+- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases-quality-checklist.template.md` - Quality checklist template
 - Research: `jaan-to/outputs/research/50-qa-test-cases.md` - ISTQB standards, test design techniques
 
 ## Input
@@ -26,7 +26,7 @@ argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)]
 
 Input modes:
 1. **Direct text**: Paste acceptance criteria directly
-2. **PRD path**: Path to PRD file (from /pm-prd-write output)
+2. **PRD path**: Path to PRD file (from /jaan-to:pm-prd-write output)
 3. **Jira ID**: Story ID (if Jira MCP available)
 4. **Interactive**: Empty arguments triggers wizard
 
@@ -37,7 +37,7 @@ IMPORTANT: The input above is your starting point. Determine mode and proceed ac
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/qa-test-cases.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:qa-test-cases.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
@@ -503,7 +503,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 Path: `$OUTPUT_FOLDER/${NEXT_ID}-test-cases-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/qa-test-cases.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases.template.md`
 
 Fill sections:
 - Title, Executive Summary
@@ -520,7 +520,7 @@ Fill sections:
 
 Path: `$OUTPUT_FOLDER/${NEXT_ID}-test-cases-quality-checklist-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/qa-test-cases-quality-checklist.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases-quality-checklist.template.md`
 
 Fill sections:
 - 10-Point Peer Review Checklist
@@ -570,7 +570,7 @@ If yes:
 - Re-write
 
 **Option 2 - Learn:**
-- Run: `/learn-add qa-test-cases "{feedback}"`
+- Run: `/jaan-to:learn-add qa-test-cases "{feedback}"`
 
 **Option 3 - Both:**
 - Fix current output (Option 1)

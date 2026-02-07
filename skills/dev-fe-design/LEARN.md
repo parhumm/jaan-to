@@ -1,7 +1,7 @@
 # Lessons: dev-fe-design
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/dev-fe-design.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to:dev-fe-design.learn.md`
 
 ---
 

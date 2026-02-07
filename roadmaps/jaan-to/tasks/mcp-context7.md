@@ -25,7 +25,7 @@ Integrate Context7 MCP to fetch, cache, and manage library documentation for dev
 ## Subtasks
 
 - [ ] Add Context7 MCP server to Claude settings
-- [ ] Create `/jaan-to-dev-fetch-tech-docs` skill
+- [ ] Create `/jaan-to:dev-fetch-tech-docs` skill
   - Parse library arguments
   - Auto-detect from task context
 - [ ] Build library keyword mapping table
@@ -67,8 +67,8 @@ cache_ttl: 7 days
 
 ## Integration Points
 
-- **Standalone:** `/jaan-to-dev-fetch-tech-docs fastapi openai`
-- **Auto-integrated:** Called from `/dev-app` Phase 1.1
+- **Standalone:** `/jaan-to:dev-fetch-tech-docs fastapi openai`
+- **Auto-integrated:** Called from `/jaan-to:dev-app` Phase 1.1
 - **Silent mode:** Cache hits don't produce output
 
 ---
@@ -86,4 +86,4 @@ Target: <10,000 tokens per execution
 ## References
 
 - Context7 MCP documentation
-- Existing skill: `/jaan-to-dev-fetch-tech-docs` (from Jaan.Coach)
+- Existing skill: `/jaan-to:dev-fetch-tech-docs` (from Jaan.Coach)

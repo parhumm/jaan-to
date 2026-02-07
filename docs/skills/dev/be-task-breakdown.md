@@ -1,4 +1,4 @@
-# /dev-be-task-breakdown
+# /jaan-to:dev-be-task-breakdown
 
 > Convert PRDs into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
 
@@ -21,17 +21,17 @@ Uses vertical slicing by default (user-facing features, not technical layers).
 ## Usage
 
 ```bash
-/dev-be-task-breakdown "path/to/prd.md"
+/jaan-to:dev-be-task-breakdown "path/to/prd.md"
 ```
 
 Or with a feature description:
 ```bash
-/dev-be-task-breakdown "User can subscribe to premium features"
+/jaan-to:dev-be-task-breakdown "User can subscribe to premium features"
 ```
 
 Or with a tech plan (from upstream skill):
 ```bash
-/dev-be-task-breakdown "path/to/tech-plan.md"
+/jaan-to:dev-be-task-breakdown "path/to/tech-plan.md"
 ```
 
 ---
@@ -89,7 +89,7 @@ Each task includes:
 
 **Input:**
 ```bash
-/dev-be-task-breakdown "$JAAN_OUTPUTS_DIR/pm/user-subscriptions/prd.md"
+/jaan-to:dev-be-task-breakdown "$JAAN_OUTPUTS_DIR/pm/user-subscriptions/prd.md"
 ```
 
 **Extracts:**
@@ -124,7 +124,7 @@ Each task includes:
 
 ## Related
 
-- [/dev-fe-task-breakdown](../dev/dev-fe-task-breakdown.md) - Frontend counterpart
-- [/pm-prd-write](../pm/pm-prd-write.md) - Upstream: PRD generation
-- [/pm-story-write](../pm/pm-story-write.md) - Upstream: User stories
+- [/jaan-to:dev-fe-task-breakdown](../dev/fe-task-breakdown.md) - Frontend counterpart
+- [/jaan-to:pm-prd-write](../pm/prd-write.md) - Upstream: PRD generation
+- [/jaan-to:pm-story-write](../pm/story-write.md) - Upstream: User stories
 - [Tech Stack Context](../../config/context-system.md) - How tech.md works

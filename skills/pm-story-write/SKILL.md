@@ -15,8 +15,8 @@ argument-hint: [feature] [persona] [goal] OR [epic-id]
 ## Context Files
 
 Read before execution:
-- `$JAAN_LEARN_DIR/pm-story-write.learn.md` - Past lessons (loaded in Pre-Execution)
-- `skills/pm-story-write/template.md` - Story output template
+- `$JAAN_LEARN_DIR/jaan-to:pm-story-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `skills/jaan-to:pm-story-write/template.md` - Story output template
 - `$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md` - Reference research (optional)
 - Jira epic/context (if MCP available and epic ID provided)
 
@@ -27,13 +27,13 @@ Read before execution:
 Three input formats supported:
 
 1. **Feature-Persona-Goal**: `[feature] [persona] [goal]`
-   - Example: `/pm-story-write "bulk export feature" "system administrator" "analyze usage data offline"`
+   - Example: `/jaan-to:pm-story-write "bulk export feature" "system administrator" "analyze usage data offline"`
 
 2. **Narrative Description**: Full feature description
-   - Example: `/pm-story-write "As an admin I need to export user data to Excel for compliance reporting"`
+   - Example: `/jaan-to:pm-story-write "As an admin I need to export user data to Excel for compliance reporting"`
 
 3. **Jira Context**: Epic or story ID
-   - Example: `/pm-story-write PROJ-123`
+   - Example: `/jaan-to:pm-story-write PROJ-123`
 
 The skill will extract feature/persona/goal from any format.
 
@@ -44,7 +44,7 @@ IMPORTANT: The input above is your starting point. Use it directly. Do NOT ask f
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/pm-story-write.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:pm-story-write.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
@@ -251,7 +251,7 @@ If "revise", ask what needs to change and return to the relevant Phase 1 step.
 
 ## Step 4: Generate Story Content
 
-Use template from `skills/pm-story-write/template.md` based on research Section 5.
+Use template from `skills/jaan-to:pm-story-write/template.md` based on research Section 5.
 
 ### YAML Frontmatter
 
@@ -578,7 +578,7 @@ After story is written, ask:
 2. Offer options:
    > "How should I handle this feedback?
    > [1] Fix now - Update this story
-   > [2] Learn - Save for future stories via /learn-add
+   > [2] Learn - Save for future stories via /jaan-to:learn-add
    > [3] Both - Fix now AND save lesson"
 
 **Option 1 - Fix now:**
@@ -587,12 +587,12 @@ After story is written, ask:
 - Re-write the updated story
 
 **Option 2 - Learn for future:**
-- Run: `/learn-add pm-story-write "{feedback}"`
+- Run: `/jaan-to:learn-add pm-story-write "{feedback}"`
 - Let the learn-add skill categorize and save the lesson
 
 **Option 3 - Both:**
 - First: Apply fix to current story (Option 1)
-- Then: Run `/learn-add pm-story-write "{feedback}"`
+- Then: Run `/jaan-to:learn-add pm-story-write "{feedback}"`
 
 **If no:**
 - Story workflow complete

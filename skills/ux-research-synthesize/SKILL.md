@@ -15,8 +15,8 @@ argument-hint: [study-name] [data-sources?]
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/ux-research-synthesize.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/ux-research-synthesize.template.md` - Synthesis report template
+- `$JAAN_LEARN_DIR/jaan-to:ux-research-synthesize.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:ux-research-synthesize.template.md` - Synthesis report template
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration (if applicable)
 
 ## Input
@@ -39,7 +39,7 @@ argument-hint: [study-name] [data-sources?]
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/ux-research-synthesize.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:ux-research-synthesize.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 3
@@ -426,7 +426,7 @@ Preview output configuration:
 
 ## Step 10: Generate Main Synthesis Report
 
-Use template from: `$JAAN_TEMPLATES_DIR/ux-research-synthesize.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-research-synthesize.template.md`
 
 Fill all template sections:
 
@@ -689,7 +689,7 @@ add_to_index \
 
 **Options**:
 - **[1] Fix now**: Revise reports, re-preview, re-write to same paths
-- **[2] Learn**: Run `/learn-add ux-research-synthesize "{feedback}"`
+- **[2] Learn**: Run `/jaan-to:learn-add ux-research-synthesize "{feedback}"`
 - **[3] Both**: Do both
 
 ---

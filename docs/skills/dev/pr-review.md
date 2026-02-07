@@ -144,7 +144,7 @@ issue (blocking, security): SQL injection in UserController...
 - Keep PRs under 400 lines for best review quality — detection drops 70% beyond that
 - The skill flags draft/WIP MRs and applies limited review automatically
 - Deletion-only PRs get extra scrutiny for removed validation or auth checks
-- Pair with `/dev-stack-detect` so security patterns match your actual stack
+- Pair with `/jaan-to:dev-stack-detect` so security patterns match your actual stack
 
 ---
 

@@ -16,7 +16,7 @@ argument-hint: [task-description]
 
 - `jaan-to/roadmap.md` - Current roadmap
 - `jaan-to/tasks/` - Task standards
-- `$JAAN_LEARN_DIR/roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to:roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -29,7 +29,7 @@ If no input provided, ask: "What task would you like to add to the roadmap?"
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/roadmap-add.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:roadmap-add.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -139,7 +139,7 @@ Push to remote? [y/n]
 ## Error Handling
 
 ### No Description
-> "No task description. Usage: `/roadmap-add Add LEARN.md files`"
+> "No task description. Usage: `/jaan-to:roadmap-add Add LEARN.md files`"
 
 ### Duplicate Found
 > "Similar task '{existing}' exists. Options: proceed / merge / cancel"

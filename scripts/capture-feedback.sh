@@ -24,7 +24,7 @@ echo "---" >&2
 echo "Output created: $FILE_PATH" >&2
 echo "" >&2
 echo "Have feedback to improve future outputs?" >&2
-echo "Use: /learn-add \"skill-name\" \"lesson\"" >&2
+echo "Use: /jaan-to:learn-add \"skill-name\" \"lesson\"" >&2
 echo "---" >&2
 
 exit 0

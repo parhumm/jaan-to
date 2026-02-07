@@ -53,7 +53,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### /jaan-to-pm-interview-guide
+### /jaan-to:pm-interview-guide
 
 - **Logical**: `pm-interview-guide`
 - **Description**: 30-min interview script with hypotheses, key probes, and bias-avoidance reminders
@@ -68,7 +68,7 @@ flowchart TD
 - **Input**: [persona] [topic]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/discovery/{slug}/interview-guide.md`
 
-### /jaan-to-pm-insights-synthesis
+### /jaan-to:pm-insights-synthesis
 
 - **Logical**: `pm-insights-synthesis`
 - **Description**: Top pains ranked by frequency/impact, quote bank by theme, frequency table + unknowns
@@ -83,7 +83,7 @@ flowchart TD
 - **Input**: [notes]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/discovery/{slug}/insights-synthesis.md`
 
-### /jaan-to-pm-problem-statement
+### /jaan-to:pm-problem-statement
 
 - **Logical**: `pm-problem-statement`
 - **Description**: 1–3 crisp problem statements (who/what/why) with explicit non-goals and assumptions to validate
@@ -97,7 +97,7 @@ flowchart TD
 - **Input**: [insights]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/discovery/{slug}/problem-statement.md`
 
-### /jaan-to-pm-competitor-matrix
+### /jaan-to:pm-competitor-matrix
 
 - **Logical**: `pm-competitor-matrix`
 - **Description**: Comparison table (criteria × competitors) with gaps/opportunities and "so what?" takeaways
@@ -112,7 +112,7 @@ flowchart TD
 - **Input**: [competitors] [criteria]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/market/{slug}/competitor-matrix.md`
 
-### /jaan-to-pm-positioning-brief
+### /jaan-to:pm-positioning-brief
 
 - **Logical**: `pm-positioning-brief`
 - **Description**: Positioning statement + core promise, differentiators + proof points, risks and open questions
@@ -126,7 +126,7 @@ flowchart TD
 - **Input**: [product] [audience]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/market/{slug}/positioning-brief.md`
 
-### /jaan-to-pm-persona-card
+### /jaan-to:pm-persona-card
 
 - **Logical**: `pm-persona-card`
 - **Description**: Persona card (goals, pains, constraints, channels) with top jobs/gains and recognition signals
@@ -140,7 +140,7 @@ flowchart TD
 - **Input**: [segment]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/user/{slug}/persona-card.md`
 
-### /jaan-to-pm-jtbd-map
+### /jaan-to:pm-jtbd-map
 
 - **Logical**: `pm-jtbd-map`
 - **Description**: JTBD map (functional/emotional/social) with triggers, current workarounds, desired outcomes
@@ -154,7 +154,7 @@ flowchart TD
 - **Input**: [use-case]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/user/{slug}/jtbd-map.md`
 
-### /jaan-to-pm-success-criteria
+### /jaan-to:pm-success-criteria
 
 - **Logical**: `pm-success-criteria`
 - **Description**: Measurable "done means" criteria with key guardrails and edge cases to include/exclude
@@ -168,7 +168,7 @@ flowchart TD
 - **Input**: [persona] [goal]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/user/{slug}/success-criteria.md`
 
-### /jaan-to-pm-north-star
+### /jaan-to:pm-north-star
 
 - **Logical**: `pm-north-star`
 - **Description**: North star metric + drivers + boundaries + cadence (weekly/monthly)
@@ -182,7 +182,7 @@ flowchart TD
 - **Input**: [product]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/metrics/{slug}/north-star.md`
 
-### /jaan-to-pm-kpi-tree
+### /jaan-to:pm-kpi-tree
 
 - **Logical**: `pm-kpi-tree`
 - **Description**: KPI tree: input metrics + leading indicators + guardrails (quality, latency, churn, cost)
@@ -196,7 +196,7 @@ flowchart TD
 - **Input**: [north-star]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/metrics/{slug}/kpi-tree.md`
 
-### /jaan-to-pm-measurement-plan
+### /jaan-to:pm-measurement-plan
 
 - **Logical**: `pm-measurement-plan`
 - **Description**: Events/properties to track + triggers, source of truth per event, validation checklist (QA for analytics)
@@ -210,7 +210,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/metrics/{slug}/measurement-plan.md`
 
-### /jaan-to-pm-feedback-synthesize
+### /jaan-to:pm-feedback-synthesize
 
 - **Logical**: `pm-feedback-synthesize`
 - **Description**: Synthesize customer feedback into categorized themes with prioritized pain points
@@ -227,7 +227,7 @@ flowchart TD
 - **Failure Modes**: Feedback silos; recency bias; loud customers over-represented
 - **Quality Gates**: Multiple sources triangulated; connected to segments
 
-### /jaan-to-pm-decision-brief
+### /jaan-to:pm-decision-brief
 
 - **Logical**: `pm-decision-brief`
 - **Description**: 1-page decision record with options, recommendation, risks, open questions
@@ -241,7 +241,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/decision/{slug}/brief.md`
 
-### /jaan-to-pm-priority-score
+### /jaan-to:pm-priority-score
 
 - **Logical**: `pm-priority-score`
 - **Description**: Ranked backlog with scoring, rationale per item (drivers + uncertainty), sensitivity notes
@@ -255,7 +255,7 @@ flowchart TD
 - **Input**: [ideas] [framework]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/priority/{slug}/priority-score.md`
 
-### /jaan-to-pm-bet-sizing
+### /jaan-to:pm-bet-sizing
 
 - **Logical**: `pm-bet-sizing`
 - **Description**: Effort bands (S/M/L or weeks), risk notes + unknowns, suggested sequencing
@@ -269,7 +269,7 @@ flowchart TD
 - **Input**: [top-ideas]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/priority/{slug}/bet-sizing.md`
 
-### /jaan-to-pm-scope-slice
+### /jaan-to:pm-scope-slice
 
 - **Logical**: `pm-scope-slice`
 - **Description**: MVP vs Later slicing with milestones and dependency list
@@ -283,7 +283,7 @@ flowchart TD
 - **Input**: [idea]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/plan/{slug}/scope.md`
 
-### /jaan-to-pm-experiment-plan
+### /jaan-to:pm-experiment-plan
 
 - **Logical**: `pm-experiment-plan`
 - **Description**: What to learn + hypothesis, success thresholds + guardrails, timeline + segments + rollout plan
@@ -297,7 +297,7 @@ flowchart TD
 - **Input**: [mvp]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/plan/{slug}/experiment-plan.md`
 
-### /jaan-to-pm-acceptance-criteria
+### /jaan-to:pm-acceptance-criteria
 
 - **Logical**: `pm-acceptance-criteria`
 - **Description**: Testable acceptance criteria with edge cases + failure handling and analytics requirements
@@ -312,7 +312,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/prd/{slug}/acceptance-criteria.md`
 
-### /pm-story-write
+### /jaan-to:pm-story-write
 
 - **Logical**: `pm-story-write`
 - **Description**: User stories in standard format with Given/When/Then acceptance criteria
@@ -330,7 +330,7 @@ flowchart TD
 - **Failure Modes**: Too technical; missing "so that"; AC not testable
 - **Quality Gates**: INVEST criteria met; QA confirms testability
 
-### /jaan-to-pm-release-notes-draft
+### /jaan-to:pm-release-notes-draft
 
 - **Logical**: `pm-release-notes-draft`
 - **Description**: User-facing release notes, what changed + who benefits, support notes / known limitations
@@ -344,7 +344,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/prd/{slug}/release-notes.md`
 
-### /jaan-to-pm-now-next-later
+### /jaan-to:pm-now-next-later
 
 - **Logical**: `pm-now-next-later`
 - **Description**: Now/Next/Later board with outcome per initiative and confidence level notes
@@ -358,7 +358,7 @@ flowchart TD
 - **Input**: [initiatives]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/roadmap/{slug}/now-next-later.md`
 
-### /jaan-to-pm-milestones
+### /jaan-to:pm-milestones
 
 - **Logical**: `pm-milestones`
 - **Description**: Milestones + owners, dependencies + critical path, risks + mitigation plan
@@ -372,7 +372,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/roadmap/{slug}/milestones.md`
 
-### /jaan-to-pm-release-review
+### /jaan-to:pm-release-review
 
 - **Logical**: `pm-release-review`
 - **Description**: Post-release review: KPI deltas, unexpected outcomes, learnings, follow-ups

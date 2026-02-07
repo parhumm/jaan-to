@@ -29,7 +29,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### /jaan-to-data-event-spec
+### /jaan-to:data-event-spec
 
 - **Logical**: `data-event-spec`
 - **Description**: GA4-ready event/param spec: naming, triggers, required properties, GTM implementation notes
@@ -43,7 +43,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/events/{slug}/event-spec.md`
 
-### /jaan-to-data-metric-spec
+### /jaan-to:data-metric-spec
 
 - **Logical**: `data-metric-spec`
 - **Description**: Metric definition: formula, caveats, segmentation rules, owner, gaming prevention
@@ -57,7 +57,7 @@ flowchart TD
 - **Input**: [metric]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/metrics/{slug}/metric-spec.md`
 
-### /jaan-to-data-metric-dictionary
+### /jaan-to:data-metric-dictionary
 
 - **Logical**: `data-metric-dictionary`
 - **Description**: Metric definitions + SQL-like logic description, pitfalls + edge cases, example interpretations
@@ -71,7 +71,7 @@ flowchart TD
 - **Input**: [metrics]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/metrics/{slug}/metric-dictionary.md`
 
-### /jaan-to-data-dashboard-spec
+### /jaan-to:data-dashboard-spec
 
 - **Logical**: `data-dashboard-spec`
 - **Description**: Dashboard layout + sections, definitions + filters, recommended review cadence
@@ -85,7 +85,7 @@ flowchart TD
 - **Input**: [kpis]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/dashboard/{slug}/dashboard-spec.md`
 
-### /jaan-to-data-funnel-review
+### /jaan-to:data-funnel-review
 
 - **Logical**: `data-funnel-review`
 - **Description**: Funnel baseline + top drop-offs + segments + 3-5 hypotheses ranked by impact × confidence
@@ -99,7 +99,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/insights/{slug}/funnel-review.md`
 
-### /jaan-to-data-experiment-design
+### /jaan-to:data-experiment-design
 
 - **Logical**: `data-experiment-design`
 - **Description**: Experiment plan: hypothesis, success metric, boundaries, ramp/kill criteria, analysis checklist
@@ -113,7 +113,7 @@ flowchart TD
 - **Input**: [hypothesis]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/experiments/{slug}/experiment-design.md`
 
-### /jaan-to-data-analysis-plan
+### /jaan-to:data-analysis-plan
 
 - **Logical**: `data-analysis-plan`
 - **Description**: Sample sizing notes (assumptions), decision rules (ship/iterate/stop), bias + data quality checks
@@ -127,7 +127,7 @@ flowchart TD
 - **Input**: [experiment]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/experiments/{slug}/analysis-plan.md`
 
-### /jaan-to-data-cohort-analyze
+### /jaan-to:data-cohort-analyze
 
 - **Logical**: `data-cohort-analyze`
 - **Description**: Cohort/retention analysis with retention curves and churn risk identification
@@ -144,7 +144,7 @@ flowchart TD
 - **Failure Modes**: Incomplete data; timezone issues; not accounting for seasonality
 - **Quality Gates**: Early cohorts stable; cross-reference with finance
 
-### /jaan-to-data-postlaunch-report
+### /jaan-to:data-postlaunch-report
 
 - **Logical**: `data-postlaunch-report`
 - **Description**: Insights summary + interpretation notes, chart checklist (no code), segment highlights
@@ -158,7 +158,7 @@ flowchart TD
 - **Input**: [metrics]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/insights/{slug}/postlaunch-report.md`
 
-### /jaan-to-data-attribution-plan
+### /jaan-to:data-attribution-plan
 
 - **Logical**: `data-attribution-plan`
 - **Description**: Tracking plan + UTMs, source of truth + governance, limits/risks checklist
@@ -172,7 +172,7 @@ flowchart TD
 - **Input**: [channels]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/growth/{slug}/attribution-plan.md`
 
-### /jaan-to-data-ltv-cac-model
+### /jaan-to:data-ltv-cac-model
 
 - **Logical**: `data-ltv-cac-model`
 - **Description**: Model inputs/outputs table, sensitivity notes (what drives outcomes), data needed to validate
@@ -186,7 +186,7 @@ flowchart TD
 - **Input**: [assumptions]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/growth/{slug}/ltv-cac-model.md`
 
-### /jaan-to-data-anomaly-triage
+### /jaan-to:data-anomaly-triage
 
 - **Logical**: `data-anomaly-triage`
 - **Description**: Triage pack: scope, likely causes, next checks, who to pull in, RCA starter template
@@ -200,7 +200,7 @@ flowchart TD
 - **Input**: [kpi]
 - **Output**: `$JAAN_OUTPUTS_DIR/data/monitoring/{slug}/anomaly-triage.md`
 
-### /jaan-to-data-sql-query
+### /jaan-to:data-sql-query
 
 - **Logical**: `data-sql-query`
 - **Description**: Ad-hoc SQL queries from natural language with results summary
@@ -217,7 +217,7 @@ flowchart TD
 - **Failure Modes**: Misunderstanding question; wrong joins; incorrect filters
 - **Quality Gates**: Row count sanity checks; cross-reference dashboards
 
-### /jaan-to-data-dbt-model
+### /jaan-to:data-dbt-model
 
 - **Logical**: `data-dbt-model`
 - **Description**: dbt staging/mart models with tests, documentation (schema.yml)

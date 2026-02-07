@@ -18,7 +18,7 @@ related: [../skills/README.md]
 Agents are specialized sub-agents bundled with the jaan.to plugin. Skills invoke them to handle focused sub-tasks — reviewing output quality, gathering project context, etc.
 
 Agents differ from skills:
-- **Skills** are user-invoked commands (`/pm-prd-write`)
+- **Skills** are user-invoked commands (`/jaan-to:pm-prd-write`)
 - **Agents** are skill-invoked helpers (users don't call them directly)
 - **Agents** use restricted tool sets and lightweight models (haiku)
 

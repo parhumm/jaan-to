@@ -1,4 +1,4 @@
-# /docs-create
+# /jaan-to:docs-create
 
 > Create new documentation with standard templates.
 
@@ -13,7 +13,7 @@ Creates documentation files following STYLE.md standards. Includes templates for
 ## Usage
 
 ```
-/docs-create {type} "{name}"
+/jaan-to:docs-create {type} "{name}"
 ```
 
 **Types**: `skill | hook | config | guide | concept | index`
@@ -49,7 +49,7 @@ Creates documentation files following STYLE.md standards. Includes templates for
 
 **Input**:
 ```
-/docs-create skill "test-runner"
+/jaan-to:docs-create skill "test-runner"
 ```
 
 **Questions**:
@@ -85,7 +85,7 @@ tags: [qa, testing]
 - **Duplicate check** before creating
 - **STYLE.md validation** before writing
 - **Auto-commit** with summary
-- **Calls /docs-update** for related docs
+- **Calls /jaan-to:docs-update** for related docs
 
 ---
 

@@ -235,10 +235,10 @@ import { FormattedMessage } from 'react-intl';
 | Created | {{date}} |
 | Output Path | {{env:JAAN_OUTPUTS_DIR}}/ux/content/{{id}}-{{slug}}/ |
 | Skill | ux-microcopy-write |
-| Command | `/ux-microcopy-write` |
+| Command | `/jaan-to:ux-microcopy-write` |
 | Version | 3.0 |
 | Status | Draft |
 
 ---
 
-> Generated with `/ux-microcopy-write` | [jaan.to](https://jaan.to)
+> Generated with `/jaan-to:ux-microcopy-write` | [jaan.to](https://jaan.to)

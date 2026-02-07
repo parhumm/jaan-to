@@ -83,7 +83,7 @@ When adding functionality, first check if a skill/command exists.
 ## Naming Conventions
 
 ### Skills
-- Role-based: `{role}-{domain}-{action}` → `/jaan-to:{role}-{domain}-{action}`
+- Role-based: `{role}-{domain}-{action}` → `/{role}-{domain}-{action}`
   Roles: pm, data, ux, qa, dev, devops
   Example: `pm-prd-write` → `/jaan-to:pm-prd-write`
 - Internal: `{domain}-{action}` → `/jaan-to:{domain}-{action}`

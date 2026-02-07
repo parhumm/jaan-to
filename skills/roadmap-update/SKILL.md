@@ -19,7 +19,7 @@ argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [bu
 - `CHANGELOG.md` - Release history
 - `.claude-plugin/plugin.json` - Plugin version
 - `.claude-plugin/marketplace.json` - Marketplace version
-- `$JAAN_LEARN_DIR/roadmap-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to:roadmap-update.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -44,7 +44,7 @@ If input doesn't match any pattern, ask: "Which mode? [smart-default / mark / re
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/roadmap-update.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:roadmap-update.learn.md`
 
 If the file exists, apply its lessons throughout this execution.
 If the file does not exist, continue without it.
@@ -128,7 +128,7 @@ Present report:
 1. Search roadmap for the task text (fuzzy match: extract keywords, case-insensitive)
 2. If exact match: prepare change
 3. If multiple matches: list them, ask which one
-4. If no match: "Task not found. Create it first with `/roadmap-add`?"
+4. If no match: "Task not found. Create it first with `/jaan-to:roadmap-add`?"
 5. Validate commit hash exists: `git log --oneline -1 {hash}`
 6. Prepare: `- [ ] {task}` → `- [x] {task} (\`{hash}\`)`
 
@@ -625,14 +625,14 @@ If "y" or "custom":
 2. Ask for summary: "One-line release summary: "
 3. Show command:
    ```
-   Running: /roadmap-update release {{version}} "{{summary}}"
+   Running: /jaan-to:roadmap-update release {{version}} "{{summary}}"
    ```
-4. Re-invoke: `/roadmap-update release {{version}} "{{summary}}"`
+4. Re-invoke: `/jaan-to:roadmap-update release {{version}} "{{summary}}"`
 
 If "n":
 > "Skipped release. Run this command when ready:"
 > ```
-> /roadmap-update release vX.Y.Z "summary"
+> /jaan-to:roadmap-update release vX.Y.Z "summary"
 > ```
 >
 > This will:

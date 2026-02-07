@@ -1,4 +1,4 @@
-# /pm-research-about
+# /jaan-to:pm-research-about
 
 > Deep research on any topic, or add existing file/URL to research index.
 
@@ -18,13 +18,13 @@ The mode is auto-detected from your input.
 ## Usage
 
 ```
-/pm-research-about <topic-or-file-path-or-URL>
+/jaan-to:pm-research-about <topic-or-file-path-or-URL>
 ```
 
 **Examples**:
-- `/pm-research-about "Claude Code hooks best practices"` — deep research
-- `/pm-research-about https://example.com/article` — add URL to index
-- `/pm-research-about jaan-to/outputs/research/my-doc.md` — add file to index
+- `/jaan-to:pm-research-about "Claude Code hooks best practices"` — deep research
+- `/jaan-to:pm-research-about https://example.com/article` — add URL to index
+- `/jaan-to:pm-research-about jaan-to/outputs/research/my-doc.md` — add file to index
 
 ---
 
@@ -123,7 +123,7 @@ Uses **5 adaptive waves** where each wave's focus is determined by findings from
 
 - Updates `jaan-to/outputs/research/README.md` index
 - Git commits the result
-- Captures feedback via `/learn-add`
+- Captures feedback via `/jaan-to:learn-add`
 
 ---
 
@@ -131,10 +131,10 @@ Uses **5 adaptive waves** where each wave's focus is determined by findings from
 
 This skill reads from:
 ```
-jaan-to/learn/pm-research-about.learn.md
+jaan-to/learn/jaan-to:pm-research-about.learn.md
 ```
 
 Add feedback:
 ```
-/learn-add pm-research-about "your feedback here"
+/jaan-to:learn-add pm-research-about "your feedback here"
 ```

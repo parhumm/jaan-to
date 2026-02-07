@@ -23,8 +23,8 @@ hooks:
 
 - `$JAAN_CONTEXT_DIR/config.md` - Configuration
 - `$JAAN_CONTEXT_DIR/boundaries.md` - Trust rules
-- `$JAAN_TEMPLATES_DIR/pm-prd-write.template.md` - PRD template
-- `$JAAN_LEARN_DIR/pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:pm-prd-write.template.md` - PRD template
+- `$JAAN_LEARN_DIR/jaan-to:pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech context (if exists)
 - `$JAAN_CONTEXT_DIR/team.md` - Team context (if exists)
 
@@ -39,7 +39,7 @@ IMPORTANT: The initiative above is your input. Use it directly. Do NOT ask for t
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/pm-prd-write.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:pm-prd-write.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
@@ -87,7 +87,7 @@ Before generating the PRD, confirm with the user:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate PRD
-Use the template from: `$JAAN_TEMPLATES_DIR/pm-prd-write.template.md`
+Use the template from: `$JAAN_TEMPLATES_DIR/jaan-to:pm-prd-write.template.md`
 
 Fill all sections:
 - **Title**: From initiative
@@ -214,7 +214,7 @@ List the user stories from the generated PRD:
 > Enter numbers (e.g., "1,3" or "all"):
 
 For each selected story, run:
-`/pm-story-write "{story_statement}"`
+`/jaan-to:pm-story-write "{story_statement}"`
 
 This invokes the full story-write skill with INVEST validation,
 Gherkin acceptance criteria, and edge case mapping.
@@ -238,12 +238,12 @@ After PRD is written, ask:
 - Write the updated PRD
 
 **Option 2 - Learn for future:**
-- Run: `/learn-add pm-prd-write "{feedback}"`
-- Follow /learn-add workflow (categorize → preview → commit)
+- Run: `/jaan-to:learn-add pm-prd-write "{feedback}"`
+- Follow /jaan-to:learn-add workflow (categorize → preview → commit)
 
 **Option 3 - Both:**
 - First: Apply fix to current PRD (Option 1)
-- Then: Run `/learn-add` (Option 2)
+- Then: Run `/jaan-to:learn-add` (Option 2)
 
 **If no:**
 - PRD workflow complete
@@ -254,4 +254,4 @@ After PRD is written, ask:
 - [ ] PRD file exists at correct path
 - [ ] All quality checks pass
 - [ ] User has approved the content
-- [ ] User stories generated via /pm-story-write (if selected)
+- [ ] User stories generated via /jaan-to:pm-story-write (if selected)

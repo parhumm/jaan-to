@@ -45,7 +45,7 @@ A skill is a reusable command that AI executes to produce outputs. This specific
 
 Role-based skills (for team use):
 ```
-jaan-to-{role}-{domain}-{action}
+{role}-{domain}-{action}
 ```
 
 Internal skills (for plugin maintenance):
@@ -63,10 +63,10 @@ Internal skills (for plugin maintenance):
 
 | Skill Name | Command | Logical Name |
 |------------|---------|--------------|
-| `pm-prd-write` | `/pm-prd-write` | `pm:prd-write` |
-| `qa-plan-test-matrix` | `/qa-plan-test-matrix` | `qa:plan-test-matrix` |
-| `docs-create` | `/docs-create` | `docs:create` |
-| `dev-api-contract` | `/dev-api-contract` | `dev:api-contract` |
+| `pm-prd-write` | `/jaan-to:pm-prd-write` | `pm-prd-write` |
+| `qa-plan-test-matrix` | `/jaan-to:qa-plan-test-matrix` | `qa:plan-test-matrix` |
+| `docs-create` | `/jaan-to:docs-create` | `docs:create` |
+| `dev-api-contract` | `/jaan-to:dev-api-contract` | `dev:api-contract` |
 
 ---
 
@@ -418,7 +418,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/learn-add {skill-name} "{feedback}"`
+- **Option 2**: Run `/jaan-to:learn-add {skill-name} "{feedback}"`
 - **Option 3**: Do both
 
 ---
@@ -546,7 +546,7 @@ Create path: `$JAAN_OUTPUTS_DIR/pm/{slug}/`
 bash scripts/lib/v3-autofix.sh {skill-name}
 
 # Or use skill validator
-/skill-update {skill-name}
+/jaan-to:skill-update {skill-name}
 # → Select option [8] Migrate to v3.0.0
 ```
 
@@ -1048,7 +1048,7 @@ Things to avoid:
 
 ### Auto-Categorization Keywords
 
-When adding lessons via `/learn-add`, category is detected by keywords:
+When adding lessons via `/jaan-to:learn-add`, category is detected by keywords:
 
 | Category | Trigger Keywords |
 |----------|------------------|
@@ -1156,7 +1156,7 @@ After writing:
 > "Any feedback? [y/n]"
 
 If yes:
-- Run `/learn-add {skill-name} "{feedback}"`
+- Run `/jaan-to:learn-add {skill-name} "{feedback}"`
 ```
 
 ### Config Registration
@@ -1168,7 +1168,7 @@ Register new skills in `jaan-to/context/config.md`:
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| `pm:prd-write` | `/pm-prd-write` | Generate PRD |
+| `pm-prd-write` | `/jaan-to:pm-prd-write` | Generate PRD |
 | `your:new-skill` | `/your-new-skill` | Your description |
 ```
 
@@ -1272,7 +1272,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/learn-add example-minimal-demo "{feedback}"`
+- **Option 2**: Run `/jaan-to:learn-add example-minimal-demo "{feedback}"`
 - **Option 3**: Do both
 
 ---
@@ -1288,7 +1288,7 @@ If yes:
 
 Complete skill with all v3.0.0 patterns:
 
-**`skills/qa-test-matrix/SKILL.md`**:
+**`skills/jaan-to:qa-test-matrix/SKILL.md`**:
 
 ```markdown
 ---
@@ -1296,12 +1296,12 @@ name: qa-test-matrix
 description: |
   Generate comprehensive test matrix from feature requirements.
   Auto-triggers on: test planning, QA coverage, test matrix requests.
-  Maps to: qa:test-matrix
+  Maps to: qa-test-matrix
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write($JAAN_OUTPUTS_DIR/qa/**)
 argument-hint: [feature-name-or-prd-path]
 ---
 
-# qa:test-matrix
+# qa-test-matrix
 
 > Generate comprehensive test matrix from feature requirements.
 
@@ -1310,8 +1310,8 @@ argument-hint: [feature-name-or-prd-path]
 Read these before execution:
 - `$JAAN_CONTEXT_DIR/config.md` - Configuration
 - `$JAAN_CONTEXT_DIR/boundaries.md` - Safety rules
-- `$JAAN_TEMPLATES_DIR/qa-test-matrix.template.md` - Output template
-- `$JAAN_LEARN_DIR/qa-test-matrix.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-matrix.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:qa-test-matrix.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Test frameworks and tools (if exists)
 - `$JAAN_CONTEXT_DIR/team.md` - QA capacity and norms (if exists)
 
@@ -1337,7 +1337,7 @@ Use extended reasoning for:
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/qa-test-matrix.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:qa-test-matrix.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
@@ -1394,7 +1394,7 @@ Show planned structure:
 
 ## Step 3: Generate Test Matrix
 
-Use template from: `$JAAN_TEMPLATES_DIR/qa-test-matrix.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-matrix.template.md`
 
 Fill variables:
 - `{{title}}` - Feature name
@@ -1440,7 +1440,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update matrix, re-preview, re-write
-- **Option 2**: Run `/learn-add qa-test-matrix "{feedback}"`
+- **Option 2**: Run `/jaan-to:learn-add qa-test-matrix "{feedback}"`
 - **Option 3**: Do both
 
 ---
@@ -1468,7 +1468,7 @@ Use the auto-fix script for quick migration:
 bash scripts/lib/v3-autofix.sh {skill-name}
 
 # Or use the skill validator
-/skill-update {skill-name}
+/jaan-to:skill-update {skill-name}
 # → Select option [8] Migrate to v3.0.0
 # → Choose migration approach (auto-fix, interactive, script, guidance)
 ```
@@ -1593,7 +1593,7 @@ After migration, run validation:
 
 ```bash
 # Use skill validator
-/skill-update {skill-name}
+/jaan-to:skill-update {skill-name}
 ```
 
 Check v3.0.0 compliance:
@@ -1654,7 +1654,7 @@ After migration, test the skill:
 
 ## Tips
 
-- Start with fewer questions—add more via `/learn-add`
+- Start with fewer questions—add more via `/jaan-to:learn-add`
 - Match output format to team expectations
 - Read stack context instead of asking redundant questions
 - Test with real scenarios before committing

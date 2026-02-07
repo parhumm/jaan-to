@@ -3,7 +3,7 @@
 > Last updated: 2026-02-03
 >
 > Plugin-side seed lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/ux-research-synthesize.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to:ux-research-synthesize.learn.md`
 
 Accumulated lessons from research synthesis executions, seeded from comprehensive UX research methodology foundation.
 

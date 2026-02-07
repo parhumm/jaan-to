@@ -1,4 +1,4 @@
-# /roadmap-update
+# /jaan-to:roadmap-update
 
 > Maintain and sync the jaan.to development roadmap.
 
@@ -18,11 +18,11 @@ Automates roadmap maintenance with 5 modes:
 ## Usage
 
 ```
-/roadmap-update
-/roadmap-update mark "<task>" done <hash>
-/roadmap-update release vX.Y.Z "<summary>"
-/roadmap-update sync
-/roadmap-update validate
+/jaan-to:roadmap-update
+/jaan-to:roadmap-update mark "<task>" done <hash>
+/jaan-to:roadmap-update release vX.Y.Z "<summary>"
+/jaan-to:roadmap-update sync
+/jaan-to:roadmap-update validate
 ```
 
 ---
@@ -43,7 +43,7 @@ Automates roadmap maintenance with 5 modes:
 
 **Input**:
 ```
-/roadmap-update mark "Add post-commit hook" done 2f4483d
+/jaan-to:roadmap-update mark "Add post-commit hook" done 2f4483d
 ```
 
 **Result**:
@@ -84,4 +84,4 @@ Updates:
 
 ## Note
 
-This is an internal skill for jaan.to development. Complements `/roadmap-add` which creates new tasks.
+This is an internal skill for jaan.to development. Complements `/jaan-to:roadmap-add` which creates new tasks.

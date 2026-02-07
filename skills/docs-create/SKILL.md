@@ -15,8 +15,8 @@ argument-hint: "{type} {name}"
 ## Context Files
 
 - `jaan-to/docs/STYLE.md` - Documentation standards (copied by bootstrap from plugin)
-- `$JAAN_TEMPLATES_DIR/docs-create.template.md` - All templates (copied by bootstrap from plugin)
-- `$JAAN_LEARN_DIR/docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:docs-create.template.md` - All templates (copied by bootstrap from plugin)
+- `$JAAN_LEARN_DIR/jaan-to:docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
 
 **Note:** Templates are intentionally read from the project's `jaan-to/templates/` directory (not from the skill directory). The bootstrap hook copies them there on first run, allowing project-level customization.
 
@@ -25,7 +25,7 @@ argument-hint: "{type} {name}"
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/docs-create.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:docs-create.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -179,7 +179,7 @@ Proceed? [y/n/edit]
 
 ## Step 6: Load Template
 
-Read template for doc type from `$JAAN_TEMPLATES_DIR/docs-create.template.md`
+Read template for doc type from `$JAAN_TEMPLATES_DIR/jaan-to:docs-create.template.md`
 
 ## Step 7: Fill Template
 
@@ -242,10 +242,10 @@ Show confirmation:
 **File:** {path}
 **Commit:** {hash}
 
-Run `/docs-update` to check related docs? [y/n]
+Run `/jaan-to:docs-update` to check related docs? [y/n]
 ```
 
-If yes, suggest running `/docs-update --quick` for related docs.
+If yes, suggest running `/jaan-to:docs-update --quick` for related docs.
 
 ---
 

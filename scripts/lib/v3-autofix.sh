@@ -167,7 +167,7 @@ if [ $REMAINING_V2 -eq 0 ]; then
   echo "Next steps:"
   echo "  1. Review changes: git diff ${SKILL_FILE}"
   echo "  2. Test the skill in a new session"
-  echo "  3. Validate: /skill-update ${SKILL_NAME}"
+  echo "  3. Validate: /jaan-to:skill-update ${SKILL_NAME}"
   echo "  4. Commit if working correctly"
 else
   echo -e "  Status: ${YELLOW}⚠ Manual review needed${NC}"

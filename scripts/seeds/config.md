@@ -30,25 +30,25 @@
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| pm-prd-write | `/pm-prd-write` | Generate PRD from initiative |
-| roadmap-add | `/roadmap-add` | [Internal] Add task to roadmap |
-| learn-add | `/learn-add` | Add lesson to skill's LEARN.md |
-| docs-create | `/docs-create` | [Internal] Create documentation |
-| docs-update | `/docs-update` | [Internal] Audit and fix documentation |
-| skill-create | `/skill-create` | [Internal] Create new skill with wizard |
-| skill-update | `/skill-update` | [Internal] Update existing skill |
-| data-gtm-datalayer | `/data-gtm-datalayer` | Generate GTM tracking code |
-| pm-research-about | `/pm-research-about` | Deep research or add file/URL to index |
-| pm-story-write | `/pm-story-write` | Generate user stories with Given/When/Then ACs |
-| roadmap-update | `/roadmap-update` | [Internal] Maintain and sync roadmap |
-| dev-stack-detect | `/dev-stack-detect` | Auto-detect tech stack and populate context |
-| ux-research-synthesize | `/ux-research-synthesize` | Synthesize research findings into themes and recommendations |
-| ux-heatmap-analyze | `/ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
-| ux-microcopy-write | `/ux-microcopy-write` | Generate multi-language microcopy packs |
-| dev-fe-task-breakdown | `/dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
-| dev-be-task-breakdown | `/dev-be-task-breakdown` | Generate BE task breakdown from PRD |
-| dev-fe-design | `/dev-fe-design` | Create distinctive, production-grade frontend components |
-| qa-test-cases | `/qa-test-cases` | Generate test cases from acceptance criteria |
+| pm-prd-write | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
+| roadmap-add | `/jaan-to:roadmap-add` | [Internal] Add task to roadmap |
+| learn-add | `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
+| docs-create | `/jaan-to:docs-create` | [Internal] Create documentation |
+| docs-update | `/jaan-to:docs-update` | [Internal] Audit and fix documentation |
+| skill-create | `/jaan-to:skill-create` | [Internal] Create new skill with wizard |
+| skill-update | `/jaan-to:skill-update` | [Internal] Update existing skill |
+| data-gtm-datalayer | `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
+| pm-research-about | `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
+| pm-story-write | `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs |
+| roadmap-update | `/jaan-to:roadmap-update` | [Internal] Maintain and sync roadmap |
+| dev-stack-detect | `/jaan-to:dev-stack-detect` | Auto-detect tech stack and populate context |
+| ux-research-synthesize | `/jaan-to:ux-research-synthesize` | Synthesize research findings into themes and recommendations |
+| ux-heatmap-analyze | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
+| ux-microcopy-write | `/jaan-to:ux-microcopy-write` | Generate multi-language microcopy packs |
+| dev-fe-task-breakdown | `/jaan-to:dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
+| dev-be-task-breakdown | `/jaan-to:dev-be-task-breakdown` | Generate BE task breakdown from PRD |
+| dev-fe-design | `/jaan-to:dev-fe-design` | Create distinctive, production-grade frontend components |
+| qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 
 ## Trust
 - trust_paths: ["jaan-to/"]

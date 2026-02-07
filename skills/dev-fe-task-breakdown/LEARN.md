@@ -3,7 +3,7 @@
 > Last updated: 2026-02-03
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/dev-fe-task-breakdown.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to:dev-fe-task-breakdown.learn.md`
 
 Seeded from research: jaan-to/outputs/research/51-dev-fe-task-breakdown.md
 

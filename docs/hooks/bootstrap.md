@@ -26,7 +26,7 @@ related: [README.md, ../config/context-system.md]
 1. Creates `jaan-to/outputs/` and `jaan-to/learn/` directories
 2. Adds `jaan-to/` to the project's `.gitignore`
 3. Copies seed LEARN.md files from plugin `skills/*/LEARN.md` to `jaan-to/learn/{name}.learn.md`
-4. Detects old standalone skills (`.claude/skills/jaan-to-*` or `.claude/skills/to-jaan-*`)
+4. Detects old standalone skills (`.claude/skills/jaan-to:*`)
 5. Checks for missing context files in the plugin
 
 ---

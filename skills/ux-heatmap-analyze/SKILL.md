@@ -14,8 +14,8 @@ argument-hint: [csv-path] [screenshot-path] [html-path?] [problem?]
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/ux-heatmap-analyze.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/ux-heatmap-analyze.template.md` - Report template
+- `$JAAN_LEARN_DIR/jaan-to:ux-heatmap-analyze.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:ux-heatmap-analyze.template.md` - Report template
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (helpful for CSS selector resolution)
 
 ## Input
@@ -37,7 +37,7 @@ argument-hint: [csv-path] [screenshot-path] [html-path?] [problem?]
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/ux-heatmap-analyze.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:ux-heatmap-analyze.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -332,7 +332,7 @@ REPORT SECTIONS:
 
 ## Step 9: Generate Report
 
-Use template from: `$JAAN_TEMPLATES_DIR/ux-heatmap-analyze.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-heatmap-analyze.template.md`
 
 Fill all template sections. Report must be **insightful, practical, and actionable** — lead with why it matters and what to do. Minimize descriptive narrative.
 
@@ -452,7 +452,7 @@ add_to_index \
    > [3] Both - Fix now AND save lesson"
 
 - **Option 1 - Fix now**: Revise report, re-preview, re-write
-- **Option 2 - Learn**: Run `/learn-add ux-heatmap-analyze "{feedback}"`
+- **Option 2 - Learn**: Run `/jaan-to:learn-add ux-heatmap-analyze "{feedback}"`
 - **Option 3 - Both**: Do both
 
 ---

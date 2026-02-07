@@ -60,4 +60,4 @@ Format: As a [user type], I want [action] so that [benefit].
 - **Created**: {date}
 - **Status**: Draft
 - **Owner**: {owner}
-- **Skill**: pm:prd-write
+- **Skill**: pm-prd-write

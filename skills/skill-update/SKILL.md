@@ -8,14 +8,14 @@ allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/*
 argument-hint: [skill-name]
 ---
 
-# skill:update
+# skill-update
 
 > Update existing jaan.to skills with specification compliance and documentation sync.
 
 ## Context Files
 
 - `docs/extending/create-skill.md` - Skill specification (REQUIRED)
-- `$JAAN_LEARN_DIR/skill-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to:skill-update.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/config.md` - Current skill catalog
 
 ## Input
@@ -31,7 +31,7 @@ If not provided, list available skills and ask which to update.
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/skill-update.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:skill-update.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions"
@@ -355,7 +355,7 @@ Missing Executive Summary section
    3. Add index management using scripts/lib/index-updater.sh
    4. Add Executive Summary to template
 
-   Reference: skills/pm-prd-write/SKILL.md (compliant example)
+   Reference: skills/jaan-to:pm-prd-write/SKILL.md (compliant example)
 ```
 
 ### v3.0.0 Compliance Summary
@@ -578,7 +578,7 @@ v3.0.0 MIGRATION CHECKLIST
   - Consider {{import:$JAAN_CONTEXT_DIR/tech.md#section}} for tech-aware skills
 
 □ Re-validate with:
-  `/skill-update {name}` → Check v3.0.0 compliance
+  `/jaan-to:skill-update {name}` → Check v3.0.0 compliance
 ```
 
 > "Apply these changes manually, then re-run validation."
@@ -684,7 +684,7 @@ Required changes:
 □ Add Executive Summary to template (if template.md exists)
 □ Update validation checklist
 
-Reference: skills/pm-prd-write/SKILL.md (compliant example)
+Reference: skills/jaan-to:pm-prd-write/SKILL.md (compliant example)
 ```
 
 ### 10.5.2: HARD STOP - Approve Migration
@@ -790,7 +790,7 @@ Confirm: "Skill files updated in `skills/{name}/`"
 
 ## Step 12: Auto-Invoke Documentation Sync
 
-Run `/docs-update {name}` to sync:
+Run `/jaan-to:docs-update {name}` to sync:
 - `docs/skills/{role}/{name}.md`
 
 This ensures documentation stays in sync with skill changes.
@@ -823,7 +823,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 >
 > For example, if updating `docs-create`:
 > ```
-> /docs-create skill "my-new-feature"
+> /jaan-to:docs-create skill "my-new-feature"
 > ```
 >
 > "Did it work correctly? [y/n]"
@@ -877,7 +877,7 @@ If no:
 > "Any feedback on the skill update process? [y/n]"
 
 If yes:
-- Run `/learn-add skill-update "{feedback}"`
+- Run `/jaan-to:learn-add skill-update "{feedback}"`
 
 ### v3.0.0 Migration Feedback (if Option 8 was used)
 
@@ -909,14 +909,14 @@ If skill was migrated to v3.0.0, capture migration-specific learnings:
 
 Example:
 ```
-/learn-add skill-update "Auto-fix missed pattern: \`Read(jaan-to/docs/**)\` in doc-generation skills. Add to v3-autofix.sh transformations."
+/jaan-to:learn-add skill-update "Auto-fix missed pattern: \`Read(jaan-to/docs/**)\` in doc-generation skills. Add to v3-autofix.sh transformations."
 ```
 
 ---
 
 ## Step 17: Auto-Invoke Roadmap Update
 
-Run `/roadmap-update` to sync the skill update with the roadmap.
+Run `/jaan-to:roadmap-update` to sync the skill update with the roadmap.
 
 This ensures the roadmap reflects the latest skill changes.
 
@@ -928,8 +928,8 @@ This ensures the roadmap reflects the latest skill changes.
 - [ ] Specification compliance validated
 - [ ] User-selected updates applied
 - [ ] Passes specification validation after update
-- [ ] Documentation synced via /docs-update
+- [ ] Documentation synced via /jaan-to:docs-update
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
-- [ ] Roadmap synced via /roadmap-update
+- [ ] Roadmap synced via /jaan-to:roadmap-update
 - [ ] User approved final result

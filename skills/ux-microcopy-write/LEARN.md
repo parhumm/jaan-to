@@ -1,7 +1,7 @@
 # Lessons: ux-microcopy-write
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/ux-microcopy-write.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to:ux-microcopy-write.learn.md`
 
 ## Better Questions
 

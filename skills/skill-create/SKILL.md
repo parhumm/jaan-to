@@ -8,15 +8,15 @@ allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/*
 argument-hint: [optional-skill-idea]
 ---
 
-# skill:create
+# skill-create
 
 > Guide users through creating new jaan.to skills with web research and best practices.
 
 ## Context Files
 
 - `docs/extending/create-skill.md` - Skill creation specification (v3.0.0)
-- `$JAAN_LEARN_DIR/skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/skill-create.template.md` - Generation templates
+- `$JAAN_LEARN_DIR/jaan-to:skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:skill-create.template.md` - Generation templates
 - `$JAAN_CONTEXT_DIR/config.md` - Current skill catalog
 
 ## Input
@@ -30,7 +30,7 @@ If provided, use as starting context. Otherwise, begin with identity questions.
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/skill-create.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:skill-create.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 1
@@ -45,7 +45,7 @@ If the file exists, apply its lessons throughout this execution:
 - ✗ Using hardcoded `jaan-to/context/` instead of `$JAAN_CONTEXT_DIR`
 - ✗ Forgetting `#anchor` syntax when importing tech.md sections
 - ✗ Using too-broad permissions like `Write(jaan-to/**)`
-- ✗ Not validating with `/skill-update` before user testing
+- ✗ Not validating with `/jaan-to:skill-update` before user testing
 
 If the file does not exist, continue without it (but still avoid mistakes above).
 
@@ -64,7 +64,7 @@ Before any creation, check for existing skills:
 3. **Decision tree**:
    - **Exact match exists**: "Skill '{name}' already does this. Use: `/{command}` [show example]"
    - **>70% overlap**: "'{name}' is similar ({n}% overlap). Update it instead? [update/new]"
-     - If update: Invoke `/skill-update {name}`
+     - If update: Invoke `/jaan-to:skill-update {name}`
      - If new: Continue with creation
    - **<70% overlap**: Continue with creation
 
@@ -117,8 +117,8 @@ Ask these questions one at a time:
 
 **After answers**, validate and show:
 > "Skill name will be: `{role}-{domain}-{action}`"
-> "Command: `/jaan-to:{role}-{domain}-{action}`"
-> "Directory: `skills/{role}-{domain}-{action}/`"
+> "Command: `/{role}-{domain}-{action}`"
+> "Logical name: `{role}-{domain}-{action}`"
 
 ## Step 1.5: Check Project Configuration (v3.0.0)
 
@@ -243,8 +243,8 @@ Present complete skill structure:
 SKILL SUMMARY
 ─────────────
 Name: {role}-{domain}-{action}
-Command: /jaan-to:{role}-{domain}-{action}
-Directory: skills/{role}-{domain}-{action}/
+Command: /{role}-{domain}-{action}
+Logical: {role}-{domain}-{action}
 Description: {description}
 
 RESEARCH USED
@@ -261,7 +261,7 @@ FILES TO CREATE
 WILL ALSO
 ─────────
 □ Register in scripts/seeds/config.md
-□ Create docs/skills/{role}/{name}.md (via /docs-create)
+□ Create docs/skills/{role}/{name}.md (via /jaan-to:docs-create)
 □ Commit to branch skill/{name}
 ```
 
@@ -285,7 +285,7 @@ Confirm: "Created branch `skill/{name}` from `dev`. All work on this branch."
 
 ## Step 7: Generate SKILL.md
 
-Use template from `$JAAN_TEMPLATES_DIR/skill-create.template.md`:
+Use template from `$JAAN_TEMPLATES_DIR/jaan-to:skill-create.template.md`:
 
 1. Fill YAML frontmatter:
    - name: {name}
@@ -735,12 +735,12 @@ If YES, add to SKILL.md Context Files section:
 Edit `scripts/seeds/config.md` to add skill to Available Skills table:
 
 ```markdown
-| {role}-{domain}-{action} | `/jaan-to:{role}-{domain}-{action}` | {short_description} |
+| {role}-{domain}-{action} | `/{name}` | {short_description} |
 ```
 
 ## Step 15: Auto-Invoke Documentation
 
-Run `/docs-create` to create:
+Run `/jaan-to:docs-create` to create:
 - `docs/skills/{role}/{name}.md`
 
 This ensures documentation is always created with the skill.
@@ -753,7 +753,7 @@ git commit -m "feat(skill): Add {name} skill
 
 - {description}
 - Research-informed: {source_count} sources consulted
-- Auto-generated with /skill-create
+- Auto-generated with /jaan-to:skill-create
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
@@ -769,7 +769,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 Before user testing, validate the created skill:
 
 ```
-/skill-update {skill-name}
+/jaan-to:skill-update {skill-name}
 ```
 
 This checks for:
@@ -798,7 +798,7 @@ This checks for:
 >
 > For example, if the skill is `pm-prd-write`:
 > ```
-> /pm-prd-write "Add user authentication with OAuth support"
+> /jaan-to:pm-prd-write "Add user authentication with OAuth support"
 > ```
 >
 > "Did it work correctly? [y/n]"
@@ -857,13 +857,13 @@ If no:
 > "Any feedback on the skill creation process? [y/n]"
 
 If yes:
-- Run `/learn-add skill-create "{feedback}"`
+- Run `/jaan-to:learn-add skill-create "{feedback}"`
 
 ---
 
 ## Step 21: Auto-Invoke Roadmap Update
 
-Run `/roadmap-update` to sync the new skill with the roadmap.
+Run `/jaan-to:roadmap-update` to sync the new skill with the roadmap.
 
 This ensures the roadmap reflects the latest skill additions.
 
@@ -876,8 +876,8 @@ This ensures the roadmap reflects the latest skill additions.
 - [ ] All skill files created (SKILL.md, LEARN.md, template.md)
 - [ ] Passes specification validation
 - [ ] Registered in context/config.md
-- [ ] Documentation created via /docs-create
+- [ ] Documentation created via /jaan-to:docs-create
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
-- [ ] Roadmap synced via /roadmap-update
+- [ ] Roadmap synced via /jaan-to:roadmap-update
 - [ ] User approved final result

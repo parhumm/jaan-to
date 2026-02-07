@@ -268,7 +268,7 @@ marketplace.json            Plugin marketplace metadata
 The following directories were removed after plugin migration:
 
 - `jaan-to/` - Old standalone structure, replaced by plugin architecture
-- Old skill names without prefixes (e.g., `pm-prd-write`, `data-gtm-datalayer`, `jaan-docs-create`) - Now use `jaan-to-` or `to-jaan-` prefixes
+- Old skill names without prefixes (e.g., `pm-prd-write`, `data-gtm-datalayer`, `jaan-docs-create`) - Now use `{role}-{domain}-{action}` or `{domain}-{action}` naming
 - `skills/{role}/{domain}/` - Old nested structure, now flat `skills/{name}/`
 - `LEARN.md` alongside skills - Now bootstrapped to `jaan-to/learn/{name}.learn.md`
 - `docs/deepresearches/` - Outputs now go to `jaan-to/outputs/research/`

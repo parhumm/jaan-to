@@ -26,8 +26,8 @@ Expected format: `"target" "lesson"`
 - Lesson: the feedback to add
 
 Examples:
-- `/learn-add "pm-prd-write" "Always ask about rollback strategy"`
-- `/learn-add "$JAAN_CONTEXT_DIR/tech" "All new tables need soft delete"`
+- `/jaan-to:learn-add "pm-prd-write" "Always ask about rollback strategy"`
+- `/jaan-to:learn-add "$JAAN_CONTEXT_DIR/tech" "All new tables need soft delete"`
 
 If no input provided, ask for target and lesson.
 

@@ -18,8 +18,8 @@ argument-hint: [initiative-or-feature-description]
 - `$JAAN_CONTEXT_DIR/config.md` - Configuration
 - `$JAAN_CONTEXT_DIR/localization.md` - Language preferences (auto-created if missing)
 - `$JAAN_CONTEXT_DIR/tone-of-voice.md` - Tone guidelines (auto-created if missing)
-- `$JAAN_TEMPLATES_DIR/ux-microcopy-write.template.md` - Output template
-- `$JAAN_LEARN_DIR/ux-microcopy-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:ux-microcopy-write.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -32,7 +32,7 @@ IMPORTANT: The initiative/feature description above is your input. Use it direct
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/ux-microcopy-write.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:ux-microcopy-write.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Phase 1
@@ -565,7 +565,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 Write to: `$OUTPUT_FOLDER/${NEXT_ID}-microcopy-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/ux-microcopy-write.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md`
 
 Fill all sections:
 - Title: Feature name
@@ -791,7 +791,7 @@ Use AskUserQuestion:
 
 **If "Learn" or "Both"**:
 1. Ask: "What lesson should I remember for future microcopy generations?"
-2. Run: `/learn-add ux-microcopy-write "{feedback}"`
+2. Run: `/jaan-to:learn-add ux-microcopy-write "{feedback}"`
 3. Confirm: "Lesson saved to LEARN.md"
 
 **If "No"**:

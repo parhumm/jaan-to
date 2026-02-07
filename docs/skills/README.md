@@ -19,13 +19,13 @@ A skill is a slash command that:
 
 Two naming conventions based on skill type:
 
-- **Role-based**: `/jaan-to-{role}-{domain}-{action}` (e.g., `/pm-prd-write`)
-- **Internal**: `/jaan-to:{domain}-{action}` (e.g., `/docs-create`)
+- **Role-based**: `/{role}-{domain}-{action}` (e.g., `/jaan-to:pm-prd-write`)
+- **Internal**: `/jaan-to:{domain}-{action}` (e.g., `/jaan-to:docs-create`)
 
 **Examples:**
-- `/pm-prd-write`
-- `/skill-create`
-- `/learn-add`
+- `/jaan-to:pm-prd-write`
+- `/jaan-to:skill-create`
+- `/jaan-to:learn-add`
 
 ---
 

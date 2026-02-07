@@ -8,7 +8,7 @@
 
 | Skill | Description |
 |-------|-------------|
-| [/data-gtm-datalayer](gtm-datalayer.md) | Generate GTM tracking code |
+| [/jaan-to:data-gtm-datalayer](gtm-datalayer.md) | Generate GTM tracking code |
 
 ---
 
