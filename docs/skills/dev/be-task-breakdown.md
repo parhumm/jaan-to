@@ -124,7 +124,7 @@ Each task includes:
 
 ## Related
 
-- [/jaan-to:dev-fe-task-breakdown](../dev/jaan-to:dev-fe-task-breakdown.md) - Frontend counterpart
-- [/jaan-to:pm-prd-write](../pm/jaan-to:pm-prd-write.md) - Upstream: PRD generation
-- [/jaan-to:pm-story-write](../pm/jaan-to:pm-story-write.md) - Upstream: User stories
+- [/jaan-to:dev-fe-task-breakdown](../dev/fe-task-breakdown.md) - Frontend counterpart
+- [/jaan-to:pm-prd-write](../pm/prd-write.md) - Upstream: PRD generation
+- [/jaan-to:pm-story-write](../pm/story-write.md) - Upstream: User stories
 - [Tech Stack Context](../../config/context-system.md) - How tech.md works

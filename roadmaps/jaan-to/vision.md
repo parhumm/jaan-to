@@ -453,7 +453,7 @@ Register in `context/config.md` if needed:
 - devops  # Added
 ```
 
-Done. Commands like `/devops-infra-provision` now work.
+Done. Commands like `/jaan-to:devops-infra-provision` now work.
 
 ---
 

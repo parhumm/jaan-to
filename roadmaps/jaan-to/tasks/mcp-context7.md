@@ -68,7 +68,7 @@ cache_ttl: 7 days
 ## Integration Points
 
 - **Standalone:** `/jaan-to:dev-fetch-tech-docs fastapi openai`
-- **Auto-integrated:** Called from `/dev-app` Phase 1.1
+- **Auto-integrated:** Called from `/jaan-to:dev-app` Phase 1.1
 - **Silent mode:** Cache hits don't produce output
 
 ---

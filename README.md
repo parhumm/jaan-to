@@ -2,10 +2,10 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-3.12.0-blue.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-3.16.2-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-18-orange.svg)](docs/skills/README.md)
+[![Skills](https://img.shields.io/badge/skills-19-orange.svg)](docs/skills/README.md)
 [![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
 
 ### Plugin Contents

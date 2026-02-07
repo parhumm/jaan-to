@@ -5,6 +5,24 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.16.2] - 2026-02-07
+
+### Changed
+- **Skill naming standardization** — Removed redundant `jaan-to-` and `to-jaan-` prefixes from all 19 skill directories
+  - Domain skills: `jaan-to-pm-prd-write` → `pm-prd-write` (12 skills)
+  - Internal skills: `to-jaan-docs-create` → `docs-create` (7 skills)
+  - Invocations now: `/jaan-to:pm-prd-write` instead of `/jaan-to:jaan-to-pm-prd-write`
+- **Standardized colon-format names** — Replaced all `role:skill-name` shorthand with `role-skill-name` hyphen format across SKILL.md (Maps to, H1), templates, docs, and roadmaps
+- **Updated all references** — scripts, agents, docs, roadmaps, seeds updated to use clean names with `/jaan-to:` prefix
+
+### Fixed
+- **Renamed doc file** — `docs/skills/dev/jaan-to-dev-be-task-breakdown.md` → `be-task-breakdown.md`
+- **Fixed broken link paths** — Markdown links using `jaan-to:` in file paths corrected
+- **README badge** — Updated stale version badge from 3.12.0 to 3.16.0
+- **mcp-connectors.md** — Added missing `/jaan-to:` prefix to 76+ bare skill references
+
+---
+
 ## [3.15.2] - 2026-02-07
 
 ### Fixed
