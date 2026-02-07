@@ -24,3 +24,5 @@ Thumbs.db
 .claude/
 .claude-plugin-cache/
 dist/
+/website
+/jaan-to/outputs
