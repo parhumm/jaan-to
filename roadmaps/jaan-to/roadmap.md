@@ -8,7 +8,7 @@
 
 | Phase | Focus | Status |
 |-------|-------|--------|
-| 1-3 | Foundation, migration, customization | Done (see CHANGELOG.md) |
+| 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](../../CHANGELOG.md)) |
 | 4 | Development workflow | Planned |
 | 5 | Role skills (137 across 11 roles) | Planned |
 | 6 | MCP connectors | Planned |
@@ -19,9 +19,9 @@
 
 ## Version History
 
-For complete release history including all v1.x, v2.x, and v3.x releases, see [CHANGELOG.md](../../CHANGELOG.md).
+For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
-**Latest:** v3.13.0 — Standards Compliance & Distribution Readiness
+**Latest:** v3.14.1 — Marketplace Schema Fix
 
 ---
 
@@ -108,6 +108,14 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
 | `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then AC |
 | `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code |
+| `/jaan-to-dev-stack-detect` | Detect project tech stack |
+| `/jaan-to-dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
+| `/jaan-to-dev-be-task-breakdown` | Backend task breakdown from PRDs |
+| `/jaan-to-dev-fe-design` | Frontend component design |
+| `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
+| `/jaan-to-ux-microcopy-write` | Multi-language UX microcopy |
+| `/jaan-to-ux-research-synthesize` | Synthesize UX research findings |
+| `/jaan-to-qa-test-cases` | Generate test cases from PRDs |
 | `/to-jaan-skill-create` | Create new skill with wizard |
 | `/to-jaan-skill-update` | Update existing skill |
 | `/to-jaan-docs-create` | Create documentation with templates |
@@ -115,11 +123,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/to-jaan-learn-add` | Add lesson to skill's LEARN.md |
 | `/to-jaan-roadmap-add` | Add task to roadmap |
 | `/to-jaan-roadmap-update` | Maintain and sync roadmap |
-| `/jaan-to-dev-stack-detect` | Detect project tech stack |
-| `/jaan-to-dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
-| `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
-| `/jaan-to-ux-microcopy-write` | Generate multi-language microcopy packs |
-| `/jaan-to-qa-test-cases` | Generate BDD/Gherkin test cases from acceptance criteria |
+| `/jaan-to-learn-report` | View learning system dashboard |
 
 ### Key Paths
 
