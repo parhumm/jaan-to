@@ -67,7 +67,7 @@ related: [README.md, ../config/context-system.md]
 **With old standalone skills**:
 ```json
 {
-  "old_standalone_skills": ["jaan-to-pm-prd-write", "to-jaan-learn-add"],
+  "old_standalone_skills": ["pm-prd-write", "learn-add"],
   "migration_needed": true
 }
 ```

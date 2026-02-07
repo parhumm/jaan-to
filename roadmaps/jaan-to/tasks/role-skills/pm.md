@@ -11,13 +11,13 @@ flowchart TD
     jaan-to-pm-interview-guide["pm-interview-guide<br>Interview Guide<br>Script + hypotheses + bias reminders"] --> jaan-to-pm-insights-synthesis["pm-insights-synthesis<br>Insights Synthesis<br>Pains ranked + quote bank"]
     jaan-to-pm-insights-synthesis["pm-insights-synthesis<br>Insights Synthesis<br>Pains ranked + quote bank"] --> jaan-to-pm-problem-statement["pm-problem-statement<br>Problem Statement<br>1-3 statements + non-goals"]
     jaan-to-pm-problem-statement["pm-problem-statement<br>Problem Statement<br>1-3 statements + non-goals"] --> jaan-to-pm-competitor-matrix["pm-competitor-matrix<br>Competitor Matrix<br>Comparison table + gaps"]
-    jaan-to-pm-problem-statement["pm-problem-statement<br>Problem Statement<br>1-3 statements + non-goals"] -.-> jaan-to-pm-prd-write["pm-prd-write<br>PRD Write ★"]
+    jaan-to-pm-problem-statement["pm-problem-statement<br>Problem Statement<br>1-3 statements + non-goals"] -.-> pm-prd-write["pm-prd-write<br>PRD Write ★"]
     jaan-to-pm-competitor-matrix["pm-competitor-matrix<br>Competitor Matrix<br>Comparison table + gaps"] --> jaan-to-pm-positioning-brief["pm-positioning-brief<br>Positioning Brief<br>Statement + differentiators"]
     jaan-to-pm-positioning-brief["pm-positioning-brief<br>Positioning Brief<br>Statement + differentiators"] --> jaan-to-pm-persona-card["pm-persona-card<br>Persona Card<br>Goals, pains, channels"]
     jaan-to-pm-persona-card["pm-persona-card<br>Persona Card<br>Goals, pains, channels"] --> jaan-to-pm-jtbd-map["pm-jtbd-map<br>JTBD Map<br>Functional/emotional/social jobs"]
     jaan-to-pm-jtbd-map["pm-jtbd-map<br>JTBD Map<br>Functional/emotional/social jobs"] --> jaan-to-pm-success-criteria["pm-success-criteria<br>Success Criteria<br>Measurable done-means + guardrails"]
     jaan-to-pm-success-criteria["pm-success-criteria<br>Success Criteria<br>Measurable done-means + guardrails"] --> jaan-to-pm-north-star["pm-north-star<br>North Star<br>Metric + drivers + cadence"]
-    jaan-to-pm-success-criteria["pm-success-criteria<br>Success Criteria<br>Measurable done-means + guardrails"] -.-> jaan-to-pm-prd-write["pm-prd-write<br>PRD Write ★"]
+    jaan-to-pm-success-criteria["pm-success-criteria<br>Success Criteria<br>Measurable done-means + guardrails"] -.-> pm-prd-write["pm-prd-write<br>PRD Write ★"]
     jaan-to-pm-north-star["pm-north-star<br>North Star<br>Metric + drivers + cadence"] --> jaan-to-pm-kpi-tree["pm-kpi-tree<br>KPI Tree<br>Input metrics + guardrails"]
     jaan-to-pm-kpi-tree["pm-kpi-tree<br>KPI Tree<br>Input metrics + guardrails"] --> jaan-to-pm-measurement-plan["pm-measurement-plan<br>Measurement Plan<br>Events + triggers + validation"]
     jaan-to-pm-measurement-plan["pm-measurement-plan<br>Measurement Plan<br>Events + triggers + validation"] -.-> jaan-to-data-event-spec["data-event-spec<br>DATA: event-spec"]
@@ -26,12 +26,12 @@ flowchart TD
     jaan-to-pm-priority-score["pm-priority-score<br>Priority Score<br>Ranked backlog + rationale"] --> jaan-to-pm-bet-sizing["pm-bet-sizing<br>Bet Sizing<br>Effort bands + risk + sequencing"]
     jaan-to-pm-bet-sizing["pm-bet-sizing<br>Bet Sizing<br>Effort bands + risk + sequencing"] --> jaan-to-pm-scope-slice["pm-scope-slice<br>Scope Slice<br>MVP vs Later + milestones"]
     jaan-to-pm-scope-slice["pm-scope-slice<br>Scope Slice<br>MVP vs Later + milestones"] --> jaan-to-pm-experiment-plan["pm-experiment-plan<br>Experiment Plan<br>Hypothesis + thresholds + rollout"]
-    jaan-to-pm-scope-slice["pm-scope-slice<br>Scope Slice<br>MVP vs Later + milestones"] -.-> jaan-to-pm-prd-write["pm-prd-write<br>PRD Write ★"]
+    jaan-to-pm-scope-slice["pm-scope-slice<br>Scope Slice<br>MVP vs Later + milestones"] -.-> pm-prd-write["pm-prd-write<br>PRD Write ★"]
     jaan-to-pm-experiment-plan["pm-experiment-plan<br>Experiment Plan<br>Hypothesis + thresholds + rollout"] -.-> jaan-to-data-experiment-design["data-experiment-design<br>DATA: experiment-design"]
-    jaan-to-pm-acceptance-criteria["pm-acceptance-criteria<br>Acceptance Criteria<br>Testable AC + edge cases"] --> jaan-to-pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"]
-    jaan-to-pm-acceptance-criteria["pm-acceptance-criteria<br>Acceptance Criteria<br>Testable AC + edge cases"] -.-> jaan-to-qa-test-cases["qa-test-cases<br>QA: test-cases"]
-    jaan-to-pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> jaan-to-dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
-    jaan-to-pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> jaan-to-dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
+    jaan-to-pm-acceptance-criteria["pm-acceptance-criteria<br>Acceptance Criteria<br>Testable AC + edge cases"] --> pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"]
+    jaan-to-pm-acceptance-criteria["pm-acceptance-criteria<br>Acceptance Criteria<br>Testable AC + edge cases"] -.-> qa-test-cases["qa-test-cases<br>QA: test-cases"]
+    pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
+    pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
     jaan-to-pm-release-notes-draft["pm-release-notes-draft<br>Release Notes Draft<br>User-facing changes + support notes"] -.-> jaan-to-support-help-article["support-help-article<br>SUPPORT: help-article"]
     jaan-to-pm-release-notes-draft["pm-release-notes-draft<br>Release Notes Draft<br>User-facing changes + support notes"] -.-> jaan-to-growth-launch-announcement["growth-launch-announcement<br>GROWTH: launch-announcement"]
     jaan-to-pm-now-next-later["pm-now-next-later<br>Now/Next/Later<br>Board + outcomes + confidence"] --> jaan-to-pm-milestones["pm-milestones<br>Milestones<br>Owners + deps + critical path"]
@@ -39,12 +39,12 @@ flowchart TD
     jaan-to-pm-release-review["pm-release-review<br>Release Review<br>KPI deltas + learnings"] --> jaan-to-pm-feedback-synthesize["pm-feedback-synthesize<br>Feedback Synthesize<br>Themes + prioritized pains"]
     jaan-to-pm-release-review["pm-release-review<br>Release Review<br>KPI deltas + learnings"] -.-> jaan-to-release-iterate-top-fixes["release-iterate-top-fixes<br>RELEASE: iterate-top-fixes"]
 
-    style jaan-to-pm-prd-write fill:#e8f5e9,stroke:#4caf50
+    style pm-prd-write fill:#e8f5e9,stroke:#4caf50
     style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
     style jaan-to-data-experiment-design fill:#f0f0f0,stroke:#999
-    style jaan-to-qa-test-cases fill:#f0f0f0,stroke:#999
-    style jaan-to-dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
-    style jaan-to-dev-be-task-breakdown fill:#f0f0f0,stroke:#999
+    style qa-test-cases fill:#f0f0f0,stroke:#999
+    style dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
+    style dev-be-task-breakdown fill:#f0f0f0,stroke:#999
     style jaan-to-support-help-article fill:#f0f0f0,stroke:#999
     style jaan-to-growth-launch-announcement fill:#f0f0f0,stroke:#999
     style jaan-to-delivery-plan-milestones fill:#f0f0f0,stroke:#999
@@ -312,7 +312,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/prd/{slug}/acceptance-criteria.md`
 
-### /jaan-to-pm-story-write
+### /pm-story-write
 
 - **Logical**: `pm:story-write`
 - **Description**: User stories in standard format with Given/When/Then acceptance criteria

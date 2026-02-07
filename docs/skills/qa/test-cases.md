@@ -1,4 +1,4 @@
-# jaan-to-qa-test-cases
+# qa-test-cases
 
 > Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB methodology.
 
@@ -6,7 +6,7 @@
 
 ## Overview
 
-The `/jaan-to-qa-test-cases` skill transforms acceptance criteria into comprehensive BDD/Gherkin test scenarios using systematic test design techniques from ISTQB standards. It generates test cases with concrete data values, proper edge case coverage, and built-in quality validation.
+The `/qa-test-cases` skill transforms acceptance criteria into comprehensive BDD/Gherkin test scenarios using systematic test design techniques from ISTQB standards. It generates test cases with concrete data values, proper edge case coverage, and built-in quality validation.
 
 **Rank**: #1 highest-leverage QA task (AI Score: 5/5)
 
@@ -16,13 +16,13 @@ The `/jaan-to-qa-test-cases` skill transforms acceptance criteria into comprehen
 
 ```bash
 # Basic usage with AC text
-/jaan-to-qa-test-cases "User can login with valid email and password"
+/qa-test-cases "User can login with valid email and password"
 
 # From PRD file
-/jaan-to-qa-test-cases jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md
+/qa-test-cases jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md
 
 # Interactive wizard
-/jaan-to-qa-test-cases
+/qa-test-cases
 ```
 
 ---
@@ -46,7 +46,7 @@ Generates **minimum 10 test cases per acceptance criterion**:
 Paste acceptance criteria directly:
 
 ```bash
-/jaan-to-qa-test-cases "
+/qa-test-cases "
 - User can login with valid email and password
 - Invalid credentials show error message
 - Account locks after 5 failed attempts
@@ -58,7 +58,7 @@ Paste acceptance criteria directly:
 Reference a PRD file to extract acceptance criteria:
 
 ```bash
-/jaan-to-qa-test-cases jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md
+/qa-test-cases jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md
 ```
 
 The skill will:
@@ -70,7 +70,7 @@ The skill will:
 ### 3. Jira Integration (if MCP available)
 
 ```bash
-/jaan-to-qa-test-cases PROJ-123
+/qa-test-cases PROJ-123
 ```
 
 Fetches the story and extracts acceptance criteria automatically.
@@ -78,7 +78,7 @@ Fetches the story and extracts acceptance criteria automatically.
 ### 4. Interactive Wizard
 
 ```bash
-/jaan-to-qa-test-cases
+/qa-test-cases
 ```
 
 Prompts you to choose your preferred input method.
@@ -316,7 +316,7 @@ Research document: `jaan-to/outputs/research/50-qa-test-cases.md`
 1. **Start with clear AC** - The better the input, the better the output
 2. **Review first 3 scenarios** - Validate approach before approving all
 3. **Use quality checklist** - Peer review with 10-point checklist
-4. **Iterate with feedback** - Use "/to-jaan-learn-add" to improve over time
+4. **Iterate with feedback** - Use "/learn-add" to improve over time
 5. **Export to tools** - Use ISTQB conversion notes for Xray/TestRail
 
 ### Common Questions Answered
@@ -340,16 +340,16 @@ A: See the "ISTQB Conversion Notes" section in generated output for CSV format a
 
 ## Related Skills
 
-- [/jaan-to-pm-prd-write](../pm/prd-write.md) - Generate PRDs with acceptance criteria
-- [/jaan-to-pm-story-write](../pm/story-write.md) - Generate user stories with AC
-- `/jaan-to-qa-test-data` (planned) - Generate test data specifications
+- [/pm-prd-write](../pm/prd-write.md) - Generate PRDs with acceptance criteria
+- [/pm-story-write](../pm/story-write.md) - Generate user stories with AC
+- `/jaan-to:qa-test-data` (planned) - Generate test data specifications
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: qa:test-cases
-- **Command**: `/jaan-to-qa-test-cases`
+- **Command**: `/qa-test-cases`
 - **Allowed Tools**: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/cases/{id}-{slug}/`
 - **ID Generation**: Sequential per subdomain (01, 02, 03...)

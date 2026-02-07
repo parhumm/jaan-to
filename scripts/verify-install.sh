@@ -54,14 +54,14 @@ done
 # 3. Templates
 echo ""
 echo "3. Templates:"
-for skill in jaan-to-pm-prd-write jaan-to-data-gtm-datalayer to-jaan-docs-create to-jaan-skill-create jaan-to-pm-research-about to-jaan-roadmap-add; do
+for skill in pm-prd-write data-gtm-datalayer docs-create skill-create pm-research-about roadmap-add; do
   check "$([ -f "$PROJECT_DIR/jaan-to/templates/${skill}.template.md" ] && echo true || echo false)" "templates/${skill}.template.md"
 done
 
 # 4. Learning seeds
 echo ""
 echo "4. Learning seeds:"
-for skill in jaan-to-pm-prd-write jaan-to-data-gtm-datalayer to-jaan-docs-create to-jaan-docs-update to-jaan-skill-create to-jaan-skill-update jaan-to-pm-research-about to-jaan-learn-add to-jaan-roadmap-add; do
+for skill in pm-prd-write data-gtm-datalayer docs-create docs-update skill-create skill-update pm-research-about learn-add roadmap-add; do
   check "$([ -f "$PROJECT_DIR/jaan-to/learn/${skill}.learn.md" ] && echo true || echo false)" "learn/${skill}.learn.md"
 done
 
@@ -194,9 +194,9 @@ if [ "$CHECKS_FAILED" -eq 0 ]; then
   echo "✅ All checks passed! Plugin is installed correctly."
   echo ""
   echo "Next steps:"
-  echo "  1. Try a skill: /jaan-to-pm-prd-write 'user authentication'"
+  echo "  1. Try a skill: /pm-prd-write 'user authentication'"
   echo "  2. Customize context: vim jaan-to/context/tech.md"
-  echo "  3. Run stack detection: /jaan-to-dev-stack-detect"
+  echo "  3. Run stack detection: /dev-stack-detect"
 else
   echo "❌ Some checks failed. See details above."
   echo ""

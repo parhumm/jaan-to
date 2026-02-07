@@ -8,8 +8,8 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-qa-test-matrix["qa-test-matrix<br>Test Matrix<br>P0/P1 flows × states × devices"] --> jaan-to-qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"]
-    jaan-to-qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"] --> jaan-to-qa-test-data["qa-test-data<br>Test Data<br>Accounts + permissions + seed data"]
+    jaan-to-qa-test-matrix["qa-test-matrix<br>Test Matrix<br>P0/P1 flows × states × devices"] --> qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"]
+    qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"] --> jaan-to-qa-test-data["qa-test-data<br>Test Data<br>Accounts + permissions + seed data"]
     jaan-to-qa-test-data["qa-test-data<br>Test Data<br>Accounts + permissions + seed data"] --> jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"]
     jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"] --> jaan-to-qa-bug-report["qa-bug-report<br>Bug Report<br>Severity + repro steps + expected"]
     jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"] --> jaan-to-qa-automation-plan["qa-automation-plan<br>Automation Plan<br>What to automate + flakiness risk"]
@@ -17,7 +17,7 @@ flowchart TD
     jaan-to-qa-bug-triage["qa-bug-triage<br>Bug Triage<br>Dedupe + severity + root cause"] -.-> jaan-to-dev-pr-review["dev-pr-review<br>DEV: pr-review"]
     jaan-to-qa-bug-triage["qa-bug-triage<br>Bug Triage<br>Dedupe + severity + root cause"] -.-> jaan-to-release-triage-decision["release-triage-decision<br>RELEASE: triage-decision"]
     jaan-to-qa-perf-plan["qa-perf-plan<br>Perf Plan<br>Load scenarios + thresholds"] --> jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"]
-    jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"] -.-> jaan-to-dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
+    jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"] -.-> dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
     jaan-to-qa-automation-plan["qa-automation-plan<br>Automation Plan<br>What to automate + flakiness risk"] --> jaan-to-qa-smoke-suite["qa-smoke-suite<br>Smoke Suite<br>Critical path tests + pass/fail"]
     jaan-to-qa-smoke-suite["qa-smoke-suite<br>Smoke Suite<br>Critical path tests + pass/fail"] --> jaan-to-qa-regression-runbook["qa-regression-runbook<br>Regression Runbook<br>Smoke → critical → deep checks"]
     jaan-to-qa-regression-runbook["qa-regression-runbook<br>Regression Runbook<br>Smoke → critical → deep checks"] --> jaan-to-qa-release-signoff["qa-release-signoff<br>Release Signoff<br>Go/No-Go + evidence + risks"]
@@ -25,7 +25,7 @@ flowchart TD
 
     style jaan-to-dev-pr-review fill:#f0f0f0,stroke:#999
     style jaan-to-release-triage-decision fill:#f0f0f0,stroke:#999
-    style jaan-to-dev-be-task-breakdown fill:#f0f0f0,stroke:#999
+    style dev-be-task-breakdown fill:#f0f0f0,stroke:#999
     style jaan-to-delivery-release-readiness fill:#f0f0f0,stroke:#999
 ```
 
@@ -45,7 +45,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/matrix/{slug}/test-matrix.md`
 
-### /jaan-to-qa-test-cases
+### /qa-test-cases
 
 - **Logical**: `qa:test-cases`
 - **Description**: Test cases from acceptance criteria with edge cases, preconditions, expected results

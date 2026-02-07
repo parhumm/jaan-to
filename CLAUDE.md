@@ -45,7 +45,7 @@ This is a Claude Code Plugin. All paths below are **relative to the plugin root*
 **No duplication or overlap allowed:**
 - One command per action (use existing skills, don't duplicate)
 - One location per data type (roadmap tasks → roadmap.md)
-- One skill per capability (learning → `/to-jaan-learn-add`)
+- One skill per capability (learning → `/jaan-to:learn-add`)
 - Reference, don't copy (link to sources, don't inline)
 
 When adding functionality, first check if a skill/command exists.
@@ -83,12 +83,12 @@ When adding functionality, first check if a skill/command exists.
 ## Naming Conventions
 
 ### Skills
-- Role-based: `jaan-to-{role}-{domain}-{action}` → `/jaan-to-{role}-{domain}-{action}`
+- Role-based: `{role}-{domain}-{action}` → `/jaan-to:{role}-{domain}-{action}`
   Roles: pm, data, ux, qa, dev, devops
-  Example: `jaan-to-pm-prd-write` → `/jaan-to-pm-prd-write`
-- Internal: `to-jaan-{domain}-{action}` → `/to-jaan-{domain}-{action}`
+  Example: `pm-prd-write` → `/jaan-to:pm-prd-write`
+- Internal: `{domain}-{action}` → `/jaan-to:{domain}-{action}`
   For plugin development and maintenance
-  Example: `to-jaan-docs-create` → `/to-jaan-docs-create`
+  Example: `docs-create` → `/jaan-to:docs-create`
 - Directory: `skills/{skill-name}/`
 
 ### Output Structure
@@ -149,7 +149,7 @@ See [jaan-to/outputs/README.md](jaan-to/outputs/README.md) for complete document
 ### Before Every Commit
 1. Update [roadmap.md](roadmaps/jaan-to/roadmap.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`
-3. For new tasks, use `/to-jaan-roadmap-add`
+3. For new tasks, use `/jaan-to:roadmap-add`
 
 ### Releasing a Version
 Every version bump MUST be a single atomic operation:
@@ -167,16 +167,16 @@ Every version bump MUST be a single atomic operation:
 
 | Command | Description |
 |---------|-------------|
-| `/jaan-to-pm-prd-write` | Generate PRD from initiative |
-| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code |
-| `/to-jaan-roadmap-add` | Add task to roadmap |
-| `/to-jaan-learn-add` | Add lesson to LEARN.md |
-| `/to-jaan-skill-create` | Create new skill |
-| `/to-jaan-skill-update` | Update existing skill |
-| `/to-jaan-docs-create` | Create documentation |
-| `/to-jaan-docs-update` | Audit documentation |
-| `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
-| `/to-jaan-roadmap-update` | Maintain and sync roadmap |
+| `/jaan-to:pm-prd-write` | Generate PRD from initiative |
+| `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
+| `/jaan-to:roadmap-add` | Add task to roadmap |
+| `/jaan-to:learn-add` | Add lesson to LEARN.md |
+| `/jaan-to:skill-create` | Create new skill |
+| `/jaan-to:skill-update` | Update existing skill |
+| `/jaan-to:docs-create` | Create documentation |
+| `/jaan-to:docs-update` | Audit documentation |
+| `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
+| `/jaan-to:roadmap-update` | Maintain and sync roadmap |
 
 ---
 
@@ -189,7 +189,7 @@ All customization happens in the project's `jaan-to/config/settings.yaml`:
 paths_outputs: "artifacts/generated"
 
 # Customize templates
-templates_jaan_to_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
+templates_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
 
 # Merge learning from plugin + project
 learning_strategy: "merge"
@@ -201,7 +201,7 @@ Edit `jaan-to/context/tech.md` to define:
 - Technical constraints
 - Architecture patterns
 
-Skills like `/jaan-to-pm-prd-write` will automatically reference your stack in generated PRDs.
+Skills like `/jaan-to:pm-prd-write` will automatically reference your stack in generated PRDs.
 
 ### Environment Variables
 Override paths via `.claude/settings.json`:

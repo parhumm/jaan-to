@@ -1,4 +1,4 @@
-# /jaan-to-ux-research-synthesize
+# /ux-research-synthesize
 
 > Synthesize UX research findings into themed insights, executive summaries, and prioritized recommendations.
 
@@ -15,14 +15,14 @@ Implements Braun & Clarke's 6-phase thematic analysis, Atomic Research framework
 ## Usage
 
 ```
-/jaan-to-ux-research-synthesize "{study-name}" {data-sources}
+/ux-research-synthesize "{study-name}" {data-sources}
 ```
 
 **Examples**:
 ```
-/jaan-to-ux-research-synthesize "Mobile Checkout Study" transcripts/
-/jaan-to-ux-research-synthesize "User Onboarding" interview1.txt interview2.txt interview3.txt
-/jaan-to-ux-research-synthesize "Q1 Research Review"
+/ux-research-synthesize "Mobile Checkout Study" transcripts/
+/ux-research-synthesize "User Onboarding" interview1.txt interview2.txt interview3.txt
+/ux-research-synthesize "Q1 Research Review"
 ```
 
 ---
@@ -106,7 +106,7 @@ Before writing, validates:
 
 **Input**:
 ```
-/jaan-to-ux-research-synthesize "Mobile Checkout Study" interviews/
+/ux-research-synthesize "Mobile Checkout Study" interviews/
 ```
 
 **Process**:

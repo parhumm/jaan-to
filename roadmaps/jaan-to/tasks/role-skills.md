@@ -17,9 +17,9 @@ Skills within each role are **sorted by workflow dependency order** (topological
 **All 137 skills MUST use v3.0.0 patterns when implemented:**
 
 ### Creation
-- Use `/to-jaan-skill-create {skill-name}` (generates v3.0.0-compliant skills)
+- Use `/skill-create {skill-name}` (generates v3.0.0-compliant skills)
 - Follow [docs/extending/create-skill.md](../../docs/extending/create-skill.md)
-- Validate with `/to-jaan-skill-update {skill-name}` before committing
+- Validate with `/skill-update {skill-name}` before committing
 
 ### Paths (Environment Variables)
 - **Outputs**: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
@@ -46,7 +46,7 @@ Use v3.0.0 syntax in all template.md files:
 ### Validation Checklist
 - [ ] Uses `$JAAN_*` variables (not `jaan-to/` paths)
 - [ ] Has SKILL.md + template.md + LEARN.md seed
-- [ ] Passes `/to-jaan-skill-update` v3.0.0 validation
+- [ ] Passes `/skill-update` v3.0.0 validation
 - [ ] Documented in `docs/skills/{role}/{skill-name}.md`
 - [ ] Tested with sample inputs
 
@@ -90,7 +90,7 @@ Key dependency flows across roles:
 - [ ] Each skill follows `docs/extending/create-skill.md` v3.0.0 specification
 - [ ] **All skills use `$JAAN_*` environment variables (zero hardcoded paths)**
 - [ ] **Tech-aware skills integrate with `$JAAN_CONTEXT_DIR/tech.md`**
-- [ ] **All skills pass `/to-jaan-skill-update` v3.0.0 validation (7 checks)**
+- [ ] **All skills pass `/skill-update` v3.0.0 validation (7 checks)**
 - [ ] Documentation in docs/skills/{role}/
 - [ ] Registered in jaan-to/context/config.md
 - [ ] Tested with sample inputs in v3.0.0 environment
@@ -109,10 +109,10 @@ Key dependency flows across roles:
 
 ## Priority Order (by research rank)
 
-1. `/jaan-to-qa-test-cases` - Rank #1
+1. `/qa-test-cases` - Rank #1
 2. `/jaan-to-data-sql-query` - Rank #2
-3. `/jaan-to-pm-story-write` - Rank #6
-4. `/jaan-to-ux-research-synthesize` - Rank #8
+3. `/pm-story-write` - Rank #6
+4. `/ux-research-synthesize` - Rank #8
 5. `/jaan-to-qa-bug-report` - Rank #10
 6. `/jaan-to-growth-meta-write` - Rank #12
 7. `/jaan-to-dev-docs-generate` - Rank #14

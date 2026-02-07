@@ -47,7 +47,7 @@ For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
 137 skills cataloged across 11 roles. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
 
-All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/to-jaan-skill-update` validation.
+All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/skill-update` validation.
 
 | Role | Total | Quick Wins | Advanced | File |
 |------|-------|------------|----------|------|
@@ -104,25 +104,25 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 
 | Command | Description |
 |---------|-------------|
-| `/jaan-to-pm-prd-write` | Generate PRD from initiative |
-| `/jaan-to-pm-research-about` | Deep research or add file/URL to index |
-| `/jaan-to-pm-story-write` | Generate user stories with Given/When/Then AC |
-| `/jaan-to-data-gtm-datalayer` | Generate GTM tracking code |
-| `/jaan-to-dev-stack-detect` | Detect project tech stack |
-| `/jaan-to-dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
-| `/jaan-to-dev-be-task-breakdown` | Backend task breakdown from PRDs |
-| `/jaan-to-dev-fe-design` | Frontend component design |
-| `/jaan-to-ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
-| `/jaan-to-ux-microcopy-write` | Multi-language UX microcopy |
-| `/jaan-to-ux-research-synthesize` | Synthesize UX research findings |
-| `/jaan-to-qa-test-cases` | Generate test cases from PRDs |
-| `/to-jaan-skill-create` | Create new skill with wizard |
-| `/to-jaan-skill-update` | Update existing skill |
-| `/to-jaan-docs-create` | Create documentation with templates |
-| `/to-jaan-docs-update` | Audit and update stale documentation |
-| `/to-jaan-learn-add` | Add lesson to skill's LEARN.md |
-| `/to-jaan-roadmap-add` | Add task to roadmap |
-| `/to-jaan-roadmap-update` | Maintain and sync roadmap |
+| `/pm-prd-write` | Generate PRD from initiative |
+| `/pm-research-about` | Deep research or add file/URL to index |
+| `/pm-story-write` | Generate user stories with Given/When/Then AC |
+| `/data-gtm-datalayer` | Generate GTM tracking code |
+| `/dev-stack-detect` | Detect project tech stack |
+| `/dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
+| `/dev-be-task-breakdown` | Backend task breakdown from PRDs |
+| `/dev-fe-design` | Frontend component design |
+| `/ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
+| `/ux-microcopy-write` | Multi-language UX microcopy |
+| `/ux-research-synthesize` | Synthesize UX research findings |
+| `/qa-test-cases` | Generate test cases from PRDs |
+| `/skill-create` | Create new skill with wizard |
+| `/skill-update` | Update existing skill |
+| `/docs-create` | Create documentation with templates |
+| `/docs-update` | Audit and update stale documentation |
+| `/learn-add` | Add lesson to skill's LEARN.md |
+| `/roadmap-add` | Add task to roadmap |
+| `/roadmap-update` | Maintain and sync roadmap |
 | `/jaan-to-learn-report` | View learning system dashboard |
 
 ### Key Paths
@@ -142,6 +142,6 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 
 | Pattern | Example |
 |---------|---------|
-| Role-based: `jaan-to-{role}-{domain}-{action}` | `/jaan-to-pm-prd-write` |
-| Internal: `to-jaan-{domain}-{action}` | `/to-jaan-skill-create` |
-| Directory: `skills/{skill-name}/` | `skills/jaan-to-pm-prd-write/` |
+| Role-based: `jaan-to-{role}-{domain}-{action}` | `/pm-prd-write` |
+| Internal: `to-jaan-{domain}-{action}` | `/skill-create` |
+| Directory: `skills/{skill-name}/` | `skills/pm-prd-write/` |
