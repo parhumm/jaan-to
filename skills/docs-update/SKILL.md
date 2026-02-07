@@ -1,9 +1,6 @@
 ---
 name: docs-update
-description: |
-  Audit and maintain documentation quality.
-  Default: Smart staleness check using git history.
-  Maps to: docs-update
+description: Audit and maintain documentation quality using smart staleness checks.
 allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 ---

@@ -1,10 +1,6 @@
 ---
 name: dev-fe-task-breakdown
-description: |
-  Generate frontend task breakdowns from UX handoffs.
-  Produces component inventory, state matrices, estimate bands, dependencies, and risks.
-  Auto-triggers on: frontend tasks, fe breakdown, component breakdown, ux handoff tasks
-  Maps to: dev-fe-task-breakdown
+description: Generate frontend task breakdowns from UX handoffs with component inventory, state matrices, and estimates.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion
 argument-hint: [ux-handoff-description-or-figma-link]
 ---

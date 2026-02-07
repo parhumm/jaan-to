@@ -1,9 +1,6 @@
 ---
 name: data-gtm-datalayer
-description: |
-  Generate production-ready GTM tracking code (dataLayer pushes and HTML attributes).
-  Auto-triggers on: gtm tracking, datalayer push, tracking code, impression tracking, click tracking gtm, al_tracker.
-  Maps to: data-gtm-datalayer
+description: Generate production-ready GTM tracking code (dataLayer pushes and HTML attributes).
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**)
 argument-hint: [prd-path | tracking-description | (interactive)]
 ---

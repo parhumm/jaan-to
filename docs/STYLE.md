@@ -261,6 +261,20 @@ Example output.
 
 ---
 
+## Skill Description Rules
+
+| Rule | Limit |
+|------|-------|
+| Description length | Max 120 chars |
+| Format | 1-2 sentences, no metadata lines |
+| Forbidden | `Auto-triggers on:`, `Maps to:` in description |
+| Budget | All skills combined must fit 15,000 char system prompt budget |
+| Validation | Run `scripts/validate-skills.sh` before release |
+
+Claude Code allocates a fixed character budget for all skill descriptions. Each skill costs ~109 chars overhead + description length. If total exceeds budget, skills get silently dropped from the system prompt.
+
+---
+
 ## Links
 
 ### Internal

@@ -1,9 +1,6 @@
 ---
 name: ux-heatmap-analyze
-description: |
-  Analyze heatmap data from CSV exports and screenshots to generate prioritized UX research reports.
-  Auto-triggers on: heatmap analysis, click analysis, ux heatmap, clarity export, interaction patterns, click patterns, scroll analysis, tap analysis.
-  Maps to: ux-heatmap-analyze
+description: Analyze heatmap data from CSV exports and screenshots to generate prioritized UX research reports.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**)
 argument-hint: [csv-path] [screenshot-path] [html-path?] [problem?]
 ---

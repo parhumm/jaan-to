@@ -1,9 +1,6 @@
 ---
 name: skill-create
-description: |
-  Guide users through creating new jaan.to skills step-by-step.
-  Auto-triggers on: create skill, new skill, skill wizard, add skill.
-  Maps to: skill-create
+description: Guide users through creating new jaan.to skills step-by-step.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 ---

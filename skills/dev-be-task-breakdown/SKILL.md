@@ -1,10 +1,6 @@
 ---
 name: dev-be-task-breakdown
-description: |
-  Convert a PRD into structured backend development tasks with data model notes,
-  idempotency patterns, reliability considerations, and error taxonomy.
-  Auto-triggers on: backend tasks, task breakdown, be tasks, dev task list, break down PRD
-  Maps to: dev-be-task-breakdown
+description: Convert a PRD into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task
 argument-hint: [prd-path] OR [feature-description]
 ---

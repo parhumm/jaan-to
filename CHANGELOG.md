@@ -5,6 +5,23 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.0] - 2026-02-07
+
+### Fixed
+- **All 19 skills now discoverable** — Trimmed skill descriptions to fit Claude Code's 15,000 char system prompt budget; removed `Auto-triggers on:` and `Maps to:` lines from all SKILL.md description fields
+
+### Added
+- **CI: Skill budget validation** — New `scripts/validate-skills.sh` checks total description chars; added to `.github/workflows/release-check.yml` to block over-budget PRs
+- **Spec: Description budget rules** — Updated `docs/extending/create-skill.md` with 120-char limit and budget documentation
+- **Style: Skill description rules** — Added description length limits to `docs/STYLE.md`
+- **skill-update: V3.9 compliance check** — Detects bloated descriptions during skill updates
+- **skill-create: Lean descriptions** — Template no longer generates `Auto-triggers on:` / `Maps to:` lines
+
+### Changed
+- **Description format** — Descriptions are now 1-2 sentences (single-line YAML) instead of multi-line with metadata
+
+---
+
 ## [3.16.3] - 2026-02-07
 
 ### Fixed
