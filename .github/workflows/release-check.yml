@@ -52,6 +52,21 @@ jobs:
           fi
           echo "✓ CHANGELOG entry found for v$VERSION"
 
+      - name: Check plugin.json has required component paths
+        run: |
+          echo "Checking plugin.json component paths..."
+          for field in skills agents hooks; do
+            VALUE=$(jq -r ".$field // empty" .claude-plugin/plugin.json)
+            if [ -z "$VALUE" ]; then
+              echo "::error::plugin.json missing required field: $field"
+              echo "Skills won't load without component paths!"
+              exit 1
+            fi
+            echo "  ✓ $field: $VALUE"
+          done
+          echo ""
+          echo "✓ All required component paths present"
+
       - name: Summary
         run: |
           VERSION=$(jq -r '.version' .claude-plugin/plugin.json)

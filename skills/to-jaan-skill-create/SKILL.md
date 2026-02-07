@@ -276,10 +276,12 @@ WILL ALSO
 ## Step 6: Create Git Branch
 
 ```bash
+git checkout dev
+git pull origin dev
 git checkout -b skill/jaan-to-{role}-{domain}-{action}
 ```
 
-Confirm: "Created branch `skill/{name}`. All work on this branch."
+Confirm: "Created branch `skill/{name}` from `dev`. All work on this branch."
 
 ## Step 7: Generate SKILL.md
 
@@ -810,12 +812,12 @@ If issues:
 ## Step 19: Create Pull Request
 
 When user confirms working:
-> "Create pull request to merge to main? [y/n]"
+> "Create pull request to merge to dev? [y/n]"
 
 If yes:
 ```bash
 git push -u origin skill/{name}
-gh pr create --title "feat(skill): Add {name} skill" --body "$(cat <<'EOF'
+gh pr create --base dev --title "feat(skill): Add {name} skill" --body "$(cat <<'EOF'
 ## Summary
 
 - **Skill**: `{name}`

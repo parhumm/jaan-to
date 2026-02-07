@@ -48,10 +48,12 @@ If the file does not exist, continue without it.
 Create feature branch for updates:
 
 ```bash
+git checkout dev
+git pull origin dev
 git checkout -b update/{skill-name}
 ```
 
-Confirm: "Created branch `update/{name}`. All updates on this branch."
+Confirm: "Created branch `update/{name}` from `dev`. All updates on this branch."
 
 ---
 
@@ -835,12 +837,12 @@ If issues:
 ## Step 15: Create Pull Request
 
 When user confirms working:
-> "Create pull request to merge to main? [y/n]"
+> "Create pull request to merge to dev? [y/n]"
 
 If yes:
 ```bash
 git push -u origin update/{name}
-gh pr create --title "fix(skill): Update {name} skill" --body "$(cat <<'EOF'
+gh pr create --base dev --title "fix(skill): Update {name} skill" --body "$(cat <<'EOF'
 ## Summary
 
 Updated `{name}` skill with:
