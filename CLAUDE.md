@@ -189,7 +189,7 @@ All customization happens in the project's `jaan-to/config/settings.yaml`:
 paths_outputs: "artifacts/generated"
 
 # Customize templates
-templates_jaan_to_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
+templates_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
 
 # Merge learning from plugin + project
 learning_strategy: "merge"

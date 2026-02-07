@@ -143,6 +143,15 @@ OLD_PATTERNS=(
   "jaan-learn-add" "jaan-research-about" "jaan-research-add"
   "research-about" "research-add"
   "jaan-roadmap-add" "jaan-skill-create" "jaan-skill-update"
+  # v3.15.2 → v3.16.0 rename: old prefixed names
+  "jaan-to-pm-prd-write" "jaan-to-pm-story-write" "jaan-to-pm-research-about"
+  "jaan-to-dev-fe-design" "jaan-to-dev-fe-task-breakdown" "jaan-to-dev-be-task-breakdown"
+  "jaan-to-dev-stack-detect" "jaan-to-qa-test-cases"
+  "jaan-to-ux-research-synthesize" "jaan-to-ux-microcopy-write" "jaan-to-ux-heatmap-analyze"
+  "jaan-to-data-gtm-datalayer"
+  "to-jaan-docs-create" "to-jaan-docs-update" "to-jaan-learn-add"
+  "to-jaan-roadmap-add" "to-jaan-roadmap-update"
+  "to-jaan-skill-create" "to-jaan-skill-update"
 )
 for pattern in "${OLD_PATTERNS[@]}"; do
   if [ -d "$PROJECT_DIR/.claude/skills/$pattern" ]; then
