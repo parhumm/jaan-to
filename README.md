@@ -544,6 +544,34 @@ jaan.to is open source. To extend:
 
 ---
 
+## Troubleshooting
+
+### Skills not loading after installation?
+
+If skills don't appear after installing or updating the plugin:
+
+```
+/plugin uninstall jaan-to
+/plugin install jaan-to@jaan-to
+```
+
+This reinstalls the plugin and refreshes the registry.
+
+### Commands not recognized?
+
+Ensure the plugin is properly installed:
+```
+/plugin list
+```
+
+You should see `jaan-to` with version `3.x.x`. If not, reinstall:
+```
+/plugin marketplace add parhumm/jaan-to
+/plugin install jaan-to
+```
+
+---
+
 ## License
 
 MIT License. See [LICENSE](LICENSE) for details.

@@ -5,6 +5,19 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.1] - 2026-02-07
+
+### Added
+- **Troubleshooting Section** in README.md for plugin loading issues
+- **Release Verification Step** (step 7) in CONTRIBUTING.md release checklist
+
+### Fixed
+- **Documented Workaround** for Claude Code v1/v2 registry sync bug affecting marketplace plugins
+  - Users experiencing skills not loading can run: `/plugin uninstall jaan-to` then `/plugin install jaan-to@jaan-to`
+  - This is a Claude Code bug, not a jaan-to issue — workaround documented for all users
+
+---
+
 ## [3.15.0] - 2026-02-07
 
 ### Added
