@@ -2,7 +2,8 @@
 name: to-jaan-roadmap-update
 description: |
   [Internal] Maintain and sync the jaan.to development roadmap.
-  Syncs git history, marks tasks done, creates version sections, validates links.
+  Syncs git history, marks tasks done, updates Latest indicator, validates links.
+  Version history lives in CHANGELOG.md; roadmap focuses on future work.
   Auto-triggers on: update roadmap, sync roadmap, release version, roadmap maintenance.
   Maps to: to-jaan-roadmap-update
 allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(roadmaps/**)
@@ -15,7 +16,7 @@ argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sy
 
 ## Context Files
 
-- `roadmaps/jaan-to/roadmap.md` - Current roadmap
+- `roadmaps/jaan-to/roadmap.md` - Current roadmap (future work only; version history in CHANGELOG)
 - `CHANGELOG.md` - Release history
 - `.claude-plugin/plugin.json` - Plugin version
 - `.claude-plugin/marketplace.json` - Marketplace version
@@ -31,9 +32,9 @@ argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sy
 |---------|------|-------------|
 | (no args) | `smart-default` | Scan git log since last tag, compare with roadmap, report gaps |
 | `mark "<task>" done <hash>` | `mark` | Mark a specific task as complete with commit hash |
-| `release vX.Y.Z "<summary>"` | `release` | Create version section + CHANGELOG entry + full atomic release |
+| `release vX.Y.Z "<summary>"` | `release` | Update Latest indicator + CHANGELOG entry + full atomic release |
 | `sync` | `sync` | Full cross-reference: git history vs roadmap |
-| `validate` | `validate` | Check all links, task file refs, version section completeness |
+| `validate` | `validate` | Check all links, task file refs, Latest indicator, CHANGELOG entries |
 
 If no input provided, default to `smart-default` mode.
 If input doesn't match any pattern, ask: "Which mode? [smart-default / mark / release / sync / validate]"
@@ -69,9 +70,11 @@ Read all context files:
 Extract:
 - Overview table (phase → status mapping)
 - All tasks with checked/unchecked status and any commit hashes
-- All version section headings with their commit hashes
+- "Latest" indicator line in Version History section
 - All CHANGELOG entries with dates
 - Current plugin version
+
+**Note:** Overview table has consolidated Phase 1-3 into single row referencing CHANGELOG.md. Do NOT modify this row. Only update Phase 4-8 status as tasks complete.
 
 ## Step 2: Read Git State
 
@@ -157,13 +160,13 @@ Present report:
    - Incorporate matching items from CHANGELOG `[Unreleased]` section
    - Incorporate categorized commits not already covered by Unreleased items
    - Draft cleared `[Unreleased]` section (keep `## [Unreleased]` header + `### Planned` sub-section, remove released items)
-9. Draft roadmap version section:
-   - Incorporate items from roadmap `## Unreleased` into the new `### {version}` subsection
-   - Draft cleared `## Unreleased` section (keep header, remove released items)
-10. Check if overview table needs status update
+9. Draft "Latest" indicator update for roadmap:
+   - Current: `**Latest:** v{old} — {old_summary}`
+   - New: `**Latest:** {version} — {summary}`
+10. Draft cleared `## Unreleased` section (if has content, replace with `(none)`)
 11. Prepare full atomic operation list:
     - CHANGELOG.md — new version entry + cleared Unreleased section
-    - roadmaps/jaan-to/roadmap.md — version section + cleared Unreleased + overview table
+    - roadmaps/jaan-to/roadmap.md — Latest indicator update + cleared Unreleased
     - .claude-plugin/plugin.json — version bump
     - .claude-plugin/marketplace.json — version bump
     - Git commit: `release: {version} — {summary}`
@@ -181,7 +184,8 @@ Present report:
    - Tasks marked done without any commit hash
    - Commits not referenced in any task
    - Phase status mismatches in overview table
-   - Missing version sections (tags without corresponding roadmap sections)
+   - Missing CHANGELOG entries (tags without corresponding CHANGELOG sections)
+   - Stale "Latest" indicator (doesn't match most recent tag)
 
 ### Mode: validate
 
@@ -191,7 +195,8 @@ Present report:
    - `[text](../../docs/path.md)` — check relative paths resolve
 2. Check CHANGELOG version reference links
 3. Check overview table consistency (phase status vs actual task completion)
-4. Check version section completeness (commit hash, bullet points, chronological order)
+4. Check "Latest" indicator matches most recent git tag
+5. Check CHANGELOG version entries match git tags
 5. Check for orphan task files (in `tasks/` but not referenced from roadmap)
 
 Present validation report:
@@ -207,9 +212,13 @@ Present validation report:
 | Phase | Table Status | Actual Status | Match |
 |-------|-------------|---------------|-------|
 
-## Version Sections
-| Version | Has Hash | Has Content | In CHANGELOG |
-|---------|----------|-------------|--------------|
+## Latest Indicator
+| Current | Expected (latest tag) | Match |
+|---------|----------------------|-------|
+
+## CHANGELOG Entries
+| Version | Has Date | Has Content | Has Tag |
+|---------|----------|-------------|---------|
 
 ## Task File Cross-References
 | File | Referenced in Roadmap | Exists |
@@ -258,18 +267,16 @@ CHANGELOG Entry (draft):
 Unreleased Section After Release (CHANGELOG):
 {cleared_unreleased_changelog}
 
-Roadmap Version Section (draft):
-{roadmap_section_draft}
+Latest Indicator Update (roadmap):
+- Current: **Latest:** v{old} — {old_summary}
+- New: **Latest:** {version} — {summary}
 
 Unreleased Section After Release (Roadmap):
-{cleared_unreleased_roadmap}
-
-Overview Table Changes:
-{table_changes}
+(none)
 
 Full Atomic Operation:
 1. Write CHANGELOG entry + clear released items from [Unreleased]
-2. Write roadmap version section + clear released items from Unreleased + overview table
+2. Update roadmap Latest indicator + clear Unreleased section
 3. Update .claude-plugin/plugin.json version
 4. Update .claude-plugin/marketplace.json version
 5. Commit: release: {version} — {summary}
@@ -328,9 +335,9 @@ For each approved change:
 1. Find overview table
 2. Update phase status cells as needed
 
-**Add missing version sections:**
-1. Find correct insertion point (chronological within phase)
-2. Insert using template
+**Update stale Latest indicator:**
+1. Find the Version History section
+2. Update the Latest line to match most recent tag
 
 ### For mark:
 
@@ -351,14 +358,13 @@ Execute atomic operation in order:
   - Keep `### Planned` sub-section (forward-looking items)
   - Remove `### Added`, `### Changed`, `### Fixed` etc. sub-sections whose items are now in the new version entry
 
-**4.2: Write roadmap version section**
-- Insert H3 version subsection in correct phase section
-- Add bullet points for changes
-- Clear released items from `## Unreleased` section:
-  - Keep `## Unreleased` header and `---` separator
-  - Remove bullet items that were incorporated into the new version section
-  - If all items were released, leave the section with just the header
-- Update overview table if needed
+**4.2: Update roadmap Latest indicator**
+1. Find the Version History section
+2. Update the Latest line:
+   - Find: `**Latest:** v{old} — {old_summary}`
+   - Replace: `**Latest:** {version} — {summary}`
+3. Clear Unreleased section (if has content):
+   - Replace content with `(none)`
 
 **4.3: Update plugin.json**
 - Update `"version"` field
