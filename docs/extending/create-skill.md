@@ -31,7 +31,6 @@ A skill is a reusable command that AI executes to produce outputs. This specific
 | Name | `{name}` |
 | Command | `/{name}` |
 | Directory | `skills/{name}/` (plugin) |
-| Logical Name | `{role}:{domain-action}` |
 | Output | `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/` (project) |
 | Templates | `$JAAN_TEMPLATES_DIR/{name}.template.md` (project) |
 | Learning | `$JAAN_LEARN_DIR/{name}.learn.md` (project) |
@@ -61,12 +60,12 @@ Internal skills (for plugin maintenance):
 
 ### Examples
 
-| Skill Name | Command | Logical Name |
-|------------|---------|--------------|
-| `pm-prd-write` | `/jaan-to:pm-prd-write` | `pm-prd-write` |
-| `qa-plan-test-matrix` | `/jaan-to:qa-plan-test-matrix` | `qa:plan-test-matrix` |
-| `docs-create` | `/jaan-to:docs-create` | `docs:create` |
-| `dev-api-contract` | `/jaan-to:dev-api-contract` | `dev:api-contract` |
+| Skill Name | Command |
+|------------|---------|
+| `pm-prd-write` | `/jaan-to:pm-prd-write` |
+| `qa-plan-test-matrix` | `/jaan-to:qa-plan-test-matrix` |
+| `docs-create` | `/jaan-to:docs-create` |
+| `dev-api-contract` | `/jaan-to:dev-api-contract` |
 
 ---
 
@@ -79,7 +78,7 @@ Every skill needs these files in `skills/{name}/`:
 | `SKILL.md` | Yes | Execution instructions |
 | `template.md` | No | Output format template |
 
-Learning lessons are stored in `jaan-to/learn/{name}.learn.md` (managed by the system).
+Learning lessons are stored in `$JAAN_LEARN_DIR/{name}.learn.md` (managed by the system).
 
 ---
 
@@ -282,7 +281,7 @@ name: {skill-name}
 description: |
   {1-2 sentence purpose}
   Auto-triggers on: {context clues}
-  Maps to: {logical-name}
+  Maps to: {name}
 allowed-tools: {tool-list}
 argument-hint: {expected-format}
 ---
@@ -329,7 +328,7 @@ argument-hint: {expected-format}
 After frontmatter, SKILL.md follows this structure:
 
 ```markdown
-# {role}:{domain-action}
+# {name}
 
 > {One-line purpose}
 
@@ -434,7 +433,7 @@ If yes:
 
 | Section | Level | Purpose |
 |---------|-------|---------|
-| `# {role}:{domain-action}` | H1 | Title with logical name |
+| `# {name}` | H1 | Title matching skill name |
 | `> {tagline}` | blockquote | One-line description |
 | `## Context Files` | H2 | Files to read before execution |
 | `## Input` | H2 | How to interpret $ARGUMENTS |
@@ -1100,7 +1099,7 @@ Accumulated lessons from past executions.
 
 ### Body Checklist
 
-- [ ] Has H1 title with logical name (`role:domain-action`)
+- [ ] Has H1 title matching skill name (`{name}`)
 - [ ] Has tagline blockquote
 - [ ] Has `## Context Files` section
 - [ ] Has `## Input` section
@@ -1169,7 +1168,7 @@ Register new skills in `jaan-to/context/config.md`:
 | Skill | Command | Description |
 |-------|---------|-------------|
 | `pm-prd-write` | `/jaan-to:pm-prd-write` | Generate PRD |
-| `your:new-skill` | `/your-new-skill` | Your description |
+| `your-new-skill` | `/jaan-to:your-new-skill` | Your description |
 ```
 
 ---
@@ -1188,12 +1187,12 @@ name: example-minimal-demo
 description: |
   Demonstrate minimal skill structure.
   Auto-triggers on: demo, example, test skill.
-  Maps to: example:minimal-demo
+  Maps to: example-minimal-demo
 allowed-tools: Read, Write($JAAN_OUTPUTS_DIR/example/**)
 argument-hint: [topic]
 ---
 
-# example:minimal-demo
+# example-minimal-demo
 
 > Demonstrate minimal skill structure.
 
@@ -1288,7 +1287,7 @@ If yes:
 
 Complete skill with all v3.0.0 patterns:
 
-**`skills/jaan-to:qa-test-matrix/SKILL.md`**:
+**`skills/qa-test-matrix/SKILL.md`**:
 
 ```markdown
 ---
