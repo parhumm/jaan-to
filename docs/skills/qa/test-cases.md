@@ -348,7 +348,7 @@ A: See the "ISTQB Conversion Notes" section in generated output for CSV format a
 
 ## Technical Details
 
-- **Logical Name**: qa:test-cases
+- **Logical Name**: qa-test-cases
 - **Command**: `/qa-test-cases`
 - **Allowed Tools**: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/cases/{id}-{slug}/`
@@ -358,5 +358,5 @@ A: See the "ISTQB Conversion Notes" section in generated output for CSV format a
 ---
 
 **Generated**: 2026-02-03
-**Skill**: qa:test-cases
+**Skill**: qa-test-cases
 **Version**: 1.0.0

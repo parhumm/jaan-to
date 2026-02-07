@@ -27,7 +27,7 @@ flowchart TD
 
 ### /jaan-to-release-beta-rollout-plan
 
-- **Logical**: `release:beta-rollout-plan`
+- **Logical**: `release-beta-rollout-plan`
 - **Description**: Phased rollout plan, exit criteria per phase, targeting + monitoring notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -41,7 +41,7 @@ flowchart TD
 
 ### /jaan-to-release-beta-issue-log
 
-- **Logical**: `release:beta-issue-log`
+- **Logical**: `release-beta-issue-log`
 - **Description**: Categorized issues + owners, trend summary, "stop the line" triggers
 - **Quick Win**: Yes
 - **Key Points**:
@@ -55,7 +55,7 @@ flowchart TD
 
 ### /jaan-to-release-prod-runbook
 
-- **Logical**: `release:prod-runbook`
+- **Logical**: `release-prod-runbook`
 - **Description**: Launch steps + rollback triggers, verification checklist, dependencies + comms notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -69,7 +69,7 @@ flowchart TD
 
 ### /jaan-to-release-prod-war-room-pack
 
-- **Logical**: `release:prod-war-room-pack`
+- **Logical**: `release-prod-war-room-pack`
 - **Description**: Dashboard links + roles + schedule, incident comms templates, decision log structure
 - **Quick Win**: Yes
 - **Key Points**:
@@ -83,7 +83,7 @@ flowchart TD
 
 ### /jaan-to-release-triage-decision
 
-- **Logical**: `release:triage-decision`
+- **Logical**: `release-triage-decision`
 - **Description**: Fix/defer decision + rationale, risk notes, suggested comms
 - **Quick Win**: Yes
 - **Key Points**:
@@ -97,7 +97,7 @@ flowchart TD
 
 ### /jaan-to-release-triage-hotfix-scope
 
-- **Logical**: `release:triage-hotfix-scope`
+- **Logical**: `release-triage-hotfix-scope`
 - **Description**: Minimal hotfix scope, test focus areas, rollback considerations
 - **Quick Win**: Yes
 - **Key Points**:
@@ -111,7 +111,7 @@ flowchart TD
 
 ### /jaan-to-release-iterate-top-fixes
 
-- **Logical**: `release:iterate-top-fixes`
+- **Logical**: `release-iterate-top-fixes`
 - **Description**: Next sprint improvements list, prioritization rationale, owners suggestions
 - **Quick Win**: Yes
 - **Key Points**:
@@ -125,7 +125,7 @@ flowchart TD
 
 ### /jaan-to-release-iterate-changelog
 
-- **Logical**: `release:iterate-changelog`
+- **Logical**: `release-iterate-changelog`
 - **Description**: Changelog + user impact notes, internal notes (optional), support guidance
 - **Quick Win**: Yes
 - **Key Points**:

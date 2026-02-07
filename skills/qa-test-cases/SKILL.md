@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch
 argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)]
 ---
 
-# qa:test-cases
+# qa-test-cases
 
 > Generate production-ready BDD/Gherkin test cases from acceptance criteria.
 

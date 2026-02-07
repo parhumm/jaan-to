@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Bash(git remote:*), Bash(ls:*), Write($JAAN_CON
 argument-hint: [optional-focus-area]
 ---
 
-# dev:stack-detect
+# dev-stack-detect
 
 > Auto-detect project tech stack and populate jaan.to context files.
 

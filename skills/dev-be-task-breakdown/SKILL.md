@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task
 argument-hint: [prd-path] OR [feature-description]
 ---
 
-# dev:be-task-breakdown
+# dev-be-task-breakdown
 
 > Convert PRDs into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
 

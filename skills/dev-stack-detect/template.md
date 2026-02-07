@@ -74,6 +74,6 @@ These sections cannot be auto-detected and need manual input:
 
 ---
 
-**Skill**: dev:stack-detect
+**Skill**: dev-stack-detect
 **Merge Mode**: {{merge_mode}}
 **Files Updated**: {{files_updated}}

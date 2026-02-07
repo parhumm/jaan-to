@@ -17,7 +17,7 @@ flowchart TD
 
 ### /jaan-to-sec-threat-model-lite
 
-- **Logical**: `sec:threat-model-lite`
+- **Logical**: `sec-threat-model-lite`
 - **Description**: Threats + mitigations checklist, high-risk areas callout, verification steps
 - **Quick Win**: Yes
 - **Key Points**:
@@ -31,7 +31,7 @@ flowchart TD
 
 ### /jaan-to-sec-pii-map
 
-- **Logical**: `sec:pii-map`
+- **Logical**: `sec-pii-map`
 - **Description**: PII inventory + where it flows, retention + deletion rules, access controls checklist
 - **Quick Win**: Yes
 - **Key Points**:
@@ -45,7 +45,7 @@ flowchart TD
 
 ### /jaan-to-sec-compliance-requirements
 
-- **Logical**: `sec:compliance-requirements`
+- **Logical**: `sec-compliance-requirements`
 - **Description**: Compliance checklist, data handling requirements, gaps + next steps
 - **Quick Win**: Yes
 - **Key Points**:
@@ -59,7 +59,7 @@ flowchart TD
 
 ### /jaan-to-sec-compliance-evidence-pack
 
-- **Logical**: `sec:compliance-evidence-pack`
+- **Logical**: `sec-compliance-evidence-pack`
 - **Description**: What to document + where stored, evidence examples, ownership and review cadence
 - **Quick Win**: Yes
 - **Key Points**:

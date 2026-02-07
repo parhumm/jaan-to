@@ -33,7 +33,7 @@ flowchart TD
 
 ### /jaan-to-qa-test-matrix
 
-- **Logical**: `qa:test-matrix`
+- **Logical**: `qa-test-matrix`
 - **Description**: Risk-based matrix: P0/P1 flows × states × devices × env (staging/prod-like)
 - **Quick Win**: Yes - structured output
 - **Key Points**:
@@ -47,7 +47,7 @@ flowchart TD
 
 ### /qa-test-cases
 
-- **Logical**: `qa:test-cases`
+- **Logical**: `qa-test-cases`
 - **Description**: Test cases from acceptance criteria with edge cases, preconditions, expected results
 - **Reference**: [Production-Ready QA Test Case Generation: A Comprehensive Standards and Methodology Guide/jaan-to/outputs/research/50-qa-test-cases.md)
 - **Quick Win**: Yes - highly structured, template-based
@@ -65,7 +65,7 @@ flowchart TD
 
 ### /jaan-to-qa-test-data
 
-- **Logical**: `qa:test-data`
+- **Logical**: `qa-test-data`
 - **Description**: Test accounts + permissions, seed data requirements, edge-case data set list
 - **Quick Win**: Yes
 - **Key Points**:
@@ -79,7 +79,7 @@ flowchart TD
 
 ### /jaan-to-qa-e2e-checklist
 
-- **Logical**: `qa:e2e-checklist`
+- **Logical**: `qa-e2e-checklist`
 - **Description**: E2E checklist + expected results, preconditions + postconditions, state coverage
 - **Quick Win**: Yes
 - **Key Points**:
@@ -93,7 +93,7 @@ flowchart TD
 
 ### /jaan-to-qa-bug-report
 
-- **Logical**: `qa:bug-report`
+- **Logical**: `qa-bug-report`
 - **Description**: Structured bug reports with severity, priority, steps to reproduce, expected vs actual
 - **Quick Win**: Yes - structured output
 - **AI Score**: 5 | **Rank**: #10
@@ -110,7 +110,7 @@ flowchart TD
 
 ### /jaan-to-qa-bug-triage
 
-- **Logical**: `qa:bug-triage`
+- **Logical**: `qa-bug-triage`
 - **Description**: Dedupe + severity + repro hints + next action per issue, cluster by root cause
 - **Quick Win**: Yes - simple triage logic
 - **Key Points**:
@@ -124,7 +124,7 @@ flowchart TD
 
 ### /jaan-to-qa-perf-plan
 
-- **Logical**: `qa:perf-plan`
+- **Logical**: `qa-perf-plan`
 - **Description**: Load scenarios + thresholds, tooling checklist, monitoring requirements
 - **Quick Win**: Yes
 - **Key Points**:
@@ -138,7 +138,7 @@ flowchart TD
 
 ### /jaan-to-qa-perf-bottleneck
 
-- **Logical**: `qa:perf-bottleneck`
+- **Logical**: `qa-perf-bottleneck`
 - **Description**: Suspected bottlenecks + checks, next diagnostic steps, quick remediation ideas
 - **Quick Win**: Yes
 - **Key Points**:
@@ -152,7 +152,7 @@ flowchart TD
 
 ### /jaan-to-qa-automation-plan
 
-- **Logical**: `qa:automation-plan`
+- **Logical**: `qa-automation-plan`
 - **Description**: Automation plan: what to automate now vs later, flakiness risk, testability changes needed
 - **Quick Win**: No - planning artifact
 - **Key Points**:
@@ -166,7 +166,7 @@ flowchart TD
 
 ### /jaan-to-qa-smoke-suite
 
-- **Logical**: `qa:smoke-suite`
+- **Logical**: `qa-smoke-suite`
 - **Description**: Smoke tests list (critical paths), environment prerequisites, pass/fail criteria
 - **Quick Win**: Yes
 - **Key Points**:
@@ -180,7 +180,7 @@ flowchart TD
 
 ### /jaan-to-qa-regression-runbook
 
-- **Logical**: `qa:regression-runbook`
+- **Logical**: `qa-regression-runbook`
 - **Description**: Step-by-step regression runbook: smoke → critical → deep checks with timing/owners
 - **Quick Win**: No - reusable checklist
 - **Key Points**:
@@ -194,7 +194,7 @@ flowchart TD
 
 ### /jaan-to-qa-release-signoff
 
-- **Logical**: `qa:release-signoff`
+- **Logical**: `qa-release-signoff`
 - **Description**: Go/No-Go summary with evidence, open risks, mitigations, rollback readiness
 - **Quick Win**: No - needs multiple MCPs
 - **Key Points**:

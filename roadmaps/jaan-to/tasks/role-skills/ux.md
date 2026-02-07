@@ -42,7 +42,7 @@ flowchart TD
 
 ### /jaan-to-ux-research-plan
 
-- **Logical**: `ux:research-plan`
+- **Logical**: `ux-research-plan`
 - **Description**: Research plan: questions, method, participants, script outline, timeline, deliverables
 - **Quick Win**: No - planning artifact
 - **Key Points**:
@@ -56,7 +56,7 @@ flowchart TD
 
 ### ✅ /ux-research-synthesize
 
-- **Logical**: `ux:research-synthesize`
+- **Logical**: `ux-research-synthesize`
 - **Description**: Synthesize research findings into themes, executive summary, and recommendations
 - **Reference**: [Building a Production-Ready UX Research Synthesis Skill: Comprehensive Research Foundation/jaan-to/outputs/research/47-ux-research-synthesize.md)
 - **Quick Win**: Yes - pattern recognition, summarization
@@ -74,7 +74,7 @@ flowchart TD
 
 ### /jaan-to-ux-persona-create
 
-- **Logical**: `ux:persona-create`
+- **Logical**: `ux-persona-create`
 - **Description**: User personas with goals, pain points, behaviors, and Jobs-to-be-Done
 - **Quick Win**: Yes - synthesize data, identify patterns
 - **AI Score**: 5 | **Rank**: #16
@@ -91,7 +91,7 @@ flowchart TD
 
 ### /jaan-to-ux-competitive-review
 
-- **Logical**: `ux:competitive-review`
+- **Logical**: `ux-competitive-review`
 - **Description**: Competitive teardown: step-by-step flows, patterns, strengths/weaknesses, opportunities
 - **Quick Win**: No - needs Figma MCP
 - **Key Points**:
@@ -105,7 +105,7 @@ flowchart TD
 
 ### /jaan-to-ux-journey-map
 
-- **Logical**: `ux:journey-map`
+- **Logical**: `ux-journey-map`
 - **Description**: Step-by-step journey map, pain points + opportunities, metrics to watch per step
 - **Quick Win**: Yes
 - **Key Points**:
@@ -119,7 +119,7 @@ flowchart TD
 
 ### /jaan-to-ux-journey-edge-cases
 
-- **Logical**: `ux:journey-edge-cases`
+- **Logical**: `ux-journey-edge-cases`
 - **Description**: Edge-case list, recovery paths + UI requirements, "must not happen" failures
 - **Quick Win**: Yes
 - **Key Points**:
@@ -133,7 +133,7 @@ flowchart TD
 
 ### /jaan-to-ux-sitemap
 
-- **Logical**: `ux:sitemap`
+- **Logical**: `ux-sitemap`
 - **Description**: Sitemap + page responsibilities, entry points + cross-links, IA risks (deep nesting, duplicates)
 - **Quick Win**: Yes
 - **Key Points**:
@@ -147,7 +147,7 @@ flowchart TD
 
 ### /jaan-to-ux-taxonomy
 
-- **Logical**: `ux:taxonomy`
+- **Logical**: `ux-taxonomy`
 - **Description**: Naming + grouping rules, attribute set (what metadata matters), examples + anti-examples
 - **Quick Win**: Yes
 - **Key Points**:
@@ -161,7 +161,7 @@ flowchart TD
 
 ### /jaan-to-ux-wireframe-screens
 
-- **Logical**: `ux:wireframe-screens`
+- **Logical**: `ux-wireframe-screens`
 - **Description**: Screen list by step, required states per screen, interaction notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -175,7 +175,7 @@ flowchart TD
 
 ### /jaan-to-ux-wireframe-review
 
-- **Logical**: `ux:wireframe-review`
+- **Logical**: `ux-wireframe-review`
 - **Description**: Usability checklist, heuristic issues to look for, missing-state detector
 - **Quick Win**: Yes
 - **Key Points**:
@@ -189,7 +189,7 @@ flowchart TD
 
 ### /jaan-to-ux-flow-spec
 
-- **Logical**: `ux:flow-spec`
+- **Logical**: `ux-flow-spec`
 - **Description**: Flow spec: happy path + empty/loading/error states + edge cases + implementation notes
 - **Quick Win**: Yes - flow documentation
 - **Key Points**:
@@ -203,7 +203,7 @@ flowchart TD
 
 ### /jaan-to-ux-heuristic-review
 
-- **Logical**: `ux:heuristic-review`
+- **Logical**: `ux-heuristic-review`
 - **Description**: Heuristic review: issues, severity, recommended fixes, quick wins, usability principles
 - **Quick Win**: No - structured review
 - **Key Points**:
@@ -217,7 +217,7 @@ flowchart TD
 
 ### /jaan-to-ux-ui-spec-states
 
-- **Logical**: `ux:ui-spec-states`
+- **Logical**: `ux-ui-spec-states`
 - **Description**: State list + triggers, copy requirements per state, visual priority guidance
 - **Quick Win**: No - needs Figma
 - **Key Points**:
@@ -231,7 +231,7 @@ flowchart TD
 
 ### /jaan-to-ux-ui-handoff-notes
 
-- **Logical**: `ux:ui-handoff-notes`
+- **Logical**: `ux-ui-handoff-notes`
 - **Description**: Dev handoff notes, components + tokens used, interaction + animation guidance
 - **Quick Win**: No - needs Figma
 - **Key Points**:
@@ -245,7 +245,7 @@ flowchart TD
 
 ### ✅ /ux-microcopy-write
 
-- **Logical**: `ux:microcopy-write`
+- **Logical**: `ux-microcopy-write`
 - **Description**: Microcopy pack: labels, helper text, errors, toasts, confirmations, empty states, tone rules
 - **Reference**: [UX Microcopy Writing Skill: Comprehensive Research Document](../../../../jaan-to/outputs/research/56-ux-microcopy-write.md)
 - **Quick Win**: Yes - simple content
@@ -260,7 +260,7 @@ flowchart TD
 
 ### /jaan-to-ux-error-messages
 
-- **Logical**: `ux:error-messages`
+- **Logical**: `ux-error-messages`
 - **Description**: User-friendly errors, next steps + recovery actions, logging hints (error codes mapping)
 - **Quick Win**: Yes
 - **Key Points**:
@@ -274,7 +274,7 @@ flowchart TD
 
 ### /jaan-to-ux-a11y-audit
 
-- **Logical**: `ux:a11y-audit`
+- **Logical**: `ux-a11y-audit`
 - **Description**: Issues + severity, fix checklist, quick wins vs structural changes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -288,7 +288,7 @@ flowchart TD
 
 ### /jaan-to-ux-a11y-aria-notes
 
-- **Logical**: `ux:a11y-aria-notes`
+- **Logical**: `ux-a11y-aria-notes`
 - **Description**: ARIA roles/labels guidance, focus management notes, accessible patterns reminders
 - **Quick Win**: Yes
 - **Key Points**:
@@ -302,7 +302,7 @@ flowchart TD
 
 ### /jaan-to-ux-onboarding-steps
 
-- **Logical**: `ux:onboarding-steps`
+- **Logical**: `ux-onboarding-steps`
 - **Description**: Onboarding steps + activation event, drop-off risks, measurement plan pointers
 - **Quick Win**: Yes
 - **Key Points**:
@@ -316,7 +316,7 @@ flowchart TD
 
 ### /jaan-to-ux-onboarding-tooltips
 
-- **Logical**: `ux:onboarding-tooltips`
+- **Logical**: `ux-onboarding-tooltips`
 - **Description**: Tooltip copy set, tone rules + character limits, "skip/done" patterns
 - **Quick Win**: Yes
 - **Key Points**:

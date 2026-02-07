@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearc
 argument-hint: [ux-handoff-description-or-figma-link]
 ---
 
-# dev:fe-task-breakdown
+# dev-fe-task-breakdown
 
 > Transform UX design handoffs into production-ready frontend task breakdowns.
 

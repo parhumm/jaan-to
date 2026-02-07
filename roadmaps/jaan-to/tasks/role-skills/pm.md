@@ -55,7 +55,7 @@ flowchart TD
 
 ### /jaan-to-pm-interview-guide
 
-- **Logical**: `pm:interview-guide`
+- **Logical**: `pm-interview-guide`
 - **Description**: 30-min interview script with hypotheses, key probes, and bias-avoidance reminders
 - **Quick Win**: Yes
 - **Key Points**:
@@ -70,7 +70,7 @@ flowchart TD
 
 ### /jaan-to-pm-insights-synthesis
 
-- **Logical**: `pm:insights-synthesis`
+- **Logical**: `pm-insights-synthesis`
 - **Description**: Top pains ranked by frequency/impact, quote bank by theme, frequency table + unknowns
 - **Quick Win**: Yes
 - **Reference**: [Product Manager User Research Synthesis: Implementation Guide/jaan-to/outputs/research/45-pm-insights-synthesis.md)
@@ -85,7 +85,7 @@ flowchart TD
 
 ### /jaan-to-pm-problem-statement
 
-- **Logical**: `pm:problem-statement`
+- **Logical**: `pm-problem-statement`
 - **Description**: 1–3 crisp problem statements (who/what/why) with explicit non-goals and assumptions to validate
 - **Quick Win**: Yes
 - **Key Points**:
@@ -99,7 +99,7 @@ flowchart TD
 
 ### /jaan-to-pm-competitor-matrix
 
-- **Logical**: `pm:competitor-matrix`
+- **Logical**: `pm-competitor-matrix`
 - **Description**: Comparison table (criteria × competitors) with gaps/opportunities and "so what?" takeaways
 - **Quick Win**: Yes
 - **Key Points**:
@@ -114,7 +114,7 @@ flowchart TD
 
 ### /jaan-to-pm-positioning-brief
 
-- **Logical**: `pm:positioning-brief`
+- **Logical**: `pm-positioning-brief`
 - **Description**: Positioning statement + core promise, differentiators + proof points, risks and open questions
 - **Quick Win**: Yes
 - **Key Points**:
@@ -128,7 +128,7 @@ flowchart TD
 
 ### /jaan-to-pm-persona-card
 
-- **Logical**: `pm:persona-card`
+- **Logical**: `pm-persona-card`
 - **Description**: Persona card (goals, pains, constraints, channels) with top jobs/gains and recognition signals
 - **Quick Win**: Yes
 - **Key Points**:
@@ -142,7 +142,7 @@ flowchart TD
 
 ### /jaan-to-pm-jtbd-map
 
-- **Logical**: `pm:jtbd-map`
+- **Logical**: `pm-jtbd-map`
 - **Description**: JTBD map (functional/emotional/social) with triggers, current workarounds, desired outcomes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -156,7 +156,7 @@ flowchart TD
 
 ### /jaan-to-pm-success-criteria
 
-- **Logical**: `pm:success-criteria`
+- **Logical**: `pm-success-criteria`
 - **Description**: Measurable "done means" criteria with key guardrails and edge cases to include/exclude
 - **Quick Win**: Yes
 - **Key Points**:
@@ -170,7 +170,7 @@ flowchart TD
 
 ### /jaan-to-pm-north-star
 
-- **Logical**: `pm:north-star`
+- **Logical**: `pm-north-star`
 - **Description**: North star metric + drivers + boundaries + cadence (weekly/monthly)
 - **Quick Win**: No - needs baseline data
 - **Key Points**:
@@ -184,7 +184,7 @@ flowchart TD
 
 ### /jaan-to-pm-kpi-tree
 
-- **Logical**: `pm:kpi-tree`
+- **Logical**: `pm-kpi-tree`
 - **Description**: KPI tree: input metrics + leading indicators + guardrails (quality, latency, churn, cost)
 - **Quick Win**: Yes
 - **Key Points**:
@@ -198,7 +198,7 @@ flowchart TD
 
 ### /jaan-to-pm-measurement-plan
 
-- **Logical**: `pm:measurement-plan`
+- **Logical**: `pm-measurement-plan`
 - **Description**: Events/properties to track + triggers, source of truth per event, validation checklist (QA for analytics)
 - **Quick Win**: Yes
 - **Key Points**:
@@ -212,7 +212,7 @@ flowchart TD
 
 ### /jaan-to-pm-feedback-synthesize
 
-- **Logical**: `pm:feedback-synthesize`
+- **Logical**: `pm-feedback-synthesize`
 - **Description**: Synthesize customer feedback into categorized themes with prioritized pain points
 - **Quick Win**: Yes - pattern recognition, summarization
 - **AI Score**: 5 | **Rank**: #15
@@ -229,7 +229,7 @@ flowchart TD
 
 ### /jaan-to-pm-decision-brief
 
-- **Logical**: `pm:decision-brief`
+- **Logical**: `pm-decision-brief`
 - **Description**: 1-page decision record with options, recommendation, risks, open questions
 - **Quick Win**: Yes - simple artifact, minimal MCP
 - **Key Points**:
@@ -243,7 +243,7 @@ flowchart TD
 
 ### /jaan-to-pm-priority-score
 
-- **Logical**: `pm:priority-score`
+- **Logical**: `pm-priority-score`
 - **Description**: Ranked backlog with scoring, rationale per item (drivers + uncertainty), sensitivity notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -257,7 +257,7 @@ flowchart TD
 
 ### /jaan-to-pm-bet-sizing
 
-- **Logical**: `pm:bet-sizing`
+- **Logical**: `pm-bet-sizing`
 - **Description**: Effort bands (S/M/L or weeks), risk notes + unknowns, suggested sequencing
 - **Quick Win**: Yes
 - **Key Points**:
@@ -271,7 +271,7 @@ flowchart TD
 
 ### /jaan-to-pm-scope-slice
 
-- **Logical**: `pm:scope-slice`
+- **Logical**: `pm-scope-slice`
 - **Description**: MVP vs Later slicing with milestones and dependency list
 - **Quick Win**: No - pairs with PRD
 - **Key Points**:
@@ -285,7 +285,7 @@ flowchart TD
 
 ### /jaan-to-pm-experiment-plan
 
-- **Logical**: `pm:experiment-plan`
+- **Logical**: `pm-experiment-plan`
 - **Description**: What to learn + hypothesis, success thresholds + guardrails, timeline + segments + rollout plan
 - **Quick Win**: Yes
 - **Key Points**:
@@ -299,7 +299,7 @@ flowchart TD
 
 ### /jaan-to-pm-acceptance-criteria
 
-- **Logical**: `pm:acceptance-criteria`
+- **Logical**: `pm-acceptance-criteria`
 - **Description**: Testable acceptance criteria with edge cases + failure handling and analytics requirements
 - **Reference**: [Acceptance Criteria Best Practices: A Production-Ready Research Guide/jaan-to/outputs/research/49-pm-acceptance-criteria.md)
 - **Quick Win**: Yes
@@ -314,7 +314,7 @@ flowchart TD
 
 ### /pm-story-write
 
-- **Logical**: `pm:story-write`
+- **Logical**: `pm-story-write`
 - **Description**: User stories in standard format with Given/When/Then acceptance criteria
 - **Reference**: [Production-Ready PM Story-Write Skill: A Comprehensive Framework/jaan-to/outputs/research/45-pm-insights-synthesis.md)
 - **Quick Win**: Yes - highly structured, template-based
@@ -332,7 +332,7 @@ flowchart TD
 
 ### /jaan-to-pm-release-notes-draft
 
-- **Logical**: `pm:release-notes-draft`
+- **Logical**: `pm-release-notes-draft`
 - **Description**: User-facing release notes, what changed + who benefits, support notes / known limitations
 - **Quick Win**: Yes
 - **Key Points**:
@@ -346,7 +346,7 @@ flowchart TD
 
 ### /jaan-to-pm-now-next-later
 
-- **Logical**: `pm:now-next-later`
+- **Logical**: `pm-now-next-later`
 - **Description**: Now/Next/Later board with outcome per initiative and confidence level notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -360,7 +360,7 @@ flowchart TD
 
 ### /jaan-to-pm-milestones
 
-- **Logical**: `pm:milestones`
+- **Logical**: `pm-milestones`
 - **Description**: Milestones + owners, dependencies + critical path, risks + mitigation plan
 - **Quick Win**: Yes
 - **Key Points**:
@@ -374,7 +374,7 @@ flowchart TD
 
 ### /jaan-to-pm-release-review
 
-- **Logical**: `pm:release-review`
+- **Logical**: `pm-release-review`
 - **Description**: Post-release review: KPI deltas, unexpected outcomes, learnings, follow-ups
 - **Quick Win**: No - needs post-launch data
 - **Key Points**:

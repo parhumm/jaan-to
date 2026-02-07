@@ -31,7 +31,7 @@ flowchart TD
 
 ### /jaan-to-data-event-spec
 
-- **Logical**: `data:event-spec`
+- **Logical**: `data-event-spec`
 - **Description**: GA4-ready event/param spec: naming, triggers, required properties, GTM implementation notes
 - **Quick Win**: Yes - extends gtm-datalayer pattern
 - **Key Points**:
@@ -45,7 +45,7 @@ flowchart TD
 
 ### /jaan-to-data-metric-spec
 
-- **Logical**: `data:metric-spec`
+- **Logical**: `data-metric-spec`
 - **Description**: Metric definition: formula, caveats, segmentation rules, owner, gaming prevention
 - **Quick Win**: Yes - simple definition
 - **Key Points**:
@@ -59,7 +59,7 @@ flowchart TD
 
 ### /jaan-to-data-metric-dictionary
 
-- **Logical**: `data:metric-dictionary`
+- **Logical**: `data-metric-dictionary`
 - **Description**: Metric definitions + SQL-like logic description, pitfalls + edge cases, example interpretations
 - **Quick Win**: Yes
 - **Key Points**:
@@ -73,7 +73,7 @@ flowchart TD
 
 ### /jaan-to-data-dashboard-spec
 
-- **Logical**: `data:dashboard-spec`
+- **Logical**: `data-dashboard-spec`
 - **Description**: Dashboard layout + sections, definitions + filters, recommended review cadence
 - **Quick Win**: Yes
 - **Key Points**:
@@ -87,7 +87,7 @@ flowchart TD
 
 ### /jaan-to-data-funnel-review
 
-- **Logical**: `data:funnel-review`
+- **Logical**: `data-funnel-review`
 - **Description**: Funnel baseline + top drop-offs + segments + 3-5 hypotheses ranked by impact × confidence
 - **Quick Win**: No - needs GA4 MCP
 - **Key Points**:
@@ -101,7 +101,7 @@ flowchart TD
 
 ### /jaan-to-data-experiment-design
 
-- **Logical**: `data:experiment-design`
+- **Logical**: `data-experiment-design`
 - **Description**: Experiment plan: hypothesis, success metric, boundaries, ramp/kill criteria, analysis checklist
 - **Quick Win**: No - builds on metric-spec
 - **Key Points**:
@@ -115,7 +115,7 @@ flowchart TD
 
 ### /jaan-to-data-analysis-plan
 
-- **Logical**: `data:analysis-plan`
+- **Logical**: `data-analysis-plan`
 - **Description**: Sample sizing notes (assumptions), decision rules (ship/iterate/stop), bias + data quality checks
 - **Quick Win**: Yes
 - **Key Points**:
@@ -129,7 +129,7 @@ flowchart TD
 
 ### /jaan-to-data-cohort-analyze
 
-- **Logical**: `data:cohort-analyze`
+- **Logical**: `data-cohort-analyze`
 - **Description**: Cohort/retention analysis with retention curves and churn risk identification
 - **Quick Win**: No - needs window functions expertise
 - **AI Score**: 5
@@ -146,7 +146,7 @@ flowchart TD
 
 ### /jaan-to-data-postlaunch-report
 
-- **Logical**: `data:postlaunch-report`
+- **Logical**: `data-postlaunch-report`
 - **Description**: Insights summary + interpretation notes, chart checklist (no code), segment highlights
 - **Quick Win**: No - needs post-launch data
 - **Key Points**:
@@ -160,7 +160,7 @@ flowchart TD
 
 ### /jaan-to-data-attribution-plan
 
-- **Logical**: `data:attribution-plan`
+- **Logical**: `data-attribution-plan`
 - **Description**: Tracking plan + UTMs, source of truth + governance, limits/risks checklist
 - **Quick Win**: No - needs attribution setup
 - **Key Points**:
@@ -174,7 +174,7 @@ flowchart TD
 
 ### /jaan-to-data-ltv-cac-model
 
-- **Logical**: `data:ltv-cac-model`
+- **Logical**: `data-ltv-cac-model`
 - **Description**: Model inputs/outputs table, sensitivity notes (what drives outcomes), data needed to validate
 - **Quick Win**: Yes
 - **Key Points**:
@@ -188,7 +188,7 @@ flowchart TD
 
 ### /jaan-to-data-anomaly-triage
 
-- **Logical**: `data:anomaly-triage`
+- **Logical**: `data-anomaly-triage`
 - **Description**: Triage pack: scope, likely causes, next checks, who to pull in, RCA starter template
 - **Quick Win**: No - needs multiple MCPs
 - **Key Points**:
@@ -202,7 +202,7 @@ flowchart TD
 
 ### /jaan-to-data-sql-query
 
-- **Logical**: `data:sql-query`
+- **Logical**: `data-sql-query`
 - **Description**: Ad-hoc SQL queries from natural language with results summary
 - **Quick Win**: Yes - natural language to SQL
 - **AI Score**: 5 | **Rank**: #2 (2nd highest-leverage task)
@@ -219,7 +219,7 @@ flowchart TD
 
 ### /jaan-to-data-dbt-model
 
-- **Logical**: `data:dbt-model`
+- **Logical**: `data-dbt-model`
 - **Description**: dbt staging/mart models with tests, documentation (schema.yml)
 - **Quick Win**: No - needs dbt knowledge
 - **AI Score**: 5 | **Rank**: #19
