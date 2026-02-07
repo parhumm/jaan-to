@@ -8,7 +8,7 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-data-event-spec["data-event-spec<br>Event Spec<br>GA4 events + params + triggers"] --> jaan-to-data-gtm-datalayer["data-gtm-datalayer<br>GTM DataLayer ★<br>Tracking code"]
+    jaan-to-data-event-spec["data-event-spec<br>Event Spec<br>GA4 events + params + triggers"] --> data-gtm-datalayer["data-gtm-datalayer<br>GTM DataLayer ★<br>Tracking code"]
     jaan-to-data-event-spec["data-event-spec<br>Event Spec<br>GA4 events + params + triggers"] --> jaan-to-data-metric-spec["data-metric-spec<br>Metric Spec<br>Formula + caveats + segmentation"]
     jaan-to-data-metric-spec["data-metric-spec<br>Metric Spec<br>Formula + caveats + segmentation"] --> jaan-to-data-metric-dictionary["data-metric-dictionary<br>Metric Dictionary<br>Definitions + SQL + pitfalls"]
     jaan-to-data-metric-dictionary["data-metric-dictionary<br>Metric Dictionary<br>Definitions + SQL + pitfalls"] --> jaan-to-data-dashboard-spec["data-dashboard-spec<br>Dashboard Spec<br>Layout + filters + cadence"]
@@ -22,7 +22,7 @@ flowchart TD
     jaan-to-data-anomaly-triage["data-anomaly-triage<br>Anomaly Triage<br>Scope + likely causes + RCA"] -.-> jaan-to-sre-incident-runbook["sre-incident-runbook<br>SRE: incident-runbook"]
     jaan-to-data-dbt-model["data-dbt-model<br>dbt Model<br>Staging/mart + tests + schema"] --> jaan-to-data-sql-query["data-sql-query<br>SQL Query<br>Ad-hoc SQL + results summary"]
 
-    style jaan-to-data-gtm-datalayer fill:#e8f5e9,stroke:#4caf50
+    style data-gtm-datalayer fill:#e8f5e9,stroke:#4caf50
     style jaan-to-pm-release-review fill:#f0f0f0,stroke:#999
     style jaan-to-sre-incident-runbook fill:#f0f0f0,stroke:#999
 ```

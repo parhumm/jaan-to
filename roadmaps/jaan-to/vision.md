@@ -67,12 +67,12 @@ That's it. Every command follows this pattern.
 ### Layers
 
 ```
-YOU USE:     /jaan-to-pm-prd-write "user import feature"
+YOU USE:     /pm-prd-write "user import feature"
                     │
-SKILL READS: ├── skills/jaan-to-pm-prd-write/SKILL.md   (what to do)
-             ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md  (past lessons)
+SKILL READS: ├── skills/pm-prd-write/SKILL.md   (what to do)
+             ├── jaan-to/learn/pm-prd-write.learn.md  (past lessons)
              ├── context/tech.md                (your tech context)
-             ├── skills/jaan-to-pm-prd-write/template.md (output format)
+             ├── skills/pm-prd-write/template.md (output format)
              └── MCP: Figma, Jira, GitLab       (real system data)
                     │
 OUTPUT:      jaan-to/outputs/pm/user-import/prd.md
@@ -117,13 +117,13 @@ No guessing. No "assuming you have a typical setup." Real data.
 Plugin root:
 │
 ├── skills/                    # What to do (flat structure)
-│   ├── jaan-to-pm-prd-write/
+│   ├── pm-prd-write/
 │   │   ├── SKILL.md           # Skill definition
 │   │   ├── LEARN.md           # Seed lessons (bootstrap source)
 │   │   └── template.md        # Output template
-│   ├── jaan-to-data-gtm-datalayer/
-│   ├── to-jaan-learn-add/
-│   ├── to-jaan-skill-create/
+│   ├── data-gtm-datalayer/
+│   ├── learn-add/
+│   ├── skill-create/
 │   └── [skill-name]/          # Extensible
 │
 ├── scripts/seeds/             # Tech & team context templates
@@ -174,7 +174,7 @@ Every skill has a `LEARN.md` file in `skills/{name}/` (seed lessons) that bootst
 - Common mistakes to avoid
 
 ```markdown
-# Lessons: jaan-to-pm-prd-write
+# Lessons: pm-prd-write
 
 ## Better Questions
 - Always ask about internationalization requirements
@@ -272,17 +272,17 @@ Context files can have learning in `jaan-to/learn/context-{name}.learn.md`:
 
 After any skill run:
 ```
-/to-jaan-learn-add "jaan-to-pm-prd-write" "Always ask about internationalization requirements"
+/learn-add "pm-prd-write" "Always ask about internationalization requirements"
 ```
 
 Or route to template:
 ```
-/to-jaan-learn-add "template-prd" "Add rollback plan section"
+/learn-add "template-prd" "Add rollback plan section"
 ```
 
 Or route to stack:
 ```
-/to-jaan-learn-add "context-tech" "All new services need health check endpoint"
+/learn-add "context-tech" "All new services need health check endpoint"
 ```
 
 ---
@@ -462,7 +462,7 @@ Done. Commands like `/jaan-to-devops-infra-provision` now work.
 Keep it simple:
 
 ```markdown
-# jaan-to-pm-prd-write
+# pm-prd-write
 
 ## Purpose
 Generate a PRD from initiative description.
@@ -517,7 +517,7 @@ Every skill has tests. Tests live in `tests/`.
 ### Test Structure
 
 ```markdown
-# Test: jaan-to-pm-prd-write
+# Test: pm-prd-write
 
 ## Setup
 - Input: "user import feature"
@@ -544,7 +544,7 @@ Every skill has tests. Tests live in `tests/`.
 ### Running Tests
 
 ```
-/to-jaan-test jaan-to-pm-prd-write
+/to-jaan-test pm-prd-write
 /to-jaan-test --all
 ```
 
@@ -553,12 +553,12 @@ Every skill has tests. Tests live in `tests/`.
 ## Execution Flow
 
 ```
-USER: /jaan-to-pm-prd-write "user import feature"
+USER: /pm-prd-write "user import feature"
 
 1. LOAD
-   ├── skills/jaan-to-pm-prd-write/SKILL.md
-   ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md (3 lessons)
-   ├── skills/jaan-to-pm-prd-write/template.md
+   ├── skills/pm-prd-write/SKILL.md
+   ├── jaan-to/learn/pm-prd-write.learn.md (3 lessons)
+   ├── skills/pm-prd-write/template.md
    ├── jaan-to/learn/template-prd.learn.md (2 lessons)
    ├── context/tech.md (Python, FastAPI, PostgreSQL)
    ├── context/team.md (2 BE, 2 FE, 2-week sprints)

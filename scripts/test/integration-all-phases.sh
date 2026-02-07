@@ -42,7 +42,7 @@ echo -e "\n========== PHASE 2: Path Resolution =========="
 source "$CLAUDE_PLUGIN_ROOT/scripts/lib/path-resolver.sh"
 
 # Test template resolution
-template_path=$(resolve_template_path "jaan-to-pm-prd-write")
+template_path=$(resolve_template_path "pm-prd-write")
 [ -n "$template_path" ] && echo "✓ Template path resolved" || (echo "✗ FAIL"; exit 1)
 
 # Test custom path override
@@ -53,12 +53,12 @@ paths_outputs: "custom/outputs"
 EOF
 
 mkdir -p "$TEST_DIR/custom/templates"
-echo "# Custom Template" > "$TEST_DIR/custom/templates/jaan-to-pm-prd-write.template.md"
+echo "# Custom Template" > "$TEST_DIR/custom/templates/pm-prd-write.template.md"
 
 unset CONFIG_CACHE_FILE
 load_config
 
-custom_template=$(resolve_template_path "jaan-to-pm-prd-write")
+custom_template=$(resolve_template_path "pm-prd-write")
 [[ "$custom_template" == *"custom/templates"* ]] && echo "✓ Custom path override works" || (echo "✗ FAIL: $custom_template"; exit 1)
 
 # ========================================
@@ -174,7 +174,7 @@ echo "   Migrated skills: $migrated_count"
 echo -e "\n========== INTEGRATION: End-to-End Workflow =========="
 
 # Simulate skill execution: PRD generation with custom paths, tech context, and learning
-echo "Simulating /jaan-to-pm-prd-write execution..."
+echo "Simulating /pm-prd-write execution..."
 
 # 1. Skill reads learning file (merged)
 [ -f "$output_file" ] && echo "✓ Skill can read merged learning" || (echo "✗ FAIL"; exit 1)
@@ -183,7 +183,7 @@ echo "Simulating /jaan-to-pm-prd-write execution..."
 [ -f "$TEST_DIR/jaan-to/context/tech.md" ] && echo "✓ Skill can read tech.md" || (echo "✗ FAIL"; exit 1)
 
 # 3. Skill reads template (from custom path)
-[ -f "$TEST_DIR/custom/templates/jaan-to-pm-prd-write.template.md" ] && echo "✓ Skill can read custom template" || (echo "✗ FAIL"; exit 1)
+[ -f "$TEST_DIR/custom/templates/pm-prd-write.template.md" ] && echo "✓ Skill can read custom template" || (echo "✗ FAIL"; exit 1)
 
 # 4. Skill generates output to custom output path
 mkdir -p "$TEST_DIR/custom/outputs/pm/test-feature"

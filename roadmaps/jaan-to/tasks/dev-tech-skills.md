@@ -167,7 +167,7 @@ jaan-to/outputs/dev/tech/{slug}/
 ## Dependencies
 
 - Phase 2.5 complete (Documentation & Tooling)
-- `/jaan-to-pm-prd-write` skill (PRD input)
+- `/pm-prd-write` skill (PRD input)
 
 ## References
 

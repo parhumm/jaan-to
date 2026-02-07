@@ -25,7 +25,7 @@ source "$CLAUDE_PLUGIN_ROOT/scripts/lib/config-loader.sh"
 source "$CLAUDE_PLUGIN_ROOT/scripts/lib/path-resolver.sh"
 load_config
 
-template_path=$(resolve_template_path "jaan-to-pm-prd-write")
+template_path=$(resolve_template_path "pm-prd-write")
 [ -n "$template_path" ] && echo "✓ Template found: $template_path" || (echo "✗ FAIL"; exit 1)
 
 # Test 2: Custom template override
@@ -40,7 +40,7 @@ EOF
 
 unset CONFIG_CACHE_FILE
 load_config
-custom_template=$(resolve_template_path "jaan-to-pm-prd-write")
+custom_template=$(resolve_template_path "pm-prd-write")
 [[ "$custom_template" == *"custom-templates"* ]] && echo "✓ Custom template resolved" || (echo "✗ FAIL: $custom_template"; exit 1)
 
 # Test 3: Learning path resolution (merge strategy)
@@ -54,7 +54,7 @@ EOF
 unset CONFIG_CACHE_FILE
 load_config
 
-learning_paths=$(resolve_learning_path "jaan-to-pm-prd-write")
+learning_paths=$(resolve_learning_path "pm-prd-write")
 if [[ "$learning_paths" == *"|"* ]]; then
   echo "✓ Merge strategy returns multiple sources"
 elif [[ -n "$learning_paths" ]]; then

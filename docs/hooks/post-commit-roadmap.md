@@ -21,8 +21,8 @@ After a significant git commit (feat/fix/refactor), displays a reminder:
 Commit: abc1234 — feat(skill): Add new skill
 
 Consider syncing the roadmap:
-  /to-jaan-roadmap-update
-  /to-jaan-roadmap-update mark "<task>" done abc1234
+  /roadmap-update
+  /roadmap-update mark "<task>" done abc1234
 ---
 ```
 
@@ -33,7 +33,7 @@ Consider syncing the roadmap:
 - Always exits 0 (never blocks)
 - Only triggers for `feat:`, `fix:`, and `refactor:` commits
 - Skips `docs(roadmap):` and `docs(changelog):` commits (already roadmap work)
-- Skips `release:` commits (handled by `/to-jaan-roadmap-update release`)
+- Skips `release:` commits (handled by `/roadmap-update release`)
 - Non-intrusive reminder via stderr
 
 ---
@@ -42,7 +42,7 @@ Consider syncing the roadmap:
 
 Creates a feedback loop between commits and roadmap tracking. When you make a significant change, you're reminded to record it in the roadmap.
 
-Works with `/to-jaan-roadmap-update` to keep the roadmap in sync with actual development.
+Works with `/roadmap-update` to keep the roadmap in sync with actual development.
 
 ---
 

@@ -14,7 +14,7 @@ NC='\033[0m' # No Color
 if [ $# -eq 0 ]; then
   echo -e "${RED}ERROR: Skill name required${NC}"
   echo "Usage: bash scripts/lib/v3-autofix.sh <skill-name>"
-  echo "Example: bash scripts/lib/v3-autofix.sh jaan-to-pm-prd-write"
+  echo "Example: bash scripts/lib/v3-autofix.sh pm-prd-write"
   exit 1
 fi
 
@@ -167,7 +167,7 @@ if [ $REMAINING_V2 -eq 0 ]; then
   echo "Next steps:"
   echo "  1. Review changes: git diff ${SKILL_FILE}"
   echo "  2. Test the skill in a new session"
-  echo "  3. Validate: /to-jaan-skill-update ${SKILL_NAME}"
+  echo "  3. Validate: /skill-update ${SKILL_NAME}"
   echo "  4. Commit if working correctly"
 else
   echo -e "  Status: ${YELLOW}⚠ Manual review needed${NC}"

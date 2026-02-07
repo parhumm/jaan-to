@@ -3,7 +3,7 @@
 > Project: {project-name}
 > Last updated: {date}
 
-**TIP**: Run `/jaan-to-dev-stack-detect` to auto-populate this file by scanning your codebase.
+**TIP**: Run `/dev-stack-detect` to auto-populate this file by scanning your codebase.
 
 ---
 
@@ -101,8 +101,8 @@
 **Delete this section after customizing:**
 
 This file is read by:
-- `/jaan-to-pm-prd-write` - References stack in PRD
-- `/jaan-to-dev-*` skills - Generates code matching conventions
-- `/jaan-to-data-*` skills - Uses correct event names
+- `/jaan-to:pm-prd-write` - References stack in PRD
+- `/jaan-to:dev-*` skills - Generates code matching conventions
+- `/jaan-to:data-*` skills - Uses correct event names
 
 Edit sections above to match your project. Use `#section-id` anchors for imports.

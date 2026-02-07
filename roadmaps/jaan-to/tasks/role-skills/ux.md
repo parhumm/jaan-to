@@ -8,14 +8,14 @@
 
 ```mermaid
 flowchart TD
-    jaan-to-ux-research-plan["ux-research-plan<br>Research Plan<br>Questions + method + participants"] --> jaan-to-ux-research-synthesize["ux-research-synthesize<br>Research Synthesize<br>Themes + recommendations"]
-    jaan-to-ux-research-synthesize["ux-research-synthesize<br>Research Synthesize<br>Themes + recommendations"] --> jaan-to-ux-persona-create["ux-persona-create<br>Persona Create<br>Goals + pains + JTBD"]
+    jaan-to-ux-research-plan["ux-research-plan<br>Research Plan<br>Questions + method + participants"] --> ux-research-synthesize["ux-research-synthesize<br>Research Synthesize<br>Themes + recommendations"]
+    ux-research-synthesize["ux-research-synthesize<br>Research Synthesize<br>Themes + recommendations"] --> jaan-to-ux-persona-create["ux-persona-create<br>Persona Create<br>Goals + pains + JTBD"]
     jaan-to-ux-persona-create["ux-persona-create<br>Persona Create<br>Goals + pains + JTBD"] -.-> jaan-to-pm-jtbd-map["pm-jtbd-map<br>PM: jtbd-map"]
     jaan-to-ux-persona-create["ux-persona-create<br>Persona Create<br>Goals + pains + JTBD"] -.-> jaan-to-pm-persona-card["pm-persona-card<br>PM: persona-card"]
     jaan-to-ux-competitive-review["ux-competitive-review<br>Competitive Review<br>Flows + patterns + opportunities"] -.-> jaan-to-pm-positioning-brief["pm-positioning-brief<br>PM: positioning-brief"]
     jaan-to-ux-journey-map["ux-journey-map<br>Journey Map<br>Steps + pain points + metrics"] --> jaan-to-ux-journey-edge-cases["ux-journey-edge-cases<br>Journey Edge Cases<br>Edge cases + recovery paths"]
     jaan-to-ux-journey-edge-cases["ux-journey-edge-cases<br>Journey Edge Cases<br>Edge cases + recovery paths"] --> jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"]
-    jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"] --> jaan-to-ux-microcopy-write["ux-microcopy-write<br>Microcopy Write<br>Labels + errors + toasts + tone"]
+    jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"] --> ux-microcopy-write["ux-microcopy-write<br>Microcopy Write<br>Labels + errors + toasts + tone"]
     jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"] -.-> jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>DEV: fe-state-machine"]
     jaan-to-ux-heuristic-review["ux-heuristic-review<br>Heuristic Review<br>Issues + severity + quick wins"] --> jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"]
     jaan-to-ux-sitemap["ux-sitemap<br>Sitemap<br>Pages + entry points + IA risks"] --> jaan-to-ux-taxonomy["ux-taxonomy<br>Taxonomy<br>Naming rules + attributes"]
@@ -23,10 +23,10 @@ flowchart TD
     jaan-to-ux-wireframe-screens["ux-wireframe-screens<br>Wireframe Screens<br>Screen list + states + interactions"] --> jaan-to-ux-wireframe-review["ux-wireframe-review<br>Wireframe Review<br>Usability checklist + issues"]
     jaan-to-ux-wireframe-review["ux-wireframe-review<br>Wireframe Review<br>Usability checklist + issues"] --> jaan-to-ux-ui-spec-states["ux-ui-spec-states<br>UI Spec States<br>State list + triggers + copy"]
     jaan-to-ux-ui-spec-states["ux-ui-spec-states<br>UI Spec States<br>State list + triggers + copy"] --> jaan-to-ux-ui-handoff-notes["ux-ui-handoff-notes<br>UI Handoff Notes<br>Components + tokens + animation"]
-    jaan-to-ux-ui-handoff-notes["ux-ui-handoff-notes<br>UI Handoff Notes<br>Components + tokens + animation"] -.-> jaan-to-dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
-    jaan-to-ux-microcopy-write["ux-microcopy-write<br>Microcopy Write<br>Labels + errors + toasts + tone"] --> jaan-to-ux-error-messages["ux-error-messages<br>Error Messages<br>User-friendly errors + recovery"]
+    jaan-to-ux-ui-handoff-notes["ux-ui-handoff-notes<br>UI Handoff Notes<br>Components + tokens + animation"] -.-> dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
+    ux-microcopy-write["ux-microcopy-write<br>Microcopy Write<br>Labels + errors + toasts + tone"] --> jaan-to-ux-error-messages["ux-error-messages<br>Error Messages<br>User-friendly errors + recovery"]
     jaan-to-ux-a11y-audit["ux-a11y-audit<br>A11y Audit<br>Issues + fix checklist"] --> jaan-to-ux-a11y-aria-notes["ux-a11y-aria-notes<br>A11y ARIA Notes<br>Roles/labels + focus management"]
-    jaan-to-ux-a11y-aria-notes["ux-a11y-aria-notes<br>A11y ARIA Notes<br>Roles/labels + focus management"] -.-> jaan-to-dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
+    jaan-to-ux-a11y-aria-notes["ux-a11y-aria-notes<br>A11y ARIA Notes<br>Roles/labels + focus management"] -.-> dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
     jaan-to-ux-onboarding-steps["ux-onboarding-steps<br>Onboarding Steps<br>Steps + activation + drop-offs"] --> jaan-to-ux-onboarding-tooltips["ux-onboarding-tooltips<br>Onboarding Tooltips<br>Tooltip copy + skip/done patterns"]
     jaan-to-ux-onboarding-tooltips["ux-onboarding-tooltips<br>Onboarding Tooltips<br>Tooltip copy + skip/done patterns"] -.-> jaan-to-data-event-spec["data-event-spec<br>DATA: event-spec"]
 
@@ -34,7 +34,7 @@ flowchart TD
     style jaan-to-pm-persona-card fill:#f0f0f0,stroke:#999
     style jaan-to-pm-positioning-brief fill:#f0f0f0,stroke:#999
     style jaan-to-dev-fe-state-machine fill:#f0f0f0,stroke:#999
-    style jaan-to-dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
+    style dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
     style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
 ```
 
@@ -54,7 +54,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/research/{slug}/research-plan.md`
 
-### ✅ /jaan-to-ux-research-synthesize
+### ✅ /ux-research-synthesize
 
 - **Logical**: `ux:research-synthesize`
 - **Description**: Synthesize research findings into themes, executive summary, and recommendations
@@ -243,7 +243,7 @@ flowchart TD
 - **Input**: [design]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/ui/{slug}/handoff-notes.md`
 
-### ✅ /jaan-to-ux-microcopy-write
+### ✅ /ux-microcopy-write
 
 - **Logical**: `ux:microcopy-write`
 - **Description**: Microcopy pack: labels, helper text, errors, toasts, confirmations, empty states, tone rules

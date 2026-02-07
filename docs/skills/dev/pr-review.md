@@ -1,5 +1,5 @@
 ---
-title: /jaan-to-dev-pr-review
+title: /jaan-to:dev-pr-review
 doc_type: skill
 created_date: 2026-02-03
 updated_date: 2026-02-03
@@ -7,7 +7,7 @@ tags: [dev, code-review, pr, merge-request, security, quality]
 related: [stack-detect]
 ---
 
-# /jaan-to-dev-pr-review
+# /jaan-to:dev-pr-review
 
 > Automated PR review pack: risk scoring, security and performance hints, missing tests, CI failures.
 
@@ -22,9 +22,9 @@ Reviews a GitLab merge request (or GitHub PR) and generates a structured review 
 ## Usage
 
 ```
-/jaan-to-dev-pr-review <pr-link-or-branch>
-/jaan-to-dev-pr-review https://gitlab.com/org/repo/-/merge_requests/42
-/jaan-to-dev-pr-review feature/user-auth
+/jaan-to:dev-pr-review <pr-link-or-branch>
+/jaan-to:dev-pr-review https://gitlab.com/org/repo/-/merge_requests/42
+/jaan-to:dev-pr-review feature/user-auth
 ```
 
 | Argument | Required | Description |
@@ -109,7 +109,7 @@ Files in `vendor/`, `dist/`, `*.lock` are skipped automatically.
 
 **Input**:
 ```
-/jaan-to-dev-pr-review https://gitlab.com/myorg/app/-/merge_requests/142
+/jaan-to:dev-pr-review https://gitlab.com/myorg/app/-/merge_requests/142
 ```
 
 **Output** (`jaan-to/outputs/dev/review/mr-142/pr-review.md`):
@@ -144,7 +144,7 @@ issue (blocking, security): SQL injection in UserController...
 - Keep PRs under 400 lines for best review quality — detection drops 70% beyond that
 - The skill flags draft/WIP MRs and applies limited review automatically
 - Deletion-only PRs get extra scrutiny for removed validation or auth checks
-- Pair with `/jaan-to-dev-stack-detect` so security patterns match your actual stack
+- Pair with `/dev-stack-detect` so security patterns match your actual stack
 
 ---
 

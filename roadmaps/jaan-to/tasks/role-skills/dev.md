@@ -10,24 +10,24 @@
 flowchart TD
     jaan-to-dev-feasibility-check["dev-feasibility-check<br>Feasibility Check<br>Risks + deps + complexity"] --> jaan-to-dev-arch-proposal["dev-arch-proposal<br>Arch Proposal<br>Architecture + tradeoffs + data flow"]
     jaan-to-dev-arch-proposal["dev-arch-proposal<br>Arch Proposal<br>Architecture + tradeoffs + data flow"] --> jaan-to-dev-tech-plan["dev-tech-plan<br>Tech Plan<br>Approach + rollout/rollback"]
-    jaan-to-dev-tech-plan["dev-tech-plan<br>Tech Plan<br>Approach + rollout/rollback"] --> jaan-to-dev-be-task-breakdown["dev-be-task-breakdown<br>BE Task Breakdown<br>BE tasks + data model notes"]
-    jaan-to-dev-tech-plan["dev-tech-plan<br>Tech Plan<br>Approach + rollout/rollback"] --> jaan-to-dev-fe-task-breakdown["dev-fe-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"]
-    jaan-to-dev-be-task-breakdown["dev-be-task-breakdown<br>BE Task Breakdown<br>BE tasks + data model notes"] --> jaan-to-dev-be-data-model["dev-be-data-model<br>BE Data Model<br>Tables + constraints + indexes"]
+    jaan-to-dev-tech-plan["dev-tech-plan<br>Tech Plan<br>Approach + rollout/rollback"] --> dev-be-task-breakdown["dev-be-task-breakdown<br>BE Task Breakdown<br>BE tasks + data model notes"]
+    jaan-to-dev-tech-plan["dev-tech-plan<br>Tech Plan<br>Approach + rollout/rollback"] --> dev-fe-task-breakdown["dev-fe-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"]
+    dev-be-task-breakdown["dev-be-task-breakdown<br>BE Task Breakdown<br>BE tasks + data model notes"] --> jaan-to-dev-be-data-model["dev-be-data-model<br>BE Data Model<br>Tables + constraints + indexes"]
     jaan-to-dev-be-data-model["dev-be-data-model<br>BE Data Model<br>Tables + constraints + indexes"] --> jaan-to-dev-api-contract["dev-api-contract<br>API Contract<br>OpenAPI + payloads + errors"]
     jaan-to-dev-api-contract["dev-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"]
     jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
     jaan-to-dev-api-contract["dev-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
-    jaan-to-dev-fe-task-breakdown["dev-fe-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>FE State Machine<br>UI states + transitions"]
+    dev-fe-task-breakdown["dev-fe-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>FE State Machine<br>UI states + transitions"]
     jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>FE State Machine<br>UI states + transitions"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
     jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"] --> jaan-to-dev-integration-mock-stubs["dev-integration-mock-stubs<br>Integration Mock Stubs<br>Stub interfaces + fake responses"]
     jaan-to-dev-integration-mock-stubs["dev-integration-mock-stubs<br>Integration Mock Stubs<br>Stub interfaces + fake responses"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
-    jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"] -.-> jaan-to-qa-test-cases["qa-test-cases<br>QA: test-cases"]
+    jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"] -.-> qa-test-cases["qa-test-cases<br>QA: test-cases"]
     jaan-to-dev-observability-events["dev-observability-events<br>Observability Events<br>Log fields + metrics + traces"] --> jaan-to-dev-observability-alerts["dev-observability-alerts<br>Observability Alerts<br>Thresholds + severity + noise"]
     jaan-to-dev-observability-alerts["dev-observability-alerts<br>Observability Alerts<br>Thresholds + severity + noise"] -.-> jaan-to-sre-slo-setup["sre-slo-setup<br>SRE: slo-setup"]
     jaan-to-dev-ship-check["dev-ship-check<br>Ship Check<br>Flags + migrations + Go/No-Go"] -.-> jaan-to-release-prod-runbook["release-prod-runbook<br>RELEASE: prod-runbook"]
     jaan-to-dev-ship-check["dev-ship-check<br>Ship Check<br>Flags + migrations + Go/No-Go"] -.-> jaan-to-qa-release-signoff["qa-release-signoff<br>QA: release-signoff"]
 
-    style jaan-to-qa-test-cases fill:#f0f0f0,stroke:#999
+    style qa-test-cases fill:#f0f0f0,stroke:#999
     style jaan-to-sre-slo-setup fill:#f0f0f0,stroke:#999
     style jaan-to-release-prod-runbook fill:#f0f0f0,stroke:#999
     style jaan-to-qa-release-signoff fill:#f0f0f0,stroke:#999
@@ -77,7 +77,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/plan/{slug}/tech-plan.md`
 
-### ✅ /jaan-to-dev-be-task-breakdown
+### ✅ /dev-be-task-breakdown
 
 - **Logical**: `dev:be-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
@@ -134,7 +134,7 @@ flowchart TD
 - **Input**: [api]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/versioning-plan.md`
 
-### ✅ /jaan-to-dev-fe-task-breakdown
+### ✅ /dev-fe-task-breakdown
 
 - **Logical**: `dev:fe-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies

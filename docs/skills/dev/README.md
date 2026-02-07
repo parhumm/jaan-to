@@ -8,9 +8,9 @@
 
 | Skill | Description |
 |-------|-------------|
-| [/jaan-to-dev-stack-detect](stack-detect.md) | Auto-detect tech stack and populate context |
-| [/jaan-to-dev-fe-task-breakdown](fe-task-breakdown.md) | Generate FE task breakdown from UX handoff |
-| [/jaan-to-dev-pr-review](pr-review.md) | Automated PR review: risk scoring, security hints, missing tests |
+| [/dev-stack-detect](stack-detect.md) | Auto-detect tech stack and populate context |
+| [/dev-fe-task-breakdown](fe-task-breakdown.md) | Generate FE task breakdown from UX handoff |
+| [/jaan-to:dev-pr-review](pr-review.md) | Automated PR review: risk scoring, security hints, missing tests |
 
 ---
 
