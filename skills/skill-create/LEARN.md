@@ -45,7 +45,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
 - Don't skip index management
 - Don't forget Executive Summary section
 
-**Reference**: See `skills/jaan-to:pm-prd-write/SKILL.md` for compliant example.
+**Reference**: See `skills/pm-prd-write/SKILL.md` for compliant example.
 
 ## Common Mistakes
 

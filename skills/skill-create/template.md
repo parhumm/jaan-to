@@ -12,12 +12,12 @@ name: {skill_name}
 description: |
   {description_line_1}
   Auto-triggers on: {trigger_phrases}.
-  Maps to: {logical_name}
+  Maps to: {skill_name}
 allowed-tools: {tool_list}
 argument-hint: {argument_format}
 ---
 
-# {logical_name}
+# {skill_name}
 
 > {one_line_purpose}
 
@@ -325,7 +325,7 @@ Generated at: {{env:JAAN_OUTPUTS_DIR}}/{{role}}/{{domain}}/
 | Placeholder | Source |
 |-------------|--------|
 | `{skill_name}` | Step 1: role-domain-action |
-| `{logical_name}` | Step 1: role:domain-action |
+| `{skill_name}` | Step 1: role-domain-action |
 | `{description_line_1}` | Step 3: purpose |
 | `{trigger_phrases}` | Step 3: triggers |
 | `{tool_list}` | Step 5: based on needs |

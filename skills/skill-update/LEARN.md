@@ -40,7 +40,7 @@ Process improvements learned from past runs:
    2. Update output step: folder + index
    3. Update template: Executive Summary
 
-   Reference: skills/jaan-to:pm-prd-write/SKILL.md
+   Reference: skills/pm-prd-write/SKILL.md
 ```
 
 **What NOT to do**:

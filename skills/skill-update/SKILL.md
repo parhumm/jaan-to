@@ -96,7 +96,7 @@ Display current structure:
 CURRENT SKILL: {name}
 ────────────────────
 Command: /{name}
-Logical: {logical_name}
+Name: {name}
 Description: {description}
 
 FILES
@@ -108,7 +108,7 @@ FILES
 
 ## Step 2: Validate Against Specification
 
-Check current skill against `jaan-to/docs/create-skill.md`:
+Check current skill against `docs/extending/create-skill.md`:
 
 **Frontmatter**:
 - [ ] Has `name` matching directory
@@ -117,7 +117,7 @@ Check current skill against `jaan-to/docs/create-skill.md`:
 - [ ] Has `argument-hint`
 
 **Body**:
-- [ ] Has H1 title with logical name
+- [ ] Has H1 title matching skill name
 - [ ] Has tagline blockquote
 - [ ] Has `## Context Files`
 - [ ] Has `## Input`
@@ -355,7 +355,7 @@ Missing Executive Summary section
    3. Add index management using scripts/lib/index-updater.sh
    4. Add Executive Summary to template
 
-   Reference: skills/jaan-to:pm-prd-write/SKILL.md (compliant example)
+   Reference: skills/pm-prd-write/SKILL.md (compliant example)
 ```
 
 ### v3.0.0 Compliance Summary
@@ -684,7 +684,7 @@ Required changes:
 □ Add Executive Summary to template (if template.md exists)
 □ Update validation checklist
 
-Reference: skills/jaan-to:pm-prd-write/SKILL.md (compliant example)
+Reference: skills/pm-prd-write/SKILL.md (compliant example)
 ```
 
 ### 10.5.2: HARD STOP - Approve Migration

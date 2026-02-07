@@ -5,6 +5,19 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.16.3] - 2026-02-07
+
+### Fixed
+- **Spec: removed outdated "Logical Name" concept** — Removed colon-format `{role}:{domain-action}` references from `docs/extending/create-skill.md`; H1 title guidance now uses `# {name}` (kebab-case)
+- **skill-create: fixed command format** — Command preview now shows `/jaan-to:{name}` instead of `/{name}`
+- **skill-create: fixed spec path** — Validation step referenced wrong path `jaan-to/docs/create-skill.md` → `docs/extending/create-skill.md`
+- **skill-create: template uses `{skill_name}`** — Replaced `{logical_name}` variable with `{skill_name}` in template.md
+- **skill-update: fixed stale directory refs** — Updated `skills/jaan-to:pm-prd-write/` → `skills/pm-prd-write/` (2 locations)
+- **skill-update: fixed spec path** — Same `jaan-to/docs/` → `docs/extending/` correction
+- **LEARN.md files** — Fixed stale `jaan-to:pm-prd-write` directory references in both skill LEARN.md files
+
+---
+
 ## [3.16.2] - 2026-02-07
 
 ### Changed

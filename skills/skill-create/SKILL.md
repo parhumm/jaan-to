@@ -117,8 +117,8 @@ Ask these questions one at a time:
 
 **After answers**, validate and show:
 > "Skill name will be: `{role}-{domain}-{action}`"
-> "Command: `/{role}-{domain}-{action}`"
-> "Logical name: `{role}-{domain}-{action}`"
+> "Command: `/jaan-to:{role}-{domain}-{action}`"
+> "Directory: `skills/{role}-{domain}-{action}/`"
 
 ## Step 1.5: Check Project Configuration (v3.0.0)
 
@@ -350,7 +350,7 @@ Based on output format from Step 4:
 
 ## Step 10: Validate Against Specification
 
-Check against `jaan-to/docs/create-skill.md`:
+Check against `docs/extending/create-skill.md`:
 
 **Frontmatter**:
 - [ ] Has `name` matching directory
@@ -360,7 +360,7 @@ Check against `jaan-to/docs/create-skill.md`:
 - [ ] Does NOT have `model:` field (causes API errors)
 
 **Body**:
-- [ ] Has H1 title with logical name
+- [ ] Has H1 title matching skill name
 - [ ] Has tagline blockquote
 - [ ] Has `## Context Files`
 - [ ] Has `## Input`
