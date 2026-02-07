@@ -139,6 +139,13 @@ See [jaan-to/outputs/README.md](jaan-to/outputs/README.md) for complete document
 
 ## Development Workflow
 
+### plugin.json Rules
+- **Only declare**: `name`, `version`, `description`, `author`
+- **Never declare**: `skills`, `agents`, `hooks`, `commands` — these are auto-discovered from standard directories
+- Official Anthropic plugins use minimal manifests; follow their pattern
+- Before every release, test install on a clean machine/session
+- The `agents` field specifically causes validation failure: `agents: Invalid input`
+
 ### Before Every Commit
 1. Update [roadmap.md](roadmaps/jaan-to/roadmap.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`

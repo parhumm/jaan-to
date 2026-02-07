@@ -5,6 +5,21 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.15.2] - 2026-02-07
+
+### Fixed
+- **Plugin installation failure** — Removed `skills`, `agents`, `hooks` fields from `plugin.json`
+  - Root cause: `"agents": "./agents/"` triggers Claude Code manifest validation error: `agents: Invalid input`
+  - Claude Code auto-discovers components from standard directories (`skills/`, `agents/`, `hooks/hooks.json`)
+  - Official Anthropic plugins use minimal manifests with only `name`, `version`, `description`, `author`
+- **CI release check** — Inverted component path validation to reject (not require) `skills`/`agents`/`hooks` in plugin.json
+
+### Added
+- **plugin.json Rules** in CLAUDE.md — Documented that component paths must never be declared in manifest
+- **Troubleshooting entry** in README.md for "agents: Invalid input" error
+
+---
+
 ## [3.15.1] - 2026-02-07
 
 ### Added

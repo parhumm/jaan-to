@@ -546,6 +546,15 @@ jaan.to is open source. To extend:
 
 ## Troubleshooting
 
+### "agents: Invalid input" or plugin install fails?
+
+Claude Code validates `plugin.json` strictly. Only these fields are allowed:
+`name`, `version`, `description`, `author`.
+
+Component paths (`skills`, `agents`, `hooks`, `commands`) must **not** be declared — Claude Code auto-discovers them from standard directories.
+
+If you see validation errors during install, check `.claude-plugin/plugin.json` for extra fields.
+
 ### Skills not loading after installation?
 
 If skills don't appear after installing or updating the plugin:
@@ -555,7 +564,7 @@ If skills don't appear after installing or updating the plugin:
 /plugin install jaan-to@jaan-to
 ```
 
-This reinstalls the plugin and refreshes the registry.
+This reinstalls the plugin and refreshes the registry. You may also need to **restart Claude Code** (exit and reopen) for changes to take effect.
 
 ### Commands not recognized?
 

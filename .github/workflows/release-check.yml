@@ -52,20 +52,21 @@ jobs:
           fi
           echo "✓ CHANGELOG entry found for v$VERSION"
 
-      - name: Check plugin.json has required component paths
+      - name: Check plugin.json has no component path declarations
         run: |
-          echo "Checking plugin.json component paths..."
-          for field in skills agents hooks; do
+          echo "Checking plugin.json does not declare component paths..."
+          echo "(Claude Code auto-discovers skills/, agents/, hooks/ from standard directories)"
+          for field in skills agents hooks commands; do
             VALUE=$(jq -r ".$field // empty" .claude-plugin/plugin.json)
-            if [ -z "$VALUE" ]; then
-              echo "::error::plugin.json missing required field: $field"
-              echo "Skills won't load without component paths!"
+            if [ -n "$VALUE" ]; then
+              echo "::error::plugin.json must NOT declare '$field' (causes validation failure)"
+              echo "Remove '$field' from plugin.json. Claude Code auto-discovers from standard directories."
               exit 1
             fi
-            echo "  ✓ $field: $VALUE"
+            echo "  ✓ $field: not declared (correct)"
           done
           echo ""
-          echo "✓ All required component paths present"
+          echo "✓ No component paths declared (auto-discovery will work)"
 
       - name: Summary
         run: |
