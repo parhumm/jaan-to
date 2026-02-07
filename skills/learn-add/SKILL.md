@@ -1,9 +1,6 @@
 ---
 name: learn-add
-description: |
-  Add a lesson to a skill's LEARN.md file.
-  Routes feedback to skill, template, or context learning.
-  Maps to: learn-add
+description: Add a lesson to a skill's LEARN.md file, routing feedback to skill, template, or context learning.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: "[target] [lesson]"
 ---

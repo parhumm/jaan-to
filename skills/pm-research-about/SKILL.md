@@ -1,9 +1,6 @@
 ---
 name: pm-research-about
-description: |
-  Deep research on any topic, or add existing file/URL to research index.
-  Auto-triggers on: research about, deep dive, investigate, research on, add research, index research
-  Maps to: pm-research-about
+description: Deep research on any topic, or add existing file/URL to research index.
 allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write(jaan-to/outputs/research/**), Edit, Bash(git add:*), Bash(git commit:*)
 argument-hint: <topic-or-file-path-or-URL>
 ---

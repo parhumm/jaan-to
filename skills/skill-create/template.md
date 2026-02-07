@@ -9,10 +9,7 @@
 ```markdown
 ---
 name: {skill_name}
-description: |
-  {description_line_1}
-  Auto-triggers on: {trigger_phrases}.
-  Maps to: {skill_name}
+description: {description_line_1}
 allowed-tools: {tool_list}
 argument-hint: {argument_format}
 ---
@@ -326,8 +323,7 @@ Generated at: {{env:JAAN_OUTPUTS_DIR}}/{{role}}/{{domain}}/
 |-------------|--------|
 | `{skill_name}` | Step 1: role-domain-action |
 | `{skill_name}` | Step 1: role-domain-action |
-| `{description_line_1}` | Step 3: purpose |
-| `{trigger_phrases}` | Step 3: triggers |
+| `{description_line_1}` | Step 3: purpose (max 120 chars) |
 | `{tool_list}` | Step 5: based on needs |
 | `{argument_format}` | Step 4: input format |
 | `{one_line_purpose}` | Step 3: short version |

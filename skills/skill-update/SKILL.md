@@ -1,9 +1,6 @@
 ---
 name: skill-update
-description: |
-  Update an existing jaan.to skill following standards.
-  Auto-triggers on: update skill, modify skill, improve skill, fix skill.
-  Maps to: skill-update
+description: Update an existing jaan.to skill following standards.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [skill-name]
 ---
@@ -358,6 +355,22 @@ Missing Executive Summary section
    Reference: skills/pm-prd-write/SKILL.md (compliant example)
 ```
 
+### V3.9: Description Budget Compliance
+
+Check that description field is concise and budget-friendly:
+
+**Rules:**
+- Description should be 1-2 sentences (under 120 chars)
+- Must NOT contain `Auto-triggers on:` line
+- Must NOT contain `Maps to:` line
+- Must use single-line YAML format (no `|` block scalar)
+
+**Detection**: Check description field length and content in YAML frontmatter.
+
+**Status**:
+- [ ] ✓ Description is concise (under 120 chars, no trigger/mapping lines)
+- [ ] ✗ Description too long or contains `Auto-triggers on:` / `Maps to:` lines
+
 ### v3.0.0 Compliance Summary
 
 Display results:
@@ -379,7 +392,11 @@ V3.8.2 Folder structure:        ✓ / ✗ / N/A
 V3.8.3 Index management:        ✓ / ✗ / N/A
 V3.8.4 Executive Summary:       ✓ / ✗ / N/A
 
-VERDICT: v3.0.0 Compliant / Needs Migration / Needs Output Migration
+DESCRIPTION BUDGET
+──────────────────
+V3.9 Description budget:        ✓ / ✗
+
+VERDICT: v3.0.0 Compliant / Needs Migration / Needs Output Migration / Needs Description Fix
 ```
 
 If **any check fails (✗)**:
@@ -399,6 +416,7 @@ If **any check fails (✗)**:
 > [7] Other (describe)
 > [8] Migrate to v3.0.0 (if v3.0.0 compliance check failed)
 > [9] Migrate output structure to ID-based folders (if V3.8 check failed)
+> [10] Fix description budget (trim Auto-triggers/Maps-to lines, shorten description)
 
 ## Step 4: Optional Web Research
 

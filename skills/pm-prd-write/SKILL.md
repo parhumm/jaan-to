@@ -1,9 +1,6 @@
 ---
 name: pm-prd-write
-description: |
-  Generate a Product Requirements Document from an initiative description.
-  Auto-triggers on: feature requirements, PRD requests, product specifications.
-  Maps to: pm-prd-write
+description: Generate a Product Requirements Document from an initiative description.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**)
 argument-hint: [initiative-description]
 hooks:

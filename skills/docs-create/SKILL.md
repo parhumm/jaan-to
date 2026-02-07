@@ -1,9 +1,6 @@
 ---
 name: docs-create
-description: |
-  Create new documentation with templates following STYLE.md.
-  Supports: skill, hook, config, guide, concept, index.
-  Maps to: docs-create
+description: Create new documentation with templates following STYLE.md.
 allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: "{type} {name}"
 ---

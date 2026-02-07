@@ -1,9 +1,6 @@
 ---
 name: roadmap-add
-description: |
-  [Internal] Add a task to the jaan.to development roadmap.
-  For jaan.to project maintenance, not end-user use.
-  Maps to: roadmap-add
+description: "[Internal] Add a task to the jaan.to development roadmap."
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**)
 argument-hint: [task-description]
 ---

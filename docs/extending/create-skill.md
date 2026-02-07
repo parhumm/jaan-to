@@ -278,10 +278,7 @@ Every SKILL.md must begin with YAML frontmatter:
 ```yaml
 ---
 name: {skill-name}
-description: |
-  {1-2 sentence purpose}
-  Auto-triggers on: {context clues}
-  Maps to: {name}
+description: {1-2 sentence purpose. Keep under 120 chars.}
 allowed-tools: {tool-list}
 argument-hint: {expected-format}
 ---
@@ -290,9 +287,21 @@ argument-hint: {expected-format}
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `name` | string | Yes | Matches directory name |
-| `description` | multiline | Yes | Purpose + triggers + mapping |
+| `description` | string | Yes | 1-2 sentence purpose (max 120 chars) |
 | `allowed-tools` | string | Yes | Comma-separated tool permissions |
 | `argument-hint` | string | Yes | Shows expected input format |
+
+### Description Budget
+
+Claude Code allocates a **15,000 character budget** for all skill descriptions in the system prompt. Each skill costs ~109 chars of XML overhead plus the description length. If total exceeds budget, skills get silently dropped.
+
+**Rules:**
+- Keep descriptions under **120 chars** (1-2 sentences)
+- Do NOT include `Auto-triggers on:` or `Maps to:` lines
+- Use single-line YAML format (no `|` block scalar needed)
+- Run `scripts/validate-skills.sh` to check budget before release
+
+**Override:** Set `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable to adjust the budget.
 
 ### Tool Permission Patterns (v3.0.0)
 
@@ -1093,7 +1102,7 @@ Accumulated lessons from past executions.
 ### Frontmatter Checklist
 
 - [ ] Has `name` matching directory
-- [ ] Has `description` with purpose and mapping
+- [ ] Has `description` with purpose (max 120 chars, no `Auto-triggers on:`/`Maps to:` lines)
 - [ ] Has `allowed-tools` with valid tool patterns
 - [ ] Has `argument-hint` showing expected format
 
@@ -1184,10 +1193,7 @@ Simplest valid skill structure:
 ```markdown
 ---
 name: example-minimal-demo
-description: |
-  Demonstrate minimal skill structure.
-  Auto-triggers on: demo, example, test skill.
-  Maps to: example-minimal-demo
+description: Demonstrate minimal skill structure.
 allowed-tools: Read, Write($JAAN_OUTPUTS_DIR/example/**)
 argument-hint: [topic]
 ---
@@ -1292,10 +1298,7 @@ Complete skill with all v3.0.0 patterns:
 ```markdown
 ---
 name: qa-test-matrix
-description: |
-  Generate comprehensive test matrix from feature requirements.
-  Auto-triggers on: test planning, QA coverage, test matrix requests.
-  Maps to: qa-test-matrix
+description: Generate comprehensive test matrix from feature requirements.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write($JAAN_OUTPUTS_DIR/qa/**)
 argument-hint: [feature-name-or-prd-path]
 ---

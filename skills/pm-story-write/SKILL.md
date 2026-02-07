@@ -1,9 +1,6 @@
 ---
 name: pm-story-write
-description: |
-  Generate user stories with Given/When/Then acceptance criteria following INVEST principles.
-  Auto-triggers on: write user story, create story, user story for, story write, generate story
-  Maps to: pm-story-write
+description: Generate user stories with Given/When/Then acceptance criteria following INVEST principles.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task
 argument-hint: [feature] [persona] [goal] OR [epic-id]
 ---

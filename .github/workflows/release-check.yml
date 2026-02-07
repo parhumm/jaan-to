@@ -68,6 +68,10 @@ jobs:
           echo ""
           echo "✓ No component paths declared (auto-discovery will work)"
 
+      - name: Check skill description character budget
+        run: |
+          bash scripts/validate-skills.sh
+
       - name: Summary
         run: |
           VERSION=$(jq -r '.version' .claude-plugin/plugin.json)

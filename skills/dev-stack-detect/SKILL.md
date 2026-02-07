@@ -1,10 +1,6 @@
 ---
 name: dev-stack-detect
-description: |
-  Auto-detect project tech stack and populate jaan.to context files.
-  Scans languages, frameworks, databases, infrastructure, CI/CD, and integrations.
-  Auto-triggers on: detect stack, scan project, setup context, analyze tech
-  Maps to: dev-stack-detect
+description: Auto-detect project tech stack and populate jaan.to context files.
 allowed-tools: Read, Glob, Grep, Bash(git remote:*), Bash(ls:*), Write($JAAN_CONTEXT_DIR/**), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_OUTPUTS_DIR/dev/**)
 argument-hint: [optional-focus-area]
 ---

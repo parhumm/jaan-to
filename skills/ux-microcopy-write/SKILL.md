@@ -1,10 +1,6 @@
 ---
 name: ux-microcopy-write
-description: |
-  Generate multi-language microcopy packs for UI components.
-  Supports 7 languages with cultural adaptation, tone-of-voice consistency, and RTL/LTR handling.
-  Auto-triggers on: microcopy, ui copy, button labels, error messages, multi-language content
-  Maps to: ux-microcopy-write
+description: Generate multi-language microcopy packs for UI components with cultural adaptation and RTL/LTR handling.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Write($JAAN_CONTEXT_DIR/localization.md), Write($JAAN_CONTEXT_DIR/tone-of-voice.md), WebSearch, Task, AskUserQuestion, Bash
 argument-hint: [initiative-or-feature-description]
 ---

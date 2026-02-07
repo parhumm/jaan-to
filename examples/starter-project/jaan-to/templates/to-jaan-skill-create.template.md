@@ -9,10 +9,7 @@
 ```markdown
 ---
 name: {skill_name}
-description: |
-  {description_line_1}
-  Auto-triggers on: {trigger_phrases}.
-  Maps to: {logical_name}
+description: {description_line_1}
 allowed-tools: {tool_list}
 argument-hint: {argument_format}
 ---
