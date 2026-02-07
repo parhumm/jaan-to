@@ -26,7 +26,7 @@ flowchart TD
 
 ### /jaan-to-sre-slo-setup
 
-- **Logical**: `sre:slo-setup`
+- **Logical**: `sre-slo-setup`
 - **Description**: SLOs + error budgets, suggested SLIs (latency, errors, uptime), reporting cadence
 - **Quick Win**: No - needs monitoring data
 - **Key Points**:
@@ -40,7 +40,7 @@ flowchart TD
 
 ### /jaan-to-sre-alert-tuning
 
-- **Logical**: `sre:alert-tuning`
+- **Logical**: `sre-alert-tuning`
 - **Description**: Noise reduction plan, priorities + severity mapping, missing alerts checklist
 - **Quick Win**: No - needs alert history
 - **Key Points**:
@@ -54,7 +54,7 @@ flowchart TD
 
 ### /jaan-to-sre-pipeline-audit
 
-- **Logical**: `sre:pipeline-audit`
+- **Logical**: `sre-pipeline-audit`
 - **Description**: Weak points + quick fixes, missing gates checklist, reliability improvements backlog
 - **Quick Win**: No - needs GitLab MCP
 - **Key Points**:
@@ -68,7 +68,7 @@ flowchart TD
 
 ### /jaan-to-sre-env-check
 
-- **Logical**: `sre:env-check`
+- **Logical**: `sre-env-check`
 - **Description**: Config drift + readiness checklist, missing secrets/configs, "safe to deploy?" hints
 - **Quick Win**: No - needs GitLab MCP
 - **Key Points**:
@@ -82,7 +82,7 @@ flowchart TD
 
 ### /jaan-to-sre-toil-audit
 
-- **Logical**: `sre:toil-audit`
+- **Logical**: `sre-toil-audit`
 - **Description**: Toil list + automation candidates, time spent estimates, top ROI opportunities
 - **Quick Win**: Yes
 - **Key Points**:
@@ -96,7 +96,7 @@ flowchart TD
 
 ### /jaan-to-sre-hardening-plan
 
-- **Logical**: `sre:hardening-plan`
+- **Logical**: `sre-hardening-plan`
 - **Description**: Reliability improvement backlog, sequenced steps, verification metrics
 - **Quick Win**: Yes
 - **Key Points**:
@@ -110,7 +110,7 @@ flowchart TD
 
 ### /jaan-to-sre-incident-runbook
 
-- **Logical**: `sre:incident-runbook`
+- **Logical**: `sre-incident-runbook`
 - **Description**: Runbook + escalation steps, triage checklist, "if X then Y" actions
 - **Quick Win**: Yes
 - **Key Points**:
@@ -124,7 +124,7 @@ flowchart TD
 
 ### /jaan-to-sre-incident-postmortem
 
-- **Logical**: `sre:incident-postmortem`
+- **Logical**: `sre-incident-postmortem`
 - **Description**: Blameless retro template filled, timeline + contributing factors, action items + owners
 - **Quick Win**: Yes
 - **Key Points**:

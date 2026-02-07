@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Write($JAAN_CON
 argument-hint: [initiative-or-feature-description]
 ---
 
-# ux:microcopy-write
+# ux-microcopy-write
 
 > Generate multi-language microcopy packs for UI components.
 

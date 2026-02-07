@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearc
 argument-hint: [component-description-or-requirements]
 ---
 
-# dev:fe-design
+# dev-fe-design
 
 > Create distinctive, production-grade frontend interfaces.
 

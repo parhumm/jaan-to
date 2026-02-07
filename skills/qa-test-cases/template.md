@@ -20,7 +20,7 @@
 | Edge Case Categories | Empty/Null: {{empty_count}}, Boundary: {{boundary_count}}, Error: {{error_count}}, Concurrent: {{concurrent_count}}, State: {{state_count}} |
 | Format | BDD/Gherkin |
 | Generated | {{date}} |
-| Skill | qa:test-cases |
+| Skill | qa-test-cases |
 | Traceability | {{requirement_ids}} |
 
 ---
@@ -247,7 +247,7 @@ Test case generation follows ISTQB standards and IEEE 829 specifications:
 | Field | Value |
 |-------|-------|
 | Generated | {{date}} |
-| Skill | qa:test-cases |
+| Skill | qa-test-cases |
 | Version | 1.0 |
 | Format | BDD/Gherkin |
 | Research | ISTQB, IEEE 829, BDD best practices |

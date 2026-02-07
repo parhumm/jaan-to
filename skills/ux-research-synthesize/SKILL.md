@@ -9,7 +9,7 @@ allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/research/**), Task, 
 argument-hint: [study-name] [data-sources?]
 ---
 
-# ux:research-synthesize
+# ux-research-synthesize
 
 > Synthesize UX research findings into themed insights, executive summaries, and prioritized recommendations.
 

@@ -37,7 +37,7 @@ flowchart TD
 
 ### /jaan-to-dev-feasibility-check
 
-- **Logical**: `dev:feasibility-check`
+- **Logical**: `dev-feasibility-check`
 - **Description**: Risks + dependencies, unknowns + spike recommendations, rough complexity estimate
 - **Quick Win**: Yes
 - **Key Points**:
@@ -51,7 +51,7 @@ flowchart TD
 
 ### /jaan-to-dev-arch-proposal
 
-- **Logical**: `dev:arch-proposal`
+- **Logical**: `dev-arch-proposal`
 - **Description**: Architecture outline, key choices + tradeoffs, data flow + failure modes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -65,7 +65,7 @@ flowchart TD
 
 ### /jaan-to-dev-tech-plan
 
-- **Logical**: `dev:tech-plan`
+- **Logical**: `dev-tech-plan`
 - **Description**: Tech approach with architecture, tradeoffs, risks, rollout/rollback, unknowns
 - **Quick Win**: Yes - extends existing pattern
 - **Key Points**:
@@ -79,7 +79,7 @@ flowchart TD
 
 ### ✅ /dev-be-task-breakdown
 
-- **Logical**: `dev:be-task-breakdown`
+- **Logical**: `dev-be-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
 - **Reference**: [Backend Task Breakdown Skill: Complete Research Guide/jaan-to/outputs/research/52-dev-be-task-breakdown.md)
 - **Quick Win**: Yes
@@ -94,7 +94,7 @@ flowchart TD
 
 ### /jaan-to-dev-be-data-model
 
-- **Logical**: `dev:be-data-model`
+- **Logical**: `dev-be-data-model`
 - **Description**: Tables/collections + fields, constraints + indexes, retention + migration notes
 - **Quick Win**: Yes
 - **Key Points**:
@@ -108,7 +108,7 @@ flowchart TD
 
 ### /jaan-to-dev-api-contract
 
-- **Logical**: `dev:api-contract`
+- **Logical**: `dev-api-contract`
 - **Description**: OpenAPI contract with payloads, errors, versioning, example requests/responses
 - **Quick Win**: No - needs OpenAPI MCP
 - **Key Points**:
@@ -122,7 +122,7 @@ flowchart TD
 
 ### /jaan-to-dev-api-versioning
 
-- **Logical**: `dev:api-versioning`
+- **Logical**: `dev-api-versioning`
 - **Description**: Compatibility strategy, migration notes + timeline, deprecation communication plan
 - **Quick Win**: Yes
 - **Key Points**:
@@ -136,7 +136,7 @@ flowchart TD
 
 ### ✅ /dev-fe-task-breakdown
 
-- **Logical**: `dev:fe-task-breakdown`
+- **Logical**: `dev-fe-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies
 - **Reference**: [Frontend Task Breakdown Skill: Complete Framework Research](/jaan-to/outputs/research/51-dev-fe-task-breakdown.md)
 - **Quick Win**: Yes
@@ -151,7 +151,7 @@ flowchart TD
 
 ### /jaan-to-dev-fe-state-machine
 
-- **Logical**: `dev:fe-state-machine`
+- **Logical**: `dev-fe-state-machine`
 - **Description**: UI states + transitions, events that trigger transitions, edge-case behavior
 - **Quick Win**: Yes
 - **Key Points**:
@@ -165,7 +165,7 @@ flowchart TD
 
 ### /jaan-to-dev-integration-plan
 
-- **Logical**: `dev:integration-plan`
+- **Logical**: `dev-integration-plan`
 - **Description**: API call sequence, retry policy + failure modes, observability events
 - **Quick Win**: Yes
 - **Key Points**:
@@ -179,7 +179,7 @@ flowchart TD
 
 ### /jaan-to-dev-integration-mock-stubs
 
-- **Logical**: `dev:integration-mock-stubs`
+- **Logical**: `dev-integration-mock-stubs`
 - **Description**: Stub interfaces, fake responses (success/fail), test harness guidance
 - **Quick Win**: Yes
 - **Key Points**:
@@ -193,7 +193,7 @@ flowchart TD
 
 ### /jaan-to-dev-test-plan
 
-- **Logical**: `dev:test-plan`
+- **Logical**: `dev-test-plan`
 - **Description**: Dev-owned test plan: unit/integration/e2e scope, fixtures, mocks, highest-risk scenarios
 - **Quick Win**: Yes - simple test plan
 - **Key Points**:
@@ -207,7 +207,7 @@ flowchart TD
 
 ### /jaan-to-dev-observability-events
 
-- **Logical**: `dev:observability-events`
+- **Logical**: `dev-observability-events`
 - **Description**: Log fields + metric names, trace spans suggestions, dashboard checklist
 - **Quick Win**: Yes
 - **Key Points**:
@@ -221,7 +221,7 @@ flowchart TD
 
 ### /jaan-to-dev-observability-alerts
 
-- **Logical**: `dev:observability-alerts`
+- **Logical**: `dev-observability-alerts`
 - **Description**: Suggested alerts + thresholds, severity levels, noise reduction ideas
 - **Quick Win**: Yes
 - **Key Points**:
@@ -235,7 +235,7 @@ flowchart TD
 
 ### /jaan-to-dev-docs-generate
 
-- **Logical**: `dev:docs-generate`
+- **Logical**: `dev-docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
 - **Research**: [Building a Production-Ready Documentation Generation Framework](../../../$JAAN_OUTPUTS_DIR/research/48-dev-docs-generate.md)
 - **Quick Win**: Yes - draft generation, format standardization
@@ -253,7 +253,7 @@ flowchart TD
 
 ### ✅ /jaan-to-dev-pr-review
 
-- **Logical**: `dev:pr-review`
+- **Logical**: `dev-pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
 - **Reference**: [Building a Production-Ready PR/MR Code Review Skill/jaan-to/outputs/research/53-dev-pr-review.md)
 - **Quick Win**: No - needs GitLab MCP
@@ -268,7 +268,7 @@ flowchart TD
 
 ### /jaan-to-dev-ship-check
 
-- **Logical**: `dev:ship-check`
+- **Logical**: `dev-ship-check`
 - **Description**: Pre-ship checklist: flags, migrations, monitoring, rollback, Go/No-Go recommendation
 - **Quick Win**: No - needs multiple MCPs
 - **Key Points**:
