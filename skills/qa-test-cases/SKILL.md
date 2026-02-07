@@ -4,7 +4,7 @@ description: |
   Generate production-ready BDD/Gherkin test cases from acceptance criteria.
   Applies ISTQB test design techniques (equivalence partitioning, BVA).
   Auto-triggers on: test cases, acceptance criteria, QA, BDD, Gherkin
-  Maps to: qa:test-cases
+  Maps to: qa-test-cases
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch
 argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)]
 ---

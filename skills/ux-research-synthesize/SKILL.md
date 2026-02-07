@@ -4,7 +4,7 @@ description: |
   Synthesize UX research findings into themed insights, executive summaries, and prioritized recommendations.
   Supports three synthesis modes: Speed (1-2h), Standard (1-2d), Cross-Study (meta-analysis).
   Auto-triggers on: research synthesis, thematic analysis, synthesize findings, analyze research, UX synthesis
-  Maps to: ux:research-synthesize
+  Maps to: ux-research-synthesize
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/research/**), Task, AskUserQuestion
 argument-hint: [study-name] [data-sources?]
 ---

@@ -4,7 +4,7 @@ description: |
   Create distinctive, production-grade frontend interfaces with bold design choices.
   Generates actual working code (HTML/CSS/JS, React, Vue, etc.) avoiding generic AI aesthetics.
   Auto-triggers on: frontend design, create component, design component, build ui, create interface
-  Maps to: dev:fe-design
+  Maps to: dev-fe-design
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion
 argument-hint: [component-description-or-requirements]
 ---

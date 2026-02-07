@@ -4,7 +4,7 @@ description: |
   Generate frontend task breakdowns from UX handoffs.
   Produces component inventory, state matrices, estimate bands, dependencies, and risks.
   Auto-triggers on: frontend tasks, fe breakdown, component breakdown, ux handoff tasks
-  Maps to: dev:fe-task-breakdown
+  Maps to: dev-fe-task-breakdown
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion
 argument-hint: [ux-handoff-description-or-figma-link]
 ---
