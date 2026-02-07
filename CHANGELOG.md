@@ -5,6 +5,15 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.14.1] - 2026-02-07
+
+### Fixed
+- **Marketplace Schema Validation** — Fix `repository` field format in marketplace.json
+  - Changed from npm-style object `{ "type": "git", "url": "..." }` to string `"https://github.com/parhumm/jaan-to"`
+  - Resolves: `Invalid schema: plugins.0.repository: Expected string, received object`
+
+---
+
 ## [3.14.0] - 2026-02-03
 
 ### Added
