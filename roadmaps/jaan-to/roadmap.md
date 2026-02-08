@@ -21,7 +21,11 @@
 
 For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
-**Latest:** v3.20.0 — Language preference system
+**Latest:** v3.21.0 — Jaanify showcase examples
+
+### v3.21.0 — Jaanify showcase examples
+- Examples replaced with Jaanify showcase README (`0bf37a1`)
+- Plugin and marketplace version sync fix (`807cad5`)
 
 ### v3.20.0 — Language preference system
 - Language preference for plugin conversation and output (`34df511`)

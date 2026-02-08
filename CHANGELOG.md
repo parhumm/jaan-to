@@ -5,6 +5,16 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.21.0] - 2026-02-08
+
+### Changed
+- **Examples replaced with Jaanify showcase** — Replaced starter-project examples with [Jaanify](https://github.com/parhumm/jaanify) README, a real-world project built entirely with jaan.to (`0bf37a1`)
+
+### Fixed
+- **Plugin and marketplace version sync** — Fixed `marketplace.json` plugins version mismatch (`807cad5`)
+
+---
+
 ## [3.20.0] - 2026-02-08
 
 ### Added
@@ -683,6 +693,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.21.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.21.0
 [3.20.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.20.0
 [3.19.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.19.0
 [3.18.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.18.0
