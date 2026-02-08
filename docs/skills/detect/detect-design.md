@@ -1,12 +1,12 @@
 ---
-title: "design-detect"
+title: "detect-design"
 sidebar_position: 2
 doc_type: skill
 tags: [detect, design, tokens, components, accessibility, drift]
-related: [knowledge-pack]
+related: [pack-detect]
 ---
 
-# /jaan-to:design-detect
+# /jaan-to:detect-design
 
 > Detect real design system in code with drift findings and evidence blocks.
 
@@ -21,7 +21,7 @@ Scans the repository for design system signals: brand definitions, design tokens
 ## Usage
 
 ```
-/jaan-to:design-detect
+/jaan-to:detect-design
 ```
 
 | Argument | Required | Description |

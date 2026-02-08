@@ -1,12 +1,12 @@
 ---
-title: "ux-detect"
+title: "detect-ux"
 sidebar_position: 5
 doc_type: skill
 tags: [detect, ux, journeys, heuristics, accessibility, pain-points]
-related: [ux-heuristic-review, ux-journey-map, knowledge-pack]
+related: [ux-heuristic-review, ux-journey-map, pack-detect]
 ---
 
-# /jaan-to:ux-detect
+# /jaan-to:detect-ux
 
 > Repo-driven UX audit with journey mapping and heuristic-based findings.
 
@@ -21,7 +21,7 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 ## Usage
 
 ```
-/jaan-to:ux-detect
+/jaan-to:detect-ux
 ```
 
 | Argument | Required | Description |

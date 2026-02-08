@@ -1,12 +1,12 @@
 ---
-title: "product-detect"
+title: "detect-product"
 sidebar_position: 4
 doc_type: skill
 tags: [detect, product, features, monetization, instrumentation]
-related: [pm-prd-write, knowledge-pack]
+related: [pm-prd-write, pack-detect]
 ---
 
-# /jaan-to:product-detect
+# /jaan-to:detect-product
 
 > Evidence-based product reality extraction with scored risks.
 
@@ -21,7 +21,7 @@ Extracts the "product reality" from the repository: features, value proposition 
 ## Usage
 
 ```
-/jaan-to:product-detect
+/jaan-to:detect-product
 ```
 
 | Argument | Required | Description |

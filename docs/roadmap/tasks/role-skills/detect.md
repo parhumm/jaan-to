@@ -7,24 +7,26 @@ sidebar_position: 12
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 5
 
-**Chains**: dev-detect + design-detect + writing-detect + product-detect + ux-detect → knowledge-pack
+**Chains**: detect-dev + detect-design + detect-writing + detect-product + detect-ux → pack-detect
+
+**Reference**: [Repo-analysis output & content detection standards](../../../../jaan-to/outputs/research/61-detect-pack.md)
 
 ## Userflow Schema
 
 ```mermaid
 flowchart TD
-    jaan-to-dev-detect["dev-detect<br>Dev Detect<br>Engineering audit + scored findings"] --> jaan-to-knowledge-pack["knowledge-pack<br>Knowledge Pack<br>Index + risk heatmap + unknowns"]
-    jaan-to-design-detect["design-detect<br>Design Detect<br>Design system + drift findings"] --> jaan-to-knowledge-pack
-    jaan-to-writing-detect["writing-detect<br>Writing Detect<br>Writing system + tone scoring"] --> jaan-to-knowledge-pack
-    jaan-to-product-detect["product-detect<br>Product Detect<br>Product reality + evidence"] --> jaan-to-knowledge-pack
-    jaan-to-ux-detect["ux-detect<br>UX Detect<br>UX audit + heuristic findings"] --> jaan-to-knowledge-pack
+    jaan-to-detect-dev["detect-dev<br>Dev Detect<br>Engineering audit + scored findings"] --> jaan-to-pack-detect["pack-detect<br>Knowledge Pack<br>Index + risk heatmap + unknowns"]
+    jaan-to-detect-design["detect-design<br>Design Detect<br>Design system + drift findings"] --> jaan-to-pack-detect
+    jaan-to-detect-writing["detect-writing<br>Writing Detect<br>Writing system + tone scoring"] --> jaan-to-pack-detect
+    jaan-to-detect-product["detect-product<br>Product Detect<br>Product reality + evidence"] --> jaan-to-pack-detect
+    jaan-to-detect-ux["detect-ux<br>UX Detect<br>UX audit + heuristic findings"] --> jaan-to-pack-detect
 ```
 
-**Legend**: Solid = internal | All detect skills converge into knowledge-pack
+**Legend**: Solid = internal | All detect skills converge into pack-detect
 
-### /jaan-to:dev-detect
+### /jaan-to:detect-dev
 
-- **Logical**: `dev-detect`
+- **Logical**: `detect-dev`
 - **Description**: Repo engineering audit that outputs machine-parseable + human-readable markdown with frontmatter, Findings (ID/severity/confidence/evidence blocks), and a score summary.
 - **Quick Win**: Yes
 - **Key Points**:
@@ -33,14 +35,14 @@ flowchart TD
   - Output structure uses Diátaxis-style sections: Executive Summary → Scope/Methodology → Findings → Recommendations → Appendices
   - Include findings_summary buckets + overall_score (0–10, OpenSSF-style) and lifecycle_phase (CycloneDX vocabulary) in frontmatter
   - CI/CD security checks explicitly cover secrets boundaries, runner trust, permissions, and supply-chain signals (pinning/provenance/SBOM "SLSA-ish")
-- **→ Next**: `knowledge-pack`
+- **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: SBOM/provenance/monitoring MCP)
 - **Input**: [repo]
 - **Output**: `docs/current/dev/{stack,architecture,standards,testing,cicd,deployment,security,observability,risks}.md` — each doc MUST include standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence)
 
-### /jaan-to:design-detect
+### /jaan-to:detect-design
 
-- **Logical**: `design-detect`
+- **Logical**: `detect-design`
 - **Description**: Detect real design system in code (brand/tokens/components/patterns/a11y) with drift findings and evidence blocks.
 - **Quick Win**: Yes
 - **Key Points**:
@@ -48,14 +50,14 @@ flowchart TD
   - Each finding includes: Severity, Confidence (4-level), Evidence blocks; no raw tool dumps without triage
   - Accessibility findings must be written as scoped findings (no scope-exceeding claims), and use "Unknown" when repo-only evidence is insufficient
   - Governance detection: owners/process/versioning signals (e.g., Storybook/docs conventions, token maintenance indicators)
-- **→ Next**: `knowledge-pack`
+- **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: Figma MCP for true drift detection)
 - **Input**: [repo]
 - **Output**: `docs/current/design/{brand,tokens,components,patterns,accessibility,governance}.md`
 
-### /jaan-to:writing-detect
+### /jaan-to:detect-writing
 
-- **Logical**: `writing-detect`
+- **Logical**: `detect-writing`
 - **Description**: Detect the current writing system using multi-signal extraction (glob discovery + string classification + heuristic/NLP scoring) and output a canonical writing-system spec.
 - **Quick Win**: Yes
 - **Key Points**:
@@ -65,16 +67,16 @@ flowchart TD
   - Error messages scored with a weighted rubric (Clarity/Specificity/Actionability/Tone/A11y) and flagged by automated heuristics (length, blame language, jargon, codes)
   - i18n maturity MUST be rated 0–5 using glob patterns + ICU/RTL/hardcoded-string signals + governance signals (CODEOWNERS/content linting/CI checks)
   - Glossary MUST use ISO-704-ish statuses (preferred/admitted/deprecated/forbidden) with occurrences + file evidence
-- **→ Next**: `knowledge-pack`
+- **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: CMS/helpdesk/email MCP)
 - **Input**: [repo]
 - **Output**:
   - `docs/current/writing/writing-system.md` (primary)
   - Optional split: `docs/current/writing/{glossary,ui-copy,error-messages,localization,samples}.md`
 
-### /jaan-to:product-detect
+### /jaan-to:detect-product
 
-- **Logical**: `product-detect`
+- **Logical**: `detect-product`
 - **Description**: Evidence-based "product reality" extraction: features, value proposition signals, monetization/entitlements, instrumentation reality, constraints + scored risks.
 - **Quick Win**: Yes
 - **Key Points**:
@@ -82,14 +84,14 @@ flowchart TD
   - Monetization findings must distinguish "pricing copy" vs "enforcement"—gates must be proven by code locations; absence becomes an "absence" evidence item
   - Instrumentation outputs must report taxonomy/consistency signals and clearly label heuristic conclusions as Tentative unless strongly evidenced
   - Follow the same standardized frontmatter + Findings block format to keep all audits interoperable
-- **→ Next**: `knowledge-pack`
+- **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: analytics/billing MCP)
 - **Input**: [repo]
 - **Output**: `docs/current/product/{overview,features,value-prop,monetization,entitlements,metrics,constraints}.md`
 
-### /jaan-to:ux-detect
+### /jaan-to:detect-ux
 
-- **Logical**: `ux-detect`
+- **Logical**: `detect-ux`
 - **Description**: Repo-driven UX audit with journeys/pains + heuristic-based findings, aligned to the same evidence/confidence system as other audits.
 - **Quick Win**: Yes
 - **Key Points**:
@@ -97,14 +99,14 @@ flowchart TD
   - Heuristic findings must be written as triaged findings (no raw dumps), each with severity + confidence + evidence blocks
   - Accessibility findings must stay within repo evidence scope; otherwise mark as Uncertain/Unknown
   - Use consistent doc structure (Exec Summary, Scope/Methodology, Findings, Recommendations, Appendices)
-- **→ Next**: `knowledge-pack`
+- **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: session replay/support/monitoring MCP)
 - **Input**: [repo]
 - **Output**: `docs/current/ux/{personas,jtbd,flows,pain-points,heuristics,accessibility,gaps}.md`
 
-### /jaan-to:knowledge-pack
+### /jaan-to:pack-detect
 
-- **Logical**: `knowledge-pack`
+- **Logical**: `pack-detect`
 - **Description**: Consolidates all detect outputs into an index with standardized metadata, severity buckets, confidence distribution, and a prioritized Unknowns backlog.
 - **Quick Win**: Yes
 - **Key Points**:
