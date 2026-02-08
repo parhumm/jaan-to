@@ -21,13 +21,11 @@
 
 For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
-**Latest:** v3.18.0 — Add dev-api-contract skill
+**Latest:** v3.19.0 — Add dev-be-data-model skill
 
 ---
 
 ## Unreleased
-
-- [x] Add `dev-be-data-model` skill — Data model documentation with constraints, indexes, migrations, and retention policies (`758d334`)
 
 ---
 
