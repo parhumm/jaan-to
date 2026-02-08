@@ -3,7 +3,7 @@
 > Project: {project-name}
 > Last updated: {date}
 
-**TIP**: Run `/jaan-to:dev-stack-detect` to auto-populate this file by scanning your codebase.
+**TIP**: Run `/jaan-to:detect-dev` to audit your codebase with evidence-backed findings, or `/jaan-to:pack-detect` for a full repo analysis.
 
 ---
 

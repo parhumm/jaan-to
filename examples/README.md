@@ -59,7 +59,7 @@ The entire Jaanify project — from discovery to implementation specs — was pr
 
 ---
 
-## Tech Stack (detected by `/jaan-to:dev-stack-detect`)
+## Tech Stack (detected by `/jaan-to:detect-dev`)
 
 React 19, Next.js 15, TailwindCSS 4, Zustand 5, Node.js 22, Fastify 5, PostgreSQL 16 (Supabase), Redis 7 (Upstash), OpenAI SDK, Vitest 3, Playwright 1.50
 

@@ -134,7 +134,7 @@ OLD_PATTERNS=(
   # v3.15.2 → v3.16.0 rename: old prefixed names
   "jaan-to-pm-prd-write" "jaan-to-pm-story-write" "jaan-to-pm-research-about"
   "jaan-to-dev-fe-design" "jaan-to-dev-fe-task-breakdown" "jaan-to-dev-be-task-breakdown"
-  "jaan-to-dev-stack-detect" "jaan-to-qa-test-cases"
+  "jaan-to-qa-test-cases"
   "jaan-to-ux-research-synthesize" "jaan-to-ux-microcopy-write" "jaan-to-ux-heatmap-analyze"
   "jaan-to-data-gtm-datalayer"
   "to-jaan-docs-create" "to-jaan-docs-update" "to-jaan-learn-add"
@@ -155,11 +155,11 @@ for f in tech.md team.md integrations.md config.md boundaries.md; do
   fi
 done
 
-# 10. Check if stack detection should be suggested (context files still have placeholders)
-SUGGEST_STACK_DETECT="false"
+# 10. Check if detect skills should be suggested (context files still have placeholders)
+SUGGEST_DETECT="false"
 if [ -f "$PROJECT_DIR/$CONTEXT_DIR/tech.md" ]; then
   if grep -q '{project-name}' "$PROJECT_DIR/$CONTEXT_DIR/tech.md" 2>/dev/null; then
-    SUGGEST_STACK_DETECT="true"
+    SUGGEST_DETECT="true"
   fi
 fi
 
@@ -196,6 +196,6 @@ cat <<RESULT
   "missing_context": [${MISSING_LIST}],
   "old_standalone_skills": [${OLD_LIST}],
   "migration_needed": $([ ${#OLD_SKILLS[@]} -gt 0 ] && echo "true" || echo "false"),
-  "suggest_stack_detect": ${SUGGEST_STACK_DETECT}
+  "suggest_detect": ${SUGGEST_DETECT}
 }
 RESULT

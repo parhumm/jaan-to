@@ -42,7 +42,7 @@ related: [README.md, ../config/context-system.md]
 9. **Copies LEARN.md seeds** — Copies `skills/*/LEARN.md` to `jaan-to/learn/{skill-name}.learn.md` (skips existing).
 10. **Detects old standalone skills** — Scans `.claude/skills/` for legacy naming conventions (pre-v3.16 names).
 11. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
-12. **Suggests stack detection** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:dev-stack-detect`.
+12. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:pack-detect` to perform full repo analysis.
 
 ---
 
@@ -59,7 +59,7 @@ related: [README.md, ../config/context-system.md]
 | Seeds research index | `outputs/research/README.md` missing | Generates scaffold README |
 | Seeds learn files | `{skill-name}.learn.md` missing | Copies from `skills/*/LEARN.md` |
 | Skips copy | Any destination file already exists | Preserves existing files |
-| Suggests stack detect | `tech.md` contains `{project-name}` | Sets `suggest_stack_detect: true` |
+| Suggests detect skills | `tech.md` contains `{project-name}` | Sets `suggest_detect: true` |
 | Warns | Old standalone skills detected | Reports `migration_needed: true` |
 | Warns | Context seed files missing from plugin | Lists missing files |
 
@@ -88,7 +88,7 @@ related: [README.md, ../config/context-system.md]
   "missing_context": [],
   "old_standalone_skills": [],
   "migration_needed": false,
-  "suggest_stack_detect": true
+  "suggest_detect": true
 }
 ```
 
@@ -113,7 +113,7 @@ related: [README.md, ../config/context-system.md]
   "missing_context": [],
   "old_standalone_skills": [],
   "migration_needed": false,
-  "suggest_stack_detect": false
+  "suggest_detect": false
 }
 ```
 

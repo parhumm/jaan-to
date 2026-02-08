@@ -72,12 +72,11 @@ GTM tracking implementations and analytics configurations.
 - `data/gtm/` - Google Tag Manager dataLayer tracking code
 
 ### [Development](dev/)
-Technical task breakdowns and stack detection.
+Technical task breakdowns.
 
 **Subdomains:**
 - `dev/frontend/` - Frontend task breakdowns
 - `dev/backend/` - Backend task breakdowns
-- `dev/stack/` - Technology stack detection reports
 
 ### [UX Research](ux/)
 Heatmap analysis and user research findings.
@@ -102,7 +101,6 @@ Deep research summaries on various topics.
 | `/jaan-to-dev-fe-task-breakdown` | `dev/frontend/` | Folder with frontend tasks |
 | `/jaan-to-dev-be-task-breakdown` | `dev/backend/` | Folder with backend tasks |
 | `/jaan-to-ux-heatmap-analyze` | `ux/heatmap/` | Folder with heatmap analysis |
-| `/jaan-to-dev-stack-detect` | `dev/stack/` | Folder with stack detection |
 | `/jaan-to-pm-research-about` | `research/` | Flat file (no folder) |
 
 ---

@@ -23,7 +23,7 @@ Product Development Flow:
                  ├──> /jaan-to:pm-story-write (Optional)
                  │    "Generate user stories from PRD"
                  │
-                 ├──> /jaan-to:dev-stack-detect
+                 ├──> /jaan-to:detect-dev
                  │    "Auto-detect tech stack for context"
                  │
                  ├──> /jaan-to:dev-fe-task-breakdown
@@ -135,7 +135,7 @@ These skills are suggested by multiple other skills:
 /jaan-to:pm-story-write from prd
 
 # Step 3: Tech Planning
-/jaan-to:dev-stack-detect
+/jaan-to:detect-dev
 /jaan-to:dev-fe-task-breakdown from prd
 /jaan-to:dev-be-task-breakdown from prd
 
@@ -179,7 +179,7 @@ These skills don't typically call others:
 | Skill | Purpose | Usage Pattern |
 |-------|---------|---------------|
 | `/jaan-to:pm-story-write` | Generate user stories | Standalone or from PRD |
-| `/jaan-to:dev-stack-detect` | Auto-detect tech stack | Run once per project |
+| `/jaan-to:detect-dev` | Auto-detect tech stack | Run once per project |
 | `/jaan-to:ux-microcopy-write` | Multi-language UI copy | Standalone |
 | `/jaan-to:ux-heatmap-analyze` | Heatmap analysis | Standalone (requires CSV/screenshot) |
 | `/jaan-to:roadmap-add` | Add roadmap task | Standalone |
@@ -216,7 +216,7 @@ Skills may invoke agents automatically:
 - **Suggested vs Required:** Most skill chains are suggestions, not hard requirements
 - **Flexibility:** You can use skills in any order that makes sense for your workflow
 - **Feedback Loop:** All skills suggest `/jaan-to:learn-add` after execution for continuous improvement
-- **Context Reuse:** Running `/jaan-to:dev-stack-detect` once benefits all subsequent tech-aware skills
+- **Context Reuse:** Running `/jaan-to:detect-dev` once benefits all subsequent tech-aware skills
 
 ---
 

@@ -14,7 +14,7 @@ slug: /skills/detect
 
 | Skill | Description |
 |-------|-------------|
-| [/jaan-to:dev-detect](dev-detect.md) | Repo engineering audit with scored findings |
+| [/jaan-to:detect-dev](detect-dev.md) | Repo engineering audit with scored findings |
 | [/jaan-to:detect-design](detect-design.md) | Design system detection with drift findings |
 | [/jaan-to:detect-writing](detect-writing.md) | Writing system extraction with tone scoring |
 | [/jaan-to:detect-product](detect-product.md) | Product reality extraction with evidence |

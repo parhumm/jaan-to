@@ -1,12 +1,12 @@
 ---
-title: "dev-detect"
+title: "detect-dev"
 sidebar_position: 1
 doc_type: skill
 tags: [detect, dev, engineering, audit, security, cicd]
-related: [dev-stack-detect, pack-detect]
+related: [detect-design, detect-writing, detect-product, detect-ux, pack-detect]
 ---
 
-# /jaan-to:dev-detect
+# /jaan-to:detect-dev
 
 > Repo engineering audit with machine-parseable findings and OpenSSF-style scoring.
 
@@ -21,7 +21,7 @@ Performs a comprehensive engineering audit of the repository, producing structur
 ## Usage
 
 ```
-/jaan-to:dev-detect
+/jaan-to:detect-dev
 ```
 
 | Argument | Required | Description |

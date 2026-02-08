@@ -87,7 +87,7 @@ Key dependency flows across roles:
 - **Security Gate**: SEC (threat-model → pii-map) feeds into DEV and DELIVERY
 - **Reliability**: DEV (observability-alerts) → SRE (slo-setup → alert-tuning)
 - **Beta**: GROWTH (beta-cohort-plan) → RELEASE (beta-rollout-plan → issue-log)
-- **Detect → Knowledge**: DETECT (dev-detect + detect-design + detect-writing + detect-product + detect-ux) → pack-detect
+- **Detect → Knowledge**: DETECT (detect-dev + detect-design + detect-writing + detect-product + detect-ux) → pack-detect
 
 ---
 

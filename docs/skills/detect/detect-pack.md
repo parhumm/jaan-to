@@ -3,7 +3,7 @@ title: "pack-detect"
 sidebar_position: 6
 doc_type: skill
 tags: [detect, knowledge, consolidation, risk, unknowns, evidence]
-related: [dev-detect, detect-design, detect-writing, detect-product, detect-ux]
+related: [detect-dev, detect-design, detect-writing, detect-product, detect-ux]
 ---
 
 # /jaan-to:pack-detect

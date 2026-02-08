@@ -39,7 +39,7 @@ Every seed follows a **skip-if-exists** rule: your edits are never overwritten. 
 
 After bootstrap runs, customize files in this order:
 
-1. **Edit `jaan-to/context/tech.md`** — Replace the placeholder stack with yours. Or run `/jaan-to:dev-stack-detect` to auto-populate it from your codebase.
+1. **Edit `jaan-to/context/tech.md`** — Replace the placeholder stack with yours. Or run `/jaan-to:detect-dev` to audit your codebase and produce evidence-backed findings.
 2. **Fill `jaan-to/context/team.md`** — Team size, ceremonies, sprint settings, approval workflows.
 3. **Add tools to `jaan-to/context/integrations.md`** — Jira project keys, GitHub repos, Slack channels, analytics IDs.
 4. **Customize a template** (optional) — Edit any file in `jaan-to/templates/` to change how a skill structures its output.

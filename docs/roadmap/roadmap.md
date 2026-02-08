@@ -65,11 +65,11 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 Evidence-based repo audits that produce `docs/current/` knowledge. All detect skills are Quick Wins (no MCP required). Each outputs machine-parseable markdown with YAML frontmatter, SARIF-like evidence blocks, and confidence scoring.
 
-Pipeline: dev-detect + detect-design + detect-writing + detect-product + detect-ux → pack-detect
+Pipeline: detect-dev + detect-design + detect-writing + detect-product + detect-ux → pack-detect
 
 | Skill | Domain | Output |
 |-------|--------|--------|
-| `/jaan-to:dev-detect` | Engineering | `docs/current/dev/` |
+| `/jaan-to:detect-dev` | Engineering | `docs/current/dev/` |
 | `/jaan-to:detect-design` | Design system | `docs/current/design/` |
 | `/jaan-to:detect-writing` | Writing/content | `docs/current/writing/` |
 | `/jaan-to:detect-product` | Product | `docs/current/product/` |
@@ -146,7 +146,12 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
 | `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then AC |
 | `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
-| `/jaan-to:dev-stack-detect` | Detect project tech stack |
+| `/jaan-to:detect-dev` | Engineering audit with scored findings |
+| `/jaan-to:detect-design` | Design system detection with drift findings |
+| `/jaan-to:detect-writing` | Writing system extraction with tone scoring |
+| `/jaan-to:detect-product` | Product reality extraction with evidence |
+| `/jaan-to:detect-ux` | UX audit with journey/pain-point findings |
+| `/jaan-to:pack-detect` | Consolidate detect outputs into knowledge index |
 | `/jaan-to:dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
 | `/jaan-to:dev-be-task-breakdown` | Backend task breakdown from PRDs |
 | `/jaan-to:dev-fe-design` | Frontend component design |
