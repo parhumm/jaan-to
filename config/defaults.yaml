@@ -22,3 +22,7 @@ learning_merge_order: "plugin,project"
 customization_path_variables: true
 customization_template_variables: true
 customization_context_variables: true
+
+# Language preference for conversation and output
+# "ask" = prompt on first skill run, then save choice
+language: "ask"
