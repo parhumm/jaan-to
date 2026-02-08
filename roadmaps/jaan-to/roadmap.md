@@ -27,7 +27,7 @@ For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
 ## Unreleased
 
-(none)
+- [x] Add `dev-api-contract` skill — OpenAPI 3.1 contract generation from API entities
 
 ---
 
@@ -112,6 +112,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
 | `/jaan-to:dev-be-task-breakdown` | Backend task breakdown from PRDs |
 | `/jaan-to:dev-fe-design` | Frontend component design |
+| `/jaan-to:dev-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
 | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |
