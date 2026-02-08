@@ -8,6 +8,7 @@
 
 | Area | File | Purpose |
 |------|------|---------|
+| [Seed Files](seed-files.md) | `jaan-to/` | Default files copied on first run |
 | [Stacks](stacks.md) | `jaan-to/context/*.md` | Your team and tech context |
 | [Context System](context-system.md) | `jaan-to/context/` | Context injection system |
 | [Permissions](permissions.md) | `.claude/settings.json` | Allow/deny rules |

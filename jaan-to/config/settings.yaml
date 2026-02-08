@@ -1,0 +1,31 @@
+# jaan.to Project Configuration
+# Version: 3.0.0
+# This file is copied to jaan-to/config/settings.yaml in your project
+# Edit it to customize paths, templates, and learning behavior
+
+version: "3.0"
+
+# Path Customization
+# Uncomment and modify to change default locations
+# paths_templates: "docs/templates"
+# paths_learning: "docs/learning"
+# paths_context: "docs/context"
+# paths_outputs: "artifacts/jaan-to"
+
+# Template Customization
+# Uncomment to use custom template files
+# templates_pm-prd-write_path: "./custom-templates/enterprise-prd.md"
+# templates_pm-prd-write_enabled: true
+
+# Learning Strategy
+# Options: merge (combine plugin + project), override (project only)
+learning_strategy: "merge"
+
+# Tech Stack Configuration
+# Edit jaan-to/context/tech.md to define your project's tech stack
+# Skills will automatically reference it in generated outputs
+
+# Notes:
+# - Paths are relative to project root
+# - Use forward slashes (/) even on Windows
+# - Restart Claude session after changes for them to take effect
