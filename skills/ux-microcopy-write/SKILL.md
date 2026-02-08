@@ -1,7 +1,7 @@
 ---
 name: ux-microcopy-write
 description: Generate multi-language microcopy packs for UI components with cultural adaptation and RTL/LTR handling.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Write($JAAN_CONTEXT_DIR/localization.md), Write($JAAN_CONTEXT_DIR/tone-of-voice.md), WebSearch, Task, AskUserQuestion, Bash
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Write($JAAN_CONTEXT_DIR/localization.md), Write($JAAN_CONTEXT_DIR/tone-of-voice.md), WebSearch, Task, AskUserQuestion, Bash, Edit(jaan-to/config/settings.yaml)
 argument-hint: [initiative-or-feature-description]
 ---
 
@@ -37,6 +37,25 @@ If the file exists, apply its lessons throughout this execution:
 - Avoid mistakes listed in "Common Mistakes"
 
 If the file does not exist, continue without it.
+
+### Language Settings
+
+**Read language preference** from `jaan-to/config/settings.yaml`:
+
+1. Check for per-skill override: `language_ux-microcopy-write` field
+2. If no override, use the global `language` field
+3. Resolve:
+
+| Value | Action |
+|-------|--------|
+| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
+| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
+
+**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
+
+**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+
+> **Language exception**: This setting controls only plugin conversation language. The multi-language microcopy output is independently controlled by `$JAAN_CONTEXT_DIR/localization.md` and this skill's own Language Selection step.
 
 ---
 

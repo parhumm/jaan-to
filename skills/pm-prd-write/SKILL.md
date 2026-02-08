@@ -1,7 +1,7 @@
 ---
 name: pm-prd-write
 description: Generate a Product Requirements Document from an initiative description.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [initiative-description]
 hooks:
   PreToolUse:
@@ -49,6 +49,23 @@ Also read context files if available:
 - `$JAAN_CONTEXT_DIR/team.md` - Know team structure and norms
 
 If the file does not exist, continue without it.
+
+### Language Settings
+
+**Read language preference** from `jaan-to/config/settings.yaml`:
+
+1. Check for per-skill override: `language_pm-prd-write` field
+2. If no override, use the global `language` field
+3. Resolve:
+
+| Value | Action |
+|-------|--------|
+| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
+| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
+
+**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
+
+**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
 
 ---
 

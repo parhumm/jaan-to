@@ -1,7 +1,7 @@
 ---
 name: skill-create
 description: Guide users through creating new jaan.to skills step-by-step.
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 ---
 
@@ -45,6 +45,23 @@ If the file exists, apply its lessons throughout this execution:
 - ✗ Not validating with `/jaan-to:skill-update` before user testing
 
 If the file does not exist, continue without it (but still avoid mistakes above).
+
+### Language Settings
+
+**Read language preference** from `jaan-to/config/settings.yaml`:
+
+1. Check for per-skill override: `language_skill-create` field
+2. If no override, use the global `language` field
+3. Resolve:
+
+| Value | Action |
+|-------|--------|
+| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
+| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
+
+**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
+
+**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
 
 ---
 
@@ -432,7 +449,7 @@ Write to: `skills/{name}/SKILL.md`
 
 **Standard pattern for all skills**:
 ```markdown
-## Pre-Execution
+## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
 `$JAAN_LEARN_DIR/{skill-name}.learn.md`
@@ -442,9 +459,33 @@ If the file exists, apply its lessons throughout this execution:
 - Note edge cases to check from "Edge Cases"
 - Follow workflow improvements from "Workflow"
 - Avoid mistakes listed in "Common Mistakes"
+
+If the file does not exist, continue without it.
+
+### Language Settings
+
+**Read language preference** from `jaan-to/config/settings.yaml`:
+
+1. Check for per-skill override: `language_{skill-name}` field
+2. If no override, use the global `language` field
+3. Resolve:
+
+| Value | Action |
+|-------|--------|
+| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
+| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
+
+**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
+
+**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
 ```
 
-**For tech-aware skills, add**:
+**For skills that generate code, add after Language Settings**:
+```markdown
+> **Language exception**: Generated code output (variable names, code blocks, schemas, SQL, API specs) is NOT affected by this setting and remains in the project's programming language.
+```
+
+**For tech-aware skills, add before Language Settings**:
 ```markdown
 Also read tech context if available:
 - `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack for relevant features
@@ -648,6 +689,9 @@ Before completing Step 12, verify:
 - [ ] Frontmatter permissions use environment variables
 - [ ] Context Files section references `$JAAN_CONTEXT_DIR`, `$JAAN_TEMPLATES_DIR`, `$JAAN_LEARN_DIR`
 - [ ] Pre-Execution reads from `$JAAN_LEARN_DIR/{skill-name}.learn.md`
+- [ ] Pre-Execution includes Language Settings block (reads `jaan-to/config/settings.yaml`)
+- [ ] `allowed-tools` includes `Edit(jaan-to/config/settings.yaml)`
+- [ ] If skill generates code, Language exception note is present
 - [ ] Output paths use `$JAAN_OUTPUTS_DIR`
 - [ ] template.md uses variable syntax: `{{field}}`, `{{env:VAR}}`, `{{import:path#section}}`
 

@@ -21,6 +21,9 @@ version: "3.0"
 # Options: merge (combine plugin + project), override (project only)
 learning_strategy: "merge"
 
+# Language preference for conversation and output
+language: "en"
+
 # Tech Stack Configuration
 # Edit jaan-to/context/tech.md to define your project's tech stack
 # Skills will automatically reference it in generated outputs

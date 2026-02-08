@@ -1,7 +1,7 @@
 ---
 name: pm-story-write
 description: Generate user stories with Given/When/Then acceptance criteria following INVEST principles.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task, Edit(jaan-to/config/settings.yaml)
 argument-hint: [feature] [persona] [goal] OR [epic-id]
 ---
 
@@ -56,6 +56,23 @@ Also optionally reference research insights:
 - Splitting patterns if needed (Section 3)
 
 If files don't exist, continue without them.
+
+### Language Settings
+
+**Read language preference** from `jaan-to/config/settings.yaml`:
+
+1. Check for per-skill override: `language_pm-story-write` field
+2. If no override, use the global `language` field
+3. Resolve:
+
+| Value | Action |
+|-------|--------|
+| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
+| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
+
+**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
+
+**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
 
 ---
 
