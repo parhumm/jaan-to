@@ -47,25 +47,25 @@ For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
 ---
 
-## Phase 5: Role Skills (137 across 11 roles)
+## Phase 5: Role Skills (141 across 11 roles)
 
 > Details: [tasks/role-skills.md](tasks/role-skills.md)
 
-137 skills cataloged across 11 roles. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
+141 skills cataloged across 11 roles. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
 
 All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/jaan-to:skill-update` validation.
 
 | Role | Total | Quick Wins | Advanced | File |
 |------|-------|------------|----------|------|
-| PM | 23 | 17 | 6 | [pm.md](tasks/role-skills/pm.md) |
-| DEV | 17 | 13 | 4 | [dev.md](tasks/role-skills/dev.md) |
+| PM | 24 | 18 | 6 | [pm.md](tasks/role-skills/pm.md) |
+| DEV | 19 | 15 | 4 | [dev.md](tasks/role-skills/dev.md) |
 | QA | 12 | 8 | 4 | [qa.md](tasks/role-skills/qa.md) |
 | DATA | 14 | 8 | 6 | [data.md](tasks/role-skills/data.md) |
 | GROWTH | 15 | 9 | 6 | [growth.md](tasks/role-skills/growth.md) |
 | UX | 20 | 15 | 5 | [ux.md](tasks/role-skills/ux.md) |
 | SEC | 4 | 4 | 0 | [sec.md](tasks/role-skills/sec.md) |
 | DELIVERY | 8 | 8 | 0 | [delivery.md](tasks/role-skills/delivery.md) |
-| SRE | 8 | 4 | 4 | [sre.md](tasks/role-skills/sre.md) |
+| SRE | 9 | 5 | 4 | [sre.md](tasks/role-skills/sre.md) |
 | SUPPORT | 8 | 8 | 0 | [support.md](tasks/role-skills/support.md) |
 | RELEASE | 8 | 8 | 0 | [release.md](tasks/role-skills/release.md) |
 

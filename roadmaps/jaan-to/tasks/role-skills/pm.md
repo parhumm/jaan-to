@@ -1,4 +1,4 @@
-# PM Skills (23)
+# PM Skills (24)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
 
@@ -32,6 +32,9 @@ flowchart TD
     jaan-to-pm-acceptance-criteria["pm-acceptance-criteria<br>Acceptance Criteria<br>Testable AC + edge cases"] -.-> qa-test-cases["qa-test-cases<br>QA: test-cases"]
     pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
     pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
+    pm-prd-write["pm-prd-write<br>PRD Write ★"] --> jaan-to-pm-trace-links["pm-trace-links<br>Trace Links<br>Traceability matrix + coverage"]
+    pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] --> jaan-to-pm-trace-links["pm-trace-links<br>Trace Links<br>Traceability matrix + coverage"]
+    jaan-to-pm-trace-links["pm-trace-links<br>Trace Links<br>Traceability matrix + coverage"] -.-> qa-test-cases["qa-test-cases<br>QA: test-cases"]
     jaan-to-pm-release-notes-draft["pm-release-notes-draft<br>Release Notes Draft<br>User-facing changes + support notes"] -.-> jaan-to-support-help-article["support-help-article<br>SUPPORT: help-article"]
     jaan-to-pm-release-notes-draft["pm-release-notes-draft<br>Release Notes Draft<br>User-facing changes + support notes"] -.-> jaan-to-growth-launch-announcement["growth-launch-announcement<br>GROWTH: launch-announcement"]
     jaan-to-pm-now-next-later["pm-now-next-later<br>Now/Next/Later<br>Board + outcomes + confidence"] --> jaan-to-pm-milestones["pm-milestones<br>Milestones<br>Owners + deps + critical path"]
@@ -329,6 +332,22 @@ flowchart TD
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`
 - **Failure Modes**: Too technical; missing "so that"; AC not testable
 - **Quality Gates**: INVEST criteria met; QA confirms testability
+
+### /jaan-to:pm-trace-links
+
+- **Logical**: `pm-trace-links`
+- **Description**: Generate traceability matrix linking PRD requirements → User Stories → Tasks → Tests with bi-directional references
+- **Quick Win**: Yes
+- **Key Points**:
+  - Parse and extract IDs from existing artifacts (US-01, TASK-BE-01, etc.)
+  - Build dependency graph with forward/backward links
+  - Detect orphaned items (tasks with no story, tests with no task)
+  - Generate coverage metrics (% requirements with tests)
+  - Include Mermaid diagrams for visual traceability
+- **→ Next**: `qa-test-cases`
+- **MCP Required**: None
+- **Input**: [prd, stories, tasks, test-cases]
+- **Output**: `$JAAN_OUTPUTS_DIR/pm/trace/{slug}/traceability-matrix.md`
 
 ### /jaan-to:pm-release-notes-draft
 

@@ -1,8 +1,8 @@
-# SRE Skills (8)
+# SRE Skills (9)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
 
-**Chains**: SLO → Alerts | Pipeline → Env | Toil → Hardening | Runbook → Postmortem
+**Chains**: SLO → Alerts | Pipeline Create → Pipeline Audit → Env | Toil → Hardening | Runbook → Postmortem
 
 ## Userflow Schema
 
@@ -10,6 +10,8 @@
 flowchart TD
     jaan-to-sre-slo-setup["sre-slo-setup<br>SLO Setup<br>SLOs + error budgets + SLIs"] --> jaan-to-sre-alert-tuning["sre-alert-tuning<br>Alert Tuning<br>Noise reduction + severity map"]
     jaan-to-sre-alert-tuning["sre-alert-tuning<br>Alert Tuning<br>Noise reduction + severity map"] -.-> jaan-to-dev-observability-alerts["dev-observability-alerts<br>DEV: observability-alerts"]
+    dev-stack-detect["dev-stack-detect<br>DEV: stack-detect"] -.-> jaan-to-sre-pipeline-create["sre-pipeline-create<br>Pipeline Create<br>CI/CD workflows + Docker + deploy"]
+    jaan-to-sre-pipeline-create["sre-pipeline-create<br>Pipeline Create<br>CI/CD workflows + Docker + deploy"] --> jaan-to-sre-pipeline-audit["sre-pipeline-audit<br>Pipeline Audit<br>Weak points + missing gates"]
     jaan-to-sre-pipeline-audit["sre-pipeline-audit<br>Pipeline Audit<br>Weak points + missing gates"] --> jaan-to-sre-env-check["sre-env-check<br>Env Check<br>Config drift + readiness"]
     jaan-to-sre-env-check["sre-env-check<br>Env Check<br>Config drift + readiness"] -.-> jaan-to-dev-ship-check["dev-ship-check<br>DEV: ship-check"]
     jaan-to-sre-toil-audit["sre-toil-audit<br>Toil Audit<br>Toil list + automation candidates"] --> jaan-to-sre-hardening-plan["sre-hardening-plan<br>Hardening Plan<br>Reliability backlog + steps"]
@@ -17,6 +19,7 @@ flowchart TD
     jaan-to-sre-incident-runbook["sre-incident-runbook<br>Incident Runbook<br>Runbook + escalation + triage"] --> jaan-to-sre-incident-postmortem["sre-incident-postmortem<br>Incident Postmortem<br>Timeline + actions + owners"]
     jaan-to-sre-incident-postmortem["sre-incident-postmortem<br>Incident Postmortem<br>Timeline + actions + owners"] --> jaan-to-sre-hardening-plan["sre-hardening-plan<br>Hardening Plan<br>Reliability backlog + steps"]
 
+    style dev-stack-detect fill:#f0f0f0,stroke:#999
     style jaan-to-dev-observability-alerts fill:#f0f0f0,stroke:#999
     style jaan-to-dev-ship-check fill:#f0f0f0,stroke:#999
     style jaan-to-delivery-backlog-split fill:#f0f0f0,stroke:#999
@@ -51,6 +54,22 @@ flowchart TD
 - **MCP Required**: Monitoring tools (Datadog/Grafana)
 - **Input**: [alerts]
 - **Output**: `$JAAN_OUTPUTS_DIR/sre/monitor/{slug}/alert-tuning.md`
+
+### /jaan-to:sre-pipeline-create
+
+- **Logical**: `sre-pipeline-create`
+- **Description**: Generate CI/CD pipeline configuration: GitHub Actions workflows, Dockerfile, deployment manifests, testing stages
+- **Quick Win**: Yes
+- **Key Points**:
+  - Multi-stage Docker builds for optimization
+  - Parallel test/lint/type-check jobs
+  - Environment-specific deployment with approval gates
+  - Secrets management pattern (GitHub Secrets)
+- **→ Next**: `sre-pipeline-audit`
+- **MCP Required**: None
+- **Input**: [tech-stack, project-structure, deployment-target]
+- **Output**: `$JAAN_OUTPUTS_DIR/sre/cicd/{slug}/pipeline/`
+- **Note**: Complements existing `sre-pipeline-audit` (audit-only)
 
 ### /jaan-to-sre-pipeline-audit
 

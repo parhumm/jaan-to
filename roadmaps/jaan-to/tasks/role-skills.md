@@ -1,6 +1,6 @@
 # Role Skills Catalog
 
-> Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 130 skills across 11 roles
+> Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 134 skills across 11 roles
 
 ## Overview
 
@@ -56,15 +56,15 @@ Use v3.0.0 syntax in all template.md files:
 
 | Role | Skills | Quick Wins | File |
 |------|--------|------------|------|
-| PM | 23 | 17 | [pm.md](role-skills/pm.md) |
-| DEV | 17 | 13 | [dev.md](role-skills/dev.md) |
+| PM | 24 | 18 | [pm.md](role-skills/pm.md) |
+| DEV | 19 | 15 | [dev.md](role-skills/dev.md) |
 | QA | 12 | 8 | [qa.md](role-skills/qa.md) |
 | DATA | 14 | 8 | [data.md](role-skills/data.md) |
 | GROWTH | 15 | 9 | [growth.md](role-skills/growth.md) |
 | UX | 20 | 15 | [ux.md](role-skills/ux.md) |
 | SEC | 4 | 4 | [sec.md](role-skills/sec.md) |
 | DELIVERY | 8 | 8 | [delivery.md](role-skills/delivery.md) |
-| SRE | 8 | 4 | [sre.md](role-skills/sre.md) |
+| SRE | 9 | 5 | [sre.md](role-skills/sre.md) |
 | SUPPORT | 8 | 8 | [support.md](role-skills/support.md) |
 | RELEASE | 8 | 8 | [release.md](role-skills/release.md) |
 
@@ -86,7 +86,7 @@ Key dependency flows across roles:
 
 ## Acceptance Criteria
 
-- [ ] All 137 skills created with SKILL.md + LEARN.md seed
+- [ ] All 141 skills created with SKILL.md + LEARN.md seed
 - [ ] Each skill follows `docs/extending/create-skill.md` v3.0.0 specification
 - [ ] **All skills use `$JAAN_*` environment variables (zero hardcoded paths)**
 - [ ] **Tech-aware skills integrate with `$JAAN_CONTEXT_DIR/tech.md`**

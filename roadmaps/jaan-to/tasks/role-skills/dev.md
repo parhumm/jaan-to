@@ -1,8 +1,8 @@
-# DEV Skills (17)
+# DEV Skills (19)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
 
-**Chains**: Discovery → Architecture → BE → API → FE → Integration → Test → Observability → Ship
+**Chains**: Discovery → Architecture → BE → API → Scaffold (BE/FE) → Integration → Test → Observability → Ship
 
 ## Userflow Schema
 
@@ -17,6 +17,14 @@ flowchart TD
     jaan-to-dev-api-contract["dev-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"]
     jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
     jaan-to-dev-api-contract["dev-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
+    jaan-to-dev-api-contract["dev-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-be-scaffold["dev-be-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"]
+    jaan-to-dev-be-scaffold["dev-be-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"]
+    jaan-to-dev-be-scaffold["dev-be-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
+    dev-fe-task-breakdown["dev-fe-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
+    jaan-to-dev-api-contract["dev-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
+    ux-microcopy-write["ux-microcopy-write<br>UX: microcopy-write"] -.-> jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
+    jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"] --> jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"]
+    jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
     dev-fe-task-breakdown["dev-fe-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>FE State Machine<br>UI states + transitions"]
     jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>FE State Machine<br>UI states + transitions"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
     jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"] --> jaan-to-dev-integration-mock-stubs["dev-integration-mock-stubs<br>Integration Mock Stubs<br>Stub interfaces + fake responses"]
@@ -28,6 +36,7 @@ flowchart TD
     jaan-to-dev-ship-check["dev-ship-check<br>Ship Check<br>Flags + migrations + Go/No-Go"] -.-> jaan-to-qa-release-signoff["qa-release-signoff<br>QA: release-signoff"]
 
     style qa-test-cases fill:#f0f0f0,stroke:#999
+    style ux-microcopy-write fill:#f0f0f0,stroke:#999
     style jaan-to-sre-slo-setup fill:#f0f0f0,stroke:#999
     style jaan-to-release-prod-runbook fill:#f0f0f0,stroke:#999
     style jaan-to-qa-release-signoff fill:#f0f0f0,stroke:#999
@@ -122,6 +131,22 @@ flowchart TD
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
 - **Reference**: [`59-dev-api-contract.md`](../../jaan-to/outputs/research/59-dev-api-contract.md)
 
+### /jaan-to:dev-be-scaffold
+
+- **Logical**: `dev-be-scaffold`
+- **Description**: Generate production-ready backend code from specifications: Fastify routes, Prisma schema, service layer, middleware, validation
+- **Quick Win**: Yes
+- **Key Points**:
+  - Map OpenAPI operations to Fastify v4+ route handlers (TypeScript)
+  - Generate Prisma models from data model with relations and indexes
+  - Include validation schemas (Zod) derived from API contract
+  - Generate error handling middleware matching RFC 9457
+  - Output includes setup README
+- **→ Next**: `dev-integration-plan`, `dev-test-plan`
+- **MCP Required**: None
+- **Input**: [api-contract, task-breakdown, data-model]
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/scaffold/`
+
 ### /jaan-to:dev-api-versioning
 
 - **Logical**: `dev-api-versioning`
@@ -164,6 +189,22 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [screen]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/state-machine.md`
+
+### /jaan-to:dev-fe-scaffold
+
+- **Logical**: `dev-fe-scaffold`
+- **Description**: Convert HTML design previews to React v19 / Next.js v15 components with TailwindCSS v4, TypeScript, and state management
+- **Quick Win**: Yes
+- **Key Points**:
+  - Extract semantic HTML structure and preserve accessibility
+  - Convert to TailwindCSS v4 utility classes
+  - Generate TypeScript interfaces from API contract schemas
+  - Create composable component hierarchy with loading/error/empty states
+  - Generate typed API client hooks
+- **→ Next**: `dev-integration-plan`, `dev-test-plan`
+- **MCP Required**: None
+- **Input**: [fe-design, fe-task-breakdown, api-contract]
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/scaffold/`
 
 ### /jaan-to:dev-integration-plan
 
