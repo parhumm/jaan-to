@@ -1,3 +1,8 @@
+---
+title: "qa-test-cases"
+sidebar_position: 2
+---
+
 # qa-test-cases
 
 > Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB methodology.

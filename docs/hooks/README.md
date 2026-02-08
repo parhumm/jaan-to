@@ -1,3 +1,8 @@
+---
+title: "Hooks"
+sidebar_position: 1
+---
+
 # Hooks
 
 > Automated triggers that run before or after actions.

@@ -1,5 +1,6 @@
 ---
-title: /jaan-to:dev-pr-review
+title: "dev-pr-review"
+sidebar_position: 7
 doc_type: skill
 created_date: 2026-02-03
 updated_date: 2026-02-03

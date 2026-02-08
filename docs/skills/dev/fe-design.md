@@ -1,5 +1,6 @@
 ---
-title: /jaan-to:dev-fe-design
+title: "dev-fe-design"
+sidebar_position: 5
 doc_type: skill
 created_date: 2026-02-03
 updated_date: 2026-02-03

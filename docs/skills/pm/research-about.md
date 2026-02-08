@@ -1,3 +1,8 @@
+---
+title: "pm-research-about"
+sidebar_position: 3
+---
+
 # /jaan-to:pm-research-about
 
 > Deep research on any topic, or add existing file/URL to research index.

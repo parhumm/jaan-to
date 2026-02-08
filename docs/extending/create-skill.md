@@ -1,3 +1,8 @@
+---
+title: "Skill Creation Specification"
+sidebar_position: 3
+---
+
 # Skill Creation Specification
 
 > Complete reference for creating jaan.to skills—for humans and AI.
@@ -196,7 +201,7 @@ When creating a new output-generating skill:
 
 ### Reference Implementation
 
-See [pm-prd-write/SKILL.md](../../skills/pm-prd-write/SKILL.md) for complete example.
+See [pm-prd-write/SKILL.md](https://github.com/parhumm/jaan-to/blob/main/skills/pm-prd-write/SKILL.md) for complete example.
 
 ### Role and Subdomain Mapping
 

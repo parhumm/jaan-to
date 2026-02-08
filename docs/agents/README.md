@@ -1,5 +1,6 @@
 ---
 title: Agents
+sidebar_position: 1
 doc_type: index
 created_date: 2026-01-29
 updated_date: 2026-01-29

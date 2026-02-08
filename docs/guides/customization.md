@@ -1,5 +1,6 @@
 ---
 title: Customizing jaan.to
+sidebar_position: 1
 doc_type: guide
 created_date: 2026-02-03
 updated_date: 2026-02-08

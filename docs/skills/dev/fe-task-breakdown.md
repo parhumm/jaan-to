@@ -1,5 +1,6 @@
 ---
-title: /jaan-to:dev-fe-task-breakdown
+title: "dev-fe-task-breakdown"
+sidebar_position: 6
 doc_type: skill
 created_date: 2026-02-03
 updated_date: 2026-02-03

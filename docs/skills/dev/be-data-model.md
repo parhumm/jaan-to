@@ -1,5 +1,6 @@
 ---
-title: /jaan-to:dev-be-data-model
+title: "dev-be-data-model"
+sidebar_position: 3
 doc_type: skill
 created_date: 2026-02-08
 updated_date: 2026-02-08

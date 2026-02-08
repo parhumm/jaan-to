@@ -1,3 +1,8 @@
+---
+title: "Extending jaan.to"
+sidebar_position: 1
+---
+
 # Extending jaan.to
 
 > Add new skills and hooks.

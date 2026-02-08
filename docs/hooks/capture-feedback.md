@@ -1,3 +1,8 @@
+---
+title: "capture-feedback"
+sidebar_position: 3
+---
+
 # capture-feedback
 
 > Prompts for feedback after artifact creation.

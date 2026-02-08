@@ -1,3 +1,8 @@
+---
+title: "dev-be-task-breakdown"
+sidebar_position: 4
+---
+
 # /jaan-to:dev-be-task-breakdown
 
 > Convert PRDs into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.

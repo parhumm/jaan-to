@@ -1,5 +1,6 @@
 ---
-title: /jaan-to:dev-stack-detect
+title: "dev-stack-detect"
+sidebar_position: 8
 doc_type: skill
 created_date: 2026-02-03
 updated_date: 2026-02-03

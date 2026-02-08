@@ -1,3 +1,8 @@
+---
+title: "ux-heatmap-analyze"
+sidebar_position: 2
+---
+
 # /jaan-to:ux-heatmap-analyze
 
 > Analyze heatmap CSV exports and screenshots to generate prioritized UX research reports.

@@ -1,3 +1,8 @@
+---
+title: "Learning System"
+sidebar_position: 1
+---
+
 # Learning System
 
 > Skills improve from your feedback.

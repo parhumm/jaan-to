@@ -1,3 +1,8 @@
+---
+title: "UX Skills"
+sidebar_position: 1
+---
+
 # UX Skills
 
 > User experience research and design commands.

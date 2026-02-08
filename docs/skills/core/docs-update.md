@@ -1,3 +1,8 @@
+---
+title: "docs-update"
+sidebar_position: 3
+---
+
 # /jaan-to:docs-update
 
 > Smart documentation auditing with git-based staleness detection.

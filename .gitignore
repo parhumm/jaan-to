@@ -25,3 +25,11 @@ Thumbs.db
 .claude-plugin-cache/
 dist/
 /jaan-to/metrics
+
+# Docusaurus (website/docs/)
+website/docs/node_modules/
+website/docs/build/
+website/docs/.docusaurus/
+website/docs/.cache-loader/
+website/docs/src/pages/changelog.md
+website/docs/src/pages/contributing.md

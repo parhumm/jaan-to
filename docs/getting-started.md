@@ -1,3 +1,8 @@
+---
+title: "Getting Started"
+sidebar_position: 2
+---
+
 # Getting Started
 
 > Run your first skill in 5 minutes.

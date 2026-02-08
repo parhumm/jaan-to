@@ -1,3 +1,9 @@
+---
+title: "Development"
+sidebar_position: 1
+slug: /skills/dev
+---
+
 # Dev Skills
 
 > Development and engineering commands.

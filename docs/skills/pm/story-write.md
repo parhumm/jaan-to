@@ -1,3 +1,8 @@
+---
+title: "pm-story-write"
+sidebar_position: 4
+---
+
 # pm-story-write
 
 > Generate user stories with Given/When/Then acceptance criteria following INVEST principles.
@@ -341,7 +346,7 @@ This continuous learning system improves story quality over time.
 
 ## Related
 
-- **Research**: [45-pm-insights-synthesis.md](../../outputs/research/45-pm-insights-synthesis.md) - Comprehensive framework
+- **Research**: `jaan-to/outputs/research/45-pm-insights-synthesis.md` - Comprehensive framework
 - **PRD Generation**: `/jaan-to:pm-prd-write` - Create full PRDs with success metrics
 - **Learning**: `/jaan-to:learn-add` - Add lessons to improve skill execution
 

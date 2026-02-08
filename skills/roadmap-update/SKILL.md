@@ -1,7 +1,7 @@
 ---
 name: roadmap-update
 description: "[Internal] Maintain and sync the jaan.to development roadmap."
-allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(roadmaps/**)
+allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(docs/roadmap/**)
 argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sync] [validate] [(no args)]"
 ---
 
@@ -11,7 +11,7 @@ argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sy
 
 ## Context Files
 
-- `roadmaps/jaan-to/roadmap.md` - Current roadmap
+- `docs/roadmap/roadmap.md` - Current roadmap
 - `CHANGELOG.md` - Release history
 - `.claude-plugin/plugin.json` - Plugin version
 - `.claude-plugin/marketplace.json` - Marketplace version
@@ -57,7 +57,7 @@ Use extended reasoning for comparing git history with roadmap entries, fuzzy-mat
 ## Step 1: Read Current State
 
 Read all context files:
-1. `roadmaps/jaan-to/roadmap.md` — Parse phases, overview table, all tasks
+1. `docs/roadmap/roadmap.md` — Parse phases, overview table, all tasks
 2. `CHANGELOG.md` — Parse all version entries
 3. `.claude-plugin/plugin.json` — Current version
 4. `.claude-plugin/marketplace.json` — Marketplace version
@@ -162,7 +162,7 @@ Present report:
 10. Check if overview table needs status update
 11. Prepare full atomic operation list:
     - CHANGELOG.md — new version entry + cleared Unreleased section
-    - roadmaps/jaan-to/roadmap.md — version section + cleared Unreleased + overview table
+    - docs/roadmap/roadmap.md — version section + cleared Unreleased + overview table
     - .claude-plugin/plugin.json — version bump
     - .claude-plugin/marketplace.json — version bump
     - Git commit: `release: {version} — {summary}`
@@ -367,7 +367,7 @@ Execute atomic operation in order:
 
 **4.5: Commit**
 ```bash
-git add CHANGELOG.md roadmaps/jaan-to/roadmap.md .claude-plugin/plugin.json .claude-plugin/marketplace.json
+git add CHANGELOG.md docs/roadmap/roadmap.md .claude-plugin/plugin.json .claude-plugin/marketplace.json
 git commit -m "release: {version} — {summary}"
 ```
 
@@ -471,7 +471,7 @@ After all writes:
 ## Step 6: Commit (non-release modes)
 
 ```bash
-git add roadmaps/jaan-to/roadmap.md CHANGELOG.md
+git add docs/roadmap/roadmap.md CHANGELOG.md
 git commit -m "docs(roadmap): {mode-specific message}"
 ```
 

@@ -1,5 +1,6 @@
 ---
 title: Quality Reviewer
+sidebar_position: 3
 doc_type: concept
 created_date: 2026-01-29
 updated_date: 2026-01-29
@@ -66,4 +67,4 @@ Issues are reported with severity:
 ## Related
 
 - [Agents Overview](README.md)
-- [Style Guide](../STYLE.md)
+- [Style Guide](https://github.com/parhumm/jaan-to/blob/main/docs/STYLE.md)

@@ -321,7 +321,7 @@ description: Brief description
 
 ### Automated Tests
 
-Currently, jaan.to uses manual testing. Automated tests coming in Phase 6 (see [roadmap](roadmaps/jaan-to/roadmap-jaan-to.md)).
+Currently, jaan.to uses manual testing. Automated tests coming in Phase 6 (see [roadmap](docs/roadmap/roadmap.md)).
 
 ### Manual Testing Checklist
 
