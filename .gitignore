@@ -24,3 +24,4 @@ Thumbs.db
 .claude/
 .claude-plugin-cache/
 dist/
+/jaan-to/metrics
