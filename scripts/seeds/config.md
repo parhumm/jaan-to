@@ -20,7 +20,7 @@
 - core (Internal)
 
 ## Planned Roles (Phase 5)
-- dev (Development) - 17 skills [3 active: fe-task-breakdown, be-task-breakdown, api-contract]
+- dev (Development) - 17 skills [4 active: fe-task-breakdown, be-task-breakdown, be-data-model, api-contract]
 - qa (Quality Assurance) - 12 skills
 - growth (SEO + Content) - 15 skills
 
@@ -48,6 +48,7 @@
 | dev-fe-task-breakdown | `/jaan-to:dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
 | dev-be-task-breakdown | `/jaan-to:dev-be-task-breakdown` | Generate BE task breakdown from PRD |
 | dev-fe-design | `/jaan-to:dev-fe-design` | Create distinctive, production-grade frontend components |
+| dev-be-data-model | `/jaan-to:dev-be-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | dev-api-contract | `/jaan-to:dev-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 

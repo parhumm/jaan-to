@@ -776,7 +776,10 @@ add_to_index \
 
 > "Backend task breakdown complete."
 >
-> *Note: For detailed data model specification skill (`/jaan-to:dev-be-data-model`), see roadmap - coming in future release.*
+> **Recommended next step**: For comprehensive data model documentation with constraints, indexes, migration playbooks, and retention policies:
+> ```
+> /jaan-to:dev-be-data-model "{entity-list-from-extraction}"
+> ```
 
 ## Step 12: Capture Feedback
 
