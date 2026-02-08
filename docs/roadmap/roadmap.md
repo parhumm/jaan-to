@@ -15,7 +15,7 @@ sidebar_position: 1
 |-------|-------|--------|
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
-| 5 | Detect & Knowledge Pack (6 skills) | Planned |
+| 5 | Detect & Knowledge Pack (6 skills) | **Done** |
 | 6 | Role skills (141 across 11 roles) | In Progress |
 | 7 | MCP connectors | Planned |
 | 8 | Testing and polish | Planned |
@@ -27,7 +27,14 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v3.22.0 — Language settings in all 21 skills
+**Latest:** v3.23.0 — Detect & Knowledge Pack (6 skills)
+
+### v3.23.0 — Detect & Knowledge Pack (6 skills)
+- 6 detect skills: detect-dev, detect-design, detect-writing, detect-product, detect-ux, pack-detect (`52eb72f`..`50a75f5`)
+- dev-stack-detect merged into detect-dev and removed (`bb9d0a7`, `9d944de`)
+- 30+ reference files updated, bootstrap updated (`9d944de`)
+- All detect docs aligned with implementations (`29901ae`)
+- Bootstrap .gitignore fix (`c95e4a9`)
 
 ### v3.22.0 — Language settings in all 21 skills
 - Language settings support in all 21 skills (`b7cfa00`)
@@ -59,7 +66,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ---
 
-## Phase 5: Detect & Knowledge Pack (6 skills)
+## Phase 5: Detect & Knowledge Pack (6 skills) — DONE
 
 > Details: [tasks/role-skills/detect.md](tasks/role-skills/detect.md)
 
@@ -67,14 +74,15 @@ Evidence-based repo audits that produce `docs/current/` knowledge. All detect sk
 
 Pipeline: detect-dev + detect-design + detect-writing + detect-product + detect-ux → pack-detect
 
-| Skill | Domain | Output |
-|-------|--------|--------|
-| `/jaan-to:detect-dev` | Engineering | `docs/current/dev/` |
-| `/jaan-to:detect-design` | Design system | `docs/current/design/` |
-| `/jaan-to:detect-writing` | Writing/content | `docs/current/writing/` |
-| `/jaan-to:detect-product` | Product | `docs/current/product/` |
-| `/jaan-to:detect-ux` | UX | `docs/current/ux/` |
-| `/jaan-to:pack-detect` | Consolidation | `docs/current/` |
+- [x] `/jaan-to:detect-dev` — Engineering audit with OpenSSF scoring (`52eb72f`)
+- [x] `/jaan-to:detect-design` — Design system detection with drift findings (`280e4f7`)
+- [x] `/jaan-to:detect-writing` — Writing system extraction with NNg tone scoring (`eb0b4f5`)
+- [x] `/jaan-to:detect-product` — Product reality extraction with 3-layer evidence (`ef3d455`)
+- [x] `/jaan-to:detect-ux` — UX audit with Nielsen heuristics and journey mapping (`6fa7cb5`)
+- [x] `/jaan-to:pack-detect` — Consolidate detect outputs into knowledge index (`50a75f5`)
+- [x] Merge `dev-stack-detect` into `detect-dev` and remove (`bb9d0a7`)
+- [x] Update all references (30+ files) (`9d944de`)
+- [x] Align detect docs with implementations (`29901ae`)
 
 ---
 
