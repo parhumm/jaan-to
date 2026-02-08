@@ -67,6 +67,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [57](57-ai-workflow-claude-code-plugin-patterns-best-practices-standards.md) | Claude Code Plugin Patterns & Standards | Analysis of 13 official Claude Code plugins revealing highly consistent ecosystem patterns for structure, configuration, naming, and implementation. Covers auto-discovery, manifest standards, progressive disclosure, Python/Bash standards, security best practices, and quality checklists. |
 | [58](58-role-wp-dev.md) | WordPress Analytics Plugin Development | Complete best practices guide addressing critical gaps in WordPress plugin documentation—privacy-compliant tracking architectures, high-performance database patterns, competitor architecture analysis (WP Statistics, Koko Analytics, Independent Analytics), JavaScript beacon tracking, and dashboard implementation. |
 | [59](59-dev-api-contract.md) | OpenAPI 3.1 Contract Generator | Production-ready OpenAPI 3.1 contract generation covering schema design (flat $ref, polymorphism, null handling), RFC 9457 error responses, example generation, versioning/deprecation, AI guardrails (Spectral + Redocly), overlay enrichment, reference specs (GitHub, Stripe, Zalando), and validation tooling stack. 40+ sources. |
+| [60](60-dev-be-data-model.md) | AI Data Modeling Skill Research | Comprehensive research on bridging natural language to production-ready DDL across PostgreSQL, MySQL, MongoDB, DynamoDB, and edge SQLite. Covers NLP constraint extraction heuristics, zero-downtime migration patterns (CONCURRENTLY, INSTANT/INPLACE/COPY, expand-contract), composite index ordering algorithms (ESR rule), multi-tenant isolation with RLS, schema evolution compatibility rules, soft delete/GDPR patterns, and a quality validation checklist with scoring rubric. |
 
 ## Quick Topic Finder
 
@@ -135,6 +136,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [17-twelve-factor-app.md](17-twelve-factor-app.md)
 - [48-dev-docs-generate.md](48-dev-docs-generate.md)
 - [59-dev-api-contract.md](59-dev-api-contract.md) - OpenAPI 3.1 contract generation with validation tooling & AI guardrails
+- [60-dev-be-data-model.md](60-dev-be-data-model.md) - AI data modeling: NLP→DDL, migrations, indexing, multi-tenancy, schema evolution
 
 ### UX & Product Analytics
 - [20-ux-heatmap-analysis.md](20-ux-heatmap-analysis.md)
