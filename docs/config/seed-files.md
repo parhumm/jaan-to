@@ -25,7 +25,7 @@ Every seed follows a **skip-if-exists** rule: your edits are never overwritten. 
 
 | Category | Source (plugin) | Destination (project) | What's Inside |
 |----------|----------------|----------------------|---------------|
-| Settings | `scripts/seeds/settings.yaml` | `jaan-to/config/settings.yaml` | Path overrides, learning strategy, template paths |
+| Settings | `scripts/seeds/settings.yaml` | `jaan-to/config/settings.yaml` | Path overrides, learning strategy, language preference, template paths |
 | Context | `scripts/seeds/*.md` | `jaan-to/context/` | 5 required: tech.md, team.md, integrations.md, config.md, boundaries.md + 2 optional: localization.md, tone-of-voice.md |
 | Templates | `skills/*/template.md` | `jaan-to/templates/{skill}.template.md` | Output structure for each skill (~16 files) |
 | Docs | plugin `docs/STYLE.md` + `docs/extending/create-skill.md` | `jaan-to/docs/` | Style guide, skill creation spec |

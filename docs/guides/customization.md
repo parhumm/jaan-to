@@ -2,14 +2,14 @@
 title: Customizing jaan.to
 doc_type: guide
 created_date: 2026-02-03
-updated_date: 2026-02-03
-tags: [customization, configuration, paths, templates, learning]
+updated_date: 2026-02-08
+tags: [customization, configuration, paths, templates, learning, language]
 related: []
 ---
 
 # Customizing jaan.to
 
-> Adapt paths, templates, learning, and tech context to your project.
+> Adapt paths, templates, learning, language, and tech context to your project.
 
 ---
 
@@ -23,7 +23,7 @@ jaan.to uses a 3-layer configuration system. Each layer overrides the one below 
 | 2 (Project) | `jaan-to/config/settings.yaml` | This repo |
 | 3 (Machine) | `$JAAN_*` environment variables | This machine |
 
-You can customize: output paths, template files, learning behavior, and tech context.
+You can customize: output paths, template files, learning behavior, language preference, and tech context.
 
 ---
 
@@ -45,6 +45,8 @@ Edit `jaan-to/config/settings.yaml` to override defaults for your repo.
 | `paths_learning` | `jaan-to/learn` | Where lessons accumulate |
 | `paths_context` | `jaan-to/context` | Where context files live |
 | `learning_strategy` | `merge` | How lessons combine |
+| `language` | `ask` | Conversation and report language |
+| `language_{skill}` | _(global)_ | Per-skill language override |
 
 Example — move outputs to `artifacts/`:
 
@@ -57,7 +59,34 @@ All paths are relative to the project root. Use forward slashes on all platforms
 
 ---
 
-## Step 2: Path Variables
+## Step 2: Language Preference
+
+Set the language for plugin conversation, questions, and report .md files.
+
+| Setting | Default | Effect |
+|---------|---------|--------|
+| `language` | `ask` | Prompts once on first skill run, saves your choice |
+| `language_{skill-name}` | _(global)_ | Override for one specific skill |
+
+Example — set فارسی globally, keep PRDs in English:
+
+```yaml
+# jaan-to/config/settings.yaml
+language: "fa"
+language_pm-prd-write: "en"
+```
+
+Options: `en`, `fa`, `tr`, or any language name/code. Set to `ask` to re-prompt.
+
+**What changes**: Section headings, labels, prose, questions, and confirmations switch to the chosen language.
+
+**What stays English**: Code, file paths, variable names, YAML keys, technical terms, template variables.
+
+**What's unaffected**: Generated code output, product localization (`localization.md`), `/jaan-to:ux-microcopy-write` multi-language output.
+
+---
+
+## Step 3: Path Variables
 
 Override paths per-machine using environment variables in `.claude/settings.json`:
 
@@ -80,7 +109,7 @@ Override paths per-machine using environment variables in `.claude/settings.json
 
 ---
 
-## Step 3: Custom Templates
+## Step 4: Custom Templates
 
 Override any skill's template by pointing to your own file:
 
@@ -102,7 +131,7 @@ Place your custom template at the path you specified. The skill uses it instead 
 
 ---
 
-## Step 4: Learning Strategy
+## Step 5: Learning Strategy
 
 Skills accumulate lessons over time. Two strategies control how plugin lessons and your project lessons combine:
 
@@ -121,7 +150,7 @@ Use `merge` when starting out. Switch to `override` when your team has enough pr
 
 ---
 
-## Step 5: Tech Stack
+## Step 6: Tech Stack
 
 Edit `jaan-to/context/tech.md` to describe your project's technology. Skills reference this file when generating outputs.
 
@@ -148,6 +177,7 @@ A SaaS team with a Next.js frontend and FastAPI backend customizes jaan.to:
 paths_outputs: "artifacts/product"
 templates_jaan_to_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
 learning_strategy: "merge"
+language: "fa"
 ```
 
 **2. .claude/settings.json** — Machine-specific override for CI:
@@ -171,7 +201,7 @@ learning_strategy: "merge"
 - **Framework**: Next.js 14 + React 18
 ```
 
-Result: PRDs land in `artifacts/product/pm/`, use the enterprise template, merge plugin + team lessons, and reference FastAPI/Next.js in technical sections.
+Result: PRDs land in `artifacts/product/pm/`, use the enterprise template, merge plugin + team lessons, reference FastAPI/Next.js in technical sections, and conversation runs in فارسی.
 
 ---
 
@@ -183,6 +213,8 @@ After customizing, verify your setup:
 2. Check the output lands in your custom path
 3. Confirm the template matches your custom file
 4. Review the learning merge in the skill's output header
+5. Set `language: "ask"` → run a skill → confirm language prompt appears
+6. Choose a language → verify `settings.yaml` updated and next skill uses it without re-prompting
 
 ---
 
@@ -202,3 +234,5 @@ After customizing, verify your setup:
 **Template not found**: Verify the path is relative to the project root, not absolute.
 
 **Learning not merging**: Confirm `learning_strategy: "merge"` in settings.yaml. The `override` value skips plugin lessons.
+
+**Language not switching**: Check `language` value in settings.yaml. Set to `ask` to re-prompt. Per-skill overrides (`language_{skill-name}`) take priority over the global setting.
