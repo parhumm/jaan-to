@@ -1,12 +1,12 @@
 ---
-title: "knowledge-pack"
+title: "pack-detect"
 sidebar_position: 6
 doc_type: skill
 tags: [detect, knowledge, consolidation, risk, unknowns, evidence]
-related: [dev-detect, design-detect, writing-detect, product-detect, ux-detect]
+related: [dev-detect, detect-design, detect-writing, detect-product, detect-ux]
 ---
 
-# /jaan-to:knowledge-pack
+# /jaan-to:pack-detect
 
 > Consolidate all detect outputs into a scored index with risk heatmap and unknowns backlog.
 
@@ -21,7 +21,7 @@ Reads all detect skill outputs (`docs/current/{dev,design,writing,product,ux}/`)
 ## Usage
 
 ```
-/jaan-to:knowledge-pack
+/jaan-to:pack-detect
 ```
 
 | Argument | Required | Description |

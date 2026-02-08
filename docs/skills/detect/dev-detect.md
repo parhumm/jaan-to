@@ -3,7 +3,7 @@ title: "dev-detect"
 sidebar_position: 1
 doc_type: skill
 tags: [detect, dev, engineering, audit, security, cicd]
-related: [dev-stack-detect, knowledge-pack]
+related: [dev-stack-detect, pack-detect]
 ---
 
 # /jaan-to:dev-detect

@@ -1,12 +1,12 @@
 ---
-title: "writing-detect"
+title: "detect-writing"
 sidebar_position: 3
 doc_type: skill
 tags: [detect, writing, tone, glossary, i18n, microcopy]
-related: [ux-microcopy-write, knowledge-pack]
+related: [ux-microcopy-write, pack-detect]
 ---
 
-# /jaan-to:writing-detect
+# /jaan-to:detect-writing
 
 > Detect the current writing system with multi-signal extraction and tone scoring.
 
@@ -21,7 +21,7 @@ Extracts the writing system from the repository using glob discovery, string cla
 ## Usage
 
 ```
-/jaan-to:writing-detect
+/jaan-to:detect-writing
 ```
 
 | Argument | Required | Description |

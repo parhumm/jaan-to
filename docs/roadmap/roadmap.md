@@ -59,16 +59,16 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 Evidence-based repo audits that produce `docs/current/` knowledge. All detect skills are Quick Wins (no MCP required). Each outputs machine-parseable markdown with YAML frontmatter, SARIF-like evidence blocks, and confidence scoring.
 
-Pipeline: dev-detect + design-detect + writing-detect + product-detect + ux-detect → knowledge-pack
+Pipeline: dev-detect + detect-design + detect-writing + detect-product + detect-ux → pack-detect
 
 | Skill | Domain | Output |
 |-------|--------|--------|
 | `/jaan-to:dev-detect` | Engineering | `docs/current/dev/` |
-| `/jaan-to:design-detect` | Design system | `docs/current/design/` |
-| `/jaan-to:writing-detect` | Writing/content | `docs/current/writing/` |
-| `/jaan-to:product-detect` | Product | `docs/current/product/` |
-| `/jaan-to:ux-detect` | UX | `docs/current/ux/` |
-| `/jaan-to:knowledge-pack` | Consolidation | `docs/current/` |
+| `/jaan-to:detect-design` | Design system | `docs/current/design/` |
+| `/jaan-to:detect-writing` | Writing/content | `docs/current/writing/` |
+| `/jaan-to:detect-product` | Product | `docs/current/product/` |
+| `/jaan-to:detect-ux` | UX | `docs/current/ux/` |
+| `/jaan-to:pack-detect` | Consolidation | `docs/current/` |
 
 ---
 
