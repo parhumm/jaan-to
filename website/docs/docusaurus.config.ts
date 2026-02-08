@@ -70,23 +70,7 @@ const config: Config = {
           ],
           editUrl: 'https://github.com/parhumm/jaan-to/edit/main/docs/',
         },
-        blog: {
-          path: '../blog',
-          routeBasePath: 'blog',
-          showReadingTime: true,
-          blogTitle: 'jaan.to Blog',
-          blogDescription: 'Updates, guides, and insights from the jaan.to project',
-          blogSidebarTitle: 'Recent Posts',
-          blogSidebarCount: 'ALL',
-          editUrl: 'https://github.com/parhumm/jaan-to/edit/main/website/blog/',
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -99,7 +83,7 @@ const config: Config = {
       '@easyops-cn/docusaurus-search-local',
       {
         hashed: true,
-        indexBlog: true,
+        indexBlog: false,
         docsRouteBasePath: '/docs',
       },
     ],
@@ -123,7 +107,6 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
         {to: '/changelog', label: 'Changelog', position: 'left'},
         {
           href: 'https://jaan.to',
@@ -152,7 +135,6 @@ const config: Config = {
         {
           title: 'Content',
           items: [
-            {label: 'Blog', to: '/blog'},
             {label: 'Changelog', to: '/changelog'},
             {label: 'Contributing', to: '/contributing'},
           ],
