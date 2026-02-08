@@ -1,3 +1,8 @@
+---
+title: "SEC Skills (4)"
+sidebar_position: 8
+---
+
 # SEC Skills (4)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6

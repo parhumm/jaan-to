@@ -1,3 +1,8 @@
+---
+title: "Role Skills Catalog"
+sidebar_position: 9
+---
+
 # Role Skills Catalog
 
 > Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 134 skills across 11 roles
@@ -10,7 +15,7 @@ Skills split into two phases by effort:
 
 Skills within each role are **sorted by workflow dependency order** (topological). Skills you call first in a workflow appear first. Chains flow top-to-bottom.
 
-**Research source**: [AI-Assisted Product Operations](../../docs/deepresearches/ai-assisted-product-operations-The-60-highest-leverage-tasks-across-SaaS-teams.md) - 60 highest-leverage tasks across SaaS teams. Skills marked with **Rank #N** are from the Top 20 list.
+**Research source**: [AI-Assisted Product Operations](https://github.com/parhumm/jaan-to/blob/main/docs/deepresearches/ai-assisted-product-operations-The-60-highest-leverage-tasks-across-SaaS-teams.md) - 60 highest-leverage tasks across SaaS teams. Skills marked with **Rank #N** are from the Top 20 list.
 
 ## v3.0.0 Implementation Requirements
 
@@ -18,7 +23,7 @@ Skills within each role are **sorted by workflow dependency order** (topological
 
 ### Creation
 - Use `/jaan-to:skill-create {skill-name}` (generates v3.0.0-compliant skills)
-- Follow [docs/extending/create-skill.md](../../docs/extending/create-skill.md)
+- Follow [docs/extending/create-skill.md](../../extending/create-skill.md)
 - Validate with `/jaan-to:skill-update {skill-name}` before committing
 
 ### Paths (Environment Variables)

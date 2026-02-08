@@ -1,3 +1,8 @@
+---
+title: "WP-SEC Skills (5)"
+sidebar_position: 5
+---
+
 # WP-SEC Skills (5)
 
 > Part of [WP Role Skills Catalog](../roles-wp-skills.md) | Phase 4 + Phase 6

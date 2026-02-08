@@ -1,3 +1,8 @@
+---
+title: "LSP Support"
+sidebar_position: 6
+---
+
 # LSP Support
 
 > Bundle LSP server configs in plugin + make skills LSP-aware.

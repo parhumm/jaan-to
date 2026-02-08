@@ -1,3 +1,8 @@
+---
+title: "MCP Context7 Integration"
+sidebar_position: 8
+---
+
 # MCP Context7 Integration
 
 > On-demand library documentation via Context7 MCP

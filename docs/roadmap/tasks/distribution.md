@@ -1,3 +1,8 @@
+---
+title: "Distribution"
+sidebar_position: 4
+---
+
 # Distribution
 
 > Phase 8 | Status: in-progress

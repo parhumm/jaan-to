@@ -1,3 +1,8 @@
+---
+title: "DATA Skills (14)"
+sidebar_position: 1
+---
+
 # DATA Skills (14)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6

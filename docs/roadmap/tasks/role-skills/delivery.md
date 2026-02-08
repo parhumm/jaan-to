@@ -1,3 +1,8 @@
+---
+title: "DELIVERY Skills (8)"
+sidebar_position: 2
+---
+
 # DELIVERY Skills (8)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6

@@ -1,3 +1,8 @@
+---
+title: "UX Skills (20)"
+sidebar_position: 11
+---
+
 # UX Skills (20)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
@@ -247,7 +252,7 @@ flowchart TD
 
 - **Logical**: `ux-microcopy-write`
 - **Description**: Microcopy pack: labels, helper text, errors, toasts, confirmations, empty states, tone rules
-- **Reference**: [UX Microcopy Writing Skill: Comprehensive Research Document](../../../../jaan-to/outputs/research/56-ux-microcopy-write.md)
+- **Reference**: [UX Microcopy Writing Skill: Comprehensive Research Document](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/56-ux-microcopy-write.md)
 - **Quick Win**: Yes - simple content
 - **Key Points**:
   - Use verbs, be specific, avoid blame

@@ -1,3 +1,8 @@
+---
+title: "GROWTH Skills (15)"
+sidebar_position: 4
+---
+
 # GROWTH Skills (15)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6

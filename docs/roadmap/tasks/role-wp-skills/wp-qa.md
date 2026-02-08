@@ -1,3 +1,8 @@
+---
+title: "WP-QA Skills (2)"
+sidebar_position: 3
+---
+
 # WP-QA Skills (2)
 
 > Part of [WP Role Skills Catalog](../roles-wp-skills.md) | Phase 4

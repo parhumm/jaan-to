@@ -1,3 +1,8 @@
+---
+title: "QA Skills (12)"
+sidebar_position: 6
+---
+
 # QA Skills (12)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6

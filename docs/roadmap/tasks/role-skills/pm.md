@@ -1,3 +1,8 @@
+---
+title: "PM Skills (24)"
+sidebar_position: 5
+---
+
 # PM Skills (24)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6

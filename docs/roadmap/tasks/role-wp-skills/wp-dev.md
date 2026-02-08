@@ -1,3 +1,8 @@
+---
+title: "WP-DEV Skills (11)"
+sidebar_position: 1
+---
+
 # WP-DEV Skills (11)
 
 > Part of [WP Role Skills Catalog](../roles-wp-skills.md) | Phase 4 + Phase 6
@@ -5,8 +10,8 @@
 **Chain**: Architecture → Hooks → Data → Settings → Uninstall → Admin Menu → Assets → Block → REST → Cron → Cache
 
 **Research**:
-- [WordPress Plugin Development: Complete Role-Based Skills Guide](../../../jaan-to/outputs/research/54-roles-wp-details.md) - PM, Engineering, Admin UX, Integrations, Security, QA, Release
-- [WordPress Analytics Plugin Development](../../../jaan-to/outputs/research/58-role-wp-dev.md) - Privacy-compliant tracking, database patterns, competitor analysis, JavaScript beacons
+- [WordPress Plugin Development: Complete Role-Based Skills Guide](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/54-roles-wp-details.md) - PM, Engineering, Admin UX, Integrations, Security, QA, Release
+- [WordPress Analytics Plugin Development](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/58-role-wp-dev.md) - Privacy-compliant tracking, database patterns, competitor analysis, JavaScript beacons
 
 ## Userflow Schema
 

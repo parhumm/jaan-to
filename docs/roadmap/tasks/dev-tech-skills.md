@@ -1,3 +1,8 @@
+---
+title: "Dev Tech Skill Family"
+sidebar_position: 2
+---
+
 # Dev Tech Skill Family
 
 > Phase 3 + 3.5 | Status: pending

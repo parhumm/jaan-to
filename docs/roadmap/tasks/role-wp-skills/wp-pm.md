@@ -1,3 +1,8 @@
+---
+title: "WP-PM Skills (3)"
+sidebar_position: 2
+---
+
 # WP-PM Skills (3)
 
 > Part of [WP Role Skills Catalog](../roles-wp-skills.md) | Phase 4

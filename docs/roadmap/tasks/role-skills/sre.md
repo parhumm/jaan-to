@@ -1,3 +1,8 @@
+---
+title: "SRE Skills (9)"
+sidebar_position: 9
+---
+
 # SRE Skills (9)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6

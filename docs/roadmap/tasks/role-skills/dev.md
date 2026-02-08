@@ -1,3 +1,8 @@
+---
+title: "DEV Skills (19)"
+sidebar_position: 3
+---
+
 # DEV Skills (19)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
@@ -114,7 +119,7 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/data-model.md`
-- **Reference**: [`60-dev-be-data-model.md`](../../../../jaan-to/outputs/research/60-dev-be-data-model.md)
+- **Reference**: [`60-dev-be-data-model.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/60-dev-be-data-model.md)
 
 ### ✅ /jaan-to:dev-api-contract
 
@@ -129,7 +134,7 @@ flowchart TD
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
-- **Reference**: [`59-dev-api-contract.md`](../../jaan-to/outputs/research/59-dev-api-contract.md)
+- **Reference**: [`59-dev-api-contract.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/59-dev-api-contract.md)
 
 ### /jaan-to:dev-be-scaffold
 
@@ -165,7 +170,7 @@ flowchart TD
 
 - **Logical**: `dev-fe-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies
-- **Reference**: [Frontend Task Breakdown Skill: Complete Framework Research](/jaan-to/outputs/research/51-dev-fe-task-breakdown.md)
+- **Reference**: [Frontend Task Breakdown Skill: Complete Framework Research](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/51-dev-fe-task-breakdown.md)
 - **Quick Win**: Yes
 - **Key Points**:
   - Explicit state machine prevents "UI glitches"
@@ -280,7 +285,7 @@ flowchart TD
 
 - **Logical**: `dev-docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
-- **Reference**: [Building a Production-Ready Documentation Generation Framework](../../../$JAAN_OUTPUTS_DIR/research/48-dev-docs-generate.md)
+- **Reference**: [Building a Production-Ready Documentation Generation Framework](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/48-dev-docs-generate.md)
 - **Quick Win**: Yes - draft generation, format standardization
 - **AI Score**: 5 | **Rank**: #14
 - **Key Points**:

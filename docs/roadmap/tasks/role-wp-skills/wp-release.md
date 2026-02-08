@@ -1,3 +1,8 @@
+---
+title: "WP-RELEASE Skills (4)"
+sidebar_position: 4
+---
+
 # WP-RELEASE Skills (4)
 
 > Part of [WP Role Skills Catalog](../roles-wp-skills.md) | Phase 4 + Phase 6

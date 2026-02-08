@@ -1,3 +1,8 @@
+---
+title: "Development Workflow"
+sidebar_position: 3
+---
+
 # Development Workflow
 
 > Phase 3.5 | Status: pending
@@ -105,4 +110,4 @@ Create immutable development principles (inspired by spec-kit's articles):
 ## References
 
 - [spec-kit constitution](https://github.com/github/spec-kit) - Template reference
-- [boundaries/](../../context/boundaries.md) - Existing safety rules
+- [boundaries/](https://github.com/parhumm/jaan-to/blob/main/context/boundaries.md) - Existing safety rules

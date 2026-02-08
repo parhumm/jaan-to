@@ -1,3 +1,8 @@
+---
+title: "Learning System"
+sidebar_position: 5
+---
+
 # Learning System
 
 > Phase 2 | Status: done

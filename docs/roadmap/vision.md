@@ -1,3 +1,8 @@
+---
+title: "jaan.to: Modular Workflow Layer for Claude Code"
+sidebar_position: 2
+---
+
 # jaan.to: Modular Workflow Layer for Claude Code
 
 > Simple. Learnable. Extensible.

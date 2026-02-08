@@ -1,3 +1,8 @@
+---
+title: "WP Role Skills Catalog"
+sidebar_position: 10
+---
+
 # WP Role Skills Catalog
 
 > Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 25 skills across 5 WP roles
@@ -12,7 +17,7 @@ Skills are split by effort:
 
 Skills within each role are **sorted by workflow dependency order** (topological). Skills you call first in a workflow appear first.
 
-**Research source**: [54-roles-wp-details.md](../../jaan-to/outputs/research/54-roles-wp-details.md) — WordPress Plugin Development: Complete Role-Based Skills Guide
+**Research source**: [54-roles-wp-details.md](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/54-roles-wp-details.md) — WordPress Plugin Development: Complete Role-Based Skills Guide
 
 ## v3.0.0 Implementation Requirements
 
@@ -28,7 +33,7 @@ Skills within each role are **sorted by workflow dependency order** (topological
 
 ### Creation
 - Use `/jaan-to:skill-create {skill-name}` (generates v3.0.0-compliant skills)
-- Follow [docs/extending/create-skill.md](../../docs/extending/create-skill.md)
+- Follow [docs/extending/create-skill.md](../../extending/create-skill.md)
 - Validate with `/jaan-to:skill-update {skill-name}` before committing
 
 ---
