@@ -1,7 +1,7 @@
 ---
 name: dev-stack-detect
 description: Auto-detect project tech stack and populate jaan.to context files.
-allowed-tools: Read, Glob, Grep, Bash(git remote:*), Bash(ls:*), Write($JAAN_CONTEXT_DIR/**), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_OUTPUTS_DIR/dev/**)
+allowed-tools: Read, Glob, Grep, Bash(git remote:*), Bash(ls:*), Write($JAAN_CONTEXT_DIR/**), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_OUTPUTS_DIR/dev/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [optional-focus-area]
 ---
 
@@ -38,6 +38,25 @@ If the file exists, apply its lessons throughout this execution:
 - Avoid mistakes listed in "Common Mistakes"
 
 If the file does not exist, continue without it.
+
+### Language Settings
+
+**Read language preference** from `jaan-to/config/settings.yaml`:
+
+1. Check for per-skill override: `language_dev-stack-detect` field
+2. If no override, use the global `language` field
+3. Resolve:
+
+| Value | Action |
+|-------|--------|
+| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
+| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
+
+**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
+
+**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+
+> **Language exception**: Generated code output (variable names, code blocks, schemas, SQL, API specs) is NOT affected by this setting and remains in the project's programming language.
 
 ---
 

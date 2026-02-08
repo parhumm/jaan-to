@@ -1,7 +1,7 @@
 ---
 name: dev-fe-design
 description: Create distinctive, production-grade frontend interfaces with bold design choices and working code.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [component-description-or-requirements]
 ---
 
@@ -49,6 +49,25 @@ Also read context files if available:
 - `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack for framework-specific code generation
 - `$JAAN_CONTEXT_DIR/design.md` - Know the design system patterns
 - `$JAAN_CONTEXT_DIR/brand.md` - Know brand colors, fonts, tone
+
+### Language Settings
+
+**Read language preference** from `jaan-to/config/settings.yaml`:
+
+1. Check for per-skill override: `language_dev-fe-design` field
+2. If no override, use the global `language` field
+3. Resolve:
+
+| Value | Action |
+|-------|--------|
+| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
+| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
+
+**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
+
+**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+
+> **Language exception**: Generated code output (variable names, code blocks, schemas, SQL, API specs) is NOT affected by this setting and remains in the project's programming language.
 
 ---
 
