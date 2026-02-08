@@ -146,6 +146,31 @@ See [jaan-to/outputs/README.md](jaan-to/outputs/README.md) for complete document
 - Before every release, test install on a clean machine/session
 - The `agents` field specifically causes validation failure: `agents: Invalid input`
 
+### Git Branching Rules
+**`dev` is the working branch. `main` is the release branch.**
+
+1. **Never commit directly to `main`** — all changes go through `dev` first
+2. **Start every task** by switching to `dev`:
+   ```
+   git checkout dev
+   git pull origin dev
+   ```
+3. **Keep `dev` in sync** with `main` before starting work:
+   ```
+   git merge main
+   ```
+4. **Commit and push** changes to `dev`:
+   ```
+   git push origin dev
+   ```
+5. **Update `main` only via PR**: Create a PR from `dev` → `main`, review, then merge
+6. **After merging to `main`**, sync back:
+   ```
+   git checkout dev
+   git merge main
+   git push origin dev
+   ```
+
 ### Before Every Commit
 1. Update [roadmap.md](roadmaps/jaan-to/roadmap.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`
