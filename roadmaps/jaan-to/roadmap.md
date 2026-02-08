@@ -10,7 +10,7 @@
 |-------|-------|--------|
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](../../CHANGELOG.md)) |
 | 4 | Development workflow | Planned |
-| 5 | Role skills (137 across 11 roles) | Planned |
+| 5 | Role skills (137 across 11 roles) | In Progress |
 | 6 | MCP connectors | Planned |
 | 7 | Testing and polish | Planned |
 | 8 | Distribution | Partial |
@@ -27,7 +27,7 @@ For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
 ## Unreleased
 
-- [x] Add `dev-api-contract` skill — OpenAPI 3.1 contract generation from API entities
+- [x] Add `dev-be-data-model` skill — Data model documentation with constraints, indexes, migrations, and retention policies (`758d334`)
 
 ---
 
@@ -112,6 +112,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
 | `/jaan-to:dev-be-task-breakdown` | Backend task breakdown from PRDs |
 | `/jaan-to:dev-fe-design` | Frontend component design |
+| `/jaan-to:dev-be-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | `/jaan-to:dev-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |

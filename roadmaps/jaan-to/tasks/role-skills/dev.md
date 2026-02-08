@@ -92,7 +92,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`
 
-### /jaan-to:dev-be-data-model
+### ✅ /jaan-to:dev-be-data-model
 
 - **Logical**: `dev-be-data-model`
 - **Description**: Tables/collections + fields, constraints + indexes, retention + migration notes
@@ -107,7 +107,7 @@ flowchart TD
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/data-model.md`
 - **Reference**: [`60-dev-be-data-model.md`](../../../../jaan-to/outputs/research/60-dev-be-data-model.md)
 
-### /jaan-to:dev-api-contract
+### ✅ /jaan-to:dev-api-contract
 
 - **Logical**: `dev-api-contract`
 - **Description**: OpenAPI contract with payloads, errors, versioning, example requests/responses
