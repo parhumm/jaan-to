@@ -78,6 +78,22 @@ When adding functionality, first check if a skill/command exists.
 - Use templates from skill directory
 - Keep humans in decision-making loop
 
+### Language
+1. **On every skill execution**, read `jaan-to/config/settings.yaml` and check the `language` field
+2. If `language: "ask"` or field is missing:
+   - Use AskUserQuestion: "What language do you prefer for conversation and reports?"
+   - Options: "English" (default), "فارسی (Persian)" — allow "Other" for any language
+   - Save the choice to `jaan-to/config/settings.yaml` (e.g., `language: "fa"`)
+3. If `language` is set (e.g., `fa`, `en`, `tr`): use that language immediately
+4. **Per-skill override** (optional): if `language_{skill-name}` exists in settings.yaml, use that instead of the global `language` for that specific skill
+5. **Apply to**: plugin conversation, questions, confirmations, section headings, labels, and prose in report/output .md files
+6. **Always keep in English**: technical terms, code snippets, file paths, variable names, YAML keys, command names
+7. **Never affects**:
+   - Generated code output (dev skills produce code in the project's programming language, unchanged)
+   - Product/end-user language systems (localization.md, i18n configs)
+   - `/jaan-to:ux-microcopy-write` multi-language output — that skill generates product UI text in multiple languages per its own localization.md settings, independent of this preference
+   - Template structure variables (`{{handlebars}}`, `{placeholders}`)
+
 ---
 
 ## Naming Conventions
@@ -218,6 +234,9 @@ templates_pm_prd_write_path: "./docs/templates/enterprise-prd.md"
 
 # Merge learning from plugin + project
 learning_strategy: "merge"
+
+# Set conversation and report language (default: "ask")
+language: "fa"
 ```
 
 ### Tech Stack

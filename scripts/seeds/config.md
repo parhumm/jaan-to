@@ -52,6 +52,14 @@
 | dev-api-contract | `/jaan-to:dev-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 
+## Language
+- language: ask
+- scope: plugin conversation, questions, report headings, labels, prose
+- excluded: code, file paths, technical terms, variable names, YAML keys
+- not affected: generated code output, product localization (localization.md), ux-microcopy-write multi-language output
+- storage: jaan-to/config/settings.yaml
+- per-skill override: language_{skill-name} in settings.yaml (optional)
+
 ## Trust
 - trust_paths: ["jaan-to/"]
 - require_preview: true
