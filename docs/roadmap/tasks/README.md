@@ -1,6 +1,11 @@
+---
+title: "Task Documentation"
+sidebar_position: 1
+---
+
 # Task Documentation Standards
 
-> Guidelines for detailed task documents in `roadmaps/jaan-to/tasks/`
+> Guidelines for detailed task documents in `docs/roadmap/tasks/`
 
 ## When to Create a Task Doc
 

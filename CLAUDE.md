@@ -10,8 +10,8 @@
 |----------|----------|
 | **Humans** | [docs/](docs/README.md) - Usage, examples, how-to |
 | **AI** | This file - Behavioral rules, file paths |
-| **Developers** | [vision.md](roadmaps/jaan-to/vision.md) - Philosophy, architecture |
-| **Progress** | [roadmap.md](roadmaps/jaan-to/roadmap.md) - Tasks, phases |
+| **Developers** | [vision.md](docs/roadmap/vision.md) - Philosophy, architecture |
+| **Progress** | [roadmap.md](docs/roadmap/roadmap.md) - Tasks, phases |
 
 ---
 
@@ -188,7 +188,7 @@ See [jaan-to/outputs/README.md](jaan-to/outputs/README.md) for complete document
    ```
 
 ### Before Every Commit
-1. Update [roadmap.md](roadmaps/jaan-to/roadmap.md) with completed tasks
+1. Update [roadmap.md](docs/roadmap/roadmap.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`
 3. For new tasks, use `/jaan-to:roadmap-add`
 

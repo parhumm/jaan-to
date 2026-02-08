@@ -1,3 +1,8 @@
+---
+title: "jaan.to Roadmap"
+sidebar_position: 1
+---
+
 # jaan.to Roadmap
 
 > See [vision.md](vision.md) for philosophy and concepts
@@ -8,7 +13,7 @@
 
 | Phase | Focus | Status |
 |-------|-------|--------|
-| 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](../../CHANGELOG.md)) |
+| 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Role skills (137 across 11 roles) | In Progress |
 | 6 | MCP connectors | Planned |
@@ -19,7 +24,7 @@
 
 ## Version History
 
-For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
+For complete release history, see [CHANGELOG.md](/changelog).
 
 **Latest:** v3.21.0 — Jaanify showcase examples
 
@@ -145,7 +150,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `jaan-to/outputs/` | Generated outputs (project-relative) |
 | `jaan-to/learn/` | Learning files (project-relative) |
 | `.claude-plugin/plugin.json` | Plugin manifest |
-| `roadmaps/jaan-to/tasks/` | Task details |
+| `docs/roadmap/tasks/` | Task details |
 
 ### Skill Naming
 

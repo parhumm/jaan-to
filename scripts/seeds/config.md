@@ -24,7 +24,7 @@
 - qa (Quality Assurance) - 12 skills
 - growth (SEO + Content) - 15 skills
 
-> See [roadmaps/jaan-to/tasks/role-skills.md](../roadmaps/jaan-to/tasks/role-skills.md) for full catalog
+> See [docs/roadmap/tasks/role-skills.md](../docs/roadmap/tasks/role-skills.md) for full catalog
 
 ## Available Skills
 

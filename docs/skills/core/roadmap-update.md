@@ -80,7 +80,7 @@ Supports releasing from feature branches: pushes the branch, checks out main, me
 ## Output
 
 Updates:
-- `roadmaps/jaan-to/roadmap.md`
+- `docs/roadmap/roadmap.md`
 - `CHANGELOG.md` (release mode)
 - `.claude-plugin/plugin.json` (release mode)
 - `.claude-plugin/marketplace.json` (release mode)

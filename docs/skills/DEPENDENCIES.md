@@ -196,7 +196,7 @@ These skills are referenced but not yet implemented:
 | `/jaan-to:dev-fe-state-machine` | fe-task-breakdown | Component state machine definitions |
 | `/jaan-to:dev-be-data-model` | be-task-breakdown | Detailed data model specification |
 
-See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/roadmaps/jaan-to/roadmap.md) for implementation timeline.
+See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.
 
 ---
 

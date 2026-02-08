@@ -528,8 +528,8 @@ Goal: Keep docs in sync with code changes
 | [Skills Reference](docs/skills/README.md) | All available commands |
 | [Creating Skills](docs/extending/create-skill.md) | Build your own skills |
 | [Configuration](docs/config/README.md) | Settings and context |
-| [Vision](roadmaps/jaan-to/vision.md) | Philosophy and architecture |
-| [Roadmap](roadmaps/jaan-to/roadmap.md) | What's coming |
+| [Vision](docs/roadmap/vision.md) | Philosophy and architecture |
+| [Roadmap](docs/roadmap/roadmap.md) | What's coming |
 
 ---
 
