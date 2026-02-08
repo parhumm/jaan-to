@@ -1,6 +1,0 @@
-# Example: Company-specific learning
-version: "3.0"
-
-learning_strategy: "override"  # Use only project lessons
-
-templates_jaan_to_pm_prd_write_path: "./docs/templates/acme-prd.md"

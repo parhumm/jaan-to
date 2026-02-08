@@ -1,7 +1,0 @@
-# Example: Monorepo with custom paths
-version: "3.0"
-
-paths_templates: "packages/common/templates"
-paths_learning: "packages/common/learning"
-paths_outputs: "packages/docs/generated"
-paths_context: "packages/common/context"
