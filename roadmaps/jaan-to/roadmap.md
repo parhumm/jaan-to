@@ -21,7 +21,7 @@
 
 For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
-**Latest:** v3.14.1 — Marketplace Schema Fix
+**Latest:** v3.18.0 — Add dev-api-contract skill
 
 ---
 

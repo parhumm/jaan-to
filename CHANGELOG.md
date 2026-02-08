@@ -5,6 +5,13 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.18.0] - 2026-02-08
+
+### Added
+- **New skill: `dev-api-contract`** — Generate OpenAPI 3.1 contracts from API resource entities with RFC 9457 error schemas, cursor-based pagination, flat `components/schemas` architecture, and named examples. Outputs `api.yaml` + companion markdown quick-start guide. Research-informed from 40+ sources.
+
+---
+
 ## [3.17.0] - 2026-02-07
 
 ### Fixed

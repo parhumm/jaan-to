@@ -1,7 +1,7 @@
 {
   "name": "jaan-to",
-  "version": "3.17.0",
-  "description": "Give soul to your workflow. 19 AI-powered skills for product management (PRDs, user stories), development (frontend/backend task breakdowns, component design), UX research synthesis, QA test cases (BDD/Gherkin), and data analytics (GTM tracking). Features two-phase workflow with human approval, quality-reviewer agent, and continuous improvement via LEARN.md system.",
+  "version": "3.18.0",
+  "description": "Give soul to your workflow. 20 AI-powered skills for product management (PRDs, user stories), development (frontend/backend task breakdowns, API contracts, component design), UX research synthesis, QA test cases (BDD/Gherkin), and data analytics (GTM tracking). Features two-phase workflow with human approval, quality-reviewer agent, and continuous improvement via LEARN.md system.",
   "author": {
     "name": "Parhum Khoshbakht",
     "email": "parhum.kh@gmail.com"
