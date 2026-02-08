@@ -105,6 +105,7 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/data-model.md`
+- **Reference**: [`60-dev-be-data-model.md`](../../../../jaan-to/outputs/research/60-dev-be-data-model.md)
 
 ### /jaan-to:dev-api-contract
 
