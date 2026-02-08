@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
-  "version": "3.20.0-dev",
+  "version": "3.20.0",
   "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev, and more",
   "owner": {
     "name": "Parhum Khoshbakht",
@@ -12,7 +12,7 @@
     {
       "name": "jaan-to",
       "description": "AI-powered plugin with 21 skills for product management, development, UX research, QA testing, and data analytics. Generate PRDs, user stories, task breakdowns, data models, API contracts, frontend components, test cases, GTM tracking, and more. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, LEARN.md continuous improvement system.",
-      "version": "3.20.0-dev",
+      "version": "3.20.0",
       "author": {
         "name": "Parhum Khoshbakht",
         "email": "parhum.kh@gmail.com"

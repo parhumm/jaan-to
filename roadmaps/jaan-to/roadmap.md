@@ -21,7 +21,11 @@
 
 For complete release history, see [CHANGELOG.md](../../CHANGELOG.md).
 
-**Latest:** v3.19.0 — Add dev-be-data-model skill
+**Latest:** v3.20.0 — Language preference system
+
+### v3.20.0 — Language preference system
+- Language preference for plugin conversation and output (`34df511`)
+- Documentation: customization guide and seed files updated (`5fe2a18`)
 
 ---
 

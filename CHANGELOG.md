@@ -5,6 +5,17 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.20.0] - 2026-02-08
+
+### Added
+- **Language preference system** — Set conversation and report language globally or per-skill via `settings.yaml`. Ask once on first skill run, persist for all future executions. Supports any language (en, fa, tr, etc.) with per-skill override (`language_{skill-name}`). Does not affect generated code, product localization, or ux-microcopy-write output.
+
+### Documentation
+- **Customization guide updated** — Added Step 2: Language Preference with settings table, YAML examples, scope boundaries, verification steps, and troubleshooting
+- **Seed files doc updated** — Settings row now mentions language preference
+
+---
+
 ## [3.19.0] - 2026-02-08
 
 ### Added
@@ -672,6 +683,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.20.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.20.0
 [3.19.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.19.0
 [3.18.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.18.0
 [3.17.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.17.0
