@@ -10,6 +10,7 @@
 |-------|-------------|
 | [/jaan-to:dev-stack-detect](stack-detect.md) | Auto-detect tech stack and populate context |
 | [/jaan-to:dev-fe-task-breakdown](fe-task-breakdown.md) | Generate FE task breakdown from UX handoff |
+| [/jaan-to:dev-api-contract](api-contract.md) | Generate OpenAPI 3.1 contracts from API entities |
 | [/jaan-to:dev-pr-review](pr-review.md) | Automated PR review: risk scoring, security hints, missing tests |
 
 ---
@@ -19,6 +20,7 @@
 Dev skills help with:
 - Tech stack detection and context setup
 - Frontend task breakdowns from UX handoffs
+- API contract generation (OpenAPI 3.1)
 - Code generation matching project conventions
 - Technical planning and architecture
 
