@@ -41,7 +41,12 @@
 | pm-research-about | `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
 | pm-story-write | `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs |
 | roadmap-update | `/jaan-to:roadmap-update` | [Internal] Maintain and sync roadmap |
-| dev-stack-detect | `/jaan-to:dev-stack-detect` | Auto-detect tech stack and populate context |
+| detect-dev | `/jaan-to:detect-dev` | Repo engineering audit with scored findings |
+| detect-design | `/jaan-to:detect-design` | Design system detection with drift findings |
+| detect-writing | `/jaan-to:detect-writing` | Writing system extraction with tone scoring |
+| detect-product | `/jaan-to:detect-product` | Product reality extraction with evidence |
+| detect-ux | `/jaan-to:detect-ux` | UX audit with journey/pain-point findings |
+| pack-detect | `/jaan-to:pack-detect` | Consolidate detect outputs into knowledge index |
 | ux-research-synthesize | `/jaan-to:ux-research-synthesize` | Synthesize research findings into themes and recommendations |
 | ux-heatmap-analyze | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 | ux-microcopy-write | `/jaan-to:ux-microcopy-write` | Generate multi-language microcopy packs |

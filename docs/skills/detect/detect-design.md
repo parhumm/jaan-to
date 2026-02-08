@@ -3,7 +3,8 @@ title: "detect-design"
 sidebar_position: 2
 doc_type: skill
 tags: [detect, design, tokens, components, accessibility, drift]
-related: [pack-detect]
+related: [detect-dev, detect-writing, pack-detect]
+updated_date: 2026-02-08
 ---
 
 # /jaan-to:detect-design
@@ -14,7 +15,7 @@ related: [pack-detect]
 
 ## What It Does
 
-Scans the repository for design system signals: brand definitions, design tokens, component libraries, UI patterns, accessibility implementation, and governance processes. Identifies drift between token definitions and actual usage.
+Scans the repository for design system signals: brand definitions, design tokens (JSON, CSS variables, Tailwind config), component libraries, UI patterns, accessibility implementation, and governance processes. Identifies drift between token definitions and actual usage with paired evidence.
 
 ---
 
@@ -34,22 +35,37 @@ Scans the repository for design system signals: brand definitions, design tokens
 
 | File | Content |
 |------|---------|
-| `docs/current/design/brand.md` | Brand signals (colors, typography, logos) |
-| `docs/current/design/tokens.md` | Design token definitions and usage |
-| `docs/current/design/components.md` | Component inventory and patterns |
-| `docs/current/design/patterns.md` | UI patterns and conventions |
-| `docs/current/design/accessibility.md` | A11y implementation findings |
-| `docs/current/design/governance.md` | Design system governance signals |
+| `docs/current/design/brand.md` | Brand signals (colors, typography, logos, font loading) |
+| `docs/current/design/tokens.md` | Design token inventory with drift findings |
+| `docs/current/design/components.md` | Component inventory (primitives, layout, navigation, feedback, data display, form) |
+| `docs/current/design/patterns.md` | UI patterns, spacing scales, dark mode, theme switching |
+| `docs/current/design/accessibility.md` | A11y implementation findings (ARIA, semantic HTML, a11y tests) |
+| `docs/current/design/governance.md` | Design system governance (CODEOWNERS, versioning, visual regression testing) |
+
+---
+
+## What It Scans
+
+| Category | Patterns |
+|----------|---------|
+| Tokens | `**/tokens/**/*.{json,js,ts}`, `tailwind.config.*`, `**/theme.{js,ts,json}`, `**/*.tokens.json` |
+| CSS variables | `**/*.{css,scss,less}` with `--` prefix |
+| Components | `**/components/**/*.{tsx,jsx,vue,svelte}` |
+| Storybook | `.storybook/**`, `**/*.stories.{tsx,jsx,ts,js,mdx}` |
+| Brand assets | `**/assets/brand/**`, font configs, logo assets |
+| Governance | `CODEOWNERS`, changelogs, Chromatic/Percy/Backstop configs |
 
 ---
 
 ## Key Points
 
-- Tokens/components evidence must include exact file locations
-- "Drift" findings require two evidences: token definition + conflicting usage
-- Each finding includes Severity, Confidence (4-level), Evidence blocks
-- Accessibility findings must be scoped — use "Unknown" when repo evidence is insufficient
-- Governance detection: owners/process/versioning signals (Storybook, docs conventions, token maintenance)
+- Evidence IDs use namespace `E-DSN-NNN` (prevents collisions in pack-detect aggregation)
+- **Drift detection** requires paired evidence per finding: token definition (E-DSN-001a) + conflicting usage (E-DSN-001b)
+- Token categories: colors, typography, spacing, shadows, border radius, breakpoints, animation
+- Component classification: primitives, layout, navigation, feedback, data display, form
+- Accessibility findings scoped to repo evidence only — use "Unknown" for runtime behavior
+- Governance signals: CODEOWNERS, design system changelogs, Storybook deployment, visual regression testing
+- 4-level confidence: Confirmed / Firm / Tentative / Uncertain
 
 ---
 

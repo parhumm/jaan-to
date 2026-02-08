@@ -15,7 +15,7 @@ sidebar_position: 9
 flowchart TD
     jaan-to-sre-slo-setup["sre-slo-setup<br>SLO Setup<br>SLOs + error budgets + SLIs"] --> jaan-to-sre-alert-tuning["sre-alert-tuning<br>Alert Tuning<br>Noise reduction + severity map"]
     jaan-to-sre-alert-tuning["sre-alert-tuning<br>Alert Tuning<br>Noise reduction + severity map"] -.-> jaan-to-dev-observability-alerts["dev-observability-alerts<br>DEV: observability-alerts"]
-    dev-stack-detect["dev-stack-detect<br>DEV: stack-detect"] -.-> jaan-to-sre-pipeline-create["sre-pipeline-create<br>Pipeline Create<br>CI/CD workflows + Docker + deploy"]
+    detect-dev["detect-dev<br>DEV: stack-detect"] -.-> jaan-to-sre-pipeline-create["sre-pipeline-create<br>Pipeline Create<br>CI/CD workflows + Docker + deploy"]
     jaan-to-sre-pipeline-create["sre-pipeline-create<br>Pipeline Create<br>CI/CD workflows + Docker + deploy"] --> jaan-to-sre-pipeline-audit["sre-pipeline-audit<br>Pipeline Audit<br>Weak points + missing gates"]
     jaan-to-sre-pipeline-audit["sre-pipeline-audit<br>Pipeline Audit<br>Weak points + missing gates"] --> jaan-to-sre-env-check["sre-env-check<br>Env Check<br>Config drift + readiness"]
     jaan-to-sre-env-check["sre-env-check<br>Env Check<br>Config drift + readiness"] -.-> jaan-to-dev-ship-check["dev-ship-check<br>DEV: ship-check"]
@@ -24,7 +24,7 @@ flowchart TD
     jaan-to-sre-incident-runbook["sre-incident-runbook<br>Incident Runbook<br>Runbook + escalation + triage"] --> jaan-to-sre-incident-postmortem["sre-incident-postmortem<br>Incident Postmortem<br>Timeline + actions + owners"]
     jaan-to-sre-incident-postmortem["sre-incident-postmortem<br>Incident Postmortem<br>Timeline + actions + owners"] --> jaan-to-sre-hardening-plan["sre-hardening-plan<br>Hardening Plan<br>Reliability backlog + steps"]
 
-    style dev-stack-detect fill:#f0f0f0,stroke:#999
+    style detect-dev fill:#f0f0f0,stroke:#999
     style jaan-to-dev-observability-alerts fill:#f0f0f0,stroke:#999
     style jaan-to-dev-ship-check fill:#f0f0f0,stroke:#999
     style jaan-to-delivery-backlog-split fill:#f0f0f0,stroke:#999

@@ -3,7 +3,8 @@ title: "detect-ux"
 sidebar_position: 5
 doc_type: skill
 tags: [detect, ux, journeys, heuristics, accessibility, pain-points]
-related: [ux-heuristic-review, ux-journey-map, pack-detect]
+related: [detect-dev, detect-design, detect-writing, detect-product, pack-detect]
+updated_date: 2026-02-08
 ---
 
 # /jaan-to:detect-ux
@@ -14,7 +15,7 @@ related: [ux-heuristic-review, ux-journey-map, pack-detect]
 
 ## What It Does
 
-Performs a UX audit by mapping journeys from actual routes, screens, and state components. Identifies pain points, heuristic issues, and accessibility gaps — all aligned to the same evidence/confidence system as other detect audits.
+Performs a UX audit by mapping journeys from actual routes, screens, and state components using framework-specific route extraction. Infers personas and JTBD from code structure, maps user flows with Mermaid diagrams, detects UX pain points, evaluates Nielsen's 10 usability heuristics from code signals, and assesses repo-level accessibility.
 
 ---
 
@@ -34,22 +35,41 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 
 | File | Content |
 |------|---------|
-| `docs/current/ux/personas.md` | Inferred personas from UI signals |
-| `docs/current/ux/jtbd.md` | Jobs-to-be-done from feature surfaces |
-| `docs/current/ux/flows.md` | User flows from routes/navigation |
-| `docs/current/ux/pain-points.md` | Identified UX pain points |
-| `docs/current/ux/heuristics.md` | Heuristic evaluation findings |
-| `docs/current/ux/accessibility.md` | A11y findings within repo scope |
-| `docs/current/ux/gaps.md` | Missing UX coverage areas |
+| `docs/current/ux/personas.md` | Inferred personas from route/auth analysis |
+| `docs/current/ux/jtbd.md` | Jobs-to-be-done statements linked to features |
+| `docs/current/ux/flows.md` | User flows with Mermaid diagrams |
+| `docs/current/ux/pain-points.md` | UX friction signals and dead ends |
+| `docs/current/ux/heuristics.md` | Nielsen 10 heuristics assessment table |
+| `docs/current/ux/accessibility.md` | A11y findings (scoped to repo evidence) |
+| `docs/current/ux/gaps.md` | UX gaps and improvement recommendations |
+
+---
+
+## What It Scans
+
+| Category | Patterns |
+|----------|---------|
+| React Router | `useRoutes()`, `<Route`, `<Outlet`, `createBrowserRouter` |
+| Next.js | `app/**/page.{tsx,jsx}`, `pages/**/*.{tsx,jsx}`, dynamic `[slug]`, route groups `(group)/`, layouts |
+| Vue Router | `routes` array definitions, `<RouterView`, `**/router/**/*.{ts,js}` |
+| Angular | `**/*routing.module.ts`, `**/*-routes.ts`, `canActivate` guards |
+| Express / API | `app.get(`, `router.post(`, NestJS `@Get(`, `@Post(` decorators |
+| Navigation | `<Link`, `<NavLink`, `useNavigate`, `router.push` |
+| Pain points | `<ErrorBoundary`, `isLoading`, `<Skeleton`, form complexity, dead-end detection |
+| Accessibility | ARIA attributes, semantic HTML, keyboard navigation, skip links, a11y testing tools |
 
 ---
 
 ## Key Points
 
-- Map journeys from actual routes/screens and state components; missing proof MUST become Unknown
-- Heuristic findings must be triaged (no raw dumps), each with severity + confidence + evidence blocks
-- Accessibility findings must stay within repo evidence scope; otherwise Uncertain/Unknown
-- Consistent doc structure: Exec Summary → Scope/Methodology → Findings → Recommendations → Appendices
+- Evidence IDs use namespace `E-UX-NNN` (prevents collisions in pack-detect aggregation)
+- **Framework-specific route extraction** across React Router, Next.js, Vue Router, Angular, and Express
+- **Nielsen's 10 heuristics** assessed from code signals: Visibility, Match, User control, Consistency, Error prevention, Recognition, Flexibility, Minimalist design, Error recovery, Help — each rated Strong/Adequate/Weak/Unknown
+- Personas and JTBD are always marked **Tentative** (inferred from code, not validated user research)
+- Multi-step flows rendered as **Mermaid** flow diagrams
+- Missing code evidence does NOT equal a violation — marked "Unknown" when evidence is insufficient
+- Accessibility findings scoped to repo evidence only — runtime behavior = Unknown
+- 4-level confidence: Confirmed / Firm / Tentative / Uncertain
 
 ---
 

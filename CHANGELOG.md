@@ -5,6 +5,33 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.0] - 2026-02-08
+
+### Added
+- **6 Detect & Knowledge Pack skills (Phase 5)** — Evidence-based repo audits with SARIF-compatible evidence, 4-level confidence scoring, and machine-parseable markdown output
+  - `/jaan-to:detect-dev` — Engineering audit with OpenSSF-style scoring across 11+ language ecosystems, CI/CD security checks, and 9 output files (`52eb72f`)
+  - `/jaan-to:detect-design` — Design system detection with drift findings (paired evidence), token inventory, component classification, and 6 output files (`280e4f7`)
+  - `/jaan-to:detect-writing` — Writing system extraction with NNg tone dimensions (4 primary + 5 extended), 8-category UI copy classification, error message rubric, i18n maturity 0–5, and 6 output files (`eb0b4f5`)
+  - `/jaan-to:detect-product` — Product reality extraction with 3-layer evidence model (surface + copy + code path), monetization/entitlement scanning, analytics SDK detection, and 7 output files (`ef3d455`)
+  - `/jaan-to:detect-ux` — UX audit with framework-specific route extraction (React Router, Next.js, Vue Router, Angular, Express), Nielsen's 10 heuristics, Mermaid flow diagrams, and 7 output files (`6fa7cb5`)
+  - `/jaan-to:pack-detect` — Consolidate all detect outputs into scored knowledge index with risk heatmap, evidence ID validation, unknowns backlog, and Step 0 orchestration for partial runs (`50a75f5`)
+
+### Changed
+- **`dev-stack-detect` merged into `detect-dev`** — All scanning patterns absorbed; old skill removed. Detection → `detect-dev`, context population remains via bootstrap (`bb9d0a7`, `9d944de`)
+- **Bootstrap updated** — Suggests `/jaan-to:pack-detect` instead of `/jaan-to:dev-stack-detect` when context has placeholders (`9d944de`)
+- **Plugin description** — Updated to reflect 27 skills (was 21)
+
+### Documentation
+- **Detect skill docs aligned with implementations** — All 7 docs updated with What It Scans tables, evidence ID namespaces, scoring formulas, and shared standards (`29901ae`)
+- **Detect README** — Added pipeline flow diagram, output file counts, and Shared Standards section (`29901ae`)
+- **`dev-stack-detect` deprecated** — Redirect doc pointing to `detect-dev` (`9d944de`)
+- **30+ reference files updated** — All `dev-stack-detect` references replaced with `detect-dev`/`pack-detect` across docs, scripts, seeds, context, website, and examples (`9d944de`)
+
+### Fixed
+- **Bootstrap `.gitignore` handling** — Stopped auto-adding `jaan-to/` to `.gitignore` which could hide project context files (`c95e4a9`)
+
+---
+
 ## [3.22.0] - 2026-02-08
 
 ### Added
@@ -712,6 +739,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.23.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.23.0
 [3.22.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.22.0
 [3.21.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.21.0
 [3.20.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.20.0
