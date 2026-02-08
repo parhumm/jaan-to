@@ -27,7 +27,13 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v3.21.0 — Jaanify showcase examples
+**Latest:** v3.22.0 — Language settings in all 21 skills
+
+### v3.22.0 — Language settings in all 21 skills
+- Language settings support in all 21 skills (`b7cfa00`)
+- Docusaurus documentation site (`7bec2d3`)
+- Roadmap moved to docs/roadmap/ (`f332657`)
+- Versioning unified — removed -dev suffix (`37516ab`)
 
 ### v3.21.0 — Jaanify showcase examples
 - Examples replaced with Jaanify showcase README (`0bf37a1`)

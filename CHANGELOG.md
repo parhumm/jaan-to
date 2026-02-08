@@ -5,6 +5,27 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.22.0] - 2026-02-08
+
+### Added
+- **Language settings in all 21 skills** — Every skill now reads language preference from `jaan-to/config/settings.yaml` on execution. Three variants: standard block (13 skills), code exception for dev/data skills (7 skills), microcopy exception for ux-microcopy-write. Updated skill-create template and validation checklist for future compliance (`b7cfa00`)
+- **Docusaurus documentation site** — Full documentation site at `website/docs/` with sidebar navigation, roadmap integration, and detect skills docs (`7bec2d3`)
+
+### Changed
+- **Roadmap moved to docs/** — Relocated `roadmaps/jaan-to/` to `docs/roadmap/` and updated all references (`f332657`, `b845900`)
+- **Versioning unified** — Removed `-dev` suffix convention, both branches use `X.Y.Z` format (`37516ab`)
+
+### Documentation
+- **Detect & Knowledge Pack** — Added 6 detect skills documentation and Phase 5 roadmap details (`6a1fd87`, `2848e94`)
+- **4 gap skills identified** — Added dev-be-scaffold, dev-fe-scaffold, sre-pipeline-create, pm-trace-links to roadmap (`f470d3e`)
+- **Research index updates** — Added repo-analysis output and content detection standards (`3888926`, `93e25b1`)
+
+### Fixed
+- **File naming** — Fixed file name inconsistencies (`c2ce826`)
+- **Roadmap path references** — Updated all `roadmaps/jaan-to/` references to `docs/roadmap/` (`b845900`)
+
+---
+
 ## [3.21.0] - 2026-02-08
 
 ### Changed
@@ -691,6 +712,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[3.22.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.22.0
 [3.21.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.21.0
 [3.20.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.20.0
 [3.19.0]: https://github.com/parhumm/jaan-to/releases/tag/v3.19.0
