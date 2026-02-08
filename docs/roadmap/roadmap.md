@@ -15,10 +15,11 @@ sidebar_position: 1
 |-------|-------|--------|
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
-| 5 | Role skills (137 across 11 roles) | In Progress |
-| 6 | MCP connectors | Planned |
-| 7 | Testing and polish | Planned |
-| 8 | Distribution | Partial |
+| 5 | Detect & Knowledge Pack (6 skills) | Planned |
+| 6 | Role skills (141 across 11 roles) | In Progress |
+| 7 | MCP connectors | Planned |
+| 8 | Testing and polish | Planned |
+| 9 | Distribution | Partial |
 
 ---
 
@@ -52,7 +53,26 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ---
 
-## Phase 5: Role Skills (141 across 11 roles)
+## Phase 5: Detect & Knowledge Pack (6 skills)
+
+> Details: [tasks/role-skills/detect.md](tasks/role-skills/detect.md)
+
+Evidence-based repo audits that produce `docs/current/` knowledge. All detect skills are Quick Wins (no MCP required). Each outputs machine-parseable markdown with YAML frontmatter, SARIF-like evidence blocks, and confidence scoring.
+
+Pipeline: dev-detect + design-detect + writing-detect + product-detect + ux-detect → knowledge-pack
+
+| Skill | Domain | Output |
+|-------|--------|--------|
+| `/jaan-to:dev-detect` | Engineering | `docs/current/dev/` |
+| `/jaan-to:design-detect` | Design system | `docs/current/design/` |
+| `/jaan-to:writing-detect` | Writing/content | `docs/current/writing/` |
+| `/jaan-to:product-detect` | Product | `docs/current/product/` |
+| `/jaan-to:ux-detect` | UX | `docs/current/ux/` |
+| `/jaan-to:knowledge-pack` | Consolidation | `docs/current/` |
+
+---
+
+## Phase 6: Role Skills (141 across 11 roles)
 
 > Details: [tasks/role-skills.md](tasks/role-skills.md)
 
@@ -78,7 +98,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 ---
 
-## Phase 6: MCP Connectors (24 documented)
+## Phase 7: MCP Connectors (24 documented)
 
 > Details: [tasks/mcp-connectors.md](tasks/mcp-connectors.md)
 
@@ -90,7 +110,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 
 ---
 
-## Phase 7: Testing and Polish
+## Phase 8: Testing and Polish
 
 - [ ] E2E test framework in `tests/` with mocked MCP responses
 - [ ] JSON export alongside markdown for all skill outputs
@@ -99,7 +119,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 
 ---
 
-## Phase 8: Distribution
+## Phase 9: Distribution
 
 > Details: [tasks/distribution.md](tasks/distribution.md)
 

@@ -5,7 +5,7 @@ sidebar_position: 9
 
 # Role Skills Catalog
 
-> Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 134 skills across 11 roles
+> Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 140 skills across 12 roles
 
 ## Overview
 
@@ -72,6 +72,7 @@ Use v3.0.0 syntax in all template.md files:
 | SRE | 9 | 5 | [sre.md](role-skills/sre.md) |
 | SUPPORT | 8 | 8 | [support.md](role-skills/support.md) |
 | RELEASE | 8 | 8 | [release.md](role-skills/release.md) |
+| DETECT | 6 | 6 | [detect.md](role-skills/detect.md) |
 
 ---
 
@@ -86,12 +87,13 @@ Key dependency flows across roles:
 - **Security Gate**: SEC (threat-model → pii-map) feeds into DEV and DELIVERY
 - **Reliability**: DEV (observability-alerts) → SRE (slo-setup → alert-tuning)
 - **Beta**: GROWTH (beta-cohort-plan) → RELEASE (beta-rollout-plan → issue-log)
+- **Detect → Knowledge**: DETECT (dev-detect + design-detect + writing-detect + product-detect + ux-detect) → knowledge-pack
 
 ---
 
 ## Acceptance Criteria
 
-- [ ] All 141 skills created with SKILL.md + LEARN.md seed
+- [ ] All 147 skills created with SKILL.md + LEARN.md seed
 - [ ] Each skill follows `docs/extending/create-skill.md` v3.0.0 specification
 - [ ] **All skills use `$JAAN_*` environment variables (zero hardcoded paths)**
 - [ ] **Tech-aware skills integrate with `$JAAN_CONTEXT_DIR/tech.md`**
@@ -99,7 +101,7 @@ Key dependency flows across roles:
 - [ ] Documentation in docs/skills/{role}/
 - [ ] Registered in jaan-to/context/config.md
 - [ ] Tested with sample inputs in v3.0.0 environment
-- [ ] Roles covered: PM, DEV, QA, DATA, GROWTH, UX, SEC, DELIVERY, SRE, SUPPORT, RELEASE
+- [ ] Roles covered: PM, DEV, QA, DATA, GROWTH, UX, SEC, DELIVERY, SRE, SUPPORT, RELEASE, DETECT
 
 ## Domain-Specific Catalogs
 

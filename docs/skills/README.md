@@ -46,6 +46,7 @@ Two naming conventions based on skill type:
 | qa | QA Engineer | Planned |
 | [ux](ux/README.md) | UX Designer | Active |
 | growth | Growth/SEO | Planned |
+| [detect](detect/README.md) | Repo audits & knowledge | Planned |
 
 ---
 
