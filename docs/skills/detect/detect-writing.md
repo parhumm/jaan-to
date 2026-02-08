@@ -3,18 +3,19 @@ title: "detect-writing"
 sidebar_position: 3
 doc_type: skill
 tags: [detect, writing, tone, glossary, i18n, microcopy]
-related: [ux-microcopy-write, pack-detect]
+related: [detect-dev, detect-design, detect-product, detect-ux, pack-detect]
+updated_date: 2026-02-08
 ---
 
 # /jaan-to:detect-writing
 
-> Detect the current writing system with multi-signal extraction and tone scoring.
+> Writing system extraction with NNg tone dimensions, UI copy classification, and i18n maturity scoring.
 
 ---
 
 ## What It Does
 
-Extracts the writing system from the repository using glob discovery, string classification, and heuristic/NLP scoring. Produces a canonical writing-system spec covering voice, tone, glossary, UI copy patterns, and i18n maturity.
+Extracts the writing system from the repository using framework-specific glob discovery, string classification, and heuristic scoring. Scans i18n/locale files across 13+ framework patterns, classifies UI copy into 8 categories using component-name matching, scores tone using NNg dimensions (4 primary + 5 extended), audits error message quality with a weighted rubric, and assesses i18n maturity on a 0–5 scale.
 
 ---
 
@@ -34,25 +35,41 @@ Extracts the writing system from the repository using glob discovery, string cla
 
 | File | Content |
 |------|---------|
-| `docs/current/writing/writing-system.md` | Primary writing system spec (voice, tone, glossary, patterns) |
-| `docs/current/writing/glossary.md` | Term inventory with ISO-704-ish statuses |
-| `docs/current/writing/ui-copy.md` | UI string classification across 8 categories |
-| `docs/current/writing/error-messages.md` | Error message quality scoring |
-| `docs/current/writing/localization.md` | i18n maturity assessment (0–5) |
-| `docs/current/writing/samples.md` | Representative copy samples |
+| `docs/current/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
+| `docs/current/writing/glossary.md` | Terminology glossary with ISO-704-ish statuses (preferred/admitted/deprecated/forbidden) |
+| `docs/current/writing/ui-copy.md` | UI string classification across 8 categories with component-name patterns |
+| `docs/current/writing/error-messages.md` | Error message quality audit with 5-dimension weighted rubric |
+| `docs/current/writing/localization.md` | i18n maturity assessment (0–5) with evidence |
+| `docs/current/writing/samples.md` | Representative copy samples per category |
 
-Primary output is `writing-system.md`; others are optional splits.
+All 6 output files are required per execution.
+
+---
+
+## What It Scans
+
+| Category | Patterns |
+|----------|---------|
+| i18n locale files | React i18next, Vue i18n, Angular, Next.js, Flutter/Dart, Android, iOS/macOS, Rails, Django, Java, .NET, PHP/Laravel, GNU gettext (13 framework-specific glob sets) |
+| Component inline text | JSX/TSX inline text, component props (`label`, `title`, `message`, `placeholder`, `helperText`, `errorMessage`) |
+| UI copy components | `*Button*`, `*Error*`, `*EmptyState*`, `*Dialog*`, `*Toast*`, `*Onboarding*`, `*FormField*`, `*Loading*` + variants |
+| ICU MessageFormat | Plural, select, and format patterns in locale files |
+| RTL support | `dir="rtl"`, CSS logical properties, RTL locale codes (ar, he, fa, ur, ps) |
+| Content governance | `CODEOWNERS`, content linting tools (`alex`, `write-good`, `vale`, `cspell`, `textlint`), CI translation checks |
 
 ---
 
 ## Key Points
 
-- Canonical structure: Voice definition → Tone spectrum → Glossary → UI copy patterns → Plain language → i18n maturity → Recommendations
-- NNg tone dimensions: Formality / Humor / Respectfulness / Enthusiasm + consistency score
-- UI copy classified into 8 categories: Buttons, Errors, Empty states, Confirm dialogs, Toasts, Onboarding, Labels/helper, Loading
-- Error messages scored with weighted rubric: Clarity / Specificity / Actionability / Tone / A11y
-- i18n maturity rated 0–5 using glob patterns + ICU/RTL/hardcoded-string signals + governance signals
-- Glossary uses ISO-704-ish statuses: preferred / admitted / deprecated / forbidden
+- Evidence IDs use namespace `E-WRT-NNN` (prevents collisions in pack-detect aggregation)
+- **NNg tone dimensions**: 4 primary (Formality/Humor/Respectfulness/Enthusiasm 1–5) + 5 extended (Technical complexity/Verbosity/Directness/Empathy/Confidence)
+- **Consistency score**: Standard deviation per dimension across all strings; flag >1.5σ outliers
+- UI copy classified into 8 categories: Buttons, Errors, Empty states, Confirm dialogs, Toasts, Onboarding, Form labels/helper, Loading
+- **Error message rubric**: Clarity (25%) / Specificity (20%) / Actionability (25%) / Tone (15%) / A11y (15%)
+- **Automated heuristic flags**: Flesch-Kincaid >8, sentences >25 words, messages >40 words, passive >10%, blame language, visible error codes, missing action verbs
+- **i18n maturity** rated 0–5: None → Basic → Partial → Functional → Mature → Excellence; centralization scoring (+1/−1 signals, cap at Level 1 if ≤−2)
+- Glossary uses ISO-704-ish methodology with TF-IDF/C-value term extraction
+- 4-level confidence: Confirmed / Firm / Tentative / Uncertain
 
 ---
 

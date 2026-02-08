@@ -3,18 +3,19 @@ title: "detect-product"
 sidebar_position: 4
 doc_type: skill
 tags: [detect, product, features, monetization, instrumentation]
-related: [pm-prd-write, pack-detect]
+related: [detect-dev, detect-design, detect-writing, detect-ux, pack-detect]
+updated_date: 2026-02-08
 ---
 
 # /jaan-to:detect-product
 
-> Evidence-based product reality extraction with scored risks.
+> Product reality extraction with evidence-backed features, monetization, and metrics.
 
 ---
 
 ## What It Does
 
-Extracts the "product reality" from the repository: features, value proposition signals, monetization/entitlements, instrumentation coverage, and constraints. Every claim requires evidence linking to surface, copy, and code path.
+Extracts the "product reality" from the repository using a 3-layer evidence model: surface (routes/screens), copy (user-facing text), and code path (business logic). Scans for features, value proposition signals, monetization/billing, entitlement enforcement, analytics instrumentation, feature flags, and technical/business constraints.
 
 ---
 
@@ -34,23 +35,40 @@ Extracts the "product reality" from the repository: features, value proposition 
 
 | File | Content |
 |------|---------|
-| `docs/current/product/overview.md` | Product overview and identity signals |
-| `docs/current/product/features.md` | Feature inventory with evidence |
-| `docs/current/product/value-prop.md` | Value proposition signals |
-| `docs/current/product/monetization.md` | Pricing copy vs enforcement evidence |
-| `docs/current/product/entitlements.md` | Access gates and tier evidence |
-| `docs/current/product/metrics.md` | Instrumentation and analytics reality |
-| `docs/current/product/constraints.md` | Technical and business constraints |
+| `docs/current/product/overview.md` | Product overview with feature summary |
+| `docs/current/product/features.md` | Feature inventory with 3-layer evidence |
+| `docs/current/product/value-prop.md` | Value proposition signals from copy |
+| `docs/current/product/monetization.md` | Monetization model with evidence |
+| `docs/current/product/entitlements.md` | Entitlement enforcement mapping |
+| `docs/current/product/metrics.md` | Instrumentation reality (analytics, flags, events) |
+| `docs/current/product/constraints.md` | Technical/business constraints and risks |
+
+---
+
+## What It Scans
+
+| Category | Patterns |
+|----------|---------|
+| Routes/screens | `**/pages/**/*.{tsx,jsx,vue}`, `**/app/**/page.{tsx,jsx}`, React Router, API routes |
+| Value proposition | Landing pages, hero sections, taglines, CTA text |
+| Pricing copy | `**/pricing.*`, `**/tiers.*`, `$X/month`, tier names (free/starter/pro/enterprise) |
+| Billing code | Stripe (`stripe.subscriptions`, `stripe.checkout`), PayPal, custom billing gates |
+| Entitlements | `canAccess`, `hasFeature`, `user.plan`, `user.tier`, middleware guards |
+| Analytics SDKs | GA4 (`gtag`), Mixpanel, Segment, PostHog, Amplitude, Plausible |
+| Feature flags | Unleash, LaunchDarkly, Split.io, Flagsmith, custom `FEATURE_`/`FF_` patterns |
+| Constraints | Rate limiting, file size limits, user limits, trial/expiration, geo-restrictions, compliance (GDPR/CCPA/HIPAA) |
 
 ---
 
 ## Key Points
 
-- "Feature exists" requires evidence linking to surface + copy + code path; otherwise Inferred/Unknown
-- Monetization: distinguish "pricing copy" vs "enforcement" — gates must be proven by code locations
-- Absence of evidence becomes an "absence" evidence item
-- Instrumentation: report taxonomy/consistency signals; heuristic conclusions labeled Tentative
-- Same standardized frontmatter + Findings block format as all detect audits
+- Evidence IDs use namespace `E-PRD-NNN` (prevents collisions in pack-detect aggregation)
+- **3-layer feature evidence**: Surface + Copy + Code Path → confidence mapping:
+  - All 3 layers → Confirmed; 2/3 → Firm; 1 layer + heuristics → Tentative; Inferred only → Uncertain
+- Monetization: distinguish "pricing copy" (what product claims) vs "enforcement" (what code enforces) — gates must be proven by code locations
+- Absence of evidence becomes an "absence" evidence item (not a claim without proof)
+- Instrumentation: event taxonomy consistency assessed (naming convention, property standardization, coverage gaps)
+- 4-level confidence: Confirmed / Firm / Tentative / Uncertain
 
 ---
 
