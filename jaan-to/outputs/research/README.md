@@ -68,6 +68,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [58](58-role-wp-dev.md) | WordPress Analytics Plugin Development | Complete best practices guide addressing critical gaps in WordPress plugin documentation—privacy-compliant tracking architectures, high-performance database patterns, competitor architecture analysis (WP Statistics, Koko Analytics, Independent Analytics), JavaScript beacon tracking, and dashboard implementation. |
 | [59](59-dev-api-contract.md) | OpenAPI 3.1 Contract Generator | Production-ready OpenAPI 3.1 contract generation covering schema design (flat $ref, polymorphism, null handling), RFC 9457 error responses, example generation, versioning/deprecation, AI guardrails (Spectral + Redocly), overlay enrichment, reference specs (GitHub, Stripe, Zalando), and validation tooling stack. 40+ sources. |
 | [60](60-dev-be-data-model.md) | AI Data Modeling Skill Research | Comprehensive research on bridging natural language to production-ready DDL across PostgreSQL, MySQL, MongoDB, DynamoDB, and edge SQLite. Covers NLP constraint extraction heuristics, zero-downtime migration patterns (CONCURRENTLY, INSTANT/INPLACE/COPY, expand-contract), composite index ordering algorithms (ESR rule), multi-tenant isolation with RLS, schema evolution compatibility rules, soft delete/GDPR patterns, and a quality validation checklist with scoring rubric. |
+| [61](61-knowledge-pack.md) | Repo-Analysis Output & Content Detection Standards | Standards for audit report output schemas synthesizing SARIF, CycloneDX, MADR, and Diátaxis, plus writing system detection methodology covering voice/tone analysis (NNg 4-dimension + 5 extended), terminology extraction (ISO 704/C-value), 8 UI copy categories with detection heuristics, error message quality scoring rubric, plain language readability targets, and i18n maturity assessment (0-5 scale with glob patterns for 13 frameworks). |
 
 ## Quick Topic Finder
 
@@ -113,6 +114,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [51-dev-fe-task-breakdown.md](51-dev-fe-task-breakdown.md) - Frontend task breakdown framework & coverage checklist
 - [52-dev-be-task-breakdown.md](52-dev-be-task-breakdown.md) - Backend task breakdown for Laravel/PHP with INVEST criteria
 - [53-dev-pr-review.md](53-dev-pr-review.md) - PR review automation with risk scoring & security patterns
+- [61-knowledge-pack.md](61-knowledge-pack.md) - Repo-analysis output schemas & writing system detection standards
 
 ### PR Review Automation
 - [04-laravel-pr-agents.md](04-laravel-pr-agents.md)
