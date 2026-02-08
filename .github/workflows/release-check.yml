@@ -10,17 +10,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check version format (no -dev suffix)
-        run: |
-          VERSION=$(jq -r '.version' .claude-plugin/plugin.json)
-          if [[ "$VERSION" == *-dev* ]]; then
-            echo "::error::Version contains -dev suffix: $VERSION"
-            echo "Release versions must not contain -dev suffix."
-            echo "Run: ./scripts/bump-version.sh X.Y.Z (without -dev)"
-            exit 1
-          fi
-          echo "✓ Version format valid: $VERSION"
-
       - name: Check all 3 version fields match
         run: |
           V1=$(jq -r '.version' .claude-plugin/plugin.json)

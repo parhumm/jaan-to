@@ -57,8 +57,7 @@ To switch from dev to stable (or vice versa):
 ```
 /plugin list
 ```
-- Stable versions: `3.15.0`, `3.16.0`, etc.
-- Dev versions: `3.15.0-dev`, `3.16.0-dev`, etc. (includes `-dev` suffix)
+- All versions use the same format: `3.15.0`, `3.16.0`, etc.
 
 ### Local Development
 ```bash

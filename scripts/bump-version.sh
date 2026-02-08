@@ -10,7 +10,6 @@ VERSION="$1"
 if [ -z "$VERSION" ]; then
   echo "Usage: $0 <version>"
   echo "Example: $0 3.15.0"
-  echo "Example: $0 3.16.0-dev"
   exit 1
 fi
 
