@@ -258,9 +258,7 @@ Override paths via `.claude/settings.json`:
 ```
 
 ### Examples
-- [Enterprise Template](examples/custom-template-enterprise.yaml)
-- [Monorepo Paths](examples/custom-paths-monorepo.yaml)
-- [Learning Override](examples/custom-learning-override.yaml)
+See [examples/README.md](examples/README.md) — showcasing [Jaanify](https://github.com/parhumm/jaanify), a complete project built entirely with jaan.to.
 
 ### Migration
 See [Migration Guide](docs/guides/migration-v3.md) for upgrading from v2.x.
