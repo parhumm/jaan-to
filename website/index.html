@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaan.to — Give your product work a soul</title>
+    <meta name="description" content="Jaan.to is a workflow layer for Claude Code. AI handles the repetitive work. Humans keep the decisions. Open source.">
+    <meta name="keywords" content="Jaan.to, Claude Code, workflow automation, human-AI collaboration, product teams, open source">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io/site.webmanifest">
+    <link rel="icon" href="favicon_io/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-accent: #dd2e44;
+            --color-accent-dark: #b52538;
+            --color-text: #1A1A1A;
+            --color-text-secondary: #6B6B6B;
+            --color-text-tertiary: #AEAEB2;
+            --color-bg: #FAFAF8;
+            --color-bg-subtle: #F5F5F3;
+            --color-bg-dark: #111111;
+            --color-border: rgba(0, 0, 0, 0.06);
+            --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', Monaco, Consolas, monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-sans);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ---- Navigation ---- */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            transition: background 0.4s ease, border-color 0.4s ease;
+            background: transparent;
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav.scrolled {
+            background: rgba(250, 250, 248, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom-color: var(--color-border);
+        }
+
+        .nav-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .nav-brand img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-version-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 4px 8px;
+            border-radius: 100px;
+            background: rgba(221, 46, 68, 0.08);
+            color: var(--color-accent-dark);
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            white-space: nowrap;
+            line-height: 1;
+            vertical-align: middle;
+        }
+
+        .nav-version-badge:hover {
+            background: rgba(221, 46, 68, 0.15);
+            transform: translateY(-1px);
+        }
+
+        .nav-version-badge:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+/* 
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text);
+            border: 1.5px solid #D2D2D7;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-text);
+            transform: translateY(-1px);
+        } */
+        .nav-links .btn-nav {
+            /* background: var(--color-accent); */
+            /* background: var(--color-bg-dark);
+            color: white;
+            transition: background 0.2s; */
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+
+            background: transparent;
+            color: var(--color-text);
+            border: 1px solid #D2D2D7;
+        }
+
+        .nav-links .btn-nav:hover {
+            /* background: var(--color-accent-dark); */
+            background-color: #2A2A2A;
+            color: white;
+            /* border-color: var(--color-text); */
+            transform: translateY(-1px);
+            border: 1px solid #2A2A2A;
+        }
+
+        /* ---- Shared ---- */
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .container-wide {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+        }
+
+        .section-heading {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 500;
+            line-height: 1.2;
+            color: var(--color-text);
+            margin-bottom: 32px;
+        }
+
+        .section-heading .dim {
+            color: var(--color-text-secondary);
+        }
+
+        .section-body {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+
+        .section-body p + p {
+            margin-top: 20px;
+        }
+
+        hr.accent {
+            width: 40px;
+            height: 1px;
+            background: #E0E0E0;
+            border: none;
+            margin: 0 auto 32px;
+        }
+
+        /* ---- Buttons ---- */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-bg-dark);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2A2A2A;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text);
+            border: 1.5px solid #D2D2D7;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--color-text);
+            transform: translateY(-1px);
+        }
+
+        /* ---- Hero ---- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+        }
+
+        .hero-definition {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5.5vw, 3.8rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--color-text);
+            margin-bottom: 32px;
+            max-width: 700px;
+        }
+
+        .hero-definition em {
+            font-style: italic;
+            color: var(--color-text-secondary);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+            max-width: 520px;
+            margin: 0 auto 24px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions .btn-primary {
+            width: 100%;
+            max-width: 400px;
+            justify-content: center;
+            font-size: 1.1rem;
+            padding: 16px 32px;
+        }
+
+        .hero-actions-secondary {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hero-note {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+        }
+
+        /* ---- Problem ---- */
+        .problem {
+            padding: clamp(80px, 12vw, 160px) 24px;
+            text-align: center;
+        }
+
+        .problem .section-heading .punchline {
+            display: block;
+            color: var(--color-text);
+            font-weight: 600;
+        }
+
+        /* ---- Philosophy ---- */
+        .philosophy {
+            padding: clamp(80px, 12vw, 160px) 24px;
+            background: #FFFAF8;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            margin: 48px 0;
+        }
+
+        .philosophy-col-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .philosophy-col-label.ai {
+            color: var(--color-accent);
+        }
+
+        .philosophy-col-label.human {
+            color: var(--color-text);
+        }
+
+        .philosophy-list {
+            list-style: none;
+            font-size: 1.05rem;
+            color: var(--color-text-secondary);
+            line-height: 2.2;
+        }
+
+        .philosophy-list li::before {
+            content: '\2014\00a0';
+            color: #D2D2D7;
+        }
+
+        .philosophy-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+            color: var(--color-text);
+            text-align: center;
+            margin-top: 64px;
+            line-height: 1.5;
+        }
+
+        /* ---- How It Works ---- */
+        .how-it-works {
+            padding: clamp(80px, 12vw, 160px) 24px;
+        }
+
+        .phase {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-left: 24px;
+            border-left: 2px solid var(--color-accent);
+        }
+
+        .phase-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 12px;
+        }
+
+        .phase h3 {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .phase p {
+            color: var(--color-text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .hard-stop {
+            max-width: 600px;
+            margin: 48px auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hard-stop-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--color-accent);
+            transform: scaleX(0);
+            transition: transform 1s ease;
+        }
+
+        .hard-stop-line.visible {
+            transform: scaleX(1);
+        }
+
+        .hard-stop-label {
+            position: relative;
+            background: var(--color-bg);
+            padding: 6px 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            border: 1px solid var(--color-accent);
+            border-radius: 100px;
+        }
+
+        .phase-2 {
+            border-left-color: #D2D2D7;
+        }
+
+        .phase-2 .phase-label {
+            color: var(--color-text-secondary);
+        }
+
+        .terminal {
+            max-width: 600px;
+            margin: 48px auto 0;
+            background: var(--color-bg-dark);
+            border-radius: 12px;
+            padding: 24px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: #A0A0A0;
+            overflow-x: auto;
+            box-shadow: 0 0 40px rgba(221, 46, 68, 0.06);
+        }
+
+        .terminal .prompt {
+            color: var(--color-accent);
+        }
+
+        .terminal .command {
+            color: #FFFFFF;
+        }
+
+        .terminal .dim {
+            color: #555;
+        }
+
+        /* ---- System ---- */
+        .system {
+            padding: clamp(80px, 12vw, 160px) 24px;
+            background: var(--color-bg-subtle);
+        }
+
+        .system-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin: 48px 0 40px;
+        }
+
+        .system-card {
+            background: var(--color-bg);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .system-card-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 8px;
+        }
+
+        .system-card h3 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+
+        .system-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .system-stats {
+            text-align: center;
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ---- Skills Catalog ---- */
+        .skills-catalog {
+            padding: clamp(80px, 12vw, 160px) 24px;
+            background: var(--color-bg);
+        }
+
+        .catalog-roles {
+            max-width: 720px;
+            margin: 56px auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .catalog-role {
+            border-left: 2px solid var(--color-accent);
+            padding-left: 24px;
+        }
+
+        .catalog-role.planned {
+            border-left-color: #D2D2D7;
+        }
+
+        .catalog-role-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .catalog-role-name {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        .catalog-badge {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+
+        .catalog-badge.available {
+            background: rgba(221, 46, 68, 0.1);
+            color: var(--color-accent-dark);
+        }
+
+        .catalog-badge.coming {
+            background: rgba(0, 0, 0, 0.04);
+            color: var(--color-text-tertiary);
+        }
+
+        .catalog-skills {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .catalog-skill {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+        }
+
+        .catalog-skill-dot {
+            width: 6px;
+            height: 6px;
+            min-width: 6px;
+            border-radius: 50%;
+            background: var(--color-accent);
+            position: relative;
+            top: -1px;
+        }
+
+        .catalog-skill-command {
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: var(--color-text);
+            white-space: nowrap;
+        }
+
+        .catalog-skill-sep {
+            color: #D2D2D7;
+            font-size: 0.85rem;
+        }
+
+        .catalog-skill-desc {
+            color: var(--color-text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .catalog-planned-note {
+            color: var(--color-text-tertiary);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 600px) {
+            .catalog-skill {
+                flex-wrap: wrap;
+                gap: 4px 12px;
+            }
+
+            .catalog-skill-sep {
+                display: none;
+            }
+
+            .catalog-skill-desc {
+                padding-left: 22px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ---- Vision ---- */
+        .vision {
+            padding: clamp(80px, 12vw, 160px) 24px;
+            background: var(--color-bg-dark);
+            color: white;
+        }
+
+        .vision .section-label {
+            color: var(--color-accent);
+        }
+
+        .vision .section-heading {
+            color: white;
+        }
+
+        .vision-horizons {
+            max-width: 600px;
+            margin: 56px auto 0;
+        }
+
+        .horizon {
+            margin-bottom: 48px;
+            transition: opacity 0.8s ease;
+        }
+
+        .horizon:last-child {
+            margin-bottom: 0;
+        }
+
+        .horizon-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .horizon-now .horizon-label { color: var(--color-accent); }
+        .horizon-next .horizon-label { color: rgba(221, 46, 68, 0.7); }
+        .horizon-ahead .horizon-label { color: rgba(221, 46, 68, 0.45); }
+
+        .horizon p {
+            color: #A0A0A0;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .vision-article {
+            max-width: 600px;
+            margin: 64px auto 0;
+            padding: 20px 24px;
+            border-left: 2px solid var(--color-accent);
+        }
+
+        .vision-article a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .vision-article a:hover {
+            text-decoration: underline;
+        }
+
+        .vision-article span {
+            display: block;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        /* ---- CTA ---- */
+        .cta {
+            padding: clamp(80px, 12vw, 160px) 24px;
+            text-align: center;
+        }
+
+        .cta .section-heading {
+            margin-bottom: 16px;
+        }
+
+        .cta-subtitle {
+            color: var(--color-text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        .cta .terminal {
+            text-align: left;
+            margin: 0 auto 40px;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 48px;
+        }
+
+        .cta-creator {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .cta-creator a {
+            color: var(--color-text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .cta-creator a:hover {
+            color: var(--color-accent);
+        }
+
+        .cta-creator-links {
+            margin-top: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .cta-creator-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .cta-creator-links a:hover {
+            color: var(--color-accent);
+        }
+
+        /* ---- Footer ---- */
+        .footer {
+            background: var(--color-bg-dark);
+            padding: 48px 24px 32px;
+        }
+
+        .footer-inner {
+            max-width: 1080px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand {
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand-desc {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            color: #999;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .footer-col a {
+            display: block;
+            color: #777;
+            text-decoration: none;
+            font-size: 0.9rem;
+            line-height: 2;
+            transition: color 0.2s;
+        }
+
+        .footer-col a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            max-width: 1080px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid #222;
+            text-align: center;
+            color: #555;
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* ---- Animations ---- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-group .reveal:nth-child(2) { transition-delay: 0.1s; }
+        .reveal-group .reveal:nth-child(3) { transition-delay: 0.2s; }
+        .reveal-group .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+        .hero-definition {
+            animation: fadeUp 0.8s ease-out 0.1s both;
+        }
+
+        .hero-subtitle {
+            animation: fadeUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-actions {
+            animation: fadeUp 0.8s ease-out 0.65s both;
+        }
+
+        .hero-note {
+            animation: fadeUp 0.8s ease-out 0.85s both;
+        }
+
+        .hero-note a {
+            color: var(--color-text-secondary);
+        }
+
+        .hero-note a:hover {
+            color: var(--color-accent);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---- Reduced Motion ---- */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .hero-definition, .hero-subtitle, .hero-actions, .hero-note { animation: none; }
+            .hard-stop-line { transform: scaleX(1); transition: none; }
+            html { scroll-behavior: auto; }
+        }
+
+        /* ---- Responsive ---- */
+        @media (max-width: 768px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .system-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .nav-links a:first-child {
+                display: none;
+            }
+
+            .nav-version-badge {
+                font-size: 0.65rem;
+                padding: 3px 6px;
+            }
+
+            .hero {
+                padding-top: 100px;
+                min-height: auto;
+                padding-bottom: 60px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions-secondary {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .nav-links .btn-nav {
+                display: none;
+            }
+        }
+
+        /* ---- Focus ---- */
+        .btn:focus-visible,
+        a:focus-visible {
+            outline: 2px solid var(--color-accent);
+            outline-offset: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <div class="nav-brand-wrapper">
+                <a href="#" class="nav-brand">
+                    <img src="favicon_io/favicon-32x32.png" alt="Jaan.to" width="24" height="24">
+                    Jaan.to
+                </a>
+                <a href="https://github.com/parhumm/jaan-to/blob/main/CHANGELOG.md"
+                   class="nav-version-badge"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   title="Version 3.16.2 - View changelog">v3.16.2</a>
+            </div>
+            <div class="nav-links">
+                <a href="#philosophy">Philosophy</a>
+                <a href="#skills">Skills</a>
+                <a href="https://github.com/parhumm/jaan-to" class="btn-nav">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+        <div>
+            <h1 class="hero-definition">/Jaan-to-*<br><em style="color:var(--color-accent)">
+            give soul to your ideas
+            </em></h1>
+            <!-- <h1 class="hero-definition">
+                Jaan <em>(n.)</em> &mdash; Persian for soul, life.<br>
+                To give soul to something.
+            </h1> -->
+            <p class="hero-subtitle">
+                A workflow layer for Claude Code that handles the repetitive work, so your team can focus on the work that matters.
+            </p>
+            <div class="hero-actions">
+                <a href="https://github.com/parhumm/jaan-to" class="btn btn-primary">Get Started</a>
+                <div class="hero-actions-secondary">
+                    <a href="#philosophy" class="btn btn-secondary">Read the Philosophy</a>
+                    <a href="#skills" class="btn btn-secondary">Available Skills</a>
+                </div>
+            </div>
+            <p class="hero-note">
+                Open source. For Claude Code. Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a>
+            </p>
+        </div>
+    </section>
+
+    <!-- The Problem -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <span class="section-label reveal">The Problem</span>
+            <hr class="accent reveal">
+            <h2 class="section-heading reveal">
+                <span class="dim">AI doesn't have a consistency problem.</span>
+                <span class="punchline">Teams do.</span>
+            </h2>
+            <div class="section-body reveal">
+                <p>The same request produces different outcomes depending on who asks, how they phrase it, and what context they remember to include.</p>
+                <p>Most people blame the AI model. The harder truth: humans are the inconsistent part.</p>
+                <p>40&ndash;60% of product work is repetitive &mdash; PRDs, specs, test plans, tracking setups, microcopy. It isn't hard work. It's work that shouldn't require thinking every time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy" id="philosophy">
+        <div class="container-wide">
+            <div style="text-align: center;">
+                <span class="section-label reveal">The Philosophy</span>
+                <h2 class="section-heading reveal">
+                    <span class="dim">Let AI handle the hands.</span><br>
+                    Keep humans on the mind.
+                </h2>
+            </div>
+
+            <div class="philosophy-grid reveal-group">
+                <div class="reveal">
+                    <div class="philosophy-col-label ai">AI handles</div>
+                    <ul class="philosophy-list">
+                        <li>Formatting and boilerplate</li>
+                        <li>Gathering context from real systems</li>
+                        <li>Following templates consistently</li>
+                        <li>Remembering every edge case</li>
+                        <li>Producing structured outputs</li>
+                    </ul>
+                </div>
+                <div class="reveal">
+                    <div class="philosophy-col-label human">Humans handle</div>
+                    <ul class="philosophy-list">
+                        <li>Defining the real problem</li>
+                        <li>Making trade-off decisions</li>
+                        <li>Understanding customer needs</li>
+                        <li>Exercising quality judgment</li>
+                        <li>Knowing when to break the rules</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="philosophy-quote reveal">
+                &ldquo;This is not replacing teams.<br>
+                This is making teams faster.&rdquo;
+            </p>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="section-label reveal">How It Works</span>
+                <h2 class="section-heading reveal">
+                    <span class="dim">Two phases. One hard stop.</span><br>
+                    Nothing ships without your approval.
+                </h2>
+            </div>
+
+            <div class="phase reveal" style="margin-top: 56px;">
+                <div class="phase-label">Phase 1: Analysis</div>
+                <h3>Read-only. No files written.</h3>
+                <p>The system reads your codebase, loads team context, and asks you clarifying questions. It plans the output structure. Nothing is created yet.</p>
+            </div>
+
+            <div class="hard-stop reveal">
+                <div class="hard-stop-line"></div>
+                <div class="hard-stop-label">Human approval required</div>
+            </div>
+
+            <div class="phase phase-2 reveal">
+                <div class="phase-label">Phase 2: Generation</div>
+                <h3>Only after your explicit approval.</h3>
+                <p>The system generates structured output from tested templates and saves it to a safe, sandboxed directory. Preview first. Always.</p>
+            </div>
+
+            <div class="terminal reveal">
+                <span class="prompt">$</span> <span class="command">/jaan-to:pm-prd-write "add dark mode support"</span><br><br>
+                <span class="dim">&gt; Loading context: tech.md, team.md</span><br>
+                <span class="dim">&gt; Questions before I proceed:</span><br>
+                &nbsp;&nbsp;1. What problem does dark mode solve for your users?<br>
+                &nbsp;&nbsp;2. How will you measure adoption?<br>
+                &nbsp;&nbsp;3. What is explicitly NOT in scope?<br><br>
+                <span class="dim">&gt; [Awaiting your answers...]</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- The System -->
+    <section class="system" id="system">
+        <div class="container-wide">
+            <div style="text-align: center;">
+                <span class="section-label reveal">The System</span>
+                <h2 class="section-heading reveal">
+                    <span class="dim">Four building blocks.</span><br>
+                    Everything else is optional.
+                </h2>
+            </div>
+
+            <div class="system-grid reveal-group">
+                <div class="system-card reveal">
+                    <div class="system-card-label">Skills</div>
+                    <h3>What to do</h3>
+                    <p>19 structured commands across 6 roles &mdash; PM, Data, Dev, UX, Core, and QA &mdash; with Growth planned. Each skill knows its questions, its template, and its output format.</p>
+                </div>
+                <div class="system-card reveal">
+                    <div class="system-card-label">Stacks</div>
+                    <h3>How your team works</h3>
+                    <p>Context files that describe your tech stack, team structure, and integrations. Written in Markdown. No schemas to learn.</p>
+                </div>
+                <div class="system-card reveal">
+                    <div class="system-card-label">Templates</div>
+                    <h3>Output format</h3>
+                    <p>Every skill produces from a tested template. Consistent structure, every time. Your team's voice, not the AI's.</p>
+                </div>
+                <div class="system-card reveal">
+                    <div class="system-card-label">Boundaries</div>
+                    <h3>Safety rules</h3>
+                    <p>Sandboxed file paths. Secret scanning. Preview-before-save. Explicit approval. Non-negotiable.</p>
+                </div>
+            </div>
+
+            <p class="system-stats reveal">19 skills available now. 6 active roles. 1 more role planned.</p>
+        </div>
+    </section>
+
+    <!-- Skills Catalog -->
+    <section class="skills-catalog" id="skills">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="section-label reveal">Skills Catalog</span>
+                <h2 class="section-heading reveal">
+                    <span class="dim">What's available today.</span><br>
+                    What's coming next.
+                </h2>
+            </div>
+
+            <div class="catalog-roles">
+
+                <!-- PM -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">PM</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:pm-prd-write</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate PRD from initiative</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:pm-story-write</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate user stories with Given/When/Then ACs</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:pm-research-about</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Deep research on any topic</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Data -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">Data</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:data-gtm-datalayer</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate GTM tracking code</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Dev -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">Dev</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:dev-stack-detect</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Auto-detect project tech stack</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:dev-fe-task-breakdown</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Transform designs into frontend task breakdowns</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:dev-be-task-breakdown</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Transform specs into backend task breakdowns</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:dev-fe-design</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Create distinctive frontend component code</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- UX -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">UX</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:ux-heatmap-analyze</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Analyze heatmap CSV exports and screenshots</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:ux-microcopy-write</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate multi-language microcopy packs</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:ux-research-synthesize</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Synthesize UX research into actionable insights</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Core -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">Core</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:docs-create</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Create documentation</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:docs-update</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Audit and maintain documentation</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:learn-add</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Add lesson to skill's LEARN.md</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:roadmap-add</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Add task to roadmap</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:roadmap-update</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Maintain and sync roadmap</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:skill-create</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Create new skill with wizard</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:skill-update</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Update existing skill</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- QA -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">QA</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-to:qa-test-cases</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate BDD/Gherkin test cases from acceptance criteria</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Planned: Growth -->
+                <div class="catalog-role planned reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">Growth</span>
+                        <span class="catalog-badge coming">Coming Soon</span>
+                    </div>
+                    <p class="catalog-planned-note">SEO and content workflows &mdash; coming soon</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision -->
+    <section class="vision" id="vision">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="section-label reveal">The Vision</span>
+                <h2 class="section-heading reveal">
+                    One person can ship like a team.<br>
+                    One team can ship like a company.
+                </h2>
+            </div>
+
+            <div class="vision-horizons">
+                <div class="horizon horizon-now reveal">
+                    <div class="horizon-label">Now</div>
+                    <p>19 production skills. Learning system that improves from feedback. Two-phase workflow with human approval. Open source, MIT licensed.</p>
+                </div>
+                <div class="horizon horizon-next reveal">
+                    <div class="horizon-label">Next</div>
+                    <p>30+ skills across 7 product roles. MCP connectors to real systems &mdash; Figma, Jira, GA4, Sentry, Clarity, and more.</p>
+                </div>
+                <div class="horizon horizon-ahead reveal">
+                    <div class="horizon-label">Ahead</div>
+                    <p>Multi-agent compatibility. Marketplace distribution for community skills. The smallest AI company that can ship.</p>
+                </div>
+            </div>
+
+            <div class="vision-article reveal">
+                <a href="https://medium.com/design-bootcamp/the-smallest-ai-company-that-can-ship-9060938cb28b">Read: "The Smallest AI Company That Can Ship"</a>
+                <span>The story behind Jaan.to, on Medium.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" id="get-started">
+        <div class="container">
+            <h2 class="section-heading reveal">Give your product work a soul.</h2>
+            <p class="cta-subtitle reveal">Open source. One-command setup. Install the plugin and run your first skill.</p>
+
+            <div class="terminal reveal" style="margin-bottom: 40px;">
+                <span class="prompt">$</span> <span class="command">claude</span><br>
+                <span class="prompt">$</span> <span class="command">/plugin marketplace add parhumm/jaan-to</span><br>
+                <span class="prompt">$</span> <span class="command">/plugin install jaan-to/jaan-to</span><br>
+                <span class="prompt">$</span> <span class="command">/jaan-to:pm-prd-write "your first feature"</span>
+            </div>
+
+            <div class="cta-actions reveal">
+                <a href="https://github.com/parhumm/jaan-to" class="btn btn-primary">Get Started on GitHub</a>
+                <a href="https://github.com/parhumm/jaan-to/blob/main/docs/README.md" class="btn btn-secondary">Read the Docs</a>
+            </div>
+
+            <div class="cta-creator reveal">
+                <p>Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a></p>
+                <div class="cta-creator-links">
+                    <a href="https://www.linkedin.com/in/parhumm/">LinkedIn</a>
+                    <a href="https://medium.com/@parhumm">Medium</a>
+                    <a href="https://github.com/parhumm">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div>
+                <div class="footer-brand">Jaan.to</div>
+                <p class="footer-brand-desc">Standardize execution. Reduce waste.<br>Keep humans in charge of decisions.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Product</h4>
+                <a href="https://github.com/parhumm/jaan-to">GitHub</a>
+                <a href="https://github.com/parhumm/jaan-to/blob/main/docs/README.md">Documentation</a>
+                <a href="https://github.com/parhumm/jaan-to/blob/main/roadmaps/jaan-to/roadmap.md">Roadmap</a>
+                <a href="https://github.com/parhumm/jaan-to/blob/main/CHANGELOG.md">Changelog</a>
+            </div>
+            <div class="footer-col">
+                <h4>Philosophy</h4>
+                <a href="#philosophy">Principles</a>
+                <a href="https://medium.com/design-bootcamp/the-smallest-ai-company-that-can-ship-9060938cb28b">The Story</a>
+            </div>
+            <div class="footer-col">
+                <h4>Creator</h4>
+                <a href="https://www.linkedin.com/in/parhumm/">LinkedIn</a>
+                <a href="https://medium.com/@parhumm">Medium</a>
+                <a href="https://github.com/parhumm">GitHub</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a>. Open source under MIT License.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Hard stop line animation
+        const hardStopObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelector('.hard-stop-line').classList.add('visible');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const hardStop = document.querySelector('.hard-stop');
+        if (hardStop) hardStopObserver.observe(hardStop);
+
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40);
+        }, { passive: true });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
