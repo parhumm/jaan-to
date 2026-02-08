@@ -119,7 +119,7 @@ flowchart TD
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
-- **Research**: [`59-dev-api-contract.md`](../../jaan-to/outputs/research/59-dev-api-contract.md)
+- **Reference**: [`59-dev-api-contract.md`](../../jaan-to/outputs/research/59-dev-api-contract.md)
 
 ### /jaan-to:dev-api-versioning
 
@@ -238,7 +238,7 @@ flowchart TD
 
 - **Logical**: `dev-docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
-- **Research**: [Building a Production-Ready Documentation Generation Framework](../../../$JAAN_OUTPUTS_DIR/research/48-dev-docs-generate.md)
+- **Reference**: [Building a Production-Ready Documentation Generation Framework](../../../$JAAN_OUTPUTS_DIR/research/48-dev-docs-generate.md)
 - **Quick Win**: Yes - draft generation, format standardization
 - **AI Score**: 5 | **Rank**: #14
 - **Key Points**:
