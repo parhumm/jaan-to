@@ -1,5 +1,6 @@
 ---
 title: Seed Files
+sidebar_position: 6
 doc_type: config
 created_date: 2026-02-08
 updated_date: 2026-02-08

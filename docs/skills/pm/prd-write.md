@@ -1,3 +1,8 @@
+---
+title: "pm-prd-write"
+sidebar_position: 2
+---
+
 # /jaan-to:pm-prd-write
 
 > Generate a Product Requirements Document from an initiative.

@@ -1,3 +1,9 @@
+---
+title: "Core / Internal"
+sidebar_position: 1
+slug: /skills/core
+---
+
 # Core Skills
 
 > System utilities for jaan.to management.

@@ -1,5 +1,6 @@
 ---
 title: Bootstrap
+sidebar_position: 2
 doc_type: hook
 created_date: 2026-01-29
 updated_date: 2026-02-08

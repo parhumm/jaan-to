@@ -1,0 +1,43 @@
+name: Deploy Sites
+on:
+  push:
+    branches: [main]
+    paths: ['docs/**', 'website/**', 'CHANGELOG.md', 'CONTRIBUTING.md']
+  workflow_dispatch:
+
+jobs:
+  deploy-marketing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync marketing site with plugin state
+        run: ./scripts/sync-marketing-site.sh
+      - name: Prepare marketing site
+        run: |
+          mkdir -p /tmp/marketing-site
+          cp website/index.html /tmp/marketing-site/
+          cp -r website/favicon_io /tmp/marketing-site/
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy /tmp/marketing-site --project-name=jaan-to
+
+  deploy-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: website/docs/package-lock.json
+      - run: npm ci
+        working-directory: website/docs
+      - run: npm run build
+        working-directory: website/docs
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy website/docs/build --project-name=jaan-to-docs

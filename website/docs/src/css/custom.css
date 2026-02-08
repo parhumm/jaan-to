@@ -1,0 +1,181 @@
+/* jaan.to docs — design system matching jaan.to marketing site */
+
+:root {
+  --ifm-color-primary: #dd2e44;
+  --ifm-color-primary-dark: #b52538;
+  --ifm-color-primary-darker: #a02232;
+  --ifm-color-primary-darkest: #841c29;
+  --ifm-color-primary-light: #e24d60;
+  --ifm-color-primary-lighter: #e6636e;
+  --ifm-color-primary-lightest: #ed8a92;
+
+  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    Helvetica, Arial, sans-serif;
+  --ifm-font-family-monospace: 'SF Mono', 'Cascadia Code', 'Fira Code', Monaco,
+    Consolas, monospace;
+  --ifm-heading-font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+
+  --ifm-background-color: #fafaf8;
+  --ifm-background-surface-color: #f5f5f3;
+  --ifm-code-font-size: 0.85rem;
+  --ifm-border-radius: 5px;
+
+  --ifm-heading-font-weight: 500;
+  --ifm-font-weight-bold: 600;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: #e24d60;
+  --ifm-color-primary-dark: #dd2e44;
+  --ifm-color-primary-darker: #b52538;
+  --ifm-color-primary-darkest: #841c29;
+  --ifm-color-primary-light: #e6636e;
+  --ifm-color-primary-lighter: #ed8a92;
+  --ifm-color-primary-lightest: #f5b8bf;
+  --ifm-background-color: #111111;
+  --ifm-background-surface-color: #1a1a1a;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Headings use Fraunces serif */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* Navbar */
+.navbar {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+[data-theme='dark'] .navbar {
+  border-bottom-color: #222;
+}
+
+.navbar__title {
+  font-weight: 600;
+}
+
+/* Footer matches marketing site dark */
+.footer--dark {
+  background: #111111;
+}
+
+.footer--dark .footer__link-item:hover {
+  color: white;
+}
+
+/* Code blocks */
+.prism-code {
+  border-radius: 12px;
+}
+
+[data-theme='dark'] .prism-code {
+  background: #111111 !important;
+}
+
+/* Sidebar category labels */
+.menu__link--sublist {
+  font-weight: 600;
+}
+
+/* Hero section for landing page */
+.hero--primary {
+  background: var(--ifm-background-color);
+  color: var(--ifm-font-color-base);
+}
+
+.hero__title {
+  font-family: var(--ifm-heading-font-family);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.15;
+}
+
+.hero__subtitle {
+  color: #6b6b6b;
+  font-size: 1.2rem;
+  line-height: 1.7;
+}
+
+[data-theme='dark'] .hero__subtitle {
+  color: #a0a0a0;
+}
+
+/* Buttons matching marketing site */
+.button--primary {
+  background: #111111;
+  border-color: #111111;
+  color: white;
+}
+
+.button--primary:hover {
+  background: #2a2a2a;
+  border-color: #2a2a2a;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.button--secondary {
+  background: transparent;
+  border: 1.5px solid #d2d2d7;
+  color: var(--ifm-font-color-base);
+}
+
+.button--secondary:hover {
+  border-color: var(--ifm-font-color-base);
+  transform: translateY(-1px);
+}
+
+/* Feature cards on homepage */
+.feature-card {
+  background: #fafaf8;
+  border-radius: 16px;
+  padding: 32px;
+}
+
+[data-theme='dark'] .feature-card {
+  background: #1a1a1a;
+}
+
+.feature-card__label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ifm-color-primary);
+  margin-bottom: 8px;
+}
+
+.feature-card h3 {
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: #6b6b6b;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+[data-theme='dark'] .feature-card p {
+  color: #a0a0a0;
+}
+
+/* Table improvements */
+table {
+  font-size: 0.95rem;
+}
+
+table th {
+  font-weight: 600;
+}
+
+/* Docusaurus search */
+.navbar__search-input {
+  border-radius: 5px;
+}

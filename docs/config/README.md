@@ -1,3 +1,8 @@
+---
+title: "Configuration"
+sidebar_position: 1
+---
+
 # Configuration
 
 > Settings, context, and safety rules.

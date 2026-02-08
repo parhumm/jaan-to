@@ -19,9 +19,16 @@ if [[ "$COMMAND" == *"docs(roadmap)"* ]] || [[ "$COMMAND" == *"docs(changelog)"*
     exit 0
 fi
 
-# Skip release commits (handled by /jaan-to:roadmap-update release)
+# Sync marketing site on release commits
 if [[ "$COMMAND" == *"release:"* ]]; then
-    exit 0
+  SCRIPT_DIR_REAL="$(cd "$(dirname "$0")" && pwd)"
+  "$SCRIPT_DIR_REAL/sync-marketing-site.sh" 2>/dev/null
+  echo "" >&2
+  echo "---" >&2
+  echo "Marketing site (website/index.html) synced with latest version and skills." >&2
+  echo "Review changes: git diff website/index.html" >&2
+  echo "---" >&2
+  exit 0
 fi
 
 # Extract commit message prefix to check significance
@@ -48,5 +55,13 @@ echo "Consider syncing the roadmap:" >&2
 echo "  /jaan-to:roadmap-update" >&2
 echo "  /jaan-to:roadmap-update mark \"<task>\" done $HASH" >&2
 echo "---" >&2
+
+# Check if commit includes docs/ changes
+DOCS_CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null | grep '^docs/' | head -1)
+if [[ -n "$DOCS_CHANGED" ]]; then
+  echo "" >&2
+  echo "Docs changed in this commit. docs.jaan.to will auto-deploy on merge to main." >&2
+  echo "Preview locally: cd website/docs && npm start" >&2
+fi
 
 exit 0

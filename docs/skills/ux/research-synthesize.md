@@ -1,3 +1,8 @@
+---
+title: "ux-research-synthesize"
+sidebar_position: 4
+---
+
 # /jaan-to:ux-research-synthesize
 
 > Synthesize UX research findings into themed insights, executive summaries, and prioritized recommendations.

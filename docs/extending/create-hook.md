@@ -1,3 +1,8 @@
+---
+title: "Create a Hook"
+sidebar_position: 2
+---
+
 # Create a Hook
 
 > Step-by-step guide to adding automation.

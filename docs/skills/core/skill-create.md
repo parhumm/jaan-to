@@ -1,3 +1,8 @@
+---
+title: "skill-create"
+sidebar_position: 7
+---
+
 # /jaan-to:skill-create
 
 > Create new jaan.to skills with interactive wizard and web research.

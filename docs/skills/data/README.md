@@ -1,3 +1,9 @@
+---
+title: "Data & Analytics"
+sidebar_position: 1
+slug: /skills/data
+---
+
 # Data Skills
 
 > Analytics and tracking commands.

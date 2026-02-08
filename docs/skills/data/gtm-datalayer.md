@@ -1,3 +1,8 @@
+---
+title: "data-gtm-datalayer"
+sidebar_position: 2
+---
+
 # /jaan-to:data-gtm-datalayer
 
 > Generate production-ready GTM tracking code with enforced naming conventions.

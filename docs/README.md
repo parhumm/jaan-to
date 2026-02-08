@@ -1,3 +1,9 @@
+---
+title: "Introduction"
+sidebar_position: 1
+slug: /
+---
+
 # jaan.to
 
 > Modular workflow layer for Claude Code. Skills generate outputs. System learns from feedback.
@@ -44,8 +50,7 @@ See [Getting Started](getting-started.md) for full walkthrough.
 | [Config](config/README.md) | Settings and context |
 | [Learning](learning/README.md) | Feedback system |
 | [Extending](extending/README.md) | Create new skills |
-| [Style Guide](STYLE.md) | Documentation standards |
-| [Deep Research](deepresearches/README.md) | Reference material (different format) |
+| [Style Guide](https://github.com/parhumm/jaan-to/blob/main/docs/STYLE.md) | Documentation standards |
 
 ---
 

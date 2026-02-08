@@ -1,3 +1,8 @@
+---
+title: "skill-update"
+sidebar_position: 8
+---
+
 # /jaan-to:skill-update
 
 > Update existing jaan.to skills with specification compliance.

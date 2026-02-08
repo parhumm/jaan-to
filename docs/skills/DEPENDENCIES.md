@@ -1,3 +1,8 @@
+---
+title: "Skill Dependencies"
+sidebar_position: 2
+---
+
 # Skill Dependencies
 
 Visual map of skill relationships and suggested workflows.
@@ -191,7 +196,7 @@ These skills are referenced but not yet implemented:
 | `/jaan-to:dev-fe-state-machine` | fe-task-breakdown | Component state machine definitions |
 | `/jaan-to:dev-be-data-model` | be-task-breakdown | Detailed data model specification |
 
-See [roadmap.md](../../roadmaps/jaan-to/roadmap-jaan-to.md) for implementation timeline.
+See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/roadmaps/jaan-to/roadmap.md) for implementation timeline.
 
 ---
 

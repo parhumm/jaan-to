@@ -1,3 +1,8 @@
+---
+title: "validate-prd"
+sidebar_position: 5
+---
+
 # validate-prd
 
 > Validates PRD files have required sections before writing.

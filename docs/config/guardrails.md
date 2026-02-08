@@ -1,3 +1,8 @@
+---
+title: "Guardrails"
+sidebar_position: 3
+---
+
 # Guardrails
 
 > Safety boundaries that cannot be disabled.

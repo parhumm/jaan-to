@@ -61,6 +61,14 @@ jobs:
         run: |
           bash scripts/validate-skills.sh
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: website/docs/package-lock.json
+      - name: Build docs site
+        run: cd website/docs && npm ci && npm run build
+
       - name: Summary
         run: |
           VERSION=$(jq -r '.version' .claude-plugin/plugin.json)

@@ -1,3 +1,8 @@
+---
+title: "Migration Guide: v2.x to v3.0"
+sidebar_position: 2
+---
+
 # Migration Guide: v2.x → v3.0
 
 ## Breaking Changes

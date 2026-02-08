@@ -1,3 +1,8 @@
+---
+title: "Stacks"
+sidebar_position: 6
+---
+
 # Stacks
 
 > Your team and tech context. Skills read these to generate relevant outputs.

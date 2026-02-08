@@ -1,3 +1,9 @@
+---
+title: "Skills"
+sidebar_position: 1
+slug: /skills
+---
+
 # Skills
 
 > Commands that generate outputs.

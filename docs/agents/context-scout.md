@@ -1,5 +1,6 @@
 ---
 title: Context Scout
+sidebar_position: 2
 doc_type: concept
 created_date: 2026-01-29
 updated_date: 2026-01-29

@@ -1,3 +1,8 @@
+---
+title: "Permissions"
+sidebar_position: 4
+---
+
 # Permissions
 
 > Allow and deny rules for Claude Code operations.

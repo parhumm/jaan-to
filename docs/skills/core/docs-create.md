@@ -1,3 +1,8 @@
+---
+title: "docs-create"
+sidebar_position: 2
+---
+
 # /jaan-to:docs-create
 
 > Create new documentation with standard templates.

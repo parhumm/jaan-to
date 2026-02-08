@@ -1,3 +1,8 @@
+---
+title: "roadmap-update"
+sidebar_position: 6
+---
+
 # /jaan-to:roadmap-update
 
 > Maintain and sync the jaan.to development roadmap.

@@ -1,3 +1,8 @@
+---
+title: "learn-add"
+sidebar_position: 4
+---
+
 # /jaan-to:learn-add
 
 > Add a lesson to a skill's LEARN.md file.

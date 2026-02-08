@@ -1,3 +1,8 @@
+---
+title: "Core Concepts"
+sidebar_position: 3
+---
+
 # Core Concepts
 
 > Six building blocks of jaan.to.

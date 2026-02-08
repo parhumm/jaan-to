@@ -1,5 +1,6 @@
 ---
-title: /jaan-to:dev-api-contract
+title: "dev-api-contract"
+sidebar_position: 2
 doc_type: skill
 created_date: 2026-02-08
 updated_date: 2026-02-08

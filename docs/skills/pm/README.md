@@ -1,3 +1,9 @@
+---
+title: "Product Management"
+sidebar_position: 1
+slug: /skills/pm
+---
+
 # PM Skills
 
 > Product Manager commands for specs and planning.
