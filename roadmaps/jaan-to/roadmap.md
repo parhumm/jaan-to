@@ -90,6 +90,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 - [ ] E2E test framework in `tests/` with mocked MCP responses
 - [ ] JSON export alongside markdown for all skill outputs
 - [ ] External notifications (Slack integration)
+- [ ] Fix `learn-report` skill hook script for macOS compatibility (Bash 3.2 — needs 4+ for `declare -A`)
 
 ---
 
