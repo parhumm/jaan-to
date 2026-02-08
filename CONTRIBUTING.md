@@ -27,7 +27,7 @@ jaan.to uses a two-branch development model:
 | Branch | Purpose | Version Format | Install Command |
 |--------|---------|----------------|-----------------|
 | `main` | Stable releases | `3.15.0` | `/plugin marketplace add parhumm/jaan-to` |
-| `dev` | Development/preview | `3.15.0-dev` | `/plugin marketplace add parhumm/jaan-to#dev` |
+| `dev` | Development/preview | `3.15.0` | `/plugin marketplace add parhumm/jaan-to#dev` |
 
 ### Workflow
 
@@ -39,13 +39,13 @@ feature/* ───> dev ───> main
                 │    (release tag)
                 │         │
                 └─────────┘
-              auto-bump dev
+               sync dev
 ```
 
 1. **Daily development**: Work on `dev` branch (direct pushes allowed)
 2. **Feature work**: Create feature branches from `dev`, merge back to `dev`
 3. **Releases**: Create PR from `dev` → `main` (requires review + CI checks)
-4. **After release**: Bump `dev` to next version (e.g., `3.15.0` → `3.16.0-dev`)
+4. **After release**: Sync `dev` from `main`, then bump to next version (e.g., `3.15.0` → `3.16.0`)
 
 ### Contributing to dev
 
@@ -449,34 +449,19 @@ jaan.to follows [Semantic Versioning](https://semver.org/):
 - **Minor (v1.1.0):** New features (backward compatible)
 - **Patch (v1.0.1):** Bug fixes
 
-**Branch versions:**
-- `main`: `X.Y.Z` (e.g., `3.15.0`)
-- `dev`: `X.Y.Z-dev` (e.g., `3.15.0-dev`)
+Both `dev` and `main` use the same `X.Y.Z` format (e.g., `3.15.0`). No `-dev` suffix.
 
 ### Release Checklist (Maintainers Only)
 
-1. **Prepare release branch from dev:**
-   ```bash
-   git checkout dev
-   git checkout -b release/3.15.0
-   ```
+1. **Ensure version and CHANGELOG are ready on `dev`:**
+   - Version should already be bumped in all 3 places via `./scripts/bump-version.sh X.Y.Z`
+   - CHANGELOG.md should have an entry for the version
 
-2. **Update version in 3 places** (remove `-dev` suffix):
-   ```bash
-   ./scripts/bump-version.sh 3.15.0
-   ```
-   This updates:
-   - `.claude-plugin/plugin.json` → `"version": "3.15.0"`
-   - `.claude-plugin/marketplace.json` → `"version": "3.15.0"` (top-level)
-   - `.claude-plugin/marketplace.json` → `"plugins[0].version": "3.15.0"`
-
-3. **Add entry to [CHANGELOG.md](CHANGELOG.md)** following [Keep a Changelog](https://keepachangelog.com/)
-
-4. **Create PR: `release/3.15.0` → `main`**
-   - CI checks: no `-dev` suffix, all 3 versions match, CHANGELOG entry exists
+2. **Create PR: `dev` → `main`**
+   - CI checks: all 3 versions match, CHANGELOG entry exists
    - Requires review and approval
 
-5. **After merge, tag and push:**
+3. **After merge, tag and push:**
    ```bash
    git checkout main
    git pull origin main
@@ -484,16 +469,21 @@ jaan.to follows [Semantic Versioning](https://semver.org/):
    git push origin main --tags
    ```
 
-6. **Bump dev to next version:**
+4. **Sync dev back from main:**
    ```bash
    git checkout dev
    git merge main
-   ./scripts/bump-version.sh 3.16.0-dev
-   git commit -m "chore: bump dev to 3.16.0-dev"
    git push origin dev
    ```
 
-7. **Verify installation works:**
+5. **Bump dev to next version (for next release cycle):**
+   ```bash
+   ./scripts/bump-version.sh 3.16.0
+   git commit -m "chore: bump version to 3.16.0"
+   git push origin dev
+   ```
+
+6. **Verify installation works:**
    ```
    /plugin uninstall jaan-to
    /plugin marketplace add parhumm/jaan-to

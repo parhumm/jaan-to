@@ -122,13 +122,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Two-Branch Development Workflow** — `main` for stable releases, `dev` for development/preview (`ba9c061`)
   - Users can install stable: `/plugin marketplace add parhumm/jaan-to`
   - Users can install dev: `/plugin marketplace add parhumm/jaan-to#dev`
-  - Stable versions: `X.Y.Z` (e.g., `3.15.0`)
-  - Dev versions: `X.Y.Z-dev` (e.g., `3.15.0-dev`)
+  - Both branches use `X.Y.Z` format (e.g., `3.15.0`)
 - **Version Management Scripts**
   - `scripts/bump-version.sh` — Update version in all 3 required locations atomically (plugin.json, marketplace.json top-level, marketplace.json plugins[0])
   - `scripts/setup-branch-protection.sh` — Configure GitHub branch protection (main: require PR + approval, dev: direct pushes allowed)
 - **CI Release Validation** — `.github/workflows/release-check.yml` for PRs to main
-  - Validates no `-dev` suffix in version
   - Ensures all 3 version fields match
   - Checks CHANGELOG entry exists
   - Validates plugin.json has required component paths (skills, agents, hooks)
