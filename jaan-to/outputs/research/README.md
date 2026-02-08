@@ -66,6 +66,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [56](56-ux-microcopy-write.md) | UX Microcopy Writing Skill | Production-ready skill for generating complete microcopy packs (labels, helper text, errors, toasts, confirmations, empty states) across seven languages with Persian (فارسی) as primary focus. Covers industry frameworks, formality systems, text expansion rates, RTL handling, and cultural tone expectations. |
 | [57](57-ai-workflow-claude-code-plugin-patterns-best-practices-standards.md) | Claude Code Plugin Patterns & Standards | Analysis of 13 official Claude Code plugins revealing highly consistent ecosystem patterns for structure, configuration, naming, and implementation. Covers auto-discovery, manifest standards, progressive disclosure, Python/Bash standards, security best practices, and quality checklists. |
 | [58](58-role-wp-dev.md) | WordPress Analytics Plugin Development | Complete best practices guide addressing critical gaps in WordPress plugin documentation—privacy-compliant tracking architectures, high-performance database patterns, competitor architecture analysis (WP Statistics, Koko Analytics, Independent Analytics), JavaScript beacon tracking, and dashboard implementation. |
+| [59](59-dev-api-contract.md) | OpenAPI 3.1 Contract Generator | Production-ready OpenAPI 3.1 contract generation covering schema design (flat $ref, polymorphism, null handling), RFC 9457 error responses, example generation, versioning/deprecation, AI guardrails (Spectral + Redocly), overlay enrichment, reference specs (GitHub, Stripe, Zalando), and validation tooling stack. 40+ sources. |
 
 ## Quick Topic Finder
 
@@ -133,6 +134,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [07-documentation-practices.md](07-documentation-practices.md)
 - [17-twelve-factor-app.md](17-twelve-factor-app.md)
 - [48-dev-docs-generate.md](48-dev-docs-generate.md)
+- [59-dev-api-contract.md](59-dev-api-contract.md) - OpenAPI 3.1 contract generation with validation tooling & AI guardrails
 
 ### UX & Product Analytics
 - [20-ux-heatmap-analysis.md](20-ux-heatmap-analysis.md)

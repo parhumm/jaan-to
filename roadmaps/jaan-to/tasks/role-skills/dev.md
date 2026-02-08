@@ -119,6 +119,7 @@ flowchart TD
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
+- **Research**: [`59-dev-api-contract.md`](../../jaan-to/outputs/research/59-dev-api-contract.md)
 
 ### /jaan-to:dev-api-versioning
 
