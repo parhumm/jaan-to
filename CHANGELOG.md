@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.3.0] - 2026-02-09
+
+### Added
+- **`wp-pr-review` skill** (`/jaan-to:wp-pr-review`) — Review WordPress plugin pull requests for security vulnerabilities, performance issues, WPCS standards violations, backward compatibility, and add-on ecosystem impact. 5-phase workflow with deterministic grep scanning, confidence-scored findings (>=80 threshold), and optional PR comment posting via GitHub/GitLab CLI
+- **`wp` role** — New WordPress-specific role for plugin development skills
+- **`references/` directory pattern** — First skill to use progressive disclosure via reference files (5 checklists: security, performance, standards, vulnerability patterns, add-on ecosystem). Keeps SKILL.md under 500 lines while providing detailed knowledge on demand
+- **WordPress skills documentation** — `docs/skills/wp/pr-review.md` and `docs/skills/wp/README.md`
+
+### Changed
+- **Plugin skill count** — Updated from 29 to 30 skills across plugin.json and marketplace.json
+- **Config seed** — Added `wp` to enabled roles and `wp-pr-review` to available skills table
+- **Skills index** — Added `wp` role to `docs/skills/README.md` Available Roles table
+
+---
+
 ## [4.2.1] - 2026-02-09
 
 ### Fixed
