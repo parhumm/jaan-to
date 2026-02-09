@@ -2,7 +2,7 @@
 
 > Non-negotiable safety rules for jaan.to
 
-**TIP**: Run `/jaan-to:detect-dev` to audit your project structure, or `/jaan-to:pack-detect` for a full repo analysis.
+**TIP**: Run `/jaan-to:detect-dev` to audit your project structure, or `/jaan-to:detect-pack` for a full repo analysis.
 
 ---
 

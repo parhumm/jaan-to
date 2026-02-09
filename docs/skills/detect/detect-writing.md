@@ -3,7 +3,7 @@ title: "detect-writing"
 sidebar_position: 3
 doc_type: skill
 tags: [detect, writing, tone, glossary, i18n, microcopy]
-related: [detect-dev, detect-design, detect-product, detect-ux, pack-detect]
+related: [detect-dev, detect-design, detect-product, detect-ux, detect-pack]
 updated_date: 2026-02-08
 ---
 
@@ -61,7 +61,7 @@ All 6 output files are required per execution.
 
 ## Key Points
 
-- Evidence IDs use namespace `E-WRT-NNN` (prevents collisions in pack-detect aggregation)
+- Evidence IDs use namespace `E-WRT-NNN` (prevents collisions in detect-pack aggregation)
 - **NNg tone dimensions**: 4 primary (Formality/Humor/Respectfulness/Enthusiasm 1–5) + 5 extended (Technical complexity/Verbosity/Directness/Empathy/Confidence)
 - **Consistency score**: Standard deviation per dimension across all strings; flag >1.5σ outliers
 - UI copy classified into 8 categories: Buttons, Errors, Empty states, Confirm dialogs, Toasts, Onboarding, Form labels/helper, Loading

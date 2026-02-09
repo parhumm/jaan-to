@@ -3,7 +3,7 @@ title: "detect-ux"
 sidebar_position: 5
 doc_type: skill
 tags: [detect, ux, journeys, heuristics, accessibility, pain-points]
-related: [detect-dev, detect-design, detect-writing, detect-product, pack-detect]
+related: [detect-dev, detect-design, detect-writing, detect-product, detect-pack]
 updated_date: 2026-02-08
 ---
 
@@ -62,7 +62,7 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 
 ## Key Points
 
-- Evidence IDs use namespace `E-UX-NNN` (prevents collisions in pack-detect aggregation)
+- Evidence IDs use namespace `E-UX-NNN` (prevents collisions in detect-pack aggregation)
 - **Framework-specific route extraction** across React Router, Next.js, Vue Router, Angular, and Express
 - **Nielsen's 10 heuristics** assessed from code signals: Visibility, Match, User control, Consistency, Error prevention, Recognition, Flexibility, Minimalist design, Error recovery, Help — each rated Strong/Adequate/Weak/Unknown
 - Personas and JTBD are always marked **Tentative** (inferred from code, not validated user research)

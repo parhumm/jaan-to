@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.23.1] - 2026-02-09
 
 ### Changed
-- **Detect skills output paths standardized** — All 6 detect skills (`detect-dev`, `detect-design`, `detect-product`, `detect-ux`, `detect-writing`, `pack-detect`) now write to `$JAAN_OUTPUTS_DIR/detect/{domain}/` instead of hardcoded `docs/current/{domain}/`, aligning with the plugin's configurable output system (`6bde383`)
+- **Detect skills output paths standardized** — All 6 detect skills (`detect-dev`, `detect-design`, `detect-product`, `detect-ux`, `detect-writing`, `detect-pack`) now write to `$JAAN_OUTPUTS_DIR/detect/{domain}/` instead of hardcoded `docs/current/{domain}/`, aligning with the plugin's configurable output system (`6bde383`)
 
 ## [3.23.0] - 2026-02-08
 
@@ -19,18 +19,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `/jaan-to:detect-writing` — Writing system extraction with NNg tone dimensions (4 primary + 5 extended), 8-category UI copy classification, error message rubric, i18n maturity 0–5, and 6 output files (`eb0b4f5`)
   - `/jaan-to:detect-product` — Product reality extraction with 3-layer evidence model (surface + copy + code path), monetization/entitlement scanning, analytics SDK detection, and 7 output files (`ef3d455`)
   - `/jaan-to:detect-ux` — UX audit with framework-specific route extraction (React Router, Next.js, Vue Router, Angular, Express), Nielsen's 10 heuristics, Mermaid flow diagrams, and 7 output files (`6fa7cb5`)
-  - `/jaan-to:pack-detect` — Consolidate all detect outputs into scored knowledge index with risk heatmap, evidence ID validation, unknowns backlog, and Step 0 orchestration for partial runs (`50a75f5`)
+  - `/jaan-to:detect-pack` — Consolidate all detect outputs into scored knowledge index with risk heatmap, evidence ID validation, unknowns backlog, and Step 0 orchestration for partial runs (`50a75f5`)
 
 ### Changed
 - **`dev-stack-detect` merged into `detect-dev`** — All scanning patterns absorbed; old skill removed. Detection → `detect-dev`, context population remains via bootstrap (`bb9d0a7`, `9d944de`)
-- **Bootstrap updated** — Suggests `/jaan-to:pack-detect` instead of `/jaan-to:dev-stack-detect` when context has placeholders (`9d944de`)
+- **Bootstrap updated** — Suggests `/jaan-to:detect-pack` instead of `/jaan-to:dev-stack-detect` when context has placeholders (`9d944de`)
 - **Plugin description** — Updated to reflect 27 skills (was 21)
 
 ### Documentation
 - **Detect skill docs aligned with implementations** — All 7 docs updated with What It Scans tables, evidence ID namespaces, scoring formulas, and shared standards (`29901ae`)
 - **Detect README** — Added pipeline flow diagram, output file counts, and Shared Standards section (`29901ae`)
 - **`dev-stack-detect` deprecated** — Redirect doc pointing to `detect-dev` (`9d944de`)
-- **30+ reference files updated** — All `dev-stack-detect` references replaced with `detect-dev`/`pack-detect` across docs, scripts, seeds, context, website, and examples (`9d944de`)
+- **30+ reference files updated** — All `dev-stack-detect` references replaced with `detect-dev`/`detect-pack` across docs, scripts, seeds, context, website, and examples (`9d944de`)
 
 ### Fixed
 - **Bootstrap `.gitignore` handling** — Stopped auto-adding `jaan-to/` to `.gitignore` which could hide project context files (`c95e4a9`)

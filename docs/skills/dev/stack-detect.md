@@ -22,7 +22,7 @@ The `dev-stack-detect` skill has been merged into **`detect-dev`** as part of th
 For a full repo analysis across all domains (dev, design, writing, product, UX), run:
 
 ```
-/jaan-to:pack-detect
+/jaan-to:detect-pack
 ```
 
 ---
@@ -31,7 +31,7 @@ For a full repo analysis across all domains (dev, design, writing, product, UX),
 
 - [detect-dev](../detect/detect-dev.md) — Engineering audit
 - [Detect Skills](../detect/README.md) — All detect skills
-- [pack-detect](../detect/detect-pack.md) — Consolidation skill
+- [detect-pack](../detect/detect-pack.md) — Consolidation skill
 
 ---
 

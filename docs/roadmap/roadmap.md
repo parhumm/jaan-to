@@ -30,7 +30,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 **Latest:** v3.23.0 — Detect & Knowledge Pack (6 skills)
 
 ### v3.23.0 — Detect & Knowledge Pack (6 skills)
-- 6 detect skills: detect-dev, detect-design, detect-writing, detect-product, detect-ux, pack-detect (`52eb72f`..`50a75f5`)
+- 6 detect skills: detect-dev, detect-design, detect-writing, detect-product, detect-ux, detect-pack (`52eb72f`..`50a75f5`)
 - dev-stack-detect merged into detect-dev and removed (`bb9d0a7`, `9d944de`)
 - 30+ reference files updated, bootstrap updated (`9d944de`)
 - All detect docs aligned with implementations (`29901ae`)
@@ -72,14 +72,14 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 Evidence-based repo audits that produce `$JAAN_OUTPUTS_DIR/detect/` knowledge. All detect skills are Quick Wins (no MCP required). Each outputs machine-parseable markdown with YAML frontmatter, SARIF-like evidence blocks, and confidence scoring.
 
-Pipeline: detect-dev + detect-design + detect-writing + detect-product + detect-ux → pack-detect
+Pipeline: detect-dev + detect-design + detect-writing + detect-product + detect-ux → detect-pack
 
 - [x] `/jaan-to:detect-dev` — Engineering audit with OpenSSF scoring (`52eb72f`)
 - [x] `/jaan-to:detect-design` — Design system detection with drift findings (`280e4f7`)
 - [x] `/jaan-to:detect-writing` — Writing system extraction with NNg tone scoring (`eb0b4f5`)
 - [x] `/jaan-to:detect-product` — Product reality extraction with 3-layer evidence (`ef3d455`)
 - [x] `/jaan-to:detect-ux` — UX audit with Nielsen heuristics and journey mapping (`6fa7cb5`)
-- [x] `/jaan-to:pack-detect` — Consolidate detect outputs into knowledge index (`50a75f5`)
+- [x] `/jaan-to:detect-pack` — Consolidate detect outputs into knowledge index (`50a75f5`)
 - [x] Merge `dev-stack-detect` into `detect-dev` and remove (`bb9d0a7`)
 - [x] Update all references (30+ files) (`9d944de`)
 - [x] Align detect docs with implementations (`29901ae`)
@@ -159,7 +159,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:detect-writing` | Writing system extraction with tone scoring |
 | `/jaan-to:detect-product` | Product reality extraction with evidence |
 | `/jaan-to:detect-ux` | UX audit with journey/pain-point findings |
-| `/jaan-to:pack-detect` | Consolidate detect outputs into knowledge index |
+| `/jaan-to:detect-pack` | Consolidate detect outputs into knowledge index |
 | `/jaan-to:dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
 | `/jaan-to:dev-be-task-breakdown` | Backend task breakdown from PRDs |
 | `/jaan-to:dev-fe-design` | Frontend component design |

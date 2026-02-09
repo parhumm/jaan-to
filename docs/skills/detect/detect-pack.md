@@ -1,5 +1,5 @@
 ---
-title: "pack-detect"
+title: "detect-pack"
 sidebar_position: 6
 doc_type: skill
 tags: [detect, knowledge, consolidation, risk, unknowns, evidence]
@@ -7,7 +7,7 @@ related: [detect-dev, detect-design, detect-writing, detect-product, detect-ux]
 updated_date: 2026-02-08
 ---
 
-# /jaan-to:pack-detect
+# /jaan-to:detect-pack
 
 > Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
 
@@ -22,7 +22,7 @@ Reads all detect skill outputs (`$JAAN_OUTPUTS_DIR/detect/{dev,design,writing,pr
 ## Usage
 
 ```
-/jaan-to:pack-detect
+/jaan-to:detect-pack
 ```
 
 | Argument | Required | Description |

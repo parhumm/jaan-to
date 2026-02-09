@@ -3,7 +3,7 @@ title: "detect-dev"
 sidebar_position: 1
 doc_type: skill
 tags: [detect, dev, engineering, audit, security, cicd]
-related: [detect-design, detect-writing, detect-product, detect-ux, pack-detect]
+related: [detect-design, detect-writing, detect-product, detect-ux, detect-pack]
 updated_date: 2026-02-08
 ---
 
@@ -66,7 +66,7 @@ Each file includes standardized YAML frontmatter + Findings blocks (ID/severity/
 
 ## Key Points
 
-- Evidence IDs use namespace `E-DEV-NNN` (prevents collisions in pack-detect aggregation)
+- Evidence IDs use namespace `E-DEV-NNN` (prevents collisions in detect-pack aggregation)
 - 4-level confidence: Confirmed (0.95-1.00) / Firm (0.80-0.94) / Tentative (0.50-0.79) / Uncertain (0.20-0.49)
 - Diataxis-style sections: Executive Summary → Scope/Methodology → Findings → Recommendations → Appendices
 - Frontmatter includes `findings_summary` buckets + `overall_score` (0-10, OpenSSF-style) + `lifecycle_phase` (CycloneDX)

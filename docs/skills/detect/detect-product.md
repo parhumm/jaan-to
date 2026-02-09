@@ -3,7 +3,7 @@ title: "detect-product"
 sidebar_position: 4
 doc_type: skill
 tags: [detect, product, features, monetization, instrumentation]
-related: [detect-dev, detect-design, detect-writing, detect-ux, pack-detect]
+related: [detect-dev, detect-design, detect-writing, detect-ux, detect-pack]
 updated_date: 2026-02-08
 ---
 
@@ -62,7 +62,7 @@ Extracts the "product reality" from the repository using a 3-layer evidence mode
 
 ## Key Points
 
-- Evidence IDs use namespace `E-PRD-NNN` (prevents collisions in pack-detect aggregation)
+- Evidence IDs use namespace `E-PRD-NNN` (prevents collisions in detect-pack aggregation)
 - **3-layer feature evidence**: Surface + Copy + Code Path → confidence mapping:
   - All 3 layers → Confirmed; 2/3 → Firm; 1 layer + heuristics → Tentative; Inferred only → Uncertain
 - Monetization: distinguish "pricing copy" (what product claims) vs "enforcement" (what code enforces) — gates must be proven by code locations

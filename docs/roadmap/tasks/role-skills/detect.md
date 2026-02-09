@@ -7,7 +7,7 @@ sidebar_position: 12
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 5
 
-**Chains**: detect-dev + detect-design + detect-writing + detect-product + detect-ux → pack-detect
+**Chains**: detect-dev + detect-design + detect-writing + detect-product + detect-ux → detect-pack
 
 **Reference**: [Repo-analysis output & content detection standards](../../../../jaan-to/outputs/research/61-detect-pack.md)
 
@@ -15,14 +15,14 @@ sidebar_position: 12
 
 ```mermaid
 flowchart TD
-    jaan-to-detect-dev["detect-dev<br>Dev Detect<br>Engineering audit + scored findings"] --> jaan-to-pack-detect["pack-detect<br>Knowledge Pack<br>Index + risk heatmap + unknowns"]
-    jaan-to-detect-design["detect-design<br>Design Detect<br>Design system + drift findings"] --> jaan-to-pack-detect
-    jaan-to-detect-writing["detect-writing<br>Writing Detect<br>Writing system + tone scoring"] --> jaan-to-pack-detect
-    jaan-to-detect-product["detect-product<br>Product Detect<br>Product reality + evidence"] --> jaan-to-pack-detect
-    jaan-to-detect-ux["detect-ux<br>UX Detect<br>UX audit + heuristic findings"] --> jaan-to-pack-detect
+    jaan-to-detect-dev["detect-dev<br>Dev Detect<br>Engineering audit + scored findings"] --> jaan-to-detect-pack["detect-pack<br>Knowledge Pack<br>Index + risk heatmap + unknowns"]
+    jaan-to-detect-design["detect-design<br>Design Detect<br>Design system + drift findings"] --> jaan-to-detect-pack
+    jaan-to-detect-writing["detect-writing<br>Writing Detect<br>Writing system + tone scoring"] --> jaan-to-detect-pack
+    jaan-to-detect-product["detect-product<br>Product Detect<br>Product reality + evidence"] --> jaan-to-detect-pack
+    jaan-to-detect-ux["detect-ux<br>UX Detect<br>UX audit + heuristic findings"] --> jaan-to-detect-pack
 ```
 
-**Legend**: Solid = internal | All detect skills converge into pack-detect
+**Legend**: Solid = internal | All detect skills converge into detect-pack
 
 ### /jaan-to:detect-dev
 
@@ -35,7 +35,7 @@ flowchart TD
   - Output structure uses Diátaxis-style sections: Executive Summary → Scope/Methodology → Findings → Recommendations → Appendices
   - Include findings_summary buckets + overall_score (0–10, OpenSSF-style) and lifecycle_phase (CycloneDX vocabulary) in frontmatter
   - CI/CD security checks explicitly cover secrets boundaries, runner trust, permissions, and supply-chain signals (pinning/provenance/SBOM "SLSA-ish")
-- **→ Next**: `pack-detect`
+- **→ Next**: `detect-pack`
 - **MCP Required**: None (v2 optional: SBOM/provenance/monitoring MCP)
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/dev/{stack,architecture,standards,testing,cicd,deployment,security,observability,risks}.md` — each doc MUST include standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence)
@@ -50,7 +50,7 @@ flowchart TD
   - Each finding includes: Severity, Confidence (4-level), Evidence blocks; no raw tool dumps without triage
   - Accessibility findings must be written as scoped findings (no scope-exceeding claims), and use "Unknown" when repo-only evidence is insufficient
   - Governance detection: owners/process/versioning signals (e.g., Storybook/docs conventions, token maintenance indicators)
-- **→ Next**: `pack-detect`
+- **→ Next**: `detect-pack`
 - **MCP Required**: None (v2 optional: Figma MCP for true drift detection)
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/design/{brand,tokens,components,patterns,accessibility,governance}.md`
@@ -67,7 +67,7 @@ flowchart TD
   - Error messages scored with a weighted rubric (Clarity/Specificity/Actionability/Tone/A11y) and flagged by automated heuristics (length, blame language, jargon, codes)
   - i18n maturity MUST be rated 0–5 using glob patterns + ICU/RTL/hardcoded-string signals + governance signals (CODEOWNERS/content linting/CI checks)
   - Glossary MUST use ISO-704-ish statuses (preferred/admitted/deprecated/forbidden) with occurrences + file evidence
-- **→ Next**: `pack-detect`
+- **→ Next**: `detect-pack`
 - **MCP Required**: None (v2 optional: CMS/helpdesk/email MCP)
 - **Input**: [repo]
 - **Output**:
@@ -84,7 +84,7 @@ flowchart TD
   - Monetization findings must distinguish "pricing copy" vs "enforcement"—gates must be proven by code locations; absence becomes an "absence" evidence item
   - Instrumentation outputs must report taxonomy/consistency signals and clearly label heuristic conclusions as Tentative unless strongly evidenced
   - Follow the same standardized frontmatter + Findings block format to keep all audits interoperable
-- **→ Next**: `pack-detect`
+- **→ Next**: `detect-pack`
 - **MCP Required**: None (v2 optional: analytics/billing MCP)
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/product/{overview,features,value-prop,monetization,entitlements,metrics,constraints}.md`
@@ -99,14 +99,14 @@ flowchart TD
   - Heuristic findings must be written as triaged findings (no raw dumps), each with severity + confidence + evidence blocks
   - Accessibility findings must stay within repo evidence scope; otherwise mark as Uncertain/Unknown
   - Use consistent doc structure (Exec Summary, Scope/Methodology, Findings, Recommendations, Appendices)
-- **→ Next**: `pack-detect`
+- **→ Next**: `detect-pack`
 - **MCP Required**: None (v2 optional: session replay/support/monitoring MCP)
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/ux/{personas,jtbd,flows,pain-points,heuristics,accessibility,gaps}.md`
 
-### /jaan-to:pack-detect
+### /jaan-to:detect-pack
 
-- **Logical**: `pack-detect`
+- **Logical**: `detect-pack`
 - **Description**: Consolidates all detect outputs into an index with standardized metadata, severity buckets, confidence distribution, and a prioritized Unknowns backlog.
 - **Quick Win**: Yes
 - **Key Points**:

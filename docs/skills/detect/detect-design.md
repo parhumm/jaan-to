@@ -3,7 +3,7 @@ title: "detect-design"
 sidebar_position: 2
 doc_type: skill
 tags: [detect, design, tokens, components, accessibility, drift]
-related: [detect-dev, detect-writing, pack-detect]
+related: [detect-dev, detect-writing, detect-pack]
 updated_date: 2026-02-08
 ---
 
@@ -59,7 +59,7 @@ Scans the repository for design system signals: brand definitions, design tokens
 
 ## Key Points
 
-- Evidence IDs use namespace `E-DSN-NNN` (prevents collisions in pack-detect aggregation)
+- Evidence IDs use namespace `E-DSN-NNN` (prevents collisions in detect-pack aggregation)
 - **Drift detection** requires paired evidence per finding: token definition (E-DSN-001a) + conflicting usage (E-DSN-001b)
 - Token categories: colors, typography, spacing, shadows, border radius, breakpoints, animation
 - Component classification: primitives, layout, navigation, feedback, data display, form

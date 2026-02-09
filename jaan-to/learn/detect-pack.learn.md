@@ -1,4 +1,4 @@
-# Lessons: pack-detect
+# Lessons: detect-pack
 
 > Last updated: 2026-02-08
 
