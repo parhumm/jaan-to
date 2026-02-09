@@ -51,7 +51,7 @@ Also read tech context if available:
 
 **Read language preference** from `jaan-to/config/settings.yaml`:
 
-1. Check for per-skill override: `language_dev-api-contract` field
+1. Check for per-skill override: `language_backend-api-contract` field
 2. If no override, use the global `language` field
 3. Resolve:
 
@@ -525,7 +525,7 @@ add_to_index \
 > 1. **Mock server**: `npx @stoplight/prism-cli mock api.yaml`
 > 2. **Generate client SDK**: `npx orval --input api.yaml --output ./src/api/`
 > 3. **Contract tests**: `schemathesis run api.yaml`
-> 4. **Versioning plan**: `/jaan-to:dev-api-versioning`
+> 4. **Versioning plan**: `/jaan-to:backend-api-versioning`
 > 5. **API documentation**: `/jaan-to:dev-docs-generate`
 
 ## Step 11: Capture Feedback

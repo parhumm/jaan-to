@@ -50,7 +50,7 @@ Also read tech context (CRITICAL for this skill):
 
 **Read language preference** from `jaan-to/config/settings.yaml`:
 
-1. Check for per-skill override: `language_dev-be-task-breakdown` field
+1. Check for per-skill override: `language_backend-task-breakdown` field
 2. If no override, use the global `language` field
 3. Resolve:
 
@@ -797,7 +797,7 @@ add_to_index \
 >
 > **Recommended next step**: For comprehensive data model documentation with constraints, indexes, migration playbooks, and retention policies:
 > ```
-> /jaan-to:dev-be-data-model "{entity-list-from-extraction}"
+> /jaan-to:backend-data-model "{entity-list-from-extraction}"
 > ```
 
 ## Step 12: Capture Feedback

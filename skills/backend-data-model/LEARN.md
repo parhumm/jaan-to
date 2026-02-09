@@ -1,4 +1,4 @@
-# Lessons: dev-be-data-model
+# Lessons: backend-data-model
 
 > Plugin-side lessons. Project-specific lessons go in:
 > `$JAAN_LEARN_DIR/jaan-to:backend-data-model.learn.md`

@@ -51,7 +51,7 @@ Also read tech context (CRITICAL for this skill):
 
 **Read language preference** from `jaan-to/config/settings.yaml`:
 
-1. Check for per-skill override: `language_dev-be-data-model` field
+1. Check for per-skill override: `language_backend-data-model` field
 2. If no override, use the global `language` field
 3. Resolve:
 
@@ -551,11 +551,11 @@ add_to_index \
 >
 > 1. **API contract**: Generate OpenAPI spec from this data model:
 >    ```
->    /jaan-to:dev-api-contract "{entity-list}"
+>    /jaan-to:backend-api-contract "{entity-list}"
 >    ```
 > 2. **Task breakdown**: Generate backend tasks from this data model:
 >    ```
->    /jaan-to:dev-be-task-breakdown "{prd-or-feature}"
+>    /jaan-to:backend-task-breakdown "{prd-or-feature}"
 >    ```
 > 3. **Review**: Have the team review constraint completeness and index strategy
 

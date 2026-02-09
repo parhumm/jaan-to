@@ -35,6 +35,32 @@ if [ -d "$PROJECT_DIR/.jaan-to" ] && [ ! -d "$PROJECT_DIR/jaan-to" ]; then
   mv "$PROJECT_DIR/.jaan-to" "$PROJECT_DIR/jaan-to"
 fi
 
+# Migration: move outputs from old dev/backend and dev/frontend to new structure
+if [ -d "$PROJECT_DIR/jaan-to/outputs/dev/backend" ]; then
+  mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend"
+  # Move all contents from old path to new path
+  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/dev/backend" 2>/dev/null)" ]; then
+    mv "$PROJECT_DIR/jaan-to/outputs/dev/backend"/* "$PROJECT_DIR/jaan-to/outputs/backend/" 2>/dev/null || true
+  fi
+  # Remove old directory if empty
+  rmdir "$PROJECT_DIR/jaan-to/outputs/dev/backend" 2>/dev/null || true
+fi
+
+if [ -d "$PROJECT_DIR/jaan-to/outputs/dev/frontend" ]; then
+  mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend"
+  # Move all contents from old path to new path
+  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/dev/frontend" 2>/dev/null)" ]; then
+    mv "$PROJECT_DIR/jaan-to/outputs/dev/frontend"/* "$PROJECT_DIR/jaan-to/outputs/frontend/" 2>/dev/null || true
+  fi
+  # Remove old directory if empty
+  rmdir "$PROJECT_DIR/jaan-to/outputs/dev/frontend" 2>/dev/null || true
+fi
+
+# Clean up parent dev directory if empty
+if [ -d "$PROJECT_DIR/jaan-to/outputs/dev" ]; then
+  rmdir "$PROJECT_DIR/jaan-to/outputs/dev" 2>/dev/null || true
+fi
+
 # 1. Create all necessary directories (using resolved paths)
 mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR"
 mkdir -p "$PROJECT_DIR/$LEARN_DIR"

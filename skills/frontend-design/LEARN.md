@@ -1,4 +1,4 @@
-# Lessons: dev-fe-design
+# Lessons: frontend-design
 
 > Plugin-side lessons. Project-specific lessons go in:
 > `$JAAN_LEARN_DIR/jaan-to:frontend-design.learn.md`

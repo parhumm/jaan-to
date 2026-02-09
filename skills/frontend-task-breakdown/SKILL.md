@@ -52,7 +52,7 @@ Also read tech context if available:
 
 **Read language preference** from `jaan-to/config/settings.yaml`:
 
-1. Check for per-skill override: `language_dev-fe-task-breakdown` field
+1. Check for per-skill override: `language_frontend-task-breakdown` field
 2. If no override, use the global `language` field
 3. Resolve:
 
@@ -571,7 +571,7 @@ add_to_index \
 
 > "Task breakdown complete."
 >
-> *Note: For detailed state machine definitions skill (`/jaan-to:dev-fe-state-machine`), see roadmap - coming in future release.*
+> *Note: For detailed state machine definitions skill (`/jaan-to:frontend-state-machine`), see roadmap - coming in future release.*
 
 ## Step 13: Capture Feedback
 

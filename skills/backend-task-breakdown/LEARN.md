@@ -1,4 +1,4 @@
-# Lessons: dev-be-task-breakdown
+# Lessons: backend-task-breakdown
 
 > Last updated: 2026-02-03
 

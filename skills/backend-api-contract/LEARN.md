@@ -1,4 +1,4 @@
-# Lessons: dev-api-contract
+# Lessons: backend-api-contract
 
 > Last updated: 2026-02-08
 

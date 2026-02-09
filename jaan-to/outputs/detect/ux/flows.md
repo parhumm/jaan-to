@@ -85,7 +85,7 @@ While UI flow mapping is not applicable, consider these alternative approaches:
    graph LR
        A[/pm-research-about] --> B[/pm-prd-write]
        B --> C[/pm-story-write]
-       C --> D[/dev-fe-task-breakdown]
+       C --> D[/frontend-task-breakdown]
    ```
 
 2. **Two-Phase Workflow**: Document the analysis → approval → generation flow used by skills

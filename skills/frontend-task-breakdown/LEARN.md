@@ -1,4 +1,4 @@
-# Lessons: dev-fe-task-breakdown
+# Lessons: frontend-task-breakdown
 
 > Last updated: 2026-02-03
 

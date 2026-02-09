@@ -54,7 +54,7 @@ Also read context files if available:
 
 **Read language preference** from `jaan-to/config/settings.yaml`:
 
-1. Check for per-skill override: `language_dev-fe-design` field
+1. Check for per-skill override: `language_frontend-design` field
 2. If no override, use the global `language` field
 3. Resolve:
 
@@ -461,7 +461,7 @@ Present follow-up workflow options:
 > - Copy code from `{CODE_FILE}` to your project
 > - Open `{PREVIEW_FILE}` in browser to see live preview
 > - Run `/jaan-to:qa-test-cases "{MAIN_FILE}"` to generate test cases
-> - Run `/jaan-to:dev-fe-task-breakdown` if you need integration tasks for larger feature
+> - Run `/jaan-to:frontend-task-breakdown` if you need integration tasks for larger feature
 
 ## Step 13: Capture Feedback
 
