@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
-  "version": "4.3.0",
-  "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev, WP, and more",
+  "version": "4.4.0",
+  "description": "Give soul to your workflow — AI-powered skills for PM, Data, QA, Dev, WP, Release, and more",
   "owner": {
     "name": "Parhum Khoshbakht",
     "email": "parhum.kh@gmail.com",
@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "jaan-to",
-      "description": "AI-powered plugin with 30 skills for product management, development, WordPress plugin review, UX research, QA testing, data analytics, and evidence-based repo audits. Generate PRDs, user stories, task breakdowns, scaffolds, data models, API contracts, frontend components, test cases, GTM tracking, WordPress PR reviews, and run detect suite (dev, design, writing, product, UX + knowledge pack). Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, LEARN.md continuous improvement system.",
-      "version": "4.3.0",
+      "description": "AI-powered plugin with 31 skills for product management, development, WordPress plugin review, release management, UX research, QA testing, data analytics, and evidence-based repo audits. Generate PRDs, user stories, task breakdowns, scaffolds, data models, API contracts, frontend components, test cases, GTM tracking, WordPress PR reviews, changelogs, and run detect suite (dev, design, writing, product, UX + knowledge pack). Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, LEARN.md continuous improvement system.",
+      "version": "4.4.0",
       "author": {
         "name": "Parhum Khoshbakht",
         "email": "parhum.kh@gmail.com"
@@ -42,7 +42,9 @@
         "gherkin",
         "wordpress",
         "wp-plugin-review",
-        "security-audit"
+        "security-audit",
+        "changelog",
+        "release-management"
       ],
       "homepage": "https://github.com/parhumm/jaan-to",
       "repository": "https://github.com/parhumm/jaan-to",

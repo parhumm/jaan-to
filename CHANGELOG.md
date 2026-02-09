@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.4.0] - 2026-02-09
+
+### Added
+- **`release-iterate-changelog` skill** (`/jaan-to:release-iterate-changelog`) — Generate user-facing changelogs with impact notes and support guidance from git history. 5 input modes (auto-generate, create, release, add, from-input), Conventional Commits parsing with freeform heuristic fallback, Keep a Changelog formatting, SemVer bump suggestion, user impact analysis (high/medium/low), and support guidance for downstream help articles
+- **`release` role** — New role for release management skills (iterate chain: top-fixes → changelog → help-article)
+- **Release skills documentation** — `docs/skills/release/iterate-changelog.md` and `docs/skills/release/README.md`
+
+### Changed
+- **Plugin skill count** — Updated from 30 to 31 skills across plugin.json and marketplace.json
+- **Config seed** — Added `release-iterate-changelog` to available skills table
+- **Skills index** — Added `release` role to `docs/skills/README.md` Available Roles table
+
+---
+
 ## [4.3.0] - 2026-02-09
 
 ### Added
@@ -880,6 +894,8 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[4.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.4.0
+[4.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.3.0
 [4.2.1]: https://github.com/parhumm/jaan-to/releases/tag/v4.2.1
 [4.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.2.0
 [4.1.1]: https://github.com/parhumm/jaan-to/releases/tag/v4.1.1
