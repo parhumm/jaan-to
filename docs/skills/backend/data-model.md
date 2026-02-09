@@ -51,7 +51,7 @@ Questions are skipped when already answered by input or `$JAAN_CONTEXT_DIR/tech.
 
 ## What It Produces
 
-One file at `$JAAN_OUTPUTS_DIR/dev/backend/{id}-{slug}/`:
+One file at `$JAAN_OUTPUTS_DIR/backend/{id}-{slug}/`:
 
 | File | Content |
 |------|---------|

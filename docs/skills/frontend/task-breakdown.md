@@ -36,7 +36,7 @@ Analyzes UX handoffs (Figma links, design descriptions, screenshots, or PRDs) an
 
 ## What It Produces
 
-A comprehensive task breakdown document at `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md` containing:
+A comprehensive task breakdown document at `$JAAN_OUTPUTS_DIR/frontend/{slug}/task-breakdown.md` containing:
 
 | Section | Content |
 |---------|---------|

@@ -62,7 +62,7 @@ Then shows a **HARD STOP** with:
 
 ## Output
 
-**Path:** `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`
+**Path:** `$JAAN_OUTPUTS_DIR/backend/{slug}/task-breakdown.md`
 
 **Structure:**
 - Overview table (metrics)
@@ -111,7 +111,7 @@ Each task includes:
 - T-shirt sizes: 2 XS, 6 S, 3 M, 1 L
 - Estimated duration: 3-4 sprints (2-week sprints, 2-dev team)
 
-**Output:** `$JAAN_OUTPUTS_DIR/dev/backend/user-subscriptions/task-breakdown.md`
+**Output:** `$JAAN_OUTPUTS_DIR/backend/user-subscriptions/task-breakdown.md`
 
 ---
 
