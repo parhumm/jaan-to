@@ -223,6 +223,7 @@ Every version bump MUST be a single atomic operation:
 | `/jaan-to:docs-update` | Audit documentation |
 | `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
 | `/jaan-to:roadmap-update` | Maintain and sync roadmap |
+| `/jaan-to:wp-pr-review` | Review WordPress plugin PRs |
 
 ---
 

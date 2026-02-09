@@ -27,7 +27,12 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.2.1 — Fix backend-scaffold command picker display
+**Latest:** v4.3.0 — WordPress plugin PR review skill
+
+### v4.3.0 — WordPress plugin PR review skill
+- Added `wp-pr-review` skill — 5-phase WordPress plugin PR review with security scanning, confidence scoring, and optional PR commenting (`b5edd39`)
+- New `wp` role (WordPress) with `references/` directory pattern for progressive disclosure
+- Plugin skill count updated from 29 to 30
 
 ### v4.2.1 — Fix backend-scaffold command picker display
 - Fixed `backend-scaffold` displaying as `/jaan-to:backend-scaffold` — removed YAML-unsafe colon from description (`c1c5f0d`)
@@ -95,6 +100,13 @@ For complete release history, see [CHANGELOG.md](/changelog).
 ---
 
 ## Unreleased
+
+### wp-pr-review skill (`b5edd39`)
+
+- [x] `/jaan-to:wp-pr-review` — WordPress plugin PR review with 5-phase workflow (`b5edd39`)
+- [x] New `wp` role (WordPress) added to enabled roles (`b5edd39`)
+- [x] First `references/` directory pattern for progressive disclosure (`b5edd39`)
+- [x] Documentation: `docs/skills/wp/pr-review.md` and `docs/skills/wp/README.md` (`b5edd39`)
 
 ---
 
@@ -228,6 +240,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
 | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |
 | `/jaan-to:qa-test-cases` | Generate test cases from PRDs |
+| `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
 | `/jaan-to:skill-create` | Create new skill with wizard |
 | `/jaan-to:skill-update` | Update existing skill |
 | `/jaan-to:docs-create` | Create documentation with templates |

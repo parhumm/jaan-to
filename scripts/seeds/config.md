@@ -17,6 +17,7 @@
 - dev (Development)
 - data (Analytics)
 - ux (User Experience)
+- wp (WordPress)
 - core (Internal)
 
 ## Planned Roles (Phase 5)
@@ -58,6 +59,7 @@
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 | backend-scaffold | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
 | frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
+| wp-pr-review | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
 
 ## Language
 - language: ask

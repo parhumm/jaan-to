@@ -74,6 +74,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [64](64-ux-flowchart-generate.md)                                            | UX Flowchart Generation Skill                                  | Complete skill blueprint for `/jaan-to:ux-flowchart-generate` covering Mermaid diagram generation constrained by UX standards and GitHub limits (v11.4.1, 50K chars, 500 edges), evidence mapping that traces every node to PRD sections and code symbols with NASA-adapted 4-level confidence scoring, diff engine for staleness detection, canonical output spec, quality gates (machine + human), and failure mode mitigations. 40+ sources.                                          |
 | [65](65-ux-flowchart-generate-skill.md)                                      | UX Flowchart Generate Skill Spec                               | Complete skill specification for `/jaan-to:ux-flowchart-generate` — Mermaid flowchart generation from PRDs/docs/codebases with 7-phase execution pipeline, evidence maps tracing nodes to sources, 4-level confidence scoring, structured unknowns lists, diff-based update mode, strict node/edge conventions, quality gates (17 machine-checkable + 5 human-review), splitting rules, and GitHub rendering constraints (v11.4.1, <40K chars, Dagre-only).                               |
 | [66](66-release-iterate-changelog.md)                                        | Changelog Create/Update Skill — Research Summary               | Standards-based research covering Keep a Changelog format, SemVer 2.0.0 rules, Conventional Commits parsing, git annotated tags, GitHub/GitLab MCP release integration, and a 5-stage commit analysis pipeline for auto-generating human-readable changelog entries. Includes skill design recommendations for 6 scenarios (create, auto-generate, release, manual add, full pipeline, retroactive). |
+| [67](67-wp-pr-review.md)                                                     | WordPress Plugin PR Review Skill — Research Foundation          | Complete research for building a Claude Code SKILL.md-driven WordPress plugin PR review covering WPCS standards, OWASP-mapped security patterns, real-world CVEs (2024–2025), performance anti-patterns, add-on ecosystem patterns (wp-slimstat), tooling (PHPCS, PHPStan, Plugin Check), backward compatibility matrices, severity classification, and 5-phase review workflow architecture. |
 
 ## Quick Topic Finder
 
@@ -126,6 +127,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [09-pr-review-practices.md](09-pr-review-practices.md)
 - [13-pr-review-agent-base.md](13-pr-review-agent-base.md)
 - [14-laravel-pr-blueprint.md](14-laravel-pr-blueprint.md)
+- [67-wp-pr-review.md](67-wp-pr-review.md) - WordPress plugin PR review skill: WPCS, OWASP, CVEs, performance, add-on ecosystem
 
 ### Token & Cost Optimization
 - [08-claude-optimization.md](08-claude-optimization.md)
@@ -137,6 +139,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [16-react-monorepo-2025.md](16-react-monorepo-2025.md)
 - [54-roles-wp-details.md](54-roles-wp-details.md) - WordPress plugin development skills across 7+ roles
 - [58-role-wp-dev.md](58-role-wp-dev.md) - WordPress analytics plugin development with privacy compliance & performance patterns
+- [67-wp-pr-review.md](67-wp-pr-review.md) - WordPress plugin PR review: security, standards, backward compatibility, tooling
 - [63-dev-scaffolds.md](63-dev-scaffolds.md) - Production-ready scaffolds for Node.js, PHP, Go, React 19 & scaffold engineering standards
 
 ### Documentation & Architecture
