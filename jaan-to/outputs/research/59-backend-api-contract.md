@@ -1,6 +1,6 @@
 # Building a production-ready OpenAPI 3.1 contract generator
 
-**The "dev:api-contract" skill must master eight interlocking domains to generate production-quality OpenAPI 3.1 YAML.** This report distills findings from 40+ authoritative sources — official specs, tool documentation, major API references, and academic research — into actionable patterns for each domain. The core insight: OpenAPI 3.1's full JSON Schema 2020-12 alignment unlocks powerful schema capabilities (`if/then/else`, `prefixItems`, `$dynamicRef`), but tool support remains uneven, making validation pipelines and carefully structured generation guardrails essential.
+**The "backend:api-contract" skill must master eight interlocking domains to generate production-quality OpenAPI 3.1 YAML.** This report distills findings from 40+ authoritative sources — official specs, tool documentation, major API references, and academic research — into actionable patterns for each domain. The core insight: OpenAPI 3.1's full JSON Schema 2020-12 alignment unlocks powerful schema capabilities (`if/then/else`, `prefixItems`, `$dynamicRef`), but tool support remains uneven, making validation pipelines and carefully structured generation guardrails essential.
 
 ---
 
@@ -134,7 +134,7 @@ Five tools form the complete contract validation pipeline:
 
 ## Conclusion: patterns for the contract generator
 
-The "dev:api-contract" skill should generate specs that follow a **flat `components/schemas` architecture** with `$ref` references throughout, RFC 9457 Problem Details as the base error schema extended with validation-specific `errors` arrays, named media type `examples` organized by scenario, and cursor-based pagination as the default pattern. Null handling must use `type: ["string", "null"]` exclusively — never `nullable: true`.
+The "backend:api-contract" skill should generate specs that follow a **flat `components/schemas` architecture** with `$ref` references throughout, RFC 9457 Problem Details as the base error schema extended with validation-specific `errors` arrays, named media type `examples` organized by scenario, and cursor-based pagination as the default pattern. Null handling must use `type: ["string", "null"]` exclusively — never `nullable: true`.
 
 The generation pipeline should enforce a strict **validate-after-generate loop**: Spectral + Redocly lint → schema validation → Prism mock test → fix via feedback prompt. Few-shot prompting with validated examples and separate generation of paths vs schemas will minimize the predictable LLM failure modes (broken `$ref` paths, version syntax confusion, missing required `description` fields). The OpenAPI Overlay Specification provides the safest mechanism for enriching partial specs without overwriting manual edits. Breaking change detection via oasdiff should gate any spec modifications in CI.
 
