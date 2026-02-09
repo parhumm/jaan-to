@@ -33,11 +33,14 @@ Comprehensive research already exists at `jaan-to/outputs/research/66-release-it
 ```yaml
 ---
 name: release-iterate-changelog
-description: "Generate changelog with user impact notes, support guidance from git history or changes."
-allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git describe:*), Bash(git status:*), Write($JAAN_OUTPUTS_DIR/release/**), Edit, Edit(jaan-to/config/settings.yaml)
+description: "Generate changelog with user impact notes and support guidance from git history or changes."
+allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git describe:*), Bash(git status:*), Write($JAAN_OUTPUTS_DIR/CHANGELOG.md), Edit($JAAN_OUTPUTS_DIR/CHANGELOG.md), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[(no args) | create | release vX.Y.Z | add \"<description>\"]"
 ---
 ```
+
+**Output**: Single file at `$JAAN_OUTPUTS_DIR/CHANGELOG.md` (not ID-based folders).
+This is a living document that gets updated on each run — not a versioned report snapshot.
 
 ### Input Mode Detection
 
@@ -80,19 +83,13 @@ Present draft changelog with:
 
 ### Phase 2 Workflow (Generation)
 
-1. **Step 6: Generate Slug** — From version or feature name
-2. **Step 7: Generate ID & Folder** — Using `id-generator.sh`
-   - `SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/release/iterate"`
-   - Folder: `{ID}-{slug}/`
-   - Main file: `{ID}-changelog-{slug}.md`
-3. **Step 8: Write Report** — Using template.md
-4. **Step 9: Update Project CHANGELOG.md** (Optional)
-   - Ask: "Also update the project's CHANGELOG.md? [y/n]"
-   - If yes: Edit CHANGELOG.md (insert into [Unreleased] or create versioned section)
-   - Update comparison links in footer
-5. **Step 10: Update Index** — Using `index-updater.sh`
-6. **Step 11: Quality Validation** — Run validation rules
-7. **Step 12: Capture Feedback**
+1. **Step 6: Write/Update `$JAAN_OUTPUTS_DIR/CHANGELOG.md`** — Using template.md
+   - `create` mode: Write new file from template
+   - `auto-generate` / `from-input`: Edit existing file — insert entries into [Unreleased] section
+   - `release` mode: Promote [Unreleased] to versioned section, update comparison links
+   - `add` mode: Append entry under correct change type in [Unreleased]
+2. **Step 7: Quality Validation** — Run validation rules
+3. **Step 8: Capture Feedback**
 
 ### Quality Checks
 
@@ -112,10 +109,8 @@ From research validation rules:
 
 - [ ] Changes collected and classified
 - [ ] Changelog draft reviewed by user
-- [ ] Report written to `$JAAN_OUTPUTS_DIR/release/iterate/`
-- [ ] Index updated
+- [ ] `$JAAN_OUTPUTS_DIR/CHANGELOG.md` written/updated
 - [ ] Quality checks pass
-- [ ] Project CHANGELOG.md updated (if user opted in)
 - [ ] User approved final result
 
 ---
@@ -252,8 +247,7 @@ Add to `scripts/seeds/config.md` Available Skills table:
 
 ## Verification
 
-1. **Manual test**: Run `/jaan-to:release-iterate-changelog` in a git repo with commits — verify it analyzes commits and generates a report
+1. **Manual test**: Run `/jaan-to:release-iterate-changelog` in a git repo with commits — verify it analyzes commits and writes to `$JAAN_OUTPUTS_DIR/CHANGELOG.md`
 2. **Mode test**: Test each input mode (`create`, `release v1.0.0`, `add "New feature"`, no args)
-3. **Output check**: Verify output lands in `$JAAN_OUTPUTS_DIR/release/iterate/{ID}-{slug}/`
-4. **CHANGELOG check**: Verify optional CHANGELOG.md update inserts correctly
-5. **Validation**: Run `/jaan-to:skill-update release-iterate-changelog` for v3.0.0 compliance
+3. **Output check**: Verify `$JAAN_OUTPUTS_DIR/CHANGELOG.md` follows Keep a Changelog format
+4. **Validation**: Run `/jaan-to:skill-update release-iterate-changelog` for v3.0.0 compliance
