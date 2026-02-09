@@ -2,7 +2,7 @@
 
 A UX handoff represents untapped potential—designs filled with implicit states, edge cases, and technical debt waiting to happen. This research establishes a systematic framework for transforming design deliverables into production-ready task breakdowns that eliminate ambiguity, enable parallel work, and prevent the coverage gaps that plague frontend development.
 
-The `dev:fe-task-breakdown` skill addresses a critical gap in frontend workflows: the translation layer between design intent and developer execution. Teams using structured task breakdown methodologies report **up to 60% faster development** through modular component approaches, while those without systematic processes consistently miss loading states, error handling, and accessibility requirements—the invisible work that distinguishes production code from prototypes.
+The `frontend-task-breakdown` skill addresses a critical gap in frontend workflows: the translation layer between design intent and developer execution. Teams using structured task breakdown methodologies report **up to 60% faster development** through modular component approaches, while those without systematic processes consistently miss loading states, error handling, and accessibility requirements—the invisible work that distinguishes production code from prototypes.
 
 ---
 

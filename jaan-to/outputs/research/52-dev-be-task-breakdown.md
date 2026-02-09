@@ -1,6 +1,6 @@
 # Backend Task Breakdown Skill: Complete Research Guide
 
-PRDs don't naturally decompose into implementation tasks—that transformation requires systematic methodology. This research establishes the foundations for a skill that converts Product Requirements Documents into structured backend development tasks, producing markdown files at `jaan-to/outputs/dev/backend/{slug}/task-breakdown.md`. The skill targets Laravel 10/PHP teams running sprint-based development with **2-4 developers**, generating **ticket-level tasks** (1 PR = 1-3 days = T-shirt sized S/M/L/XL) that can be directly imported into Jira or Linear.
+PRDs don't naturally decompose into implementation tasks—that transformation requires systematic methodology. This research establishes the foundations for a skill that converts Product Requirements Documents into structured backend development tasks, producing markdown files at `jaan-to/outputs/backend/{slug}/task-breakdown.md`. The skill targets Laravel 10/PHP teams running sprint-based development with **2-4 developers**, generating **ticket-level tasks** (1 PR = 1-3 days = T-shirt sized S/M/L/XL) that can be directly imported into Jira or Linear.
 
 The research synthesizes industry standards from IEEE, SAFe, and Shape Up with Laravel-specific patterns from Spatie guidelines and real-world examples from 12+ engineering teams. Key findings include: vertical slicing produces more independently deployable tasks than horizontal layering; INVEST criteria adapted for backend tasks requires explicit testability annotations; and PRD transformation must identify **implicit tasks** (indexes, error handling, monitoring) that requirements documents rarely specify.
 
@@ -897,7 +897,7 @@ Constraints: [FK, unique, check]
 
 ## Conclusion
 
-Building the `dev:be-task-breakdown` skill requires encoding three categories of knowledge: **industry methodology** (INVEST, vertical slicing, Shape Up's bounded scope), **Laravel conventions** (task types mapping to framework components with consistent naming), and **implicit requirements detection** (indexes, error handling, security, observability that PRDs omit).
+Building the `backend-task-breakdown` skill requires encoding three categories of knowledge: **industry methodology** (INVEST, vertical slicing, Shape Up's bounded scope), **Laravel conventions** (task types mapping to framework components with consistent naming), and **implicit requirements detection** (indexes, error handling, security, observability that PRDs omit).
 
 The most critical implementation insights: vertical slicing produces independently shippable tasks while horizontal slicing creates blocking dependencies; every mutation task needs explicit idempotency annotation; T-shirt sizes only calibrate correctly when the team agrees on concrete examples for each size; and AI-generated tasks require validation against known failure modes (hallucinated packages, missing error handling, wrong PHP version syntax).
 
