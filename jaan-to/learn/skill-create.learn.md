@@ -1,6 +1,6 @@
 # Lessons: skill-create
 
-> Last updated: 2026-02-03
+> Last updated: 2026-02-09
 
 Accumulated lessons from past executions. Read this before creating skills to avoid past mistakes and apply learned improvements.
 
@@ -51,4 +51,19 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
 
 Things to avoid based on past feedback:
 
-(none yet)
+### No colons in YAML description fields (2026-02-09)
+
+**Context**: `backend-scaffold` was the only skill with `: ` (colon-space) in its description — `"from specs: routes, data model..."`. Claude Code's YAML parser misinterpreted `specs: routes` as a key-value pair, corrupting the skill metadata.
+
+**Symptom**: Skill displayed as `/jaan-to:backend-scaffold` instead of `/backend-scaffold` in the command picker.
+
+**What NOT to do**:
+- Don't use `: ` (colon-space) in the `description` frontmatter field
+- Don't use any YAML special characters (`:`, `#`, `[`, `]`, `{`, `}`) in unquoted descriptions
+
+**What to do**:
+- Rephrase to avoid colons: "from specs: routes" → "with routes"
+- Run `scripts/validate-skills.sh` which now checks for colons
+- If a colon is truly needed, quote the description: `description: "text with: colon"`
+
+**Reference**: Fix commit `c1c5f0d`, docs rule added to `docs/STYLE.md` and `docs/extending/create-skill.md`.
