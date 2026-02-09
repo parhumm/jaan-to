@@ -3,6 +3,7 @@ name: learn-add
 description: Add a lesson to a skill's LEARN.md file, routing feedback to skill, template, or context learning.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[target] [lesson]"
+disable-model-invocation: true
 ---
 
 # learn-add

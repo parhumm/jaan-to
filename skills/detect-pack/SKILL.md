@@ -3,6 +3,7 @@ name: detect-pack
 description: Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-pack

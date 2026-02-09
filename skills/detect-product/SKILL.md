@@ -3,6 +3,7 @@ name: detect-product
 description: Product reality extraction with evidence-backed features, monetization, and metrics.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-product

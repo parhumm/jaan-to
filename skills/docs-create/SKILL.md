@@ -3,6 +3,7 @@ name: docs-create
 description: Create new documentation with templates following STYLE.md.
 allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "{type} {name}"
+disable-model-invocation: true
 ---
 
 # docs-create

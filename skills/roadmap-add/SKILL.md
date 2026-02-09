@@ -3,6 +3,7 @@ name: roadmap-add
 description: "[Internal] Add a task to the jaan.to development roadmap."
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [task-description]
+disable-model-invocation: true
 ---
 
 # roadmap-add

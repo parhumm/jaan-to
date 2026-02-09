@@ -3,6 +3,7 @@ name: detect-writing
 description: Writing system extraction with NNg tone dimensions, UI copy classification, and i18n maturity scoring.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-writing

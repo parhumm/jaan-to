@@ -3,6 +3,7 @@ name: detect-design
 description: Design system detection with drift findings and evidence blocks.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-design

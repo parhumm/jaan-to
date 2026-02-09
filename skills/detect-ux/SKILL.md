@@ -3,6 +3,7 @@ name: detect-ux
 description: Repo-driven UX audit with journey mapping and heuristic-based findings.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-ux

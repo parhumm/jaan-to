@@ -3,6 +3,7 @@ name: skill-update
 description: Update an existing jaan.to skill following standards.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [skill-name]
+disable-model-invocation: true
 ---
 
 # skill-update

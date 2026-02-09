@@ -3,6 +3,7 @@ name: detect-dev
 description: Engineering audit with SARIF evidence, 4-level confidence, and OpenSSF scoring.
 allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-dev
