@@ -45,6 +45,7 @@ Two naming conventions based on skill type:
 | [dev](dev/README.md) | Developer | Active |
 | qa | QA Engineer | Planned |
 | [ux](ux/README.md) | UX Designer | Active |
+| [wp](wp/README.md) | WordPress | Active |
 | growth | Growth/SEO | Planned |
 | [detect](detect/README.md) | Repo audits & knowledge | Planned |
 
