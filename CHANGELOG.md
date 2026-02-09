@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.2.0] - 2026-02-09
+
+### Added
+- **`backend-scaffold` skill** (`/jaan-to:backend-scaffold`) — Generate production-ready backend code from API contracts, data models, and task breakdowns. Supports Node.js (Fastify v5 + Prisma + Zod), PHP (Laravel 12 / Symfony 7), and Go (Chi / stdlib). Includes routes, service layer, validation schemas, middleware, and RFC 9457 error handling
+- **`frontend-scaffold` skill** (`/jaan-to:frontend-scaffold`) — Convert designs to React 19 / Next.js 15 component scaffolds with TailwindCSS v4 CSS-first config, typed API client hooks (Orval v7 + TanStack Query v5), Zustand v5 state management, and nuqs URL state. Generates components, hooks, types, pages, and config files
+- **LEARN.md seed files** for both scaffold skills — Pre-populated with research-validated lessons (Better Questions, Edge Cases, Workflow, Common Mistakes) from research output 63-dev-scaffolds
+
+### Changed
+- **Plugin skill count** — Updated from 27 to 29 skills across plugin.json and marketplace.json descriptions
+- **Config seed** — Added both scaffold skills to Available Skills table; updated dev role active count from 4 to 6
+
+---
+
 ## [4.1.1] - 2026-02-09
 
 ### Fixed
