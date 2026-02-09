@@ -20,7 +20,7 @@
 - core (Internal)
 
 ## Planned Roles (Phase 5)
-- dev (Development) - 17 skills [4 active: fe-task-breakdown, be-task-breakdown, be-data-model, api-contract]
+- dev (Development) - 17 skills [6 active: fe-task-breakdown, be-task-breakdown, be-data-model, api-contract, be-scaffold, fe-scaffold]
 - qa (Quality Assurance) - 12 skills
 - growth (SEO + Content) - 15 skills
 
@@ -56,6 +56,8 @@
 | backend-data-model | `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | backend-api-contract | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
+| backend-scaffold | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
+| frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
 
 ## Language
 - language: ask
