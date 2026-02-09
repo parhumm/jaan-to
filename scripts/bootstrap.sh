@@ -134,7 +134,11 @@ OLD_PATTERNS=(
   # v3.15.2 → v3.16.0 rename: old prefixed names
   "jaan-to-pm-prd-write" "jaan-to-pm-story-write" "jaan-to-pm-research-about"
   "jaan-to-dev-fe-design" "jaan-to-dev-fe-task-breakdown" "jaan-to-dev-be-task-breakdown"
+  "jaan-to-dev-be-data-model" "jaan-to-dev-api-contract"
   "jaan-to-qa-test-cases"
+  # v3.x → v4.0.0 rename: old dev-be-*/dev-fe-*/dev-api-* names
+  "dev-be-data-model" "dev-be-task-breakdown" "dev-api-contract"
+  "dev-fe-design" "dev-fe-task-breakdown"
   "jaan-to-ux-research-synthesize" "jaan-to-ux-microcopy-write" "jaan-to-ux-heatmap-analyze"
   "jaan-to-data-gtm-datalayer"
   "to-jaan-docs-create" "to-jaan-docs-update" "to-jaan-learn-add"
