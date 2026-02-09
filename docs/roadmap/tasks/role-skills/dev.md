@@ -22,16 +22,16 @@ flowchart TD
     jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"]
     jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
     jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
-    jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-be-scaffold["dev-be-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"]
-    jaan-to-dev-be-scaffold["dev-be-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"]
-    jaan-to-dev-be-scaffold["dev-be-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
-    frontend-task-breakdown["frontend-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
-    jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
-    ux-microcopy-write["ux-microcopy-write<br>UX: microcopy-write"] -.-> jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
-    jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"] --> jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"]
-    jaan-to-dev-fe-scaffold["dev-fe-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
-    frontend-task-breakdown["frontend-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>FE State Machine<br>UI states + transitions"]
-    jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>FE State Machine<br>UI states + transitions"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
+    jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-backend-scaffold["backend-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"]
+    jaan-to-backend-scaffold["backend-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"]
+    jaan-to-backend-scaffold["backend-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
+    frontend-task-breakdown["frontend-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-frontend-scaffold["frontend-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
+    jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-frontend-scaffold["frontend-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
+    ux-microcopy-write["ux-microcopy-write<br>UX: microcopy-write"] -.-> jaan-to-frontend-scaffold["frontend-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"]
+    jaan-to-frontend-scaffold["frontend-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"] --> jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"]
+    jaan-to-frontend-scaffold["frontend-scaffold<br>FE Scaffold<br>React/Next.js + TailwindCSS + API client"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
+    frontend-task-breakdown["frontend-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"] --> jaan-to-frontend-state-machine["frontend-state-machine<br>FE State Machine<br>UI states + transitions"]
+    jaan-to-frontend-state-machine["frontend-state-machine<br>FE State Machine<br>UI states + transitions"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
     jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"] --> jaan-to-dev-integration-mock-stubs["dev-integration-mock-stubs<br>Integration Mock Stubs<br>Stub interfaces + fake responses"]
     jaan-to-dev-integration-mock-stubs["dev-integration-mock-stubs<br>Integration Mock Stubs<br>Stub interfaces + fake responses"] --> jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"]
     jaan-to-dev-test-plan["dev-test-plan<br>Test Plan<br>Unit/integration/e2e scope"] -.-> qa-test-cases["qa-test-cases<br>QA: test-cases"]
@@ -136,9 +136,9 @@ flowchart TD
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
 - **Reference**: [`59-backend-api-contract.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/59-backend-api-contract.md)
 
-### /jaan-to:dev-be-scaffold
+### /jaan-to:backend-scaffold
 
-- **Logical**: `dev-be-scaffold`
+- **Logical**: `backend-scaffold`
 - **Description**: Generate production-ready backend code from specifications: Fastify routes, Prisma schema, service layer, middleware, validation
 - **Quick Win**: Yes
 - **Key Points**:
@@ -177,14 +177,14 @@ flowchart TD
   - Explicit state machine prevents "UI glitches"
   - Define caching/loading strategies
   - Performance budgets where needed
-- **→ Next**: `dev-fe-state-machine`
+- **→ Next**: `frontend-state-machine`
 - **MCP Required**: None
 - **Input**: [ux-handoff]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`
 
-### /jaan-to:dev-fe-state-machine
+### /jaan-to:frontend-state-machine
 
-- **Logical**: `dev-fe-state-machine`
+- **Logical**: `frontend-state-machine`
 - **Description**: UI states + transitions, events that trigger transitions, edge-case behavior
 - **Quick Win**: Yes
 - **Key Points**:
@@ -196,9 +196,9 @@ flowchart TD
 - **Input**: [screen]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/state-machine.md`
 
-### /jaan-to:dev-fe-scaffold
+### /jaan-to:frontend-scaffold
 
-- **Logical**: `dev-fe-scaffold`
+- **Logical**: `frontend-scaffold`
 - **Description**: Convert HTML design previews to React v19 / Next.js v15 components with TailwindCSS v4, TypeScript, and state management
 - **Quick Win**: Yes
 - **Key Points**:

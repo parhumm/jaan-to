@@ -1,4 +1,4 @@
-# Plan: Create dev-be-scaffold and dev-fe-scaffold Skills
+# Plan: Create backend-scaffold and frontend-scaffold Skills
 
 > Saved from implementation plan | 2026-02-09
 
@@ -18,12 +18,12 @@ Create **2 new skills** following v3.0.0 patterns from existing code-generation 
 
 | # | File | Purpose |
 |---|------|---------|
-| 1 | `skills/dev-be-scaffold/SKILL.md` | Backend scaffold skill definition |
-| 2 | `skills/dev-be-scaffold/template.md` | Output template for scaffold documentation |
-| 3 | `skills/dev-be-scaffold/LEARN.md` | Seed learning file |
-| 4 | `skills/dev-fe-scaffold/SKILL.md` | Frontend scaffold skill definition |
-| 5 | `skills/dev-fe-scaffold/template.md` | Output template for scaffold documentation |
-| 6 | `skills/dev-fe-scaffold/LEARN.md` | Seed learning file |
+| 1 | `skills/backend-scaffold/SKILL.md` | Backend scaffold skill definition |
+| 2 | `skills/backend-scaffold/template.md` | Output template for scaffold documentation |
+| 3 | `skills/backend-scaffold/LEARN.md` | Seed learning file |
+| 4 | `skills/frontend-scaffold/SKILL.md` | Frontend scaffold skill definition |
+| 5 | `skills/frontend-scaffold/template.md` | Output template for scaffold documentation |
+| 6 | `skills/frontend-scaffold/LEARN.md` | Seed learning file |
 
 ### Files to Modify (1 file)
 
@@ -49,14 +49,14 @@ These issues were identified by deep verification against plugin standards:
 
 ---
 
-## Skill 1: dev-be-scaffold
+## Skill 1: backend-scaffold
 
 ### Frontmatter
 ```yaml
-name: dev-be-scaffold
+name: backend-scaffold
 description: Generate production-ready backend code from specs: Fastify routes, Prisma schema, service layer, Zod validation.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [api-contract, task-breakdown, data-model]
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+argument-hint: [backend-api-contract, backend-task-breakdown, backend-data-model]
 ```
 
 ### Context Files
@@ -64,29 +64,29 @@ argument-hint: [api-contract, task-breakdown, data-model]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL — determines framework, DB, patterns)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-be-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:dev-be-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:backend-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 ```
 
 ### Pre-Execution (standard v3.0.0 block)
-1. Read `$JAAN_LEARN_DIR/jaan-to:dev-be-scaffold.learn.md` — apply lessons
+1. Read `$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md` — apply lessons
 2. Read `$JAAN_CONTEXT_DIR/tech.md` — know framework/DB for code generation
 3. Language Settings — read `jaan-to/config/settings.yaml`, resolve language
 4. Language exception note — generated code NOT affected by language setting
 
 ### Input Handling
 Accepts 1-3 file paths or descriptions:
-- **api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output: `api.yaml`)
-- **task-breakdown** — Path to BE task breakdown markdown (from `/jaan-to:backend-task-breakdown` output)
-- **data-model** — Path to data model markdown (from `/jaan-to:backend-data-model` output)
+- **backend-api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output: `api.yaml`)
+- **backend-task-breakdown** — Path to BE task breakdown markdown (from `/jaan-to:backend-task-breakdown` output)
+- **backend-data-model** — Path to data model markdown (from `/jaan-to:backend-data-model` output)
 - **Empty** — Interactive wizard prompting for each
 
 ### Phase 1 Steps
 1. **Validate & Parse Inputs** — For each provided path:
-   - api-contract: Read api.yaml, extract paths, schemas, error responses, security schemes
-   - task-breakdown: Read markdown, extract task list, entity names, reliability patterns
-   - data-model: Read markdown, extract table definitions, constraints, indexes, relations
-   - Report which inputs found vs missing; suggest fallback for missing (e.g., CRUD from data-model if no API contract)
+   - backend-api-contract: Read api.yaml, extract paths, schemas, error responses, security schemes
+   - backend-task-breakdown: Read markdown, extract task list, entity names, reliability patterns
+   - backend-data-model: Read markdown, extract table definitions, constraints, indexes, relations
+   - Report which inputs found vs missing; suggest fallback for missing (e.g., CRUD from backend-data-model if no API contract)
 2. **Detect Tech Stack** — Read `$JAAN_CONTEXT_DIR/tech.md`:
    - Extract framework from `#current-stack` (default: Fastify v4+)
    - Extract DB from `#current-stack` (default: PostgreSQL)
@@ -105,14 +105,14 @@ All files in `$JAAN_OUTPUTS_DIR/dev/backend/{id}-{slug}/`:
 
 ```
 {id}-{slug}/
-├── {id}-be-scaffold-{slug}.md                    # Main doc (setup guide + architecture)
-├── {id}-be-scaffold-routes-{slug}.ts              # Fastify route handlers (all resources)
-├── {id}-be-scaffold-services-{slug}.ts            # Service layer (business logic)
-├── {id}-be-scaffold-schemas-{slug}.ts             # Zod validation schemas
-├── {id}-be-scaffold-middleware-{slug}.ts           # Auth + error handling middleware
-├── {id}-be-scaffold-prisma-{slug}.prisma          # Prisma data model
-├── {id}-be-scaffold-config-{slug}.ts              # Package.json + tsconfig content
-└── {id}-be-scaffold-readme-{slug}.md              # Setup + run instructions
+├── {id}-backend-scaffold-{slug}.md                    # Main doc (setup guide + architecture)
+├── {id}-backend-scaffold-routes-{slug}.ts              # Fastify route handlers (all resources)
+├── {id}-backend-scaffold-services-{slug}.ts            # Service layer (business logic)
+├── {id}-backend-scaffold-schemas-{slug}.ts             # Zod validation schemas
+├── {id}-backend-scaffold-middleware-{slug}.ts           # Auth + error handling middleware
+├── {id}-backend-scaffold-prisma-{slug}.prisma          # Prisma data model
+├── {id}-backend-scaffold-config-{slug}.ts              # Package.json + tsconfig content
+└── {id}-backend-scaffold-readme-{slug}.md              # Setup + run instructions
 ```
 
 ### Key Generation Rules (Research-Informed)
@@ -196,14 +196,14 @@ The skill reads tech.md `#current-stack` to determine which stack to generate:
 
 ---
 
-## Skill 2: dev-fe-scaffold
+## Skill 2: frontend-scaffold
 
 ### Frontmatter
 ```yaml
-name: dev-fe-scaffold
+name: frontend-scaffold
 description: Convert designs to React/Next.js components with TailwindCSS, TypeScript, and typed API client hooks.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [fe-design, fe-task-breakdown, api-contract]
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+argument-hint: [frontend-design, frontend-task-breakdown, backend-api-contract]
 ```
 
 ### Context Files
@@ -212,12 +212,12 @@ argument-hint: [fe-design, fe-task-breakdown, api-contract]
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/design.md` - Design system guidelines (optional)
 - `$JAAN_CONTEXT_DIR/brand.md` - Brand guidelines (optional)
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-fe-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:dev-fe-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:frontend-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 ```
 
 ### Pre-Execution (standard v3.0.0 block)
-1. Read `$JAAN_LEARN_DIR/jaan-to:dev-fe-scaffold.learn.md` — apply lessons
+1. Read `$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md` — apply lessons
 2. Read `$JAAN_CONTEXT_DIR/tech.md` — know framework/styling for code generation
 3. Read `$JAAN_CONTEXT_DIR/design.md` — design system patterns (optional)
 4. Language Settings — read `jaan-to/config/settings.yaml`, resolve language
@@ -225,9 +225,9 @@ argument-hint: [fe-design, fe-task-breakdown, api-contract]
 
 ### Input Handling
 Accepts 1-3 file paths or descriptions:
-- **fe-design** — Path to HTML preview or component description (from `/jaan-to:frontend-design` output)
-- **fe-task-breakdown** — Path to FE task breakdown (from `/jaan-to:frontend-task-breakdown` output)
-- **api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output)
+- **frontend-design** — Path to HTML preview or component description (from `/jaan-to:frontend-design` output)
+- **frontend-task-breakdown** — Path to FE task breakdown (from `/jaan-to:frontend-task-breakdown` output)
+- **backend-api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output)
 - **Empty** — Interactive wizard
 - Cross-role: optionally consumes `/jaan-to:ux-microcopy-write` output
 
@@ -244,13 +244,13 @@ All files in `$JAAN_OUTPUTS_DIR/dev/frontend/{id}-{slug}/`:
 
 ```
 {id}-{slug}/
-├── {id}-fe-scaffold-{slug}.md                     # Main doc (architecture + component map)
-├── {id}-fe-scaffold-components-{slug}.tsx          # React components
-├── {id}-fe-scaffold-hooks-{slug}.ts               # Typed API client hooks
-├── {id}-fe-scaffold-types-{slug}.ts               # TypeScript interfaces from API schemas
-├── {id}-fe-scaffold-pages-{slug}.tsx               # Page layouts / routes
-├── {id}-fe-scaffold-config-{slug}.ts              # Package.json + tsconfig + tailwind config
-└── {id}-fe-scaffold-readme-{slug}.md              # Setup + run instructions
+├── {id}-frontend-scaffold-{slug}.md                     # Main doc (architecture + component map)
+├── {id}-frontend-scaffold-components-{slug}.tsx          # React components
+├── {id}-frontend-scaffold-hooks-{slug}.ts               # Typed API client hooks
+├── {id}-frontend-scaffold-types-{slug}.ts               # TypeScript interfaces from API schemas
+├── {id}-frontend-scaffold-pages-{slug}.tsx               # Page layouts / routes
+├── {id}-frontend-scaffold-config-{slug}.ts              # Package.json + tsconfig + tailwind config
+└── {id}-frontend-scaffold-readme-{slug}.md              # Setup + run instructions
 ```
 
 ### Key Generation Rules (Research-Informed)
@@ -300,7 +300,7 @@ All files in `$JAAN_OUTPUTS_DIR/dev/frontend/{id}-{slug}/`:
 **Dev**: `typescript` ^5.7, `@types/react` ^19, `@types/node` ^22, `@tailwindcss/postcss` ^4, `tailwindcss` ^4, `eslint` ^9, `prettier` ^3.4, `orval` ^8, `vitest` ^2, `@testing-library/react` ^16
 
 ### Definition of Done
-- [ ] All components from fe-task-breakdown inventory generated
+- [ ] All components from frontend-task-breakdown inventory generated
 - [ ] Server Components default; `'use client'` only where needed
 - [ ] TypeScript interfaces from API contract schemas
 - [ ] TanStack Query hooks for client-side data fetching
@@ -316,16 +316,16 @@ All files in `$JAAN_OUTPUTS_DIR/dev/frontend/{id}-{slug}/`:
 
 ## LEARN.md Seeds
 
-### dev-be-scaffold
+### backend-scaffold
 - **Better Questions**: idempotency keys, repository vs direct ORM, WebSocket vs SSE, relation strategies, zero-downtime migrations
 - **Edge Cases**: endpoints without data model coverage, uncovered audit tables, middleware gaps, Prisma error codes, Zod type provider scoping, MySQL DDL limitations, Go connection pooling
-- **Workflow**: tech.md first, api-contract → data-model → task-breakdown order, SSE before WebSocket
+- **Workflow**: tech.md first, backend-api-contract → backend-data-model → backend-task-breakdown order, SSE before WebSocket
 - **Common Mistakes**: wrong framework code, Express-style errors in Fastify, multiple Prisma instances, raw Eloquent models, N+1 queries, env() outside config, global Go DB connections
 
-### dev-fe-scaffold
+### frontend-scaffold
 - **Better Questions**: feature-scoped vs atomic, SSR vs client-only, Orval vs openapi-typescript, Server Actions vs client API calls
 - **Edge Cases**: component count conflicts between inputs, API contract newer than design, useFormStatus child requirement, Next.js 15 no-cache default
-- **Workflow**: fe-task-breakdown → fe-design → api-contract order, types before components, Server Components for data fetching
+- **Workflow**: frontend-task-breakdown → frontend-design → backend-api-contract order, types before components, Server Components for data fetching
 - **Common Mistakes**: useEffect for fetching, forwardRef, manual memoization, tailwind.config.js, @tailwind directives, 'use client' everywhere, unstable_cache, next lint
 
 ---
