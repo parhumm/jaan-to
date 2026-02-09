@@ -19,8 +19,8 @@ flowchart TD
     jaan-to-dev-tech-plan["dev-tech-plan<br>Tech Plan<br>Approach + rollout/rollback"] --> frontend-task-breakdown["frontend-task-breakdown<br>FE Task Breakdown<br>FE tasks + estimates + risks"]
     backend-task-breakdown["backend-task-breakdown<br>BE Task Breakdown<br>BE tasks + data model notes"] --> jaan-to-backend-data-model["backend-data-model<br>BE Data Model<br>Tables + constraints + indexes"]
     jaan-to-backend-data-model["backend-data-model<br>BE Data Model<br>Tables + constraints + indexes"] --> jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"]
-    jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"]
-    jaan-to-dev-api-versioning["dev-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
+    jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-backend-api-versioning["backend-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"]
+    jaan-to-backend-api-versioning["backend-api-versioning<br>API Versioning<br>Compatibility + deprecation plan"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
     jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-dev-docs-generate["dev-docs-generate<br>Docs Generate<br>README + API docs + runbooks"]
     jaan-to-backend-api-contract["backend-api-contract<br>API Contract<br>OpenAPI + payloads + errors"] --> jaan-to-backend-scaffold["backend-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"]
     jaan-to-backend-scaffold["backend-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-dev-integration-plan["dev-integration-plan<br>Integration Plan<br>API sequence + retry + failures"]
@@ -130,7 +130,7 @@ flowchart TD
   - Define schemas with examples
   - Versioning + deprecation strategy
   - Ownership: who maintains, who consumes
-- **→ Next**: `dev-api-versioning`, `dev-docs-generate`
+- **→ Next**: `backend-api-versioning`, `dev-docs-generate`
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [entities]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
@@ -153,9 +153,9 @@ flowchart TD
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/scaffold/`
 - **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)
 
-### /jaan-to:dev-api-versioning
+### /jaan-to:backend-api-versioning
 
-- **Logical**: `dev-api-versioning`
+- **Logical**: `backend-api-versioning`
 - **Description**: Compatibility strategy, migration notes + timeline, deprecation communication plan
 - **Quick Win**: Yes
 - **Key Points**:
