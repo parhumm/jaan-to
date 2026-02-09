@@ -1,9 +1,9 @@
 ---
-title: "UX Skills (20)"
+title: "UX Skills (21)"
 sidebar_position: 11
 ---
 
-# UX Skills (20)
+# UX Skills (21)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
 
@@ -205,6 +205,26 @@ flowchart TD
 - **MCP Required**: Figma (flow/state extraction)
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/flows/{slug}/flow-spec.md`
+
+### /jaan-to:ux-flowchart-generate
+
+- **Logical**: `ux-flowchart-generate`
+- **Description**: Generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence map, confidence scoring, and unknowns list
+- **Reference**: [64-ux-flowchart-generate.md](../../../../jaan-to/outputs/research/64-ux-flowchart-generate.md) | [65-ux-flowchart-generate-skill.md](../../../../jaan-to/outputs/research/65-ux-flowchart-generate-skill.md)
+- **Quick Win**: Yes — no MCP required, generates Mermaid from text sources
+- **Key Points**:
+  - Supports `prd`, `doc`, `repo`, `mixed` source types with `userflow`, `systemflow`, `architecture`, `stateflow` goals
+  - 7-phase pipeline: Diff Check → Parse → Diagram Type → Generate Mermaid → Evidence Map → Unknowns → Validate
+  - Evidence map traces every node to PRD section, code symbol, and test path with automated confidence scoring
+  - Quality gates: 17 machine-checkable + 5 human-review flags
+  - Auto-split diagrams when exceeding thresholds (>25 nodes, >50 edges, >15 cyclomatic complexity)
+  - GitHub Mermaid constraints enforced (v11.4.1, <40K chars, Dagre-only, strict security)
+- **→ Next**: `ux-wireframe-notes`, `dev-fe-state-map`, `data-event-spec`
+- **MCP Required**: None
+- **Input**: `[source_type] [paths...] [goal] [scope?]`
+- **Output**: `$JAAN_OUTPUTS_DIR/ux/diagrams/{slug}/flowchart.md`, `$JAAN_OUTPUTS_DIR/ux/diagrams/{slug}/evidence-map.md`
+- **Failure Modes**: Hallucinated nodes, missing error paths, spaghetti diagrams, stale diagrams
+- **Quality Gates**: 17 automated checks (syntax, node/edge caps, cyclomatic complexity, evidence completeness); 5 human-review flags
 
 ### /jaan-to:ux-heuristic-review
 

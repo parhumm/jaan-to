@@ -16,7 +16,7 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (141 across 11 roles) | In Progress |
+| 6 | Role skills (142 across 11 roles) | In Progress |
 | 7 | MCP connectors | Planned |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution | Partial |
@@ -114,11 +114,11 @@ Pipeline: detect-dev + detect-design + detect-writing + detect-product + detect-
 
 ---
 
-## Phase 6: Role Skills (141 across 11 roles)
+## Phase 6: Role Skills (142 across 11 roles)
 
 > Details: [tasks/role-skills.md](tasks/role-skills.md)
 
-141 skills cataloged across 11 roles. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
+142 skills cataloged across 11 roles. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
 
 All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/jaan-to:skill-update` validation.
 
@@ -129,7 +129,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 | QA | 12 | 8 | 4 | [qa.md](tasks/role-skills/qa.md) |
 | DATA | 14 | 8 | 6 | [data.md](tasks/role-skills/data.md) |
 | GROWTH | 15 | 9 | 6 | [growth.md](tasks/role-skills/growth.md) |
-| UX | 20 | 15 | 5 | [ux.md](tasks/role-skills/ux.md) |
+| UX | 21 | 16 | 5 | [ux.md](tasks/role-skills/ux.md) |
 | SEC | 4 | 4 | 0 | [sec.md](tasks/role-skills/sec.md) |
 | DELIVERY | 8 | 8 | 0 | [delivery.md](tasks/role-skills/delivery.md) |
 | SRE | 9 | 5 | 4 | [sre.md](tasks/role-skills/sre.md) |
