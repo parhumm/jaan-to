@@ -72,6 +72,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [62](62-ai-workflow-claude-code-token-optimization.md)                       | Claude Code Token Optimization at Scale                        | Scaling 141 skills + 24 MCP connectors within 200K-token context window. Covers progressive disclosure (~40 tokens/skill), MCP Tool Search (85% reduction), CLAUDE.md trigger tables (54-62% savings), hook strategies, skill tiering (disable-model-invocation, context:fork), subagent isolation, concrete token budget achieving ~73% available context, and anti-patterns to avoid.                                                                                                   |
 | [63](63-dev-scaffolds.md)                                                    | Production-Ready Code Scaffolds                                | Comprehensive blueprint for production-ready code scaffolds across Node.js/Fastify, PHP/Laravel/Symfony, Go, and React 19/Next.js 15/TailwindCSS v4. Covers feature-based project structure, Zod type providers, Prisma patterns, Sanctum auth, sqlc codegen, Server Components, state management (TanStack Query + Zustand + nuqs), OpenAPI-first development, SSE/WebSocket patterns, and scaffold engineering anti-patterns.                                                         |
 | [64](64-ux-flowchart-generate.md)                                            | UX Flowchart Generation Skill                                  | Complete skill blueprint for `/jaan-to:ux-flowchart-generate` covering Mermaid diagram generation constrained by UX standards and GitHub limits (v11.4.1, 50K chars, 500 edges), evidence mapping that traces every node to PRD sections and code symbols with NASA-adapted 4-level confidence scoring, diff engine for staleness detection, canonical output spec, quality gates (machine + human), and failure mode mitigations. 40+ sources.                                          |
+| [65](65-ux-flowchart-generate-skill.md)                                      | UX Flowchart Generate Skill Spec                               | Complete skill specification for `/jaan-to:ux-flowchart-generate` — Mermaid flowchart generation from PRDs/docs/codebases with 7-phase execution pipeline, evidence maps tracing nodes to sources, 4-level confidence scoring, structured unknowns lists, diff-based update mode, strict node/edge conventions, quality gates (17 machine-checkable + 5 human-review), splitting rules, and GitHub rendering constraints (v11.4.1, <40K chars, Dagre-only).                               |
 
 ## Quick Topic Finder
 
@@ -152,6 +153,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [47-ux-research-synthesize.md](47-ux-research-synthesize.md)
 - [56-ux-microcopy-write.md](56-ux-microcopy-write.md)
 - [64-ux-flowchart-generate.md](64-ux-flowchart-generate.md)
+- [65-ux-flowchart-generate-skill.md](65-ux-flowchart-generate-skill.md)
 
 ## Related Resources
 
