@@ -65,7 +65,8 @@ Every finding MUST include structured evidence blocks:
 
 ```yaml
 evidence:
-  id: E-DEV-001
+  id: E-DEV-001                # Single-platform format
+  id: E-DEV-WEB-001            # Multi-platform format (platform prefix)
   type: code-location          # code-location | config-pattern | dependency | metric | absence
   confidence: 0.95             # 0.0-1.0
   location:
@@ -77,7 +78,18 @@ evidence:
   method: manifest-analysis    # manifest-analysis | static-analysis | manual-review | pattern-match | heuristic
 ```
 
-Evidence IDs use namespace `E-DEV-NNN` to prevent collisions in pack-detect aggregation.
+**Evidence ID Format**:
+
+```python
+# Generation logic:
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  evidence_id = f"E-DEV-{sequence:03d}"                     # E-DEV-001
+else:  # Multi-platform
+  platform_upper = current_platform.upper()
+  evidence_id = f"E-DEV-{platform_upper}-{sequence:03d}"    # E-DEV-WEB-001, E-DEV-BACKEND-023
+```
+
+Evidence IDs use namespace `E-DEV-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
 
 ### Confidence Levels (4-level)
 
@@ -104,6 +116,7 @@ status: draft
 date: {YYYY-MM-DD}
 target:
   name: "{repo-name}"
+  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'backend'/etc for multi-platform
   commit: "{git HEAD hash}"
   branch: "{current branch}"
 tool:
@@ -151,6 +164,89 @@ Use extended reasoning for:
 - Resolving version conflicts or migration detection
 - Confidence scoring decisions
 - Architecture pattern recognition
+
+## Step 0: Detect Platforms
+
+**Purpose**: Auto-detect platform structure to support multi-platform monorepos.
+
+Use **Glob** and **Bash** to identify platform folders:
+
+### Platform Patterns
+
+Match top-level directories against these patterns:
+
+| Platform | Folder Patterns |
+|----------|----------------|
+| web | `web/`, `webapp/`, `frontend/`, `client/` |
+| mobile | `mobile/`, `app/` |
+| backend | `backend/`, `server/`, `api/`, `services/` |
+| androidtv | `androidtv/`, `tv/`, `android-tv/` |
+| ios | `ios/`, `iOS/` |
+| android | `android/`, `Android/` |
+| desktop | `desktop/`, `electron/` |
+| cli | `cli/`, `cmd/` |
+
+### Detection Process
+
+1. **Check for monorepo markers**:
+   - Glob: `pnpm-workspace.yaml`, `lerna.json`, `nx.json`, `turbo.json`
+   - If found, proceed to multi-platform detection
+   - If not found, check folder structure anyway (could be non-standard monorepo)
+
+2. **List top-level directories**:
+   - Run: `ls -d */ | grep -Ev "node_modules|\.git|dist|build|\.next|__pycache__|coverage"`
+   - Extract directory names (strip trailing slashes)
+
+3. **Match against platform patterns**:
+   - For each directory, check if name matches any platform pattern (case-insensitive)
+   - Apply disambiguation rules (see below)
+
+4. **Handle detection results**:
+   - **No platforms detected** → Single-platform mode:
+     - Set `platforms = [{ name: 'all', path: '.' }]`
+     - Path = repository root
+   - **Platforms detected** → Multi-platform mode:
+     - Build list: `platforms = [{ name: 'web', path: 'web/' }, { name: 'backend', path: 'backend/' }, ...]`
+     - Ask user: "Detected platforms: {list}. Analyze all or select specific? [all/select]"
+     - If 'select', prompt: "Enter platform names (comma-separated): "
+
+### Disambiguation Rules
+
+**Priority order** (highest to lowest):
+
+1. **Explicit markers**: Check `package.json` `workspaces` field or `nx.json` app names
+2. **Exact folder match**: `web/`, `backend/`, `mobile/` (case-insensitive exact match)
+3. **Pattern match**: `*frontend*`, `*server*`, `*app*` in folder name
+4. **File pattern fallback**: If folder contains `.jsx/.tsx` → web, `Dockerfile` → backend, `.kt/.swift` → mobile
+
+**Conflict resolution**:
+
+- **Multiple patterns match** (e.g., `client-server/`): Prompt user to select or split
+- **Subfolder structure** (e.g., `apps/web/`): Use subfolder name as platform, ignore parent
+- **Shared code** (`packages/`, `libs/`): Analyze once without platform suffix (creates `stack.md` not `stack-shared.md`), then link findings via `related_evidence` in per-platform outputs
+
+**Edge cases**:
+
+- **Microservices** (`services/auth/`, `services/payment/`): All under single 'backend' platform (not separate platforms)
+- **Mobile subfolders** (`app/ios/`, `app/android/`): Two platforms (ios, android), not one "app" platform
+- **Monorepo without markers** (Bazel WORKSPACE, custom build system): Fall back to manual platform selection via interactive prompt
+- **Turborepo/Nx patterns** (`apps/*/`, `packages/*/`): Use glob to list subdirectories, classify each independently
+
+**Validation**:
+
+After auto-detection, always show: "Detected platforms: {list}. Correct? [y/n/select]"
+- If 'n' or 'select', prompt: "Enter platform names (comma-separated): "
+
+### Analysis Loop
+
+For each platform in platforms:
+1. Set `current_platform = platform.name`
+2. Set `base_path = platform.path`
+3. Run all detection steps (Steps 2-8) scoped to `base_path`
+4. Collect findings with platform context
+5. Use platform-specific output paths in Step 10
+
+**Note**: If single-platform mode (`platform.name == 'all'`), output paths have NO suffix. If multi-platform mode, output paths include `-{platform}` suffix.
 
 ## Step 1: Read Existing Context
 
@@ -369,6 +465,8 @@ Output a structured summary of all findings organized by output file:
 DETECTION COMPLETE
 ------------------
 
+PLATFORM: {platform_name or 'all'}
+
 STACK FINDINGS
   Backend:        {lang} {ver} + {framework} {ver}    [Confidence: {level}]
   Frontend:       {lang} {ver} + {framework} {ver}    [Confidence: {level}]
@@ -381,15 +479,17 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10 (OpenSSF-style)
 
 OUTPUT FILES (9):
-  $JAAN_OUTPUTS_DIR/detect/dev/stack.md           - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/architecture.md    - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/standards.md       - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/testing.md         - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/cicd.md            - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/deployment.md      - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/security.md        - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/observability.md   - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/risks.md           - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/stack{-platform}.md           - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/architecture{-platform}.md    - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/standards{-platform}.md       - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/testing{-platform}.md         - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/cicd{-platform}.md            - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/deployment{-platform}.md      - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/security{-platform}.md        - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/observability{-platform}.md   - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/risks{-platform}.md           - {n} findings
+
+Note: {-platform} suffix only if multi-platform mode (e.g., -web, -backend). Single-platform mode has no suffix.
 ```
 
 > "Proceed with writing 9 output files to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
@@ -404,40 +504,58 @@ OUTPUT FILES (9):
 
 Create directory `$JAAN_OUTPUTS_DIR/detect/dev/` if it does not exist.
 
+**Platform-specific output path logic**:
+
+```python
+# Determine filename suffix
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  suffix = ""                                               # No suffix
+else:  # Multi-platform
+  suffix = f"-{current_platform}"                          # e.g., "-web", "-backend"
+
+# Example output paths:
+# Single-platform: $JAAN_OUTPUTS_DIR/detect/dev/stack.md
+# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/dev/stack-web.md
+#                  $JAAN_OUTPUTS_DIR/detect/dev/stack-backend.md
+```
+
 For each of the 9 output files, use the template from `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` and fill with findings:
 
 ### Output Files
 
 | File | Content |
 |------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/dev/stack.md` | Tech stack with version evidence |
-| `$JAAN_OUTPUTS_DIR/detect/dev/architecture.md` | Architecture patterns and data flow |
-| `$JAAN_OUTPUTS_DIR/detect/dev/standards.md` | Coding standards and conventions |
-| `$JAAN_OUTPUTS_DIR/detect/dev/testing.md` | Test coverage and strategy |
-| `$JAAN_OUTPUTS_DIR/detect/dev/cicd.md` | CI/CD pipelines and security |
-| `$JAAN_OUTPUTS_DIR/detect/dev/deployment.md` | Deployment patterns |
-| `$JAAN_OUTPUTS_DIR/detect/dev/security.md` | Security posture and findings (OWASP mapping) |
-| `$JAAN_OUTPUTS_DIR/detect/dev/observability.md` | Logging, metrics, tracing |
-| `$JAAN_OUTPUTS_DIR/detect/dev/risks.md` | Technical risks and debt |
+| `$JAAN_OUTPUTS_DIR/detect/dev/stack{suffix}.md` | Tech stack with version evidence |
+| `$JAAN_OUTPUTS_DIR/detect/dev/architecture{suffix}.md` | Architecture patterns and data flow |
+| `$JAAN_OUTPUTS_DIR/detect/dev/standards{suffix}.md` | Coding standards and conventions |
+| `$JAAN_OUTPUTS_DIR/detect/dev/testing{suffix}.md` | Test coverage and strategy |
+| `$JAAN_OUTPUTS_DIR/detect/dev/cicd{suffix}.md` | CI/CD pipelines and security |
+| `$JAAN_OUTPUTS_DIR/detect/dev/deployment{suffix}.md` | Deployment patterns |
+| `$JAAN_OUTPUTS_DIR/detect/dev/security{suffix}.md` | Security posture and findings (OWASP mapping) |
+| `$JAAN_OUTPUTS_DIR/detect/dev/observability{suffix}.md` | Logging, metrics, tracing |
+| `$JAAN_OUTPUTS_DIR/detect/dev/risks{suffix}.md` | Technical risks and debt |
+
+**Note**: `{suffix}` is empty for single-platform mode, or `-{platform}` for multi-platform mode.
 
 Each file MUST include:
-1. Universal YAML frontmatter with findings_summary and overall_score
+1. Universal YAML frontmatter with `platform` field and findings_summary/overall_score
 2. Executive Summary
 3. Scope and Methodology
-4. Findings with evidence blocks (using E-DEV-NNN IDs)
+4. Findings with evidence blocks (using E-DEV-{PLATFORM}-NNN or E-DEV-NNN IDs)
 5. Recommendations
 6. Appendices (if applicable)
 
 ## Step 11: Quality Check
 
 Before finalizing, verify:
-- [ ] All 9 files have valid YAML frontmatter
-- [ ] Every finding has an evidence block with E-DEV-NNN ID
+- [ ] All 9 files have valid YAML frontmatter with `platform` field
+- [ ] Every finding has an evidence block with correct ID format (E-DEV-NNN for single-platform, E-DEV-{PLATFORM}-NNN for multi-platform)
 - [ ] Confidence levels assigned to all findings
 - [ ] No speculation presented as evidence
 - [ ] No scope-exceeding claims
 - [ ] CI/CD security checks explicitly covered
 - [ ] Overall score calculated correctly
+- [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
 
 ---
 

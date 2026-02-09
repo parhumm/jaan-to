@@ -57,9 +57,11 @@ If the file does not exist, continue without it.
 
 ```yaml
 evidence:
-  id: E-PRD-001
+  id: E-PRD-001                # Single-platform format
+  id: E-PRD-WEB-001            # Multi-platform format (platform prefix)
   type: code-location
   confidence: 0.85
+  related_evidence: [E-PRD-BACKEND-042]  # Optional: cross-platform feature linking
   location:
     uri: "src/billing/stripe.ts"
     startLine: 42
@@ -68,7 +70,20 @@ evidence:
   method: pattern-match
 ```
 
-Evidence IDs use namespace `E-PRD-NNN` to prevent collisions in pack-detect.
+**Evidence ID Format**:
+
+```python
+# Generation logic:
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  evidence_id = f"E-PRD-{sequence:03d}"                     # E-PRD-001
+else:  # Multi-platform
+  platform_upper = current_platform.upper()
+  evidence_id = f"E-PRD-{platform_upper}-{sequence:03d}"    # E-PRD-WEB-001, E-PRD-MOBILE-023
+```
+
+Evidence IDs use namespace `E-PRD-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
+
+**Cross-platform linking**: Use `related_evidence` field to link findings of the same feature across different platforms (see Step 0 for examples).
 
 ### Feature Evidence Linking — 3-Layer Model
 
@@ -106,6 +121,7 @@ status: draft
 date: {YYYY-MM-DD}
 target:
   name: "{repo-name}"
+  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'backend'/etc for multi-platform
   commit: "{git HEAD hash}"
   branch: "{current branch}"
 tool:
@@ -145,6 +161,92 @@ Use extended reasoning for:
 - Monetization model inference
 - Instrumentation taxonomy analysis
 - Constraint and risk assessment
+
+## Step 0: Detect Platforms
+
+**Purpose**: Auto-detect platform structure for multi-platform product feature tracking.
+
+Use **Glob** and **Bash** to identify platform folders (same as detect-dev - see detect-dev Step 0 for full patterns and disambiguation rules).
+
+### Platform Detection
+
+1. **Check for monorepo markers**: `pnpm-workspace.yaml`, `lerna.json`, `nx.json`, `turbo.json`
+2. **List top-level directories**: Exclude `node_modules`, `.git`, build outputs
+3. **Match against platform patterns**: Apply disambiguation rules
+4. **Handle detection results**:
+   - No platforms → Single-platform: `platforms = [{ name: 'all', path: '.' }]`
+   - Platforms detected → Multi-platform: Ask user to select all or specific platforms
+
+### Product Detection Applicability
+
+**Product detection is FULLY applicable to ALL platform types** (web, mobile, backend, cli, etc.)
+
+| Platform Type | Product Analysis Scope |
+|---------------|------------------------|
+| web, mobile, androidtv, ios, android, desktop | Full feature detection (UI + business logic) |
+| backend, api, services | Full feature detection (API endpoints, business logic, data models) |
+| cli, cmd | Full feature detection (commands, flags, help text) |
+
+### Cross-Platform Feature Linking
+
+When the same feature appears across multiple platforms, use `related_evidence` field to link findings:
+
+**Example: User Authentication across Web + Mobile**
+
+```yaml
+# In web/product/features.md:
+evidence:
+  id: E-PRD-WEB-015
+  type: feature
+  related_evidence: [E-PRD-MOBILE-023, E-PRD-BACKEND-042]
+  description: "User authentication feature with OAuth support"
+  layers:
+    surface: "web/src/pages/login.tsx"
+    copy: "Sign in with Google"
+    code_path: "web/src/auth/oauth.ts"
+  confidence: 1.0  # Confirmed (all 3 layers)
+
+# In mobile/product/features.md:
+evidence:
+  id: E-PRD-MOBILE-023
+  type: feature
+  related_evidence: [E-PRD-WEB-015, E-PRD-BACKEND-042]
+  description: "User authentication feature with OAuth support"
+  layers:
+    surface: "mobile/screens/LoginScreen.tsx"
+    copy: "Sign in with Google"
+    code_path: "mobile/services/auth.ts"
+  confidence: 1.0  # Confirmed (all 3 layers)
+
+# In backend/product/features.md:
+evidence:
+  id: E-PRD-BACKEND-042
+  type: feature
+  related_evidence: [E-PRD-WEB-015, E-PRD-MOBILE-023]
+  description: "OAuth authentication API endpoints"
+  layers:
+    surface: "POST /api/auth/oauth"
+    code_path: "backend/routes/auth.ts"
+  confidence: 0.90  # Firm (2/3 layers - no UI copy in backend)
+```
+
+**Rationale**:
+- Preserves traceability: each platform's findings stay in its own output file
+- Enables detect-pack to identify cross-platform features in merged reports
+- Allows confidence comparison across platforms (e.g., web has full 3-layer evidence, backend has 2-layer)
+
+### Analysis Loop
+
+For each platform in platforms:
+1. Set `current_platform = platform.name`
+2. Set `base_path = platform.path`
+3. Run all detection steps (Steps 1-5) scoped to `base_path`
+4. When feature is detected, check if it's already detected in another platform:
+   - Search across other platforms' findings for matching feature by name/description
+   - If match found, add cross-platform links via `related_evidence`
+5. Use platform-specific output paths in Step 7
+
+**Note**: If single-platform mode (`platform.name == 'all'`), output paths have NO suffix. If multi-platform mode, output paths include `-{platform}` suffix.
 
 ## Step 1: Scan Routes and Screens (Surface Layer)
 
@@ -250,11 +352,14 @@ Assess taxonomy consistency: naming convention, property standardization, covera
 PRODUCT DETECTION COMPLETE
 ---------------------------
 
+PLATFORM: {platform_name or 'all'}
+
 FEATURES DETECTED: {n}
   Confirmed (3-layer): {n}
   Firm (2-layer):      {n}
   Tentative (1-layer): {n}
   Inferred:            {n}
+  Cross-platform:      {n} features linked via related_evidence
 
 MONETIZATION
   Model:        {free|freemium|subscription|usage-based|one-time|none detected}
@@ -272,13 +377,15 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (7):
-  $JAAN_OUTPUTS_DIR/detect/product/overview.md       - Product overview
-  $JAAN_OUTPUTS_DIR/detect/product/features.md       - Feature inventory
-  $JAAN_OUTPUTS_DIR/detect/product/value-prop.md     - Value proposition signals
-  $JAAN_OUTPUTS_DIR/detect/product/monetization.md   - Monetization model
-  $JAAN_OUTPUTS_DIR/detect/product/entitlements.md   - Entitlement enforcement
-  $JAAN_OUTPUTS_DIR/detect/product/metrics.md        - Instrumentation reality
-  $JAAN_OUTPUTS_DIR/detect/product/constraints.md    - Constraints and risks
+  $JAAN_OUTPUTS_DIR/detect/product/overview{-platform}.md       - Product overview
+  $JAAN_OUTPUTS_DIR/detect/product/features{-platform}.md       - Feature inventory
+  $JAAN_OUTPUTS_DIR/detect/product/value-prop{-platform}.md     - Value proposition signals
+  $JAAN_OUTPUTS_DIR/detect/product/monetization{-platform}.md   - Monetization model
+  $JAAN_OUTPUTS_DIR/detect/product/entitlements{-platform}.md   - Entitlement enforcement
+  $JAAN_OUTPUTS_DIR/detect/product/metrics{-platform}.md        - Instrumentation reality
+  $JAAN_OUTPUTS_DIR/detect/product/constraints{-platform}.md    - Constraints and risks
+
+Note: {-platform} suffix only if multi-platform mode (e.g., -web, -backend). Single-platform mode has no suffix.
 ```
 
 > "Proceed with writing 7 output files to $JAAN_OUTPUTS_DIR/detect/product/? [y/n]"
@@ -293,23 +400,41 @@ OUTPUT FILES (7):
 
 Create directory `$JAAN_OUTPUTS_DIR/detect/product/` if it does not exist.
 
+**Platform-specific output path logic**:
+
+```python
+# Determine filename suffix
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  suffix = ""                                               # No suffix
+else:  # Multi-platform
+  suffix = f"-{current_platform}"                          # e.g., "-web", "-backend"
+
+# Example output paths:
+# Single-platform: $JAAN_OUTPUTS_DIR/detect/product/features.md
+# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/product/features-web.md
+#                  $JAAN_OUTPUTS_DIR/detect/product/features-backend.md
+```
+
 Write 7 output files:
 
 | File | Content |
 |------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/product/overview.md` | Product overview with feature summary |
-| `$JAAN_OUTPUTS_DIR/detect/product/features.md` | Feature inventory with 3-layer evidence |
-| `$JAAN_OUTPUTS_DIR/detect/product/value-prop.md` | Value proposition signals from copy |
-| `$JAAN_OUTPUTS_DIR/detect/product/monetization.md` | Monetization model with evidence |
-| `$JAAN_OUTPUTS_DIR/detect/product/entitlements.md` | Entitlement enforcement mapping |
-| `$JAAN_OUTPUTS_DIR/detect/product/metrics.md` | Instrumentation reality (analytics, flags, events) |
-| `$JAAN_OUTPUTS_DIR/detect/product/constraints.md` | Technical/business constraints and risks |
+| `$JAAN_OUTPUTS_DIR/detect/product/overview{suffix}.md` | Product overview with feature summary |
+| `$JAAN_OUTPUTS_DIR/detect/product/features{suffix}.md` | Feature inventory with 3-layer evidence + `related_evidence` for cross-platform features |
+| `$JAAN_OUTPUTS_DIR/detect/product/value-prop{suffix}.md` | Value proposition signals from copy |
+| `$JAAN_OUTPUTS_DIR/detect/product/monetization{suffix}.md` | Monetization model with evidence |
+| `$JAAN_OUTPUTS_DIR/detect/product/entitlements{suffix}.md` | Entitlement enforcement mapping |
+| `$JAAN_OUTPUTS_DIR/detect/product/metrics{suffix}.md` | Instrumentation reality (analytics, flags, events) |
+| `$JAAN_OUTPUTS_DIR/detect/product/constraints{suffix}.md` | Technical/business constraints and risks |
+
+**Note**: `{suffix}` is empty for single-platform mode, or `-{platform}` for multi-platform mode.
 
 Each file MUST include:
-1. Universal YAML frontmatter
+1. Universal YAML frontmatter with `platform` field and findings_summary/overall_score
 2. Executive Summary
 3. Scope and Methodology
-4. Findings with evidence blocks (using E-PRD-NNN IDs)
+4. Findings with evidence blocks (using E-PRD-{PLATFORM}-NNN or E-PRD-NNN IDs)
+   - For cross-platform features, include `related_evidence` field linking to same feature in other platforms
 5. Recommendations
 
 ---
@@ -326,11 +451,13 @@ If yes:
 ## Definition of Done
 
 - [ ] All 7 output files written to `$JAAN_OUTPUTS_DIR/detect/product/`
-- [ ] Universal YAML frontmatter in every file
-- [ ] Every finding has evidence block with E-PRD-NNN ID
+- [ ] Universal YAML frontmatter with `platform` field in every file
+- [ ] Every finding has evidence block with correct ID format (E-PRD-NNN for single-platform, E-PRD-{PLATFORM}-NNN for multi-platform)
 - [ ] Feature evidence uses 3-layer model with confidence mapping
+- [ ] Cross-platform features linked via `related_evidence` field (if multi-platform)
 - [ ] Monetization distinguishes "copy" from "enforcement"
 - [ ] Absence evidence used where appropriate (not claims without evidence)
 - [ ] Instrumentation taxonomy consistency assessed
 - [ ] Confidence scores assigned to all findings
+- [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
 - [ ] User approved output
