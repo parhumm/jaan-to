@@ -1,11 +1,11 @@
 ---
-name: dev-fe-design
+name: frontend-design
 description: Create distinctive, production-grade frontend interfaces with bold design choices and working code.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [component-description-or-requirements]
 ---
 
-# dev-fe-design
+# frontend-design
 
 > Create distinctive, production-grade frontend interfaces.
 
@@ -15,8 +15,8 @@ argument-hint: [component-description-or-requirements]
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/design.md` - Design system guidelines (optional)
 - `$JAAN_CONTEXT_DIR/brand.md` - Brand guidelines (optional)
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-fe-design.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:dev-fe-design.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:frontend-design.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:frontend-design.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -35,7 +35,7 @@ If no input provided, ask: "What component should I design and build?"
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:dev-fe-design.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:frontend-design.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 3
@@ -338,7 +338,7 @@ Create standalone HTML preview showing the component in action:
 
 ## Step 8: Generate Documentation
 
-Read template: `$JAAN_TEMPLATES_DIR/jaan-to:dev-fe-design.template.md`
+Read template: `$JAAN_TEMPLATES_DIR/jaan-to:frontend-design.template.md`
 
 Fill all sections:
 - **Executive Summary**: 1-2 sentence overview (component type, framework, key design characteristic)

@@ -1,11 +1,11 @@
 ---
-name: dev-api-contract
+name: backend-api-contract
 description: Generate OpenAPI 3.1 contracts with schemas, RFC 9457 errors, versioning, and examples from API entities.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [entities-or-prd-path]
 ---
 
-# dev-api-contract
+# backend-api-contract
 
 > Generate production-quality OpenAPI 3.1 contracts from API resource entities.
 
@@ -14,8 +14,8 @@ argument-hint: [entities-or-prd-path]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (optional, auto-imported if exists)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#versioning`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-api-contract.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:dev-api-contract.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:backend-api-contract.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:backend-api-contract.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -34,7 +34,7 @@ If no input provided, ask: "What API resources should be included?"
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:dev-api-contract.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:backend-api-contract.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 2
@@ -302,7 +302,7 @@ Use AskUserQuestion:
 
 ## Step 5: Generate OpenAPI YAML
 
-Read template: `$JAAN_TEMPLATES_DIR/jaan-to:dev-api-contract.template.md`
+Read template: `$JAAN_TEMPLATES_DIR/jaan-to:backend-api-contract.template.md`
 
 If tech stack needed, extract sections from tech.md:
 - Current Stack: `#current-stack`

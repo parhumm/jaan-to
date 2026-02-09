@@ -20,7 +20,7 @@ info:
   license:
     name: MIT
     identifier: MIT
-  x-generated-by: jaan.to/dev-api-contract
+  x-generated-by: jaan.to/backend-api-contract
 
 servers:
   - url: https://api.example.com/v1

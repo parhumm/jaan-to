@@ -1,11 +1,11 @@
 ---
-name: dev-be-data-model
+name: backend-data-model
 description: Generate data model docs with tables, constraints, indexes, retention, and migration notes from entities.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [entities-or-prd-path]
 ---
 
-# dev-be-data-model
+# backend-data-model
 
 > Generate production-quality data model documentation from entity descriptions.
 
@@ -14,8 +14,8 @@ argument-hint: [entities-or-prd-path]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL: determines database engine and patterns)
   - Uses sections: `#current-stack`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-be-data-model.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:dev-be-data-model.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:backend-data-model.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:backend-data-model.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -34,7 +34,7 @@ If no input provided, ask: "What entities or features should the data model cove
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:dev-be-data-model.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:backend-data-model.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 2
@@ -357,7 +357,7 @@ Use AskUserQuestion:
 
 ## Step 5: Generate Data Model Document
 
-Read template: `$JAAN_TEMPLATES_DIR/jaan-to:dev-be-data-model.template.md`
+Read template: `$JAAN_TEMPLATES_DIR/jaan-to:backend-data-model.template.md`
 
 If tech stack needed, extract sections from tech.md:
 - Current Stack: `#current-stack`

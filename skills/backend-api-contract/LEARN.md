@@ -3,7 +3,7 @@
 > Last updated: 2026-02-08
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:dev-api-contract.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to:backend-api-contract.learn.md`
 
 Accumulated lessons from past executions. Read this before executing to avoid past mistakes and apply learned improvements.
 

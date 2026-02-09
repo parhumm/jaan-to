@@ -1,7 +1,7 @@
 # Lessons: dev-be-data-model
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:dev-be-data-model.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to:backend-data-model.learn.md`
 
 > Last updated: 2026-02-08
 

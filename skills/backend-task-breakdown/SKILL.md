@@ -1,11 +1,11 @@
 ---
-name: dev-be-task-breakdown
+name: backend-task-breakdown
 description: Convert a PRD into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, Edit(jaan-to/config/settings.yaml)
 argument-hint: [prd-path] OR [feature-description]
 ---
 
-# dev-be-task-breakdown
+# backend-task-breakdown
 
 > Convert PRDs into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
 
@@ -14,8 +14,8 @@ argument-hint: [prd-path] OR [feature-description]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL: determines framework patterns)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-be-task-breakdown.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:dev-be-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to:backend-task-breakdown.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:backend-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
 
 ## Input
 
@@ -33,7 +33,7 @@ If no input provided, ask: "What PRD or feature should I break down into backend
 ## Pre-Execution: Apply Past Lessons
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:dev-be-task-breakdown.learn.md`
+`$JAAN_LEARN_DIR/jaan-to:backend-task-breakdown.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 2
@@ -503,7 +503,7 @@ VALIDATION
 
 ## Step 6: Generate Task Breakdown Document
 
-1. Read template: `$JAAN_TEMPLATES_DIR/jaan-to:dev-be-task-breakdown.template.md`
+1. Read template: `$JAAN_TEMPLATES_DIR/jaan-to:backend-task-breakdown.template.md`
 2. If tech stack needed, extract sections from tech.md:
    - Current Stack: `#current-stack`
    - Frameworks: `#frameworks`

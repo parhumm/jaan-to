@@ -149,6 +149,6 @@ erDiagram
 |-------|-------|
 | Generated | {{date}} |
 | Output Path | {{env:JAAN_OUTPUTS_DIR}}/dev/backend/ |
-| Skill | jaan-to:dev-be-data-model |
+| Skill | jaan-to:backend-data-model |
 | Status | Draft |
 | Version | 3.0 |
