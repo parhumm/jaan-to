@@ -17,6 +17,7 @@ argument-hint: [frontend-design, frontend-task-breakdown, backend-api-contract]
 - `$JAAN_CONTEXT_DIR/brand.md` - Brand guidelines (optional)
 - `$JAAN_TEMPLATES_DIR/jaan-to:frontend-scaffold.template.md` - Output template
 - `$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
 
@@ -32,17 +33,8 @@ Accepts 1-3 file paths or descriptions:
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 4
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `frontend-scaffold`
 
 Also read context files if available:
 - `$JAAN_CONTEXT_DIR/tech.md` — Know the tech stack for framework-specific code generation
@@ -50,21 +42,8 @@ Also read context files if available:
 - `$JAAN_CONTEXT_DIR/brand.md` — Know brand colors, fonts, tone
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_frontend-scaffold` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_frontend-scaffold`
 
 > **Language exception**: Generated code output (variable names, code blocks, schemas, SQL, API specs) is NOT affected by this setting and remains in the project's programming language.
 

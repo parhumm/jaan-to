@@ -15,6 +15,7 @@ context: fork
 - `$JAAN_LEARN_DIR/jaan-to:detect-writing.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for framework-aware i18n scanning)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-writing.template.md` - Output template
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/writing/` — flat files, overwritten each run (no IDs).
 
@@ -25,30 +26,12 @@ context: fork
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:detect-writing.learn.md`
-
-If the file exists, apply its lessons throughout this execution.
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `detect-writing`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_detect-writing` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, evidence blocks.
-
-> **Language exception**: This skill's output describes the *project's* writing system. The language setting affects conversation and report prose, NOT the analysis of the project's content language or i18n configuration.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_detect-writing`
 
 ---
 

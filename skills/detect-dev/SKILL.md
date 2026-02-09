@@ -15,6 +15,7 @@ context: fork
 - `$JAAN_LEARN_DIR/jaan-to:detect-dev.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if populated by dev-stack-detect, used as starting input)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` - Output template
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/dev/` — flat files, overwritten each run (no IDs).
 
@@ -25,34 +26,12 @@ context: fork
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:detect-dev.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add detection patterns from "Better Questions"
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `detect-dev`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_detect-dev` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names, evidence blocks.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_detect-dev`
 
 ---
 

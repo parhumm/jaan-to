@@ -13,6 +13,7 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 
 - `$JAAN_LEARN_DIR/jaan-to:data-gtm-datalayer.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_TEMPLATES_DIR/jaan-to:data-gtm-datalayer.template.md` - Output template
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
 
@@ -25,36 +26,12 @@ argument-hint: [prd-path | tracking-description | (interactive)]
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:data-gtm-datalayer.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `data-gtm-datalayer`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_data-gtm-datalayer` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
-
-> **Language exception**: Generated code output (variable names, code blocks, schemas, SQL, API specs) is NOT affected by this setting and remains in the project's programming language.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_data-gtm-datalayer`
 
 ---
 
