@@ -1,6 +1,6 @@
 ---
 name: backend-scaffold
-description: Generate production-ready backend code from specs: routes, data model, service layer, validation.
+description: Generate production-ready backend code with routes, data models, service layers, and validation.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [backend-api-contract, backend-task-breakdown, backend-data-model]
 ---

@@ -100,3 +100,24 @@ if [ "$TOTAL" -gt "$BUDGET" ]; then
 fi
 
 echo "✓ Under budget ($TOTAL / $BUDGET)"
+echo ""
+
+# Check for YAML-unsafe colons in descriptions
+COLON_ISSUES=""
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_file="$skill_dir/SKILL.md"
+  [ -f "$skill_file" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  desc=$(awk '/^---$/{n++; next} n==1 && /^description:/{sub(/^description: */, ""); print; exit}' "$skill_file")
+  if echo "$desc" | grep -q ':'; then
+    COLON_ISSUES+="  $skill_name: $desc"$'\n'
+  fi
+done
+if [ -n "$COLON_ISSUES" ]; then
+  echo "::error::Descriptions with colons (causes YAML parsing issues in Claude Code):"
+  echo "$COLON_ISSUES"
+  echo "Fix: Remove colons from description or quote the value"
+  exit 1
+fi
+
+echo "✓ No YAML-unsafe colons in descriptions"

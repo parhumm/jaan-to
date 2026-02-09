@@ -303,6 +303,7 @@ Claude Code allocates a **15,000 character budget** for all skill descriptions i
 **Rules:**
 - Keep descriptions under **120 chars** (1-2 sentences)
 - Do NOT include `Auto-triggers on:` or `Maps to:` lines
+- Do NOT use `: ` (colon-space) in descriptions — Claude Code's parser may misinterpret it as a YAML key-value separator, causing the skill to display incorrectly in the command picker
 - Use single-line YAML format (no `|` block scalar needed)
 - Run `scripts/validate-skills.sh` to check budget before release
 

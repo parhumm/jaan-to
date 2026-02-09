@@ -27,7 +27,18 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.1.1 — Fix hardcoded paths across all skills
+**Latest:** v4.2.0 — Add backend-scaffold and frontend-scaffold skills
+
+### v4.2.0 — Backend & frontend scaffold skills
+- Added `backend-scaffold` skill — generate production-ready backend code (Fastify/Prisma/Zod, Laravel, Go) from API contracts, data models, and task breakdowns (`6ef0c32`)
+- Added `frontend-scaffold` skill — convert designs to React 19/Next.js 15 scaffolds with TailwindCSS v4, typed API hooks, and accessibility (`6ef0c32`)
+- LEARN.md seed files for both skills from research 63-dev-scaffolds
+- Plugin skill count updated from 27 to 29
+- Config seed updated with both skills; dev role active count 4 → 6
+
+### v4.1.1 — Fix hardcoded paths across all skills
+- Replaced all hardcoded `jaan-to/outputs/`, `jaan-to/context/`, `jaan-to/templates/` with `$JAAN_*` env vars across 19 skill files (`dc70857`)
+- Added automated path scan in skill-create and skill-update to prevent regressions
 
 ### v4.1.0 — Light/Full mode for detect skills
 - All 6 detect skills support `--light` (default) and `--full` modes
@@ -78,9 +89,6 @@ For complete release history, see [CHANGELOG.md](/changelog).
 ---
 
 ## Unreleased
-
-- [x] Add `--light` (default) / `--full` mode to all 6 detect skills — light mode produces 1 summary file per domain; full mode preserves current behavior
-- [x] Update detect-* documentation for light/full modes (7 files)
 
 ---
 
@@ -137,6 +145,12 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 | RELEASE | 8 | 8 | 0 | [release.md](tasks/role-skills/release.md) |
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
+
+### v4.2.0 — Backend & frontend scaffold skills (`6ef0c32`)
+
+- [x] `/jaan-to:backend-scaffold` — Generate production-ready backend code from specs (`6ef0c32`)
+- [x] `/jaan-to:frontend-scaffold` — Convert designs to React/Next.js scaffold code (`6ef0c32`)
+- [x] LEARN.md seed files for both scaffold skills (`6ef0c32`)
 
 ### v4.0.0 — Batch skill rename (`d93cbdc`)
 
@@ -202,6 +216,8 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:frontend-design` | Frontend component design |
 | `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
+| `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
 | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |
