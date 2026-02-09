@@ -151,6 +151,7 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [api-contract, task-breakdown, data-model]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/scaffold/`
+- **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)
 
 ### /jaan-to:dev-api-versioning
 
@@ -210,6 +211,7 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [fe-design, fe-task-breakdown, api-contract]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/scaffold/`
+- **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)
 
 ### /jaan-to:dev-integration-plan
 
