@@ -2,7 +2,7 @@
 name: detect-dev
 description: Engineering audit with SARIF evidence, 4-level confidence, and OpenSSF scoring.
 allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [repo]
+argument-hint: "[repo] [--full]"
 ---
 
 # detect-dev
@@ -19,9 +19,7 @@ argument-hint: [repo]
 
 ## Input
 
-**Repository**: $ARGUMENTS
-
-If a repository path is provided, scan that repo. Otherwise, scan the current working directory.
+**Arguments**: $ARGUMENTS — parsed in Step 0.0. Repository path and mode determined there.
 
 ---
 
@@ -155,9 +153,26 @@ Each output file follows:
 
 # PHASE 1: Detection (Read-Only)
 
+## Step 0.0: Parse Arguments
+
+**Arguments**: $ARGUMENTS
+
+| Argument | Effect |
+|----------|--------|
+| (none) | **Light mode** (default): Layers 1-2 detection, single summary file |
+| `[repo]` | Scan specified repo (applies to both modes) |
+| `--full` | **Full mode**: All detection layers (1-5), 9 output files (current behavior) |
+
+**Mode determination:**
+- If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
+- Otherwise → set `run_depth = "light"`
+
+Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+
 ## Thinking Mode
 
-ultrathink
+**If `run_depth == "full"`:** ultrathink
+**If `run_depth == "light"`:** megathink
 
 Use extended reasoning for:
 - Analyzing detected dependencies and mapping to stack sections
@@ -242,7 +257,9 @@ After auto-detection, always show: "Detected platforms: {list}. Correct? [y/n/se
 For each platform in platforms:
 1. Set `current_platform = platform.name`
 2. Set `base_path = platform.path`
-3. Run all detection steps (Steps 2-8) scoped to `base_path`
+3. Run detection steps per `run_depth`:
+   - **If `run_depth == "full"`:** Run Steps 1-8 scoped to `base_path`
+   - **If `run_depth == "light"`:** Run Steps 1-3 and Step 8 scoped to `base_path` (skip Steps 4-7)
 4. Collect findings with platform context
 5. Use platform-specific output paths in Step 10
 
@@ -330,6 +347,8 @@ Use **Glob** to find manifest files, then **Read** each one:
 
 - Glob: `**/Dockerfile`, `**/Dockerfile.*`
 - Extract: base image, runtime version
+
+**If `run_depth == "light"`:** Skip Steps 4-7. Proceed directly to Step 8 (Score & Categorize) using findings from Steps 1-3 only.
 
 ## Step 4: Scan CI/CD & Testing (Layer 3 — 90-95% confidence)
 
@@ -459,7 +478,35 @@ Clamp result to 0-10 range.
 
 ## Step 9: Present Detection Summary
 
-Output a structured summary of all findings organized by output file:
+**If `run_depth == "light"`:**
+
+```
+DETECTION COMPLETE (Light Mode)
+--------------------------------
+
+PLATFORM: {platform_name or 'all'}
+
+STACK FINDINGS
+  Backend:        {lang} {ver} + {framework} {ver}    [Confidence: {level}]
+  Frontend:       {lang} {ver} + {framework} {ver}    [Confidence: {level}]
+  Database:       {database} {ver}                      [Confidence: {level}]
+  Container:      {docker images}                       [Confidence: {level}]
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10 (OpenSSF-style, config + container layers only)
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/dev/summary{-platform}.md
+
+Note: Score based on Layers 1-2 only. Run with --full for complete analysis
+including CI/CD, security, infrastructure, observability, and risk assessment.
+```
+
+> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
+
+**If `run_depth == "full"`:**
 
 ```
 DETECTION COMPLETE
@@ -512,16 +559,28 @@ if current_platform == 'all' or current_platform is None:  # Single-platform
   suffix = ""                                               # No suffix
 else:  # Multi-platform
   suffix = f"-{current_platform}"                          # e.g., "-web", "-backend"
-
-# Example output paths:
-# Single-platform: $JAAN_OUTPUTS_DIR/detect/dev/stack.md
-# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/dev/stack-web.md
-#                  $JAAN_OUTPUTS_DIR/detect/dev/stack-backend.md
 ```
 
-For each of the 9 output files, use the template from `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` and fill with findings:
+### Stale File Cleanup
 
-### Output Files
+- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
+- **If `run_depth == "light"`:** Do NOT delete existing full-mode files (they may be from a previous `--full` run).
+
+### If `run_depth == "light"`: Write Single Summary File
+
+Write one file: `$JAAN_OUTPUTS_DIR/detect/dev/summary{suffix}.md`
+
+Contents:
+1. Universal YAML frontmatter with `platform` field, `findings_summary`, and `overall_score`
+2. **Executive Summary** — BLUF of tech stack findings
+3. **Tech Stack Table** — languages, frameworks, versions, confidence levels (from Step 2)
+4. **Database & Container Table** — detected databases, Docker images (from Step 3)
+5. **Top Findings** — up to 5 highest-severity findings with evidence blocks
+6. **Score Disclaimer** — "Score based on config + container layers only (Layers 1-2). Run with `--full` for complete engineering audit including CI/CD, security, infrastructure, observability, and risk assessment."
+
+### If `run_depth == "full"`: Write 9 Output Files
+
+For each of the 9 output files, use the template from `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` and fill with findings:
 
 | File | Content |
 |------|---------|
@@ -547,7 +606,18 @@ Each file MUST include:
 
 ## Step 11: Quality Check
 
-Before finalizing, verify:
+**If `run_depth == "light"`:**
+
+- [ ] Summary file has valid YAML frontmatter with `platform` field
+- [ ] Every finding has an evidence block with correct ID format
+- [ ] Confidence levels assigned to all findings
+- [ ] No speculation presented as evidence
+- [ ] Overall score calculated correctly
+- [ ] Score disclaimer included
+- [ ] Output filename matches platform suffix convention
+
+**If `run_depth == "full"`:**
+
 - [ ] All 9 files have valid YAML frontmatter with `platform` field
 - [ ] Every finding has an evidence block with correct ID format (E-DEV-NNN for single-platform, E-DEV-{PLATFORM}-NNN for multi-platform)
 - [ ] Confidence levels assigned to all findings
@@ -569,6 +639,18 @@ If yes:
 ---
 
 ## Definition of Done
+
+**If `run_depth == "light"`:**
+
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/dev/summary{suffix}.md`
+- [ ] Universal YAML frontmatter with `overall_score`
+- [ ] Layers 1-2 findings have evidence blocks with E-DEV-NNN IDs
+- [ ] Confidence scores assigned to all findings
+- [ ] Score disclaimer included (partial analysis note)
+- [ ] Detection summary shown to user before writing
+- [ ] User approved output
+
+**If `run_depth == "full"`:**
 
 - [ ] All 9 output files written to `$JAAN_OUTPUTS_DIR/detect/dev/`
 - [ ] Universal YAML frontmatter in every file

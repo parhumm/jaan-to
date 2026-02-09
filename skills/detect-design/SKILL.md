@@ -2,7 +2,7 @@
 name: detect-design
 description: Design system detection with drift findings and evidence blocks.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [repo]
+argument-hint: "[repo] [--full]"
 ---
 
 # detect-design
@@ -19,9 +19,7 @@ argument-hint: [repo]
 
 ## Input
 
-**Repository**: $ARGUMENTS
-
-If a repository path is provided, scan that repo. Otherwise, scan the current working directory.
+**Arguments**: $ARGUMENTS — parsed in Step 0.0. Repository path and mode determined there.
 
 ---
 
@@ -160,9 +158,26 @@ lifecycle_phase: post-build
 
 # PHASE 1: Detection (Read-Only)
 
+## Step 0.0: Parse Arguments
+
+**Arguments**: $ARGUMENTS
+
+| Argument | Effect |
+|----------|--------|
+| (none) | **Light mode** (default): Token + component scan, single summary file |
+| `[repo]` | Scan specified repo (applies to both modes) |
+| `--full` | **Full mode**: All detection steps, 6 output files (current behavior) |
+
+**Mode determination:**
+- If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
+- Otherwise → set `run_depth = "light"`
+
+Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+
 ## Thinking Mode
 
-ultrathink
+**If `run_depth == "full"`:** ultrathink
+**If `run_depth == "light"`:** megathink
 
 Use extended reasoning for:
 - Identifying design token hierarchies and naming conventions
@@ -249,7 +264,9 @@ For each platform in platforms:
    - Skip Steps 1-7 (detection steps)
    - Go directly to Step 8 with "Not Applicable" findings
 5. If `platform_has_ui == true` or platform is expected to have UI:
-   - Run all detection steps (Steps 1-7) scoped to `base_path`
+   - Run detection steps per `run_depth`:
+     - **If `run_depth == "full"`:** Run Steps 1-7 scoped to `base_path`
+     - **If `run_depth == "light"`:** Run Steps 1-2 only scoped to `base_path` (skip Steps 3-7)
 6. Use platform-specific output paths in Step 9
 
 **"Not Applicable" Findings Structure**:
@@ -338,6 +355,10 @@ Classify components:
 - **Feedback**: Alert, Toast, Modal, Dialog, Progress
 - **Data display**: Table, Card, List, Badge, Avatar
 - **Form**: Select, Checkbox, Radio, Switch, DatePicker
+
+**If `run_depth == "light"`:** Skip Steps 3-7. Proceed directly to Step 8 (Present Detection Summary).
+
+**Precedence**: N/A handling (platform_has_ui checks) always takes priority over run_depth gates. If `platform_has_ui == false`, skip ALL detection steps regardless of run_depth.
 
 ## Step 3: Scan Brand Assets
 
