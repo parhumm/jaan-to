@@ -59,7 +59,8 @@ Every finding MUST include structured evidence blocks:
 
 ```yaml
 evidence:
-  id: E-DSN-001
+  id: E-DSN-001                # Single-platform format
+  id: E-DSN-WEB-001            # Multi-platform format (platform prefix)
   type: code-location
   confidence: 0.95
   location:
@@ -71,7 +72,18 @@ evidence:
   method: pattern-match
 ```
 
-Evidence IDs use namespace `E-DSN-NNN` to prevent collisions in pack-detect.
+**Evidence ID Format**:
+
+```python
+# Generation logic:
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  evidence_id = f"E-DSN-{sequence:03d}"                     # E-DSN-001
+else:  # Multi-platform
+  platform_upper = current_platform.upper()
+  evidence_id = f"E-DSN-{platform_upper}-{sequence:03d}"    # E-DSN-WEB-001, E-DSN-MOBILE-023
+```
+
+Evidence IDs use namespace `E-DSN-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
 
 ### Drift Detection — Paired Evidence
 
@@ -117,6 +129,7 @@ status: draft
 date: {YYYY-MM-DD}
 target:
   name: "{repo-name}"
+  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'mobile'/etc for multi-platform
   commit: "{git HEAD hash}"
   branch: "{current branch}"
 tool:
@@ -156,6 +169,129 @@ Use extended reasoning for:
 - Detecting drift between definitions and usage
 - Mapping component library patterns
 - Accessibility scope assessment
+
+## Step 0: Detect Platforms
+
+**Purpose**: Auto-detect platform structure and check for UI presence before analysis.
+
+Use **Glob** and **Bash** to identify platform folders:
+
+### Platform Patterns
+
+Match top-level directories against these patterns:
+
+| Platform | Folder Patterns |
+|----------|----------------|
+| web | `web/`, `webapp/`, `frontend/`, `client/` |
+| mobile | `mobile/`, `app/` |
+| backend | `backend/`, `server/`, `api/`, `services/` |
+| androidtv | `androidtv/`, `tv/`, `android-tv/` |
+| ios | `ios/`, `iOS/` |
+| android | `android/`, `Android/` |
+| desktop | `desktop/`, `electron/` |
+| cli | `cli/`, `cmd/` |
+
+### Detection Process
+
+1. **Check for monorepo markers**:
+   - Glob: `pnpm-workspace.yaml`, `lerna.json`, `nx.json`, `turbo.json`
+   - If found, proceed to multi-platform detection
+   - If not found, check folder structure anyway (could be non-standard monorepo)
+
+2. **List top-level directories**:
+   - Run: `ls -d */ | grep -Ev "node_modules|\.git|dist|build|\.next|__pycache__|coverage"`
+   - Extract directory names (strip trailing slashes)
+
+3. **Match against platform patterns**:
+   - For each directory, check if name matches any platform pattern (case-insensitive)
+   - Apply disambiguation rules (same as detect-dev)
+
+4. **Handle detection results**:
+   - **No platforms detected** → Single-platform mode:
+     - Set `platforms = [{ name: 'all', path: '.' }]`
+     - Path = repository root
+   - **Platforms detected** → Multi-platform mode:
+     - Build list: `platforms = [{ name: 'web', path: 'web/' }, { name: 'backend', path: 'backend/' }, ...]`
+     - Ask user: "Detected platforms: {list}. Analyze all or select specific? [all/select]"
+     - If 'select', prompt: "Enter platform names (comma-separated): "
+
+### UI Presence Check (Design System Applicability)
+
+For each platform, check for UI indicators:
+
+```bash
+# Check for UI component files
+ui_files=$(find {platform.path} -type f \( -name "*.jsx" -o -name "*.tsx" -o -name "*.vue" -o -name "*.svelte" \) 2>/dev/null | head -n 1)
+
+if [ -z "$ui_files" ]; then
+  # No UI files detected - design system analysis not applicable
+  # Will create minimal output files with "Not Applicable" findings
+  platform_has_ui = false
+else
+  platform_has_ui = true
+fi
+```
+
+**Platform applicability:**
+
+| Platform Type | UI Expected | If No UI Found |
+|---------------|-------------|----------------|
+| web, mobile, androidtv, ios, android, desktop | Yes | Report as finding (unexpected) |
+| backend, cli, services | Conditional | Report "Not Applicable" (expected) |
+
+### Analysis Loop
+
+For each platform in platforms:
+1. Set `current_platform = platform.name`
+2. Set `base_path = platform.path`
+3. **Check UI presence** using the check above
+4. If `platform_has_ui == false` and platform is backend/cli:
+   - Skip Steps 1-7 (detection steps)
+   - Go directly to Step 8 with "Not Applicable" findings
+5. If `platform_has_ui == true` or platform is expected to have UI:
+   - Run all detection steps (Steps 1-7) scoped to `base_path`
+6. Use platform-specific output paths in Step 9
+
+**"Not Applicable" Findings Structure**:
+
+When a platform has no UI files and design analysis is not applicable, create minimal output files with this finding:
+
+```yaml
+---
+findings_summary:
+  critical: 0
+  high: 0
+  medium: 0
+  low: 0
+  informational: 1
+overall_score: 10.0  # Perfect score (nothing to assess)
+---
+
+## Executive Summary
+
+No UI components detected for platform '{platform}'. Design system analysis is not applicable to this platform.
+
+## Findings
+
+### E-DSN-{PLATFORM}-001: No UI Components Detected
+
+**Severity**: Informational
+**Confidence**: Confirmed (1.0)
+
+**Description**: Platform '{platform}' does not contain UI component files (.jsx, .tsx, .vue, .svelte). Design system detection, token analysis, and component inventory are not applicable to this platform type.
+
+**Evidence**:
+```yaml
+evidence:
+  id: E-DSN-{PLATFORM}-001
+  type: absence
+  confidence: 1.0
+  method: glob-pattern-match
+  description: "No UI files found in {platform.path}"
+```
+```
+
+**Note**: If single-platform mode (`platform.name == 'all'`), output paths have NO suffix. If multi-platform mode, output paths include `-{platform}` suffix.
 
 ## Step 1: Scan Design Tokens
 
@@ -260,6 +396,9 @@ Each drift finding MUST have paired evidence (definition + conflicting usage).
 DESIGN SYSTEM DETECTION COMPLETE
 ---------------------------------
 
+PLATFORM: {platform_name or 'all'}
+UI PRESENCE: {Yes/No} {if No, show "(Not Applicable)"}
+
 TOKEN INVENTORY
   Colors:      {n} tokens found    [Confidence: {level}]
   Typography:  {n} tokens found    [Confidence: {level}]
@@ -276,12 +415,15 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (6):
-  $JAAN_OUTPUTS_DIR/detect/design/brand.md          - Brand signals
-  $JAAN_OUTPUTS_DIR/detect/design/tokens.md         - Design token inventory
-  $JAAN_OUTPUTS_DIR/detect/design/components.md     - Component inventory
-  $JAAN_OUTPUTS_DIR/detect/design/patterns.md       - UI patterns and conventions
-  $JAAN_OUTPUTS_DIR/detect/design/accessibility.md  - A11y findings
-  $JAAN_OUTPUTS_DIR/detect/design/governance.md     - Governance signals
+  $JAAN_OUTPUTS_DIR/detect/design/brand{-platform}.md          - Brand signals
+  $JAAN_OUTPUTS_DIR/detect/design/tokens{-platform}.md         - Design token inventory
+  $JAAN_OUTPUTS_DIR/detect/design/components{-platform}.md     - Component inventory
+  $JAAN_OUTPUTS_DIR/detect/design/patterns{-platform}.md       - UI patterns and conventions
+  $JAAN_OUTPUTS_DIR/detect/design/accessibility{-platform}.md  - A11y findings
+  $JAAN_OUTPUTS_DIR/detect/design/governance{-platform}.md     - Governance signals
+
+Note: {-platform} suffix only if multi-platform mode (e.g., -web, -mobile). Single-platform mode has no suffix.
+      If UI presence = No, files contain "Not Applicable" findings.
 ```
 
 > "Proceed with writing 6 output files to $JAAN_OUTPUTS_DIR/detect/design/? [y/n]"
@@ -296,22 +438,43 @@ OUTPUT FILES (6):
 
 Create directory `$JAAN_OUTPUTS_DIR/detect/design/` if it does not exist.
 
+**Platform-specific output path logic**:
+
+```python
+# Determine filename suffix
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  suffix = ""                                               # No suffix
+else:  # Multi-platform
+  suffix = f"-{current_platform}"                          # e.g., "-web", "-mobile"
+
+# Example output paths:
+# Single-platform: $JAAN_OUTPUTS_DIR/detect/design/brand.md
+# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/design/brand-web.md
+#                  $JAAN_OUTPUTS_DIR/detect/design/brand-mobile.md
+```
+
 Write 6 output files using the template:
 
 | File | Content |
 |------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/design/brand.md` | Brand signals (colors, typography, logos) |
-| `$JAAN_OUTPUTS_DIR/detect/design/tokens.md` | Design token definitions and usage with drift findings |
-| `$JAAN_OUTPUTS_DIR/detect/design/components.md` | Component inventory and patterns |
-| `$JAAN_OUTPUTS_DIR/detect/design/patterns.md` | UI patterns and conventions |
-| `$JAAN_OUTPUTS_DIR/detect/design/accessibility.md` | A11y implementation findings (scoped to repo evidence) |
-| `$JAAN_OUTPUTS_DIR/detect/design/governance.md` | Design system governance signals |
+| `$JAAN_OUTPUTS_DIR/detect/design/brand{suffix}.md` | Brand signals (colors, typography, logos) |
+| `$JAAN_OUTPUTS_DIR/detect/design/tokens{suffix}.md` | Design token definitions and usage with drift findings |
+| `$JAAN_OUTPUTS_DIR/detect/design/components{suffix}.md` | Component inventory and patterns |
+| `$JAAN_OUTPUTS_DIR/detect/design/patterns{suffix}.md` | UI patterns and conventions |
+| `$JAAN_OUTPUTS_DIR/detect/design/accessibility{suffix}.md` | A11y implementation findings (scoped to repo evidence) |
+| `$JAAN_OUTPUTS_DIR/detect/design/governance{suffix}.md` | Design system governance signals |
+
+**Note**: `{suffix}` is empty for single-platform mode, or `-{platform}` for multi-platform mode.
+
+**If UI presence = No** (from Step 0 check), write minimal "Not Applicable" files with:
+- Frontmatter: `findings_summary.informational: 1`, `overall_score: 10.0`
+- Single finding: "E-DSN-{PLATFORM}-001: No UI Components Detected" (severity: informational)
 
 Each file MUST include:
-1. Universal YAML frontmatter
+1. Universal YAML frontmatter with `platform` field and findings_summary/overall_score
 2. Executive Summary
 3. Scope and Methodology
-4. Findings with evidence blocks (using E-DSN-NNN IDs)
+4. Findings with evidence blocks (using E-DSN-{PLATFORM}-NNN or E-DSN-NNN IDs)
 5. Recommendations
 
 ---
@@ -328,10 +491,12 @@ If yes:
 ## Definition of Done
 
 - [ ] All 6 output files written to `$JAAN_OUTPUTS_DIR/detect/design/`
-- [ ] Universal YAML frontmatter in every file
-- [ ] Every finding has evidence block with E-DSN-NNN ID
+- [ ] Universal YAML frontmatter with `platform` field in every file
+- [ ] Every finding has evidence block with correct ID format (E-DSN-NNN for single-platform, E-DSN-{PLATFORM}-NNN for multi-platform)
 - [ ] Drift findings have paired evidence (definition + conflicting usage)
 - [ ] Accessibility findings scoped to repo evidence (no runtime claims)
 - [ ] Confidence scores assigned to all findings
 - [ ] Overall score calculated
+- [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
+- [ ] If no UI files detected for platform, minimal "Not Applicable" files created with informational findings
 - [ ] User approved output

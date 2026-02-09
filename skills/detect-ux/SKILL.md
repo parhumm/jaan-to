@@ -57,7 +57,8 @@ If the file does not exist, continue without it.
 
 ```yaml
 evidence:
-  id: E-UX-001
+  id: E-UX-001                 # Single-platform format
+  id: E-UX-WEB-001             # Multi-platform format (platform prefix)
   type: code-location
   confidence: 0.80
   location:
@@ -68,7 +69,18 @@ evidence:
   method: pattern-match
 ```
 
-Evidence IDs use namespace `E-UX-NNN` to prevent collisions in pack-detect.
+**Evidence ID Format**:
+
+```python
+# Generation logic:
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  evidence_id = f"E-UX-{sequence:03d}"                      # E-UX-001
+else:  # Multi-platform
+  platform_upper = current_platform.upper()
+  evidence_id = f"E-UX-{platform_upper}-{sequence:03d}"     # E-UX-WEB-001, E-UX-MOBILE-023
+```
+
+Evidence IDs use namespace `E-UX-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
 
 ### Confidence Levels (4-level)
 
@@ -90,6 +102,7 @@ status: draft
 date: {YYYY-MM-DD}
 target:
   name: "{repo-name}"
+  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'mobile'/etc for multi-platform
   commit: "{git HEAD hash}"
   branch: "{current branch}"
 tool:
@@ -129,6 +142,102 @@ Use extended reasoning for:
 - Journey flow construction from navigation patterns
 - Nielsen heuristic assessment from code signals
 - Pain-point inference from error handling patterns
+
+## Step 0: Detect Platforms
+
+**Purpose**: Auto-detect platform structure and check for UI/TUI presence before UX analysis.
+
+Use **Glob** and **Bash** to identify platform folders (same patterns as detect-dev - see detect-dev Step 0 for full platform patterns and disambiguation rules).
+
+### Platform Detection
+
+1. **Check for monorepo markers**: `pnpm-workspace.yaml`, `lerna.json`, `nx.json`, `turbo.json`
+2. **List top-level directories**: Exclude `node_modules`, `.git`, build outputs
+3. **Match against platform patterns**: Apply disambiguation rules
+4. **Handle detection results**:
+   - No platforms → Single-platform: `platforms = [{ name: 'all', path: '.' }]`
+   - Platforms detected → Multi-platform: Ask user to select all or specific platforms
+
+### UI/TUI Presence Check (UX Audit Applicability)
+
+For each platform, check for UI or TUI (terminal UI) indicators:
+
+```bash
+# Check for UI component files
+ui_files=$(find {platform.path} -type f \( -name "*.jsx" -o -name "*.tsx" -o -name "*.vue" -o -name "*.svelte" \) 2>/dev/null | head -n 1)
+
+# Check for TUI libraries (blessed, ink, bubbletea, etc.)
+tui_detected=$(grep -r "blessed\|ink\|bubbletea\|charm" {platform.path}/package.json {platform.path}/go.mod 2>/dev/null)
+
+if [ -z "$ui_files" ] && [ -z "$tui_detected" ]; then
+  # No UI/TUI files detected - UX analysis not applicable
+  platform_has_ui = false
+else
+  platform_has_ui = true
+fi
+```
+
+**Platform applicability:**
+
+| Platform Type | UX Expected | If No UI/TUI Found |
+|---------------|-------------|---------------------|
+| web, mobile, androidtv, ios, android, desktop | Yes | Report as finding (unexpected) |
+| backend, api, services | Conditional | Report "Not Applicable" (expected, unless admin UI detected) |
+| cli, cmd | Conditional | Full analysis if TUI detected, otherwise "Not Applicable" |
+
+### Analysis Loop
+
+For each platform in platforms:
+1. Set `current_platform = platform.name`
+2. Set `base_path = platform.path`
+3. **Check UI/TUI presence** using the check above
+4. If `platform_has_ui == false` and platform is backend/cli:
+   - Skip Steps 1-7 (detection steps)
+   - Go directly to Step 8 with "Not Applicable" findings
+5. If `platform_has_ui == true` or platform is expected to have UI:
+   - Run all detection steps (Steps 1-7) scoped to `base_path`
+6. Use platform-specific output paths in Step 9
+
+**"Not Applicable" Findings Structure**:
+
+When a platform has no UI/TUI and UX analysis is not applicable, create minimal output files with this finding:
+
+```yaml
+---
+findings_summary:
+  critical: 0
+  high: 0
+  medium: 0
+  low: 0
+  informational: 1
+overall_score: 10.0  # Perfect score (nothing to assess)
+---
+
+## Executive Summary
+
+No UI/TUI detected for platform '{platform}'. UX audit (route mapping, user flows, heuristic assessment) is not applicable to this platform type.
+
+## Findings
+
+### E-UX-{PLATFORM}-001: No UI/TUI Detected
+
+**Severity**: Informational
+**Confidence**: Confirmed (1.0)
+
+**Description**: Platform '{platform}' does not contain UI components (.jsx, .tsx, .vue, .svelte) or TUI libraries. UX analysis (journeys, personas, heuristics, accessibility) is not applicable to this platform type.
+
+**Evidence**:
+```yaml
+evidence:
+  id: E-UX-{PLATFORM}-001
+  type: absence
+  confidence: 1.0
+  method: glob-pattern-match
+  description: "No UI/TUI files found in {platform.path}"
+```
+```
+
+**Note**: If single-platform mode (`platform.name == 'all'`), output paths have NO suffix. If multi-platform mode, output paths include `-{platform}` suffix.
 
 ## Step 1: Route / Screen Mapping
 
@@ -281,6 +390,9 @@ Mark findings as "Unknown" for runtime behavior that can't be verified from code
 UX DETECTION COMPLETE
 ----------------------
 
+PLATFORM: {platform_name or 'all'}
+UI/TUI PRESENCE: {Yes/No} {if No, show "(Not Applicable)"}
+
 ROUTES/SCREENS: {n} routes mapped
 PERSONAS (inferred): {n} personas
 JTBD (inferred): {n} jobs-to-be-done
@@ -302,13 +414,16 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (7):
-  $JAAN_OUTPUTS_DIR/detect/ux/personas.md       - Inferred personas
-  $JAAN_OUTPUTS_DIR/detect/ux/jtbd.md           - Jobs-to-be-done
-  $JAAN_OUTPUTS_DIR/detect/ux/flows.md          - User flows with diagrams
-  $JAAN_OUTPUTS_DIR/detect/ux/pain-points.md    - UX friction and pain points
-  $JAAN_OUTPUTS_DIR/detect/ux/heuristics.md     - Nielsen 10 heuristics assessment
-  $JAAN_OUTPUTS_DIR/detect/ux/accessibility.md  - A11y findings (repo-scoped)
-  $JAAN_OUTPUTS_DIR/detect/ux/gaps.md           - UX gaps and recommendations
+  $JAAN_OUTPUTS_DIR/detect/ux/personas{-platform}.md       - Inferred personas
+  $JAAN_OUTPUTS_DIR/detect/ux/jtbd{-platform}.md           - Jobs-to-be-done
+  $JAAN_OUTPUTS_DIR/detect/ux/flows{-platform}.md          - User flows with diagrams
+  $JAAN_OUTPUTS_DIR/detect/ux/pain-points{-platform}.md    - UX friction and pain points
+  $JAAN_OUTPUTS_DIR/detect/ux/heuristics{-platform}.md     - Nielsen 10 heuristics assessment
+  $JAAN_OUTPUTS_DIR/detect/ux/accessibility{-platform}.md  - A11y findings (repo-scoped)
+  $JAAN_OUTPUTS_DIR/detect/ux/gaps{-platform}.md           - UX gaps and recommendations
+
+Note: {-platform} suffix only if multi-platform mode (e.g., -web, -mobile). Single-platform mode has no suffix.
+      If UI/TUI presence = No, files contain "Not Applicable" findings.
 ```
 
 > "Proceed with writing 7 output files to $JAAN_OUTPUTS_DIR/detect/ux/? [y/n]"
@@ -323,23 +438,44 @@ OUTPUT FILES (7):
 
 Create directory `$JAAN_OUTPUTS_DIR/detect/ux/` if it does not exist.
 
+**Platform-specific output path logic**:
+
+```python
+# Determine filename suffix
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  suffix = ""                                               # No suffix
+else:  # Multi-platform
+  suffix = f"-{current_platform}"                          # e.g., "-web", "-mobile"
+
+# Example output paths:
+# Single-platform: $JAAN_OUTPUTS_DIR/detect/ux/personas.md
+# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/ux/personas-web.md
+#                  $JAAN_OUTPUTS_DIR/detect/ux/personas-mobile.md
+```
+
 Write 7 output files:
 
 | File | Content |
 |------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/ux/personas.md` | Inferred personas from route/auth analysis |
-| `$JAAN_OUTPUTS_DIR/detect/ux/jtbd.md` | Jobs-to-be-done statements linked to features |
-| `$JAAN_OUTPUTS_DIR/detect/ux/flows.md` | User flows with Mermaid diagrams |
-| `$JAAN_OUTPUTS_DIR/detect/ux/pain-points.md` | UX friction signals and dead ends |
-| `$JAAN_OUTPUTS_DIR/detect/ux/heuristics.md` | Nielsen 10 heuristics assessment table |
-| `$JAAN_OUTPUTS_DIR/detect/ux/accessibility.md` | A11y findings (scoped to repo evidence) |
-| `$JAAN_OUTPUTS_DIR/detect/ux/gaps.md` | UX gaps and improvement recommendations |
+| `$JAAN_OUTPUTS_DIR/detect/ux/personas{suffix}.md` | Inferred personas from route/auth analysis |
+| `$JAAN_OUTPUTS_DIR/detect/ux/jtbd{suffix}.md` | Jobs-to-be-done statements linked to features |
+| `$JAAN_OUTPUTS_DIR/detect/ux/flows{suffix}.md` | User flows with Mermaid diagrams |
+| `$JAAN_OUTPUTS_DIR/detect/ux/pain-points{suffix}.md` | UX friction signals and dead ends |
+| `$JAAN_OUTPUTS_DIR/detect/ux/heuristics{suffix}.md` | Nielsen 10 heuristics assessment table |
+| `$JAAN_OUTPUTS_DIR/detect/ux/accessibility{suffix}.md` | A11y findings (scoped to repo evidence) |
+| `$JAAN_OUTPUTS_DIR/detect/ux/gaps{suffix}.md` | UX gaps and improvement recommendations |
+
+**Note**: `{suffix}` is empty for single-platform mode, or `-{platform}` for multi-platform mode.
+
+**If UI/TUI presence = No** (from Step 0 check), write minimal "Not Applicable" files with:
+- Frontmatter: `findings_summary.informational: 1`, `overall_score: 10.0`
+- Single finding: "E-UX-{PLATFORM}-001: No UI/TUI Detected" (severity: informational)
 
 Each file MUST include:
-1. Universal YAML frontmatter
+1. Universal YAML frontmatter with `platform` field and findings_summary/overall_score
 2. Executive Summary
 3. Scope and Methodology
-4. Findings with evidence blocks (using E-UX-NNN IDs)
+4. Findings with evidence blocks (using E-UX-{PLATFORM}-NNN or E-UX-NNN IDs)
 5. Recommendations
 
 ---
@@ -356,12 +492,14 @@ If yes:
 ## Definition of Done
 
 - [ ] All 7 output files written to `$JAAN_OUTPUTS_DIR/detect/ux/`
-- [ ] Universal YAML frontmatter in every file
-- [ ] Every finding has evidence block with E-UX-NNN ID
+- [ ] Universal YAML frontmatter with `platform` field in every file
+- [ ] Every finding has evidence block with correct ID format (E-UX-NNN for single-platform, E-UX-{PLATFORM}-NNN for multi-platform)
 - [ ] Routes/screens mapped from framework-specific patterns
 - [ ] Personas and JTBD marked as Tentative (inferred)
 - [ ] Nielsen heuristics assessed with code evidence
 - [ ] Accessibility findings scoped to repo (no runtime claims)
 - [ ] Mermaid flow diagrams for multi-step flows
 - [ ] Confidence scores assigned to all findings
+- [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
+- [ ] If no UI/TUI detected for platform, minimal "Not Applicable" files created with informational findings
 - [ ] User approved output

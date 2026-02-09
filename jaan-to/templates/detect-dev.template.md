@@ -6,6 +6,7 @@ status: draft
 date: {{date}}
 target:
   name: "{{repo_name}}"
+  platform: "{{platform}}"
   commit: "{{commit_hash}}"
   branch: "{{branch}}"
 tool:
@@ -81,7 +82,8 @@ lifecycle_phase: post-build
 **Evidence**:
 
 evidence:
-  id: E-DEV-NNN
+  id: E-DEV-NNN              # Single-platform: E-DEV-001
+  id: E-DEV-{PLATFORM}-NNN   # Multi-platform: E-DEV-WEB-001, E-DEV-BACKEND-023
   type: {code-location|config-pattern|dependency|metric|absence}
   confidence: {0.0-1.0}
   location:

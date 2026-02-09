@@ -46,7 +46,7 @@
 | detect-writing | `/jaan-to:detect-writing` | Writing system extraction with tone scoring |
 | detect-product | `/jaan-to:detect-product` | Product reality extraction with evidence |
 | detect-ux | `/jaan-to:detect-ux` | UX audit with journey/pain-point findings |
-| pack-detect | `/jaan-to:pack-detect` | Consolidate detect outputs into knowledge index |
+| detect-pack | `/jaan-to:detect-pack` | Consolidate detect outputs into knowledge index |
 | ux-research-synthesize | `/jaan-to:ux-research-synthesize` | Synthesize research findings into themes and recommendations |
 | ux-heatmap-analyze | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 | ux-microcopy-write | `/jaan-to:ux-microcopy-write` | Generate multi-language microcopy packs |

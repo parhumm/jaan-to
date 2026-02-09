@@ -3,7 +3,7 @@ title: "detect-dev"
 sidebar_position: 1
 doc_type: skill
 tags: [detect, dev, engineering, audit, security, cicd]
-related: [detect-design, detect-writing, detect-product, detect-ux, pack-detect]
+related: [detect-design, detect-writing, detect-product, detect-ux, detect-pack]
 updated_date: 2026-02-08
 ---
 
@@ -35,6 +35,7 @@ Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), D
 
 ## Output
 
+### Single-Platform Project
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/dev/stack.md` | Tech stack with version evidence |
@@ -46,6 +47,13 @@ Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), D
 | `$JAAN_OUTPUTS_DIR/detect/dev/security.md` | Security posture and findings (OWASP mapping) |
 | `$JAAN_OUTPUTS_DIR/detect/dev/observability.md` | Logging, metrics, tracing |
 | `$JAAN_OUTPUTS_DIR/detect/dev/risks.md` | Technical risks and debt |
+
+### Multi-Platform Monorepo
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/dev/stack-{platform}.md` | Tech stack scoped to platform (e.g., `stack-web.md`, `stack-backend.md`) |
+| `$JAAN_OUTPUTS_DIR/detect/dev/architecture-{platform}.md` | Architecture patterns per platform |
+| ... | (same structure with platform suffix) |
 
 Each file includes standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence).
 
@@ -64,12 +72,23 @@ Each file includes standardized YAML frontmatter + Findings blocks (ID/severity/
 
 ---
 
+## Multi-Platform Support
+
+- **Platform auto-detection**: Detects web/, backend/, mobile/, etc. from folder structure
+- **Evidence ID format**:
+  - Single-platform: `E-DEV-NNN` (e.g., `E-DEV-001`)
+  - Multi-platform: `E-DEV-{PLATFORM}-NNN` (e.g., `E-DEV-WEB-001`, `E-DEV-BACKEND-023`)
+- **Output paths**: Platform-scoped filenames (`stack-web.md`) instead of nested folders
+- **Fully applicable**: detect-dev analyzes all platforms (no skip logic)
+- **Cross-platform linking**: Use `related_evidence` field for findings appearing in multiple platforms
+
+---
+
 ## Key Points
 
-- Evidence IDs use namespace `E-DEV-NNN` (prevents collisions in pack-detect aggregation)
 - 4-level confidence: Confirmed (0.95-1.00) / Firm (0.80-0.94) / Tentative (0.50-0.79) / Uncertain (0.20-0.49)
 - Diataxis-style sections: Executive Summary → Scope/Methodology → Findings → Recommendations → Appendices
-- Frontmatter includes `findings_summary` buckets + `overall_score` (0-10, OpenSSF-style) + `lifecycle_phase` (CycloneDX)
+- Frontmatter includes `target.platform`, `findings_summary` buckets + `overall_score` (0-10, OpenSSF-style) + `lifecycle_phase` (CycloneDX)
 - CI/CD security checks: secrets boundaries, runner trust (`self-hosted`), permissions (`write-all`), action pinning (SHA vs `@main`), SLSA provenance
 - Overall score formula: `10 - (critical*2.0 + high*1.0 + medium*0.4 + low*0.1) / max(total_findings, 1)`
 - Uses git tools for history analysis (`git log`, `git remote`, `git show`)

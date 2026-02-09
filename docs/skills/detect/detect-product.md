@@ -3,7 +3,7 @@ title: "detect-product"
 sidebar_position: 4
 doc_type: skill
 tags: [detect, product, features, monetization, instrumentation]
-related: [detect-dev, detect-design, detect-writing, detect-ux, pack-detect]
+related: [detect-dev, detect-design, detect-writing, detect-ux, detect-pack]
 updated_date: 2026-02-08
 ---
 
@@ -33,6 +33,7 @@ Extracts the "product reality" from the repository using a 3-layer evidence mode
 
 ## Output
 
+### Single-Platform Project
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/product/overview.md` | Product overview with feature summary |
@@ -42,6 +43,12 @@ Extracts the "product reality" from the repository using a 3-layer evidence mode
 | `$JAAN_OUTPUTS_DIR/detect/product/entitlements.md` | Entitlement enforcement mapping |
 | `$JAAN_OUTPUTS_DIR/detect/product/metrics.md` | Instrumentation reality (analytics, flags, events) |
 | `$JAAN_OUTPUTS_DIR/detect/product/constraints.md` | Technical/business constraints and risks |
+
+### Multi-Platform Monorepo
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/product/overview-{platform}.md` | Product overview scoped to platform (e.g., `overview-web.md`, `overview-backend.md`) |
+| ... | (same structure with platform suffix) |
 
 ---
 
@@ -60,9 +67,20 @@ Extracts the "product reality" from the repository using a 3-layer evidence mode
 
 ---
 
+## Multi-Platform Support
+
+- **Platform auto-detection**: Detects web/, backend/, mobile/, etc. from folder structure
+- **Evidence ID format**:
+  - Single-platform: `E-PRD-NNN` (e.g., `E-PRD-001`)
+  - Multi-platform: `E-PRD-{PLATFORM}-NNN` (e.g., `E-PRD-WEB-001`, `E-PRD-BACKEND-023`)
+- **Cross-platform feature linking**: Use `related_evidence` field to link features spanning multiple platforms (e.g., web checkout UI → backend payment API)
+- **Platform-specific features**: Separate evidence per platform (e.g., mobile push notifications vs web in-app notifications)
+- **Fully applicable**: detect-product analyzes all platforms (no skip logic)
+
+---
+
 ## Key Points
 
-- Evidence IDs use namespace `E-PRD-NNN` (prevents collisions in pack-detect aggregation)
 - **3-layer feature evidence**: Surface + Copy + Code Path → confidence mapping:
   - All 3 layers → Confirmed; 2/3 → Firm; 1 layer + heuristics → Tentative; Inferred only → Uncertain
 - Monetization: distinguish "pricing copy" (what product claims) vs "enforcement" (what code enforces) — gates must be proven by code locations

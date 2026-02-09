@@ -6,6 +6,7 @@ status: draft
 date: {{date}}
 target:
   name: "{{repo_name}}"
+  platform: "{{platform}}"
   commit: "{{commit_hash}}"
   branch: "{{branch}}"
 tool:

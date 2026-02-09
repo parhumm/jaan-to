@@ -59,7 +59,8 @@ If the file does not exist, continue without it.
 
 ```yaml
 evidence:
-  id: E-WRT-001
+  id: E-WRT-001                # Single-platform format
+  id: E-WRT-WEB-001            # Multi-platform format (platform prefix)
   type: code-location
   confidence: 0.85
   location:
@@ -70,7 +71,18 @@ evidence:
   method: pattern-match
 ```
 
-Evidence IDs use namespace `E-WRT-NNN` to prevent collisions in pack-detect.
+**Evidence ID Format**:
+
+```python
+# Generation logic:
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  evidence_id = f"E-WRT-{sequence:03d}"                     # E-WRT-001
+else:  # Multi-platform
+  platform_upper = current_platform.upper()
+  evidence_id = f"E-WRT-{platform_upper}-{sequence:03d}"    # E-WRT-WEB-001, E-WRT-BACKEND-023
+```
+
+Evidence IDs use namespace `E-WRT-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
 
 ### Confidence Levels (4-level)
 
@@ -92,6 +104,7 @@ status: draft
 date: {YYYY-MM-DD}
 target:
   name: "{repo-name}"
+  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'backend'/etc for multi-platform
   commit: "{git HEAD hash}"
   branch: "{current branch}"
 tool:
@@ -123,6 +136,83 @@ Use extended reasoning for:
 - UI copy classification and quality assessment
 - i18n maturity level determination
 - Terminology consistency analysis
+
+## Step 0: Detect Platforms
+
+**Purpose**: Auto-detect platform structure and determine analysis scope (full vs partial).
+
+Use **Glob** and **Bash** to identify platform folders:
+
+### Platform Patterns
+
+(Same as detect-dev - see detect-dev Step 0 for full patterns table)
+
+### Detection Process
+
+1. **Check for monorepo markers**: `pnpm-workspace.yaml`, `lerna.json`, `nx.json`, `turbo.json`
+2. **List top-level directories**: `ls -d */ | grep -Ev "node_modules|\.git|dist|build|\.next"`
+3. **Match against platform patterns**: Apply disambiguation rules
+4. **Handle detection results**:
+   - No platforms → Single-platform: `platforms = [{ name: 'all', path: '.' }]`
+   - Platforms detected → Multi-platform: Ask user to select all or specific platforms
+
+### Writing System Applicability
+
+For each platform, determine analysis scope:
+
+| Platform Type | Analysis Scope | Rationale |
+|---------------|---------------|-----------|
+| web, mobile, androidtv, ios, android, desktop | **Full** | UI copy, error messages, tone, localization |
+| backend, api, services | **Partial** | Error messages only (API errors, logs, validation messages) |
+| cli, cmd | **Partial** | Error messages + CLI help text only |
+
+**Partial analysis** includes:
+- Error message detection and scoring (Step 4)
+- Glossary extraction from error messages (Step 5 - partial)
+- Localization detection for error messages (Step 6 - partial)
+- **Skips**: UI copy classification (Step 2), full tone analysis (Step 3 reduced to error messages only)
+
+### UI Presence Check
+
+```bash
+# Check for UI component files
+ui_files=$(find {platform.path} -type f \( -name "*.jsx" -o -name "*.tsx" -o -name "*.vue" -o -name "*.svelte" \) 2>/dev/null | head -n 1)
+
+if [ -z "$ui_files" ]; then
+  # No UI files - partial analysis mode
+  analysis_mode = "partial"  # Error messages only
+else
+  analysis_mode = "full"     # Full writing system analysis
+fi
+```
+
+### Analysis Loop
+
+For each platform in platforms:
+1. Set `current_platform = platform.name`
+2. Set `base_path = platform.path`
+3. **Determine analysis mode** based on platform type and UI presence
+4. If `analysis_mode == "partial"`:
+   - Run Step 1 (String Inventory) - focus on error strings only
+   - Skip Step 2 (UI Copy Classification)
+   - Run Step 3 (Tone Analysis) - reduced to error messages corpus only
+   - Run Step 4 (Error Message Scoring)
+   - Run Step 5 (Glossary) - error terminology only
+   - Run Step 6 (Localization) - error message i18n only
+   - Skip Step 7 (Governance) unless content linting detected
+   - Output files: writing-system.md (partial), error-messages.md, glossary.md (reduced), localization.md (reduced)
+   - Mark ui-copy.md and samples.md as "Not Applicable"
+5. If `analysis_mode == "full"`:
+   - Run all steps (Steps 1-7)
+   - Output all 6 files
+6. Use platform-specific output paths in Step 9
+
+**Partial Analysis Output Notes**:
+- `writing-system.md`: Tone dimensions based on error messages only, with note about scope limitation
+- `ui-copy.md`: Minimal "Not Applicable" file with informational finding
+- `samples.md`: Minimal "Not Applicable" file or error message samples only
+
+**Note**: If single-platform mode (`platform.name == 'all'`), output paths have NO suffix. If multi-platform mode, output paths include `-{platform}` suffix.
 
 ## Step 1: String Inventory
 
@@ -314,16 +404,19 @@ terms:
 WRITING SYSTEM DETECTION COMPLETE
 -----------------------------------
 
+PLATFORM: {platform_name or 'all'}
+ANALYSIS MODE: {Full/Partial (error messages only)}
+
 STRING CORPUS: {n} strings analyzed across {n} files
 LOCALES DETECTED: {list}
 
-TONE DIMENSIONS (NNg)
+TONE DIMENSIONS (NNg) {scope note if partial: "based on error messages only"}
   Formality:      {score}/5    Consistency: {stddev}
   Humor:          {score}/5    Consistency: {stddev}
   Respectfulness: {score}/5    Consistency: {stddev}
   Enthusiasm:     {score}/5    Consistency: {stddev}
 
-UI COPY COVERAGE
+UI COPY COVERAGE {show "N/A" if partial analysis}
   Buttons:      {n} strings    Error messages: {n} strings
   Empty states: {n} strings    Dialogs:        {n} strings
   Toasts:       {n} strings    Onboarding:     {n} strings
@@ -338,12 +431,15 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (6):
-  $JAAN_OUTPUTS_DIR/detect/writing/writing-system.md  - Voice + tone + consistency
-  $JAAN_OUTPUTS_DIR/detect/writing/glossary.md        - Terminology glossary
-  $JAAN_OUTPUTS_DIR/detect/writing/ui-copy.md         - UI copy classification
-  $JAAN_OUTPUTS_DIR/detect/writing/error-messages.md  - Error message audit
-  $JAAN_OUTPUTS_DIR/detect/writing/localization.md    - i18n maturity assessment
-  $JAAN_OUTPUTS_DIR/detect/writing/samples.md         - Representative samples
+  $JAAN_OUTPUTS_DIR/detect/writing/writing-system{-platform}.md  - Voice + tone + consistency
+  $JAAN_OUTPUTS_DIR/detect/writing/glossary{-platform}.md        - Terminology glossary
+  $JAAN_OUTPUTS_DIR/detect/writing/ui-copy{-platform}.md         - UI copy classification {or "N/A" if partial}
+  $JAAN_OUTPUTS_DIR/detect/writing/error-messages{-platform}.md  - Error message audit
+  $JAAN_OUTPUTS_DIR/detect/writing/localization{-platform}.md    - i18n maturity assessment
+  $JAAN_OUTPUTS_DIR/detect/writing/samples{-platform}.md         - Representative samples {or "N/A" if partial}
+
+Note: {-platform} suffix only if multi-platform mode (e.g., -web, -backend). Single-platform mode has no suffix.
+      Partial analysis mode (backend/cli) produces minimal "Not Applicable" files for ui-copy.md and samples.md.
 ```
 
 > "Proceed with writing 6 output files to $JAAN_OUTPUTS_DIR/detect/writing/? [y/n]"
@@ -358,22 +454,64 @@ OUTPUT FILES (6):
 
 Create directory `$JAAN_OUTPUTS_DIR/detect/writing/` if it does not exist.
 
+**Platform-specific output path logic**:
+
+```python
+# Determine filename suffix
+if current_platform == 'all' or current_platform is None:  # Single-platform
+  suffix = ""                                               # No suffix
+else:  # Multi-platform
+  suffix = f"-{current_platform}"                          # e.g., "-web", "-backend"
+
+# Example output paths:
+# Single-platform: $JAAN_OUTPUTS_DIR/detect/writing/writing-system.md
+# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/writing/writing-system-web.md
+#                  $JAAN_OUTPUTS_DIR/detect/writing/writing-system-backend.md
+```
+
 Write 6 output files:
 
-| File | Content |
-|------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
-| `$JAAN_OUTPUTS_DIR/detect/writing/glossary.md` | Terminology glossary with ISO-704 statuses |
-| `$JAAN_OUTPUTS_DIR/detect/writing/ui-copy.md` | UI copy classification across 8 categories |
-| `$JAAN_OUTPUTS_DIR/detect/writing/error-messages.md` | Error message quality audit with rubric scoring |
-| `$JAAN_OUTPUTS_DIR/detect/writing/localization.md` | i18n maturity assessment (0-5) with evidence |
-| `$JAAN_OUTPUTS_DIR/detect/writing/samples.md` | Representative string samples per category |
+| File | Content | Partial Analysis Handling |
+|------|---------|---------------------------|
+| `$JAAN_OUTPUTS_DIR/detect/writing/writing-system{suffix}.md` | Voice definition, tone spectrum (NNg dimensions), consistency score | If partial: Note scope limitation ("based on error messages only") |
+| `$JAAN_OUTPUTS_DIR/detect/writing/glossary{suffix}.md` | Terminology glossary with ISO-704 statuses | If partial: Error terminology only |
+| `$JAAN_OUTPUTS_DIR/detect/writing/ui-copy{suffix}.md` | UI copy classification across 8 categories | If partial: **Minimal "Not Applicable" file** |
+| `$JAAN_OUTPUTS_DIR/detect/writing/error-messages{suffix}.md` | Error message quality audit with rubric scoring | Always included (core finding) |
+| `$JAAN_OUTPUTS_DIR/detect/writing/localization{suffix}.md` | i18n maturity assessment (0-5) with evidence | If partial: Error message i18n only |
+| `$JAAN_OUTPUTS_DIR/detect/writing/samples{suffix}.md` | Representative string samples per category | If partial: **Minimal "Not Applicable" or error samples only** |
+
+**Note**: `{suffix}` is empty for single-platform mode, or `-{platform}` for multi-platform mode.
+
+**Partial Analysis "Not Applicable" Files**:
+
+For platforms with `analysis_mode == "partial"` (backend/cli), create minimal files for `ui-copy.md` and `samples.md`:
+
+```yaml
+---
+findings_summary:
+  informational: 1
+overall_score: 10.0  # Nothing to assess
+---
+
+## Executive Summary
+
+Platform '{platform}' does not contain UI components. Full writing system analysis is not applicable. This audit focuses on error messages only.
+
+## Findings
+
+### E-WRT-{PLATFORM}-001: UI Copy Analysis Not Applicable
+
+**Severity**: Informational
+**Confidence**: Confirmed (1.0)
+
+**Description**: Platform type '{platform}' (backend/CLI) does not have UI copy. Writing system analysis is limited to error messages, validation strings, and API responses.
+```
 
 Each file MUST include:
-1. Universal YAML frontmatter
-2. Executive Summary
-3. Scope and Methodology
-4. Findings with evidence blocks (using E-WRT-NNN IDs)
+1. Universal YAML frontmatter with `platform` field and findings_summary/overall_score
+2. Executive Summary (with scope note if partial analysis)
+3. Scope and Methodology (clearly state "Partial Analysis" if applicable)
+4. Findings with evidence blocks (using E-WRT-{PLATFORM}-NNN or E-WRT-NNN IDs)
 5. Recommendations
 
 ---
@@ -390,12 +528,15 @@ If yes:
 ## Definition of Done
 
 - [ ] All 6 output files written to `$JAAN_OUTPUTS_DIR/detect/writing/`
-- [ ] Universal YAML frontmatter in every file
-- [ ] Every finding has evidence block with E-WRT-NNN ID
-- [ ] NNg tone dimensions scored with consistency analysis
-- [ ] UI copy classified into 8 categories
-- [ ] Error messages scored with weighted rubric
-- [ ] i18n maturity rated 0-5 with evidence
-- [ ] Glossary uses ISO-704 statuses
+- [ ] Universal YAML frontmatter with `platform` field in every file
+- [ ] Every finding has evidence block with correct ID format (E-WRT-NNN for single-platform, E-WRT-{PLATFORM}-NNN for multi-platform)
+- [ ] NNg tone dimensions scored with consistency analysis (note scope if partial)
+- [ ] UI copy classified into 8 categories (or "Not Applicable" if partial analysis)
+- [ ] Error messages scored with weighted rubric (always included)
+- [ ] i18n maturity rated 0-5 with evidence (scoped to error messages if partial)
+- [ ] Glossary uses ISO-704 statuses (error terminology if partial)
+- [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
+- [ ] If partial analysis mode (backend/cli), minimal "Not Applicable" files created for ui-copy.md and samples.md
+- [ ] User approved output
 - [ ] Confidence scores assigned to all findings
 - [ ] User approved output

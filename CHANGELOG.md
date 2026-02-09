@@ -5,10 +5,40 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.24.0] - 2026-02-09
+
+### Added
+- **Multi-platform support in all 6 detect skills** — All detect skills (`detect-dev`, `detect-design`, `detect-writing`, `detect-product`, `detect-ux`, `detect-pack`) now automatically detect and analyze multi-platform monorepos (web, backend, mobile, TV apps, etc.)
+  - **Platform auto-detection** — Scans folder structure using configurable patterns (`web/`, `backend/`, `mobile/`, etc.) with disambiguation rules for edge cases (microservices, Turborepo/Nx, mobile subfolders)
+  - **Platform-scoped filenames** — Multi-platform outputs use flat files with platform suffixes (`stack-web.md`, `stack-backend.md`) instead of nested folders, maintaining backward compatibility
+  - **Evidence ID prefixing** — Multi-platform format: `E-DEV-WEB-001`, `E-DSN-BACKEND-023`; single-platform format unchanged: `E-DEV-001`
+  - **Cross-platform evidence linking** — Use `related_evidence` field to link findings across platforms (e.g., TypeScript issue in both web and backend)
+  - **"Detect and Report N/A" pattern** — Non-applicable domains (e.g., Design for backend) produce minimal output with informational finding and perfect score (10.0)
+  - **Merged pack** — detect-pack creates consolidated pack combining all platforms with cross-platform risk heatmap (platform × domain table), deduplicated findings, and unified unknowns backlog
+
+### Changed
+- **pack-detect renamed to detect-pack** — Command: `/jaan-to:detect-pack` (was `/jaan-to:pack-detect`); skill directory and 41 files renamed for naming consistency
+- **Flat file architecture formalized** — detect outputs officially documented as exception to ID-based folder structure in CLAUDE.md (alongside research); rationale: detect skills produce system state snapshots (overwritten each run), not versioned reports (archived)
+- **detect-pack orchestration enhanced** — Step 0 now asks "Is this a multi-platform project?" and displays platform-by-platform workflow guide
+- **Evidence ID parsing updated** — Regex now handles both single-platform (`E-DEV-001`) and multi-platform (`E-DEV-WEB-001`) formats
+
+### Documentation
+- **Multi-platform sections added to all 6 detect skill docs** — Platform auto-detection, evidence ID formats, skip logic, and platform-specific behavior documented
+- **Migration guide created** — Comprehensive v3.23 → v3.24 guide with FAQ, rollback instructions, and backward compatibility notes (`docs/guides/migration-v3.24.md`)
+- **detect README updated** — Added multi-platform pipeline flow diagram, cross-platform linking examples, and shared standards updates
+- **6 templates updated** — All detect templates now include `target.platform` field and evidence ID format examples
+
+### Breaking Changes
+- **Command rename**: `/jaan-to:pack-detect` → `/jaan-to:detect-pack` (old command removed)
+- **Output paths** (backward compatible):
+  - Single-platform: `detect/dev/stack.md` (unchanged)
+  - Multi-platform: `detect/dev/stack-web.md`, `detect/dev/stack-backend.md` (new format)
+- **Evidence IDs** (backward compatible): Both formats supported — single-platform `E-DEV-001`, multi-platform `E-DEV-WEB-001`
+
 ## [3.23.1] - 2026-02-09
 
 ### Changed
-- **Detect skills output paths standardized** — All 6 detect skills (`detect-dev`, `detect-design`, `detect-product`, `detect-ux`, `detect-writing`, `pack-detect`) now write to `$JAAN_OUTPUTS_DIR/detect/{domain}/` instead of hardcoded `docs/current/{domain}/`, aligning with the plugin's configurable output system (`6bde383`)
+- **Detect skills output paths standardized** — All 6 detect skills (`detect-dev`, `detect-design`, `detect-product`, `detect-ux`, `detect-writing`, `detect-pack`) now write to `$JAAN_OUTPUTS_DIR/detect/{domain}/` instead of hardcoded `docs/current/{domain}/`, aligning with the plugin's configurable output system (`6bde383`)
 
 ## [3.23.0] - 2026-02-08
 
@@ -19,18 +49,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `/jaan-to:detect-writing` — Writing system extraction with NNg tone dimensions (4 primary + 5 extended), 8-category UI copy classification, error message rubric, i18n maturity 0–5, and 6 output files (`eb0b4f5`)
   - `/jaan-to:detect-product` — Product reality extraction with 3-layer evidence model (surface + copy + code path), monetization/entitlement scanning, analytics SDK detection, and 7 output files (`ef3d455`)
   - `/jaan-to:detect-ux` — UX audit with framework-specific route extraction (React Router, Next.js, Vue Router, Angular, Express), Nielsen's 10 heuristics, Mermaid flow diagrams, and 7 output files (`6fa7cb5`)
-  - `/jaan-to:pack-detect` — Consolidate all detect outputs into scored knowledge index with risk heatmap, evidence ID validation, unknowns backlog, and Step 0 orchestration for partial runs (`50a75f5`)
+  - `/jaan-to:detect-pack` — Consolidate all detect outputs into scored knowledge index with risk heatmap, evidence ID validation, unknowns backlog, and Step 0 orchestration for partial runs (`50a75f5`)
 
 ### Changed
 - **`dev-stack-detect` merged into `detect-dev`** — All scanning patterns absorbed; old skill removed. Detection → `detect-dev`, context population remains via bootstrap (`bb9d0a7`, `9d944de`)
-- **Bootstrap updated** — Suggests `/jaan-to:pack-detect` instead of `/jaan-to:dev-stack-detect` when context has placeholders (`9d944de`)
+- **Bootstrap updated** — Suggests `/jaan-to:detect-pack` instead of `/jaan-to:dev-stack-detect` when context has placeholders (`9d944de`)
 - **Plugin description** — Updated to reflect 27 skills (was 21)
 
 ### Documentation
 - **Detect skill docs aligned with implementations** — All 7 docs updated with What It Scans tables, evidence ID namespaces, scoring formulas, and shared standards (`29901ae`)
 - **Detect README** — Added pipeline flow diagram, output file counts, and Shared Standards section (`29901ae`)
 - **`dev-stack-detect` deprecated** — Redirect doc pointing to `detect-dev` (`9d944de`)
-- **30+ reference files updated** — All `dev-stack-detect` references replaced with `detect-dev`/`pack-detect` across docs, scripts, seeds, context, website, and examples (`9d944de`)
+- **30+ reference files updated** — All `dev-stack-detect` references replaced with `detect-dev`/`detect-pack` across docs, scripts, seeds, context, website, and examples (`9d944de`)
 
 ### Fixed
 - **Bootstrap `.gitignore` handling** — Stopped auto-adding `jaan-to/` to `.gitignore` which could hide project context files (`c95e4a9`)
