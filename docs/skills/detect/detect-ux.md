@@ -35,13 +35,13 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 
 | File | Content |
 |------|---------|
-| `docs/current/ux/personas.md` | Inferred personas from route/auth analysis |
-| `docs/current/ux/jtbd.md` | Jobs-to-be-done statements linked to features |
-| `docs/current/ux/flows.md` | User flows with Mermaid diagrams |
-| `docs/current/ux/pain-points.md` | UX friction signals and dead ends |
-| `docs/current/ux/heuristics.md` | Nielsen 10 heuristics assessment table |
-| `docs/current/ux/accessibility.md` | A11y findings (scoped to repo evidence) |
-| `docs/current/ux/gaps.md` | UX gaps and improvement recommendations |
+| `$JAAN_OUTPUTS_DIR/detect/ux/personas.md` | Inferred personas from route/auth analysis |
+| `$JAAN_OUTPUTS_DIR/detect/ux/jtbd.md` | Jobs-to-be-done statements linked to features |
+| `$JAAN_OUTPUTS_DIR/detect/ux/flows.md` | User flows with Mermaid diagrams |
+| `$JAAN_OUTPUTS_DIR/detect/ux/pain-points.md` | UX friction signals and dead ends |
+| `$JAAN_OUTPUTS_DIR/detect/ux/heuristics.md` | Nielsen 10 heuristics assessment table |
+| `$JAAN_OUTPUTS_DIR/detect/ux/accessibility.md` | A11y findings (scoped to repo evidence) |
+| `$JAAN_OUTPUTS_DIR/detect/ux/gaps.md` | UX gaps and improvement recommendations |
 
 ---
 

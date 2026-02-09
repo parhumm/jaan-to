@@ -1,7 +1,7 @@
 ---
 name: detect-design
 description: Design system detection with drift findings and evidence blocks.
-allowed-tools: Read, Glob, Grep, Write(docs/current/design/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [repo]
 ---
 
@@ -15,7 +15,7 @@ argument-hint: [repo]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if exists, for framework-aware scanning)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-design.template.md` - Output template
 
-**Output path exception**: This skill writes to `docs/current/design/` in the target project, NOT to `$JAAN_OUTPUTS_DIR`. Detect outputs are living project documentation (overwritten each run), not versioned artifacts.
+**Output path**: `$JAAN_OUTPUTS_DIR/detect/design/` — flat files, overwritten each run (no IDs).
 
 ## Input
 
@@ -276,15 +276,15 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (6):
-  docs/current/design/brand.md          - Brand signals
-  docs/current/design/tokens.md         - Design token inventory
-  docs/current/design/components.md     - Component inventory
-  docs/current/design/patterns.md       - UI patterns and conventions
-  docs/current/design/accessibility.md  - A11y findings
-  docs/current/design/governance.md     - Governance signals
+  $JAAN_OUTPUTS_DIR/detect/design/brand.md          - Brand signals
+  $JAAN_OUTPUTS_DIR/detect/design/tokens.md         - Design token inventory
+  $JAAN_OUTPUTS_DIR/detect/design/components.md     - Component inventory
+  $JAAN_OUTPUTS_DIR/detect/design/patterns.md       - UI patterns and conventions
+  $JAAN_OUTPUTS_DIR/detect/design/accessibility.md  - A11y findings
+  $JAAN_OUTPUTS_DIR/detect/design/governance.md     - Governance signals
 ```
 
-> "Proceed with writing 6 output files to docs/current/design/? [y/n]"
+> "Proceed with writing 6 output files to $JAAN_OUTPUTS_DIR/detect/design/? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -292,20 +292,20 @@ OUTPUT FILES (6):
 
 # PHASE 2: Write Output Files
 
-## Step 9: Write to docs/current/design/
+## Step 9: Write to $JAAN_OUTPUTS_DIR/detect/design/
 
-Create directory `docs/current/design/` if it does not exist.
+Create directory `$JAAN_OUTPUTS_DIR/detect/design/` if it does not exist.
 
 Write 6 output files using the template:
 
 | File | Content |
 |------|---------|
-| `docs/current/design/brand.md` | Brand signals (colors, typography, logos) |
-| `docs/current/design/tokens.md` | Design token definitions and usage with drift findings |
-| `docs/current/design/components.md` | Component inventory and patterns |
-| `docs/current/design/patterns.md` | UI patterns and conventions |
-| `docs/current/design/accessibility.md` | A11y implementation findings (scoped to repo evidence) |
-| `docs/current/design/governance.md` | Design system governance signals |
+| `$JAAN_OUTPUTS_DIR/detect/design/brand.md` | Brand signals (colors, typography, logos) |
+| `$JAAN_OUTPUTS_DIR/detect/design/tokens.md` | Design token definitions and usage with drift findings |
+| `$JAAN_OUTPUTS_DIR/detect/design/components.md` | Component inventory and patterns |
+| `$JAAN_OUTPUTS_DIR/detect/design/patterns.md` | UI patterns and conventions |
+| `$JAAN_OUTPUTS_DIR/detect/design/accessibility.md` | A11y implementation findings (scoped to repo evidence) |
+| `$JAAN_OUTPUTS_DIR/detect/design/governance.md` | Design system governance signals |
 
 Each file MUST include:
 1. Universal YAML frontmatter
@@ -327,7 +327,7 @@ If yes:
 
 ## Definition of Done
 
-- [ ] All 6 output files written to `docs/current/design/`
+- [ ] All 6 output files written to `$JAAN_OUTPUTS_DIR/detect/design/`
 - [ ] Universal YAML frontmatter in every file
 - [ ] Every finding has evidence block with E-DSN-NNN ID
 - [ ] Drift findings have paired evidence (definition + conflicting usage)

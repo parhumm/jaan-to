@@ -37,15 +37,15 @@ Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), D
 
 | File | Content |
 |------|---------|
-| `docs/current/dev/stack.md` | Tech stack with version evidence |
-| `docs/current/dev/architecture.md` | Architecture patterns and data flow |
-| `docs/current/dev/standards.md` | Coding standards and conventions |
-| `docs/current/dev/testing.md` | Test coverage and strategy |
-| `docs/current/dev/cicd.md` | CI/CD pipelines and security |
-| `docs/current/dev/deployment.md` | Deployment patterns |
-| `docs/current/dev/security.md` | Security posture and findings (OWASP mapping) |
-| `docs/current/dev/observability.md` | Logging, metrics, tracing |
-| `docs/current/dev/risks.md` | Technical risks and debt |
+| `$JAAN_OUTPUTS_DIR/detect/dev/stack.md` | Tech stack with version evidence |
+| `$JAAN_OUTPUTS_DIR/detect/dev/architecture.md` | Architecture patterns and data flow |
+| `$JAAN_OUTPUTS_DIR/detect/dev/standards.md` | Coding standards and conventions |
+| `$JAAN_OUTPUTS_DIR/detect/dev/testing.md` | Test coverage and strategy |
+| `$JAAN_OUTPUTS_DIR/detect/dev/cicd.md` | CI/CD pipelines and security |
+| `$JAAN_OUTPUTS_DIR/detect/dev/deployment.md` | Deployment patterns |
+| `$JAAN_OUTPUTS_DIR/detect/dev/security.md` | Security posture and findings (OWASP mapping) |
+| `$JAAN_OUTPUTS_DIR/detect/dev/observability.md` | Logging, metrics, tracing |
+| `$JAAN_OUTPUTS_DIR/detect/dev/risks.md` | Technical risks and debt |
 
 Each file includes standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence).
 

@@ -35,12 +35,12 @@ Extracts the writing system from the repository using framework-specific glob di
 
 | File | Content |
 |------|---------|
-| `docs/current/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
-| `docs/current/writing/glossary.md` | Terminology glossary with ISO-704-ish statuses (preferred/admitted/deprecated/forbidden) |
-| `docs/current/writing/ui-copy.md` | UI string classification across 8 categories with component-name patterns |
-| `docs/current/writing/error-messages.md` | Error message quality audit with 5-dimension weighted rubric |
-| `docs/current/writing/localization.md` | i18n maturity assessment (0–5) with evidence |
-| `docs/current/writing/samples.md` | Representative copy samples per category |
+| `$JAAN_OUTPUTS_DIR/detect/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
+| `$JAAN_OUTPUTS_DIR/detect/writing/glossary.md` | Terminology glossary with ISO-704-ish statuses (preferred/admitted/deprecated/forbidden) |
+| `$JAAN_OUTPUTS_DIR/detect/writing/ui-copy.md` | UI string classification across 8 categories with component-name patterns |
+| `$JAAN_OUTPUTS_DIR/detect/writing/error-messages.md` | Error message quality audit with 5-dimension weighted rubric |
+| `$JAAN_OUTPUTS_DIR/detect/writing/localization.md` | i18n maturity assessment (0–5) with evidence |
+| `$JAAN_OUTPUTS_DIR/detect/writing/samples.md` | Representative copy samples per category |
 
 All 6 output files are required per execution.
 

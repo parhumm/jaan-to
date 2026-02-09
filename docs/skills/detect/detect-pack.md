@@ -15,7 +15,7 @@ updated_date: 2026-02-08
 
 ## What It Does
 
-Reads all detect skill outputs (`docs/current/{dev,design,writing,product,ux}/`) and consolidates them into a unified knowledge index. Does NOT scan the repository directly — only reads and aggregates outputs from the 5 detect skills. Enforces universal frontmatter, aggregates findings into severity buckets, builds a domain x severity risk heatmap, validates all evidence IDs, and produces a prioritized Unknowns backlog.
+Reads all detect skill outputs (`$JAAN_OUTPUTS_DIR/detect/{dev,design,writing,product,ux}/`) and consolidates them into a unified knowledge index. Does NOT scan the repository directly — only reads and aggregates outputs from the 5 detect skills. Enforces universal frontmatter, aggregates findings into severity buckets, builds a domain x severity risk heatmap, validates all evidence IDs, and produces a prioritized Unknowns backlog.
 
 ---
 
@@ -35,10 +35,10 @@ Reads all detect skill outputs (`docs/current/{dev,design,writing,product,ux}/`)
 
 | File | Content |
 |------|---------|
-| `docs/current/README.md` | Knowledge index: metadata, domain summaries, overall score, links to all detect outputs |
-| `docs/current/risk-heatmap.md` | Risk heatmap table (domain x severity), top risks per domain |
-| `docs/current/unknowns-backlog.md` | Prioritized unknowns with "how to confirm" steps and scope boundaries |
-| `docs/current/source-map.md` | Evidence index: all E-IDs mapped to file locations |
+| `$JAAN_OUTPUTS_DIR/detect/README.md` | Knowledge index: metadata, domain summaries, overall score, links to all detect outputs |
+| `$JAAN_OUTPUTS_DIR/detect/risk-heatmap.md` | Risk heatmap table (domain x severity), top risks per domain |
+| `$JAAN_OUTPUTS_DIR/detect/unknowns-backlog.md` | Prioritized unknowns with "how to confirm" steps and scope boundaries |
+| `$JAAN_OUTPUTS_DIR/detect/source-map.md` | Evidence index: all E-IDs mapped to file locations |
 
 ---
 

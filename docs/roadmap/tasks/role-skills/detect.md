@@ -38,7 +38,7 @@ flowchart TD
 - **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: SBOM/provenance/monitoring MCP)
 - **Input**: [repo]
-- **Output**: `docs/current/dev/{stack,architecture,standards,testing,cicd,deployment,security,observability,risks}.md` — each doc MUST include standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence)
+- **Output**: `$JAAN_OUTPUTS_DIR/detect/dev/{stack,architecture,standards,testing,cicd,deployment,security,observability,risks}.md` — each doc MUST include standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence)
 
 ### /jaan-to:detect-design
 
@@ -53,7 +53,7 @@ flowchart TD
 - **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: Figma MCP for true drift detection)
 - **Input**: [repo]
-- **Output**: `docs/current/design/{brand,tokens,components,patterns,accessibility,governance}.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/detect/design/{brand,tokens,components,patterns,accessibility,governance}.md`
 
 ### /jaan-to:detect-writing
 
@@ -71,8 +71,8 @@ flowchart TD
 - **MCP Required**: None (v2 optional: CMS/helpdesk/email MCP)
 - **Input**: [repo]
 - **Output**:
-  - `docs/current/writing/writing-system.md` (primary)
-  - Optional split: `docs/current/writing/{glossary,ui-copy,error-messages,localization,samples}.md`
+  - `$JAAN_OUTPUTS_DIR/detect/writing/writing-system.md` (primary)
+  - Optional split: `$JAAN_OUTPUTS_DIR/detect/writing/{glossary,ui-copy,error-messages,localization,samples}.md`
 
 ### /jaan-to:detect-product
 
@@ -87,7 +87,7 @@ flowchart TD
 - **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: analytics/billing MCP)
 - **Input**: [repo]
-- **Output**: `docs/current/product/{overview,features,value-prop,monetization,entitlements,metrics,constraints}.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/detect/product/{overview,features,value-prop,monetization,entitlements,metrics,constraints}.md`
 
 ### /jaan-to:detect-ux
 
@@ -102,7 +102,7 @@ flowchart TD
 - **→ Next**: `pack-detect`
 - **MCP Required**: None (v2 optional: session replay/support/monitoring MCP)
 - **Input**: [repo]
-- **Output**: `docs/current/ux/{personas,jtbd,flows,pain-points,heuristics,accessibility,gaps}.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/detect/ux/{personas,jtbd,flows,pain-points,heuristics,accessibility,gaps}.md`
 
 ### /jaan-to:pack-detect
 
@@ -117,4 +117,4 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None (v2 optional: Jira/Linear MCP to create backlog tickets)
 - **Input**: [repo]
-- **Output**: `docs/current/{README,risk-heatmap,unknowns-backlog,source-map}.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/detect/{README,risk-heatmap,unknowns-backlog,source-map}.md`

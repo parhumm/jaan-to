@@ -1,7 +1,7 @@
 ---
 name: detect-writing
 description: Writing system extraction with NNg tone dimensions, UI copy classification, and i18n maturity scoring.
-allowed-tools: Read, Glob, Grep, Write(docs/current/writing/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [repo]
 ---
 
@@ -15,7 +15,7 @@ argument-hint: [repo]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for framework-aware i18n scanning)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-writing.template.md` - Output template
 
-**Output path exception**: This skill writes to `docs/current/writing/` in the target project, NOT to `$JAAN_OUTPUTS_DIR`. Detect outputs are living project documentation (overwritten each run), not versioned artifacts.
+**Output path**: `$JAAN_OUTPUTS_DIR/detect/writing/` — flat files, overwritten each run (no IDs).
 
 ## Input
 
@@ -338,15 +338,15 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (6):
-  docs/current/writing/writing-system.md  - Voice + tone + consistency
-  docs/current/writing/glossary.md        - Terminology glossary
-  docs/current/writing/ui-copy.md         - UI copy classification
-  docs/current/writing/error-messages.md  - Error message audit
-  docs/current/writing/localization.md    - i18n maturity assessment
-  docs/current/writing/samples.md         - Representative samples
+  $JAAN_OUTPUTS_DIR/detect/writing/writing-system.md  - Voice + tone + consistency
+  $JAAN_OUTPUTS_DIR/detect/writing/glossary.md        - Terminology glossary
+  $JAAN_OUTPUTS_DIR/detect/writing/ui-copy.md         - UI copy classification
+  $JAAN_OUTPUTS_DIR/detect/writing/error-messages.md  - Error message audit
+  $JAAN_OUTPUTS_DIR/detect/writing/localization.md    - i18n maturity assessment
+  $JAAN_OUTPUTS_DIR/detect/writing/samples.md         - Representative samples
 ```
 
-> "Proceed with writing 6 output files to docs/current/writing/? [y/n]"
+> "Proceed with writing 6 output files to $JAAN_OUTPUTS_DIR/detect/writing/? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -354,20 +354,20 @@ OUTPUT FILES (6):
 
 # PHASE 2: Write Output Files
 
-## Step 9: Write to docs/current/writing/
+## Step 9: Write to $JAAN_OUTPUTS_DIR/detect/writing/
 
-Create directory `docs/current/writing/` if it does not exist.
+Create directory `$JAAN_OUTPUTS_DIR/detect/writing/` if it does not exist.
 
 Write 6 output files:
 
 | File | Content |
 |------|---------|
-| `docs/current/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
-| `docs/current/writing/glossary.md` | Terminology glossary with ISO-704 statuses |
-| `docs/current/writing/ui-copy.md` | UI copy classification across 8 categories |
-| `docs/current/writing/error-messages.md` | Error message quality audit with rubric scoring |
-| `docs/current/writing/localization.md` | i18n maturity assessment (0-5) with evidence |
-| `docs/current/writing/samples.md` | Representative string samples per category |
+| `$JAAN_OUTPUTS_DIR/detect/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
+| `$JAAN_OUTPUTS_DIR/detect/writing/glossary.md` | Terminology glossary with ISO-704 statuses |
+| `$JAAN_OUTPUTS_DIR/detect/writing/ui-copy.md` | UI copy classification across 8 categories |
+| `$JAAN_OUTPUTS_DIR/detect/writing/error-messages.md` | Error message quality audit with rubric scoring |
+| `$JAAN_OUTPUTS_DIR/detect/writing/localization.md` | i18n maturity assessment (0-5) with evidence |
+| `$JAAN_OUTPUTS_DIR/detect/writing/samples.md` | Representative string samples per category |
 
 Each file MUST include:
 1. Universal YAML frontmatter
@@ -389,7 +389,7 @@ If yes:
 
 ## Definition of Done
 
-- [ ] All 6 output files written to `docs/current/writing/`
+- [ ] All 6 output files written to `$JAAN_OUTPUTS_DIR/detect/writing/`
 - [ ] Universal YAML frontmatter in every file
 - [ ] Every finding has evidence block with E-WRT-NNN ID
 - [ ] NNg tone dimensions scored with consistency analysis

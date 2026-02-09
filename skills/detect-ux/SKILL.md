@@ -1,7 +1,7 @@
 ---
 name: detect-ux
 description: Repo-driven UX audit with journey mapping and heuristic-based findings.
-allowed-tools: Read, Glob, Grep, Write(docs/current/ux/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [repo]
 ---
 
@@ -15,7 +15,7 @@ argument-hint: [repo]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for framework-aware route detection)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-ux.template.md` - Output template
 
-**Output path exception**: This skill writes to `docs/current/ux/` in the target project, NOT to `$JAAN_OUTPUTS_DIR`. Detect outputs are living project documentation (overwritten each run), not versioned artifacts.
+**Output path**: `$JAAN_OUTPUTS_DIR/detect/ux/` — flat files, overwritten each run (no IDs).
 
 ## Input
 
@@ -302,16 +302,16 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (7):
-  docs/current/ux/personas.md       - Inferred personas
-  docs/current/ux/jtbd.md           - Jobs-to-be-done
-  docs/current/ux/flows.md          - User flows with diagrams
-  docs/current/ux/pain-points.md    - UX friction and pain points
-  docs/current/ux/heuristics.md     - Nielsen 10 heuristics assessment
-  docs/current/ux/accessibility.md  - A11y findings (repo-scoped)
-  docs/current/ux/gaps.md           - UX gaps and recommendations
+  $JAAN_OUTPUTS_DIR/detect/ux/personas.md       - Inferred personas
+  $JAAN_OUTPUTS_DIR/detect/ux/jtbd.md           - Jobs-to-be-done
+  $JAAN_OUTPUTS_DIR/detect/ux/flows.md          - User flows with diagrams
+  $JAAN_OUTPUTS_DIR/detect/ux/pain-points.md    - UX friction and pain points
+  $JAAN_OUTPUTS_DIR/detect/ux/heuristics.md     - Nielsen 10 heuristics assessment
+  $JAAN_OUTPUTS_DIR/detect/ux/accessibility.md  - A11y findings (repo-scoped)
+  $JAAN_OUTPUTS_DIR/detect/ux/gaps.md           - UX gaps and recommendations
 ```
 
-> "Proceed with writing 7 output files to docs/current/ux/? [y/n]"
+> "Proceed with writing 7 output files to $JAAN_OUTPUTS_DIR/detect/ux/? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -319,21 +319,21 @@ OUTPUT FILES (7):
 
 # PHASE 2: Write Output Files
 
-## Step 9: Write to docs/current/ux/
+## Step 9: Write to $JAAN_OUTPUTS_DIR/detect/ux/
 
-Create directory `docs/current/ux/` if it does not exist.
+Create directory `$JAAN_OUTPUTS_DIR/detect/ux/` if it does not exist.
 
 Write 7 output files:
 
 | File | Content |
 |------|---------|
-| `docs/current/ux/personas.md` | Inferred personas from route/auth analysis |
-| `docs/current/ux/jtbd.md` | Jobs-to-be-done statements linked to features |
-| `docs/current/ux/flows.md` | User flows with Mermaid diagrams |
-| `docs/current/ux/pain-points.md` | UX friction signals and dead ends |
-| `docs/current/ux/heuristics.md` | Nielsen 10 heuristics assessment table |
-| `docs/current/ux/accessibility.md` | A11y findings (scoped to repo evidence) |
-| `docs/current/ux/gaps.md` | UX gaps and improvement recommendations |
+| `$JAAN_OUTPUTS_DIR/detect/ux/personas.md` | Inferred personas from route/auth analysis |
+| `$JAAN_OUTPUTS_DIR/detect/ux/jtbd.md` | Jobs-to-be-done statements linked to features |
+| `$JAAN_OUTPUTS_DIR/detect/ux/flows.md` | User flows with Mermaid diagrams |
+| `$JAAN_OUTPUTS_DIR/detect/ux/pain-points.md` | UX friction signals and dead ends |
+| `$JAAN_OUTPUTS_DIR/detect/ux/heuristics.md` | Nielsen 10 heuristics assessment table |
+| `$JAAN_OUTPUTS_DIR/detect/ux/accessibility.md` | A11y findings (scoped to repo evidence) |
+| `$JAAN_OUTPUTS_DIR/detect/ux/gaps.md` | UX gaps and improvement recommendations |
 
 Each file MUST include:
 1. Universal YAML frontmatter
@@ -355,7 +355,7 @@ If yes:
 
 ## Definition of Done
 
-- [ ] All 7 output files written to `docs/current/ux/`
+- [ ] All 7 output files written to `$JAAN_OUTPUTS_DIR/detect/ux/`
 - [ ] Universal YAML frontmatter in every file
 - [ ] Every finding has evidence block with E-UX-NNN ID
 - [ ] Routes/screens mapped from framework-specific patterns

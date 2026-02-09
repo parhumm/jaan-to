@@ -35,13 +35,13 @@ Extracts the "product reality" from the repository using a 3-layer evidence mode
 
 | File | Content |
 |------|---------|
-| `docs/current/product/overview.md` | Product overview with feature summary |
-| `docs/current/product/features.md` | Feature inventory with 3-layer evidence |
-| `docs/current/product/value-prop.md` | Value proposition signals from copy |
-| `docs/current/product/monetization.md` | Monetization model with evidence |
-| `docs/current/product/entitlements.md` | Entitlement enforcement mapping |
-| `docs/current/product/metrics.md` | Instrumentation reality (analytics, flags, events) |
-| `docs/current/product/constraints.md` | Technical/business constraints and risks |
+| `$JAAN_OUTPUTS_DIR/detect/product/overview.md` | Product overview with feature summary |
+| `$JAAN_OUTPUTS_DIR/detect/product/features.md` | Feature inventory with 3-layer evidence |
+| `$JAAN_OUTPUTS_DIR/detect/product/value-prop.md` | Value proposition signals from copy |
+| `$JAAN_OUTPUTS_DIR/detect/product/monetization.md` | Monetization model with evidence |
+| `$JAAN_OUTPUTS_DIR/detect/product/entitlements.md` | Entitlement enforcement mapping |
+| `$JAAN_OUTPUTS_DIR/detect/product/metrics.md` | Instrumentation reality (analytics, flags, events) |
+| `$JAAN_OUTPUTS_DIR/detect/product/constraints.md` | Technical/business constraints and risks |
 
 ---
 

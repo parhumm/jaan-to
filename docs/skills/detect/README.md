@@ -16,13 +16,13 @@ updated_date: 2026-02-08
 Run individual detect skills for specific domains, or run all 5 then consolidate:
 
 ```
-/jaan-to:detect-dev        → docs/current/dev/
-/jaan-to:detect-design     → docs/current/design/
-/jaan-to:detect-writing    → docs/current/writing/
-/jaan-to:detect-product    → docs/current/product/
-/jaan-to:detect-ux         → docs/current/ux/
+/jaan-to:detect-dev        → $JAAN_OUTPUTS_DIR/detect/dev/
+/jaan-to:detect-design     → $JAAN_OUTPUTS_DIR/detect/design/
+/jaan-to:detect-writing    → $JAAN_OUTPUTS_DIR/detect/writing/
+/jaan-to:detect-product    → $JAAN_OUTPUTS_DIR/detect/product/
+/jaan-to:detect-ux         → $JAAN_OUTPUTS_DIR/detect/ux/
                                     ↓
-/jaan-to:pack-detect       → docs/current/{README,risk-heatmap,unknowns-backlog,source-map}.md
+/jaan-to:pack-detect       → $JAAN_OUTPUTS_DIR/detect/{README,risk-heatmap,unknowns-backlog,source-map}.md
 ```
 
 ---
@@ -49,7 +49,7 @@ All detect skills share:
 - **4-level confidence**: Confirmed (0.95–1.00) / Firm (0.80–0.94) / Tentative (0.50–0.79) / Uncertain (0.20–0.49)
 - **Universal frontmatter**: title, id, version, status, target.commit, tool metadata, confidence_scheme, findings_summary, overall_score (0–10), lifecycle_phase
 - **Document structure** (Diataxis): Executive Summary → Scope/Methodology → Findings → Recommendations → Appendices
-- **Output path**: `docs/current/{domain}/` in the target project (NOT `$JAAN_OUTPUTS_DIR`)
+- **Output path**: `$JAAN_OUTPUTS_DIR/detect/{domain}/` — flat files, overwritten each run (no IDs)
 
 ---
 

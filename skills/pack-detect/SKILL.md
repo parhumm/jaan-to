@@ -1,7 +1,7 @@
 ---
 name: pack-detect
 description: Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
-allowed-tools: Read, Glob, Grep, Write(docs/current/README.md), Write(docs/current/risk-heatmap.md), Write(docs/current/unknowns-backlog.md), Write(docs/current/source-map.md), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [repo]
 ---
 
@@ -14,7 +14,7 @@ argument-hint: [repo]
 - `$JAAN_LEARN_DIR/jaan-to:pack-detect.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_TEMPLATES_DIR/jaan-to:pack-detect.template.md` - Output template
 
-**Output path exception**: This skill writes to `docs/current/` in the target project, NOT to `$JAAN_OUTPUTS_DIR`. Detect outputs are living project documentation, not versioned artifacts.
+**Output path**: `$JAAN_OUTPUTS_DIR/detect/` — flat files, overwritten each run (no IDs).
 
 **Important**: This skill does NOT scan the repository directly. It reads and consolidates outputs from the 5 detect skills.
 
@@ -66,7 +66,7 @@ Use extended reasoning for:
 
 ## Step 0: Check Detect Outputs
 
-Glob `docs/current/{dev,design,writing,product,ux}/` to see which detect skills have run.
+Glob `$JAAN_OUTPUTS_DIR/detect/{dev,design,writing,product,ux}/` to see which detect skills have run.
 
 **If NO detect outputs exist**:
 
@@ -101,11 +101,11 @@ For each domain that has outputs, read all files:
 
 | Domain | Directory | Expected Files |
 |--------|-----------|---------------|
-| dev | `docs/current/dev/` | stack, architecture, standards, testing, cicd, deployment, security, observability, risks |
-| design | `docs/current/design/` | brand, tokens, components, patterns, accessibility, governance |
-| writing | `docs/current/writing/` | writing-system, glossary, ui-copy, error-messages, localization, samples |
-| product | `docs/current/product/` | overview, features, value-prop, monetization, entitlements, metrics, constraints |
-| ux | `docs/current/ux/` | personas, jtbd, flows, pain-points, heuristics, accessibility, gaps |
+| dev | `$JAAN_OUTPUTS_DIR/detect/dev/` | stack, architecture, standards, testing, cicd, deployment, security, observability, risks |
+| design | `$JAAN_OUTPUTS_DIR/detect/design/` | brand, tokens, components, patterns, accessibility, governance |
+| writing | `$JAAN_OUTPUTS_DIR/detect/writing/` | writing-system, glossary, ui-copy, error-messages, localization, samples |
+| product | `$JAAN_OUTPUTS_DIR/detect/product/` | overview, features, value-prop, monetization, entitlements, metrics, constraints |
+| ux | `$JAAN_OUTPUTS_DIR/detect/ux/` | personas, jtbd, flows, pain-points, heuristics, accessibility, gaps |
 
 ## Step 2: Validate Universal Frontmatter
 
@@ -224,13 +224,13 @@ UNKNOWNS BACKLOG: {n} items requiring investigation
 VALIDATION ISSUES: {n} frontmatter validation failures
 
 OUTPUT FILES (4):
-  docs/current/README.md              - Knowledge index with overall score
-  docs/current/risk-heatmap.md        - Domain x severity risk heatmap
-  docs/current/unknowns-backlog.md    - Prioritized unknowns with confirmation steps
-  docs/current/source-map.md          - Evidence ID resolution index
+  $JAAN_OUTPUTS_DIR/detect/README.md              - Knowledge index with overall score
+  $JAAN_OUTPUTS_DIR/detect/risk-heatmap.md        - Domain x severity risk heatmap
+  $JAAN_OUTPUTS_DIR/detect/unknowns-backlog.md    - Prioritized unknowns with confirmation steps
+  $JAAN_OUTPUTS_DIR/detect/source-map.md          - Evidence ID resolution index
 ```
 
-> "Proceed with writing 4 consolidation files to docs/current/? [y/n]"
+> "Proceed with writing 4 consolidation files to $JAAN_OUTPUTS_DIR/detect/? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -238,16 +238,16 @@ OUTPUT FILES (4):
 
 # PHASE 2: Write Output Files
 
-## Step 8: Write to docs/current/
+## Step 8: Write to $JAAN_OUTPUTS_DIR/detect/
 
 Write 4 output files:
 
 | File | Content |
 |------|---------|
-| `docs/current/README.md` | Knowledge index: metadata, domain summaries, overall score, links to all detect outputs |
-| `docs/current/risk-heatmap.md` | Risk heatmap table (domain x severity), top risks per domain |
-| `docs/current/unknowns-backlog.md` | Prioritized unknowns with "how to confirm" steps and scope boundaries |
-| `docs/current/source-map.md` | Evidence index: all E-IDs mapped to file locations |
+| `$JAAN_OUTPUTS_DIR/detect/README.md` | Knowledge index: metadata, domain summaries, overall score, links to all detect outputs |
+| `$JAAN_OUTPUTS_DIR/detect/risk-heatmap.md` | Risk heatmap table (domain x severity), top risks per domain |
+| `$JAAN_OUTPUTS_DIR/detect/unknowns-backlog.md` | Prioritized unknowns with "how to confirm" steps and scope boundaries |
+| `$JAAN_OUTPUTS_DIR/detect/source-map.md` | Evidence index: all E-IDs mapped to file locations |
 
 ### README.md Structure
 
@@ -306,7 +306,7 @@ If yes:
 
 ## Definition of Done
 
-- [ ] All 4 output files written to `docs/current/`
+- [ ] All 4 output files written to `$JAAN_OUTPUTS_DIR/detect/`
 - [ ] Universal YAML frontmatter in every file
 - [ ] Risk heatmap shows domain x severity table
 - [ ] Evidence index resolves all E-IDs to file locations

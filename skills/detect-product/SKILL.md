@@ -1,7 +1,7 @@
 ---
 name: detect-product
 description: Product reality extraction with evidence-backed features, monetization, and metrics.
-allowed-tools: Read, Glob, Grep, Write(docs/current/product/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [repo]
 ---
 
@@ -15,7 +15,7 @@ argument-hint: [repo]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for framework-aware scanning)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-product.template.md` - Output template
 
-**Output path exception**: This skill writes to `docs/current/product/` in the target project, NOT to `$JAAN_OUTPUTS_DIR`. Detect outputs are living project documentation (overwritten each run), not versioned artifacts.
+**Output path**: `$JAAN_OUTPUTS_DIR/detect/product/` — flat files, overwritten each run (no IDs).
 
 ## Input
 
@@ -272,16 +272,16 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10
 
 OUTPUT FILES (7):
-  docs/current/product/overview.md       - Product overview
-  docs/current/product/features.md       - Feature inventory
-  docs/current/product/value-prop.md     - Value proposition signals
-  docs/current/product/monetization.md   - Monetization model
-  docs/current/product/entitlements.md   - Entitlement enforcement
-  docs/current/product/metrics.md        - Instrumentation reality
-  docs/current/product/constraints.md    - Constraints and risks
+  $JAAN_OUTPUTS_DIR/detect/product/overview.md       - Product overview
+  $JAAN_OUTPUTS_DIR/detect/product/features.md       - Feature inventory
+  $JAAN_OUTPUTS_DIR/detect/product/value-prop.md     - Value proposition signals
+  $JAAN_OUTPUTS_DIR/detect/product/monetization.md   - Monetization model
+  $JAAN_OUTPUTS_DIR/detect/product/entitlements.md   - Entitlement enforcement
+  $JAAN_OUTPUTS_DIR/detect/product/metrics.md        - Instrumentation reality
+  $JAAN_OUTPUTS_DIR/detect/product/constraints.md    - Constraints and risks
 ```
 
-> "Proceed with writing 7 output files to docs/current/product/? [y/n]"
+> "Proceed with writing 7 output files to $JAAN_OUTPUTS_DIR/detect/product/? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -289,21 +289,21 @@ OUTPUT FILES (7):
 
 # PHASE 2: Write Output Files
 
-## Step 7: Write to docs/current/product/
+## Step 7: Write to $JAAN_OUTPUTS_DIR/detect/product/
 
-Create directory `docs/current/product/` if it does not exist.
+Create directory `$JAAN_OUTPUTS_DIR/detect/product/` if it does not exist.
 
 Write 7 output files:
 
 | File | Content |
 |------|---------|
-| `docs/current/product/overview.md` | Product overview with feature summary |
-| `docs/current/product/features.md` | Feature inventory with 3-layer evidence |
-| `docs/current/product/value-prop.md` | Value proposition signals from copy |
-| `docs/current/product/monetization.md` | Monetization model with evidence |
-| `docs/current/product/entitlements.md` | Entitlement enforcement mapping |
-| `docs/current/product/metrics.md` | Instrumentation reality (analytics, flags, events) |
-| `docs/current/product/constraints.md` | Technical/business constraints and risks |
+| `$JAAN_OUTPUTS_DIR/detect/product/overview.md` | Product overview with feature summary |
+| `$JAAN_OUTPUTS_DIR/detect/product/features.md` | Feature inventory with 3-layer evidence |
+| `$JAAN_OUTPUTS_DIR/detect/product/value-prop.md` | Value proposition signals from copy |
+| `$JAAN_OUTPUTS_DIR/detect/product/monetization.md` | Monetization model with evidence |
+| `$JAAN_OUTPUTS_DIR/detect/product/entitlements.md` | Entitlement enforcement mapping |
+| `$JAAN_OUTPUTS_DIR/detect/product/metrics.md` | Instrumentation reality (analytics, flags, events) |
+| `$JAAN_OUTPUTS_DIR/detect/product/constraints.md` | Technical/business constraints and risks |
 
 Each file MUST include:
 1. Universal YAML frontmatter
@@ -325,7 +325,7 @@ If yes:
 
 ## Definition of Done
 
-- [ ] All 7 output files written to `docs/current/product/`
+- [ ] All 7 output files written to `$JAAN_OUTPUTS_DIR/detect/product/`
 - [ ] Universal YAML frontmatter in every file
 - [ ] Every finding has evidence block with E-PRD-NNN ID
 - [ ] Feature evidence uses 3-layer model with confidence mapping
