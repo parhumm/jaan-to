@@ -27,7 +27,14 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v3.24.0 — Multi-platform support for detect skills
+**Latest:** v4.0.0 — Batch skill rename (breaking: 5 skills renamed)
+
+### v4.0.0 — Batch skill rename (breaking)
+- Renamed 5 skills: `dev-be-data-model` → `backend-data-model`, `dev-be-task-breakdown` → `backend-task-breakdown`, `dev-api-contract` → `backend-api-contract`, `dev-fe-design` → `frontend-design`, `dev-fe-task-breakdown` → `frontend-task-breakdown` (`d93cbdc`)
+- Moved documentation to role-based directories (`docs/skills/backend/`, `docs/skills/frontend/`)
+- Updated output paths to `outputs/backend/` and `outputs/frontend/`
+- Added bootstrap migration for automatic output path migration
+- Fixed language setting keys and cross-skill command references
 
 ### v3.24.0 — Multi-platform support for detect skills
 - Multi-platform monorepo analysis (web, backend, mobile, TV apps) with auto-detection (`f57a406`)
@@ -120,6 +127,14 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 | RELEASE | 8 | 8 | 0 | [release.md](tasks/role-skills/release.md) |
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
+
+### v4.0.0 — Batch skill rename (`d93cbdc`)
+
+- [x] Renamed 5 skills: `dev-be-data-model` → `backend-data-model`, `dev-be-task-breakdown` → `backend-task-breakdown`, `dev-api-contract` → `backend-api-contract`, `dev-fe-design` → `frontend-design`, `dev-fe-task-breakdown` → `frontend-task-breakdown` (`3ab9a93`..`d93cbdc`)
+- [x] Moved documentation to role-based directories (`docs/skills/backend/`, `docs/skills/frontend/`) (`1aa0b73`)
+- [x] Updated output paths to `outputs/backend/` and `outputs/frontend/` (`fb0ddff`)
+- [x] Added bootstrap migration for automatic output path migration (`d93cbdc`)
+- [x] Fixed language setting keys and cross-skill command references (`d93cbdc`)
 
 ---
 
