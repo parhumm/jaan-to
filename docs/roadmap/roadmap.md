@@ -27,7 +27,18 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v3.23.0 — Detect & Knowledge Pack (6 skills)
+**Latest:** v3.24.0 — Multi-platform support for detect skills
+
+### v3.24.0 — Multi-platform support for detect skills
+- Multi-platform monorepo analysis (web, backend, mobile, TV apps) with auto-detection (`f57a406`)
+- Platform-scoped filenames with backward compatibility (`d7a1667`)
+- Cross-platform risk heatmap and merged pack consolidation (`8768b41`)
+- pack-detect renamed to detect-pack for consistency (`aed1c3f`)
+- 6 templates updated with platform variables (`d7a1667`)
+- Multi-platform documentation and migration guide (`a955bc7`)
+
+### v3.23.1 — Detect output paths standardized
+- All 6 detect skills now write to `$JAAN_OUTPUTS_DIR/detect/` instead of `docs/current/` (`6bde383`)
 
 ### v3.23.0 — Detect & Knowledge Pack (6 skills)
 - 6 detect skills: detect-dev, detect-design, detect-writing, detect-product, detect-ux, detect-pack (`52eb72f`..`50a75f5`)
