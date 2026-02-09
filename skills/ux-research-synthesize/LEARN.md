@@ -242,4 +242,4 @@ This skill implements best practices from:
 - **ISO 9241-11:2018** - Usability dimensions (effectiveness, efficiency, satisfaction)
 - **Thomas & Harden's Three-Stage Thematic Synthesis** - Line-by-line coding, descriptive themes, analytical themes
 
-For complete methodology foundation: `jaan-to/outputs/research/47-ux-research-synthesize.md` (877 lines)
+For complete methodology foundation: `$JAAN_OUTPUTS_DIR/research/47-ux-research-synthesize.md` (877 lines)

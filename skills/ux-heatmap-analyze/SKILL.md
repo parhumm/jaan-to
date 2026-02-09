@@ -421,7 +421,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-heatmap-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/ux/heatmap/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/ux/heatmap/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-heatmap-{slug}.md
 
 ## Step 12: Write Output
@@ -450,8 +450,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ Heatmap report written to: jaan-to/outputs/ux/heatmap/{NEXT_ID}-{slug}/{NEXT_ID}-heatmap-{slug}.md
-> ✓ Index updated: jaan-to/outputs/ux/heatmap/README.md
+> ✓ Heatmap report written to: $JAAN_OUTPUTS_DIR/ux/heatmap/{NEXT_ID}-{slug}/{NEXT_ID}-heatmap-{slug}.md
+> ✓ Index updated: $JAAN_OUTPUTS_DIR/ux/heatmap/README.md
 
 ## Step 13: Capture Feedback
 

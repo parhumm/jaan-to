@@ -523,7 +523,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-story-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/pm/stories/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/pm/stories/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-story-{slug}.md
 
 ## Step 7: Write Output
@@ -552,8 +552,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✅ Story written to: jaan-to/outputs/pm/stories/{NEXT_ID}-{slug}/{NEXT_ID}-story-{slug}.md
-> ✅ Index updated: jaan-to/outputs/pm/stories/README.md
+> ✅ Story written to: $JAAN_OUTPUTS_DIR/pm/stories/{NEXT_ID}-{slug}/{NEXT_ID}-story-{slug}.md
+> ✅ Index updated: $JAAN_OUTPUTS_DIR/pm/stories/README.md
 
 ### Export Formats
 

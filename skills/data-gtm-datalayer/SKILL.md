@@ -374,7 +374,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-gtm-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/data/gtm/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/data/gtm/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-gtm-{slug}.md
 
 ## Step 6: Write Output
@@ -404,8 +404,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ Tracking code written to: jaan-to/outputs/data/gtm/{NEXT_ID}-{slug}/{NEXT_ID}-gtm-{slug}.md
-> ✓ Index updated: jaan-to/outputs/data/gtm/README.md
+> ✓ Tracking code written to: $JAAN_OUTPUTS_DIR/data/gtm/{NEXT_ID}-{slug}/{NEXT_ID}-gtm-{slug}.md
+> ✓ Index updated: $JAAN_OUTPUTS_DIR/data/gtm/README.md
 
 ## Step 7: Capture Feedback
 

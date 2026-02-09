@@ -410,7 +410,7 @@ PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-preview-${slug}.html"
 **Preview output configuration:**
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/frontend/components/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/frontend/components/{NEXT_ID}-{slug}/
 > - Files:
 >   - {NEXT_ID}-component-{slug}.md (documentation)
 >   - {NEXT_ID}-component-code-{slug}.{ext} (code)
@@ -444,12 +444,12 @@ PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-preview-${slug}.html"
    ```
 
 6. **Confirm to user:**
-   > ✓ Component written to: jaan-to/outputs/frontend/components/{NEXT_ID}-{slug}/
+   > ✓ Component written to: $JAAN_OUTPUTS_DIR/frontend/components/{NEXT_ID}-{slug}/
    > ✓ Files created:
    >   - {NEXT_ID}-component-{slug}.md
    >   - {NEXT_ID}-component-code-{slug}.{ext}
    >   - {NEXT_ID}-component-preview-{slug}.html
-   > ✓ Index updated: jaan-to/outputs/frontend/components/README.md
+   > ✓ Index updated: $JAAN_OUTPUTS_DIR/frontend/components/README.md
 
 ## Step 12: Suggest Next Actions
 
