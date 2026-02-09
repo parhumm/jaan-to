@@ -27,7 +27,12 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.3.0 — WordPress plugin PR review skill
+**Latest:** v4.4.0 — Add release-iterate-changelog skill
+
+### v4.4.0 — Add release-iterate-changelog skill
+- Added `release-iterate-changelog` skill — changelog generation with user impact notes and support guidance from git history (`e19911c`)
+- New `release` role with documentation (`7623812`)
+- LEARN.md seed from research 66-release-iterate-changelog (`e19911c`)
 
 ### v4.3.0 — WordPress plugin PR review skill
 - Added `wp-pr-review` skill — 5-phase WordPress plugin PR review with security scanning, confidence scoring, and optional PR commenting (`b5edd39`)
@@ -101,13 +106,6 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## Unreleased
 
-### wp-pr-review skill (`b5edd39`)
-
-- [x] `/jaan-to:wp-pr-review` — WordPress plugin PR review with 5-phase workflow (`b5edd39`)
-- [x] New `wp` role (WordPress) added to enabled roles (`b5edd39`)
-- [x] First `references/` directory pattern for progressive disclosure (`b5edd39`)
-- [x] Documentation: `docs/skills/wp/pr-review.md` and `docs/skills/wp/README.md` (`b5edd39`)
-
 ---
 
 ## Phase 4: Development Workflow
@@ -163,6 +161,12 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 | RELEASE | 8 | 8 | 0 | [release.md](tasks/role-skills/release.md) |
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
+
+### v4.4.0 — Add release-iterate-changelog skill (`e19911c`)
+
+- [x] `/jaan-to:release-iterate-changelog` — Generate changelog with user impact notes and support guidance (`e19911c`)
+- [x] New `release` role with documentation (`7623812`)
+- [x] LEARN.md seed from research 66-release-iterate-changelog (`e19911c`)
 
 ### v4.2.0 — Backend & frontend scaffold skills (`6ef0c32`)
 
