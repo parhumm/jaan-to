@@ -171,7 +171,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-prd-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/pm/prd/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/pm/prd/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-prd-{slug}.md
 
 ## Step 6: Write Output
@@ -200,8 +200,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ PRD written to: jaan-to/outputs/pm/prd/{NEXT_ID}-{slug}/{NEXT_ID}-prd-{slug}.md
-> ✓ Index updated: jaan-to/outputs/pm/prd/README.md
+> ✓ PRD written to: $JAAN_OUTPUTS_DIR/pm/prd/{NEXT_ID}-{slug}/{NEXT_ID}-prd-{slug}.md
+> ✓ Index updated: $JAAN_OUTPUTS_DIR/pm/prd/README.md
 
 ## Step 7: Auto-Invoke User Story Generation
 

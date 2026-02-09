@@ -542,7 +542,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
 3. Preview for user:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-{report-type}-{slug}.md
 
 ## Step {N}: Write Output
@@ -576,8 +576,8 @@ add_to_index \
 \`\`\`
 
 4. Confirm to user:
-> ✓ Output written to: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
-> ✓ Index updated: jaan-to/outputs/{role}/{subdomain}/README.md
+> ✓ Output written to: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
+> ✓ Index updated: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/README.md
 ```
 
 **Key Components**:
@@ -720,6 +720,23 @@ Before completing Step 12, verify:
 - [ ] No TODOs or placeholders in generated files
 
 Confirm: "Skill files written to `skills/{name}/` (v3.0.0-compliant)"
+
+### Step 12.9: Automated Path Scan
+
+Before writing the generated SKILL.md, scan its content for hardcoded paths:
+
+**Search for violations:**
+- `jaan-to/outputs/` (should be `$JAAN_OUTPUTS_DIR/`)
+- `jaan-to/templates/` (should be `$JAAN_TEMPLATES_DIR/`)
+- `jaan-to/learn/` (should be `$JAAN_LEARN_DIR/`)
+- `jaan-to/context/` (should be `$JAAN_CONTEXT_DIR/`)
+
+**Exclude**: Lines that are examples of what NOT to do (marked with ✗ or inside bad-example blocks)
+
+If violations found:
+> "Found {N} hardcoded path(s) in generated SKILL.md. Auto-fix? [y/n]"
+
+Replace all violations with environment variable equivalents before proceeding.
 
 ## Step 13: Tech Stack Integration (Optional)
 

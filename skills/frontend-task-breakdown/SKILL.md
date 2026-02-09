@@ -535,7 +535,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-fe-tasks-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/frontend/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/frontend/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-fe-tasks-{slug}.md
 
 ## Step 11: Write Output
@@ -564,8 +564,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ Task breakdown written to: jaan-to/outputs/frontend/{NEXT_ID}-{slug}/{NEXT_ID}-fe-tasks-{slug}.md
-> ✓ Index updated: jaan-to/outputs/frontend/README.md
+> ✓ Task breakdown written to: $JAAN_OUTPUTS_DIR/frontend/{NEXT_ID}-{slug}/{NEXT_ID}-fe-tasks-{slug}.md
+> ✓ Index updated: $JAAN_OUTPUTS_DIR/frontend/README.md
 
 ## Step 12: Suggest Next Skill
 

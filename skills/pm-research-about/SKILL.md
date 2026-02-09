@@ -1,7 +1,7 @@
 ---
 name: pm-research-about
 description: Deep research on any topic, or add existing file/URL to research index.
-allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write(jaan-to/outputs/research/**), Edit, Bash(git add:*), Bash(git commit:*)
+allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/research/**), Edit, Bash(git add:*), Bash(git commit:*)
 argument-hint: <topic-or-file-path-or-URL>
 ---
 
@@ -101,7 +101,7 @@ If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topi
 > - Topic: {topic}
 > - Category: {category}
 > - Filename: {filename}
-> - Path: jaan-to/outputs/research/{filename}
+> - Path: $JAAN_OUTPUTS_DIR/research/{filename}
 
 ---
 
@@ -689,8 +689,8 @@ SUBTOPICS DISCOVERED
 
 WILL CREATE
 ───────────
-□ jaan-to/outputs/research/{filename}
-□ Update jaan-to/outputs/research/README.md
+□ $JAAN_OUTPUTS_DIR/research/{filename}
+□ Update $JAAN_OUTPUTS_DIR/research/README.md
 ```
 
 > "Generate full research document? [y/n]"
@@ -761,7 +761,7 @@ Edit `$JAAN_OUTPUTS_DIR/research/README.md`:
 ## Step 12: Git Commit
 
 ```bash
-git add jaan-to/outputs/research/{filename} jaan-to/outputs/research/README.md
+git add $JAAN_OUTPUTS_DIR/research/{filename} $JAAN_OUTPUTS_DIR/research/README.md
 git commit -m "$(cat <<'EOF'
 docs(research): Add {title}
 
@@ -786,7 +786,7 @@ EOF
 ✅ Research Complete
 
 📁 Category: {category}
-📄 Document: jaan-to/outputs/research/{filename}
+📄 Document: $JAAN_OUTPUTS_DIR/research/{filename}
 📊 Sources: {N} unique sources consulted
 🔍 Queries: {M} search queries used
 📅 Date: {YYYY-MM-DD}
@@ -871,8 +871,8 @@ Filename: {NN}-{category}-{slug}.md (if URL)
 Summary: {2-3 sentences}
 
 WILL MODIFY:
-□ jaan-to/outputs/research/README.md (add to index)
-□ jaan-to/outputs/research/{filename} (if URL: create new file)
+□ $JAAN_OUTPUTS_DIR/research/README.md (add to index)
+□ $JAAN_OUTPUTS_DIR/research/{filename} (if URL: create new file)
 ```
 
 > "Proceed with adding to index? [y/n]"
@@ -905,7 +905,7 @@ Path: `$JAAN_OUTPUTS_DIR/research/{NN}-{category}-{slug}.md`
 ## Git Commit
 
 ```bash
-git add jaan-to/outputs/research/README.md jaan-to/outputs/research/{filename}
+git add $JAAN_OUTPUTS_DIR/research/README.md $JAAN_OUTPUTS_DIR/research/{filename}
 git commit -m "$(cat <<'COMMITMSG'
 docs(research): Add {title} to index
 
@@ -928,8 +928,8 @@ Category: {category}
 File: {filename}
 
 Files modified:
-- jaan-to/outputs/research/README.md
-- jaan-to/outputs/research/{filename} (if URL)
+- $JAAN_OUTPUTS_DIR/research/README.md
+- $JAAN_OUTPUTS_DIR/research/{filename} (if URL)
 ```
 
 > "Any feedback? [y/n]"

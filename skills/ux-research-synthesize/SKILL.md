@@ -433,7 +433,7 @@ EXEC_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-exec-brief-${slug}.md"
 Preview output configuration:
 > "**Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/ux/research/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/ux/research/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-synthesis-{slug}.md
 > - Exec brief: {NEXT_ID}-exec-brief-{slug}.md"
 
@@ -684,9 +684,9 @@ add_to_index \
 ```
 
 5. **Confirm completion**:
-> "✓ Synthesis report written to: jaan-to/outputs/ux/research/{NEXT_ID}-{slug}/{NEXT_ID}-synthesis-{slug}.md
-> ✓ Executive brief written to: jaan-to/outputs/ux/research/{NEXT_ID}-{slug}/{NEXT_ID}-exec-brief-{slug}.md
-> ✓ Index updated: jaan-to/outputs/ux/research/README.md"
+> "✓ Synthesis report written to: $JAAN_OUTPUTS_DIR/ux/research/{NEXT_ID}-{slug}/{NEXT_ID}-synthesis-{slug}.md
+> ✓ Executive brief written to: $JAAN_OUTPUTS_DIR/ux/research/{NEXT_ID}-{slug}/{NEXT_ID}-exec-brief-{slug}.md
+> ✓ Index updated: $JAAN_OUTPUTS_DIR/ux/research/README.md"
 
 ## Step 15: Capture Feedback
 

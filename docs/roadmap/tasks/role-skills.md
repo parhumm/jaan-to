@@ -5,7 +5,7 @@ sidebar_position: 9
 
 # Role Skills Catalog
 
-> Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 140 skills across 12 roles
+> Phase 4 (Quick Wins) + Phase 6 (Advanced) | Status: pending | 141 skills across 12 roles
 
 ## Overview
 
@@ -68,7 +68,7 @@ Use v3.0.0 syntax in all template.md files:
 | QA | 12 | 8 | [qa.md](role-skills/qa.md) |
 | DATA | 14 | 8 | [data.md](role-skills/data.md) |
 | GROWTH | 15 | 9 | [growth.md](role-skills/growth.md) |
-| UX | 20 | 15 | [ux.md](role-skills/ux.md) |
+| UX | 21 | 16 | [ux.md](role-skills/ux.md) |
 | SEC | 4 | 4 | [sec.md](role-skills/sec.md) |
 | DELIVERY | 8 | 8 | [delivery.md](role-skills/delivery.md) |
 | SRE | 9 | 5 | [sre.md](role-skills/sre.md) |

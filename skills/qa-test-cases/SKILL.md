@@ -14,7 +14,7 @@ argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)]
 - `$JAAN_LEARN_DIR/jaan-to:qa-test-cases.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases.template.md` - BDD/Gherkin template
 - `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases-quality-checklist.template.md` - Quality checklist template
-- Research: `jaan-to/outputs/research/50-qa-test-cases.md` - ISTQB standards, test design techniques
+- Research: `$JAAN_OUTPUTS_DIR/research/50-qa-test-cases.md` - ISTQB standards, test design techniques
 
 ## Input
 
@@ -42,7 +42,7 @@ If the file exists, apply its lessons throughout this execution:
 - Avoid mistakes listed in "Common Mistakes"
 
 Also read the comprehensive research document:
-`jaan-to/outputs/research/50-qa-test-cases.md`
+`$JAAN_OUTPUTS_DIR/research/50-qa-test-cases.md`
 
 This provides:
 - ISTQB test case specification standards (Section 2)
@@ -87,7 +87,7 @@ If $ARGUMENTS contains acceptance criteria text:
 3. Proceed to Step 2
 
 **Mode B - PRD File Path:**
-If $ARGUMENTS contains file path pattern (e.g., ".md" or "jaan-to/outputs/"):
+If $ARGUMENTS contains file path pattern (e.g., ".md" or "$JAAN_OUTPUTS_DIR/"):
 1. Use Read tool to open the file
 2. Locate "Acceptance Criteria" or "User Stories" section
 3. Extract all AC statements

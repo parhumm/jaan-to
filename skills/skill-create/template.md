@@ -103,7 +103,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
 3. Preview:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-{report-type}-{slug}.md
 
 ## Step 6: Preview & Approval
@@ -138,7 +138,7 @@ add_to_index \
 \`\`\`
 
 4. Confirm:
-> ✓ Output written to: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
+> ✓ Output written to: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
 > ✓ Index updated
 
 ## Step 8: Capture Feedback

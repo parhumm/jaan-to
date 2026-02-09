@@ -361,7 +361,7 @@ Missing Executive Summary section
 ```
 ❌ Output structure outdated
    Current: {current pattern}
-   Standard: jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md
+   Standard: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md
 
    Required changes:
    1. Add Step 5.5: Generate ID using scripts/lib/id-generator.sh
@@ -388,6 +388,24 @@ Check that description field is concise and budget-friendly:
 - [ ] ✓ Description is concise (under 120 chars, no trigger/mapping lines)
 - [ ] ✗ Description too long or contains `Auto-triggers on:` / `Maps to:` lines
 
+### V3.10: Preview & Confirmation Text Uses Variables
+
+Check display strings for hardcoded paths:
+
+**Detection**: Search for `jaan-to/outputs/`, `jaan-to/templates/`, `jaan-to/learn/`, `jaan-to/context/` in:
+- Output preview sections ("> - Folder: ...")
+- Completion confirmations ("> ✓ Written to: ...")
+- Index confirmations ("> ✓ Index updated: ...")
+- Git add commands
+
+**Exclude**: Lines showing old patterns as bad examples (marked with ✗ or inside migration arrows `→`)
+
+**Fix**: Replace with corresponding `$JAAN_*` environment variable.
+
+**Status**:
+- [ ] ✓ All display strings use `$JAAN_*` variables
+- [ ] ✗ Hardcoded paths found in display strings
+
 ### v3.0.0 Compliance Summary
 
 Display results:
@@ -413,7 +431,11 @@ DESCRIPTION BUDGET
 ──────────────────
 V3.9 Description budget:        ✓ / ✗
 
-VERDICT: v3.0.0 Compliant / Needs Migration / Needs Output Migration / Needs Description Fix
+DISPLAY STRINGS
+───────────────
+V3.10 Display paths use vars:   ✓ / ✗
+
+VERDICT: v3.0.0 Compliant / Needs Migration / Needs Output Migration / Needs Description Fix / Needs Display Fix
 ```
 
 If **any check fails (✗)**:
@@ -754,7 +776,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
 3. Preview:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-{report-type}-{slug}.md
 ```
 
@@ -791,7 +813,7 @@ add_to_index \
 \`\`\`
 
 4. Confirm:
-> ✓ Output written to: jaan-to/outputs/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
+> ✓ Output written to: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
 > ✓ Index updated
 ```
 

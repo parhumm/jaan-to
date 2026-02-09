@@ -75,4 +75,5 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [fe-design, fe-task-breakdown, api-contract]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/scaffold/`
+- **Reference**: [`63-dev-scaffolds.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/63-dev-scaffolds.md)
 - **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)

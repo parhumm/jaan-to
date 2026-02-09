@@ -4,7 +4,7 @@
 
 Accumulated lessons from past executions. Read this before generating test cases to avoid past mistakes and apply learned improvements.
 
-Seed content extracted from research: `jaan-to/outputs/research/50-qa-test-cases.md`
+Seed content extracted from research: `$JAAN_OUTPUTS_DIR/research/50-qa-test-cases.md`
 
 ---
 
