@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.5.0] - 2026-02-09
+
+### Added
+- **`ux-flowchart-generate` skill** (`/jaan-to:ux-flowchart-generate`) — Generate GitHub-renderable Mermaid flowcharts from PRDs, docs, codebases, or any combination with evidence maps tracing every node to its source, confidence scoring, and structured unknowns lists. Supports 4 source types (`prd`, `doc`, `repo`, `mixed`), 4 diagram goals (`userflow`, `systemflow`, `architecture`, `stateflow`), 17 machine-checkable quality gates, auto-split for large diagrams, update mode with manual section preservation, and GitHub Mermaid v11.4.1 constraint enforcement
+- **LEARN.md seed file** for ux-flowchart-generate — Pre-populated with research-validated lessons from 40+ sources (research 64/65-ux-flowchart-generate)
+
+### Changed
+- **Plugin skill count** — Updated from 31 to 32 skills across plugin.json and marketplace.json descriptions
+- **Config seed** — Added ux-flowchart-generate to Available Skills table
+
+---
+
 ## [4.4.0] - 2026-02-09
 
 ### Added

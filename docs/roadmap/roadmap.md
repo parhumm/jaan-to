@@ -27,7 +27,12 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.4.0 — Add release-iterate-changelog skill
+**Latest:** v4.5.0 — Add ux-flowchart-generate skill
+
+### v4.5.0 — Add ux-flowchart-generate skill
+- Added `ux-flowchart-generate` skill — generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence maps, confidence scoring, and unknowns lists (`df64dab`)
+- LEARN.md seed from research 64/65-ux-flowchart-generate
+- Plugin skill count updated from 31 to 32
 
 ### v4.4.0 — Add release-iterate-changelog skill
 - Added `release-iterate-changelog` skill — changelog generation with user impact notes and support guidance from git history (`e19911c`)
