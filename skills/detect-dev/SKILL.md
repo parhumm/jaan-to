@@ -1,7 +1,7 @@
 ---
 name: detect-dev
 description: Engineering audit with SARIF evidence, 4-level confidence, and OpenSSF scoring.
-allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Write(docs/current/dev/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [repo]
 ---
 
@@ -15,7 +15,7 @@ argument-hint: [repo]
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if populated by dev-stack-detect, used as starting input)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` - Output template
 
-**Output path exception**: This skill writes to `docs/current/dev/` in the target project, NOT to `$JAAN_OUTPUTS_DIR`. Detect outputs are living project documentation (overwritten each run), not versioned artifacts.
+**Output path**: `$JAAN_OUTPUTS_DIR/detect/dev/` — flat files, overwritten each run (no IDs).
 
 ## Input
 
@@ -381,18 +381,18 @@ SEVERITY SUMMARY
 OVERALL SCORE: {score}/10 (OpenSSF-style)
 
 OUTPUT FILES (9):
-  docs/current/dev/stack.md           - {n} findings
-  docs/current/dev/architecture.md    - {n} findings
-  docs/current/dev/standards.md       - {n} findings
-  docs/current/dev/testing.md         - {n} findings
-  docs/current/dev/cicd.md            - {n} findings
-  docs/current/dev/deployment.md      - {n} findings
-  docs/current/dev/security.md        - {n} findings
-  docs/current/dev/observability.md   - {n} findings
-  docs/current/dev/risks.md           - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/stack.md           - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/architecture.md    - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/standards.md       - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/testing.md         - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/cicd.md            - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/deployment.md      - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/security.md        - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/observability.md   - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/risks.md           - {n} findings
 ```
 
-> "Proceed with writing 9 output files to docs/current/dev/? [y/n]"
+> "Proceed with writing 9 output files to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -400,9 +400,9 @@ OUTPUT FILES (9):
 
 # PHASE 2: Write Output Files
 
-## Step 10: Write to docs/current/dev/
+## Step 10: Write to $JAAN_OUTPUTS_DIR/detect/dev/
 
-Create directory `docs/current/dev/` if it does not exist.
+Create directory `$JAAN_OUTPUTS_DIR/detect/dev/` if it does not exist.
 
 For each of the 9 output files, use the template from `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` and fill with findings:
 
@@ -410,15 +410,15 @@ For each of the 9 output files, use the template from `$JAAN_TEMPLATES_DIR/jaan-
 
 | File | Content |
 |------|---------|
-| `docs/current/dev/stack.md` | Tech stack with version evidence |
-| `docs/current/dev/architecture.md` | Architecture patterns and data flow |
-| `docs/current/dev/standards.md` | Coding standards and conventions |
-| `docs/current/dev/testing.md` | Test coverage and strategy |
-| `docs/current/dev/cicd.md` | CI/CD pipelines and security |
-| `docs/current/dev/deployment.md` | Deployment patterns |
-| `docs/current/dev/security.md` | Security posture and findings (OWASP mapping) |
-| `docs/current/dev/observability.md` | Logging, metrics, tracing |
-| `docs/current/dev/risks.md` | Technical risks and debt |
+| `$JAAN_OUTPUTS_DIR/detect/dev/stack.md` | Tech stack with version evidence |
+| `$JAAN_OUTPUTS_DIR/detect/dev/architecture.md` | Architecture patterns and data flow |
+| `$JAAN_OUTPUTS_DIR/detect/dev/standards.md` | Coding standards and conventions |
+| `$JAAN_OUTPUTS_DIR/detect/dev/testing.md` | Test coverage and strategy |
+| `$JAAN_OUTPUTS_DIR/detect/dev/cicd.md` | CI/CD pipelines and security |
+| `$JAAN_OUTPUTS_DIR/detect/dev/deployment.md` | Deployment patterns |
+| `$JAAN_OUTPUTS_DIR/detect/dev/security.md` | Security posture and findings (OWASP mapping) |
+| `$JAAN_OUTPUTS_DIR/detect/dev/observability.md` | Logging, metrics, tracing |
+| `$JAAN_OUTPUTS_DIR/detect/dev/risks.md` | Technical risks and debt |
 
 Each file MUST include:
 1. Universal YAML frontmatter with findings_summary and overall_score
@@ -452,7 +452,7 @@ If yes:
 
 ## Definition of Done
 
-- [ ] All 9 output files written to `docs/current/dev/`
+- [ ] All 9 output files written to `$JAAN_OUTPUTS_DIR/detect/dev/`
 - [ ] Universal YAML frontmatter in every file
 - [ ] Every finding has evidence block with E-DEV-NNN ID
 - [ ] Confidence scores assigned to all findings

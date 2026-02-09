@@ -70,7 +70,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 > Details: [tasks/role-skills/detect.md](tasks/role-skills/detect.md)
 
-Evidence-based repo audits that produce `docs/current/` knowledge. All detect skills are Quick Wins (no MCP required). Each outputs machine-parseable markdown with YAML frontmatter, SARIF-like evidence blocks, and confidence scoring.
+Evidence-based repo audits that produce `$JAAN_OUTPUTS_DIR/detect/` knowledge. All detect skills are Quick Wins (no MCP required). Each outputs machine-parseable markdown with YAML frontmatter, SARIF-like evidence blocks, and confidence scoring.
 
 Pipeline: detect-dev + detect-design + detect-writing + detect-product + detect-ux → pack-detect
 

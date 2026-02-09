@@ -35,12 +35,12 @@ Scans the repository for design system signals: brand definitions, design tokens
 
 | File | Content |
 |------|---------|
-| `docs/current/design/brand.md` | Brand signals (colors, typography, logos, font loading) |
-| `docs/current/design/tokens.md` | Design token inventory with drift findings |
-| `docs/current/design/components.md` | Component inventory (primitives, layout, navigation, feedback, data display, form) |
-| `docs/current/design/patterns.md` | UI patterns, spacing scales, dark mode, theme switching |
-| `docs/current/design/accessibility.md` | A11y implementation findings (ARIA, semantic HTML, a11y tests) |
-| `docs/current/design/governance.md` | Design system governance (CODEOWNERS, versioning, visual regression testing) |
+| `$JAAN_OUTPUTS_DIR/detect/design/brand.md` | Brand signals (colors, typography, logos, font loading) |
+| `$JAAN_OUTPUTS_DIR/detect/design/tokens.md` | Design token inventory with drift findings |
+| `$JAAN_OUTPUTS_DIR/detect/design/components.md` | Component inventory (primitives, layout, navigation, feedback, data display, form) |
+| `$JAAN_OUTPUTS_DIR/detect/design/patterns.md` | UI patterns, spacing scales, dark mode, theme switching |
+| `$JAAN_OUTPUTS_DIR/detect/design/accessibility.md` | A11y implementation findings (ARIA, semantic HTML, a11y tests) |
+| `$JAAN_OUTPUTS_DIR/detect/design/governance.md` | Design system governance (CODEOWNERS, versioning, visual regression testing) |
 
 ---
 

@@ -5,6 +5,11 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.23.1] - 2026-02-09
+
+### Changed
+- **Detect skills output paths standardized** — All 6 detect skills (`detect-dev`, `detect-design`, `detect-product`, `detect-ux`, `detect-writing`, `pack-detect`) now write to `$JAAN_OUTPUTS_DIR/detect/{domain}/` instead of hardcoded `docs/current/{domain}/`, aligning with the plugin's configurable output system (`6bde383`)
+
 ## [3.23.0] - 2026-02-08
 
 ### Added
