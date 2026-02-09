@@ -182,9 +182,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`dev-stack-detect` deprecated** — Redirect doc pointing to `detect-dev` (`9d944de`)
 - **30+ reference files updated** — All `dev-stack-detect` references replaced with `detect-dev`/`detect-pack` across docs, scripts, seeds, context, website, and examples (`9d944de`)
 
-### Fixed
-- **Bootstrap `.gitignore` handling** — Stopped auto-adding `jaan-to/` to `.gitignore` which could hide project context files (`c95e4a9`)
-
 ---
 
 ## [3.22.0] - 2026-02-08
