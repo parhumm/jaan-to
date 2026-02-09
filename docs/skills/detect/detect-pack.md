@@ -33,12 +33,38 @@ Reads all detect skill outputs (`$JAAN_OUTPUTS_DIR/detect/{dev,design,writing,pr
 
 ## Output
 
+### Single-Platform Project
 | File | Content |
 |------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/README.md` | Knowledge index: metadata, domain summaries, overall score, links to all detect outputs |
-| `$JAAN_OUTPUTS_DIR/detect/risk-heatmap.md` | Risk heatmap table (domain x severity), top risks per domain |
-| `$JAAN_OUTPUTS_DIR/detect/unknowns-backlog.md` | Prioritized unknowns with "how to confirm" steps and scope boundaries |
-| `$JAAN_OUTPUTS_DIR/detect/source-map.md` | Evidence index: all E-IDs mapped to file locations |
+| `$JAAN_OUTPUTS_DIR/detect/pack/README.md` | Knowledge index: metadata, domain summaries, overall score, links to all detect outputs |
+| `$JAAN_OUTPUTS_DIR/detect/pack/risk-heatmap.md` | Risk heatmap table (domain x severity), top risks per domain |
+| `$JAAN_OUTPUTS_DIR/detect/pack/unknowns-backlog.md` | Prioritized unknowns with "how to confirm" steps and scope boundaries |
+| `$JAAN_OUTPUTS_DIR/detect/pack/source-map.md` | Evidence index: all E-IDs mapped to file locations |
+
+### Multi-Platform Monorepo
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/pack/README-{platform}.md` | Per-platform knowledge index (e.g., `README-web.md`, `README-backend.md`) |
+| `$JAAN_OUTPUTS_DIR/detect/pack/README.md` | **Merged pack**: Consolidates all platforms into cross-platform risk heatmap and unified backlog |
+| `$JAAN_OUTPUTS_DIR/detect/pack/risk-heatmap.md` | **Cross-platform risk table** with platform x domain matrix |
+| `$JAAN_OUTPUTS_DIR/detect/pack/unknowns-backlog.md` | All platforms combined, grouped by platform then domain |
+| `$JAAN_OUTPUTS_DIR/detect/pack/source-map.md` | All evidence IDs from all platforms |
+
+---
+
+## Multi-Platform Support
+
+- **Platform auto-discovery**: Detects platforms by scanning for filename suffixes in detect outputs (e.g., `stack-web.md`, `stack-backend.md`)
+- **Per-platform packs**: Creates separate pack for each platform at `detect/pack/README-{platform}.md`
+- **Merged pack algorithm**: For multi-platform projects, creates additional merged pack that:
+  - Aggregates findings across all platforms
+  - Deduplicates cross-platform findings via `related_evidence` chains
+  - Builds cross-platform risk heatmap (platform x domain table)
+  - Combines unknowns backlog from all platforms
+- **Evidence ID parsing**: Handles both formats:
+  - Single-platform: `E-DEV-001` → domain: DEV, platform: null, sequence: 001
+  - Multi-platform: `E-DEV-WEB-001` → domain: DEV, platform: WEB, sequence: 001
+- **Orchestration mode**: If no outputs exist, asks if multi-platform, then displays platform-by-platform workflow guide
 
 ---
 
@@ -46,18 +72,24 @@ Reads all detect skill outputs (`$JAAN_OUTPUTS_DIR/detect/{dev,design,writing,pr
 
 Before consolidation, checks which detect skills have run:
 
-- **No outputs found**: Lists all 5 detect skills and suggests running them first
-- **Partial outputs**: Reports which domains are present/missing, asks user to continue (results marked as partial)
-- **All outputs found**: Proceeds directly to consolidation
+- **No outputs found**:
+  - Asks: "Is this a multi-platform project? [y/n]"
+  - If YES: Displays orchestration guide with platform-by-platform workflow
+  - If NO: Lists all 5 detect skills and suggests running them first
+- **Partial outputs**: Reports which domains are present/missing per platform, asks user to continue (results marked as partial)
+- **All outputs found**: Proceeds directly to consolidation (per-platform + merged if multi-platform)
 
 ---
 
 ## Key Points
 
-- Enforces universal frontmatter: `target.commit` (must match git HEAD), `tool.rules_version`, `confidence_scheme`, `findings_summary`, `overall_score`, `lifecycle_phase` (CycloneDX)
+- Enforces universal frontmatter: `target.commit` (must match git HEAD), `target.platform`, `tool.rules_version`, `confidence_scheme`, `findings_summary`, `overall_score`, `lifecycle_phase` (CycloneDX)
 - **Overall score formula**: `10 - (critical×2.0 + high×1.0 + medium×0.4 + low×0.1) / max(total_findings, 1)`, clamped 0–10
-- **Risk heatmap**: domain × severity markdown table with per-domain scores; missing domains shown as "not analyzed"
-- **Evidence ID validation**: all IDs must follow namespace convention (E-DEV, E-DSN, E-WRT, E-PRD, E-UX), no duplicates, all resolve to file locations
+- **Risk heatmap**:
+  - Single-platform: domain × severity markdown table with per-domain scores
+  - Multi-platform: platform × domain table showing findings per platform + totals row
+- **Evidence ID validation**: all IDs must follow namespace convention, no duplicates, all resolve to file locations
+  - Regex: `^E-([A-Z]+)-(([A-Z]+)-)?(\d{3}[a-z]?)$` (matches both single and multi-platform formats)
 - **Partial run handling**: coverage % reported ("3/5 domains analyzed"), overall score labeled with "(partial)" suffix
 - Unknowns backlog collects all findings with confidence ≤ Tentative + "how to confirm" steps
 - Frontmatter validation failures become findings (severity: Medium, confidence: Confirmed)

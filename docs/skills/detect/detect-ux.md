@@ -33,6 +33,7 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 
 ## Output
 
+### Single-Platform Project
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/ux/personas.md` | Inferred personas from route/auth analysis |
@@ -42,6 +43,12 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 | `$JAAN_OUTPUTS_DIR/detect/ux/heuristics.md` | Nielsen 10 heuristics assessment table |
 | `$JAAN_OUTPUTS_DIR/detect/ux/accessibility.md` | A11y findings (scoped to repo evidence) |
 | `$JAAN_OUTPUTS_DIR/detect/ux/gaps.md` | UX gaps and improvement recommendations |
+
+### Multi-Platform Monorepo
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/ux/personas-{platform}.md` | Inferred personas per platform (e.g., `personas-web.md`, `personas-mobile.md`) |
+| ... | (same structure with platform suffix) |
 
 ---
 
@@ -60,9 +67,20 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 
 ---
 
+## Multi-Platform Support
+
+- **Platform auto-detection**: Detects web/, backend/, mobile/, etc. from folder structure
+- **Evidence ID format**:
+  - Single-platform: `E-UX-NNN` (e.g., `E-UX-001`)
+  - Multi-platform: `E-UX-{PLATFORM}-NNN` (e.g., `E-UX-WEB-001`, `E-UX-MOBILE-023`)
+- **"Detect and Report N/A" pattern**: For non-UI platforms (backend, CLI), produces minimal output with informational finding ("No User-Facing UI Detected")
+- **Skip criteria**: Platforms without routes/screens automatically get N/A treatment with perfect score (10.0)
+- **Platform-specific journeys**: Mobile vs web navigation patterns differ (tabs vs sidebar, gestures vs clicks)
+
+---
+
 ## Key Points
 
-- Evidence IDs use namespace `E-UX-NNN` (prevents collisions in detect-pack aggregation)
 - **Framework-specific route extraction** across React Router, Next.js, Vue Router, Angular, and Express
 - **Nielsen's 10 heuristics** assessed from code signals: Visibility, Match, User control, Consistency, Error prevention, Recognition, Flexibility, Minimalist design, Error recovery, Help — each rated Strong/Adequate/Weak/Unknown
 - Personas and JTBD are always marked **Tentative** (inferred from code, not validated user research)

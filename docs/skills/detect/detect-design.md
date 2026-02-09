@@ -33,6 +33,7 @@ Scans the repository for design system signals: brand definitions, design tokens
 
 ## Output
 
+### Single-Platform Project
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/design/brand.md` | Brand signals (colors, typography, logos, font loading) |
@@ -41,6 +42,12 @@ Scans the repository for design system signals: brand definitions, design tokens
 | `$JAAN_OUTPUTS_DIR/detect/design/patterns.md` | UI patterns, spacing scales, dark mode, theme switching |
 | `$JAAN_OUTPUTS_DIR/detect/design/accessibility.md` | A11y implementation findings (ARIA, semantic HTML, a11y tests) |
 | `$JAAN_OUTPUTS_DIR/detect/design/governance.md` | Design system governance (CODEOWNERS, versioning, visual regression testing) |
+
+### Multi-Platform Monorepo
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/design/brand-{platform}.md` | Brand signals per platform (e.g., `brand-web.md`, `brand-mobile.md`) |
+| ... | (same structure with platform suffix) |
 
 ---
 
@@ -57,9 +64,19 @@ Scans the repository for design system signals: brand definitions, design tokens
 
 ---
 
+## Multi-Platform Support
+
+- **Platform detection with UI presence check**: Auto-detects platforms and checks for UI components (`.jsx`, `.tsx`, `.vue`, `.svelte`)
+- **Evidence ID format**:
+  - Single-platform: `E-DSN-NNN` (e.g., `E-DSN-001`)
+  - Multi-platform: `E-DSN-{PLATFORM}-NNN` (e.g., `E-DSN-WEB-001`, `E-DSN-MOBILE-023`)
+- **"Detect and Report N/A" pattern**: For non-UI platforms (backend, CLI), produces minimal output with informational finding ("No UI Components Detected")
+- **Skip criteria**: Platforms without UI files automatically get N/A treatment with perfect score (10.0)
+
+---
+
 ## Key Points
 
-- Evidence IDs use namespace `E-DSN-NNN` (prevents collisions in detect-pack aggregation)
 - **Drift detection** requires paired evidence per finding: token definition (E-DSN-001a) + conflicting usage (E-DSN-001b)
 - Token categories: colors, typography, spacing, shadows, border radius, breakpoints, animation
 - Component classification: primitives, layout, navigation, feedback, data display, form

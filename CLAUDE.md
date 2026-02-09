@@ -142,7 +142,12 @@ jaan-to/outputs/pm/stories/01-login-validation/
   └── 01-story-login-validation.md  # User story
 ```
 
-**Exception:** Research outputs use flat files (`research/{id}-{category}-{slug}.md`) instead of folders.
+**Exceptions:**
+- **Research outputs**: Use flat files (`research/{id}-{category}-{slug}.md`) instead of folders
+- **Detect outputs**: Use flat files with platform-scoped filenames (`detect/{domain}/{aspect}-{platform}.md`) instead of ID-based folders
+  - Rationale: Detect skills produce system state snapshots (overwritten each run), not versioned reports (archived)
+  - Single-platform: `detect/dev/stack.md` (no platform suffix)
+  - Multi-platform: `detect/dev/stack-web.md`, `detect/dev/stack-backend.md` (platform suffix)
 
 See [jaan-to/outputs/README.md](jaan-to/outputs/README.md) for complete documentation.
 

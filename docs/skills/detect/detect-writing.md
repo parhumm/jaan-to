@@ -33,6 +33,7 @@ Extracts the writing system from the repository using framework-specific glob di
 
 ## Output
 
+### Single-Platform Project
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
@@ -41,6 +42,12 @@ Extracts the writing system from the repository using framework-specific glob di
 | `$JAAN_OUTPUTS_DIR/detect/writing/error-messages.md` | Error message quality audit with 5-dimension weighted rubric |
 | `$JAAN_OUTPUTS_DIR/detect/writing/localization.md` | i18n maturity assessment (0–5) with evidence |
 | `$JAAN_OUTPUTS_DIR/detect/writing/samples.md` | Representative copy samples per category |
+
+### Multi-Platform Monorepo
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/writing/writing-system-{platform}.md` | Voice definition per platform (e.g., `writing-system-web.md`, `writing-system-mobile.md`) |
+| ... | (same structure with platform suffix) |
 
 All 6 output files are required per execution.
 
@@ -59,9 +66,19 @@ All 6 output files are required per execution.
 
 ---
 
+## Multi-Platform Support
+
+- **Platform auto-detection**: Detects web/, backend/, mobile/, etc. from folder structure
+- **Evidence ID format**:
+  - Single-platform: `E-WRT-NNN` (e.g., `E-WRT-001`)
+  - Multi-platform: `E-WRT-{PLATFORM}-NNN` (e.g., `E-WRT-WEB-001`, `E-WRT-BACKEND-023`)
+- **Partial analysis mode**: Backend/CLI platforms analyze error messages only (skips UI copy, onboarding, CTA)
+- **Cross-platform consistency**: Tone dimension scoring compares across platforms for brand consistency
+
+---
+
 ## Key Points
 
-- Evidence IDs use namespace `E-WRT-NNN` (prevents collisions in detect-pack aggregation)
 - **NNg tone dimensions**: 4 primary (Formality/Humor/Respectfulness/Enthusiasm 1–5) + 5 extended (Technical complexity/Verbosity/Directness/Empathy/Confidence)
 - **Consistency score**: Standard deviation per dimension across all strings; flag >1.5σ outliers
 - UI copy classified into 8 categories: Buttons, Errors, Empty states, Confirm dialogs, Toasts, Onboarding, Form labels/helper, Loading
