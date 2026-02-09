@@ -30,7 +30,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### /jaan-to-release-beta-rollout-plan
+### /jaan-to:release-beta-rollout-plan
 
 - **Logical**: `release-beta-rollout-plan`
 - **Description**: Phased rollout plan, exit criteria per phase, targeting + monitoring notes
@@ -44,7 +44,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/beta/{slug}/rollout-plan.md`
 
-### /jaan-to-release-beta-issue-log
+### /jaan-to:release-beta-issue-log
 
 - **Logical**: `release-beta-issue-log`
 - **Description**: Categorized issues + owners, trend summary, "stop the line" triggers
@@ -58,7 +58,7 @@ flowchart TD
 - **Input**: [reports]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/beta/{slug}/issue-log.md`
 
-### /jaan-to-release-prod-runbook
+### /jaan-to:release-prod-runbook
 
 - **Logical**: `release-prod-runbook`
 - **Description**: Launch steps + rollback triggers, verification checklist, dependencies + comms notes
@@ -72,7 +72,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/prod/{slug}/runbook.md`
 
-### /jaan-to-release-prod-war-room-pack
+### /jaan-to:release-prod-war-room-pack
 
 - **Logical**: `release-prod-war-room-pack`
 - **Description**: Dashboard links + roles + schedule, incident comms templates, decision log structure
@@ -86,7 +86,7 @@ flowchart TD
 - **Input**: [release]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/prod/{slug}/war-room-pack.md`
 
-### /jaan-to-release-triage-decision
+### /jaan-to:release-triage-decision
 
 - **Logical**: `release-triage-decision`
 - **Description**: Fix/defer decision + rationale, risk notes, suggested comms
@@ -100,7 +100,7 @@ flowchart TD
 - **Input**: [bug]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/triage/{slug}/decision.md`
 
-### /jaan-to-release-triage-hotfix-scope
+### /jaan-to:release-triage-hotfix-scope
 
 - **Logical**: `release-triage-hotfix-scope`
 - **Description**: Minimal hotfix scope, test focus areas, rollback considerations
@@ -114,7 +114,7 @@ flowchart TD
 - **Input**: [bugs]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/triage/{slug}/hotfix-scope.md`
 
-### /jaan-to-release-iterate-top-fixes
+### /jaan-to:release-iterate-top-fixes
 
 - **Logical**: `release-iterate-top-fixes`
 - **Description**: Next sprint improvements list, prioritization rationale, owners suggestions
@@ -128,7 +128,7 @@ flowchart TD
 - **Input**: [insights]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/iterate/{slug}/top-fixes.md`
 
-### /jaan-to-release-iterate-changelog
+### /jaan-to:release-iterate-changelog
 
 - **Logical**: `release-iterate-changelog`
 - **Description**: Changelog + user impact notes, internal notes (optional), support guidance
@@ -141,3 +141,4 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [changes]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/iterate/{slug}/changelog.md`
+- **Research**: [`66-release-iterate-changelog.md`](../../../../jaan-to/outputs/research/66-release-iterate-changelog.md) — Keep a Changelog, SemVer, Conventional Commits, git tags, commit analysis pipeline, MCP release integration
