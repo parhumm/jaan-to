@@ -2,7 +2,7 @@
 name: detect-pack
 description: Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [repo]
+argument-hint: "[repo] [--full]"
 ---
 
 # detect-pack
@@ -20,9 +20,7 @@ argument-hint: [repo]
 
 ## Input
 
-**Repository**: $ARGUMENTS
-
-If a repository path is provided, read detect outputs from that repo. Otherwise, use the current working directory.
+**Arguments**: $ARGUMENTS — parsed in Step 0.0. Repository path and mode determined there.
 
 ---
 
@@ -54,9 +52,26 @@ If the file does not exist, continue without it.
 
 # PHASE 1: Consolidation (Read-Only)
 
+## Step 0.0: Parse Arguments
+
+**Arguments**: $ARGUMENTS
+
+| Argument | Effect |
+|----------|--------|
+| (none) | **Light mode** (default): Heatmap + domain scores, single summary file |
+| `[repo]` | Read detect outputs from specified repo (applies to both modes) |
+| `--full` | **Full mode**: Full consolidation with evidence index and unknowns backlog (current behavior) |
+
+**Mode determination:**
+- If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
+- Otherwise → set `run_depth = "light"`
+
+Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+
 ## Thinking Mode
 
-ultrathink
+**If `run_depth == "full"`:** ultrathink
+**If `run_depth == "light"`:** megathink
 
 Use extended reasoning for:
 - Cross-domain pattern recognition
@@ -167,7 +182,26 @@ If user declines, stop execution.
 
 ## Step 1: Read All Detect Outputs
 
-For each domain that has outputs, read all files:
+For each domain that has outputs, detect input mode and read accordingly:
+
+### Input Mode Detection
+
+For each domain directory (`detect/dev/`, `detect/design/`, etc.):
+
+1. **Glob for individual aspect files** (e.g., `stack*.md`, `architecture*.md`, `tokens*.md`)
+2. **If individual files found** → `input_mode = "full"` — read all individual files (current behavior)
+3. **If only `summary{suffix}.md` found** → `input_mode = "light"` — read summary file, extract `findings_summary` and `overall_score` from frontmatter
+4. **Track input mode per domain** for use in subsequent steps:
+
+| Domain | Input Mode | Files Read |
+|---------|-----------|------------|
+| dev     | full / light | {count} files or summary.md |
+| design  | full / light | {count} files or summary.md |
+| writing | full / light | {count} files or summary.md |
+| product | full / light | {count} files or summary.md |
+| ux      | full / light | {count} files or summary.md |
+
+### Full-Mode Input: Expected Files
 
 | Domain | Directory | Expected Files |
 |--------|-----------|---------------|
@@ -176,6 +210,12 @@ For each domain that has outputs, read all files:
 | writing | `$JAAN_OUTPUTS_DIR/detect/writing/` | writing-system, glossary, ui-copy, error-messages, localization, samples |
 | product | `$JAAN_OUTPUTS_DIR/detect/product/` | overview, features, value-prop, monetization, entitlements, metrics, constraints |
 | ux | `$JAAN_OUTPUTS_DIR/detect/ux/` | personas, jtbd, flows, pain-points, heuristics, accessibility, gaps |
+
+### Light-Mode Input: Summary Files
+
+For domains with `input_mode = "light"`, read `summary{suffix}.md` and extract:
+- YAML frontmatter: `findings_summary`, `overall_score`, `platform`, `target`
+- Executive summary text (for domain summary in consolidated output)
 
 ## Step 2: Validate Universal Frontmatter
 
@@ -189,6 +229,8 @@ For each output file, validate required frontmatter fields:
 - `lifecycle_phase` — MUST use CycloneDX vocabulary
 
 **Validation failures** become findings in the consolidated output (severity: Medium, confidence: Confirmed).
+
+**Light-mode input handling**: For domains with `input_mode = "light"`, validate only the summary file frontmatter. Skip per-file validation (individual files don't exist).
 
 ## Step 3: Aggregate Findings
 
@@ -238,6 +280,10 @@ Create a domain x severity markdown table:
 ```
 
 For missing domains, show "not analyzed" in all cells.
+
+**If `run_depth == "light"`:** Skip Steps 5, 6, and 6a. Proceed directly to Step 7 (Present Consolidation Summary).
+
+**Note**: For domains with `input_mode = "light"`, Steps 2-4 use summary-level data (frontmatter scores and finding counts) instead of per-file data. Validation is limited to frontmatter presence check.
 
 ## Step 5: Build Evidence Index (Source Map)
 
@@ -439,6 +485,38 @@ for finding in cross_platform_findings:
 
 ## Step 7: Present Consolidation Summary
 
+**If `run_depth == "light"`:**
+
+```
+KNOWLEDGE PACK CONSOLIDATION (Light Mode)
+--------------------------------------------
+
+MODE: {Single-Platform / Multi-Platform}
+{if multi: "PLATFORMS DETECTED: {list} ({n} platforms)"}
+
+DOMAINS ANALYZED: {n}/5 {list}
+INPUT MODES: {domain: mode for each domain}
+{if partial: "WARNING: Partial analysis — missing: {list}"}
+
+REPO-WIDE FINDINGS
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10 {(partial) if applicable}
+
+RISK HEATMAP:
+  {inline domain x severity table}
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/summary.md
+
+Note: Run with --full for evidence index (source map), unknowns backlog,
+cross-platform deduplication, and per-platform detail packs.
+```
+
+> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/? [y/n]"
+
+**If `run_depth == "full"`:**
+
 **Single-Platform Mode:**
 
 ```
@@ -536,6 +614,26 @@ else:  # Multi-platform
 # Create directory if needed
 os.makedirs(output_dir, exist_ok=True)
 ```
+
+### Stale File Cleanup
+
+- **If `run_depth == "full"`:** Delete any existing `summary.md` in `$JAAN_OUTPUTS_DIR/detect/` (stale light-mode output).
+- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+
+### If `run_depth == "light"`: Write Single Summary File
+
+Write one file: `$JAAN_OUTPUTS_DIR/detect/summary.md`
+
+Contents:
+1. Universal YAML frontmatter with `findings_summary` and `overall_score`
+2. **Overview** — domains analyzed, input modes, overall score
+3. **Risk Heatmap** — domain x severity table (from Step 4)
+4. **Per-Domain Executive Summary** — 1-2 sentences per domain
+5. If multi-platform: **Platform Scores Table** — scores per platform (no cross-platform dedup)
+6. **Input Mode Table** — which domains provided full vs summary data
+7. "Run with `--full` for evidence index (source map), unknowns backlog with confirmation steps, cross-platform finding deduplication, and per-platform detail packs."
+
+### If `run_depth == "full"`: Write Full Output Files
 
 ### Single-Platform Mode
 
@@ -671,6 +769,20 @@ If yes:
 ---
 
 ## Definition of Done
+
+**If `run_depth == "light"`:**
+
+- [ ] Single `summary.md` written to `$JAAN_OUTPUTS_DIR/detect/`
+- [ ] Universal YAML frontmatter with `findings_summary` and `overall_score`
+- [ ] Risk heatmap table included (domain x severity)
+- [ ] Per-domain executive summary (1-2 sentences each)
+- [ ] Input mode table shows which domains provided full vs summary data
+- [ ] Overall score calculated with formula
+- [ ] Partial runs clearly labeled with coverage %
+- [ ] "--full" upsell note included
+- [ ] User approved output
+
+**If `run_depth == "full"`:**
 
 **Single-Platform Mode:**
 

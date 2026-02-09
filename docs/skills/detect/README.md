@@ -2,7 +2,7 @@
 title: "Detect & Knowledge"
 sidebar_position: 7
 slug: /skills/detect
-updated_date: 2026-02-08
+updated_date: 2026-02-09
 ---
 
 # Detect Skills
@@ -13,41 +13,44 @@ updated_date: 2026-02-08
 
 ## Pipeline
 
-Run individual detect skills for specific domains, or run all 5 then consolidate:
+All detect skills support `--light` (default) and `--full` modes. Light mode produces 1 summary file per domain; full mode produces detailed multi-file output.
 
-### Single-Platform Project
+### Light Mode (default)
 ```
-/jaan-to:detect-dev        → $JAAN_OUTPUTS_DIR/detect/dev/*.md
-/jaan-to:detect-design     → $JAAN_OUTPUTS_DIR/detect/design/*.md
-/jaan-to:detect-writing    → $JAAN_OUTPUTS_DIR/detect/writing/*.md
-/jaan-to:detect-product    → $JAAN_OUTPUTS_DIR/detect/product/*.md
-/jaan-to:detect-ux         → $JAAN_OUTPUTS_DIR/detect/ux/*.md
+/jaan-to:detect-dev        → $JAAN_OUTPUTS_DIR/detect/dev/summary.md        (1 file)
+/jaan-to:detect-design     → $JAAN_OUTPUTS_DIR/detect/design/summary.md     (1 file)
+/jaan-to:detect-writing    → $JAAN_OUTPUTS_DIR/detect/writing/summary.md    (1 file)
+/jaan-to:detect-product    → $JAAN_OUTPUTS_DIR/detect/product/summary.md    (1 file)
+/jaan-to:detect-ux         → $JAAN_OUTPUTS_DIR/detect/ux/summary.md         (1 file)
                                     ↓
-/jaan-to:detect-pack       → $JAAN_OUTPUTS_DIR/detect/pack/{README,risk-heatmap,unknowns-backlog,source-map}.md
+/jaan-to:detect-pack       → $JAAN_OUTPUTS_DIR/detect/summary.md            (1 file)
 ```
 
-### Multi-Platform Monorepo
+### Full Mode (`--full`)
 ```
-Per platform (web, backend, mobile, etc.):
-  /jaan-to:detect-dev      → $JAAN_OUTPUTS_DIR/detect/dev/stack-{platform}.md
-  /jaan-to:detect-design   → $JAAN_OUTPUTS_DIR/detect/design/brand-{platform}.md
-  ...                      → (platform-scoped filenames)
-                                    ↓
-/jaan-to:detect-pack       → Per-platform packs + merged pack combining all platforms
+/jaan-to:detect-dev --full        → $JAAN_OUTPUTS_DIR/detect/dev/*.md        (9 files)
+/jaan-to:detect-design --full     → $JAAN_OUTPUTS_DIR/detect/design/*.md     (6 files)
+/jaan-to:detect-writing --full    → $JAAN_OUTPUTS_DIR/detect/writing/*.md    (6 files)
+/jaan-to:detect-product --full    → $JAAN_OUTPUTS_DIR/detect/product/*.md    (7 files)
+/jaan-to:detect-ux --full         → $JAAN_OUTPUTS_DIR/detect/ux/*.md         (7 files)
+                                           ↓
+/jaan-to:detect-pack --full       → $JAAN_OUTPUTS_DIR/detect/pack/*.md       (4+ files)
 ```
+
+detect-pack handles mixed inputs: domains can be light or full independently.
 
 ---
 
 ## Available Skills
 
-| Skill | Description | Output Files |
-|-------|-------------|-------------|
-| [/jaan-to:detect-dev](detect-dev.md) | Engineering audit with OpenSSF-style scoring | 9 files |
-| [/jaan-to:detect-design](detect-design.md) | Design system detection with drift findings | 6 files |
-| [/jaan-to:detect-writing](detect-writing.md) | Writing system extraction with NNg tone scoring | 6 files |
-| [/jaan-to:detect-product](detect-product.md) | Product reality extraction with 3-layer evidence | 7 files |
-| [/jaan-to:detect-ux](detect-ux.md) | UX audit with Nielsen heuristics and journey mapping | 7 files |
-| [/jaan-to:detect-pack](detect-pack.md) | Consolidate all detect outputs into scored index | 4 files |
+| Skill | Description | Light | Full |
+|-------|-------------|-------|------|
+| [/jaan-to:detect-dev](detect-dev.md) | Engineering audit with OpenSSF-style scoring | 1 file | 9 files |
+| [/jaan-to:detect-design](detect-design.md) | Design system detection with drift findings | 1 file | 6 files |
+| [/jaan-to:detect-writing](detect-writing.md) | Writing system extraction with NNg tone scoring | 1 file | 6 files |
+| [/jaan-to:detect-product](detect-product.md) | Product reality extraction with 3-layer evidence | 1 file | 7 files |
+| [/jaan-to:detect-ux](detect-ux.md) | UX audit with Nielsen heuristics and journey mapping | 1 file | 7 files |
+| [/jaan-to:detect-pack](detect-pack.md) | Consolidate all detect outputs into scored index | 1 file | 4+ files |
 
 ---
 

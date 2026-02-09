@@ -4,7 +4,7 @@ sidebar_position: 5
 doc_type: skill
 tags: [detect, ux, journeys, heuristics, accessibility, pain-points]
 related: [detect-dev, detect-design, detect-writing, detect-product, detect-pack]
-updated_date: 2026-02-08
+updated_date: 2026-02-09
 ---
 
 # /jaan-to:detect-ux
@@ -15,25 +15,35 @@ updated_date: 2026-02-08
 
 ## What It Does
 
-Performs a UX audit by mapping journeys from actual routes, screens, and state components using framework-specific route extraction. Infers personas and JTBD from code structure, maps user flows with Mermaid diagrams, detects UX pain points, evaluates Nielsen's 10 usability heuristics from code signals, and assesses repo-level accessibility.
+Performs a UX audit by mapping journeys from actual routes, screens, and state components. Supports **light mode** (default, 1 summary file with screen inventory and flows) and **full mode** (`--full`, 7 detailed files with persona inference, heuristics, and accessibility).
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:detect-ux
+/jaan-to:detect-ux [repo] [--full]
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | repo | No | Target repository (defaults to current) |
+| `--full` | No | Run full analysis (7 detection steps, 7 output files). Default is light mode. |
+
+**Light mode** (default): Maps routes/screens and user flows, produces 1 summary file with screen inventory and key flows as Mermaid diagrams.
+
+**Full mode** (`--full`): Runs all steps including persona inference, JTBD, pain points, Nielsen heuristics, and accessibility audit. Produces 7 detailed output files.
 
 ---
 
 ## Output
 
-### Single-Platform Project
+### Light Mode (default) — 1 file
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/ux/summary{suffix}.md` | Screen inventory, key user flows (Mermaid), top-5 findings |
+
+### Full Mode (`--full`) — 7 files
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/ux/personas.md` | Inferred personas from route/auth analysis |
@@ -45,10 +55,7 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 | `$JAAN_OUTPUTS_DIR/detect/ux/gaps.md` | UX gaps and improvement recommendations |
 
 ### Multi-Platform Monorepo
-| File | Content |
-|------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/ux/personas-{platform}.md` | Inferred personas per platform (e.g., `personas-web.md`, `personas-mobile.md`) |
-| ... | (same structure with platform suffix) |
+Files use platform suffix: `personas-{platform}.md`, `summary-{platform}.md`, etc.
 
 ---
 

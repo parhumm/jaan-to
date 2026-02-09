@@ -2,7 +2,7 @@
 name: detect-ux
 description: Repo-driven UX audit with journey mapping and heuristic-based findings.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [repo]
+argument-hint: "[repo] [--full]"
 ---
 
 # detect-ux
@@ -19,9 +19,7 @@ argument-hint: [repo]
 
 ## Input
 
-**Repository**: $ARGUMENTS
-
-If a repository path is provided, scan that repo. Otherwise, scan the current working directory.
+**Arguments**: $ARGUMENTS — parsed in Step 0.0. Repository path and mode determined there.
 
 ---
 
@@ -133,9 +131,26 @@ lifecycle_phase: post-build
 
 # PHASE 1: Detection (Read-Only)
 
+## Step 0.0: Parse Arguments
+
+**Arguments**: $ARGUMENTS
+
+| Argument | Effect |
+|----------|--------|
+| (none) | **Light mode** (default): Route mapping + user flows, single summary file |
+| `[repo]` | Scan specified repo (applies to both modes) |
+| `--full` | **Full mode**: All detection steps, 7 output files (current behavior) |
+
+**Mode determination:**
+- If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
+- Otherwise → set `run_depth = "light"`
+
+Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+
 ## Thinking Mode
 
-ultrathink
+**If `run_depth == "full"`:** ultrathink
+**If `run_depth == "light"`:** megathink
 
 Use extended reasoning for:
 - Route/screen mapping from framework-specific patterns
@@ -195,7 +210,9 @@ For each platform in platforms:
    - Skip Steps 1-7 (detection steps)
    - Go directly to Step 8 with "Not Applicable" findings
 5. If `platform_has_ui == true` or platform is expected to have UI:
-   - Run all detection steps (Steps 1-7) scoped to `base_path`
+   - Run detection steps per `run_depth`:
+     - **If `run_depth == "full"`:** Run Steps 1-7 scoped to `base_path`
+     - **If `run_depth == "light"`:** Run Steps 1 and 4 only scoped to `base_path` (skip Steps 2, 3, 5, 6, 7)
 6. Use platform-specific output paths in Step 9
 
 **"Not Applicable" Findings Structure**:
@@ -239,6 +256,8 @@ evidence:
 
 **Note**: If single-platform mode (`platform.name == 'all'`), output paths have NO suffix. If multi-platform mode, output paths include `-{platform}` suffix.
 
+**Precedence**: N/A handling (platform_has_ui checks) always takes priority over run_depth gates. If `platform_has_ui == false`, skip ALL detection steps regardless of run_depth.
+
 ## Step 1: Route / Screen Mapping
 
 Detect framework and extract routes:
@@ -279,6 +298,8 @@ For each route/page, extract:
 - Layout parent
 - Query parameters / dynamic segments
 
+**If `run_depth == "light"`:** Skip Steps 2-3. Proceed to Step 4 (Map User Flows).
+
 ## Step 2: Infer User Personas
 
 From route structure and component analysis, infer personas:
@@ -315,6 +336,8 @@ For multi-step flows, construct Mermaid flow diagrams:
 graph LR
     A[Cart] --> B[Shipping] --> C[Payment] --> D[Confirmation]
 ```
+
+**If `run_depth == "light"`:** Skip Steps 5-7. Proceed directly to Step 8 (Present Detection Summary).
 
 ## Step 5: Detect Pain Points
 
@@ -386,6 +409,34 @@ Mark findings as "Unknown" for runtime behavior that can't be verified from code
 
 ## Step 8: Present Detection Summary
 
+**If `run_depth == "light"`:**
+
+```
+UX DETECTION COMPLETE (Light Mode)
+-------------------------------------
+
+PLATFORM: {platform_name or 'all'}
+UI/TUI PRESENCE: {Yes/No} {if No, show "(Not Applicable)"}
+
+ROUTES/SCREENS: {n} routes mapped
+USER FLOWS: {n} flows mapped
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/ux/summary{-platform}.md
+
+Note: Run with --full for persona inference, JTBD mapping, pain point detection,
+Nielsen heuristic assessment, and accessibility audit (7 output files).
+```
+
+> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/ux/? [y/n]"
+
+**If `run_depth == "full"`:**
+
 ```
 UX DETECTION COMPLETE
 ----------------------
@@ -453,6 +504,25 @@ else:  # Multi-platform
 #                  $JAAN_OUTPUTS_DIR/detect/ux/personas-mobile.md
 ```
 
+### Stale File Cleanup
+
+- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
+- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+
+### If `run_depth == "light"`: Write Single Summary File
+
+Write one file: `$JAAN_OUTPUTS_DIR/detect/ux/summary{suffix}.md`
+
+Contents:
+1. Universal YAML frontmatter with `platform` field, `findings_summary`, and `overall_score`
+2. **Executive Summary** — BLUF of UX findings
+3. **Screen Inventory** — routes/screens mapped with auth classification (from Step 1)
+4. **Key User Flows** — top flows as Mermaid diagrams (from Step 4)
+5. **Top Findings** — up to 5 highest-severity findings with evidence blocks
+6. "Run with `--full` for persona inference, JTBD mapping, pain point detection, Nielsen heuristic assessment, and accessibility audit (7 output files)."
+
+### If `run_depth == "full"`: Write 7 Output Files
+
 Write 7 output files:
 
 | File | Content |
@@ -490,6 +560,16 @@ If yes:
 ---
 
 ## Definition of Done
+
+**If `run_depth == "light"`:**
+
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/ux/summary{suffix}.md`
+- [ ] Universal YAML frontmatter with `overall_score`
+- [ ] Screen inventory and user flows included with evidence blocks
+- [ ] "--full" upsell note included
+- [ ] User approved output
+
+**If `run_depth == "full"`:**
 
 - [ ] All 7 output files written to `$JAAN_OUTPUTS_DIR/detect/ux/`
 - [ ] Universal YAML frontmatter with `platform` field in every file

@@ -413,6 +413,39 @@ Each drift finding MUST have paired evidence (definition + conflicting usage).
 
 ## Step 8: Present Detection Summary
 
+**If `run_depth == "light"`:**
+
+```
+DESIGN SYSTEM DETECTION COMPLETE (Light Mode)
+-----------------------------------------------
+
+PLATFORM: {platform_name or 'all'}
+UI PRESENCE: {Yes/No} {if No, show "(Not Applicable)"}
+
+TOKEN INVENTORY
+  Colors:      {n} tokens found    [Confidence: {level}]
+  Typography:  {n} tokens found    [Confidence: {level}]
+  Spacing:     {n} tokens found    [Confidence: {level}]
+  Other:       {n} tokens found    [Confidence: {level}]
+
+COMPONENTS: {n} components detected across {n} categories
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/design/summary{-platform}.md
+
+Note: Run with --full for brand assets, UI patterns, accessibility audit,
+governance signals, and full drift analysis (6 output files).
+```
+
+> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/design/? [y/n]"
+
+**If `run_depth == "full"`:**
+
 ```
 DESIGN SYSTEM DETECTION COMPLETE
 ---------------------------------
@@ -474,6 +507,26 @@ else:  # Multi-platform
 #                  $JAAN_OUTPUTS_DIR/detect/design/brand-mobile.md
 ```
 
+### Stale File Cleanup
+
+- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
+- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+
+### If `run_depth == "light"`: Write Single Summary File
+
+Write one file: `$JAAN_OUTPUTS_DIR/detect/design/summary{suffix}.md`
+
+Contents:
+1. Universal YAML frontmatter with `platform` field, `findings_summary`, and `overall_score`
+2. **Executive Summary** — BLUF of design system findings
+3. **Token Inventory** — categories, count, naming convention, confidence levels (from Step 1)
+4. **Component Inventory** — name, category, variant count (from Step 2)
+5. **Token Coverage Gaps** — categories defined vs categories missing
+6. **Top Findings** — up to 5 highest-severity findings with evidence blocks
+7. "Run with `--full` for brand assets, UI patterns, accessibility audit, governance signals, and full drift analysis."
+
+### If `run_depth == "full"`: Write 6 Output Files
+
 Write 6 output files using the template:
 
 | File | Content |
@@ -510,6 +563,17 @@ If yes:
 ---
 
 ## Definition of Done
+
+**If `run_depth == "light"`:**
+
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/design/summary{suffix}.md`
+- [ ] Universal YAML frontmatter with `overall_score`
+- [ ] Token and component findings have evidence blocks with E-DSN-NNN IDs
+- [ ] Confidence scores assigned to all findings
+- [ ] Detection summary shown to user before writing
+- [ ] User approved output
+
+**If `run_depth == "full"`:**
 
 - [ ] All 6 output files written to `$JAAN_OUTPUTS_DIR/detect/design/`
 - [ ] Universal YAML frontmatter with `platform` field in every file
