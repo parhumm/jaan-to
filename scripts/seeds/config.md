@@ -60,6 +60,7 @@
 | backend-scaffold | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
 | frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
 | wp-pr-review | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
+| release-iterate-changelog | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact notes and support guidance |
 
 ## Language
 - language: ask
