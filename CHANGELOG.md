@@ -5,6 +5,19 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- **[Breaking]** Renamed 5 dev skills to remove `dev-` prefix for cleaner naming:
+  - `dev-be-data-model` → `backend-data-model` (`/jaan-to:backend-data-model`)
+  - `dev-be-task-breakdown` → `backend-task-breakdown` (`/jaan-to:backend-task-breakdown`)
+  - `dev-api-contract` → `backend-api-contract` (`/jaan-to:backend-api-contract`)
+  - `dev-fe-design` → `frontend-design` (`/jaan-to:frontend-design`)
+  - `dev-fe-task-breakdown` → `frontend-task-breakdown` (`/jaan-to:frontend-task-breakdown`)
+
+---
+
 ## [3.24.0] - 2026-02-09
 
 ### Added
