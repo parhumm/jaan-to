@@ -268,6 +268,7 @@ Example output.
 | Description length | Max 120 chars |
 | Format | 1-2 sentences, no metadata lines |
 | Forbidden | `Auto-triggers on:`, `Maps to:` in description |
+| No colons | Descriptions must not contain `: ` (colon-space) — causes YAML parsing issues in Claude Code |
 | Budget | All skills combined must fit 15,000 char system prompt budget |
 | Validation | Run `scripts/validate-skills.sh` before release |
 
