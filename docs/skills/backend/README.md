@@ -16,6 +16,7 @@ sidebar_position: 2
 | [/jaan-to:backend-api-contract](api-contract.md) | Generate OpenAPI 3.1 contracts from API entities |
 | [/jaan-to:backend-data-model](data-model.md) | Generate data model docs with constraints, indexes, and migrations |
 | [/jaan-to:backend-task-breakdown](task-breakdown.md) | Convert PRDs into structured backend development tasks |
+| [/jaan-to:backend-scaffold](scaffold.md) | Generate production-ready backend code with routes, services, and validation |
 
 ---
 
