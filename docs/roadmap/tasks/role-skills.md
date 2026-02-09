@@ -62,7 +62,9 @@ Use v3.0.0 syntax in all template.md files:
 | Role | Skills | Quick Wins | File |
 |------|--------|------------|------|
 | PM | 24 | 18 | [pm.md](role-skills/pm.md) |
-| DEV | 19 | 15 | [dev.md](role-skills/dev.md) |
+| DEV | 11 | 9 | [dev.md](role-skills/dev.md) |
+| FRONTEND | 3 | 2 | [frontend.md](role-skills/frontend.md) |
+| BACKEND | 5 | 4 | [backend.md](role-skills/backend.md) |
 | QA | 12 | 8 | [qa.md](role-skills/qa.md) |
 | DATA | 14 | 8 | [data.md](role-skills/data.md) |
 | GROWTH | 15 | 9 | [growth.md](role-skills/growth.md) |
