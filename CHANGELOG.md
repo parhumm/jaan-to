@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.1] - 2026-02-09
+
+### Fixed
+- **Skills writing to plugin directory instead of project directory** — Replaced all hardcoded `jaan-to/outputs/`, `jaan-to/context/`, and `jaan-to/templates/` paths with `$JAAN_OUTPUTS_DIR`, `$JAAN_CONTEXT_DIR`, and `$JAAN_TEMPLATES_DIR` environment variables across 19 skill files
+- **Restored intentional exception lines** in `skill-create` and `skill-update` that document deprecated v2.x patterns (bad examples, migration arrows)
+
+### Added
+- **Step 12.9: Automated Path Scan** in `skill-create` — scans generated SKILL.md for hardcoded paths before writing, preventing future regressions
+- **V3.10: Display String Check** in `skill-update` — catches hardcoded paths in preview/confirmation text during skill compliance checks
+
+---
+
 ## [4.1.0] - 2026-02-09
 
 ### Added

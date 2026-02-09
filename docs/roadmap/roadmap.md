@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.1.0 — Add --light/--full mode to detect skills
+**Latest:** v4.1.1 — Fix hardcoded paths across all skills
 
 ### v4.1.0 — Light/Full mode for detect skills
 - All 6 detect skills support `--light` (default) and `--full` modes
@@ -174,6 +174,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 > Details: [tasks/distribution.md](tasks/distribution.md)
 
 - [x] Plugin marketplace installation (`/plugin marketplace add parhumm/jaan-to`)
+- [x] Fix hardcoded `jaan-to/` paths across all skills — replaced with `$JAAN_*` env vars so outputs write to project directory, not plugin directory (`4197238`, `dc70857`)
 - [ ] Multi-agent compatibility research (Cursor, Copilot, Windsurf, Gemini)
 - [ ] CLI installer (`jaan-to-cli`) for one-command setup
 - [ ] Public documentation site and branding guidelines
