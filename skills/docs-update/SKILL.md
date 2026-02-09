@@ -86,7 +86,7 @@ If the file does not exist, continue without it.
 ## Step 0.2: Get Recent Code Changes
 
 ```bash
-git log --since="30 days ago" --name-only --pretty=format: -- skills/ jaan-to/context/hooks/ jaan-to/context/config.md jaan-to/context/ | sort -u | grep -v '^$'
+git log --since="30 days ago" --name-only --pretty=format: -- skills/ $JAAN_CONTEXT_DIR/hooks/ $JAAN_CONTEXT_DIR/config.md $JAAN_CONTEXT_DIR/ | sort -u | grep -v '^$'
 ```
 
 Extract unique changed files.
@@ -106,14 +106,14 @@ skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
 
 **Hooks:**
 ```
-jaan-to/context/hooks/{name}.sh → docs/hooks/{name}.md
+$JAAN_CONTEXT_DIR/hooks/{name}.sh → docs/hooks/{name}.md
 ```
 
 **Config:**
 ```
-jaan-to/context/config.md → docs/config/README.md
-jaan-to/context/*.md → docs/config/context.md
-jaan-to/context/boundaries.md → docs/config/boundaries.md
+$JAAN_CONTEXT_DIR/config.md → docs/config/README.md
+$JAAN_CONTEXT_DIR/*.md → docs/config/context.md
+$JAAN_CONTEXT_DIR/boundaries.md → docs/config/boundaries.md
 ```
 
 ## Step 0.4: Compare Timestamps

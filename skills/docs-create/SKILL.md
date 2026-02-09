@@ -15,7 +15,7 @@ argument-hint: "{type} {name}"
 - `$JAAN_TEMPLATES_DIR/jaan-to:docs-create.template.md` - All templates (copied by bootstrap from plugin)
 - `$JAAN_LEARN_DIR/jaan-to:docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
 
-**Note:** Templates are intentionally read from the project's `jaan-to/templates/` directory (not from the skill directory). The bootstrap hook copies them there on first run, allowing project-level customization.
+**Note:** Templates are intentionally read from the project's `$JAAN_TEMPLATES_DIR` directory (not from the skill directory). The bootstrap hook copies them there on first run, allowing project-level customization.
 
 ---
 
