@@ -160,6 +160,6 @@ The plugin needs project-local directories for config, context, templates, outpu
 
 ## Related
 
-- [Hooks Overview](README.md)
+- [Hooks Overview](docs/hooks/README.md)
 - [Context System](../config/context-system.md)
 - [Seed Files](../config/seed-files.md) — What each file contains and how to customize

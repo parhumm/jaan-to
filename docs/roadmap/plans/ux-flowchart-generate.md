@@ -2,7 +2,7 @@
 
 ## Context
 
-The `ux-flowchart-generate` skill generates GitHub-renderable Mermaid flowcharts from PRDs, docs, and codebases with evidence maps, confidence scoring, and unknowns lists. Two detailed research documents ([64-ux-flowchart-generate.md](../../../jaan-to/outputs/research/64-ux-flowchart-generate.md) | [65-ux-flowchart-generate-skill.md](../../../jaan-to/outputs/research/65-ux-flowchart-generate-skill.md)) provide the full specification. No MCP required — pure text-to-Mermaid generation.
+The `ux-flowchart-generate` skill generates GitHub-renderable Mermaid flowcharts from PRDs, docs, and codebases with evidence maps, confidence scoring, and unknowns lists. Two detailed research documents ([64-ux-flowchart-generate.md](64-ux-flowchart-generate.md) | [65-ux-flowchart-generate-skill.md](65-ux-flowchart-generate-skill.md)) provide the full specification. No MCP required — pure text-to-Mermaid generation.
 
 **Duplicate check**: No existing skill matches. Closest UX skills (heatmap-analyze, research-synthesize, microcopy-write) have <30% overlap.
 

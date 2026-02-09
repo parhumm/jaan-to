@@ -59,5 +59,5 @@ Returns a structured summary that skills consume during generation. The summary 
 
 ## Related
 
-- [Agents Overview](README.md)
+- [Agents Overview](docs/agents/README.md)
 - [Context System](../config/context-system.md)

@@ -435,7 +435,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Evidence traceability ensures every claim traces to verbatim quote with participant ID
   - Dual outputs: main synthesis report + 1-page executive brief (auto-generated)
   - Methodologies: Braun & Clarke Six-Phase, Atomic Research (Experiments → Facts → Insights → Recommendations), Nielsen Severity Ratings (0-4 scale), Impact × Effort Matrix (Quick Wins, Big Bets, Fill-Ins, Money Pits), ISO 9241-11:2018 usability dimensions
-  - Research-informed: 877-line methodology foundation ([jaan-to/outputs/research/47-ux-research-synthesize.md](jaan-to/outputs/research/47-ux-research-synthesize.md))
+  - Research-informed: 877-line methodology foundation ([jaan-to/outputs/research/47-ux-research-synthesize.md](docs/research/47-ux-research-synthesize.md))
 
 ### Changed
 - **`/jaan-to:roadmap-update` enhanced** — Automatic release detection from git history when running in smart-default mode (`602d651`)
@@ -455,7 +455,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - ISTQB conversion notes for traditional test management tools (Xray, TestRail, Azure DevOps)
   - Auxiliary quality checklist file with anti-patterns reference and coverage sufficiency analysis
   - Two-phase workflow with systematic test design techniques and human approval gate
-  - Research-informed: 880-line methodology guide ([50-qa-test-cases.md](jaan-to/outputs/research/50-qa-test-cases.md))
+  - Research-informed: 880-line methodology guide ([50-qa-test-cases.md](docs/research/50-qa-test-cases.md))
 
 ---
 
@@ -720,7 +720,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
   - Story splitting: Suggests 6 proven patterns when >7 ACs or >8 points
   - Export formats: Jira CSV and Linear JSON for easy import
   - Output: `jaan-to/outputs/pm/stories/{slug}/stories.md`
-  - Research-informed: Based on comprehensive [45-pm-insights-synthesis.md](jaan-to/outputs/research/45-pm-insights-synthesis.md) framework
+  - Research-informed: Based on comprehensive [45-pm-insights-synthesis.md](docs/research/45-pm-insights-synthesis.md) framework
 
 ---
 

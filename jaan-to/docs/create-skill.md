@@ -1661,4 +1661,4 @@ After migration, test the skill:
 
 ---
 
-[Back to Extending](README.md) | [Create a Hook](create-hook.md)
+[Back to Extending](claude-code/README.md) | [Create a Hook](create-hook.md)

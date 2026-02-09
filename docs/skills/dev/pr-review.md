@@ -149,4 +149,4 @@ issue (blocking, security): SQL injection in UserController...
 
 ---
 
-[Back to Dev Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Dev Skills](docs/skills/dev/README.md) | [Back to All Skills](../README.md)

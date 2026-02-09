@@ -69,6 +69,6 @@ Plugin ships templates in `context/` (plugin-relative). Fill them in for your pr
 
 ## Related
 
-- [Config Overview](README.md)
+- [Config Overview](docs/config/README.md)
 - [Stacks](stacks.md)
 - [Guardrails](guardrails.md)

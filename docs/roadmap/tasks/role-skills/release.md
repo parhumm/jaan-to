@@ -141,4 +141,4 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [changes]
 - **Output**: `$JAAN_OUTPUTS_DIR/release/iterate/{slug}/changelog.md`
-- **Research**: [`66-release-iterate-changelog.md`](../../../../jaan-to/outputs/research/66-release-iterate-changelog.md) — Keep a Changelog, SemVer, Conventional Commits, git tags, commit analysis pipeline, MCP release integration
+- **Research**: [`66-release-iterate-changelog.md`](66-release-iterate-changelog.md) — Keep a Changelog, SemVer, Conventional Commits, git tags, commit analysis pipeline, MCP release integration

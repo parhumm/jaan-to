@@ -113,7 +113,7 @@ Deep research summaries on various topics.
 - **Tracking Code**: Visit [data/gtm/README.md](data/gtm/README.md) for GTM implementations
 - **Dev Tasks**: Check [dev/frontend/README.md](dev/frontend/README.md) or [dev/backend/README.md](dev/backend/README.md)
 - **UX Insights**: Browse [ux/heatmap/README.md](ux/heatmap/README.md)
-- **Research**: Explore [research/README.md](research/README.md)
+- **Research**: Explore [research/README.md](docs/research/README.md)
 
 ### Search by Feature
 Since slugs are reusable across roles, you can track a feature across different output types:
