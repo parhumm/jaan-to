@@ -27,7 +27,13 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.2.0 — Add backend-scaffold and frontend-scaffold skills
+**Latest:** v4.2.1 — Fix backend-scaffold command picker display
+
+### v4.2.1 — Fix backend-scaffold command picker display
+- Fixed `backend-scaffold` displaying as `/jaan-to:backend-scaffold` — removed YAML-unsafe colon from description (`c1c5f0d`)
+- Added colon detection to `validate-skills.sh` to prevent future YAML parsing issues (`c1c5f0d`)
+- Learn files tracked in repository (`9683ab7`)
+- Lesson added to skill-create LEARN.md: No colons in YAML descriptions (`c0b0285`)
 
 ### v4.2.0 — Backend & frontend scaffold skills
 - Added `backend-scaffold` skill — generate production-ready backend code (Fastify/Prisma/Zod, Laravel, Go) from API contracts, data models, and task breakdowns (`6ef0c32`)
