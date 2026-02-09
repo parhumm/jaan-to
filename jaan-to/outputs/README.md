@@ -98,8 +98,8 @@ Deep research summaries on various topics.
 | `/jaan-to-pm-prd-write` | `pm/prd/` | Folder with PRD + optional tasks file |
 | `/jaan-to-pm-story-write` | `pm/stories/` | Folder with user story |
 | `/jaan-to-data-gtm-datalayer` | `data/gtm/` | Folder with tracking code |
-| `/jaan-to-dev-fe-task-breakdown` | `dev/frontend/` | Folder with frontend tasks |
-| `/jaan-to-dev-be-task-breakdown` | `dev/backend/` | Folder with backend tasks |
+| `/jaan-to-frontend-task-breakdown` | `dev/frontend/` | Folder with frontend tasks |
+| `/jaan-to-backend-task-breakdown` | `dev/backend/` | Folder with backend tasks |
 | `/jaan-to-ux-heatmap-analyze` | `ux/heatmap/` | Folder with heatmap analysis |
 | `/jaan-to-pm-research-about` | `research/` | Flat file (no folder) |
 

@@ -12,7 +12,7 @@ Two scaffold skills are documented in the roadmap (`docs/roadmap/tasks/role-skil
 
 ## Scope
 
-Create **2 new skills** following v3.0.0 patterns from existing code-generation skills (`dev-fe-design`, `dev-api-contract`).
+Create **2 new skills** following v3.0.0 patterns from existing code-generation skills (`frontend-design`, `backend-api-contract`).
 
 ### Files to Create (6 files)
 
@@ -76,9 +76,9 @@ argument-hint: [api-contract, task-breakdown, data-model]
 
 ### Input Handling
 Accepts 1-3 file paths or descriptions:
-- **api-contract** — Path to OpenAPI YAML (from `/jaan-to:dev-api-contract` output: `api.yaml`)
-- **task-breakdown** — Path to BE task breakdown markdown (from `/jaan-to:dev-be-task-breakdown` output)
-- **data-model** — Path to data model markdown (from `/jaan-to:dev-be-data-model` output)
+- **api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output: `api.yaml`)
+- **task-breakdown** — Path to BE task breakdown markdown (from `/jaan-to:backend-task-breakdown` output)
+- **data-model** — Path to data model markdown (from `/jaan-to:backend-data-model` output)
 - **Empty** — Interactive wizard prompting for each
 
 ### Phase 1 Steps
@@ -225,9 +225,9 @@ argument-hint: [fe-design, fe-task-breakdown, api-contract]
 
 ### Input Handling
 Accepts 1-3 file paths or descriptions:
-- **fe-design** — Path to HTML preview or component description (from `/jaan-to:dev-fe-design` output)
-- **fe-task-breakdown** — Path to FE task breakdown (from `/jaan-to:dev-fe-task-breakdown` output)
-- **api-contract** — Path to OpenAPI YAML (from `/jaan-to:dev-api-contract` output)
+- **fe-design** — Path to HTML preview or component description (from `/jaan-to:frontend-design` output)
+- **fe-task-breakdown** — Path to FE task breakdown (from `/jaan-to:frontend-task-breakdown` output)
+- **api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output)
 - **Empty** — Interactive wizard
 - Cross-role: optionally consumes `/jaan-to:ux-microcopy-write` output
 
@@ -334,10 +334,10 @@ All files in `$JAAN_OUTPUTS_DIR/dev/frontend/{id}-{slug}/`:
 
 | Skill | Relationship |
 |-------|-------------|
-| `dev-api-contract` | Upstream — provides OpenAPI YAML consumed by both scaffold skills |
-| `dev-be-data-model` | Upstream — provides data model consumed by BE scaffold |
-| `dev-be-task-breakdown` | Upstream — provides task list consumed by BE scaffold |
-| `dev-fe-task-breakdown` | Upstream — provides component inventory consumed by FE scaffold |
-| `dev-fe-design` | Upstream — provides HTML previews consumed by FE scaffold |
+| `backend-api-contract` | Upstream — provides OpenAPI YAML consumed by both scaffold skills |
+| `backend-data-model` | Upstream — provides data model consumed by BE scaffold |
+| `backend-task-breakdown` | Upstream — provides task list consumed by BE scaffold |
+| `frontend-task-breakdown` | Upstream — provides component inventory consumed by FE scaffold |
+| `frontend-design` | Upstream — provides HTML previews consumed by FE scaffold |
 | `dev-integration-plan` | Downstream — suggested next step after scaffold |
 | `dev-test-plan` | Downstream — suggested next step after scaffold |
