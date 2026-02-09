@@ -15,6 +15,7 @@ sidebar_position: 3
 |-------|-------------|
 | [/jaan-to:frontend-design](design.md) | Create distinctive, production-grade frontend interfaces |
 | [/jaan-to:frontend-task-breakdown](task-breakdown.md) | Transform UX design handoffs into production-ready task breakdowns |
+| [/jaan-to:frontend-scaffold](scaffold.md) | Convert designs to React/Next.js components with TailwindCSS and typed API hooks |
 
 ---
 

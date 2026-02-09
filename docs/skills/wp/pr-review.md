@@ -1,5 +1,6 @@
 ---
 title: "wp-pr-review"
+sidebar_position: 2
 doc_type: skill
 created_date: 2026-02-09
 updated_date: 2026-02-09

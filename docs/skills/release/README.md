@@ -1,5 +1,6 @@
 ---
 title: "Release Skills"
+sidebar_position: 1
 doc_type: index
 created_date: 2026-02-09
 updated_date: 2026-02-09

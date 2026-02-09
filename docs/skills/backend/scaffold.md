@@ -1,0 +1,145 @@
+---
+title: "backend-scaffold"
+sidebar_position: 5
+doc_type: skill
+created_date: 2026-02-09
+updated_date: 2026-02-09
+tags: [dev, backend, scaffold, routes, services, validation, prisma, fastify]
+related: [backend-api-contract, backend-task-breakdown, backend-data-model]
+---
+
+# /jaan-to:backend-scaffold
+
+> Generate production-ready backend code with routes, data models, service layers, and validation.
+
+---
+
+## Overview
+
+Generates production-ready backend scaffolds from upstream specs (API contracts, task breakdowns, data models). Supports multiple stacks — Node.js/TypeScript (Fastify + Prisma), PHP (Laravel/Symfony), and Go (Chi/stdlib + sqlc) — auto-detected from `tech.md`.
+
+---
+
+## Usage
+
+```
+/jaan-to:backend-scaffold
+/jaan-to:backend-scaffold backend-api-contract backend-task-breakdown backend-data-model
+```
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| backend-api-contract | No | Path to OpenAPI YAML |
+| backend-task-breakdown | No | Path to BE task breakdown markdown |
+| backend-data-model | No | Path to data model markdown |
+
+When run without arguments, launches an interactive wizard.
+
+---
+
+## What It Produces
+
+Files at `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/` (Node.js/TypeScript example):
+
+| File | Content |
+|------|---------|
+| `{id}-backend-scaffold-{slug}.md` | Setup guide + architecture doc |
+| `{id}-backend-scaffold-routes-{slug}.ts` | Route handlers (all resources) |
+| `{id}-backend-scaffold-services-{slug}.ts` | Service layer (business logic) |
+| `{id}-backend-scaffold-schemas-{slug}.ts` | Validation schemas |
+| `{id}-backend-scaffold-middleware-{slug}.ts` | Auth + error handling middleware |
+| `{id}-backend-scaffold-prisma-{slug}.prisma` | ORM data model |
+| `{id}-backend-scaffold-config-{slug}.ts` | Package.json + tsconfig content |
+| `{id}-backend-scaffold-readme-{slug}.md` | Setup + run instructions |
+
+File extensions adapt to detected stack (.ts for Node.js, .php for PHP, .go for Go).
+
+---
+
+## What It Asks
+
+| Question | When | Why |
+|----------|------|-----|
+| Project structure | Not in tech.md | Monolith / modular monolith / microservice |
+| Auth middleware | Not in tech.md | JWT / API key / session / none |
+| Error handling depth | Not in tech.md | Basic / full RFC 9457 with error taxonomy |
+| Logging | Not in tech.md | Structured JSON pino / winston / none |
+
+---
+
+## Multi-Stack Support
+
+Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect the stack:
+
+| Stack | Framework | ORM/DB | Validation |
+|-------|-----------|--------|------------|
+| Node.js / TypeScript | Fastify v5+ | Prisma | Zod + type-provider |
+| PHP | Laravel 12 / Symfony 7 | Eloquent / Doctrine | Form Requests / Validator |
+| Go | Chi / stdlib (Go 1.22+) | sqlc / GORM | go-playground/validator |
+
+---
+
+## Key Patterns (Node.js/TypeScript)
+
+- **Routing**: `@fastify/autoload` v6 for file-based route loading
+- **Validation**: `fastify-type-provider-zod` v6.1+ with Zod schemas
+- **ORM**: Prisma singleton with `globalThis` pattern
+- **Services**: Plain exported functions, module caching as built-in singleton
+- **Errors**: RFC 9457 Problem Details with `application/problem+json`
+- **Structure**: Collocated routes + schemas + services per resource
+
+---
+
+## Workflow Chain
+
+```
+/jaan-to:backend-api-contract → /jaan-to:backend-task-breakdown → /jaan-to:backend-scaffold → /jaan-to:qa-test-cases
+```
+
+---
+
+## Example
+
+**Input:**
+```
+/jaan-to:backend-scaffold path/to/api.yaml path/to/tasks.md path/to/data-model.md
+```
+
+**Output:**
+```
+jaan-to/outputs/backend/scaffold/01-user-api/
+├── 01-backend-scaffold-user-api.md
+├── 01-backend-scaffold-routes-user-api.ts
+├── 01-backend-scaffold-services-user-api.ts
+├── 01-backend-scaffold-schemas-user-api.ts
+├── 01-backend-scaffold-middleware-user-api.ts
+├── 01-backend-scaffold-prisma-user-api.prisma
+├── 01-backend-scaffold-config-user-api.ts
+└── 01-backend-scaffold-readme-user-api.md
+```
+
+---
+
+## Tips
+
+- Run `/jaan-to:backend-api-contract` and `/jaan-to:backend-data-model` first for best results
+- Set up `$JAAN_CONTEXT_DIR/tech.md` to skip stack detection questions
+- Copy scaffold files to your project directory and install dependencies
+- Use `/jaan-to:frontend-scaffold` to generate matching frontend code
+
+---
+
+## Related Skills
+
+- [/jaan-to:backend-api-contract](api-contract.md) - Generate OpenAPI contracts
+- [/jaan-to:backend-data-model](data-model.md) - Generate data model docs
+- [/jaan-to:backend-task-breakdown](task-breakdown.md) - Convert PRDs into backend tasks
+
+---
+
+## Technical Details
+
+- **Logical Name**: backend-scaffold
+- **Command**: `/jaan-to:backend-scaffold`
+- **Role**: dev (backend)
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/`
