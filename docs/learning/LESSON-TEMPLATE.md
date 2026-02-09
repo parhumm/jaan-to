@@ -122,7 +122,7 @@ Skill didn't ask clarifying questions when user input was ambiguous. "Authentica
 
 ### Related Skills
 - `pm-story-write` — Also affected by ambiguous scope (stories will be wrong if PRD scope was wrong)
-- `dev-fe-task-breakdown` — Frontend tasks depend on correct auth approach from PRD
+- `frontend-task-breakdown` — Frontend tasks depend on correct auth approach from PRD
 ```
 
 ---

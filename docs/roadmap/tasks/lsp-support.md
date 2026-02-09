@@ -72,7 +72,7 @@ Update skill workflows to leverage LSP capabilities when available.
 - **Hover** on function signatures to generate accurate mock types
 - **Result:** Test cases compile on first try
 
-### `/jaan-to:dev-api-contract`
+### `/jaan-to:backend-api-contract`
 
 **Without LSP:** Reads route files with text search. May miss overloaded handlers or middleware.
 

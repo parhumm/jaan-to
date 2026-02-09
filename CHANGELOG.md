@@ -5,6 +5,37 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+---
+
+## [4.0.0] - 2026-02-09
+
+### Changed
+
+- **[Breaking]** Renamed 5 dev skills to remove `dev-` prefix for cleaner naming:
+  - `dev-be-data-model` → `backend-data-model` (`/jaan-to:backend-data-model`)
+  - `dev-be-task-breakdown` → `backend-task-breakdown` (`/jaan-to:backend-task-breakdown`)
+  - `dev-api-contract` → `backend-api-contract` (`/jaan-to:backend-api-contract`)
+  - `dev-fe-design` → `frontend-design` (`/jaan-to:frontend-design`)
+  - `dev-fe-task-breakdown` → `frontend-task-breakdown` (`/jaan-to:frontend-task-breakdown`)
+- **Documentation reorganization** — Moved skill docs to role-based directories (`docs/skills/backend/`, `docs/skills/frontend/`)
+- **Output paths simplified** — Skills now write to `outputs/backend/` and `outputs/frontend/` instead of `outputs/dev/backend/` and `outputs/dev/frontend/`
+
+### Fixed
+
+- **Bootstrap migration** — Automatically migrates existing outputs from old paths to new paths on session start
+- **Language setting keys** — Updated per-skill language override keys to match new skill names
+- **Cross-skill references** — Updated all command references in SKILL.md files and documentation
+
+### Documentation
+
+- All 104 files updated with new skill names and paths
+- Research files updated (4 files: 52-backend-task-breakdown.md, 60-backend-data-model.md, 51-frontend-task-breakdown.md, research README)
+- Website changelog synced with main CHANGELOG
+
+---
+
 ## [3.24.0] - 2026-02-09
 
 ### Added

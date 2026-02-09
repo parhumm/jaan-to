@@ -50,11 +50,11 @@
 | ux-research-synthesize | `/jaan-to:ux-research-synthesize` | Synthesize research findings into themes and recommendations |
 | ux-heatmap-analyze | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 | ux-microcopy-write | `/jaan-to:ux-microcopy-write` | Generate multi-language microcopy packs |
-| dev-fe-task-breakdown | `/jaan-to:dev-fe-task-breakdown` | Generate FE task breakdown from UX handoff |
-| dev-be-task-breakdown | `/jaan-to:dev-be-task-breakdown` | Generate BE task breakdown from PRD |
-| dev-fe-design | `/jaan-to:dev-fe-design` | Create distinctive, production-grade frontend components |
-| dev-be-data-model | `/jaan-to:dev-be-data-model` | Generate data model docs with constraints, indexes, and migrations |
-| dev-api-contract | `/jaan-to:dev-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| frontend-task-breakdown | `/jaan-to:frontend-task-breakdown` | Generate FE task breakdown from UX handoff |
+| backend-task-breakdown | `/jaan-to:backend-task-breakdown` | Generate BE task breakdown from PRD |
+| frontend-design | `/jaan-to:frontend-design` | Create distinctive, production-grade frontend components |
+| backend-data-model | `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
+| backend-api-contract | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 
 ## Language

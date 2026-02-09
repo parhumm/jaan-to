@@ -65,7 +65,7 @@ Internal skills (for plugin maintenance):
 | `pm-prd-write` | `/jaan-to:pm-prd-write` |
 | `qa-plan-test-matrix` | `/jaan-to:qa-plan-test-matrix` |
 | `docs-create` | `/jaan-to:docs-create` |
-| `dev-api-contract` | `/jaan-to:dev-api-contract` |
+| `dev-api-contract` | `/jaan-to:backend-api-contract` |
 
 ---
 

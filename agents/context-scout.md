@@ -13,7 +13,7 @@ First time using skills in a new project - trigger context-scout to gather tech 
 
 <example>
 Context: User wants to generate backend task breakdown but hasn't customized context files
-user: "/jaan-to:dev-be-task-breakdown from this PRD"
+user: "/jaan-to:backend-task-breakdown from this PRD"
 assistant: "I'll use the context-scout to detect your database, API framework, and testing patterns before breaking down the tasks."
 <commentary>
 Skill needs project-specific context (database type, API framework, test setup) to generate accurate task breakdown. Scout the project first.

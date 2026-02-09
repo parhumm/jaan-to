@@ -27,7 +27,14 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v3.24.0 — Multi-platform support for detect skills
+**Latest:** v4.0.0 — Batch skill rename (breaking: 5 skills renamed)
+
+### v4.0.0 — Batch skill rename (breaking)
+- Renamed 5 skills: `dev-be-data-model` → `backend-data-model`, `dev-be-task-breakdown` → `backend-task-breakdown`, `dev-api-contract` → `backend-api-contract`, `dev-fe-design` → `frontend-design`, `dev-fe-task-breakdown` → `frontend-task-breakdown` (`d93cbdc`)
+- Moved documentation to role-based directories (`docs/skills/backend/`, `docs/skills/frontend/`)
+- Updated output paths to `outputs/backend/` and `outputs/frontend/`
+- Added bootstrap migration for automatic output path migration
+- Fixed language setting keys and cross-skill command references
 
 ### v3.24.0 — Multi-platform support for detect skills
 - Multi-platform monorepo analysis (web, backend, mobile, TV apps) with auto-detection (`f57a406`)
@@ -121,6 +128,14 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
+### v4.0.0 — Batch skill rename (`d93cbdc`)
+
+- [x] Renamed 5 skills: `dev-be-data-model` → `backend-data-model`, `dev-be-task-breakdown` → `backend-task-breakdown`, `dev-api-contract` → `backend-api-contract`, `dev-fe-design` → `frontend-design`, `dev-fe-task-breakdown` → `frontend-task-breakdown` (`3ab9a93`..`d93cbdc`)
+- [x] Moved documentation to role-based directories (`docs/skills/backend/`, `docs/skills/frontend/`) (`1aa0b73`)
+- [x] Updated output paths to `outputs/backend/` and `outputs/frontend/` (`fb0ddff`)
+- [x] Added bootstrap migration for automatic output path migration (`d93cbdc`)
+- [x] Fixed language setting keys and cross-skill command references (`d93cbdc`)
+
 ---
 
 ## Phase 7: MCP Connectors (24 documented)
@@ -171,11 +186,11 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:detect-product` | Product reality extraction with evidence |
 | `/jaan-to:detect-ux` | UX audit with journey/pain-point findings |
 | `/jaan-to:detect-pack` | Consolidate detect outputs into knowledge index |
-| `/jaan-to:dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
-| `/jaan-to:dev-be-task-breakdown` | Backend task breakdown from PRDs |
-| `/jaan-to:dev-fe-design` | Frontend component design |
-| `/jaan-to:dev-be-data-model` | Generate data model docs with constraints, indexes, and migrations |
-| `/jaan-to:dev-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| `/jaan-to:frontend-task-breakdown` | Frontend task breakdown with component hierarchy |
+| `/jaan-to:backend-task-breakdown` | Backend task breakdown from PRDs |
+| `/jaan-to:frontend-design` | Frontend component design |
+| `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
+| `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
 | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |

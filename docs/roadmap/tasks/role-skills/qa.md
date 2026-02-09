@@ -22,7 +22,7 @@ flowchart TD
     jaan-to-qa-bug-triage["qa-bug-triage<br>Bug Triage<br>Dedupe + severity + root cause"] -.-> jaan-to-dev-pr-review["dev-pr-review<br>DEV: pr-review"]
     jaan-to-qa-bug-triage["qa-bug-triage<br>Bug Triage<br>Dedupe + severity + root cause"] -.-> jaan-to-release-triage-decision["release-triage-decision<br>RELEASE: triage-decision"]
     jaan-to-qa-perf-plan["qa-perf-plan<br>Perf Plan<br>Load scenarios + thresholds"] --> jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"]
-    jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"] -.-> dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
+    jaan-to-qa-perf-bottleneck["qa-perf-bottleneck<br>Perf Bottleneck<br>Bottlenecks + diagnostics + fixes"] -.-> backend-task-breakdown["backend-task-breakdown<br>DEV: be-task-breakdown"]
     jaan-to-qa-automation-plan["qa-automation-plan<br>Automation Plan<br>What to automate + flakiness risk"] --> jaan-to-qa-smoke-suite["qa-smoke-suite<br>Smoke Suite<br>Critical path tests + pass/fail"]
     jaan-to-qa-smoke-suite["qa-smoke-suite<br>Smoke Suite<br>Critical path tests + pass/fail"] --> jaan-to-qa-regression-runbook["qa-regression-runbook<br>Regression Runbook<br>Smoke → critical → deep checks"]
     jaan-to-qa-regression-runbook["qa-regression-runbook<br>Regression Runbook<br>Smoke → critical → deep checks"] --> jaan-to-qa-release-signoff["qa-release-signoff<br>Release Signoff<br>Go/No-Go + evidence + risks"]
@@ -30,7 +30,7 @@ flowchart TD
 
     style jaan-to-dev-pr-review fill:#f0f0f0,stroke:#999
     style jaan-to-release-triage-decision fill:#f0f0f0,stroke:#999
-    style dev-be-task-breakdown fill:#f0f0f0,stroke:#999
+    style backend-task-breakdown fill:#f0f0f0,stroke:#999
     style jaan-to-delivery-release-readiness fill:#f0f0f0,stroke:#999
 ```
 
@@ -150,7 +150,7 @@ flowchart TD
   - Define load profiles (steady, spike, soak)
   - Pass/fail thresholds tied to user experience
   - Identify bottlenecks with data
-- **→ Next**: `dev-be-task-breakdown`
+- **→ Next**: `backend-task-breakdown`
 - **MCP Required**: None
 - **Input**: [metrics]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/perf/{slug}/bottleneck-hypotheses.md`

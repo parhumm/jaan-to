@@ -70,7 +70,7 @@ Customizing `tech.md` for a Laravel project:
 - **Database**: MySQL 8
 ```
 
-**Result**: When you run `/jaan-to:pm-prd-write`, the generated PRD references Laravel and MySQL. When you run `/jaan-to:dev-be-task-breakdown`, task cards use Laravel conventions.
+**Result**: When you run `/jaan-to:pm-prd-write`, the generated PRD references Laravel and MySQL. When you run `/jaan-to:backend-task-breakdown`, task cards use Laravel conventions.
 
 ---
 

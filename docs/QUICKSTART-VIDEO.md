@@ -129,14 +129,14 @@ claude
 
 ### [02:15 - 02:45] Demo 3: Generate Frontend Tasks (30 seconds)
 
-**VISUAL:** Run `/jaan-to:dev-fe-task-breakdown` command
+**VISUAL:** Run `/jaan-to:frontend-task-breakdown` command
 
 **NARRATION:**
 > "For implementation, jaan.to can break down frontend tasks from the PRD."
 
 **COMMANDS:**
 ```
-/jaan-to:dev-fe-task-breakdown from prd at jaan-to/outputs/pm/prd/01-oauth-login/
+/jaan-to:frontend-task-breakdown from prd at jaan-to/outputs/pm/prd/01-oauth-login/
 ```
 
 **VISUAL:** Show skill generating component inventory and tasks
@@ -193,7 +193,7 @@ claude
 /jaan-to:qa-test-cases         # Generate BDD test scenarios
 /jaan-to:data-gtm-datalayer    # GTM tracking code
 /jaan-to:ux-heatmap-analyze    # Analyze user behavior
-/jaan-to:dev-be-task-breakdown # Backend task breakdown
+/jaan-to:backend-task-breakdown # Backend task breakdown
 ```
 
 **NARRATION (continued):**

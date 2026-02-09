@@ -75,7 +75,7 @@ flowchart TD
 - **Logical**: `wp-data:storage-decision`
 - **Description**: Storage strategy per entity (options vs meta vs custom tables) + multisite scope + retention policy
 - **Quick Win**: Yes
-- **Cross-ref**: Extends [dev-be-data-model](../role-skills/dev.md#jaan-to-dev-be-data-model) with WP persistence layers + multisite scope
+- **Cross-ref**: Extends [backend-data-model](../role-skills/dev.md#jaan-to-backend-data-model) with WP persistence layers + multisite scope
 - **Key Points**:
   - Pick the smallest viable persistence layer (avoid tables unless justified)
   - Define network-wide vs per-site behavior up front
@@ -166,7 +166,7 @@ flowchart TD
 - **Logical**: `wp-rest:endpoint-spec`
 - **Description**: REST routes spec (namespace, methods, args schema, validation/sanitization, permission model) + error contract
 - **Quick Win**: Yes
-- **Cross-ref**: Extends [dev-api-contract](../role-skills/dev.md#jaan-to-dev-api-contract) with WP register_rest_route patterns + permission callbacks
+- **Cross-ref**: Extends [backend-api-contract](../role-skills/dev.md#jaan-to-backend-api-contract) with WP register_rest_route patterns + permission callbacks
 - **Key Points**:
   - Every endpoint must define a permission strategy (public vs authenticated)
   - Args should include validation + sanitization callbacks for predictable behavior
