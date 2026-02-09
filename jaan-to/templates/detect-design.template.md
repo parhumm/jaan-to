@@ -6,6 +6,7 @@ status: draft
 date: {{date}}
 target:
   name: "{{repo_name}}"
+  platform: "{{platform}}"
   commit: "{{commit_hash}}"
   branch: "{{branch}}"
 tool:
@@ -80,7 +81,8 @@ lifecycle_phase: post-build
 **Token Definition**:
 
 evidence:
-  id: E-DSN-NNNa
+  id: E-DSN-NNNa                    # Single-platform: E-DSN-001a
+  id: E-DSN-{PLATFORM}-NNNa         # Multi-platform: E-DSN-WEB-001a
   type: token-definition
   location:
     uri: "{token-file}"
@@ -91,7 +93,8 @@ evidence:
 **Conflicting Usage**:
 
 evidence:
-  id: E-DSN-NNNb
+  id: E-DSN-NNNb                    # Single-platform: E-DSN-001b
+  id: E-DSN-{PLATFORM}-NNNb         # Multi-platform: E-DSN-WEB-001b
   type: conflicting-usage
   location:
     uri: "{component-file}"
