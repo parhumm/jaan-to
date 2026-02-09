@@ -14,6 +14,7 @@ sidebar_position: 1
 | Skill | Description |
 |-------|-------------|
 | [/jaan-to:ux-heatmap-analyze](heatmap-analyze.md) | Analyze heatmap data for UX insights |
+| [/jaan-to:ux-flowchart-generate](flowchart-generate.md) | Generate Mermaid flowcharts from PRD/docs/codebase with evidence maps |
 
 ---
 
