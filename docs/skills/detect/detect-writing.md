@@ -4,7 +4,7 @@ sidebar_position: 3
 doc_type: skill
 tags: [detect, writing, tone, glossary, i18n, microcopy]
 related: [detect-dev, detect-design, detect-product, detect-ux, detect-pack]
-updated_date: 2026-02-08
+updated_date: 2026-02-09
 ---
 
 # /jaan-to:detect-writing
@@ -15,25 +15,35 @@ updated_date: 2026-02-08
 
 ## What It Does
 
-Extracts the writing system from the repository using framework-specific glob discovery, string classification, and heuristic scoring. Scans i18n/locale files across 13+ framework patterns, classifies UI copy into 8 categories using component-name matching, scores tone using NNg dimensions (4 primary + 5 extended), audits error message quality with a weighted rubric, and assesses i18n maturity on a 0–5 scale.
+Extracts the writing system from the repository with string discovery, classification, and heuristic scoring. Supports **light mode** (default, 1 summary file) and **full mode** (`--full`, 6 detailed files with NNg tone scoring, glossary, and governance).
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:detect-writing
+/jaan-to:detect-writing [repo] [--full]
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | repo | No | Target repository (defaults to current) |
+| `--full` | No | Run full analysis (6 detection steps, 6 output files). Default is light mode. |
+
+**Light mode** (default): Scans string inventory and i18n maturity, produces 1 summary file. Backend/CLI platforms also include error message quality scores (partial-mode exception).
+
+**Full mode** (`--full`): Runs all steps including NNg tone dimensions, UI copy classification, glossary, and governance. Produces 6 detailed output files.
 
 ---
 
 ## Output
 
-### Single-Platform Project
+### Light Mode (default) — 1 file
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/writing/summary{suffix}.md` | String corpus overview, i18n maturity, top-5 findings (+ error scores for backend/CLI) |
+
+### Full Mode (`--full`) — 6 files
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/writing/writing-system.md` | Voice definition, tone spectrum (NNg dimensions), consistency score |
@@ -44,12 +54,7 @@ Extracts the writing system from the repository using framework-specific glob di
 | `$JAAN_OUTPUTS_DIR/detect/writing/samples.md` | Representative copy samples per category |
 
 ### Multi-Platform Monorepo
-| File | Content |
-|------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/writing/writing-system-{platform}.md` | Voice definition per platform (e.g., `writing-system-web.md`, `writing-system-mobile.md`) |
-| ... | (same structure with platform suffix) |
-
-All 6 output files are required per execution.
+Files use platform suffix: `writing-system-{platform}.md`, `summary-{platform}.md`, etc.
 
 ---
 

@@ -2,7 +2,7 @@
 name: detect-design
 description: Design system detection with drift findings and evidence blocks.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [repo]
+argument-hint: "[repo] [--full]"
 ---
 
 # detect-design
@@ -19,9 +19,7 @@ argument-hint: [repo]
 
 ## Input
 
-**Repository**: $ARGUMENTS
-
-If a repository path is provided, scan that repo. Otherwise, scan the current working directory.
+**Arguments**: $ARGUMENTS — parsed in Step 0.0. Repository path and mode determined there.
 
 ---
 
@@ -160,9 +158,26 @@ lifecycle_phase: post-build
 
 # PHASE 1: Detection (Read-Only)
 
+## Step 0.0: Parse Arguments
+
+**Arguments**: $ARGUMENTS
+
+| Argument | Effect |
+|----------|--------|
+| (none) | **Light mode** (default): Token + component scan, single summary file |
+| `[repo]` | Scan specified repo (applies to both modes) |
+| `--full` | **Full mode**: All detection steps, 6 output files (current behavior) |
+
+**Mode determination:**
+- If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
+- Otherwise → set `run_depth = "light"`
+
+Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+
 ## Thinking Mode
 
-ultrathink
+**If `run_depth == "full"`:** ultrathink
+**If `run_depth == "light"`:** megathink
 
 Use extended reasoning for:
 - Identifying design token hierarchies and naming conventions
@@ -249,7 +264,9 @@ For each platform in platforms:
    - Skip Steps 1-7 (detection steps)
    - Go directly to Step 8 with "Not Applicable" findings
 5. If `platform_has_ui == true` or platform is expected to have UI:
-   - Run all detection steps (Steps 1-7) scoped to `base_path`
+   - Run detection steps per `run_depth`:
+     - **If `run_depth == "full"`:** Run Steps 1-7 scoped to `base_path`
+     - **If `run_depth == "light"`:** Run Steps 1-2 only scoped to `base_path` (skip Steps 3-7)
 6. Use platform-specific output paths in Step 9
 
 **"Not Applicable" Findings Structure**:
@@ -339,6 +356,10 @@ Classify components:
 - **Data display**: Table, Card, List, Badge, Avatar
 - **Form**: Select, Checkbox, Radio, Switch, DatePicker
 
+**If `run_depth == "light"`:** Skip Steps 3-7. Proceed directly to Step 8 (Present Detection Summary).
+
+**Precedence**: N/A handling (platform_has_ui checks) always takes priority over run_depth gates. If `platform_has_ui == false`, skip ALL detection steps regardless of run_depth.
+
 ## Step 3: Scan Brand Assets
 
 - Glob: `**/assets/brand/**` — brand directory
@@ -391,6 +412,39 @@ Each drift finding MUST have paired evidence (definition + conflicting usage).
 # HARD STOP — Detection Summary & User Approval
 
 ## Step 8: Present Detection Summary
+
+**If `run_depth == "light"`:**
+
+```
+DESIGN SYSTEM DETECTION COMPLETE (Light Mode)
+-----------------------------------------------
+
+PLATFORM: {platform_name or 'all'}
+UI PRESENCE: {Yes/No} {if No, show "(Not Applicable)"}
+
+TOKEN INVENTORY
+  Colors:      {n} tokens found    [Confidence: {level}]
+  Typography:  {n} tokens found    [Confidence: {level}]
+  Spacing:     {n} tokens found    [Confidence: {level}]
+  Other:       {n} tokens found    [Confidence: {level}]
+
+COMPONENTS: {n} components detected across {n} categories
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/design/summary{-platform}.md
+
+Note: Run with --full for brand assets, UI patterns, accessibility audit,
+governance signals, and full drift analysis (6 output files).
+```
+
+> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/design/? [y/n]"
+
+**If `run_depth == "full"`:**
 
 ```
 DESIGN SYSTEM DETECTION COMPLETE
@@ -453,6 +507,26 @@ else:  # Multi-platform
 #                  $JAAN_OUTPUTS_DIR/detect/design/brand-mobile.md
 ```
 
+### Stale File Cleanup
+
+- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
+- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+
+### If `run_depth == "light"`: Write Single Summary File
+
+Write one file: `$JAAN_OUTPUTS_DIR/detect/design/summary{suffix}.md`
+
+Contents:
+1. Universal YAML frontmatter with `platform` field, `findings_summary`, and `overall_score`
+2. **Executive Summary** — BLUF of design system findings
+3. **Token Inventory** — categories, count, naming convention, confidence levels (from Step 1)
+4. **Component Inventory** — name, category, variant count (from Step 2)
+5. **Token Coverage Gaps** — categories defined vs categories missing
+6. **Top Findings** — up to 5 highest-severity findings with evidence blocks
+7. "Run with `--full` for brand assets, UI patterns, accessibility audit, governance signals, and full drift analysis."
+
+### If `run_depth == "full"`: Write 6 Output Files
+
 Write 6 output files using the template:
 
 | File | Content |
@@ -489,6 +563,17 @@ If yes:
 ---
 
 ## Definition of Done
+
+**If `run_depth == "light"`:**
+
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/design/summary{suffix}.md`
+- [ ] Universal YAML frontmatter with `overall_score`
+- [ ] Token and component findings have evidence blocks with E-DSN-NNN IDs
+- [ ] Confidence scores assigned to all findings
+- [ ] Detection summary shown to user before writing
+- [ ] User approved output
+
+**If `run_depth == "full"`:**
 
 - [ ] All 6 output files written to `$JAAN_OUTPUTS_DIR/detect/design/`
 - [ ] Universal YAML frontmatter with `platform` field in every file

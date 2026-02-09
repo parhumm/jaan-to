@@ -4,7 +4,7 @@ sidebar_position: 2
 doc_type: skill
 tags: [detect, design, tokens, components, accessibility, drift]
 related: [detect-dev, detect-writing, detect-pack]
-updated_date: 2026-02-08
+updated_date: 2026-02-09
 ---
 
 # /jaan-to:detect-design
@@ -15,25 +15,35 @@ updated_date: 2026-02-08
 
 ## What It Does
 
-Scans the repository for design system signals: brand definitions, design tokens (JSON, CSS variables, Tailwind config), component libraries, UI patterns, accessibility implementation, and governance processes. Identifies drift between token definitions and actual usage with paired evidence.
+Scans the repository for design system signals: design tokens, component libraries, brand assets, UI patterns, accessibility, and governance. Supports **light mode** (default, 1 summary file) and **full mode** (`--full`, 6 detailed files with drift analysis).
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:detect-design
+/jaan-to:detect-design [repo] [--full]
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | repo | No | Target repository (defaults to current) |
+| `--full` | No | Run full analysis (6 detection steps, 6 output files). Default is light mode. |
+
+**Light mode** (default): Scans design tokens and component library, produces 1 summary file with token inventory, component inventory, and token coverage gaps.
+
+**Full mode** (`--full`): Runs all steps including brand assets, UI patterns, accessibility, governance, and drift detection. Produces 6 detailed output files.
 
 ---
 
 ## Output
 
-### Single-Platform Project
+### Light Mode (default) — 1 file
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/design/summary{suffix}.md` | Token inventory, component inventory, coverage gaps, top-5 findings |
+
+### Full Mode (`--full`) — 6 files
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/design/brand.md` | Brand signals (colors, typography, logos, font loading) |
@@ -44,10 +54,7 @@ Scans the repository for design system signals: brand definitions, design tokens
 | `$JAAN_OUTPUTS_DIR/detect/design/governance.md` | Design system governance (CODEOWNERS, versioning, visual regression testing) |
 
 ### Multi-Platform Monorepo
-| File | Content |
-|------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/design/brand-{platform}.md` | Brand signals per platform (e.g., `brand-web.md`, `brand-mobile.md`) |
-| ... | (same structure with platform suffix) |
+Files use platform suffix: `brand-{platform}.md`, `summary-{platform}.md`, etc.
 
 ---
 

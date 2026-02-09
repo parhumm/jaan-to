@@ -4,7 +4,7 @@ sidebar_position: 4
 doc_type: skill
 tags: [detect, product, features, monetization, instrumentation]
 related: [detect-dev, detect-design, detect-writing, detect-ux, detect-pack]
-updated_date: 2026-02-08
+updated_date: 2026-02-09
 ---
 
 # /jaan-to:detect-product
@@ -15,25 +15,35 @@ updated_date: 2026-02-08
 
 ## What It Does
 
-Extracts the "product reality" from the repository using a 3-layer evidence model: surface (routes/screens), copy (user-facing text), and code path (business logic). Scans for features, value proposition signals, monetization/billing, entitlement enforcement, analytics instrumentation, feature flags, and technical/business constraints.
+Extracts the "product reality" from the repository with evidence-backed detection. Supports **light mode** (default, 1 summary file with Tentative-confidence features) and **full mode** (`--full`, 7 detailed files with 3-layer evidence model).
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:detect-product
+/jaan-to:detect-product [repo] [--full]
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | repo | No | Target repository (defaults to current) |
+| `--full` | No | Run full analysis (7 detection steps, 7 output files). Default is light mode. |
+
+**Light mode** (default): Scans routes/screens and business logic/monetization, produces 1 summary file with feature inventory (Tentative confidence) and monetization summary.
+
+**Full mode** (`--full`): Runs all steps including copy layer, instrumentation audit, feature flags, and constraint analysis. Produces 7 detailed output files with 3-layer evidence linking.
 
 ---
 
 ## Output
 
-### Single-Platform Project
+### Light Mode (default) — 1 file
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/product/summary{suffix}.md` | Feature inventory (Tentative), monetization + entitlements, top-5 findings |
+
+### Full Mode (`--full`) — 7 files
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/product/overview.md` | Product overview with feature summary |
@@ -45,10 +55,7 @@ Extracts the "product reality" from the repository using a 3-layer evidence mode
 | `$JAAN_OUTPUTS_DIR/detect/product/constraints.md` | Technical/business constraints and risks |
 
 ### Multi-Platform Monorepo
-| File | Content |
-|------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/product/overview-{platform}.md` | Product overview scoped to platform (e.g., `overview-web.md`, `overview-backend.md`) |
-| ... | (same structure with platform suffix) |
+Files use platform suffix: `overview-{platform}.md`, `summary-{platform}.md`, etc.
 
 ---
 

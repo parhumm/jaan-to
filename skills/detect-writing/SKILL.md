@@ -2,7 +2,7 @@
 name: detect-writing
 description: Writing system extraction with NNg tone dimensions, UI copy classification, and i18n maturity scoring.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [repo]
+argument-hint: "[repo] [--full]"
 ---
 
 # detect-writing
@@ -19,9 +19,7 @@ argument-hint: [repo]
 
 ## Input
 
-**Repository**: $ARGUMENTS
-
-If a repository path is provided, scan that repo. Otherwise, scan the current working directory.
+**Arguments**: $ARGUMENTS — parsed in Step 0.0. Repository path and mode determined there.
 
 ---
 
@@ -127,9 +125,26 @@ lifecycle_phase: post-build
 
 # PHASE 1: Detection (Read-Only)
 
+## Step 0.0: Parse Arguments
+
+**Arguments**: $ARGUMENTS
+
+| Argument | Effect |
+|----------|--------|
+| (none) | **Light mode** (default): String inventory + i18n maturity, single summary file |
+| `[repo]` | Scan specified repo (applies to both modes) |
+| `--full` | **Full mode**: All detection steps, 6 output files (current behavior) |
+
+**Mode determination:**
+- If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
+- Otherwise → set `run_depth = "light"`
+
+Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+
 ## Thinking Mode
 
-ultrathink
+**If `run_depth == "full"`:** ultrathink
+**If `run_depth == "light"`:** megathink
 
 Use extended reasoning for:
 - NNg tone dimension scoring across string corpus
@@ -192,20 +207,12 @@ For each platform in platforms:
 1. Set `current_platform = platform.name`
 2. Set `base_path = platform.path`
 3. **Determine analysis mode** based on platform type and UI presence
-4. If `analysis_mode == "partial"`:
-   - Run Step 1 (String Inventory) - focus on error strings only
-   - Skip Step 2 (UI Copy Classification)
-   - Run Step 3 (Tone Analysis) - reduced to error messages corpus only
-   - Run Step 4 (Error Message Scoring)
-   - Run Step 5 (Glossary) - error terminology only
-   - Run Step 6 (Localization) - error message i18n only
-   - Skip Step 7 (Governance) unless content linting detected
-   - Output files: writing-system.md (partial), error-messages.md, glossary.md (reduced), localization.md (reduced)
-   - Mark ui-copy.md and samples.md as "Not Applicable"
-5. If `analysis_mode == "full"`:
-   - Run all steps (Steps 1-7)
-   - Output all 6 files
-6. Use platform-specific output paths in Step 9
+4. Run detection steps per `run_depth` and `analysis_mode`:
+   - **If `run_depth == "full"` AND `analysis_mode == "full"`:** Run Steps 1-7
+   - **If `run_depth == "full"` AND `analysis_mode == "partial"`:** Run Steps 1, 3 (reduced), 4, 5, 6 (reduced). Skip Step 2, 7 unless content linting detected.
+   - **If `run_depth == "light"` AND `analysis_mode == "full"`:** Run Steps 1, 5 only (skip Steps 2, 3, 4, 6, 7)
+   - **If `run_depth == "light"` AND `analysis_mode == "partial"`:** Run Steps 1, 4, 5 only (skip Steps 2, 3, 6, 7)
+5. Use platform-specific output paths in Step 9
 
 **Partial Analysis Output Notes**:
 - `writing-system.md`: Tone dimensions based on error messages only, with note about scope limitation
@@ -240,6 +247,10 @@ Use framework-specific glob patterns:
 ### Component Inline Text
 - Grep for text in component props: `label`, `title`, `message`, `description`, `placeholder`, `helperText`, `errorMessage`
 - Grep for JSX/TSX inline text between tags
+
+**If `run_depth == "light"` AND `analysis_mode == "full"`:** Skip Steps 2-4, 6-7. Proceed directly to Step 5 (i18n Maturity Assessment).
+
+**If `run_depth == "light"` AND `analysis_mode == "partial"`:** Skip Steps 2-3. Proceed directly to Step 4 (Error Message Quality Scoring), then Step 5, then skip Steps 6-7.
 
 ## Step 2: UI Copy Classification
 
@@ -360,6 +371,8 @@ Scores <= -2 cap maturity at Level 1 regardless of other signals.
 | **4** | Mature | 5+ locales; >95% externalized; ICU plural+select; RTL support; CLDR; governance |
 | **5** | Excellence | 10+ locales; 100% externalized with lint; full ICU; bidi CSS; automated pipeline |
 
+**If `run_depth == "light"`:** Skip Steps 6-7. Proceed directly to Step 8 (Present Detection Summary).
+
 ## Step 6: Terminology Extraction
 
 Build a glossary using ISO-704-inspired methodology:
@@ -399,6 +412,38 @@ terms:
 # HARD STOP — Detection Summary & User Approval
 
 ## Step 8: Present Detection Summary
+
+**If `run_depth == "light"`:**
+
+```
+WRITING SYSTEM DETECTION COMPLETE (Light Mode)
+-------------------------------------------------
+
+PLATFORM: {platform_name or 'all'}
+ANALYSIS MODE: {Full/Partial (error messages only)}
+
+STRING CORPUS: {n} strings analyzed across {n} files
+LOCALES DETECTED: {list}
+
+i18n MATURITY: Level {0-5} ({name})
+{if analysis_mode == "partial":}
+ERROR MESSAGE SCORE: {avg_score}/10
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/writing/summary{-platform}.md
+
+Note: Run with --full for NNg tone dimensions, UI copy classification,
+glossary, and governance analysis (6 output files).
+```
+
+> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/writing/? [y/n]"
+
+**If `run_depth == "full"`:**
 
 ```
 WRITING SYSTEM DETECTION COMPLETE
@@ -469,6 +514,26 @@ else:  # Multi-platform
 #                  $JAAN_OUTPUTS_DIR/detect/writing/writing-system-backend.md
 ```
 
+### Stale File Cleanup
+
+- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
+- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+
+### If `run_depth == "light"`: Write Single Summary File
+
+Write one file: `$JAAN_OUTPUTS_DIR/detect/writing/summary{suffix}.md`
+
+Contents:
+1. Universal YAML frontmatter with `platform` field, `findings_summary`, and `overall_score`
+2. **Executive Summary** — BLUF of writing system findings
+3. **String Corpus Overview** — total strings, file count, categories found (from Step 1)
+4. **i18n Maturity** — level (0-5), locales detected, evidence (from Step 5)
+5. **If `analysis_mode == "partial"`:** **Error Message Quality Scores** — rubric scoring results (from Step 4)
+6. **Top Findings** — up to 5 highest-severity findings with evidence blocks
+7. "Run with `--full` for NNg tone dimensions, UI copy classification, glossary, and governance analysis (6 output files)."
+
+### If `run_depth == "full"`: Write 6 Output Files
+
 Write 6 output files:
 
 | File | Content | Partial Analysis Handling |
@@ -527,6 +592,17 @@ If yes:
 
 ## Definition of Done
 
+**If `run_depth == "light"`:**
+
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/writing/summary{suffix}.md`
+- [ ] Universal YAML frontmatter with `overall_score`
+- [ ] String corpus overview and i18n maturity included
+- [ ] If partial analysis: error message quality scores included
+- [ ] "--full" upsell note included
+- [ ] User approved output
+
+**If `run_depth == "full"`:**
+
 - [ ] All 6 output files written to `$JAAN_OUTPUTS_DIR/detect/writing/`
 - [ ] Universal YAML frontmatter with `platform` field in every file
 - [ ] Every finding has evidence block with correct ID format (E-WRT-NNN for single-platform, E-WRT-{PLATFORM}-NNN for multi-platform)
@@ -537,6 +613,5 @@ If yes:
 - [ ] Glossary uses ISO-704 statuses (error terminology if partial)
 - [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
 - [ ] If partial analysis mode (backend/cli), minimal "Not Applicable" files created for ui-copy.md and samples.md
-- [ ] User approved output
 - [ ] Confidence scores assigned to all findings
 - [ ] User approved output

@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.1.0] - 2026-02-09
+
+### Added
+- **Light/Full mode for all 6 detect skills** — All detect skills (`detect-dev`, `detect-design`, `detect-writing`, `detect-product`, `detect-ux`, `detect-pack`) now support `--light` (default) and `--full` modes
+  - **Light mode** (default, no flag): Reduced detection steps, single `summary.md` output per skill, `megathink` thinking mode — significantly lower token usage
+  - **Full mode** (`--full`): All detection steps, all output files (9/6/7/7/6/4+), `ultrathink` thinking mode — identical to previous behavior
+  - **detect-writing partial exception**: Backend/CLI platforms keep error message scoring even in light mode
+  - **detect-pack mixed input handling**: Automatically detects whether each domain provided light-mode (`summary.md`) or full-mode (individual files) outputs
+  - **Stale file cleanup**: Full mode deletes leftover `summary.md`; light mode preserves existing full-mode files
+  - **N/A precedence**: Platform UI-presence checks always take priority over run_depth gates
+
+### Changed
+- **Detect skill documentation** — All 6 detect skill docs + README updated with light/full mode usage, output tables, and examples
+- **Roadmap** — Added light/full mode tasks to Phase 5
+
+---
+
 ## [4.0.0] - 2026-02-09
 
 ### Changed

@@ -1,6 +1,6 @@
 {
   "name": "jaan-to",
-  "version": "4.0.0",
+  "version": "4.1.0",
   "description": "Give soul to your workflow. 27 AI-powered skills for product management (PRDs, user stories), development (frontend/backend task breakdowns, data models, API contracts, component design), evidence-based repo audits (detect suite: dev, design, writing, product, UX + knowledge pack), UX research synthesis, QA test cases (BDD/Gherkin), and data analytics (GTM tracking). Features two-phase workflow with human approval, quality-reviewer agent, and continuous improvement via LEARN.md system.",
   "author": {
     "name": "Parhum Khoshbakht",

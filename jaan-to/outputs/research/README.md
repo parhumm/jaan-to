@@ -69,6 +69,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [59](59-backend-api-contract.md)                                                 | OpenAPI 3.1 Contract Generator                                 | Production-ready OpenAPI 3.1 contract generation covering schema design (flat $ref, polymorphism, null handling), RFC 9457 error responses, example generation, versioning/deprecation, AI guardrails (Spectral + Redocly), overlay enrichment, reference specs (GitHub, Stripe, Zalando), and validation tooling stack. 40+ sources.                                                                                                                                                    |
 | [60](60-backend-data-model.md)                                                | AI Data Modeling Skill Research                                | Comprehensive research on bridging natural language to production-ready DDL across PostgreSQL, MySQL, MongoDB, DynamoDB, and edge SQLite. Covers NLP constraint extraction heuristics, zero-downtime migration patterns (CONCURRENTLY, INSTANT/INPLACE/COPY, expand-contract), composite index ordering algorithms (ESR rule), multi-tenant isolation with RLS, schema evolution compatibility rules, soft delete/GDPR patterns, and a quality validation checklist with scoring rubric. |
 | [61](61-knowledge-pack.md)                                                   | Repo-Analysis Output & Content Detection Standards             | Standards for audit report output schemas synthesizing SARIF, CycloneDX, MADR, and Diátaxis, plus writing system detection methodology covering voice/tone analysis (NNg 4-dimension + 5 extended), terminology extraction (ISO 704/C-value), 8 UI copy categories with detection heuristics, error message quality scoring rubric, plain language readability targets, and i18n maturity assessment (0-5 scale with glob patterns for 13 frameworks).                                   |
+| [62](62-ai-workflow-claude-code-token-optimization.md)                       | Claude Code Token Optimization at Scale                        | Scaling 141 skills + 24 MCP connectors within 200K-token context window. Covers progressive disclosure (~40 tokens/skill), MCP Tool Search (85% reduction), CLAUDE.md trigger tables (54-62% savings), hook strategies, skill tiering (disable-model-invocation, context:fork), subagent isolation, concrete token budget achieving ~73% available context, and anti-patterns to avoid.                                                                                                   |
 
 ## Quick Topic Finder
 
@@ -125,6 +126,7 @@ This directory contains structured summaries of research on Claude Code best pra
 ### Token & Cost Optimization
 - [08-claude-optimization.md](08-claude-optimization.md)
 - [18-token-optimization.md](18-token-optimization.md)
+- [62-ai-workflow-claude-code-token-optimization.md](62-ai-workflow-claude-code-token-optimization.md)
 
 ### Tech Stack Best Practices
 - [12-react-nx-monorepo.md](12-react-nx-monorepo.md)

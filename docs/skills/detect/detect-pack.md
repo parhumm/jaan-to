@@ -4,7 +4,7 @@ sidebar_position: 6
 doc_type: skill
 tags: [detect, knowledge, consolidation, risk, unknowns, evidence]
 related: [detect-dev, detect-design, detect-writing, detect-product, detect-ux]
-updated_date: 2026-02-08
+updated_date: 2026-02-09
 ---
 
 # /jaan-to:detect-pack
@@ -15,25 +15,37 @@ updated_date: 2026-02-08
 
 ## What It Does
 
-Reads all detect skill outputs (`$JAAN_OUTPUTS_DIR/detect/{dev,design,writing,product,ux}/`) and consolidates them into a unified knowledge index. Does NOT scan the repository directly — only reads and aggregates outputs from the 5 detect skills. Enforces universal frontmatter, aggregates findings into severity buckets, builds a domain x severity risk heatmap, validates all evidence IDs, and produces a prioritized Unknowns backlog.
+Reads all detect skill outputs and consolidates them into a unified knowledge index. Supports **light mode** (default, 1 summary file) and **full mode** (`--full`, 4+ detailed files with evidence index and unknowns backlog). Automatically detects whether each domain provided light-mode (summary) or full-mode (individual files) outputs.
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:detect-pack
+/jaan-to:detect-pack [repo] [--full]
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | repo | No | Target repository (defaults to current) |
+| `--full` | No | Run full consolidation (4+ output files with evidence index and unknowns). Default is light mode. |
+
+**Light mode** (default): Produces 1 summary file with risk heatmap, per-domain scores, and executive summaries.
+
+**Full mode** (`--full`): Produces 4 files (single-platform) or 4 + per-platform packs (multi-platform), including evidence index, unknowns backlog, and cross-platform deduplication.
+
+**Mixed input handling**: detect-pack automatically detects whether each domain produced light-mode (`summary.md`) or full-mode (individual files) outputs. Full-mode domains use per-file data; light-mode domains use summary frontmatter.
 
 ---
 
 ## Output
 
-### Single-Platform Project
+### Light Mode (default) — 1 file
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/summary.md` | Risk heatmap, per-domain scores, executive summaries, input mode table |
+
+### Full Mode (`--full`) — 4 files (single-platform)
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/pack/README.md` | Knowledge index: metadata, domain summaries, overall score, links to all detect outputs |
@@ -41,7 +53,7 @@ Reads all detect skill outputs (`$JAAN_OUTPUTS_DIR/detect/{dev,design,writing,pr
 | `$JAAN_OUTPUTS_DIR/detect/pack/unknowns-backlog.md` | Prioritized unknowns with "how to confirm" steps and scope boundaries |
 | `$JAAN_OUTPUTS_DIR/detect/pack/source-map.md` | Evidence index: all E-IDs mapped to file locations |
 
-### Multi-Platform Monorepo
+### Full Mode — Multi-Platform Monorepo
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/pack/README-{platform}.md` | Per-platform knowledge index (e.g., `README-web.md`, `README-backend.md`) |

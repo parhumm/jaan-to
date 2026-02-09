@@ -27,7 +27,14 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.0.0 — Batch skill rename (breaking: 5 skills renamed)
+**Latest:** v4.1.0 — Add --light/--full mode to detect skills
+
+### v4.1.0 — Light/Full mode for detect skills
+- All 6 detect skills support `--light` (default) and `--full` modes
+- Light mode: 1 summary file per domain, reduced steps, lower token usage
+- Full mode (`--full`): All steps and files, identical to previous behavior
+- detect-pack handles mixed light/full inputs from other domains
+- Documentation updated for all detect skills
 
 ### v4.0.0 — Batch skill rename (breaking)
 - Renamed 5 skills: `dev-be-data-model` → `backend-data-model`, `dev-be-task-breakdown` → `backend-task-breakdown`, `dev-api-contract` → `backend-api-contract`, `dev-fe-design` → `frontend-design`, `dev-fe-task-breakdown` → `frontend-task-breakdown` (`d93cbdc`)
@@ -71,6 +78,9 @@ For complete release history, see [CHANGELOG.md](/changelog).
 ---
 
 ## Unreleased
+
+- [x] Add `--light` (default) / `--full` mode to all 6 detect skills — light mode produces 1 summary file per domain; full mode preserves current behavior
+- [x] Update detect-* documentation for light/full modes (7 files)
 
 ---
 

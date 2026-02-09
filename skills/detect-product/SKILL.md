@@ -2,7 +2,7 @@
 name: detect-product
 description: Product reality extraction with evidence-backed features, monetization, and metrics.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [repo]
+argument-hint: "[repo] [--full]"
 ---
 
 # detect-product
@@ -19,9 +19,7 @@ argument-hint: [repo]
 
 ## Input
 
-**Repository**: $ARGUMENTS
-
-If a repository path is provided, scan that repo. Otherwise, scan the current working directory.
+**Arguments**: $ARGUMENTS — parsed in Step 0.0. Repository path and mode determined there.
 
 ---
 
@@ -152,9 +150,26 @@ lifecycle_phase: post-build
 
 # PHASE 1: Detection (Read-Only)
 
+## Step 0.0: Parse Arguments
+
+**Arguments**: $ARGUMENTS
+
+| Argument | Effect |
+|----------|--------|
+| (none) | **Light mode** (default): Surface + business logic scan, single summary file |
+| `[repo]` | Scan specified repo (applies to both modes) |
+| `--full` | **Full mode**: All detection steps, 7 output files (current behavior) |
+
+**Mode determination:**
+- If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
+- Otherwise → set `run_depth = "light"`
+
+Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+
 ## Thinking Mode
 
-ultrathink
+**If `run_depth == "full"`:** ultrathink
+**If `run_depth == "light"`:** megathink
 
 Use extended reasoning for:
 - Feature evidence linking across 3 layers
@@ -240,7 +255,9 @@ evidence:
 For each platform in platforms:
 1. Set `current_platform = platform.name`
 2. Set `base_path = platform.path`
-3. Run all detection steps (Steps 1-5) scoped to `base_path`
+3. Run detection steps per `run_depth`:
+   - **If `run_depth == "full"`:** Run Steps 1-5 scoped to `base_path`
+   - **If `run_depth == "light"`:** Run Steps 1 and 3 only scoped to `base_path` (skip Steps 2, 4, 5)
 4. When feature is detected, check if it's already detected in another platform:
    - Search across other platforms' findings for matching feature by name/description
    - If match found, add cross-platform links via `related_evidence`
@@ -264,6 +281,8 @@ For each route/page, extract:
 - Page/component name
 - Public vs authenticated (look for auth guards, middleware)
 - Feature domain (billing, settings, dashboard, etc.)
+
+**If `run_depth == "light"`:** Skip Step 2. Proceed to Step 3 (Scan Business Logic).
 
 ## Step 2: Scan User-Facing Copy (Copy Layer)
 
@@ -298,6 +317,10 @@ Extract product-relevant text:
 - Grep for middleware/guards: `requiresAuth`, `requiresPlan`, `checkEntitlement`
 
 Distinguish "pricing copy" (what the product claims) from "enforcement" (what the code actually enforces). Gates must be proven by code locations; absence = "absence" evidence item.
+
+**If `run_depth == "light"`:** Skip Steps 4-5. Proceed directly to Step 6 (Present Detection Summary).
+
+**Note**: In light mode, features are capped at Tentative confidence (1 of 3 evidence layers from surface scan only). Cross-platform `related_evidence` linking works but is degraded (no copy-layer features).
 
 ## Step 4: Scan Instrumentation / Analytics
 
@@ -347,6 +370,40 @@ Assess taxonomy consistency: naming convention, property standardization, covera
 # HARD STOP — Detection Summary & User Approval
 
 ## Step 6: Present Detection Summary
+
+**If `run_depth == "light"`:**
+
+```
+PRODUCT DETECTION COMPLETE (Light Mode)
+-----------------------------------------
+
+PLATFORM: {platform_name or 'all'}
+
+FEATURES DETECTED: {n}
+  Tentative (surface-layer): {n}
+  Cross-platform:            {n} features linked via related_evidence
+
+MONETIZATION
+  Model:        {free|freemium|subscription|usage-based|one-time|none detected}
+  Tiers:        {tier names or "none detected"}
+  Enforcement:  {n} code gates found    [Confidence: {level}]
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/product/summary{-platform}.md
+
+Note: Features at Tentative confidence (surface layer only).
+Run with --full for copy layer, instrumentation audit, constraint analysis,
+and 3-layer evidence linking (7 output files).
+```
+
+> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/product/? [y/n]"
+
+**If `run_depth == "full"`:**
 
 ```
 PRODUCT DETECTION COMPLETE
@@ -415,6 +472,25 @@ else:  # Multi-platform
 #                  $JAAN_OUTPUTS_DIR/detect/product/features-backend.md
 ```
 
+### Stale File Cleanup
+
+- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
+- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+
+### If `run_depth == "light"`: Write Single Summary File
+
+Write one file: `$JAAN_OUTPUTS_DIR/detect/product/summary{suffix}.md`
+
+Contents:
+1. Universal YAML frontmatter with `platform` field, `findings_summary`, and `overall_score`
+2. **Executive Summary** — BLUF of product findings
+3. **Feature Inventory** — routes/screens with auth classification, Tentative confidence (from Step 1)
+4. **Monetization + Entitlement Summary** — billing integrations, tier detection, code gates (from Step 3)
+5. **Top Findings** — up to 5 highest-severity findings with evidence blocks
+6. **Note**: "Features at Tentative confidence (surface layer only). Run with `--full` for copy layer analysis, instrumentation audit, feature flag detection, constraint analysis, and 3-layer evidence linking."
+
+### If `run_depth == "full"`: Write 7 Output Files
+
 Write 7 output files:
 
 | File | Content |
@@ -449,6 +525,17 @@ If yes:
 ---
 
 ## Definition of Done
+
+**If `run_depth == "light"`:**
+
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/product/summary{suffix}.md`
+- [ ] Universal YAML frontmatter with `overall_score`
+- [ ] Feature inventory at Tentative confidence with evidence blocks
+- [ ] Monetization + entitlement summary included
+- [ ] "--full" upsell note included
+- [ ] User approved output
+
+**If `run_depth == "full"`:**
 
 - [ ] All 7 output files written to `$JAAN_OUTPUTS_DIR/detect/product/`
 - [ ] Universal YAML frontmatter with `platform` field in every file

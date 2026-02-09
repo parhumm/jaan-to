@@ -4,7 +4,7 @@ sidebar_position: 1
 doc_type: skill
 tags: [detect, dev, engineering, audit, security, cicd]
 related: [detect-design, detect-writing, detect-product, detect-ux, detect-pack]
-updated_date: 2026-02-08
+updated_date: 2026-02-09
 ---
 
 # /jaan-to:detect-dev
@@ -15,7 +15,7 @@ updated_date: 2026-02-08
 
 ## What It Does
 
-Performs a comprehensive engineering audit of the repository, producing 9 structured markdown reports covering stack, architecture, standards, testing, CI/CD, deployment, security, observability, and risks. Every finding is evidence-backed with SARIF-like locations and confidence scoring.
+Performs an engineering audit of the repository with evidence-backed findings and OpenSSF-style scoring. Supports **light mode** (default, 1 summary file) and **full mode** (`--full`, 9 detailed files).
 
 Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), Docker/compose configurations, CI/CD pipelines, git metadata, infrastructure-as-code, and project structure across 11+ language ecosystems.
 
@@ -24,18 +24,28 @@ Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), D
 ## Usage
 
 ```
-/jaan-to:detect-dev
+/jaan-to:detect-dev [repo] [--full]
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | repo | No | Target repository (defaults to current) |
+| `--full` | No | Run full analysis (9 detection steps, 9 output files). Default is light mode. |
+
+**Light mode** (default): Scans config/manifest files and Docker/database layers, produces 1 summary file with tech stack, database/container table, top-5 findings, and overall score (score notes limited scope).
+
+**Full mode** (`--full`): Runs all detection steps including CI/CD, git analysis, infrastructure, and project structure. Produces 9 detailed output files.
 
 ---
 
 ## Output
 
-### Single-Platform Project
+### Light Mode (default) — 1 file
+| File | Content |
+|------|---------|
+| `$JAAN_OUTPUTS_DIR/detect/dev/summary{suffix}.md` | Tech stack table, db/container table, top-5 findings, overall score |
+
+### Full Mode (`--full`) — 9 files
 | File | Content |
 |------|---------|
 | `$JAAN_OUTPUTS_DIR/detect/dev/stack.md` | Tech stack with version evidence |
@@ -49,11 +59,7 @@ Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), D
 | `$JAAN_OUTPUTS_DIR/detect/dev/risks.md` | Technical risks and debt |
 
 ### Multi-Platform Monorepo
-| File | Content |
-|------|---------|
-| `$JAAN_OUTPUTS_DIR/detect/dev/stack-{platform}.md` | Tech stack scoped to platform (e.g., `stack-web.md`, `stack-backend.md`) |
-| `$JAAN_OUTPUTS_DIR/detect/dev/architecture-{platform}.md` | Architecture patterns per platform |
-| ... | (same structure with platform suffix) |
+Files use platform suffix: `stack-{platform}.md`, `summary-{platform}.md`, etc.
 
 Each file includes standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence).
 
