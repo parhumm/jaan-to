@@ -142,4 +142,4 @@ Component includes:
 
 ---
 
-[Back to Dev Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Dev Skills](docs/skills/frontend/README.md) | [Back to All Skills](../README.md)

@@ -95,4 +95,4 @@ Files use platform suffix: `writing-system-{platform}.md`, `summary-{platform}.m
 
 ---
 
-[Back to Detect Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Detect Skills](docs/skills/detect/README.md) | [Back to All Skills](../README.md)

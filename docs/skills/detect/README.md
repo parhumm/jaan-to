@@ -86,7 +86,7 @@ All detect skills share:
 
 ## Reference
 
-- [Repo-analysis output & content detection standards](../../../jaan-to/outputs/research/61-detect-pack.md)
+- [Repo-analysis output & content detection standards](61-detect-pack.md)
 
 ---
 

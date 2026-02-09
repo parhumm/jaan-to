@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.5.0] - 2026-02-09
+
+### Added
+- **`ux-flowchart-generate` skill** (`/jaan-to:ux-flowchart-generate`) — Generate GitHub-renderable Mermaid flowcharts from PRDs, docs, codebases, or any combination with evidence maps tracing every node to its source, confidence scoring, and structured unknowns lists. Supports 4 source types (`prd`, `doc`, `repo`, `mixed`), 4 diagram goals (`userflow`, `systemflow`, `architecture`, `stateflow`), 17 machine-checkable quality gates, auto-split for large diagrams, update mode with manual section preservation, and GitHub Mermaid v11.4.1 constraint enforcement
+- **LEARN.md seed file** for ux-flowchart-generate — Pre-populated with research-validated lessons from 40+ sources (research 64/65-ux-flowchart-generate)
+
+### Changed
+- **Plugin skill count** — Updated from 31 to 32 skills across plugin.json and marketplace.json descriptions
+- **Config seed** — Added ux-flowchart-generate to Available Skills table
+
+---
+
 ## [4.4.0] - 2026-02-09
 
 ### Added
@@ -181,9 +193,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Detect README** — Added pipeline flow diagram, output file counts, and Shared Standards section (`29901ae`)
 - **`dev-stack-detect` deprecated** — Redirect doc pointing to `detect-dev` (`9d944de`)
 - **30+ reference files updated** — All `dev-stack-detect` references replaced with `detect-dev`/`detect-pack` across docs, scripts, seeds, context, website, and examples (`9d944de`)
-
-### Fixed
-- **Bootstrap `.gitignore` handling** — Stopped auto-adding `jaan-to/` to `.gitignore` which could hide project context files (`c95e4a9`)
 
 ---
 
@@ -426,7 +435,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Evidence traceability ensures every claim traces to verbatim quote with participant ID
   - Dual outputs: main synthesis report + 1-page executive brief (auto-generated)
   - Methodologies: Braun & Clarke Six-Phase, Atomic Research (Experiments → Facts → Insights → Recommendations), Nielsen Severity Ratings (0-4 scale), Impact × Effort Matrix (Quick Wins, Big Bets, Fill-Ins, Money Pits), ISO 9241-11:2018 usability dimensions
-  - Research-informed: 877-line methodology foundation ([jaan-to/outputs/research/47-ux-research-synthesize.md](jaan-to/outputs/research/47-ux-research-synthesize.md))
+  - Research-informed: 877-line methodology foundation ([jaan-to/outputs/research/47-ux-research-synthesize.md](docs/research/47-ux-research-synthesize.md))
 
 ### Changed
 - **`/jaan-to:roadmap-update` enhanced** — Automatic release detection from git history when running in smart-default mode (`602d651`)
@@ -446,7 +455,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - ISTQB conversion notes for traditional test management tools (Xray, TestRail, Azure DevOps)
   - Auxiliary quality checklist file with anti-patterns reference and coverage sufficiency analysis
   - Two-phase workflow with systematic test design techniques and human approval gate
-  - Research-informed: 880-line methodology guide ([50-qa-test-cases.md](jaan-to/outputs/research/50-qa-test-cases.md))
+  - Research-informed: 880-line methodology guide ([50-qa-test-cases.md](docs/research/50-qa-test-cases.md))
 
 ---
 
@@ -711,7 +720,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
   - Story splitting: Suggests 6 proven patterns when >7 ACs or >8 points
   - Export formats: Jira CSV and Linear JSON for easy import
   - Output: `jaan-to/outputs/pm/stories/{slug}/stories.md`
-  - Research-informed: Based on comprehensive [45-pm-insights-synthesis.md](jaan-to/outputs/research/45-pm-insights-synthesis.md) framework
+  - Research-informed: Based on comprehensive [45-pm-insights-synthesis.md](docs/research/45-pm-insights-synthesis.md) framework
 
 ---
 

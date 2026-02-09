@@ -128,4 +128,4 @@ Based on comprehensive research at `jaan-to/outputs/research/60-backend-data-mod
 
 ---
 
-[Back to Dev Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Dev Skills](docs/skills/backend/README.md) | [Back to All Skills](../README.md)

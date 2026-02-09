@@ -9,7 +9,7 @@ sidebar_position: 12
 
 **Chains**: detect-dev + detect-design + detect-writing + detect-product + detect-ux → detect-pack
 
-**Reference**: [Repo-analysis output & content detection standards](../../../../jaan-to/outputs/research/61-detect-pack.md)
+**Reference**: [Repo-analysis output & content detection standards](61-detect-pack.md)
 
 ## Userflow Schema
 
