@@ -93,6 +93,7 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [api-contract, task-breakdown, data-model]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/scaffold/`
+- **Reference**: [`63-dev-scaffolds.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/63-dev-scaffolds.md)
 - **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)
 
 ### /jaan-to:backend-api-versioning

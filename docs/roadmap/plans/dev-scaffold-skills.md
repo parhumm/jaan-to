@@ -8,6 +8,8 @@ Two scaffold skills are documented in the roadmap (`docs/roadmap/tasks/role-skil
 
 **Multi-stack support**: Both skills must be tech.md-adaptive — generating code for whatever stack the project uses, not just one framework. Research covered: Node.js (Fastify), PHP (Laravel/Symfony), Go (Chi/stdlib), MySQL, WebSocket patterns.
 
+**Research Reference**: [`63-dev-scaffolds.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/63-dev-scaffolds.md) — Comprehensive blueprint for production-ready code scaffolds across all target stacks.
+
 ---
 
 ## Scope
