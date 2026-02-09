@@ -71,6 +71,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [61](61-knowledge-pack.md)                                                   | Repo-Analysis Output & Content Detection Standards             | Standards for audit report output schemas synthesizing SARIF, CycloneDX, MADR, and Diátaxis, plus writing system detection methodology covering voice/tone analysis (NNg 4-dimension + 5 extended), terminology extraction (ISO 704/C-value), 8 UI copy categories with detection heuristics, error message quality scoring rubric, plain language readability targets, and i18n maturity assessment (0-5 scale with glob patterns for 13 frameworks).                                   |
 | [62](62-ai-workflow-claude-code-token-optimization.md)                       | Claude Code Token Optimization at Scale                        | Scaling 141 skills + 24 MCP connectors within 200K-token context window. Covers progressive disclosure (~40 tokens/skill), MCP Tool Search (85% reduction), CLAUDE.md trigger tables (54-62% savings), hook strategies, skill tiering (disable-model-invocation, context:fork), subagent isolation, concrete token budget achieving ~73% available context, and anti-patterns to avoid.                                                                                                   |
 | [63](63-dev-scaffolds.md)                                                    | Production-Ready Code Scaffolds                                | Comprehensive blueprint for production-ready code scaffolds across Node.js/Fastify, PHP/Laravel/Symfony, Go, and React 19/Next.js 15/TailwindCSS v4. Covers feature-based project structure, Zod type providers, Prisma patterns, Sanctum auth, sqlc codegen, Server Components, state management (TanStack Query + Zustand + nuqs), OpenAPI-first development, SSE/WebSocket patterns, and scaffold engineering anti-patterns.                                                         |
+| [64](64-ux-flowchart-generate.md)                                            | UX Flowchart Generation Skill                                  | Complete skill blueprint for `/jaan-to:ux-flowchart-generate` covering Mermaid diagram generation constrained by UX standards and GitHub limits (v11.4.1, 50K chars, 500 edges), evidence mapping that traces every node to PRD sections and code symbols with NASA-adapted 4-level confidence scoring, diff engine for staleness detection, canonical output spec, quality gates (machine + human), and failure mode mitigations. 40+ sources.                                          |
 
 ## Quick Topic Finder
 
@@ -150,6 +151,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [22-data-microsoft-clarity.md](22-data-microsoft-clarity.md)
 - [47-ux-research-synthesize.md](47-ux-research-synthesize.md)
 - [56-ux-microcopy-write.md](56-ux-microcopy-write.md)
+- [64-ux-flowchart-generate.md](64-ux-flowchart-generate.md)
 
 ## Related Resources
 
