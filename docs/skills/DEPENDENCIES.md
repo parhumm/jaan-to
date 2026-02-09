@@ -26,16 +26,16 @@ Product Development Flow:
                  ├──> /jaan-to:detect-dev
                  │    "Auto-detect tech stack for context"
                  │
-                 ├──> /jaan-to:dev-fe-task-breakdown
+                 ├──> /jaan-to:frontend-task-breakdown
                  │    "Frontend task breakdown from PRD"
                  │     │
                  │     └──> /jaan-to:dev-fe-state-machine (Future)
                  │          "State machine definitions"
                  │
-                 ├──> /jaan-to:dev-be-task-breakdown
+                 ├──> /jaan-to:backend-task-breakdown
                  │    "Backend task breakdown from PRD"
                  │     │
-                 │     └──> /jaan-to:dev-be-data-model (Future)
+                 │     └──> /jaan-to:backend-data-model (Future)
                  │          "Data model specification"
                  │
                  ├──> /jaan-to:qa-test-cases
@@ -136,8 +136,8 @@ These skills are suggested by multiple other skills:
 
 # Step 3: Tech Planning
 /jaan-to:detect-dev
-/jaan-to:dev-fe-task-breakdown from prd
-/jaan-to:dev-be-task-breakdown from prd
+/jaan-to:frontend-task-breakdown from prd
+/jaan-to:backend-task-breakdown from prd
 
 # Step 4: QA & Tracking
 /jaan-to:qa-test-cases from prd
@@ -194,7 +194,7 @@ These skills are referenced but not yet implemented:
 | Skill | Referenced By | Purpose |
 |-------|---------------|---------|
 | `/jaan-to:dev-fe-state-machine` | fe-task-breakdown | Component state machine definitions |
-| `/jaan-to:dev-be-data-model` | be-task-breakdown | Detailed data model specification |
+| `/jaan-to:backend-data-model` | be-task-breakdown | Detailed data model specification |
 
 See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.
 

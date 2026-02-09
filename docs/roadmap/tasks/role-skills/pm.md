@@ -35,8 +35,8 @@ flowchart TD
     jaan-to-pm-experiment-plan["pm-experiment-plan<br>Experiment Plan<br>Hypothesis + thresholds + rollout"] -.-> jaan-to-data-experiment-design["data-experiment-design<br>DATA: experiment-design"]
     jaan-to-pm-acceptance-criteria["pm-acceptance-criteria<br>Acceptance Criteria<br>Testable AC + edge cases"] --> pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"]
     jaan-to-pm-acceptance-criteria["pm-acceptance-criteria<br>Acceptance Criteria<br>Testable AC + edge cases"] -.-> qa-test-cases["qa-test-cases<br>QA: test-cases"]
-    pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
-    pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> dev-be-task-breakdown["dev-be-task-breakdown<br>DEV: be-task-breakdown"]
+    pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> frontend-task-breakdown["frontend-task-breakdown<br>DEV: fe-task-breakdown"]
+    pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] -.-> backend-task-breakdown["backend-task-breakdown<br>DEV: be-task-breakdown"]
     pm-prd-write["pm-prd-write<br>PRD Write ★"] --> jaan-to-pm-trace-links["pm-trace-links<br>Trace Links<br>Traceability matrix + coverage"]
     pm-story-write["pm-story-write<br>Story Write<br>Given/When/Then stories"] --> jaan-to-pm-trace-links["pm-trace-links<br>Trace Links<br>Traceability matrix + coverage"]
     jaan-to-pm-trace-links["pm-trace-links<br>Trace Links<br>Traceability matrix + coverage"] -.-> qa-test-cases["qa-test-cases<br>QA: test-cases"]
@@ -51,8 +51,8 @@ flowchart TD
     style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
     style jaan-to-data-experiment-design fill:#f0f0f0,stroke:#999
     style qa-test-cases fill:#f0f0f0,stroke:#999
-    style dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
-    style dev-be-task-breakdown fill:#f0f0f0,stroke:#999
+    style frontend-task-breakdown fill:#f0f0f0,stroke:#999
+    style backend-task-breakdown fill:#f0f0f0,stroke:#999
     style jaan-to-support-help-article fill:#f0f0f0,stroke:#999
     style jaan-to-growth-launch-announcement fill:#f0f0f0,stroke:#999
     style jaan-to-delivery-plan-milestones fill:#f0f0f0,stroke:#999
@@ -331,7 +331,7 @@ flowchart TD
   - Start from problem + success metrics, not solutions
   - Make scope explicit: in/out
   - Acceptance criteria must be testable and include edge cases
-- **→ Next**: `dev-fe-task-breakdown`, `dev-be-task-breakdown`
+- **→ Next**: `frontend-task-breakdown`, `backend-task-breakdown`
 - **MCP Required**: Jira (optional backlog context)
 - **Input**: [feature] [persona] [goal]
 - **Output**: `$JAAN_OUTPUTS_DIR/pm/stories/{slug}/stories.md`

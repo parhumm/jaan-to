@@ -1,6 +1,6 @@
 # Building an AI data modeling skill: a practitioner's research compendium
 
-**The core challenge in building `dev-be-data-model` is bridging the gap between fuzzy natural language ("users have unique emails") and production-ready DDL with correct constraints, indexes, and migration safety across engines.** This report distills research across PostgreSQL, MySQL, MongoDB, DynamoDB, and edge SQLite into actionable rules, decision algorithms, and syntax references an AI tool can execute directly. Every section targets a specific implementation concern — from NLP constraint extraction heuristics to zero-downtime migration matrices — and provides concrete code, comparison tables, and decision trees rather than abstract guidance.
+**The core challenge in building `backend-data-model` is bridging the gap between fuzzy natural language ("users have unique emails") and production-ready DDL with correct constraints, indexes, and migration safety across engines.** This report distills research across PostgreSQL, MySQL, MongoDB, DynamoDB, and edge SQLite into actionable rules, decision algorithms, and syntax references an AI tool can execute directly. Every section targets a specific implementation concern — from NLP constraint extraction heuristics to zero-downtime migration matrices — and provides concrete code, comparison tables, and decision trees rather than abstract guidance.
 
 ---
 
@@ -407,7 +407,7 @@ Analysis of **Discourse, Mastodon, Ghost, Cal.com, GitLab, and Supabase** reveal
 
 ## Conclusion: implementation priorities for the skill
 
-The research converges on five architectural decisions for `dev-be-data-model`:
+The research converges on five architectural decisions for `backend-data-model`:
 
 **First, adopt a multi-agent review pipeline** inspired by SchemaAgent. A single LLM pass produces schemas with ~42% error rates on constraint extraction. A pipeline of analyst → designer → reviewer → validator, with structured validation between stages, dramatically reduces errors. The reviewer should run the full anti-pattern checklist against every generated schema.
 

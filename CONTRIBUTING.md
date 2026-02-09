@@ -346,7 +346,7 @@ Test skills work together:
 # Example: PRD → Stories → Tasks workflow
 /jaan-to:pm-prd-write "user authentication"
 /jaan-to:pm-story-write from prd
-/jaan-to:dev-fe-task-breakdown from prd
+/jaan-to:frontend-task-breakdown from prd
 ```
 
 Verify:

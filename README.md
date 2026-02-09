@@ -431,10 +431,10 @@ Goal: Add OAuth2 authentication to your app
    → Generates: jaan-to/outputs/pm/stories/01-oauth2-auth/
 
 3. Task Breakdowns
-   /jaan-to:dev-fe-task-breakdown from prd
+   /jaan-to:frontend-task-breakdown from prd
    → Frontend tasks: Component inventory, state machines, estimates
 
-   /jaan-to:dev-be-task-breakdown from prd
+   /jaan-to:backend-task-breakdown from prd
    → Backend tasks: API endpoints, data models, security
 
 4. QA & Analytics

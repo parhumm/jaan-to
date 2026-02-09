@@ -171,11 +171,11 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:detect-product` | Product reality extraction with evidence |
 | `/jaan-to:detect-ux` | UX audit with journey/pain-point findings |
 | `/jaan-to:detect-pack` | Consolidate detect outputs into knowledge index |
-| `/jaan-to:dev-fe-task-breakdown` | Frontend task breakdown with component hierarchy |
-| `/jaan-to:dev-be-task-breakdown` | Backend task breakdown from PRDs |
-| `/jaan-to:dev-fe-design` | Frontend component design |
-| `/jaan-to:dev-be-data-model` | Generate data model docs with constraints, indexes, and migrations |
-| `/jaan-to:dev-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| `/jaan-to:frontend-task-breakdown` | Frontend task breakdown with component hierarchy |
+| `/jaan-to:backend-task-breakdown` | Backend task breakdown from PRDs |
+| `/jaan-to:frontend-design` | Frontend component design |
+| `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
+| `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
 | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |

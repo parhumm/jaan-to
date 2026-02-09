@@ -1,5 +1,5 @@
 ---
-title: "dev-be-data-model"
+title: "backend-data-model"
 sidebar_position: 3
 doc_type: skill
 created_date: 2026-02-08
@@ -8,7 +8,7 @@ tags: [dev, backend, data-model, database, schema, constraints, indexes, migrati
 related: [be-task-breakdown, api-contract]
 ---
 
-# /jaan-to:dev-be-data-model
+# /jaan-to:backend-data-model
 
 > Generate data model documentation with tables, constraints, indexes, retention, and migration notes from entity descriptions.
 
@@ -23,9 +23,9 @@ Analyzes entity descriptions and produces a comprehensive data model document wi
 ## Usage
 
 ```
-/jaan-to:dev-be-data-model "User, Post, Comment"
-/jaan-to:dev-be-data-model "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
-/jaan-to:dev-be-data-model "path/to/schema.sql"
+/jaan-to:backend-data-model "User, Post, Comment"
+/jaan-to:backend-data-model "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
+/jaan-to:backend-data-model "path/to/schema.sql"
 ```
 
 | Argument | Required | Description |
@@ -74,7 +74,7 @@ One file at `$JAAN_OUTPUTS_DIR/dev/backend/{id}-{slug}/`:
 
 ## Design Patterns
 
-Based on research from `60-dev-be-data-model.md` (420 lines, 10 major areas):
+Based on research from `60-backend-data-model.md` (420 lines, 10 major areas):
 
 - **CHECK constraints on VARCHAR** instead of native ENUM types — strongest consensus from production schemas (GitLab, Discourse, Mastodon)
 - **ESR composite index ordering** — Equality columns first, Sort next, Range last
@@ -99,12 +99,12 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to adapt the data model:
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:dev-be-task-breakdown → /jaan-to:dev-be-data-model → /jaan-to:dev-api-contract
+/jaan-to:backend-task-breakdown → /jaan-to:backend-data-model → /jaan-to:backend-api-contract
 ```
 
 After generating the data model, the skill suggests:
-- API contract generation with `/jaan-to:dev-api-contract`
-- Backend task breakdown with `/jaan-to:dev-be-task-breakdown`
+- API contract generation with `/jaan-to:backend-api-contract`
+- Backend task breakdown with `/jaan-to:backend-task-breakdown`
 
 ---
 
@@ -124,7 +124,7 @@ Every output includes a weighted quality score:
 
 ## Research Source
 
-Based on comprehensive research at `jaan-to/outputs/research/60-dev-be-data-model.md` covering NLP constraint extraction, zero-downtime migrations (PostgreSQL, MySQL, expand-contract), ESR indexing rules, multi-tenant isolation patterns, schema evolution, GDPR/retention strategies, engine syntax comparison tables, and production schema analysis (Discourse, Mastodon, Ghost, Cal.com, GitLab, Supabase).
+Based on comprehensive research at `jaan-to/outputs/research/60-backend-data-model.md` covering NLP constraint extraction, zero-downtime migrations (PostgreSQL, MySQL, expand-contract), ESR indexing rules, multi-tenant isolation patterns, schema evolution, GDPR/retention strategies, engine syntax comparison tables, and production schema analysis (Discourse, Mastodon, Ghost, Cal.com, GitLab, Supabase).
 
 ---
 

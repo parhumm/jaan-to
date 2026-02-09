@@ -14,9 +14,9 @@ slug: /skills/dev
 
 | Skill | Description |
 |-------|-------------|
-| [/jaan-to:dev-fe-task-breakdown](fe-task-breakdown.md) | Generate FE task breakdown from UX handoff |
-| [/jaan-to:dev-be-data-model](be-data-model.md) | Generate data model docs with constraints, indexes, and migrations |
-| [/jaan-to:dev-api-contract](api-contract.md) | Generate OpenAPI 3.1 contracts from API entities |
+| [/jaan-to:frontend-task-breakdown](fe-task-breakdown.md) | Generate FE task breakdown from UX handoff |
+| [/jaan-to:backend-data-model](be-data-model.md) | Generate data model docs with constraints, indexes, and migrations |
+| [/jaan-to:backend-api-contract](api-contract.md) | Generate OpenAPI 3.1 contracts from API entities |
 | [/jaan-to:dev-pr-review](pr-review.md) | Automated PR review: risk scoring, security hints, missing tests |
 
 ---

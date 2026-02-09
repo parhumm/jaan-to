@@ -1,5 +1,5 @@
 ---
-title: "dev-fe-task-breakdown"
+title: "frontend-task-breakdown"
 sidebar_position: 6
 doc_type: skill
 created_date: 2026-02-03
@@ -8,7 +8,7 @@ tags: [dev, frontend, task-breakdown, ux-handoff, components, atomic-design]
 related: [stack-detect, fe-state-machine]
 ---
 
-# /jaan-to:dev-fe-task-breakdown
+# /jaan-to:frontend-task-breakdown
 
 > Transform UX design handoffs into production-ready frontend task breakdowns.
 
@@ -23,9 +23,9 @@ Analyzes UX handoffs (Figma links, design descriptions, screenshots, or PRDs) an
 ## Usage
 
 ```
-/jaan-to:dev-fe-task-breakdown "User profile redesign with settings modal"
-/jaan-to:dev-fe-task-breakdown "https://figma.com/file/abc123"
-/jaan-to:dev-fe-task-breakdown "See PRD at jaan-to/outputs/pm/prd/profile-redesign/prd.md"
+/jaan-to:frontend-task-breakdown "User profile redesign with settings modal"
+/jaan-to:frontend-task-breakdown "https://figma.com/file/abc123"
+/jaan-to:frontend-task-breakdown "See PRD at jaan-to/outputs/pm/prd/profile-redesign/prd.md"
 ```
 
 | Argument | Required | Description |
@@ -89,7 +89,7 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to adapt the breakdown for the project's frame
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:dev-tech-plan → /jaan-to:dev-fe-task-breakdown → /jaan-to:dev-fe-state-machine
+/jaan-to:dev-tech-plan → /jaan-to:frontend-task-breakdown → /jaan-to:dev-fe-state-machine
 ```
 
 After generating the task breakdown, the skill suggests running `/jaan-to:dev-fe-state-machine` for detailed state machine definitions per component.
@@ -98,7 +98,7 @@ After generating the task breakdown, the skill suggests running `/jaan-to:dev-fe
 
 ## Research Source
 
-Based on comprehensive framework research at `jaan-to/outputs/research/51-dev-fe-task-breakdown.md` covering PMI WBS, Atomic Design, CDD, Shape Up, Feature-Sliced Design, and React/Next.js specific patterns.
+Based on comprehensive framework research at `jaan-to/outputs/research/51-frontend-task-breakdown.md` covering PMI WBS, Atomic Design, CDD, Shape Up, Feature-Sliced Design, and React/Next.js specific patterns.
 
 ---
 

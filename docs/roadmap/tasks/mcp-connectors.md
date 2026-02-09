@@ -145,7 +145,7 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: DEV
 - **Capabilities**: API contract validation, schema generation
 - **Skills**:
-  - `/jaan-to:dev-api-contract` - contract generation
+  - `/jaan-to:backend-api-contract` - contract generation
 
 #### 11. dbt Cloud MCP
 

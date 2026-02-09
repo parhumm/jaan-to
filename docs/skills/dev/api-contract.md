@@ -1,5 +1,5 @@
 ---
-title: "dev-api-contract"
+title: "backend-api-contract"
 sidebar_position: 2
 doc_type: skill
 created_date: 2026-02-08
@@ -8,7 +8,7 @@ tags: [dev, api, openapi, contract, rest, schema, backend]
 related: [be-task-breakdown, fe-task-breakdown]
 ---
 
-# /jaan-to:dev-api-contract
+# /jaan-to:backend-api-contract
 
 > Generate OpenAPI 3.1 contracts from API resource entities.
 
@@ -23,9 +23,9 @@ Analyzes API resource entities and produces a validated OpenAPI 3.1 specificatio
 ## Usage
 
 ```
-/jaan-to:dev-api-contract "User, Post, Comment"
-/jaan-to:dev-api-contract "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
-/jaan-to:dev-api-contract "path/to/schema.sql"
+/jaan-to:backend-api-contract "User, Post, Comment"
+/jaan-to:backend-api-contract "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
+/jaan-to:backend-api-contract "path/to/schema.sql"
 ```
 
 | Argument | Required | Description |
@@ -72,7 +72,7 @@ Two files at `$JAAN_OUTPUTS_DIR/dev/contract/{id}-{slug}/`:
 
 ## Design Patterns
 
-Based on research from `59-dev-api-contract.md` (40+ sources):
+Based on research from `59-backend-api-contract.md` (40+ sources):
 
 - **OpenAPI 3.1** with full JSON Schema 2020-12 alignment
 - **Flat component architecture** — never deep inline, always `$ref`
@@ -98,7 +98,7 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to adapt the contract:
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:dev-be-task-breakdown → /jaan-to:dev-api-contract → /jaan-to:dev-api-versioning
+/jaan-to:backend-task-breakdown → /jaan-to:backend-api-contract → /jaan-to:dev-api-versioning
 ```
 
 After generating the contract, the skill suggests:
@@ -111,7 +111,7 @@ After generating the contract, the skill suggests:
 
 ## Research Source
 
-Based on comprehensive research at `jaan-to/outputs/research/59-dev-api-contract.md` covering schema design, RFC 9457 errors, example generation, versioning, AI generation guardrails, hybrid authoring, reference specs (GitHub, Stripe, Zalando), and the validation tooling stack (Spectral, Redocly, Prism, Schemathesis).
+Based on comprehensive research at `jaan-to/outputs/research/59-backend-api-contract.md` covering schema design, RFC 9457 errors, example generation, versioning, AI generation guardrails, hybrid authoring, reference specs (GitHub, Stripe, Zalando), and the validation tooling stack (Spectral, Redocly, Prism, Schemathesis).
 
 ---
 

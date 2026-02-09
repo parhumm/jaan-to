@@ -81,7 +81,7 @@ WP skills are WordPress-specific specializations. They do NOT duplicate generic 
 | WP Skill | Generic Skill | Relationship |
 |----------|---------------|-------------|
 | `wp-pm-problem-brief` | `pm-problem-statement` | WP narrows to plugin surface (admin/front/editor) + interop risks |
-| `wp-rest-endpoint-spec` | `dev-api-contract` | WP uses `register_rest_route()` patterns + permission callbacks |
+| `wp-rest-endpoint-spec` | `backend-api-contract` | WP uses `register_rest_route()` patterns + permission callbacks |
 | `wp-support-triage-rules` | `support-triage-priority` | WP adds WP/PHP env diagnostics + plugin conflict isolation steps |
 
 ### MEDIUM Overlap (6 skills — justified by WP-specific conventions)
@@ -90,7 +90,7 @@ WP skills are WordPress-specific specializations. They do NOT duplicate generic 
 |----------|---------------|---------------------|
 | `wp-dev-architecture-map` | `dev-arch-proposal` | Action/filter design + collision prevention |
 | `wp-hooks-feature-hook-map` | `dev-integration-plan` | WP hook timing, priorities, recursion risks |
-| `wp-data-storage-decision` | `dev-be-data-model` | Options vs meta vs CPT vs custom tables + multisite scope |
+| `wp-data-storage-decision` | `backend-data-model` | Options vs meta vs CPT vs custom tables + multisite scope |
 | `wp-admin-menu-ia` | `ux-sitemap` | WP admin menu conventions + capability gating |
 | `wp-sec-capability-map` | `sec-threat-model-lite` | WP capabilities system + meta-capabilities |
 | `wp-qa-compat-matrix` | `qa-test-matrix` | WP/PHP version targets + plugin/theme conflict testing |

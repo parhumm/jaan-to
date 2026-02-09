@@ -28,10 +28,10 @@ flowchart TD
     jaan-to-ux-wireframe-screens["ux-wireframe-screens<br>Wireframe Screens<br>Screen list + states + interactions"] --> jaan-to-ux-wireframe-review["ux-wireframe-review<br>Wireframe Review<br>Usability checklist + issues"]
     jaan-to-ux-wireframe-review["ux-wireframe-review<br>Wireframe Review<br>Usability checklist + issues"] --> jaan-to-ux-ui-spec-states["ux-ui-spec-states<br>UI Spec States<br>State list + triggers + copy"]
     jaan-to-ux-ui-spec-states["ux-ui-spec-states<br>UI Spec States<br>State list + triggers + copy"] --> jaan-to-ux-ui-handoff-notes["ux-ui-handoff-notes<br>UI Handoff Notes<br>Components + tokens + animation"]
-    jaan-to-ux-ui-handoff-notes["ux-ui-handoff-notes<br>UI Handoff Notes<br>Components + tokens + animation"] -.-> dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
+    jaan-to-ux-ui-handoff-notes["ux-ui-handoff-notes<br>UI Handoff Notes<br>Components + tokens + animation"] -.-> frontend-task-breakdown["frontend-task-breakdown<br>DEV: fe-task-breakdown"]
     ux-microcopy-write["ux-microcopy-write<br>Microcopy Write<br>Labels + errors + toasts + tone"] --> jaan-to-ux-error-messages["ux-error-messages<br>Error Messages<br>User-friendly errors + recovery"]
     jaan-to-ux-a11y-audit["ux-a11y-audit<br>A11y Audit<br>Issues + fix checklist"] --> jaan-to-ux-a11y-aria-notes["ux-a11y-aria-notes<br>A11y ARIA Notes<br>Roles/labels + focus management"]
-    jaan-to-ux-a11y-aria-notes["ux-a11y-aria-notes<br>A11y ARIA Notes<br>Roles/labels + focus management"] -.-> dev-fe-task-breakdown["dev-fe-task-breakdown<br>DEV: fe-task-breakdown"]
+    jaan-to-ux-a11y-aria-notes["ux-a11y-aria-notes<br>A11y ARIA Notes<br>Roles/labels + focus management"] -.-> frontend-task-breakdown["frontend-task-breakdown<br>DEV: fe-task-breakdown"]
     jaan-to-ux-onboarding-steps["ux-onboarding-steps<br>Onboarding Steps<br>Steps + activation + drop-offs"] --> jaan-to-ux-onboarding-tooltips["ux-onboarding-tooltips<br>Onboarding Tooltips<br>Tooltip copy + skip/done patterns"]
     jaan-to-ux-onboarding-tooltips["ux-onboarding-tooltips<br>Onboarding Tooltips<br>Tooltip copy + skip/done patterns"] -.-> jaan-to-data-event-spec["data-event-spec<br>DATA: event-spec"]
 
@@ -39,7 +39,7 @@ flowchart TD
     style jaan-to-pm-persona-card fill:#f0f0f0,stroke:#999
     style jaan-to-pm-positioning-brief fill:#f0f0f0,stroke:#999
     style jaan-to-dev-fe-state-machine fill:#f0f0f0,stroke:#999
-    style dev-fe-task-breakdown fill:#f0f0f0,stroke:#999
+    style frontend-task-breakdown fill:#f0f0f0,stroke:#999
     style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
 ```
 
@@ -243,7 +243,7 @@ flowchart TD
   - Ensure state coverage: success/error/empty/loading
   - Document component usage to reduce custom builds
   - Align spacing/typography with system tokens
-- **→ Next**: `dev-fe-task-breakdown`
+- **→ Next**: `frontend-task-breakdown`
 - **MCP Required**: Figma (design specs)
 - **Input**: [design]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/ui/{slug}/handoff-notes.md`
@@ -300,7 +300,7 @@ flowchart TD
   - Contrast, focus order, keyboard operability
   - Labels for inputs, meaningful headings
   - Don't rely on color alone
-- **→ Next**: `dev-fe-task-breakdown`
+- **→ Next**: `frontend-task-breakdown`
 - **MCP Required**: None
 - **Input**: [components]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/a11y/{slug}/aria-notes.md`

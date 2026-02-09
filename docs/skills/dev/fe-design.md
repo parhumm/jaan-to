@@ -1,5 +1,5 @@
 ---
-title: "dev-fe-design"
+title: "frontend-design"
 sidebar_position: 5
 doc_type: skill
 created_date: 2026-02-03
@@ -8,7 +8,7 @@ tags: [dev, frontend, component, design, accessibility, responsive, react, vue]
 related: [fe-task-breakdown, stack-detect]
 ---
 
-# /jaan-to:dev-fe-design
+# /jaan-to:frontend-design
 
 > Create distinctive, production-grade frontend interfaces.
 
@@ -23,9 +23,9 @@ Generates working component code (HTML/CSS/JS, React, Vue, vanilla) with bold de
 ## Usage
 
 ```
-/jaan-to:dev-fe-design "Hero section for SaaS landing page"
-/jaan-to:dev-fe-design "Pricing card component with 3 tiers and hover effects"
-/jaan-to:dev-fe-design "Login form for admin panel"
+/jaan-to:frontend-design "Hero section for SaaS landing page"
+/jaan-to:frontend-design "Pricing card component with 3 tiers and hover effects"
+/jaan-to:frontend-design "Login form for admin panel"
 ```
 
 | Argument | Required | Description |
@@ -100,7 +100,7 @@ Default scope: **Component + Preview**
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:pm-prd-write → /jaan-to:dev-fe-task-breakdown → /jaan-to:dev-fe-design → /jaan-to:qa-test-cases
+/jaan-to:pm-prd-write → /jaan-to:frontend-task-breakdown → /jaan-to:frontend-design → /jaan-to:qa-test-cases
 ```
 
 - **task-breakdown** plans what to build (component inventory, tasks)
@@ -113,7 +113,7 @@ This skill fits in the dev workflow:
 
 **Input:**
 ```
-/jaan-to:dev-fe-design "Hero section for SaaS landing page with bold typography"
+/jaan-to:frontend-design "Hero section for SaaS landing page with bold typography"
 ```
 
 **Output:**
@@ -136,7 +136,7 @@ Component includes:
 
 - **Check design.md first** — If your project has `$JAAN_CONTEXT_DIR/design.md`, the skill follows existing patterns for consistency
 - **Specify brand elements** — Mention specific colors, fonts, or brand guidelines in your request
-- **Use with task-breakdown** — Run `/jaan-to:dev-fe-task-breakdown` first to plan, then use this to build individual components
+- **Use with task-breakdown** — Run `/jaan-to:frontend-task-breakdown` first to plan, then use this to build individual components
 - **Preview in browser** — Open the generated preview file to see the component with multiple states
 - **Customize via settings.yaml** — Set `design.default_direction` in `jaan-to/config/settings.yaml` to skip direction questions
 
