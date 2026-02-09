@@ -1,7 +1,7 @@
 ---
 name: backend-task-breakdown
 description: Convert a PRD into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/**), Write($JAAN_OUTPUTS_DIR/frontend/**), Task, Edit(jaan-to/config/settings.yaml)
 argument-hint: [prd-path] OR [feature-description]
 ---
 
@@ -730,7 +730,7 @@ If any check fails, fix before preview.
 
 Show the complete task breakdown document.
 
-> "Here's the task breakdown preview. Write to `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`? [y/n]"
+> "Here's the task breakdown preview. Write to `$JAAN_OUTPUTS_DIR/backend/{slug}/task-breakdown.md`? [y/n]"
 
 ## Step 9.5: Generate ID and Folder Structure
 
@@ -744,7 +744,7 @@ source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 2. Generate sequential ID and output paths:
 ```bash
 # Define subdomain directory
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/backend"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/backend"
 mkdir -p "$SUBDOMAIN_DIR"
 
 # Generate next ID
@@ -759,7 +759,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-be-tasks-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/dev/backend/{NEXT_ID}-{slug}/
+> - Folder: jaan-to/outputs/backend/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-be-tasks-{slug}.md
 
 ## Step 10: Write Output
@@ -788,8 +788,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ Task breakdown written to: jaan-to/outputs/dev/backend/{NEXT_ID}-{slug}/{NEXT_ID}-be-tasks-{slug}.md
-> ✓ Index updated: jaan-to/outputs/dev/backend/README.md
+> ✓ Task breakdown written to: jaan-to/outputs/backend/{NEXT_ID}-{slug}/{NEXT_ID}-be-tasks-{slug}.md
+> ✓ Index updated: jaan-to/outputs/backend/README.md
 
 ## Step 11: Suggest Next Skill
 
@@ -829,5 +829,5 @@ add_to_index \
 - [ ] Full task cards generated with master template per task
 - [ ] Export formats generated (Jira CSV, Linear MD, JSON)
 - [ ] Quality checks passed (Coverage, Structure, Technical, Anti-patterns)
-- [ ] Task breakdown document written to `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`
+- [ ] Task breakdown document written to `$JAAN_OUTPUTS_DIR/backend/{slug}/task-breakdown.md`
 - [ ] User approved final result

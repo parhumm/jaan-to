@@ -1,7 +1,7 @@
 ---
 name: frontend-task-breakdown
 description: Generate frontend task breakdowns from UX handoffs with component inventory, state matrices, and estimates.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [ux-handoff-description-or-figma-link]
 ---
 
@@ -520,7 +520,7 @@ source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 2. Generate sequential ID and output paths:
 ```bash
 # Define subdomain directory
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/frontend"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/frontend"
 mkdir -p "$SUBDOMAIN_DIR"
 
 # Generate next ID
@@ -535,7 +535,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-fe-tasks-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/dev/frontend/{NEXT_ID}-{slug}/
+> - Folder: jaan-to/outputs/frontend/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-fe-tasks-{slug}.md
 
 ## Step 11: Write Output
@@ -564,8 +564,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ Task breakdown written to: jaan-to/outputs/dev/frontend/{NEXT_ID}-{slug}/{NEXT_ID}-fe-tasks-{slug}.md
-> ✓ Index updated: jaan-to/outputs/dev/frontend/README.md
+> ✓ Task breakdown written to: jaan-to/outputs/frontend/{NEXT_ID}-{slug}/{NEXT_ID}-fe-tasks-{slug}.md
+> ✓ Index updated: jaan-to/outputs/frontend/README.md
 
 ## Step 12: Suggest Next Skill
 
@@ -598,6 +598,6 @@ Use AskUserQuestion:
 - [ ] Coverage checklist applied per scope level
 - [ ] Dependencies mapped with Mermaid diagram
 - [ ] Risks assessed with mitigations for High-impact items
-- [ ] Task breakdown document written to `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`
+- [ ] Task breakdown document written to `$JAAN_OUTPUTS_DIR/frontend/{slug}/task-breakdown.md`
 - [ ] Quality checks passed
 - [ ] User approved final result

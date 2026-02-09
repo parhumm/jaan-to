@@ -132,5 +132,5 @@ Open `{{preview_file_name}}` in your browser to see the component in action with
 | Generated | {{date}} |
 | Skill | dev-fe-design |
 | Framework | {{framework}} |
-| Output Path | {{env:JAAN_OUTPUTS_DIR}}/dev/components/ |
+| Output Path | {{env:JAAN_OUTPUTS_DIR}}/frontend/components/ |
 | Version | 3.0 |

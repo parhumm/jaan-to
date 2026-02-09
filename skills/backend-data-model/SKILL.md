@@ -1,7 +1,7 @@
 ---
 name: backend-data-model
 description: Generate data model docs with tables, constraints, indexes, retention, and migration notes from entities.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/**), Write($JAAN_OUTPUTS_DIR/frontend/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [entities-or-prd-path]
 ---
 
@@ -337,7 +337,7 @@ Naming:        plural snake_case tables, GitLab-style constraint naming
 
 OUTPUT
 ──────
-Folder: $JAAN_OUTPUTS_DIR/dev/backend/{id}-{slug}/
+Folder: $JAAN_OUTPUTS_DIR/backend/{id}-{slug}/
 File:   {id}-data-model-{slug}.md
 ```
 
@@ -503,7 +503,7 @@ source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 2. Generate sequential ID and output paths:
 ```bash
 # Define subdomain directory
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/backend"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/backend"
 mkdir -p "$SUBDOMAIN_DIR"
 
 # Generate next ID
@@ -518,7 +518,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-data-model-${slug}.md"
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: `$JAAN_OUTPUTS_DIR/dev/backend/{NEXT_ID}-{slug}/`
+> - Folder: `$JAAN_OUTPUTS_DIR/backend/{NEXT_ID}-{slug}/`
 > - Main: `{NEXT_ID}-data-model-{slug}.md`
 
 ## Step 8: Write Output
@@ -542,8 +542,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ Data model written to: `$JAAN_OUTPUTS_DIR/dev/backend/{NEXT_ID}-{slug}/{NEXT_ID}-data-model-{slug}.md`
-> ✓ Index updated: `$JAAN_OUTPUTS_DIR/dev/backend/README.md`
+> ✓ Data model written to: `$JAAN_OUTPUTS_DIR/backend/{NEXT_ID}-{slug}/{NEXT_ID}-data-model-{slug}.md`
+> ✓ Index updated: `$JAAN_OUTPUTS_DIR/backend/README.md`
 
 ## Step 9: Suggest Next Steps
 
@@ -585,6 +585,6 @@ Use AskUserQuestion:
 - [ ] Data model document generated with Mermaid ER diagram
 - [ ] Migration notes included per table (zero-downtime for brownfield)
 - [ ] Quality checks passed (anti-patterns + 5-dimension rubric)
-- [ ] Output written to `$JAAN_OUTPUTS_DIR/dev/backend/{id}-{slug}/`
+- [ ] Output written to `$JAAN_OUTPUTS_DIR/backend/{id}-{slug}/`
 - [ ] Subdomain index updated
 - [ ] User approved final result

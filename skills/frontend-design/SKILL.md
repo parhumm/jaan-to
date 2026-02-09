@@ -1,7 +1,7 @@
 ---
 name: frontend-design
 description: Create distinctive, production-grade frontend interfaces with bold design choices and working code.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [component-description-or-requirements]
 ---
 
@@ -156,7 +156,7 @@ Ask up to 7 smart questions based on what's unclear from Steps 1-2. Skip questio
 
 Check for existing patterns to maintain consistency:
 
-1. **Glob** for `$JAAN_OUTPUTS_DIR/dev/components/*` to see existing components
+1. **Glob** for `$JAAN_OUTPUTS_DIR/frontend/components/*` to see existing components
 2. **Read** `$JAAN_CONTEXT_DIR/design.md` (if exists) for:
    - Color palette and usage guidelines
    - Typography scale and hierarchy
@@ -391,7 +391,7 @@ Use AskUserQuestion:
 source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 
 # Define subdomain directory
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/components"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/frontend/components"
 mkdir -p "$SUBDOMAIN_DIR"
 
 # Generate next sequential ID
@@ -410,7 +410,7 @@ PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-preview-${slug}.html"
 **Preview output configuration:**
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: jaan-to/outputs/dev/components/{NEXT_ID}-{slug}/
+> - Folder: jaan-to/outputs/frontend/components/{NEXT_ID}-{slug}/
 > - Files:
 >   - {NEXT_ID}-component-{slug}.md (documentation)
 >   - {NEXT_ID}-component-code-{slug}.{ext} (code)
@@ -444,12 +444,12 @@ PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-preview-${slug}.html"
    ```
 
 6. **Confirm to user:**
-   > ✓ Component written to: jaan-to/outputs/dev/components/{NEXT_ID}-{slug}/
+   > ✓ Component written to: jaan-to/outputs/frontend/components/{NEXT_ID}-{slug}/
    > ✓ Files created:
    >   - {NEXT_ID}-component-{slug}.md
    >   - {NEXT_ID}-component-code-{slug}.{ext}
    >   - {NEXT_ID}-component-preview-{slug}.html
-   > ✓ Index updated: jaan-to/outputs/dev/components/README.md
+   > ✓ Index updated: jaan-to/outputs/frontend/components/README.md
 
 ## Step 12: Suggest Next Actions
 
