@@ -5,6 +5,36 @@ All notable changes to the jaan.to Claude Code Plugin will be documented in this
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.24.0] - 2026-02-09
+
+### Added
+- **Multi-platform support in all 6 detect skills** — All detect skills (`detect-dev`, `detect-design`, `detect-writing`, `detect-product`, `detect-ux`, `detect-pack`) now automatically detect and analyze multi-platform monorepos (web, backend, mobile, TV apps, etc.)
+  - **Platform auto-detection** — Scans folder structure using configurable patterns (`web/`, `backend/`, `mobile/`, etc.) with disambiguation rules for edge cases (microservices, Turborepo/Nx, mobile subfolders)
+  - **Platform-scoped filenames** — Multi-platform outputs use flat files with platform suffixes (`stack-web.md`, `stack-backend.md`) instead of nested folders, maintaining backward compatibility
+  - **Evidence ID prefixing** — Multi-platform format: `E-DEV-WEB-001`, `E-DSN-BACKEND-023`; single-platform format unchanged: `E-DEV-001`
+  - **Cross-platform evidence linking** — Use `related_evidence` field to link findings across platforms (e.g., TypeScript issue in both web and backend)
+  - **"Detect and Report N/A" pattern** — Non-applicable domains (e.g., Design for backend) produce minimal output with informational finding and perfect score (10.0)
+  - **Merged pack** — detect-pack creates consolidated pack combining all platforms with cross-platform risk heatmap (platform × domain table), deduplicated findings, and unified unknowns backlog
+
+### Changed
+- **pack-detect renamed to detect-pack** — Command: `/jaan-to:detect-pack` (was `/jaan-to:pack-detect`); skill directory and 41 files renamed for naming consistency
+- **Flat file architecture formalized** — detect outputs officially documented as exception to ID-based folder structure in CLAUDE.md (alongside research); rationale: detect skills produce system state snapshots (overwritten each run), not versioned reports (archived)
+- **detect-pack orchestration enhanced** — Step 0 now asks "Is this a multi-platform project?" and displays platform-by-platform workflow guide
+- **Evidence ID parsing updated** — Regex now handles both single-platform (`E-DEV-001`) and multi-platform (`E-DEV-WEB-001`) formats
+
+### Documentation
+- **Multi-platform sections added to all 6 detect skill docs** — Platform auto-detection, evidence ID formats, skip logic, and platform-specific behavior documented
+- **Migration guide created** — Comprehensive v3.23 → v3.24 guide with FAQ, rollback instructions, and backward compatibility notes (`docs/guides/migration-v3.24.md`)
+- **detect README updated** — Added multi-platform pipeline flow diagram, cross-platform linking examples, and shared standards updates
+- **6 templates updated** — All detect templates now include `target.platform` field and evidence ID format examples
+
+### Breaking Changes
+- **Command rename**: `/jaan-to:pack-detect` → `/jaan-to:detect-pack` (old command removed)
+- **Output paths** (backward compatible):
+  - Single-platform: `detect/dev/stack.md` (unchanged)
+  - Multi-platform: `detect/dev/stack-web.md`, `detect/dev/stack-backend.md` (new format)
+- **Evidence IDs** (backward compatible): Both formats supported — single-platform `E-DEV-001`, multi-platform `E-DEV-WEB-001`
+
 ## [3.23.1] - 2026-02-09
 
 ### Changed
