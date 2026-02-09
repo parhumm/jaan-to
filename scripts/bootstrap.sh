@@ -70,7 +70,19 @@ mkdir -p "$PROJECT_DIR/$CONFIG_DIR"
 mkdir -p "$PROJECT_DIR/jaan-to/docs"
 mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR/research"
 
-# 2. Initialize project config if not exists
+# 2. Add to .gitignore if not present
+if [ -f "$PROJECT_DIR/.gitignore" ]; then
+  # Migration: replace old .jaan-to entry with jaan-to/
+  if grep -q "^\.jaan-to" "$PROJECT_DIR/.gitignore" 2>/dev/null; then
+    sed -i.bak 's|^\.jaan-to.*|jaan-to/|' "$PROJECT_DIR/.gitignore" && rm -f "$PROJECT_DIR/.gitignore.bak"
+  elif ! grep -q "jaan-to/" "$PROJECT_DIR/.gitignore" 2>/dev/null; then
+    echo "jaan-to/" >> "$PROJECT_DIR/.gitignore"
+  fi
+else
+  echo "jaan-to/" > "$PROJECT_DIR/.gitignore"
+fi
+
+# 2.5. Initialize project config if not exists
 if [ ! -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ]; then
   if [ -f "$PLUGIN_DIR/scripts/seeds/settings.yaml" ]; then
     cp "$PLUGIN_DIR/scripts/seeds/settings.yaml" "$PROJECT_DIR/$CONFIG_DIR/settings.yaml"

@@ -24,7 +24,7 @@ Thumbs.db
 .claude/
 .claude-plugin-cache/
 dist/
-/jaan-to/
+jaan-to/
 
 # Docusaurus (website/docs/)
 website/docs/node_modules/

@@ -35,4 +35,4 @@ For a full repo analysis across all domains (dev, design, writing, product, UX),
 
 ---
 
-[Back to Dev Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Dev Skills](docs/skills/dev/README.md) | [Back to All Skills](../README.md)

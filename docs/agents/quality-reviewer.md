@@ -66,5 +66,5 @@ Issues are reported with severity:
 
 ## Related
 
-- [Agents Overview](README.md)
+- [Agents Overview](docs/agents/README.md)
 - [Style Guide](https://github.com/parhumm/jaan-to/blob/main/docs/STYLE.md)

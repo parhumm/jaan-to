@@ -210,7 +210,7 @@ flowchart TD
 
 - **Logical**: `ux-flowchart-generate`
 - **Description**: Generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence map, confidence scoring, and unknowns list
-- **Reference**: [64-ux-flowchart-generate.md](../../../../jaan-to/outputs/research/64-ux-flowchart-generate.md) | [65-ux-flowchart-generate-skill.md](../../../../jaan-to/outputs/research/65-ux-flowchart-generate-skill.md)
+- **Reference**: [64-ux-flowchart-generate.md](64-ux-flowchart-generate.md) | [65-ux-flowchart-generate-skill.md](65-ux-flowchart-generate-skill.md)
 - **Quick Win**: Yes — no MCP required, generates Mermaid from text sources
 - **Key Points**:
   - Supports `prd`, `doc`, `repo`, `mixed` source types with `userflow`, `systemflow`, `architecture`, `stateflow` goals

@@ -93,4 +93,4 @@ Files use platform suffix: `brand-{platform}.md`, `summary-{platform}.md`, etc.
 
 ---
 
-[Back to Detect Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Detect Skills](docs/skills/detect/README.md) | [Back to All Skills](../README.md)

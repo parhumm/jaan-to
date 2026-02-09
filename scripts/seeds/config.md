@@ -51,6 +51,7 @@
 | ux-research-synthesize | `/jaan-to:ux-research-synthesize` | Synthesize research findings into themes and recommendations |
 | ux-heatmap-analyze | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots for UX insights |
 | ux-microcopy-write | `/jaan-to:ux-microcopy-write` | Generate multi-language microcopy packs |
+| ux-flowchart-generate | `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase with evidence maps |
 | frontend-task-breakdown | `/jaan-to:frontend-task-breakdown` | Generate FE task breakdown from UX handoff |
 | backend-task-breakdown | `/jaan-to:backend-task-breakdown` | Generate BE task breakdown from PRD |
 | frontend-design | `/jaan-to:frontend-design` | Create distinctive, production-grade frontend components |

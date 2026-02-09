@@ -38,15 +38,16 @@ related: [README.md, ../config/context-system.md]
    - `jaan-to/templates/`
    - `jaan-to/config/`
    - `jaan-to/docs/`
-5. **Seeds config** — Copies `settings.yaml` from `scripts/seeds/` to `jaan-to/config/` if not present.
-6. **Copies context files** — Copies `.md` seed files from `scripts/seeds/` to `jaan-to/context/` (skips existing).
-7. **Copies skill templates** — Copies `skills/*/template.md` to `jaan-to/templates/{skill-name}.template.md` (skips existing).
-8. **Copies docs** — Copies `STYLE.md` and `create-skill.md` to `jaan-to/docs/` (skips existing).
-9. **Creates research README** — Generates `jaan-to/outputs/research/README.md` with index scaffold if not present.
-10. **Copies LEARN.md seeds** — Copies `skills/*/LEARN.md` to `jaan-to/learn/{skill-name}.learn.md` (skips existing).
-11. **Detects old standalone skills** — Scans `.claude/skills/` for legacy naming conventions (pre-v3.16 names).
-12. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
-13. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:detect-pack` to perform full repo analysis.
+5. **Manages `.gitignore`** — Adds `jaan-to/` to `.gitignore`, migrating old `.jaan-to` entries if present. Creates `.gitignore` if it doesn't exist.
+6. **Seeds config** — Copies `settings.yaml` from `scripts/seeds/` to `jaan-to/config/` if not present.
+7. **Copies context files** — Copies `.md` seed files from `scripts/seeds/` to `jaan-to/context/` (skips existing).
+8. **Copies skill templates** — Copies `skills/*/template.md` to `jaan-to/templates/{skill-name}.template.md` (skips existing).
+9. **Copies docs** — Copies `STYLE.md` and `create-skill.md` to `jaan-to/docs/` (skips existing).
+10. **Creates research README** — Generates `jaan-to/outputs/research/README.md` with index scaffold if not present.
+11. **Copies LEARN.md seeds** — Copies `skills/*/LEARN.md` to `jaan-to/learn/{skill-name}.learn.md` (skips existing).
+12. **Detects old standalone skills** — Scans `.claude/skills/` for legacy naming conventions (pre-v3.16 names).
+13. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
+14. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:detect-pack` to perform full repo analysis.
 
 ---
 
@@ -57,6 +58,9 @@ related: [README.md, ../config/context-system.md]
 | Migrates directory | `.jaan-to/` exists, `jaan-to/` doesn't | Renames `.jaan-to/` → `jaan-to/` |
 | Migrates output paths | `outputs/dev/backend` or `outputs/dev/frontend` exist | Moves to `outputs/backend` and `outputs/frontend` |
 | Creates directories | Any missing | Creates all 7 directories listed above |
+| Replaces gitignore entry | `.gitignore` has `.jaan-to` entry | Replaces with `jaan-to/` |
+| Appends to gitignore | `.gitignore` exists without entry | Appends `jaan-to/` |
+| Creates gitignore | No `.gitignore` exists | Creates file with `jaan-to/` |
 | Seeds config | `jaan-to/config/settings.yaml` missing | Copies from plugin seeds |
 | Seeds context | Context `.md` files missing | Copies from `scripts/seeds/` |
 | Seeds templates | Template files missing | Copies from `skills/*/template.md` |
@@ -156,6 +160,6 @@ The plugin needs project-local directories for config, context, templates, outpu
 
 ## Related
 
-- [Hooks Overview](README.md)
+- [Hooks Overview](docs/hooks/README.md)
 - [Context System](../config/context-system.md)
 - [Seed Files](../config/seed-files.md) — What each file contains and how to customize

@@ -108,4 +108,4 @@ Before consolidation, checks which detect skills have run:
 
 ---
 
-[Back to Detect Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Detect Skills](docs/skills/detect/README.md) | [Back to All Skills](../README.md)

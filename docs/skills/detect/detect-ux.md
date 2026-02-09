@@ -98,4 +98,4 @@ Files use platform suffix: `personas-{platform}.md`, `summary-{platform}.md`, et
 
 ---
 
-[Back to Detect Skills](README.md) | [Back to All Skills](../README.md)
+[Back to Detect Skills](docs/skills/detect/README.md) | [Back to All Skills](../README.md)
