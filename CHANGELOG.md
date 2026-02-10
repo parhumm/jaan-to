@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Token optimization (v5)** — Reduced plugin token footprint across all sessions and skill invocations
+  - **CLAUDE.md trimmed** from 282 → 97 lines — extracted Output Structure, Naming Conventions, and Development Workflow to `docs/extending/` reference files (~1,700 tokens/session saved)
+  - **Frontmatter flags** — Added `disable-model-invocation` to 7 internal skills and `context: fork` to 6 detect skills (~280 tokens/session + ~30K-48K tokens per detect run saved)
+  - **Boilerplate extraction** — Extracted Language Settings and Pre-Execution blocks from 31 skills into shared `docs/extending/language-protocol.md` and `docs/extending/pre-execution-protocol.md` (~6,350 tokens per skill invocation saved)
+  - **Body trimming** — Extracted reference material from 8 large skills (skill-create, skill-update, detect-dev, pm-research-about, backend-task-breakdown, ux-microcopy-write, detect-pack, ux-research-synthesize) into dedicated `docs/extending/` reference files (~3.5K-5.5K tokens per trimmed skill invocation saved)
+  - **Total savings**: ~2,000 tokens/session permanently, ~7K-48K tokens per skill invocation
+
 ---
 
 ## [4.5.1] - 2026-02-10

@@ -3,6 +3,7 @@ name: detect-product
 description: Product reality extraction with evidence-backed features, monetization, and metrics.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-product
@@ -14,6 +15,7 @@ argument-hint: "[repo] [--full]"
 - `$JAAN_LEARN_DIR/jaan-to:detect-product.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for framework-aware scanning)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-product.template.md` - Output template
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/product/` — flat files, overwritten each run (no IDs).
 
@@ -24,28 +26,12 @@ argument-hint: "[repo] [--full]"
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:detect-product.learn.md`
-
-If the file exists, apply its lessons throughout this execution.
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `detect-product`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_detect-product` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, evidence blocks.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_detect-product`
 
 ---
 

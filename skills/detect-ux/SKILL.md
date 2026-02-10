@@ -3,6 +3,7 @@ name: detect-ux
 description: Repo-driven UX audit with journey mapping and heuristic-based findings.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[repo] [--full]"
+context: fork
 ---
 
 # detect-ux
@@ -14,6 +15,7 @@ argument-hint: "[repo] [--full]"
 - `$JAAN_LEARN_DIR/jaan-to:detect-ux.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for framework-aware route detection)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-ux.template.md` - Output template
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/ux/` — flat files, overwritten each run (no IDs).
 
@@ -24,28 +26,12 @@ argument-hint: "[repo] [--full]"
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:detect-ux.learn.md`
-
-If the file exists, apply its lessons throughout this execution.
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `detect-ux`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_detect-ux` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, evidence blocks.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_detect-ux`
 
 ---
 

@@ -3,6 +3,7 @@ name: docs-update
 description: Audit and maintain documentation quality using smart staleness checks.
 allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
+disable-model-invocation: true
 ---
 
 # docs-update
@@ -13,37 +14,17 @@ argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 
 - `jaan-to/docs/STYLE.md` - Documentation standards (copied by bootstrap from plugin)
 - `$JAAN_LEARN_DIR/jaan-to:docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Note:** Style guide is intentionally read from the project's `jaan-to/docs/` directory (not from the skill directory). The bootstrap hook copies it there on first run, allowing project-level customization.
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:docs-update.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Note common issues to check
-- Apply workflow improvements
-- Avoid known mistakes
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `docs-update`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_docs-update` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_docs-update`
 
 ---
 

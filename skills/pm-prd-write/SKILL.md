@@ -24,6 +24,7 @@ hooks:
 - `$JAAN_LEARN_DIR/jaan-to:pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech context (if exists)
 - `$JAAN_CONTEXT_DIR/team.md` - Team context (if exists)
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
 
@@ -34,15 +35,8 @@ IMPORTANT: The initiative above is your input. Use it directly. Do NOT ask for t
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:pm-prd-write.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 1
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `pm-prd-write`
 
 Also read context files if available:
 - `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack to reference
@@ -51,21 +45,8 @@ Also read context files if available:
 If the file does not exist, continue without it.
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_pm-prd-write` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_pm-prd-write`
 
 ---
 

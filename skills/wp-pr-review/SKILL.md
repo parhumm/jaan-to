@@ -16,6 +16,7 @@ argument-hint: <pr-url | owner/repo#number | local>
 - `$JAAN_LEARN_DIR/jaan-to:wp-pr-review.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_TEMPLATES_DIR/jaan-to:wp-pr-review.template.md` - Report output template
 - Research: `$JAAN_OUTPUTS_DIR/research/67-wp-pr-review.md` - Full research document
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Reference files** (loaded on demand during review):
 - `references/security-checklist.md` - Sanitization, escaping, nonce, capability, DB security
@@ -38,33 +39,12 @@ Input modes:
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:wp-pr-review.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `wp-pr-review`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_wp-pr-review` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names, evidence blocks.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_wp-pr-review`
 
 ---
 

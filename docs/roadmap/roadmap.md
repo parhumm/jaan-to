@@ -122,6 +122,13 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## Unreleased
 
+### Token optimization (v5)
+- Trimmed CLAUDE.md from 282 → 97 lines, extracted to `docs/extending/` (`26a68fb`)
+- Added `disable-model-invocation` to 7 internal skills + `context: fork` to 6 detect skills (`e67efdf`)
+- Extracted Language Settings + Pre-Execution boilerplate from 31 skills (`52b6cd2`)
+- Body-trimmed 8 large skills with reference file extraction (`ba8d9ff`..`6f85957`)
+- **Savings**: ~2,000 tokens/session permanently, ~7K-48K tokens per skill invocation
+
 ---
 
 ## Phase 4: Development Workflow

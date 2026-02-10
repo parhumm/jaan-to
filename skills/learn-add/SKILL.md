@@ -3,6 +3,7 @@ name: learn-add
 description: Add a lesson to a skill's LEARN.md file, routing feedback to skill, template, or context learning.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[target] [lesson]"
+disable-model-invocation: true
 ---
 
 # learn-add
@@ -13,6 +14,7 @@ argument-hint: "[target] [lesson]"
 
 - `$JAAN_LEARN_DIR/*.learn.md` - Skill lessons
 - `$JAAN_CONTEXT_DIR/*.md` - Context files and lessons
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
 
@@ -33,21 +35,8 @@ If no input provided, ask for target and lesson.
 ## Pre-Execution
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_learn-add` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_learn-add`
 
 ---
 

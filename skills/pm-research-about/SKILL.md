@@ -14,6 +14,8 @@ argument-hint: <topic-or-file-path-or-URL>
 - `$JAAN_LEARN_DIR/jaan-to:pm-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_TEMPLATES_DIR/jaan-to:pm-research-about.template.md` - Output format template
 - `$JAAN_OUTPUTS_DIR/research/README.md` - Current index structure
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` - Reference tables, templates, scoring rubrics
 
 ## Input
 
@@ -22,34 +24,12 @@ argument-hint: <topic-or-file-path-or-URL>
 ---
 
 ## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:pm-research-about.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
-
-If the file does not exist, continue without it.
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `pm-research-about`
 
 ### Language Settings
-
-**Read language preference** from `jaan-to/config/settings.yaml`:
-
-1. Check for per-skill override: `language_pm-research-about` field
-2. If no override, use the global `language` field
-3. Resolve:
-
-| Value | Action |
-|-------|--------|
-| Language code (`en`, `fa`, `tr`, etc.) | Use that language immediately |
-| `"ask"` or field missing | Prompt: "What language do you prefer for conversation and reports?" — Options: "English" (default), "فارسی (Persian)", "Other (specify)" — then save choice to `jaan-to/config/settings.yaml` |
-
-**Keep in English always**: technical terms, code snippets, file paths, variable names, YAML keys, command names.
-
-**Apply resolved language to**: all questions, confirmations, section headings, labels, and prose in output files for this execution.
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_pm-research-about`
 
 ---
 
@@ -72,21 +52,9 @@ If no topic provided, ask:
 
 ## Step 0.2: Detect Category
 
-Detect category from topic keywords:
+Detect category from topic keywords.
 
-| Category | Keywords |
-|----------|----------|
-| `ai-workflow` | claude, agent, workflow, prompt, token, MCP, LLM, GPT |
-| `dev` | code, architecture, testing, API, backend, frontend, react, typescript |
-| `pm` | product, PRD, roadmap, feature, requirement, spec |
-| `qa` | test, quality, automation, CI/CD, coverage |
-| `ux` | design, UI, UX, accessibility, user, interface |
-| `data` | analytics, tracking, GTM, metrics, dashboard |
-| `growth` | SEO, content, marketing, conversion |
-| `mcp` | MCP server, tool server, integration |
-| `other` | (fallback for non-matching) |
-
-If ambiguous, default to `ai-workflow` for AI topics or `dev` for technical topics.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Category Detection Keywords" for full keyword-to-category mapping table.
 
 ## Step 0.3: Generate Filename
 
@@ -166,30 +134,7 @@ Each question offers **3 options + 1 recommendation**:
 
 **Default**: Standard (60) if user doesn't specify or just presses enter.
 
-**Agent Capacity:**
-```
-1 agent ≈ 10 searches + 3 WebFetch = ~13 operations
-```
-
-**Workload per Wave (searches + fetches):**
-
-| Size | W1 Scout | W2 Gaps | W3 Expand | W4 Verify | W5 Deep |
-|------|----------|---------|-----------|-----------|---------|
-| 20   | 8+3      | 6+2     | 6+2       | -         | -       |
-| 60   | 8+3      | 10+3    | 12+4      | 8+3       | 10+4    |
-| 100  | 8+3      | 12+4    | 24+8      | 20+6      | 12+4    |
-| 200  | 8+3      | 20+6    | 40+12     | 36+10     | 24+8    |
-| 500  | 8+3      | 40+12   | 100+30    | 80+24     | 60+18   |
-
-**Derived Agents (ceil(ops / 13)):**
-
-| Size | W1 | W2 | W3 | W4 | W5 | Total |
-|------|----|----|----|----|----|----|
-| 20   | 1  | 1  | 1  | -  | -  | 3  |
-| 60   | 1  | 1  | 2  | 1  | 2  | 7  |
-| 100  | 1  | 2  | 3  | 2  | 2  | 10 |
-| 200  | 1  | 2  | 4  | 4  | 3  | 14 |
-| 500  | 1  | 4  | 10 | 8  | 6  | 29 |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Agent Capacity Model" for capacity formula, workload-per-wave tables, and derived agent counts.
 
 **Confirm selection:**
 > "Research size: {selected} (~{N} sources, {M} agents)"
@@ -206,15 +151,7 @@ Each question offers **3 options + 1 recommendation**:
 
 **Default**: Interactive (C) if user doesn't specify.
 
-**Mode Behaviors:**
-
-| Check | Auto | Summary | Interactive |
-|------|------|---------|-------------|
-| After clarifications | Skip | Skip | Confirm |
-| Research plan | Skip | Show | Confirm |
-| After each wave | Skip | Brief status | N/A |
-| HARD STOP (before write) | Skip | Skip | **Confirm** |
-| Before file write | Auto-yes | Auto-yes | Confirm |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Approval Mode Behaviors" for the full mode behavior matrix.
 
 **If Auto or Summary selected:**
 > "Auto mode enabled. Will show final document for review before writing."
@@ -238,15 +175,7 @@ Plan the **Scout Agent** (Wave 1) approach only:
 
 **DO NOT plan Wave 2-3 queries yet** - they will be determined by Scout results.
 
-**Wave Distribution by Size (5 Waves):**
-
-| Size | Total | W1 Scout | W2 Gaps | W3 Expand | W4 Verify | W5 Deep |
-|------|-------|----------|---------|-----------|-----------|---------|
-| 20   | 3     | 1        | 1       | 1         | -         | -       |
-| 60   | 7     | 1        | 1       | 2         | 1         | 2       |
-| 100  | 10    | 1        | 2       | 3         | 2         | 2       |
-| 200  | 14    | 1        | 2       | 4         | 4         | 3       |
-| 500  | 29    | 1        | 4       | 10        | 8         | 6       |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Wave Distribution by Size" for agent-per-wave allocation table.
 
 **Output initial plan:**
 
@@ -328,14 +257,7 @@ Analyze Scout results to identify the **biggest gap**:
 
 **Wave 2 Focus:** Fill the single biggest gap identified by Scout.
 
-**W2 Workload by Size:**
-| Size | Agents | Searches | WebFetch |
-|------|--------|----------|----------|
-| 20   | 1      | 6        | 2        |
-| 60   | 1      | 10       | 3        |
-| 100  | 2      | 6 each   | 2 each   |
-| 200  | 2      | 10 each  | 3 each   |
-| 500  | 4      | 10 each  | 3 each   |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W2 Workload by Size" for agent/search/fetch counts.
 
 ```
 Task prompt: "Research {primary_gap} of {topic}:
@@ -380,14 +302,7 @@ Analyze Scout + Wave 2 results:
 
 **Wave 3 Focus:** Expand into new areas based on Wave 2 discoveries.
 
-**W3 Workload by Size:**
-| Size | Agents | Searches/Agent | WebFetch/Agent |
-|------|--------|----------------|----------------|
-| 20   | 1      | 6              | 2              |
-| 60   | 2      | 6              | 2              |
-| 100  | 3      | 8              | 3              |
-| 200  | 4      | 10             | 3              |
-| 500  | 10     | 10             | 3              |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W3 Workload by Size" for agent/search/fetch counts.
 
 ```
 For each Wave 3 agent:
@@ -434,13 +349,7 @@ Analyze Waves 1-3 results:
 
 **Wave 4 Focus:** Verify key claims and resolve conflicts.
 
-**W4 Workload by Size:**
-| Size | Agents | Searches/Agent | WebFetch/Agent |
-|------|--------|----------------|----------------|
-| 60   | 1      | 8              | 3              |
-| 100  | 2      | 10             | 3              |
-| 200  | 4      | 9              | 3              |
-| 500  | 8      | 10             | 3              |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W4 Workload by Size" for agent/search/fetch counts.
 
 ```
 For each Wave 4 agent:
@@ -488,13 +397,7 @@ Analyze all previous waves:
 
 **Wave 5 Focus:** Final deep dive on remaining priorities.
 
-**W5 Workload by Size:**
-| Size | Agents | Searches/Agent | WebFetch/Agent |
-|------|--------|----------------|----------------|
-| 60   | 2      | 5              | 2              |
-| 100  | 2      | 6              | 2              |
-| 200  | 3      | 8              | 3              |
-| 500  | 6      | 10             | 3              |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W5 Workload by Size" for agent/search/fetch counts.
 
 ```
 For each Wave 5 agent:
@@ -530,27 +433,7 @@ run_in_background: true
 
 ## Step 4: Consolidate All Wave Results
 
-Merge findings from all completed waves:
-
-```
-WAVE RESULTS SUMMARY (5 Waves)
-──────────────────────────────
-Wave 1 (Scout):  {N1} sources - Mapped landscape
-Wave 2 (Gaps):   {N2} sources - Filled primary gap
-Wave 3 (Expand): {N3} sources - Expanded coverage
-Wave 4 (Verify): {N4} sources - Verified claims
-Wave 5 (Deep):   {N5} sources - Final deep dive
-──────────────────────────────────────────────
-Total: {N} unique sources
-
-ADAPTIVE RESEARCH FLOW
-──────────────────────
-W1 Scout → identified: {subtopics}
-W2 Gaps  → filled: {primary_gap}
-W3 Expand → expanded: {expansion_areas}
-W4 Verify → confirmed: {verified_claims}
-W5 Deep  → explored: {final_areas}
-```
+Merge findings from all completed waves using the summary format from `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Wave Results Summary Template".
 
 For consolidation:
 1. Combine all findings from all 5 waves
@@ -588,34 +471,9 @@ Analyze all gathered research and plan the final document:
    - Areas with conflicting info
    - Topics needing deeper research
 
-6. **Source Ranking** - Prioritize references
-   - Official docs > research papers > quality blogs > forums
-   - Recent (2024-2025) > older
+6. **Source Ranking** - Prioritize references per `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Source Ranking Criteria"
 
-**Output structure plan with source mappings:**
-
-```
-DOCUMENT STRUCTURE
-──────────────────
-Executive Summary:
-1. {insight} ← Sources: [A], [B]
-2. {insight} ← Sources: [C]
-3. {insight} ← Sources: [D], [E]
-
-Subtopics:
-1. {name}: {findings mapped} ← Sources: [...]
-2. {name}: {findings mapped} ← Sources: [...]
-3. {name}: {findings mapped} ← Sources: [...]
-
-Best Practices:
-1. {practice} ← Sources: [...]
-2. {practice} ← Sources: [...]
-
-Source Priority:
-- Primary (official/authoritative): [...]
-- Supporting (quality blogs): [...]
-- Reference (forums/discussions): [...]
-```
+**Output structure plan with source mappings** using the format from `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Document Structure Plan Template".
 
 ## Step 6: Merge Findings
 
@@ -713,18 +571,9 @@ Use template from `$JAAN_TEMPLATES_DIR/jaan-to:pm-research-about.template.md`:
 
 ## Step 8: Quality Check
 
-Before preview, verify:
-- [ ] Has executive summary with 3-5 key insights
-- [ ] Has background context (2-3 paragraphs)
-- [ ] Has at least 2 key findings sections
-- [ ] Has recent developments section
-- [ ] Has best practices with 3-5 recommendations
-- [ ] Has open questions section
-- [ ] Has sources with descriptions and URLs
-- [ ] Has research metadata (date, category, queries used)
-- [ ] Sources are properly attributed to findings
+Before preview, verify all items pass.
 
-If any check fails, revise before preview.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Quality Checklist" for the full verification checklist. If any check fails, revise before preview.
 
 ## Step 9: Preview & Approval
 
@@ -782,25 +631,7 @@ EOF
 
 ## Step 13: Completion Report
 
-```
-✅ Research Complete
-
-📁 Category: {category}
-📄 Document: $JAAN_OUTPUTS_DIR/research/{filename}
-📊 Sources: {N} unique sources consulted
-🔍 Queries: {M} search queries used
-📅 Date: {YYYY-MM-DD}
-
-ADAPTIVE WAVES (5)
-──────────────────
-🔭 W1 Scout:  {N1} sources - mapped landscape
-🎯 W2 Gaps:   {N2} sources - filled {gap}
-📈 W3 Expand: {N3} sources - expanded {areas}
-✅ W4 Verify: {N4} sources - verified {claims}
-🔬 W5 Deep:   {N5} sources - deep dived {final}
-
-README.md updated with new entry.
-```
+Output the completion report using the template in `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Completion Report Template", filling in all placeholders with actual values.
 
 ## Step 14: Capture Feedback
 
@@ -813,20 +644,7 @@ If yes:
 
 ## Definition of Done
 
-- [ ] Topic clarified (if needed)
-- [ ] Research size selected
-- [ ] Wave 1 Scout completed and analyzed
-- [ ] Wave 2 filled primary gap based on Scout
-- [ ] Wave 3 expanded coverage based on W1+W2
-- [ ] Wave 4 verified claims and resolved conflicts (if size ≥ 60)
-- [ ] Wave 5 deep dived remaining areas (if size ≥ 60)
-- [ ] All 5 wave findings merged and deduplicated
-- [ ] Document structure planned
-- [ ] Research document created with all sections
-- [ ] Quality checks pass
-- [ ] README.md updated with new entry
-- [ ] Git committed
-- [ ] User approved final result
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Definition of Done (Research)" for the full checklist.
 
 ---
 
@@ -883,19 +701,7 @@ Do NOT proceed without approval.
 
 ## Create File (URLs only)
 
-Path: `$JAAN_OUTPUTS_DIR/research/{NN}-{category}-{slug}.md`
-
-```markdown
-# {Title}
-
-> {Brief description}
-> Source: {URL}
-> Added: {YYYY-MM-DD}
-
----
-
-{Full content from WebFetch}
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Add-to-Index: File Template" for the file format. Write to `$JAAN_OUTPUTS_DIR/research/{NN}-{category}-{slug}.md`.
 
 ## Update README.md
 
@@ -921,16 +727,7 @@ COMMITMSG
 
 ## Completion
 
-```
-✅ Research Document Added
-
-Category: {category}
-File: {filename}
-
-Files modified:
-- $JAAN_OUTPUTS_DIR/research/README.md
-- $JAAN_OUTPUTS_DIR/research/{filename} (if URL)
-```
+Output the completion message using the template in `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Add-to-Index: Completion Template", filling in actual values.
 
 > "Any feedback? [y/n]"
 
@@ -940,8 +737,4 @@ If yes: Run `/jaan-to:learn-add pm-research-about "{feedback}"`
 
 ## Definition of Done (Add to Index)
 
-- [ ] Source analyzed, metadata extracted
-- [ ] User approved proposal
-- [ ] File created (if URL)
-- [ ] README.md updated
-- [ ] Git committed
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Definition of Done (Add to Index)" for the full checklist.
