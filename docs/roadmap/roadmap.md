@@ -36,6 +36,9 @@ For complete release history, see [CHANGELOG.md](/changelog).
 - Added bootstrap migration for existing user outputs (4 migration blocks)
 - Fixed missing skill categories in Docusaurus sidebar (`d489f60`)
 - Refreshed website landing page for v4.5.0 (`a1400aa`)
+- Aligned specification docs to `{id}-{slug}.md` convention (`c86c877`)
+- Corrected skill count 32→31, added missing commands to roadmap quick reference (`359f317`)
+- Synced `docs/skills/**/README.md` indexes with actual skills (`202a581`)
 
 ### v4.5.0 — Add ux-flowchart-generate skill
 - Added `ux-flowchart-generate` skill — generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence maps, confidence scoring, and unknowns lists (`df64dab`)
@@ -182,6 +185,9 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 - [x] Fix stale `dev-fe-*/dev-be-*` references in skills and docs (`387a084`)
 - [x] Add bootstrap migration for existing user outputs (`387a084`)
 - [x] Fix Docusaurus sidebar missing skill categories (`d489f60`)
+- [x] Align specification docs (CLAUDE.md, skill-create, skill-update, roadmap tasks) to `{id}-{slug}.md` convention (`c86c877`)
+- [x] Fix skill count 32→31 in manifests, add missing commands to roadmap quick reference (`359f317`)
+- [x] Sync `docs/skills/**/README.md` indexes with actual skills; enhance docs-create/docs-update to auto-maintain README indexes (`202a581`)
 
 ### v4.4.0 — Add release-iterate-changelog skill (`e19911c`)
 
