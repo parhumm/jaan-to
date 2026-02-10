@@ -27,7 +27,7 @@ Skills within each role are **sorted by workflow dependency order** (topological
 - Validate with `/jaan-to:skill-update {skill-name}` before committing
 
 ### Paths (Environment Variables)
-- **Outputs**: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}/`
+- **Outputs**: `$JAAN_OUTPUTS_DIR/{role}/{domain}/{id}-{slug}/`
 - **Templates**: `$JAAN_TEMPLATES_DIR/{skill-name}.template.md`
 - **Learning**: `$JAAN_LEARN_DIR/{skill-name}.learn.md`
 - **Context**: `$JAAN_CONTEXT_DIR/*.md`

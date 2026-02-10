@@ -113,14 +113,13 @@ All skills follow the standardized ID-based folder output pattern:
 
 ```
 jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/
-  ├── {id}-{report-type}-{slug}.md    # Main file
-  └── {id}-{aux-type}-{slug}.md       # Optional auxiliary files
+  ├── {id}-{slug}.md                  # Main file
+  └── {id}-{slug}-{type}.{ext}        # Optional companion files
 ```
 
 **Components:**
 - **ID**: Sequential per subdomain (01, 02, 03...) - Generated automatically
 - **Slug**: lowercase-kebab-case from title (max 50 chars)
-- **Report type**: Subdomain name (prd, story, gtm, tasks, etc.)
 - **Index**: Each subdomain has README.md with executive summaries
 
 **Key Features:**
@@ -132,14 +131,14 @@ jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/
 **Examples:**
 ```
 jaan-to/outputs/pm/prd/01-user-auth/
-  ├── 01-prd-user-auth.md           # Main PRD
-  └── 01-prd-tasks-user-auth.md     # Optional task breakdown
+  ├── 01-user-auth.md               # Main PRD
+  └── 01-user-auth-tasks.md         # Optional task breakdown
 
 jaan-to/outputs/data/gtm/01-user-auth/
-  └── 01-gtm-user-auth.md           # GTM tracking for same feature
+  └── 01-user-auth.md               # GTM tracking for same feature
 
 jaan-to/outputs/pm/stories/01-login-validation/
-  └── 01-story-login-validation.md  # User story
+  └── 01-login-validation.md        # User story
 ```
 
 **Exceptions:**

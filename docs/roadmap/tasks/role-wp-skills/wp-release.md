@@ -35,7 +35,7 @@ flowchart TD
 - **→ Next**: `wp-org-readme-draft`
 - **MCP Required**: None
 - **Input**: [repo]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/release/{slug}/coding-standards.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/release/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: WordPress Coding Standards handbook
 
 ### /jaan-to-wp-org-readme-draft
@@ -50,7 +50,7 @@ flowchart TD
 - **→ Next**: `wp-org-assets-plan`
 - **MCP Required**: None
 - **Input**: [slug]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{slug}/readme-draft.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: How readme.txt works in the plugin directory
 
 ### /jaan-to-wp-org-assets-plan
@@ -65,7 +65,7 @@ flowchart TD
 - **→ Next**: `wp-org-svn-release-plan`
 - **MCP Required**: None
 - **Input**: [slug]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{slug}/assets-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: How plugin assets work in WordPress.org SVN
 
 ### /jaan-to-wp-org-svn-release-plan
@@ -80,5 +80,5 @@ flowchart TD
 - **→ Next**: `wp-support-triage-rules`
 - **MCP Required**: None
 - **Input**: [version]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{slug}/svn-release-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Using Subversion for WordPress.org plugins

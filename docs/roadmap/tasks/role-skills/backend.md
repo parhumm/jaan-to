@@ -46,7 +46,7 @@ flowchart TD
 - **→ Next**: `backend-data-model`
 - **MCP Required**: None
 - **Input**: [prd]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/task-breakdown.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/task-breakdown/{id}-{slug}/{id}-{slug}.md`
 
 ### ✅ /jaan-to:backend-data-model
 
@@ -60,7 +60,7 @@ flowchart TD
 - **→ Next**: `backend-api-contract`
 - **MCP Required**: None
 - **Input**: [entities]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/data-model.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/data-model/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: [`60-backend-data-model.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/60-backend-data-model.md)
 
 ### ✅ /jaan-to:backend-api-contract
@@ -75,7 +75,7 @@ flowchart TD
 - **→ Next**: `backend-api-versioning`, `dev-docs-generate`
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [entities]
-- **Output**: `$JAAN_OUTPUTS_DIR/backend/api-contract/{slug}/api.yaml`
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/api-contract/{id}-{slug}/api.yaml`
 - **Reference**: [`59-backend-api-contract.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/59-backend-api-contract.md)
 
 ### /jaan-to:backend-scaffold
@@ -92,7 +92,7 @@ flowchart TD
 - **→ Next**: `dev-integration-plan`, `dev-test-plan`
 - **MCP Required**: None
 - **Input**: [api-contract, task-breakdown, data-model]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/backend/{slug}/scaffold/`
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/`
 - **Reference**: [`63-dev-scaffolds.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/63-dev-scaffolds.md)
 - **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)
 
@@ -108,4 +108,4 @@ flowchart TD
 - **→ Next**: `dev-docs-generate`
 - **MCP Required**: None
 - **Input**: [api]
-- **Output**: `$JAAN_OUTPUTS_DIR/backend/api-contract/{slug}/versioning-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/api-versioning/{id}-{slug}/{id}-{slug}.md`

@@ -35,7 +35,7 @@ flowchart TD
 - **→ Next**: `wp-pm-slug-textdomain`
 - **MCP Required**: None
 - **Input**: [audience] [pain] [surface]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/pm/{slug}/problem-brief.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/pm/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to-wp-pm-slug-textdomain
 
@@ -49,7 +49,7 @@ flowchart TD
 - **→ Next**: `wp-org-guideline-scan`
 - **MCP Required**: None
 - **Input**: [plugin-name]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/pm/{slug}/naming-and-textdomain.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/pm/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Internationalization: text domains must match slug
 
 ### /jaan-to-wp-org-guideline-scan
@@ -64,5 +64,5 @@ flowchart TD
 - **→ Next**: `wp-dev-architecture-map`
 - **MCP Required**: None
 - **Input**: [plugin-idea] [distribution-model]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{slug}/guideline-scan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/org/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Detailed Plugin Guidelines (WordPress.org)
