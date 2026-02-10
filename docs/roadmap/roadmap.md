@@ -264,8 +264,10 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
 | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |
+| `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase |
 | `/jaan-to:qa-test-cases` | Generate test cases from PRDs |
 | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
+| `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
 | `/jaan-to:skill-create` | Create new skill with wizard |
 | `/jaan-to:skill-update` | Update existing skill |
 | `/jaan-to:docs-create` | Create documentation with templates |
