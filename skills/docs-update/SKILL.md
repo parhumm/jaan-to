@@ -270,6 +270,31 @@ Check all internal links:
 - `[text](path.md)` - file exists?
 - `[text](../path.md)` - relative path valid?
 
+### README Index Consistency
+
+For each `docs/skills/{role}/README.md`:
+
+1. **List all `.md` files** in the same directory (excluding README.md itself)
+2. **Parse the "## Available Skills" table** rows in the README
+3. **Compare and flag:**
+   - **MISSING**: `.md` file exists in directory but not listed in Available Skills table
+   - **PHANTOM**: Listed in table but `.md` file doesn't exist in directory
+   - **STALE DESCRIPTION**: Description in table differs significantly from the skill's SKILL.md `description:` field
+
+4. **Also check `docs/skills/README.md` root Available Roles table:**
+   - Compare against actual `docs/skills/*/` subdirectories that contain files
+   - Flag roles with directories but missing from table as MISSING ROLE
+   - Flag roles listed as "Planned" that have active skill docs as STALE STATUS
+
+5. **Report findings** in the audit report under a "## README Index Consistency" section
+
+**Auto-fix logic** (Phase 3):
+- MISSING → add row to table using description from SKILL.md frontmatter
+- PHANTOM → remove row or ask user for decision
+- STALE DESCRIPTION → update description from SKILL.md
+- MISSING ROLE → add row to root Available Roles table with "Active" status
+- STALE STATUS → update "Planned" to "Active" in root table
+
 ### Duplication Detection
 
 Compare similar docs for overlap:
