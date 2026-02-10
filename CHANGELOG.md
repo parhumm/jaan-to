@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [5.0.0] - 2026-02-10
+
 ### Changed
 - **Token optimization (v5)** — Reduced plugin token footprint across all sessions and skill invocations
   - **CLAUDE.md trimmed** from 282 → 97 lines — extracted Output Structure, Naming Conventions, and Development Workflow to `docs/extending/` reference files (~1,700 tokens/session saved)
@@ -928,6 +932,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[5.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.0.0
 [4.5.1]: https://github.com/parhumm/jaan-to/releases/tag/v4.5.1
 [4.5.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.5.0
 [4.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.4.0

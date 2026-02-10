@@ -27,7 +27,14 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.5.1 — Standardize backend + frontend skill output paths
+**Latest:** v5.0.0 — Token optimization — save ~2K tokens/session, ~7K-48K per skill invocation
+
+### v5.0.0 — Token optimization — save ~2K tokens/session, ~7K-48K per skill invocation
+- Trimmed CLAUDE.md from 282 → 97 lines, extracted to `docs/extending/` (`2c854a4`)
+- Added `disable-model-invocation` to 7 internal skills + `context: fork` to 6 detect skills (`cdcf019`)
+- Extracted Language Settings + Pre-Execution boilerplate from 31 skills (`5f87fe3`)
+- Body-trimmed 8 large skills with reference file extraction (`4afd3fe`..`b984d69`)
+- **Savings**: ~2,000 tokens/session permanently, ~7K-48K tokens per skill invocation
 
 ### v4.5.1 — Standardize backend + frontend skill output paths
 - Aligned all 7 backend/frontend skills to `{role}/{domain}/{id}-{slug}/{id}-{slug}.md` convention (`387a084`)
@@ -121,13 +128,6 @@ For complete release history, see [CHANGELOG.md](/changelog).
 ---
 
 ## Unreleased
-
-### Token optimization (v5)
-- Trimmed CLAUDE.md from 282 → 97 lines, extracted to `docs/extending/` (`26a68fb`)
-- Added `disable-model-invocation` to 7 internal skills + `context: fork` to 6 detect skills (`e67efdf`)
-- Extracted Language Settings + Pre-Execution boilerplate from 31 skills (`52b6cd2`)
-- Body-trimmed 8 large skills with reference file extraction (`ba8d9ff`..`6f85957`)
-- **Savings**: ~2,000 tokens/session permanently, ~7K-48K tokens per skill invocation
 
 ---
 
