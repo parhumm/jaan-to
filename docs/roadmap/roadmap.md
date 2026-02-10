@@ -27,7 +27,15 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.5.0 — Add ux-flowchart-generate skill
+**Latest:** v4.5.1 — Standardize backend + frontend skill output paths
+
+### v4.5.1 — Standardize backend + frontend skill output paths
+- Aligned all 7 backend/frontend skills to `{role}/{domain}/{id}-{slug}/{id}-{slug}.md` convention (`387a084`)
+- Removed redundant domain names from filenames (e.g., `{id}-data-model-{slug}.md` → `{id}-{slug}.md`)
+- Fixed stale `dev-fe-*/dev-be-*` skill name references across skills, docs, and templates
+- Added bootstrap migration for existing user outputs (4 migration blocks)
+- Fixed missing skill categories in Docusaurus sidebar (`d489f60`)
+- Refreshed website landing page for v4.5.0 (`a1400aa`)
 
 ### v4.5.0 — Add ux-flowchart-generate skill
 - Added `ux-flowchart-generate` skill — generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence maps, confidence scoring, and unknowns lists (`df64dab`)
@@ -166,6 +174,14 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 | RELEASE | 8 | 8 | 0 | [release.md](tasks/role-skills/release.md) |
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
+
+### v4.5.1 — Standardize backend + frontend skill output paths (`387a084`)
+
+- [x] Standardize output paths to `{role}/{domain}/{id}-{slug}/` convention across all 7 backend/frontend skills (`387a084`)
+- [x] Remove redundant domain names from filenames (`387a084`)
+- [x] Fix stale `dev-fe-*/dev-be-*` references in skills and docs (`387a084`)
+- [x] Add bootstrap migration for existing user outputs (`387a084`)
+- [x] Fix Docusaurus sidebar missing skill categories (`d489f60`)
 
 ### v4.4.0 — Add release-iterate-changelog skill (`e19911c`)
 

@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [4.5.1] - 2026-02-10
+
+### Fixed
+- **Standardized output paths for all 7 backend/frontend skills** — Aligned to `{role}/{domain}/{id}-{slug}/{id}-{slug}.md` convention, removing redundant domain names from filenames (e.g., `{id}-data-model-{slug}.md` → `{id}-{slug}.md`). Fixed stale `dev-fe-*/dev-be-*` references across 30 files (`387a084`)
+- **Bootstrap migration for existing outputs** — Added 4 migration blocks to `bootstrap.sh`: `dev/contract/` → `backend/api-contract/`, backend/frontend numbered folder splitting by content pattern, and `frontend/components/` → `frontend/design/`. Existing user outputs auto-migrate on next session start (`387a084`)
+- **Docusaurus sidebar missing skill categories** — Wired backend, frontend, release, and wp skill categories into sidebar config (`d489f60`)
+
+### Changed
+- **Website landing page** — Refreshed for v4.5.0 release (`a1400aa`)
+
+---
+
 ## [4.5.0] - 2026-02-09
 
 ### Added
@@ -903,6 +915,8 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[4.5.1]: https://github.com/parhumm/jaan-to/releases/tag/v4.5.1
+[4.5.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.5.0
 [4.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.4.0
 [4.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.3.0
 [4.2.1]: https://github.com/parhumm/jaan-to/releases/tag/v4.2.1
