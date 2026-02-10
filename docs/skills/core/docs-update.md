@@ -1,6 +1,11 @@
 ---
 title: "docs-update"
 sidebar_position: 3
+doc_type: skill
+created_date: 2026-01-26
+updated_date: 2026-02-10
+tags: [skills, core, documentation, audit, staleness]
+related: [docs-create.md, ../../hooks/bootstrap.md]
 ---
 
 # /jaan-to:docs-update
