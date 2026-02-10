@@ -17,6 +17,7 @@ argument-hint: [initiative-or-feature-description]
 - `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md` - Output template
 - `$JAAN_LEARN_DIR/jaan-to:ux-microcopy-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` - Per-language rules, export templates, JSON schema
 
 ## Input
 
@@ -370,46 +371,9 @@ Use AskUserQuestion:
 
 For each selected language, translate approved English text with cultural adaptation:
 
-**Persian (FA)**:
-- Use formal شما pronoun (unless tone is informal → تو)
-- Warm, polite tone
-- Add ZWNJ (Zero-Width Non-Joiner) for plurals: کاربرها‌
-- Use Persian punctuation: ؟ ، ؛ « »
-- Mark as RTL
-- Western numerals (0-9) for UI pragmatism
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Per-Language Translation Rules" for full per-language rules (pronouns, punctuation, text expansion, script/direction).
 
-**Russian (RU)**:
-- Use formal Вы pronoun (unless tone is informal → ты)
-- Direct, factual tone
-- Minimize apologies—focus on solution
-- Handle 3-form pluralization
-- Mark as LTR, Cyrillic script
-
-**German (DE)**:
-- Use formal Sie pronoun (or du if tone is informal)
-- Precise, non-blaming language
-- Expect +30-35% text expansion
-- No overapologizing
-
-**Turkish (TR)**:
-- Use formal Siz pronoun (or sen if tone is informal)
-- Polite, respectful
-- Agglutinative language—single words can be long
-- Expect +22-33% text expansion
-
-**French (FR)**:
-- Use formal Vous pronoun (or tu if tone is informal)
-- Elegant phrasing
-- Apologetic conditional for errors
-- Expect +15-25% text expansion
-
-**Tajik (TG)**:
-- Use formal Шумо pronoun
-- Cyrillic script handling
-- Similar to Persian culturally
-- Mark as LTR
-
-Store translations in memory for output generation.
+Apply the language-specific rules from the reference to each translation. Store translations in memory for output generation.
 
 ### 5.5: Track Progress
 
@@ -435,18 +399,7 @@ Before writing output, validate all generated microcopy:
 - [ ] No ambiguous language
 - [ ] Error messages include recovery instructions
 
-**Language-Specific Checks**:
-- [ ] **Persian**: شما consistency, Persian punctuation (؟ ، ؛), ZWNJ for plurals, RTL flag set
-- [ ] **Russian**: Вы consistency, factual tone, no blame language
-- [ ] **German**: Sie/du consistency, precise language, no overapologies
-- [ ] **Turkish**: Siz/sen consistency, politeness markers
-- [ ] **French**: Vous/tu consistency, elegant phrasing
-- [ ] **All RTL languages**: Direction metadata correct (rtl for FA)
-
-**Cultural Adaptation**:
-- [ ] No literal translations—culturally adapted per language
-- [ ] Formality level matches tone profile for each language
-- [ ] Longest text (German/Turkish/Persian) noted for UI constraints
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Quality Validation: Language-Specific Checks" for per-language and cultural adaptation checklists.
 
 If any check fails:
 - Fix issues
@@ -578,68 +531,7 @@ Fill all sections:
 
 Write to: `$OUTPUT_FOLDER/${NEXT_ID}-microcopy-${slug}.json`
 
-Structure:
-```json
-{
-  "metadata": {
-    "feature": "{feature_name}",
-    "languages": ["en", "fa", "tr", "de", "fr", "ru", "tg"],
-    "tone_profile": "{profile}",
-    "categories": ["{list}"],
-    "generated": "{ISO-8601-date}",
-    "version": "1.0.0",
-    "warnings": ["Native speaker review required"]
-  },
-  "microcopy": [
-    {
-      "id": "{category}-{item-slug}",
-      "category": "{category}",
-      "item": "{item_name}",
-      "context": "{usage_notes}",
-      "translations": {
-        "en": {
-          "text": "{text}",
-          "direction": "ltr",
-          "chars": 12
-        },
-        "fa": {
-          "text": "{text}",
-          "direction": "rtl",
-          "chars": 15,
-          "script": "Perso-Arabic"
-        },
-        "tr": {
-          "text": "{text}",
-          "direction": "ltr",
-          "chars": 18
-        },
-        "de": {
-          "text": "{text}",
-          "direction": "ltr",
-          "chars": 20
-        },
-        "fr": {
-          "text": "{text}",
-          "direction": "ltr",
-          "chars": 16
-        },
-        "ru": {
-          "text": "{text}",
-          "direction": "ltr",
-          "chars": 17,
-          "script": "Cyrillic"
-        },
-        "tg": {
-          "text": "{text}",
-          "direction": "ltr",
-          "chars": 19,
-          "script": "Cyrillic"
-        }
-      }
-    }
-  ]
-}
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "JSON Output Structure" for the complete JSON schema with metadata, translations, direction, and script fields.
 
 ### 8.4: Update Subdomain Index
 
@@ -675,92 +567,9 @@ Total Items: {n} items across {n} categories in {n} languages
 
 ## Step 9: Export Formats (Optional)
 
-Show i18n framework integration formats:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Export Format Templates" for React i18next, Vue i18n, and ICU MessageFormat examples with installation and usage code.
 
-### React i18next
-
-```json
-{
-  "labels": {
-    "save": "Save changes",
-    "cancel": "Cancel",
-    "delete": "Delete item"
-  },
-  "errors": {
-    "emailRequired": "Email address is required. Please enter your email to continue.",
-    "passwordWeak": "Password is too weak. Use at least 8 characters with numbers and symbols."
-  }
-}
-```
-
-**Installation**:
-```bash
-npm install react-i18next i18next
-```
-
-**Usage**:
-```javascript
-import { useTranslation } from 'react-i18next';
-
-function MyComponent() {
-  const { t } = useTranslation();
-  return <button>{t('labels.save')}</button>;
-}
-```
-
-### Vue i18n
-
-```json
-{
-  "en": {
-    "labels": {
-      "save": "Save changes"
-    }
-  },
-  "fa": {
-    "labels": {
-      "save": "ذخیره تغییرات"
-    }
-  }
-}
-```
-
-**Installation**:
-```bash
-npm install vue-i18n
-```
-
-**Usage**:
-```vue
-<template>
-  <button>{{ $t('labels.save') }}</button>
-</template>
-```
-
-### ICU MessageFormat (for Russian plurals)
-
-```
-{itemCount, plural,
-  =0 {нет элементов}
-  =1 {один элемент}
-  few {# элемента}
-  many {# элементов}
-  other {# элементов}
-}
-```
-
-Show to user:
-```
-📤 EXPORT FORMATS
-
-Copy the format you need:
-
-**React i18next**: [show JSON above]
-**Vue i18n**: [show JSON above]
-**ICU MessageFormat**: [show example above]
-
-Import the JSON file into your i18n system or copy the formats above.
-```
+Show export format examples from the reference to the user, tailored to their generated microcopy data.
 
 ## Step 10: Feedback Capture
 
