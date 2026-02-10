@@ -129,6 +129,9 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## Unreleased
 
+- [x] `/jaan-to:jaan-issue-report` — Issue reporting skill with session context awareness, privacy sanitization, and dual delivery (GitHub submit / local save)
+- [x] Documentation: `docs/skills/core/jaan-issue-report.md` and Core Skills README updated
+
 ---
 
 ## Phase 4: Development Workflow

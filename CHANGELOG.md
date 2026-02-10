@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`jaan-issue-report` skill** (`/jaan-to:jaan-issue-report`) — Report bugs, feature requests, skill issues, or documentation problems to the jaan-to GitHub repo. Two delivery modes: `--submit` for direct GitHub issue creation via `gh` CLI, or local-only (default) saving to `$JAAN_OUTPUTS_DIR/jaan-issues/`. Features session context awareness (auto-drafts from conversation history when invoked mid-session), privacy sanitization (redacts private paths, tokens, credentials before preview), 4 issue types with auto-classification, upfront `gh auth status` check, and type-specific templates with environment info collection
+- **`jaan-issue-report` documentation** — `docs/skills/core/jaan-issue-report.md` and updated Core Skills README index
+
 ---
 
 ## [5.0.0] - 2026-02-10
