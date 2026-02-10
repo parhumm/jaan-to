@@ -309,7 +309,7 @@ NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 ```bash
 # ✓ Compliant
 OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
-MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 
 # ✗ Non-compliant
 OUTPUT_FILE="$JAAN_OUTPUTS_DIR/{role}/{domain}/{slug}.md"  # Direct file, no folder
@@ -361,7 +361,7 @@ Missing Executive Summary section
 ```
 ❌ Output structure outdated
    Current: {current pattern}
-   Standard: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md
+   Standard: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{id}-{slug}/{id}-{slug}.md
 
    Required changes:
    1. Add Step 5.5: Generate ID using scripts/lib/id-generator.sh
@@ -732,7 +732,7 @@ OUTPUT STRUCTURE MIGRATION
 This skill will be updated to use the standardized output pattern:
 
 Old: {current_pattern}
-New: {subdomain}/{id}-{slug}/{id}-{report-type}-{slug}.md
+New: {subdomain}/{id}-{slug}/{id}-{slug}.md
 
 Required changes:
 □ Add Step 5.5: Generate ID using scripts/lib/id-generator.sh
@@ -770,14 +770,14 @@ mkdir -p "$SUBDOMAIN_DIR"
 
 NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
-MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 \`\`\`
 
 3. Preview:
 > **Output Configuration**
 > - ID: {NEXT_ID}
 > - Folder: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/
-> - Main file: {NEXT_ID}-{report-type}-{slug}.md
+> - Main file: {NEXT_ID}-{slug}.md
 ```
 
 **2. Update output writing step** (typically Step 6 or 7):
@@ -813,7 +813,7 @@ add_to_index \
 \`\`\`
 
 4. Confirm:
-> ✓ Output written to: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
+> ✓ Output written to: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md
 > ✓ Index updated
 ```
 
@@ -831,7 +831,7 @@ Add Executive Summary section after title:
 **Output Structure**:
 - [ ] ID generated using scripts/lib/id-generator.sh
 - [ ] Folder created: {subdomain}/{id}-{slug}/
-- [ ] File named: {id}-{report-type}-{slug}.md
+- [ ] File named: {id}-{slug}.md
 - [ ] Index updated
 - [ ] Executive Summary included
 ```

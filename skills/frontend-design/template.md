@@ -130,7 +130,7 @@ Open `{{preview_file_name}}` in your browser to see the component in action with
 | Field | Value |
 |-------|-------|
 | Generated | {{date}} |
-| Skill | dev-fe-design |
+| Skill | frontend-design |
 | Framework | {{framework}} |
-| Output Path | {{env:JAAN_OUTPUTS_DIR}}/frontend/components/ |
+| Output Path | {{env:JAAN_OUTPUTS_DIR}}/frontend/design/ |
 | Version | 3.0 |

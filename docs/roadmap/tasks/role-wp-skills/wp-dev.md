@@ -51,7 +51,7 @@ flowchart TD
 - **→ Next**: `wp-hooks-feature-hook-map`
 - **MCP Required**: None
 - **Input**: [plugin-type] [features]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/architecture-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Plugin best practices (interop + naming collisions)
 
 ### /jaan-to-wp-hooks-feature-hook-map
@@ -67,7 +67,7 @@ flowchart TD
 - **→ Next**: `wp-data-storage-decision`, `wp-cron-job-plan`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/hooks/{feature}/hook-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: REST routes/args validation pattern is analogous for "explicit contracts" mindset
 
 ### /jaan-to-wp-data-storage-decision
@@ -83,7 +83,7 @@ flowchart TD
 - **→ Next**: `wp-settings-settings-api-plan`
 - **MCP Required**: None
 - **Input**: [entities] [multisite-mode]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/data/storage-decision.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Plugin uninstall expectations (cleanup belongs in uninstall, not deactivation)
 
 ### /jaan-to-wp-settings-settings-api-plan
@@ -98,7 +98,7 @@ flowchart TD
 - **→ Next**: `wp-dev-uninstall-policy`, `wp-admin-menu-ia`
 - **MCP Required**: None
 - **Input**: [settings]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/settings/settings-api-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Data validation principles
 
 ### /jaan-to-wp-dev-uninstall-policy
@@ -113,7 +113,7 @@ flowchart TD
 - **→ Next**: `wp-sec-nonce-plan`
 - **MCP Required**: None
 - **Input**: [data-types] [retain-or-remove]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/lifecycle/uninstall-policy.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Uninstall methods guidance
 
 ### /jaan-to-wp-admin-menu-ia
@@ -129,7 +129,7 @@ flowchart TD
 - **→ Next**: `wp-assets-enqueue-plan`
 - **MCP Required**: None
 - **Input**: [pages] [capability]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/admin/{slug}/menu-ia.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/admin/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to-wp-assets-enqueue-plan
 
@@ -143,7 +143,7 @@ flowchart TD
 - **→ Next**: `wp-block-block-json-spec`, `wp-rest-endpoint-spec`
 - **MCP Required**: None
 - **Input**: [scripts] [styles] [surfaces]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/assets/enqueue-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: wp_enqueue_script() behavior and loading strategy
 
 ### /jaan-to-wp-block-block-json-spec
@@ -158,7 +158,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: None
 - **Input**: [block]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/blocks/{slug}/{block}/block-spec.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/blocks/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Block Editor block.json fundamentals
 
 ### /jaan-to-wp-rest-endpoint-spec
@@ -174,7 +174,7 @@ flowchart TD
 - **→ Next**: `wp-sec-capability-map`
 - **MCP Required**: None
 - **Input**: [routes]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/rest/endpoints.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Adding custom REST endpoints (permissions + args schema)
 
 ### /jaan-to-wp-cron-job-plan
@@ -189,7 +189,7 @@ flowchart TD
 - **→ Next**: `wp-perf-transients-cache-plan`
 - **MCP Required**: None
 - **Input**: [job] [recurrence]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{slug}/cron/{job}/cron-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/dev/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Scheduling WP-Cron events + duplication guard guidance
 
 ### /jaan-to-wp-perf-transients-cache-plan
@@ -204,5 +204,5 @@ flowchart TD
 - **→ Next**: `wp-qa-compat-matrix`
 - **MCP Required**: None
 - **Input**: [features]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/perf/{slug}/transients-cache-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/perf/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Transients API overview

@@ -1,12 +1,12 @@
 # jaan.to Configuration
 
-> Phase 1 | v0.1.0
+> Phase 6 | v4.5.1
 
 ---
 
 ## Version
-- phase: 1
-- version: 0.1.0
+- phase: 6
+- version: 4.5.1
 
 ## References
 - Skill Specification: `jaan-to/docs/create-skill.md` (project)
@@ -21,7 +21,7 @@
 - core (Internal)
 
 ## Planned Roles (Phase 5)
-- dev (Development) - 17 skills [6 active: fe-task-breakdown, be-task-breakdown, be-data-model, api-contract, be-scaffold, fe-scaffold]
+- dev (Development) - 17 skills [7 active: frontend-task-breakdown, backend-task-breakdown, backend-data-model, backend-api-contract, backend-scaffold, frontend-scaffold, frontend-design]
 - qa (Quality Assurance) - 12 skills
 - growth (SEO + Content) - 15 skills
 

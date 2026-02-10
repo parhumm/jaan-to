@@ -536,14 +536,14 @@ NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 
 # Generate folder and file paths
 OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
-MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 \`\`\`
 
 3. Preview for user:
 > **Output Configuration**
 > - ID: {NEXT_ID}
 > - Folder: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/
-> - Main file: {NEXT_ID}-{report-type}-{slug}.md
+> - Main file: {NEXT_ID}-{slug}.md
 
 ## Step {N}: Write Output
 
@@ -576,7 +576,7 @@ add_to_index \
 \`\`\`
 
 4. Confirm to user:
-> ✓ Output written to: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{report-type}-{slug}.md
+> ✓ Output written to: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md
 > ✓ Index updated: $JAAN_OUTPUTS_DIR/{role}/{subdomain}/README.md
 ```
 
@@ -698,7 +698,7 @@ Before completing Step 12, verify:
 **Output Structure Compliance** (for output-generating skills):
 - [ ] Uses `scripts/lib/id-generator.sh` for ID generation (Step 5.5)
 - [ ] Creates folder: `{subdomain}/{id}-{slug}/`
-- [ ] Main file named: `{id}-{report-type}-{slug}.md`
+- [ ] Main file named: `{id}-{slug}.md`
 - [ ] Updates index using `scripts/lib/index-updater.sh`
 - [ ] Includes Executive Summary section in template
 - [ ] Preview shows ID, folder path, and file path to user

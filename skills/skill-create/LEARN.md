@@ -37,7 +37,7 @@ Process improvements learned from past runs:
 source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
-MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-{report-type}-${slug}.md"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 ```
 
 **What NOT to do**:

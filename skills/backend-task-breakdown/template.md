@@ -163,7 +163,7 @@ Summary,Description,Issue Type,Priority,Story Points,Parent,Labels
 | Field | Value |
 |-------|-------|
 | Generated | {{date}} |
-| Skill | dev-be-task-breakdown |
-| Output Path | {{env:JAAN_OUTPUTS_DIR}}/dev/backend/ |
+| Skill | backend-task-breakdown |
+| Output Path | {{env:JAAN_OUTPUTS_DIR}}/backend/task-breakdown/ |
 | Status | Draft |
 | Version | 3.0 |

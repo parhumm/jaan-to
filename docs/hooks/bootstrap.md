@@ -29,7 +29,11 @@ related: [README.md, ../config/context-system.md]
 3. **Migrates output directories** — Moves outputs from deprecated paths:
    - `jaan-to/outputs/dev/backend/**/*` → `jaan-to/outputs/backend/**/*`
    - `jaan-to/outputs/dev/frontend/**/*` → `jaan-to/outputs/frontend/**/*`
-   - Removes empty `dev/` parent directory after migration
+   - `jaan-to/outputs/dev/contract/**/*` → `jaan-to/outputs/backend/api-contract/**/*`
+   - Splits `backend/` numbered folders into subdomain folders by filename pattern (data-model, task-breakdown)
+   - Moves `frontend/components/**/*` → `frontend/design/**/*`
+   - Splits `frontend/` numbered folders into subdomain folders by filename pattern (design, task-breakdown)
+   - Removes empty parent directories after migration
 4. **Creates directories** — Ensures all required project directories exist:
    - `jaan-to/outputs/`
    - `jaan-to/outputs/research/`
@@ -57,6 +61,10 @@ related: [README.md, ../config/context-system.md]
 |--------|-----------|--------|
 | Migrates directory | `.jaan-to/` exists, `jaan-to/` doesn't | Renames `.jaan-to/` → `jaan-to/` |
 | Migrates output paths | `outputs/dev/backend` or `outputs/dev/frontend` exist | Moves to `outputs/backend` and `outputs/frontend` |
+| Migrates api-contract | `outputs/dev/contract` exists | Moves to `outputs/backend/api-contract` |
+| Splits backend outputs | Numbered folders in `outputs/backend/` | Routes to `backend/data-model/` or `backend/task-breakdown/` by filename pattern |
+| Migrates design outputs | `outputs/frontend/components` exists | Moves to `outputs/frontend/design` |
+| Splits frontend outputs | Numbered folders in `outputs/frontend/` | Routes to `frontend/design/` or `frontend/task-breakdown/` by filename pattern |
 | Creates directories | Any missing | Creates all 7 directories listed above |
 | Replaces gitignore entry | `.gitignore` has `.jaan-to` entry | Replaces with `jaan-to/` |
 | Appends to gitignore | `.gitignore` exists without entry | Appends `jaan-to/` |

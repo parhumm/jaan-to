@@ -43,14 +43,14 @@ Files at `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/` (Node.js/TypeScript e
 
 | File | Content |
 |------|---------|
-| `{id}-backend-scaffold-{slug}.md` | Setup guide + architecture doc |
-| `{id}-backend-scaffold-routes-{slug}.ts` | Route handlers (all resources) |
-| `{id}-backend-scaffold-services-{slug}.ts` | Service layer (business logic) |
-| `{id}-backend-scaffold-schemas-{slug}.ts` | Validation schemas |
-| `{id}-backend-scaffold-middleware-{slug}.ts` | Auth + error handling middleware |
-| `{id}-backend-scaffold-prisma-{slug}.prisma` | ORM data model |
-| `{id}-backend-scaffold-config-{slug}.ts` | Package.json + tsconfig content |
-| `{id}-backend-scaffold-readme-{slug}.md` | Setup + run instructions |
+| `{id}-{slug}.md` | Setup guide + architecture doc |
+| `{id}-{slug}-routes.ts` | Route handlers (all resources) |
+| `{id}-{slug}-services.ts` | Service layer (business logic) |
+| `{id}-{slug}-schemas.ts` | Validation schemas |
+| `{id}-{slug}-middleware.ts` | Auth + error handling middleware |
+| `{id}-{slug}-prisma.prisma` | ORM data model |
+| `{id}-{slug}-config.ts` | Package.json + tsconfig content |
+| `{id}-{slug}-readme.md` | Setup + run instructions |
 
 File extensions adapt to detected stack (.ts for Node.js, .php for PHP, .go for Go).
 
@@ -108,14 +108,14 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect the stack:
 **Output:**
 ```
 jaan-to/outputs/backend/scaffold/01-user-api/
-├── 01-backend-scaffold-user-api.md
-├── 01-backend-scaffold-routes-user-api.ts
-├── 01-backend-scaffold-services-user-api.ts
-├── 01-backend-scaffold-schemas-user-api.ts
-├── 01-backend-scaffold-middleware-user-api.ts
-├── 01-backend-scaffold-prisma-user-api.prisma
-├── 01-backend-scaffold-config-user-api.ts
-└── 01-backend-scaffold-readme-user-api.md
+├── 01-user-api.md
+├── 01-user-api-routes.ts
+├── 01-user-api-services.ts
+├── 01-user-api-schemas.ts
+├── 01-user-api-middleware.ts
+├── 01-user-api-prisma.prisma
+├── 01-user-api-config.ts
+└── 01-user-api-readme.md
 ```
 
 ---

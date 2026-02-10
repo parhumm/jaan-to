@@ -36,7 +36,7 @@ Analyzes UX handoffs (Figma links, design descriptions, screenshots, or PRDs) an
 
 ## What It Produces
 
-A comprehensive task breakdown document at `$JAAN_OUTPUTS_DIR/frontend/{slug}/task-breakdown.md` containing:
+A comprehensive task breakdown document at `$JAAN_OUTPUTS_DIR/frontend/task-breakdown/{id}-{slug}/{id}-{slug}.md` containing:
 
 | Section | Content |
 |---------|---------|
@@ -89,10 +89,10 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to adapt the breakdown for the project's frame
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:dev-tech-plan → /jaan-to:frontend-task-breakdown → /jaan-to:dev-fe-state-machine
+/jaan-to:dev-tech-plan → /jaan-to:frontend-task-breakdown → /jaan-to:frontend-state-machine
 ```
 
-After generating the task breakdown, the skill suggests running `/jaan-to:dev-fe-state-machine` for detailed state machine definitions per component.
+After generating the task breakdown, the skill suggests running `/jaan-to:frontend-state-machine` for detailed state machine definitions per component.
 
 ---
 

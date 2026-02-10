@@ -156,7 +156,7 @@ Ask up to 7 smart questions based on what's unclear from Steps 1-2. Skip questio
 
 Check for existing patterns to maintain consistency:
 
-1. **Glob** for `$JAAN_OUTPUTS_DIR/frontend/components/*` to see existing components
+1. **Glob** for `$JAAN_OUTPUTS_DIR/frontend/design/*` to see existing components
 2. **Read** `$JAAN_CONTEXT_DIR/design.md` (if exists) for:
    - Color palette and usage guidelines
    - Typography scale and hierarchy
@@ -391,7 +391,7 @@ Use AskUserQuestion:
 source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 
 # Define subdomain directory
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/frontend/components"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/frontend/design"
 mkdir -p "$SUBDOMAIN_DIR"
 
 # Generate next sequential ID
@@ -402,19 +402,19 @@ slug="{component-name-slug}"
 
 # Generate paths
 OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
-MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-${slug}.md"
-CODE_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-code-${slug}.{jsx|vue|html}"
-PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-preview-${slug}.html"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
+CODE_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}-code.{jsx|vue|html}"
+PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}-preview.html"
 ```
 
 **Preview output configuration:**
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: $JAAN_OUTPUTS_DIR/frontend/components/{NEXT_ID}-{slug}/
+> - Folder: $JAAN_OUTPUTS_DIR/frontend/design/{NEXT_ID}-{slug}/
 > - Files:
->   - {NEXT_ID}-component-{slug}.md (documentation)
->   - {NEXT_ID}-component-code-{slug}.{ext} (code)
->   - {NEXT_ID}-component-preview-{slug}.html (preview)
+>   - {NEXT_ID}-{slug}.md (documentation)
+>   - {NEXT_ID}-{slug}-code.{ext} (code)
+>   - {NEXT_ID}-{slug}-preview.html (preview)
 
 ## Step 11: Write Output
 
@@ -444,12 +444,12 @@ PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-component-preview-${slug}.html"
    ```
 
 6. **Confirm to user:**
-   > ✓ Component written to: $JAAN_OUTPUTS_DIR/frontend/components/{NEXT_ID}-{slug}/
+   > ✓ Component written to: $JAAN_OUTPUTS_DIR/frontend/design/{NEXT_ID}-{slug}/
    > ✓ Files created:
-   >   - {NEXT_ID}-component-{slug}.md
-   >   - {NEXT_ID}-component-code-{slug}.{ext}
-   >   - {NEXT_ID}-component-preview-{slug}.html
-   > ✓ Index updated: $JAAN_OUTPUTS_DIR/frontend/components/README.md
+   >   - {NEXT_ID}-{slug}.md
+   >   - {NEXT_ID}-{slug}-code.{ext}
+   >   - {NEXT_ID}-{slug}-preview.html
+   > ✓ Index updated: $JAAN_OUTPUTS_DIR/frontend/design/README.md
 
 ## Step 12: Suggest Next Actions
 
@@ -474,7 +474,7 @@ Use AskUserQuestion:
   - "Learn from this" — Capture a lesson for future runs
 
 If "Learn from this":
-- Run `/jaan-to:learn-add dev-fe-design "{feedback}"`
+- Run `/jaan-to:learn-add frontend-design "{feedback}"`
 
 ---
 

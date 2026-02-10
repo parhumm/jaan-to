@@ -43,13 +43,13 @@ Files at `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`:
 
 | File | Content |
 |------|---------|
-| `{id}-frontend-scaffold-{slug}.md` | Architecture doc + component map |
-| `{id}-frontend-scaffold-components-{slug}.tsx` | React components |
-| `{id}-frontend-scaffold-hooks-{slug}.ts` | Typed API client hooks |
-| `{id}-frontend-scaffold-types-{slug}.ts` | TypeScript interfaces from API schemas |
-| `{id}-frontend-scaffold-pages-{slug}.tsx` | Page layouts / routes |
-| `{id}-frontend-scaffold-config-{slug}.ts` | Package.json + tsconfig + tailwind config |
-| `{id}-frontend-scaffold-readme-{slug}.md` | Setup + run instructions |
+| `{id}-{slug}.md` | Architecture doc + component map |
+| `{id}-{slug}-components.tsx` | React components |
+| `{id}-{slug}-hooks.ts` | Typed API client hooks |
+| `{id}-{slug}-types.ts` | TypeScript interfaces from API schemas |
+| `{id}-{slug}-pages.tsx` | Page layouts / routes |
+| `{id}-{slug}-config.ts` | Package.json + tsconfig + tailwind config |
+| `{id}-{slug}-readme.md` | Setup + run instructions |
 
 ---
 
@@ -102,13 +102,13 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect:
 **Output:**
 ```
 jaan-to/outputs/frontend/scaffold/01-user-dashboard/
-├── 01-frontend-scaffold-user-dashboard.md
-├── 01-frontend-scaffold-components-user-dashboard.tsx
-├── 01-frontend-scaffold-hooks-user-dashboard.ts
-├── 01-frontend-scaffold-types-user-dashboard.ts
-├── 01-frontend-scaffold-pages-user-dashboard.tsx
-├── 01-frontend-scaffold-config-user-dashboard.ts
-└── 01-frontend-scaffold-readme-user-dashboard.md
+├── 01-user-dashboard.md
+├── 01-user-dashboard-components.tsx
+├── 01-user-dashboard-hooks.ts
+├── 01-user-dashboard-types.ts
+├── 01-user-dashboard-pages.tsx
+├── 01-user-dashboard-config.ts
+└── 01-user-dashboard-readme.md
 ```
 
 ---

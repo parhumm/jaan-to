@@ -1,7 +1,7 @@
 ---
 name: backend-api-contract
 description: Generate OpenAPI 3.1 contracts with schemas, RFC 9457 errors, versioning, and examples from API entities.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/api-contract/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [entities-or-prd-path]
 ---
 
@@ -283,7 +283,7 @@ Server:  500
 OUTPUT
 ──────
 Main:      api.yaml (OpenAPI 3.1)
-Companion: {id}-contract-{slug}.md (quick-start guide)
+Companion: {id}-{slug}.md (quick-start guide)
 ```
 
 Use AskUserQuestion:
@@ -471,7 +471,7 @@ source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 2. Generate sequential ID and output paths:
 ```bash
 # Define subdomain directory
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/contract"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/backend/api-contract"
 mkdir -p "$SUBDOMAIN_DIR"
 
 # Generate next ID
@@ -481,15 +481,15 @@ NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 slug="{lowercase-hyphenated-api-name}"
 OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
 MAIN_FILE="${OUTPUT_FOLDER}/api.yaml"
-COMPANION_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-contract-${slug}.md"
+COMPANION_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 ```
 
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: `$JAAN_OUTPUTS_DIR/dev/contract/{NEXT_ID}-{slug}/`
+> - Folder: `$JAAN_OUTPUTS_DIR/backend/api-contract/{NEXT_ID}-{slug}/`
 > - Main: `api.yaml`
-> - Companion: `{NEXT_ID}-contract-{slug}.md`
+> - Companion: `{NEXT_ID}-{slug}.md`
 
 ## Step 9: Write Output
 
@@ -500,7 +500,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 2. Write OpenAPI spec to `api.yaml`
 
-3. Write companion guide to `{NEXT_ID}-contract-{slug}.md`
+3. Write companion guide to `{NEXT_ID}-{slug}.md`
 
 4. Update subdomain index:
 ```bash
@@ -514,9 +514,9 @@ add_to_index \
 ```
 
 5. Confirm completion:
-> ✓ Contract written to: `$JAAN_OUTPUTS_DIR/dev/contract/{NEXT_ID}-{slug}/api.yaml`
-> ✓ Guide written to: `$JAAN_OUTPUTS_DIR/dev/contract/{NEXT_ID}-{slug}/{NEXT_ID}-contract-{slug}.md`
-> ✓ Index updated: `$JAAN_OUTPUTS_DIR/dev/contract/README.md`
+> ✓ Contract written to: `$JAAN_OUTPUTS_DIR/backend/api-contract/{NEXT_ID}-{slug}/api.yaml`
+> ✓ Guide written to: `$JAAN_OUTPUTS_DIR/backend/api-contract/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md`
+> ✓ Index updated: `$JAAN_OUTPUTS_DIR/backend/api-contract/README.md`
 
 ## Step 10: Suggest Next Steps
 
@@ -540,7 +540,7 @@ Use AskUserQuestion:
   - "Both" — Fix now AND save lesson
 
 - **Fix now**: Update the output files, re-preview, re-write
-- **Learn**: Run `/jaan-to:learn-add dev-api-contract "{feedback}"`
+- **Learn**: Run `/jaan-to:learn-add backend-api-contract "{feedback}"`
 - **Both**: Do both
 
 ---
@@ -554,6 +554,6 @@ Use AskUserQuestion:
 - [ ] OpenAPI 3.1 YAML generated with all components and paths
 - [ ] Companion markdown guide generated with Executive Summary
 - [ ] Quality checks passed (structural, error handling, completeness)
-- [ ] Output written to `$JAAN_OUTPUTS_DIR/dev/contract/{id}-{slug}/`
+- [ ] Output written to `$JAAN_OUTPUTS_DIR/backend/api-contract/{id}-{slug}/`
 - [ ] Subdomain index updated
 - [ ] User approved final result

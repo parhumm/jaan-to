@@ -34,7 +34,7 @@ flowchart TD
 - **→ Next**: `wp-support-triage-rules`
 - **MCP Required**: None
 - **Input**: [wp] [php] [targets]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/qa/{slug}/compat-matrix.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/qa/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to-wp-support-triage-rules
 
@@ -49,5 +49,5 @@ flowchart TD
 - **→ Next**: `wp-pm-problem-brief`
 - **MCP Required**: None
 - **Input**: [reports]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/support/{slug}/triage-rules.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/support/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Plugin Handbook (general best practices + interoperability mindset)

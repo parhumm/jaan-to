@@ -37,7 +37,7 @@ flowchart TD
 - **→ Next**: `wp-sec-nonce-plan`
 - **MCP Required**: None
 - **Input**: [features]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{slug}/capability-map.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: current_user_can() capability checks
 
 ### /jaan-to-wp-sec-nonce-plan
@@ -52,7 +52,7 @@ flowchart TD
 - **→ Next**: `wp-sec-escaping-checklist`
 - **MCP Required**: None
 - **Input**: [surfaces]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{slug}/nonce-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Nonces guidance
 
 ### /jaan-to-wp-sec-escaping-checklist
@@ -67,7 +67,7 @@ flowchart TD
 - **→ Next**: `wp-sec-db-safety-plan`
 - **MCP Required**: None
 - **Input**: [screens]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{slug}/escaping-checklist.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Escaping data guidance
 
 ### /jaan-to-wp-sec-db-safety-plan
@@ -82,7 +82,7 @@ flowchart TD
 - **→ Next**: `wp-privacy-eraser-exporter-plan`
 - **MCP Required**: None
 - **Input**: [queries]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{slug}/db-safety-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/security/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: wpdb::prepare() safe query preparation rules
 
 ### /jaan-to-wp-privacy-eraser-exporter-plan
@@ -97,5 +97,5 @@ flowchart TD
 - **→ Next**: `wp-org-readme-draft`
 - **MCP Required**: None
 - **Input**: [data-stores]
-- **Output**: `$JAAN_OUTPUTS_DIR/wp/privacy/{slug}/personal-data-tools-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/wp/privacy/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: Adding the Personal Data Eraser to your plugin

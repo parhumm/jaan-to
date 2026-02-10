@@ -19,6 +19,7 @@ See [Backend Skills](../backend/README.md) for complete documentation:
 - [/jaan-to:backend-api-contract](../backend/api-contract.md) - Generate OpenAPI 3.1 contracts from API entities
 - [/jaan-to:backend-data-model](../backend/data-model.md) - Generate data model docs with constraints, indexes, and migrations
 - [/jaan-to:backend-task-breakdown](../backend/task-breakdown.md) - Convert PRDs into structured backend development tasks
+- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate production-ready backend code from specs
 
 ### Frontend Skills
 
@@ -26,12 +27,13 @@ See [Frontend Skills](../frontend/README.md) for complete documentation:
 
 - [/jaan-to:frontend-design](../frontend/design.md) - Create distinctive, production-grade frontend interfaces
 - [/jaan-to:frontend-task-breakdown](../frontend/task-breakdown.md) - Transform UX design handoffs into production-ready task breakdowns
+- [/jaan-to:frontend-scaffold](../frontend/scaffold.md) - Convert designs to React/Next.js components with TailwindCSS and typed API hooks
 
-### Other Dev Skills
+### Planned Dev Skills
 
-| Skill | Description |
-|-------|-------------|
-| [/jaan-to:dev-pr-review](pr-review.md) | Automated PR review: risk scoring, security hints, missing tests |
+| Skill | Description | Depends On |
+|-------|-------------|------------|
+| [/jaan-to:dev-pr-review](pr-review.md) | Automated PR review with risk scoring | GitLab/GitHub MCP (Phase 7) |
 
 ---
 

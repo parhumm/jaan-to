@@ -97,8 +97,8 @@ All jaan.to skills that generate user-facing outputs MUST follow the standardize
 
 ```
 jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/
-  ├── {id}-{report-type}-{slug}.md    # Main output file
-  └── {id}-{aux-type}-{slug}.md       # Optional auxiliary files
+  ├── {id}-{slug}.md                  # Main output file
+  └── {id}-{slug}-{type}.{ext}        # Optional companion files
 ```
 
 ### Components
@@ -136,7 +136,7 @@ NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 **Example**: "user-auth" can exist in:
 - `pm/prd/01-user-auth/` (PRD for user authentication)
 - `data/gtm/01-user-auth/` (GTM tracking for user authentication)
-- `dev/frontend/01-user-auth/` (Frontend tasks for user authentication)
+- `frontend/task-breakdown/01-user-auth/` (Frontend tasks for user authentication)
 
 **Benefit**: Natural feature/topic naming across different roles and output types.
 
@@ -144,15 +144,14 @@ NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 
 **Requirement**: All files in folder must use ID prefix.
 
-**Main File Format**: `{id}-{report-type}-{slug}.md`
-- `report-type`: Subdomain name (prd, story, gtm, tasks, etc.)
+**Main File Format**: `{id}-{slug}.md`
 
-**Auxiliary File Format**: `{id}-{aux-type}-{slug}.md`
-- `aux-type`: Descriptive name (notes, appendix, data, etc.)
+**Companion File Format**: `{id}-{slug}-{type}.{ext}`
+- `type`: Descriptive suffix (tasks, notes, code, preview, etc.)
 
 **Examples**:
-- Main: `01-prd-user-authentication.md`
-- Auxiliary: `01-prd-tasks-user-authentication.md`
+- Main: `01-user-authentication.md`
+- Auxiliary: `01-user-authentication-tasks.md`
 
 #### 5. Index Management
 
@@ -192,7 +191,7 @@ When creating a new output-generating skill:
 - [ ] Source `scripts/lib/id-generator.sh` in Step 5.5
 - [ ] Generate sequential ID using `generate_next_id()`
 - [ ] Create folder: `{subdomain}/{id}-{slug}/`
-- [ ] Name main file: `{id}-{report-type}-{slug}.md`
+- [ ] Name main file: `{id}-{slug}.md`
 - [ ] Source `scripts/lib/index-updater.sh` after output write
 - [ ] Call `add_to_index()` with ID, folder name, title, summary
 - [ ] Include Executive Summary in template

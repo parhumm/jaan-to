@@ -59,7 +59,7 @@ flowchart TD
 - **→ Next**: `dev-arch-proposal`
 - **MCP Required**: None
 - **Input**: [prd]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{slug}/feasibility-check.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to:dev-arch-proposal
 
@@ -73,7 +73,7 @@ flowchart TD
 - **→ Next**: `dev-tech-plan`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{slug}/arch-proposal.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to:dev-tech-plan
 
@@ -87,7 +87,7 @@ flowchart TD
 - **→ Next**: `frontend-task-breakdown`, `backend-task-breakdown`
 - **MCP Required**: GitLab (modules/flags), Figma (optional constraints)
 - **Input**: [initiative]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/plan/{slug}/tech-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/plan/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to:dev-integration-plan
 
@@ -101,7 +101,7 @@ flowchart TD
 - **→ Next**: `dev-integration-mock-stubs`
 - **MCP Required**: None
 - **Input**: [provider] [use-case]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{slug}/integration-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to:dev-integration-mock-stubs
 
@@ -115,7 +115,7 @@ flowchart TD
 - **→ Next**: `dev-test-plan`
 - **MCP Required**: None
 - **Input**: [provider]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{slug}/mock-stubs.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{id}-{slug}/{id}-{slug}-stubs.md`
 
 ### /jaan-to:dev-test-plan
 
@@ -129,7 +129,7 @@ flowchart TD
 - **→ Next**: `qa-test-cases`
 - **MCP Required**: GitLab (diff impact)
 - **Input**: [initiative]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/test/{slug}/test-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/test/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to:dev-observability-events
 
@@ -143,7 +143,7 @@ flowchart TD
 - **→ Next**: `dev-observability-alerts`
 - **MCP Required**: None
 - **Input**: [feature]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{slug}/events.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to:dev-observability-alerts
 
@@ -157,7 +157,7 @@ flowchart TD
 - **→ Next**: `sre-slo-setup`
 - **MCP Required**: None
 - **Input**: [service]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{slug}/alert-rules.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{id}-{slug}/{id}-{slug}-alerts.md`
 
 ### /jaan-to:dev-docs-generate
 
@@ -173,7 +173,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: GitLab (code context, optional)
 - **Input**: [component] [doc_type]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/docs/{slug}/{doc_type}.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/docs/{id}-{slug}/{id}-{slug}.md`
 - **Failure Modes**: Documentation stale; inconsistent formatting; missing context
 - **Quality Gates**: Up-to-date with code; follows style guide; onboarding-friendly
 
@@ -190,7 +190,7 @@ flowchart TD
 - **→ Next**: —
 - **MCP Required**: GitLab (MR + pipeline), Sentry (optional regressions)
 - **Input**: [pr-link-or-branch]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/review/{slug}/pr-review.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/review/{id}-{slug}/{id}-{slug}.md`
 
 ### /jaan-to:dev-ship-check
 
@@ -204,4 +204,4 @@ flowchart TD
 - **→ Next**: `release-prod-runbook`, `qa-release-signoff`
 - **MCP Required**: GitLab (pipelines), Sentry (health)
 - **Input**: [initiative]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/release/{slug}/ship-check.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/release/{id}-{slug}/{id}-{slug}.md`

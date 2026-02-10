@@ -236,6 +236,34 @@ Show full preview and ask:
 
 If approved, write file.
 
+## Step 10.5: Update Parent README
+
+After writing the new doc file, update the parent folder's README.md to keep indexes in sync:
+
+1. **Determine parent README path:**
+   - For `docs/skills/{role}/{name}.md` → `docs/skills/{role}/README.md`
+   - For `docs/hooks/{name}.md` → `docs/hooks/README.md`
+   - For other types → skip this step
+
+2. **Read the parent README.md** (if it doesn't exist, create one using the index template with frontmatter, H1, tagline, empty Available Skills table, and back-link)
+
+3. **Find the "## Available Skills" section** (or equivalent table header)
+
+4. **Check if the new doc is already listed:**
+   - If listed → skip (no duplicate rows)
+   - If not listed → add a new row to the table
+
+5. **New row format:**
+   ```
+   | [/jaan-to:{skill-name}]({filename}.md) | {description from SKILL.md} |
+   ```
+
+6. **Also check `docs/skills/README.md` (root) Available Roles table:**
+   - If the role folder is new → add a row for the new role with "Active" status and link to its README
+   - If the role is listed as "Planned" → update to "Active" and add link
+
+7. **Include the README changes in the commit** (Step 11 below)
+
 ## Step 11: Commit
 
 ```bash

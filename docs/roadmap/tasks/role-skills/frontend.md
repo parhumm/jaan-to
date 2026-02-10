@@ -44,7 +44,7 @@ flowchart TD
 - **→ Next**: `frontend-state-machine`
 - **MCP Required**: None
 - **Input**: [ux-handoff]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/task-breakdown.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/frontend/task-breakdown/{id}-{slug}/`
 
 ### /jaan-to:frontend-state-machine
 
@@ -58,7 +58,7 @@ flowchart TD
 - **→ Next**: `dev-test-plan`
 - **MCP Required**: None
 - **Input**: [screen]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/state-machine.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/frontend/state-machine/{id}-{slug}/`
 
 ### /jaan-to:frontend-scaffold
 
@@ -73,7 +73,7 @@ flowchart TD
   - Generate typed API client hooks
 - **→ Next**: `dev-integration-plan`, `dev-test-plan`
 - **MCP Required**: None
-- **Input**: [fe-design, fe-task-breakdown, api-contract]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/frontend/{slug}/scaffold/`
+- **Input**: [frontend-design, frontend-task-breakdown, api-contract]
+- **Output**: `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`
 - **Reference**: [`63-dev-scaffolds.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/63-dev-scaffolds.md)
 - **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)

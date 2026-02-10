@@ -21,7 +21,7 @@ flowchart TD
     jaan-to-ux-journey-map["ux-journey-map<br>Journey Map<br>Steps + pain points + metrics"] --> jaan-to-ux-journey-edge-cases["ux-journey-edge-cases<br>Journey Edge Cases<br>Edge cases + recovery paths"]
     jaan-to-ux-journey-edge-cases["ux-journey-edge-cases<br>Journey Edge Cases<br>Edge cases + recovery paths"] --> jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"]
     jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"] --> ux-microcopy-write["ux-microcopy-write<br>Microcopy Write<br>Labels + errors + toasts + tone"]
-    jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"] -.-> jaan-to-dev-fe-state-machine["dev-fe-state-machine<br>DEV: fe-state-machine"]
+    jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"] -.-> jaan-to-frontend-state-machine["frontend-state-machine<br>DEV: frontend-state-machine"]
     jaan-to-ux-heuristic-review["ux-heuristic-review<br>Heuristic Review<br>Issues + severity + quick wins"] --> jaan-to-ux-flow-spec["ux-flow-spec<br>Flow Spec<br>Happy path + all states"]
     jaan-to-ux-sitemap["ux-sitemap<br>Sitemap<br>Pages + entry points + IA risks"] --> jaan-to-ux-taxonomy["ux-taxonomy<br>Taxonomy<br>Naming rules + attributes"]
     jaan-to-ux-taxonomy["ux-taxonomy<br>Taxonomy<br>Naming rules + attributes"] --> jaan-to-ux-wireframe-screens["ux-wireframe-screens<br>Wireframe Screens<br>Screen list + states + interactions"]
@@ -38,7 +38,7 @@ flowchart TD
     style jaan-to-pm-jtbd-map fill:#f0f0f0,stroke:#999
     style jaan-to-pm-persona-card fill:#f0f0f0,stroke:#999
     style jaan-to-pm-positioning-brief fill:#f0f0f0,stroke:#999
-    style jaan-to-dev-fe-state-machine fill:#f0f0f0,stroke:#999
+    style jaan-to-frontend-state-machine fill:#f0f0f0,stroke:#999
     style frontend-task-breakdown fill:#f0f0f0,stroke:#999
     style jaan-to-data-event-spec fill:#f0f0f0,stroke:#999
 ```
@@ -201,7 +201,7 @@ flowchart TD
   - Specify key states early (empty/error/loading)
   - Validate primary task completion
   - Include content hierarchy (what matters first)
-- **→ Next**: `ux-microcopy-write`, `dev-fe-state-machine`
+- **→ Next**: `ux-microcopy-write`, `frontend-state-machine`
 - **MCP Required**: Figma (flow/state extraction)
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/flows/{slug}/flow-spec.md`
@@ -219,7 +219,7 @@ flowchart TD
   - Quality gates: 17 machine-checkable + 5 human-review flags
   - Auto-split diagrams when exceeding thresholds (>25 nodes, >50 edges, >15 cyclomatic complexity)
   - GitHub Mermaid constraints enforced (v11.4.1, <40K chars, Dagre-only, strict security)
-- **→ Next**: `ux-wireframe-notes`, `dev-fe-state-map`, `data-event-spec`
+- **→ Next**: `ux-wireframe-notes`, `frontend-state-machine`, `data-event-spec`
 - **MCP Required**: None
 - **Input**: `[source_type] [paths...] [goal] [scope?]`
 - **Output**: `$JAAN_OUTPUTS_DIR/ux/diagrams/{slug}/flowchart.md`, `$JAAN_OUTPUTS_DIR/ux/diagrams/{slug}/evidence-map.md`

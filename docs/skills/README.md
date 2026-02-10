@@ -43,12 +43,14 @@ Two naming conventions based on skill type:
 | [core](core/README.md) | System utilities | Active |
 | [data](data/README.md) | Data/Analytics | Active |
 | [dev](dev/README.md) | Developer | Active |
-| qa | QA Engineer | Planned |
+| [backend](backend/README.md) | Backend development | Active |
+| [frontend](frontend/README.md) | Frontend development | Active |
+| [qa](qa/README.md) | QA Engineer | Active |
 | [ux](ux/README.md) | UX Designer | Active |
+| [detect](detect/README.md) | Repo audits & knowledge | Active |
 | [wp](wp/README.md) | WordPress | Active |
 | [release](release/README.md) | Release management | Active |
 | growth | Growth/SEO | Planned |
-| [detect](detect/README.md) | Repo audits & knowledge | Planned |
 
 ---
 
@@ -86,7 +88,7 @@ Every skill follows this flow:
 All outputs go to:
 
 ```
-jaan-to/outputs/{role}/{domain}/{slug}/
+jaan-to/outputs/{role}/{domain}/{id}-{slug}/{id}-{slug}.md
 ```
 
-Example: `jaan-to/outputs/pm/user-auth/prd.md`
+Example: `jaan-to/outputs/pm/prd/01-user-auth/01-user-auth.md`

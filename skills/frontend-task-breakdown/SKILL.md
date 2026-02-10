@@ -1,7 +1,7 @@
 ---
 name: frontend-task-breakdown
 description: Generate frontend task breakdowns from UX handoffs with component inventory, state matrices, and estimates.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/task-breakdown/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [ux-handoff-description-or-figma-link]
 ---
 
@@ -520,7 +520,7 @@ source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 2. Generate sequential ID and output paths:
 ```bash
 # Define subdomain directory
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/frontend"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/frontend/task-breakdown"
 mkdir -p "$SUBDOMAIN_DIR"
 
 # Generate next ID
@@ -529,14 +529,14 @@ NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 # Create folder and file paths (slug from feature name)
 slug="{lowercase-hyphenated-feature-name}"
 OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
-MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-fe-tasks-${slug}.md"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 ```
 
 3. Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
-> - Folder: $JAAN_OUTPUTS_DIR/frontend/{NEXT_ID}-{slug}/
-> - Main file: {NEXT_ID}-fe-tasks-{slug}.md
+> - Folder: $JAAN_OUTPUTS_DIR/frontend/task-breakdown/{NEXT_ID}-{slug}/
+> - Main file: {NEXT_ID}-{slug}.md
 
 ## Step 11: Write Output
 
@@ -564,8 +564,8 @@ add_to_index \
 ```
 
 4. Confirm completion:
-> ✓ Task breakdown written to: $JAAN_OUTPUTS_DIR/frontend/{NEXT_ID}-{slug}/{NEXT_ID}-fe-tasks-{slug}.md
-> ✓ Index updated: $JAAN_OUTPUTS_DIR/frontend/README.md
+> ✓ Task breakdown written to: $JAAN_OUTPUTS_DIR/frontend/task-breakdown/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md
+> ✓ Index updated: $JAAN_OUTPUTS_DIR/frontend/task-breakdown/README.md
 
 ## Step 12: Suggest Next Skill
 
@@ -585,7 +585,7 @@ Use AskUserQuestion:
   - "Both" — Fix now AND save lesson
 
 - **Fix now**: Update the output file, re-preview, re-write
-- **Learn**: Run `/jaan-to:learn-add dev-fe-task-breakdown "{feedback}"`
+- **Learn**: Run `/jaan-to:learn-add frontend-task-breakdown "{feedback}"`
 - **Both**: Do both
 
 ---
@@ -598,6 +598,6 @@ Use AskUserQuestion:
 - [ ] Coverage checklist applied per scope level
 - [ ] Dependencies mapped with Mermaid diagram
 - [ ] Risks assessed with mitigations for High-impact items
-- [ ] Task breakdown document written to `$JAAN_OUTPUTS_DIR/frontend/{slug}/task-breakdown.md`
+- [ ] Task breakdown document written to `$JAAN_OUTPUTS_DIR/frontend/task-breakdown/{id}-{slug}/{id}-{slug}.md`
 - [ ] Quality checks passed
 - [ ] User approved final result

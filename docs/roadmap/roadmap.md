@@ -27,7 +27,18 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v4.5.0 — Add ux-flowchart-generate skill
+**Latest:** v4.5.1 — Standardize backend + frontend skill output paths
+
+### v4.5.1 — Standardize backend + frontend skill output paths
+- Aligned all 7 backend/frontend skills to `{role}/{domain}/{id}-{slug}/{id}-{slug}.md` convention (`387a084`)
+- Removed redundant domain names from filenames (e.g., `{id}-data-model-{slug}.md` → `{id}-{slug}.md`)
+- Fixed stale `dev-fe-*/dev-be-*` skill name references across skills, docs, and templates
+- Added bootstrap migration for existing user outputs (4 migration blocks)
+- Fixed missing skill categories in Docusaurus sidebar (`d489f60`)
+- Refreshed website landing page for v4.5.0 (`a1400aa`)
+- Aligned specification docs to `{id}-{slug}.md` convention (`c86c877`)
+- Corrected skill count 32→31 in manifests and website, added missing commands to roadmap quick reference (`359f317`, `1851802`)
+- Synced `docs/skills/**/README.md` indexes with actual skills (`202a581`)
 
 ### v4.5.0 — Add ux-flowchart-generate skill
 - Added `ux-flowchart-generate` skill — generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence maps, confidence scoring, and unknowns lists (`df64dab`)
@@ -167,6 +178,17 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
+### v4.5.1 — Standardize backend + frontend skill output paths (`387a084`)
+
+- [x] Standardize output paths to `{role}/{domain}/{id}-{slug}/` convention across all 7 backend/frontend skills (`387a084`)
+- [x] Remove redundant domain names from filenames (`387a084`)
+- [x] Fix stale `dev-fe-*/dev-be-*` references in skills and docs (`387a084`)
+- [x] Add bootstrap migration for existing user outputs (`387a084`)
+- [x] Fix Docusaurus sidebar missing skill categories (`d489f60`)
+- [x] Align specification docs (CLAUDE.md, skill-create, skill-update, roadmap tasks) to `{id}-{slug}.md` convention (`c86c877`)
+- [x] Fix skill count 32→31 in manifests and website, add missing commands to roadmap quick reference (`359f317`, `1851802`)
+- [x] Sync `docs/skills/**/README.md` indexes with actual skills; enhance docs-create/docs-update to auto-maintain README indexes (`202a581`)
+
 ### v4.4.0 — Add release-iterate-changelog skill (`e19911c`)
 
 - [x] `/jaan-to:release-iterate-changelog` — Generate changelog with user impact notes and support guidance (`e19911c`)
@@ -248,8 +270,10 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
 | `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
 | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |
+| `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase |
 | `/jaan-to:qa-test-cases` | Generate test cases from PRDs |
 | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
+| `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
 | `/jaan-to:skill-create` | Create new skill with wizard |
 | `/jaan-to:skill-update` | Update existing skill |
 | `/jaan-to:docs-create` | Create documentation with templates |

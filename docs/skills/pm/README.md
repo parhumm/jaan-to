@@ -16,6 +16,7 @@ slug: /skills/pm
 |---------|-------------|
 | [/jaan-to:pm-prd-write](prd-write.md) | Generate PRD from initiative |
 | [/jaan-to:pm-research-about](research-about.md) | Deep research or add to index |
+| [/jaan-to:pm-story-write](story-write.md) | Generate user stories with Given/When/Then AC |
 
 ---
 
@@ -41,5 +42,5 @@ PM skills generate product outputs:
 ## Output Location
 
 ```
-jaan-to/outputs/pm/{slug}/prd.md
+jaan-to/outputs/pm/{domain}/{id}-{slug}/{id}-{slug}.md
 ```

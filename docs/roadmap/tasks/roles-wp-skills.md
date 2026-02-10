@@ -24,7 +24,7 @@ Skills within each role are **sorted by workflow dependency order** (topological
 **All 25 skills MUST use v3.0.0 patterns when implemented:**
 
 ### Paths (Environment Variables)
-- **Outputs**: `$JAAN_OUTPUTS_DIR/wp/{role}/{domain}/{slug}/`
+- **Outputs**: `$JAAN_OUTPUTS_DIR/wp/{role}/{domain}/{id}-{slug}/`
 - **Templates**: `$JAAN_TEMPLATES_DIR/{skill-name}.template.md`
 - **Learning**: `$JAAN_LEARN_DIR/{skill-name}.learn.md`
 - **Context**: `$JAAN_CONTEXT_DIR/*.md`
