@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Bootstrap migration for existing outputs** — Added 4 migration blocks to `bootstrap.sh`: `dev/contract/` → `backend/api-contract/`, backend/frontend numbered folder splitting by content pattern, and `frontend/components/` → `frontend/design/`. Existing user outputs auto-migrate on next session start (`387a084`)
 - **Docusaurus sidebar missing skill categories** — Wired backend, frontend, release, and wp skill categories into sidebar config (`d489f60`)
 - **Aligned specification docs to `{id}-{slug}.md` convention** — Updated CLAUDE.md, skill-create, skill-update specs, and all roadmap task output paths (dev, backend, wp-*) to use `{id}-{slug}.md` instead of `{id}-{report-type}-{slug}.md`. Fixed stale `dev-fe-state-machine` refs. Updated config seed to v4.5.1 (`c86c877`)
-- **Corrected plugin skill count** — Fixed 32→31 in plugin.json and marketplace.json descriptions; added `ux-flowchart-generate` and `release-iterate-changelog` to roadmap quick reference commands table (`359f317`)
+- **Corrected plugin skill count** — Fixed 32→31 in plugin.json, marketplace.json, and website landing page; added `ux-flowchart-generate` and `release-iterate-changelog` to roadmap quick reference commands table (`359f317`, `1851802`)
 
 ### Changed
 - **Website landing page** — Refreshed for v4.5.0 release (`a1400aa`)
