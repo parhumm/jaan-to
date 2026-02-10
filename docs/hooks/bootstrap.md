@@ -22,6 +22,21 @@ related: [README.md, ../config/context-system.md]
 
 ---
 
+## Per-Project Opt-In
+
+Bootstrap checks if the project has been initialized before running. If neither `jaan-to/` nor `.jaan-to/` (legacy) directory exists, bootstrap exits early:
+
+```json
+{
+  "status": "not_initialized",
+  "message": "Run /jaan-to:jaan-init to activate jaan-to for this project"
+}
+```
+
+To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, bootstrap runs normally on every session start.
+
+---
+
 ## What It Does
 
 1. **Loads config system** — Sources `scripts/lib/config-loader.sh` to resolve customizable paths for templates, learn, context, and outputs. Falls back to defaults if missing.

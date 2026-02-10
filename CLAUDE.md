@@ -19,6 +19,10 @@
 
 This is a Claude Code Plugin. All paths below are **relative to the plugin root** unless marked as `(project)`.
 
+### Per-Project Activation
+jaan-to is opt-in per project. Run `/jaan-to:jaan-init` to activate for a project.
+Projects without a `jaan-to/` directory are not affected by the plugin.
+
 ## File Locations
 
 | Component | Location | Format | Customizable |

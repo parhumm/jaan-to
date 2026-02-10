@@ -8,6 +8,18 @@ set -euo pipefail
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-.}"
 PLUGIN_DIR="${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}"
 
+# Opt-in: skip if project not initialized (jaan-to/ doesn't exist)
+# Existing projects with jaan-to/ continue normally
+if [ ! -d "$PROJECT_DIR/jaan-to" ] && [ ! -d "$PROJECT_DIR/.jaan-to" ]; then
+  cat <<RESULT
+{
+  "status": "not_initialized",
+  "message": "Run /jaan-to:jaan-init to activate jaan-to for this project"
+}
+RESULT
+  exit 0
+fi
+
 # Load configuration system
 if [ -f "${PLUGIN_DIR}/scripts/lib/config-loader.sh" ]; then
   source "${PLUGIN_DIR}/scripts/lib/config-loader.sh"

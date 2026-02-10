@@ -5,6 +5,12 @@
 set -euo pipefail
 
 PROJECT_DIR="${CLAUDE_PROJECT_DIR:-.}"
+
+# Skip if project not initialized
+if [ ! -d "$PROJECT_DIR/jaan-to" ]; then
+  exit 0
+fi
+
 METRICS_DIR="$PROJECT_DIR/jaan-to/metrics"
 
 # Create metrics directory if it doesn't exist

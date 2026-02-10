@@ -19,6 +19,18 @@ claude
 
 ---
 
+## Activate for Your Project
+
+jaan-to is opt-in per project. Run this once in each project you want to use it:
+
+```
+/jaan-to:jaan-init
+```
+
+This creates the `jaan-to/` directory with config, context, templates, outputs, and learning subdirectories. Projects without `jaan-to/` are not affected by the plugin.
+
+---
+
 ## Step 1: Run a Skill
 
 Type this command:
