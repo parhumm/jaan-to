@@ -6,7 +6,7 @@ The user wants a new jaan-to skill that orchestrates full-lifecycle app developm
 
 This is the **first "action skill"** in jaan-to — it writes source code to the project itself (not to `jaan-to/outputs/`), runs tests, commits, and pushes.
 
-**Research conducted**: 100+ sources across 7 agents covering SDLC, CI/CD, Git workflows, AI-assisted dev, deployment strategies, feature flags, incident management, security, metrics (DORA/SPACE), code review, and collaboration patterns.
+**Research conducted**: 100+ sources across 7 agents covering SDLC, CI/CD, Git workflows, AI-assisted dev, deployment strategies, feature flags, incident management, security, metrics (DORA/SPACE), code review, and collaboration patterns. Full findings documented in [`jaan-to/outputs/research/68-dev-fullcycle-app-development-workflow.md`](../../jaan-to/outputs/research/68-dev-fullcycle-app-development-workflow.md).
 
 ---
 
@@ -111,34 +111,39 @@ Add after `frontend-scaffold`:
 
 ---
 
-## Also Create: Research Document
+## Research Document (completed)
 
-### 5. `jaan-to/outputs/research/68-dev-fullcycle-app-development-workflow.md`
+### 5. [`jaan-to/outputs/research/68-dev-fullcycle-app-development-workflow.md`](../../jaan-to/outputs/research/68-dev-fullcycle-app-development-workflow.md)
 
-Research document with all findings from 100+ sources across:
-- SDLC fundamentals & 2025/2026 evolution
-- CI/CD pipeline best practices (shift-left, progressive delivery)
-- Git workflow standards (trunk-based dev vs feature branching)
-- AI-assisted development patterns (AWS AI-DLC, pair programmer model)
-- Feature flags & progressive delivery lifecycle
-- Incident management & blameless postmortems (Google SRE)
-- DevSecOps & security scanning (SAST/DAST pipeline placement)
-- Developer experience & DORA/SPACE metrics
-- Deployment strategies (blue-green, canary, rolling)
-- Code review standards & automation tools
-- Conventional commits & changelog automation
-- Dev environment standardization (dev containers, twelve-factor parity)
-- Database migration strategies (Flyway, Liquibase, Alembic)
-- Technical debt management (Kaplan-Moss framework)
-- Code ownership models (CODEOWNERS patterns)
+Research document with all findings from 100+ sources across 17 sections:
 
-Update `jaan-to/outputs/research/README.md` index.
+| # | Section | Key Topics |
+|---|---------|------------|
+| 1 | SDLC Fundamentals | Lifecycle phases, AI-assisted dev, shift-left, twelve-factor parity |
+| 2 | CI/CD Pipelines | Quality gates, test/package-manager/linter detection tables (Node/Python/Go/Rust/PHP) |
+| 3 | Git Workflows | Trunk-based dev, feature branching, conventional commits spec, branch protection |
+| 4 | AI-Assisted Dev | Pair programmer model, codebase exploration first, baseline test runs |
+| 5 | Feature Flags | Flag lifecycle, progressive rollout (3 phases), AI-powered intelligence (2026) |
+| 6 | Incident Management | Blameless postmortems (Google SRE), triggers, structure, action item quality |
+| 7 | DevSecOps | SAST/DAST/SCA pipeline placement, shift-left security, compliance trends |
+| 8 | DORA/SPACE Metrics | Four DORA metrics + benchmarks, five SPACE dimensions, anti-patterns |
+| 9 | Deployment Strategies | Blue-green, canary, rolling, feature flags comparison, git-based rollback |
+| 10 | Code Review | PR best practices, automation tools, ownership models, CODEOWNERS |
+| 11 | Changelog Automation | Conventional commits → semantic versioning → changelog → release pipeline |
+| 12 | Dev Environment | Dev containers, monorepo vs polyrepo (2026 AI advantage), env parity |
+| 13 | Database Migrations | Flyway vs Liquibase vs Alembic, backwards compatibility strategies |
+| 14 | Technical Debt | Kaplan-Moss framework (10-20% budget), TDR metrics, measurement tools |
+| 15 | Observability | Monitoring vs observability, SLO/SLI/SLA framework, RED/USE methods |
+| 16 | Team Collaboration | Async communication (Shopify model), ADRs, Definition of Done |
+| 17 | Versioning | SemVer vs CalVer, API backwards compatibility, deprecation patterns |
+
+README index updated: `jaan-to/outputs/research/README.md`
 
 ---
 
 ## Implementation Steps
 
-1. Write research document `68-dev-fullcycle-app-development-workflow.md` + update README index
+1. ~~Write research document `68-dev-fullcycle-app-development-workflow.md` + update README index~~ **Done**
 2. Create directory `skills/dev-app-develop/`
 3. Write `skills/dev-app-develop/SKILL.md` — full skill with all phases, research-informed
 4. Write `skills/dev-app-develop/LEARN.md` — seeded with research lessons
