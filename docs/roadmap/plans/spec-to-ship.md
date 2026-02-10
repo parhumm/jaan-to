@@ -23,29 +23,6 @@ The jaan-to plugin excels at specification generation but produces 0% production
 
 ---
 
-## Pre-Creation Research
-
-Run `/jaan-to:pm-research-about` for each skill to gather development workflow standards, methods, and best practices. All 6 research tasks run as **parallel dedicated agents** (Auto mode, Deep/100 unique sources each).
-
-| # | Skill | Research Topic | Output File |
-|---|-------|---------------|-------------|
-| R1 | `dev-project-assemble` | Scaffold-to-project assembly automation: monorepo patterns (Turborepo, pnpm workspaces), entry point generation, provider wiring, config generation, bundled file splitting, .env management, bootstrapping workflows (Node.js/TypeScript + Fastify + Next.js) | [`69-dev-scaffold-project-assembly-automation.md`](../../../jaan-to/outputs/research/69-dev-scaffold-project-assembly-automation.md) |
-| R2 | `backend-service-implement` | Spec-to-code service implementation: ORM query generation (Prisma, Eloquent, GORM), business logic derivation from API specs, RFC 9457 error handling, validation beyond schema, pagination (cursor/offset), JWT lifecycle (jose), transactions, idempotency, service layer architecture | [`70-dev-backend-service-implementation-generation.md`](../../../jaan-to/outputs/research/70-dev-backend-service-implementation-generation.md) |
-| R3 | `qa-test-generate` | BDD/Gherkin to runnable test code: Given/When/Then to Vitest/Playwright conversion, test data factories (Fishery, zod-mock), MSW mock handlers from OpenAPI, tag-based routing (@smoke→unit, @e2e→Playwright), coverage strategies, CI-friendly execution | [`71-qa-bdd-gherkin-test-code-generation.md`](../../../jaan-to/outputs/research/71-qa-bdd-gherkin-test-code-generation.md) |
-| R4 | `backend-scaffold` (security) | Secure backend defaults: JWT verification (jose vs base64), httpOnly cookies, CSRF (@fastify/csrf-protection), rate limiting (@fastify/rate-limit), CSP headers, CORS, input sanitization, OWASP Top 10 mitigation in scaffolds | [`72-dev-secure-backend-scaffold-hardening.md`](../../../jaan-to/outputs/research/72-dev-secure-backend-scaffold-hardening.md) |
-| R5 | `sec-audit-remediate` | SARIF remediation automation: SARIF 2.1.0 parsing, finding-to-fix mapping, CWE-to-remediation mapping, automated fixes by category (auth, injection, XSS, SSRF, crypto, config), regression test generation, CI security gates (CodeQL, Semgrep, Snyk) | [`73-dev-sarif-security-remediation-automation.md`](../../../jaan-to/outputs/research/73-dev-sarif-security-remediation-automation.md) |
-| R6 | `devops-infra-scaffold` | CI/CD scaffold generation: GitHub Actions workflows (matrix, caching, reusable), multi-stage Docker builds, docker-compose, .env management, deployment configs (Vercel, Railway, Fly.io, AWS ECS), database migrations in CI, security scanning (Trivy, Snyk) | [`74-dev-cicd-infra-scaffold-generation.md`](../../../jaan-to/outputs/research/74-dev-cicd-infra-scaffold-generation.md) |
-
-**Cross-references with existing research:**
-- R1 builds on `63-dev-scaffolds.md` (individual scaffold patterns → assembly layer)
-- R2 builds on `59-backend-api-contract.md` + `60-backend-data-model.md` + `52-backend-task-breakdown.md`
-- R3 builds on `50-qa-test-cases.md` (BDD generation methodology → code generation)
-- R4 fills the security gap in `63-dev-scaffolds.md`
-- R5 builds on `53-dev-pr-review.md` + `61-detect-pack.md` (SARIF output → remediation)
-- R6 is net new (no existing infrastructure research)
-
----
-
 ## 1. `/jaan-to:dev-project-assemble` (L-02 — P0)
 
 > Wire scaffold outputs into a runnable project with proper directory tree, configs, and entry points.
@@ -101,6 +78,8 @@ project-root/
 ├── package.json                           # Root workspace config
 └── .gitignore
 ```
+
+Also writes an assembly log to `$JAAN_OUTPUTS_DIR/dev/project-assemble/{id}-{slug}/{id}-{slug}.md`.
 
 ### Phase 1 Workflow
 1. Read all scaffold outputs (backend + frontend) — parse bundled files
@@ -475,13 +454,38 @@ Ship Phase (NEW):
 
 ---
 
+## Pre-Creation Research (Step 0)
+
+Run `/jaan-to:pm-research-about` for each skill to gather development workflow standards, methods, and best practices. All 6 research tasks run as **parallel dedicated agents** (Auto mode, Deep/100 unique sources each).
+
+| # | Skill | Research Topic | Output File |
+|---|-------|---------------|-------------|
+| R1 | `dev-project-assemble` | Scaffold-to-project assembly automation: monorepo patterns (Turborepo, pnpm workspaces), entry point generation, provider wiring, config generation, bundled file splitting, .env management, bootstrapping workflows (Node.js/TypeScript + Fastify + Next.js) | [`69-dev-scaffold-project-assembly-automation.md`](../../research/69-dev-scaffold-project-assembly-automation.md) |
+| R2 | `backend-service-implement` | Spec-to-code service implementation: ORM query generation (Prisma, Eloquent, GORM), business logic derivation from API specs, RFC 9457 error handling, validation beyond schema, pagination (cursor/offset), JWT lifecycle (jose), transactions, idempotency, service layer architecture | [`70-dev-backend-service-implementation-generation.md`](../../research/70-dev-backend-service-implementation-generation.md) |
+| R3 | `qa-test-generate` | BDD/Gherkin to runnable test code: Given/When/Then to Vitest/Playwright conversion, test data factories (Fishery, zod-mock), MSW mock handlers from OpenAPI, tag-based routing (@smoke→unit, @e2e→Playwright), coverage strategies, CI-friendly execution | [`71-qa-bdd-gherkin-test-code-generation.md`](../../research/71-qa-bdd-gherkin-test-code-generation.md) |
+| R4 | `backend-scaffold` (security) | Secure backend defaults: JWT verification (jose vs base64), httpOnly cookies, CSRF (@fastify/csrf-protection), rate limiting (@fastify/rate-limit), CSP headers, CORS, input sanitization, OWASP Top 10 mitigation in scaffolds | [`72-dev-secure-backend-scaffold-hardening.md`](../../research/72-dev-secure-backend-scaffold-hardening.md) |
+| R5 | `sec-audit-remediate` | SARIF remediation automation: SARIF 2.1.0 parsing, finding-to-fix mapping, CWE-to-remediation mapping, automated fixes by category (auth, injection, XSS, SSRF, crypto, config), regression test generation, CI security gates (CodeQL, Semgrep, Snyk) | [`73-dev-sarif-security-remediation-automation.md`](../../research/73-dev-sarif-security-remediation-automation.md) |
+| R6 | `devops-infra-scaffold` | CI/CD scaffold generation: GitHub Actions workflows (matrix, caching, reusable), multi-stage Docker builds, docker-compose, .env management, deployment configs (Vercel, Railway, Fly.io, AWS ECS), database migrations in CI, security scanning (Trivy, Snyk) | [`74-dev-cicd-infra-scaffold-generation.md`](../../research/74-dev-cicd-infra-scaffold-generation.md) |
+
+**Cross-references with existing research:**
+- R1 builds on `63-dev-scaffolds.md` (individual scaffold patterns → assembly layer)
+- R2 builds on `59-backend-api-contract.md` + `60-backend-data-model.md` + `52-backend-task-breakdown.md`
+- R3 builds on `50-qa-test-cases.md` (BDD generation methodology → code generation)
+- R4 fills the security gap in `63-dev-scaffolds.md`
+- R5 builds on `53-dev-pr-review.md` + `61-detect-pack.md` (SARIF output → remediation)
+- R6 is net new (no existing infrastructure research)
+
+---
+
 ## Execution Plan
 
-### Phase A: Research (all 6 in parallel)
-Run `/jaan-to:pm-research-about` for each skill — 6 parallel agents, Auto mode, Deep (100 unique sources each).
+### Phase A: Research (all 6 in parallel) ✅
+Run `/jaan-to:pm-research-about` for each skill — 6 parallel agents, Auto mode, Deep (100 unique sources each). Complete — outputs at `docs/research/69-74`.
 
 ### Phase B: Skill Creation
 Each new skill is created by invoking `/jaan-to:skill-create` as a **separate dedicated agent**. Each agent receives its corresponding research output as context. The scaffold improvement (4a) is a direct edit to the existing SKILL.md.
+
+`/jaan-to:skill-create` produces: `SKILL.md` + `LEARN.md` (research-seeded) + `template.md` (if applicable). Skills that write code (`dev-project-assemble`, `backend-service-implement`) do NOT need `template.md`.
 
 | Step | Action | Method | Parallelizable |
 |------|--------|--------|----------------|
@@ -498,11 +502,94 @@ Each new skill is created by invoking `/jaan-to:skill-create` as a **separate de
 - **Batch 2:** Steps 4 + 5 (test generate + security remediate)
 - **Batch 3:** Step 6 (infra scaffold)
 
+### Phase C: Post-Creation (per skill, after each batch)
+
+After each skill is created via `/jaan-to:skill-create`, run these steps:
+
+| # | Step | Command/Action |
+|---|------|---------------|
+| 1 | Compliance check | `/jaan-to:skill-update {skill-name}` — v3.0.0 frontmatter + structure compliance |
+| 2 | Issue capture | If any issues found during creation or compliance check, fix them, then run `/jaan-to:learn-add` to record the lesson |
+| 3 | Config catalog | Edit `scripts/seeds/config.md` — add skill entry to catalog table |
+| 4 | Documentation | `/jaan-to:docs-create {skill-name}` — generate skill docs page |
+| 5 | Roadmap update | `/jaan-to:roadmap-add` to add skill to roadmap (or `/jaan-to:roadmap-update` to sync existing entries) |
+| 6 | Changelog | `/jaan-to:release-iterate-changelog` — add entries for new skills |
+| 7 | Commit + PR | Commit all files, create PR to `dev` |
+
+**Continuous learning rule:** At any point during Phase B or C, if an issue is discovered and fixed (frontmatter error, missing section, wrong path, etc.), immediately run `/jaan-to:learn-add` to capture the lesson before moving on.
+
+### Batch Execution: Step-by-Step Pipeline
+
+Run all 6 skills sequentially. Each skill completes its full lifecycle (Phase B create + Phase C post-creation) before the next one starts. This ensures lessons learned from earlier skills feed into later ones.
+
+**Execution order:**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  SKILL 1: dev-project-assemble                              │
+│  B1. /jaan-to:skill-create dev-project-assemble (agent)     │
+│  C1. skill-update → learn-add → config → docs-create        │
+│      → roadmap-add → release-iterate-changelog → commit      │
+├─────────────────────────────────────────────────────────────┤
+│  SKILL 2: backend-scaffold improvement                      │
+│  B2. Direct edit to skills/backend-scaffold/SKILL.md        │
+│  C2. skill-update → learn-add → docs-create                 │
+│      → roadmap-update → release-iterate-changelog → commit   │
+├─────────────────────────────────────────────────────────────┤
+│  SKILL 3: backend-service-implement                         │
+│  B3. /jaan-to:skill-create backend-service-implement (agent)│
+│  C3. skill-update → learn-add → config → docs-create        │
+│      → roadmap-add → release-iterate-changelog → commit      │
+├─────────────────────────────────────────────────────────────┤
+│  SKILL 4: qa-test-generate                                  │
+│  B4. /jaan-to:skill-create qa-test-generate (agent)         │
+│  C4. skill-update → learn-add → config → docs-create        │
+│      → roadmap-add → release-iterate-changelog → commit      │
+├─────────────────────────────────────────────────────────────┤
+│  SKILL 5: sec-audit-remediate                               │
+│  B5. /jaan-to:skill-create sec-audit-remediate (agent)      │
+│  C5. skill-update → learn-add → config → docs-create        │
+│      → roadmap-add → release-iterate-changelog → commit      │
+├─────────────────────────────────────────────────────────────┤
+│  SKILL 6: devops-infra-scaffold                             │
+│  B6. /jaan-to:skill-create devops-infra-scaffold (agent)    │
+│  C6. skill-update → learn-add → config → docs-create        │
+│      → roadmap-add → release-iterate-changelog → commit      │
+└─────────────────────────────────────────────────────────────┘
+```
+
+**Per-skill lifecycle (B + C combined):**
+
+```
+For each skill in [1..6]:
+  1. Create skill          → /jaan-to:skill-create {name} (or direct edit for #2)
+  2. Compliance check      → /jaan-to:skill-update {name}
+  3. Fix issues + learn    → fix → /jaan-to:learn-add (if issues found)
+  4. Config catalog        → Edit scripts/seeds/config.md (new skills only)
+  5. Documentation         → /jaan-to:docs-create {name}
+  6. Roadmap               → /jaan-to:roadmap-add (or /jaan-to:roadmap-update)
+  7. Changelog             → /jaan-to:release-iterate-changelog
+  8. Commit                → git add + commit to dev branch
+  → NEXT SKILL
+```
+
+**Gate rule:** Do NOT start skill N+1 until skill N's commit (step 8) succeeds. This guarantees each skill builds on a clean, committed state.
+
 ---
 
 ## Verification
 
-For each skill, verify on any project that has completed the upstream skill pipeline:
+### Structural (per skill — after Phase C step 1)
+
+1. Frontmatter: `name` matches directory, `description` < 120 chars, no `: ` escaping issues, no `model:` field
+2. Required sections: Context Files, Input, Pre-Execution, HARD STOP, Definition of Done
+3. All paths use `$JAAN_*` env vars (no hardcoded project paths)
+4. No hardcoded credentials, IPs, or tokens
+5. `/jaan-to:learn-add` referenced (not deprecated `/update-lessons-learned`)
+6. LEARN.md exists with seeded lessons (Better Questions, Edge Cases, Workflow, Common Mistakes)
+7. `scripts/seeds/config.md` has catalog entry for the skill
+
+### Functional (per skill — on a project with upstream pipeline complete)
 
 1. **dev-project-assemble**: Run on scaffold outputs → verify `npm run dev` boots both backend and frontend
 2. **backend-service-implement**: Run on stubs → verify all TODO comments replaced with real ORM queries and business logic
@@ -514,6 +601,8 @@ For each skill, verify on any project that has completed the upstream skill pipe
 ---
 
 ## Roadmap Integration
+
+Done via `/jaan-to:roadmap-add` or `/jaan-to:roadmap-update` in Phase C step 5. Expected changes:
 
 - Add `dev-project-assemble` to `docs/roadmap/tasks/role-skills/dev.md` in the DEV skills chain
 - Add `backend-service-implement` to `docs/roadmap/tasks/role-skills/backend.md` after `backend-scaffold`
@@ -533,5 +622,6 @@ For each skill, verify on any project that has completed the upstream skill pipe
 | `skills/detect-dev/SKILL.md` | Reference for sec-audit-remediate SARIF input |
 | `skills/frontend-scaffold/SKILL.md` | Reference for dev-project-assemble bundled output parsing |
 | `docs/extending/create-skill.md` | Skill creation spec (used by /skill-create) |
+| `scripts/seeds/config.md` | Skill catalog — add entry per new skill (Phase C step 2) |
 | `scripts/lib/id-generator.sh` | ID generation for output folders |
 | `scripts/lib/index-updater.sh` | Index updates for output folders |
