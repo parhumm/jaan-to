@@ -16,6 +16,7 @@ context: fork
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if populated by dev-stack-detect, used as starting input)
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` - Evidence format, scoring tables, scan patterns
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/dev/` — flat files, overwritten each run (no IDs).
 
@@ -39,35 +40,7 @@ Override field for this skill: `language_detect-dev`
 
 ### Evidence Format (SARIF-compatible)
 
-Every finding MUST include structured evidence blocks:
-
-```yaml
-evidence:
-  id: E-DEV-001                # Single-platform format
-  id: E-DEV-WEB-001            # Multi-platform format (platform prefix)
-  type: code-location          # code-location | config-pattern | dependency | metric | absence
-  confidence: 0.95             # 0.0-1.0
-  location:
-    uri: "src/auth/login.py"
-    startLine: 42
-    endLine: 58
-    snippet: |
-      query = "SELECT * FROM users WHERE id=" + user_id
-  method: manifest-analysis    # manifest-analysis | static-analysis | manual-review | pattern-match | heuristic
-```
-
-**Evidence ID Format**:
-
-```python
-# Generation logic:
-if current_platform == 'all' or current_platform is None:  # Single-platform
-  evidence_id = f"E-DEV-{sequence:03d}"                     # E-DEV-001
-else:  # Multi-platform
-  platform_upper = current_platform.upper()
-  evidence_id = f"E-DEV-{platform_upper}-{sequence:03d}"    # E-DEV-WEB-001, E-DEV-BACKEND-023
-```
-
-Evidence IDs use namespace `E-DEV-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Evidence Format" for YAML template, ID generation logic, and namespace rules.
 
 ### Confidence Levels (4-level)
 
@@ -81,53 +54,12 @@ Evidence IDs use namespace `E-DEV-*` to prevent collisions in detect-pack aggreg
 **Downgrade one level** if: evidence from outdated code, finding in dead code, tool has high false-positive rate.
 **Upgrade one level** if: multiple tools agree, maintainer confirmed, systematic pattern detected.
 
-### Frontmatter Schema (Universal)
+### Frontmatter Schema, Document Structure & Anti-patterns
 
-Every output file MUST include this YAML frontmatter:
-
-```yaml
----
-title: "{document title}"
-id: "{AUDIT-YYYY-NNN}"
-version: "1.0.0"
-status: draft
-date: {YYYY-MM-DD}
-target:
-  name: "{repo-name}"
-  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'backend'/etc for multi-platform
-  commit: "{git HEAD hash}"
-  branch: "{current branch}"
-tool:
-  name: "detect-dev"
-  version: "1.0.0"
-  rules_version: "2024.1"
-confidence_scheme: "four-level"
-findings_summary:
-  critical: 0
-  high: 0
-  medium: 0
-  low: 0
-  informational: 0
-overall_score: 0.0             # 0-10, OpenSSF-style
-lifecycle_phase: post-build    # CycloneDX vocabulary
----
-```
-
-### Document Structure (Diataxis)
-
-Each output file follows:
-1. **Executive Summary** - BLUF: what was found and why it matters
-2. **Scope and Methodology** - What was analyzed, tools used, exclusions
-3. **Findings** - Each as H3 with ID/severity/confidence/description/evidence/impact/remediation
-4. **Recommendations** - Prioritized remediation roadmap
-5. **Appendices** - Methodology details, confidence scale reference
-
-### Prohibited Anti-patterns
-
-- Never present speculation as evidence. Use hedging for confidence < Firm.
-- Never omit confidence levels. Every finding MUST include confidence.
-- Never inflate severity. Reserve Critical for verified, exploitable, high-impact.
-- Never make scope-exceeding claims. Distinguish "findings" from "observations".
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` for:
+> - "Frontmatter Schema (Universal)" -- required YAML frontmatter for every output file
+> - "Document Structure (Diataxis)" -- 5-section output structure (Executive Summary through Appendices)
+> - "Prohibited Anti-patterns" -- constraints on speculation, confidence, severity, and scope
 
 ---
 
@@ -207,30 +139,7 @@ Match top-level directories against these patterns:
 
 ### Disambiguation Rules
 
-**Priority order** (highest to lowest):
-
-1. **Explicit markers**: Check `package.json` `workspaces` field or `nx.json` app names
-2. **Exact folder match**: `web/`, `backend/`, `mobile/` (case-insensitive exact match)
-3. **Pattern match**: `*frontend*`, `*server*`, `*app*` in folder name
-4. **File pattern fallback**: If folder contains `.jsx/.tsx` → web, `Dockerfile` → backend, `.kt/.swift` → mobile
-
-**Conflict resolution**:
-
-- **Multiple patterns match** (e.g., `client-server/`): Prompt user to select or split
-- **Subfolder structure** (e.g., `apps/web/`): Use subfolder name as platform, ignore parent
-- **Shared code** (`packages/`, `libs/`): Analyze once without platform suffix (creates `stack.md` not `stack-shared.md`), then link findings via `related_evidence` in per-platform outputs
-
-**Edge cases**:
-
-- **Microservices** (`services/auth/`, `services/payment/`): All under single 'backend' platform (not separate platforms)
-- **Mobile subfolders** (`app/ios/`, `app/android/`): Two platforms (ios, android), not one "app" platform
-- **Monorepo without markers** (Bazel WORKSPACE, custom build system): Fall back to manual platform selection via interactive prompt
-- **Turborepo/Nx patterns** (`apps/*/`, `packages/*/`): Use glob to list subdirectories, classify each independently
-
-**Validation**:
-
-After auto-detection, always show: "Detected platforms: {list}. Correct? [y/n/select]"
-- If 'n' or 'select', prompt: "Enter platform names (comma-separated): "
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Platform Disambiguation Rules" for priority order, conflict resolution, edge cases, and validation prompt.
 
 ### Analysis Loop
 
@@ -263,52 +172,9 @@ Use **Glob** to find manifest files, then **Read** each one:
 - Detect testing: jest, vitest, mocha, cypress, playwright
 - Detect TypeScript from: `typescript` in deps OR `tsconfig.json` exists
 
-### Python
-- Glob: `**/pyproject.toml`, `**/requirements.txt`, `**/Pipfile`, `**/setup.py`, `**/setup.cfg`
-- Extract: dependencies, dev-dependencies
-- Detect frameworks: fastapi, django, flask, starlette, litestar, tornado
-- Detect ORM: sqlalchemy, django-orm, tortoise-orm, peewee
-- Detect testing: pytest, unittest, nose2, tox
-- Detect version from: `python_requires` or `[tool.poetry.dependencies].python`
+### Other Languages (Python, Go, Rust, Ruby, Java/Kotlin, PHP, C#/.NET, Dart/Flutter, Elixir, Swift)
 
-### Go
-- Glob: `**/go.mod`
-- Extract: module name, go version, require statements
-- Detect frameworks: gin, echo, fiber, chi, gorilla/mux
-
-### Rust
-- Glob: `**/Cargo.toml`
-- Extract: package name, edition, dependencies
-- Detect frameworks: actix-web, axum, rocket, warp, tokio
-
-### Ruby
-- Glob: `**/Gemfile`
-- Extract: gems
-- Detect frameworks: rails, sinatra, hanami
-
-### Java / Kotlin
-- Glob: `**/pom.xml`, `**/build.gradle`, `**/build.gradle.kts`
-- Detect: spring-boot, quarkus, micronaut, ktor
-
-### PHP
-- Glob: `**/composer.json`
-- Detect: laravel, symfony, slim
-
-### C# / .NET
-- Glob: `**/*.csproj`, `**/*.sln`
-- Detect: aspnet, blazor, maui
-
-### Dart / Flutter
-- Glob: `**/pubspec.yaml`
-- Detect: flutter
-
-### Elixir
-- Glob: `**/mix.exs`
-- Detect: phoenix
-
-### Swift
-- Glob: `**/Package.swift`
-- Detect: vapor, swiftui
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Language-Specific Scan Patterns" for glob patterns, framework detection, and extraction rules for all other languages.
 
 ## Step 3: Scan Docker & Databases (Layer 2 — 90-95% confidence)
 
@@ -438,19 +304,7 @@ Use **Glob** to map the directory structure:
 
 For each detection, assign a confidence score using the 4-level system:
 
-| Confidence | Source | Example |
-|-----------|--------|---------|
-| Confirmed (0.95-1.00) | Manifest file with explicit dependency | `"react": "^18.2.0"` in package.json |
-| Firm (0.80-0.94) | Docker image with version tag | `postgres:15` in docker-compose |
-| Firm (0.80-0.94) | CI workflow file | `.github/workflows/` exists |
-| Tentative (0.50-0.79) | Directory structure inference | `k8s/` directory exists |
-| Uncertain (0.20-0.49) | Grep mention in arbitrary files | "datadog" mentioned in a README |
-
-**Only include detections with confidence >= Uncertain (0.20) in findings.**
-
-Calculate overall_score (OpenSSF-style 0-10):
-`overall_score = 10 - (critical * 2.0 + high * 1.0 + medium * 0.4 + low * 0.1) / max(total_findings, 1)`
-Clamp result to 0-10 range.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Confidence Scoring Examples" for the confidence-source mapping table, inclusion threshold (>= Uncertain/0.20), and OpenSSF overall_score formula.
 
 ---
 
@@ -584,28 +438,30 @@ Each file MUST include:
 5. Recommendations
 6. Appendices (if applicable)
 
-## Step 11: Quality Check
+## Step 11: Quality Check & Definition of Done
 
 **If `run_depth == "light"`:**
 
-- [ ] Summary file has valid YAML frontmatter with `platform` field
-- [ ] Every finding has an evidence block with correct ID format
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/dev/summary{suffix}.md`
+- [ ] Valid YAML frontmatter with `platform` field and `overall_score`
+- [ ] Every finding has evidence block with correct ID format (E-DEV-NNN)
 - [ ] Confidence levels assigned to all findings
 - [ ] No speculation presented as evidence
-- [ ] Overall score calculated correctly
-- [ ] Score disclaimer included
+- [ ] Score disclaimer included (partial analysis note)
 - [ ] Output filename matches platform suffix convention
+- [ ] Detection summary shown to user; user approved output
 
 **If `run_depth == "full"`:**
 
-- [ ] All 9 files have valid YAML frontmatter with `platform` field
-- [ ] Every finding has an evidence block with correct ID format (E-DEV-NNN for single-platform, E-DEV-{PLATFORM}-NNN for multi-platform)
+- [ ] All 9 output files written to `$JAAN_OUTPUTS_DIR/detect/dev/`
+- [ ] Valid YAML frontmatter in every file with `platform` field
+- [ ] Every finding has evidence block with correct ID format (E-DEV-NNN or E-DEV-{PLATFORM}-NNN)
 - [ ] Confidence levels assigned to all findings
-- [ ] No speculation presented as evidence
-- [ ] No scope-exceeding claims
-- [ ] CI/CD security checks explicitly covered
-- [ ] Overall score calculated correctly
-- [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
+- [ ] No speculation presented as evidence; no scope-exceeding claims
+- [ ] CI/CD security explicitly checked (secrets, runner trust, permissions, pinning, provenance)
+- [ ] Overall score calculated (OpenSSF 0-10)
+- [ ] Output filenames match platform suffix convention
+- [ ] Detection summary shown to user; user approved output
 
 ---
 
@@ -615,29 +471,3 @@ Each file MUST include:
 
 If yes:
 - Run `/jaan-to:learn-add detect-dev "{feedback}"`
-
----
-
-## Definition of Done
-
-**If `run_depth == "light"`:**
-
-- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/dev/summary{suffix}.md`
-- [ ] Universal YAML frontmatter with `overall_score`
-- [ ] Layers 1-2 findings have evidence blocks with E-DEV-NNN IDs
-- [ ] Confidence scores assigned to all findings
-- [ ] Score disclaimer included (partial analysis note)
-- [ ] Detection summary shown to user before writing
-- [ ] User approved output
-
-**If `run_depth == "full"`:**
-
-- [ ] All 9 output files written to `$JAAN_OUTPUTS_DIR/detect/dev/`
-- [ ] Universal YAML frontmatter in every file
-- [ ] Every finding has evidence block with E-DEV-NNN ID
-- [ ] Confidence scores assigned to all findings
-- [ ] CI/CD security explicitly checked (secrets, runner trust, permissions, pinning, provenance)
-- [ ] Overall score calculated (OpenSSF 0-10)
-- [ ] Detection summary shown to user before writing
-- [ ] User approved output
-- [ ] Summary shown with any manual review suggestions
