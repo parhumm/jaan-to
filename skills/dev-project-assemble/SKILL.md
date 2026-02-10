@@ -1,0 +1,725 @@
+---
+name: dev-project-assemble
+description: Wire scaffold outputs into runnable project structure with configs and entry points.
+allowed-tools: Read, Glob, Grep, Write(src/**), Write(prisma/**), Write(package.json), Write(tsconfig.json), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.gitignore), Write($JAAN_OUTPUTS_DIR/dev/project-assemble/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+argument-hint: [backend-scaffold, frontend-scaffold] [target-dir]
+---
+
+# dev-project-assemble
+
+> Wire backend + frontend scaffold outputs into a runnable project with proper directory tree, configs, and entry points.
+
+## Context Files
+
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL -- determines framework, monorepo tool, package manager)
+  - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
+- `$JAAN_CONTEXT_DIR/config.md` - Project configuration
+- `$JAAN_TEMPLATES_DIR/jaan-to:dev-project-assemble.template.md` - Output template (assembly log)
+- `$JAAN_LEARN_DIR/jaan-to:dev-project-assemble.learn.md` - Past lessons (loaded in Pre-Execution)
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
+- `${CLAUDE_PLUGIN_ROOT}/docs/research/69-dev-scaffold-project-assembly-automation.md` - Research: monorepo patterns, entry points, provider wiring, config inheritance, .env validation
+
+## Input
+
+**Upstream Artifacts**: $ARGUMENTS
+
+Accepts 2-3 file paths or descriptions plus optional target directory:
+- **backend-scaffold** -- Path to backend scaffold output folder (from `/jaan-to:backend-scaffold` output: `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/`)
+- **frontend-scaffold** -- Path to frontend scaffold output folder (from `/jaan-to:frontend-scaffold` output: `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`)
+- **frontend-design** -- Path to HTML previews (from `/jaan-to:frontend-design` output, optional)
+- **target-dir** -- Target project directory (default: current working directory)
+- **Empty** -- Interactive wizard prompting for each
+
+---
+
+## Pre-Execution: Apply Past Lessons
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `dev-project-assemble`
+
+Also read context files if available:
+- `$JAAN_CONTEXT_DIR/tech.md` -- Know the tech stack for framework-specific assembly
+- `$JAAN_CONTEXT_DIR/config.md` -- Project configuration
+- `${CLAUDE_PLUGIN_ROOT}/docs/research/69-dev-scaffold-project-assembly-automation.md` -- Research reference for assembly patterns
+
+### Language Settings
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_dev-project-assemble`
+
+> **Language exception**: Generated code output (variable names, code blocks, schemas, SQL, API specs) is NOT affected by this setting and remains in the project's programming language.
+
+---
+
+# PHASE 1: Analysis (Read-Only)
+
+## Thinking Mode
+
+ultrathink
+
+Use extended reasoning for:
+- Analyzing scaffold outputs to determine file splitting strategy
+- Planning monorepo vs single-project structure
+- Mapping bundled scaffold files to individual project files
+- Detecting provider wiring order from dependencies
+- Planning config inheritance chains
+
+## Step 1: Validate & Parse Scaffold Inputs
+
+For each provided path:
+
+**backend-scaffold**: Read all files in the scaffold folder:
+- `{id}-{slug}.md` -- Main doc (setup guide, architecture)
+- `{id}-{slug}-routes.ts` -- Route handlers
+- `{id}-{slug}-services.ts` -- Service layer
+- `{id}-{slug}-schemas.ts` -- Validation schemas
+- `{id}-{slug}-middleware.ts` -- Auth + error handling
+- `{id}-{slug}-prisma.prisma` -- ORM data model
+- `{id}-{slug}-config.ts` -- Package.json + tsconfig content
+- `{id}-{slug}-readme.md` -- Setup instructions
+
+**frontend-scaffold**: Read all files in the scaffold folder:
+- `{id}-{slug}.md` -- Main doc (architecture, component map)
+- `{id}-{slug}-components.tsx` -- React components
+- `{id}-{slug}-hooks.ts` -- Typed API client hooks
+- `{id}-{slug}-types.ts` -- TypeScript interfaces
+- `{id}-{slug}-pages.tsx` -- Page layouts / routes
+- `{id}-{slug}-config.ts` -- Package.json + tsconfig + tailwind config
+- `{id}-{slug}-readme.md` -- Setup instructions
+
+**frontend-design** (optional): Read HTML preview files for visual reference.
+
+Report which inputs found vs missing:
+```
+INPUT SUMMARY
+-------------
+Sources Found:    {list}
+Sources Missing:  {list with fallback suggestions}
+Backend Files:    {count}
+Frontend Files:   {count}
+Design Files:     {count or "none"}
+Entities:         {extracted entity names from backend}
+Components:       {extracted component names from frontend}
+```
+
+## Step 2: Detect Tech Stack
+
+Read `$JAAN_CONTEXT_DIR/tech.md`:
+- Extract backend framework from `#current-stack` (default: Fastify v5 + Node.js)
+- Extract frontend framework from `#current-stack` (default: React v19 + Next.js v15)
+- Extract package manager (default: pnpm)
+- Extract monorepo tool preference (Turborepo / Nx / none)
+- Extract DB from `#current-stack` (default: PostgreSQL + Prisma)
+- Extract styling from `#current-stack` (default: TailwindCSS v4)
+- Extract patterns from `#patterns` (auth, error handling, state management)
+- If tech.md missing: ask framework/package manager via AskUserQuestion
+
+Determine primary stack from tech.md:
+
+| tech.md value | Backend | Frontend | Package Manager |
+|---------------|---------|----------|-----------------|
+| Node.js / TypeScript | Fastify v5+ | Next.js v15+ | pnpm |
+| PHP | Laravel 12 / Symfony 7 | Next.js v15+ (or Blade/Inertia) | composer + pnpm |
+| Go | Chi / stdlib | Next.js v15+ | go mod + pnpm |
+
+## Step 3: Clarify Project Structure
+
+AskUserQuestion:
+- Question: "How should the project be structured?"
+- Header: "Project Structure"
+- Options:
+  - "Monorepo (Turborepo + pnpm workspaces)" -- Recommended for full-stack TypeScript
+  - "Monorepo (Nx)" -- For teams needing generator ecosystem
+  - "Separate projects" -- Backend and frontend in separate directories
+  - "Single project (Next.js with API routes)" -- Frontend-first, backend collocated
+
+Based on selection, determine directory layout:
+
+**Monorepo (Turborepo):**
+```
+{project}/
+  apps/
+    web/          # Next.js frontend
+    api/          # Fastify backend
+  packages/
+    ui/           # Shared components (optional)
+    types/        # Shared TypeScript types
+    validators/   # Shared Zod schemas
+  tooling/
+    typescript/   # Shared tsconfig presets
+    eslint/       # Shared ESLint configs
+    tailwind/     # Shared Tailwind config
+  turbo.json
+  pnpm-workspace.yaml
+  package.json
+  .env.example
+  .gitignore
+```
+
+**Separate Projects:**
+```
+{project}/
+  backend/        # Fastify backend
+    src/
+    prisma/
+    package.json
+    tsconfig.json
+  frontend/       # Next.js frontend
+    src/
+    package.json
+    tsconfig.json
+    next.config.ts
+  .env.example
+  .gitignore
+```
+
+## Step 4: Plan File Splitting
+
+Map bundled scaffold files to individual project files:
+
+**Backend (from `{id}-{slug}-routes.ts`):**
+- Split per resource: `src/routes/{resource}/index.ts`
+- Extract schemas: `src/routes/{resource}/{resource}.schema.ts`
+- Extract services: `src/routes/{resource}/{resource}.service.ts`
+
+**Backend (from `{id}-{slug}-middleware.ts`):**
+- Auth plugin: `src/plugins/auth.ts`
+- Error handler: `src/plugins/error-handler.ts`
+- CORS config: `src/plugins/cors.ts`
+
+**Backend (from `{id}-{slug}-prisma.prisma`):**
+- Prisma schema: `prisma/schema.prisma`
+- Seed file: `prisma/seed.ts`
+
+**Backend entry points (GENERATED):**
+- `src/app.ts` -- Fastify app builder with plugin registration
+- `src/server.ts` -- Server startup with graceful shutdown
+- `src/env.ts` -- Environment variable validation with Zod
+
+**Frontend (from `{id}-{slug}-components.tsx`):**
+- Split per component: `src/components/{level}/{ComponentName}.tsx`
+- Atomic design levels: atoms, molecules, organisms
+
+**Frontend (from `{id}-{slug}-hooks.ts`):**
+- API hooks: `src/lib/api/hooks.ts`
+- Query client: `src/lib/api/query-client.ts`
+
+**Frontend (from `{id}-{slug}-types.ts`):**
+- Shared types: `src/types/api.ts` (or `packages/types/` in monorepo)
+
+**Frontend (from `{id}-{slug}-pages.tsx`):**
+- Split per page: `src/app/{route}/page.tsx`
+- Layout files: `src/app/{route}/layout.tsx`
+
+**Frontend entry points (GENERATED):**
+- `src/app/layout.tsx` -- Root layout (Server Component)
+- `src/app/providers.tsx` -- Client-side provider composition
+- `src/app/page.tsx` -- Home page
+- `src/app/global.css` -- Global styles with Tailwind imports
+- `src/env.ts` -- Environment variable validation
+
+**Config files (GENERATED):**
+- `package.json` -- Dependencies, scripts
+- `tsconfig.json` -- TypeScript config (extends shared base in monorepo)
+- `next.config.ts` -- Next.js configuration
+- `tailwind.config.ts` -- Tailwind config (or CSS-first `@theme` in v4)
+- `.env.example` -- All required environment variables documented
+- `.gitignore` -- Standard ignores
+
+Present file tree:
+```
+FILE SPLIT PLAN
+===============
+
+BACKEND ({count} files)
+-----------------------
+{numbered list with source -> target mapping}
+
+FRONTEND ({count} files)
+------------------------
+{numbered list with source -> target mapping}
+
+GENERATED ENTRY POINTS ({count} files)
+---------------------------------------
+{numbered list}
+
+CONFIG FILES ({count} files)
+----------------------------
+{numbered list}
+
+TOTAL: {count} files to write
+```
+
+## Step 5: Plan Provider Wiring
+
+Detect required providers from scaffold dependencies:
+
+**Frontend providers (ordered by dependency):**
+1. **Session/Auth** (outermost) -- if `next-auth` or auth hooks detected
+2. **Theme** -- if `next-themes` detected
+3. **Data layer** -- TanStack Query `QueryClientProvider` + optional tRPC
+4. **State stores** -- Zustand (no provider needed) / other
+
+**Backend plugins (ordered by registration):**
+1. **Infrastructure** -- CORS, compression, logging
+2. **Auth** -- JWT verification, session
+3. **Database** -- Prisma singleton
+4. **Routes** -- Autoload or manual registration
+
+Present wiring plan:
+```
+PROVIDER WIRING
+===============
+
+Frontend (providers.tsx):
+  1. {Provider} -- {reason}
+  2. {Provider} -- {reason}
+  ...
+
+Backend (app.ts plugin registration):
+  1. {Plugin} -- {reason}
+  2. {Plugin} -- {reason}
+  ...
+```
+
+---
+
+# HARD STOP -- Review Assembly Plan
+
+Use AskUserQuestion:
+- Question: "Review the assembly plan. Proceed with writing files to the project?"
+- Header: "Assemble Project"
+- Options:
+  - "Yes" -- Write all files to the project directory
+  - "No" -- Cancel
+  - "Edit" -- Let me revise the structure, file splitting, or wiring
+
+Present full summary:
+```
+ASSEMBLY PLAN SUMMARY
+=====================
+
+Project Structure:  {monorepo / separate / single}
+Target Directory:   {path}
+Package Manager:    {pnpm / npm / yarn}
+Backend Stack:      {framework + DB + ORM}
+Frontend Stack:     {framework + styling + state}
+
+FILES TO WRITE
+--------------
+Backend:       {count} files
+Frontend:      {count} files
+Entry Points:  {count} files (generated)
+Configs:       {count} files (generated)
+Total:         {count} files
+
+PROVIDERS
+---------
+Frontend: {list}
+Backend:  {list}
+
+ENVIRONMENT VARIABLES
+---------------------
+{list of all .env variables with descriptions}
+```
+
+**Do NOT proceed to Phase 2 without explicit approval.**
+
+---
+
+# PHASE 2: Generation (Write Phase)
+
+## Step 6: Split Backend Scaffold Files
+
+Read each bundled backend scaffold file and split into individual project files:
+
+### 6.1: Routes
+Parse `{id}-{slug}-routes.ts` and split per resource:
+- For each resource endpoint group, create:
+  - `{target}/src/routes/{resource}/index.ts` -- Route handler
+  - Import from collocated schema and service files
+
+### 6.2: Schemas
+Parse `{id}-{slug}-schemas.ts` and split per resource:
+- For each resource schema group, create:
+  - `{target}/src/routes/{resource}/{resource}.schema.ts` -- Zod schemas + inferred types
+
+### 6.3: Services
+Parse `{id}-{slug}-services.ts` and split per resource:
+- For each resource service group, create:
+  - `{target}/src/routes/{resource}/{resource}.service.ts` -- Business logic with Prisma
+
+### 6.4: Middleware to Plugins
+Parse `{id}-{slug}-middleware.ts` and create:
+- `{target}/src/plugins/auth.ts` -- Auth plugin (fastify-plugin wrapped)
+- `{target}/src/plugins/error-handler.ts` -- Error handler (RFC 9457)
+- `{target}/src/plugins/cors.ts` -- CORS configuration (if not inline)
+
+### 6.5: Prisma
+Copy `{id}-{slug}-prisma.prisma` to:
+- `{target}/prisma/schema.prisma`
+- Generate `{target}/prisma/seed.ts` with placeholder seed data
+
+## Step 7: Generate Backend Entry Points
+
+Create entry points that wire everything together:
+
+### 7.1: App Builder (`src/app.ts`)
+```typescript
+// Generate based on detected plugins and routes
+import Fastify from "fastify";
+// ... plugin imports based on scaffold analysis
+// ... route imports or @fastify/autoload config
+
+export async function buildApp() {
+  const app = Fastify({ logger: true });
+  // Register plugins in correct order
+  // Register routes
+  return app;
+}
+```
+
+### 7.2: Server Startup (`src/server.ts`)
+```typescript
+// Separate from app.ts for testability
+import { buildApp } from "./app.js";
+import { env } from "./env.js";
+// Graceful shutdown handler
+```
+
+### 7.3: Environment Validation (`src/env.ts`)
+```typescript
+// Zod-based env validation from scaffold config
+import { z } from "zod";
+const envSchema = z.object({ /* from scaffold */ });
+export const env = envSchema.parse(process.env);
+```
+
+## Step 8: Split Frontend Scaffold Files
+
+Read each bundled frontend scaffold file and split into individual project files:
+
+### 8.1: Components
+Parse `{id}-{slug}-components.tsx` and split per component:
+- Detect atomic level (atom/molecule/organism)
+- Create: `{target}/src/components/{level}/{ComponentName}.tsx`
+- Add `'use client'` directive only where needed
+
+### 8.2: Hooks
+Parse `{id}-{slug}-hooks.ts` and create:
+- `{target}/src/lib/api/hooks.ts` -- TanStack Query hooks
+- `{target}/src/lib/api/query-client.ts` -- Query client configuration
+
+### 8.3: Types
+Parse `{id}-{slug}-types.ts` and create:
+- `{target}/src/types/api.ts` -- API response/request types
+- In monorepo: `packages/types/src/index.ts`
+
+### 8.4: Pages
+Parse `{id}-{slug}-pages.tsx` and split per route:
+- `{target}/src/app/{route}/page.tsx`
+- `{target}/src/app/{route}/layout.tsx` (where needed)
+- `{target}/src/app/{route}/loading.tsx` (skeleton states)
+
+## Step 9: Generate Frontend Entry Points
+
+### 9.1: Root Layout (`src/app/layout.tsx`)
+Server Component that wraps children in Providers:
+```tsx
+// Generated from detected providers
+import { Providers } from "./providers";
+import "./global.css";
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
+}
+```
+
+### 9.2: Provider Composition (`src/app/providers.tsx`)
+Client component with providers in correct nesting order:
+```tsx
+"use client";
+// Generated based on Step 5 provider analysis
+// Auth -> Theme -> Data -> State ordering
+```
+
+### 9.3: Home Page (`src/app/page.tsx`)
+Basic page connecting to scaffold components.
+
+### 9.4: Global Styles (`src/app/global.css`)
+TailwindCSS v4 imports:
+```css
+@import "tailwindcss";
+@theme { /* custom design tokens */ }
+```
+
+### 9.5: Environment Validation (`src/env.ts`)
+```typescript
+// @t3-oss/env-nextjs or custom Zod validation
+// Server + client variable separation
+```
+
+## Step 10: Generate Config Files
+
+### 10.1: Root `package.json`
+- Monorepo: Root with workspaces, Turborepo scripts
+- Separate: Individual per project
+- Include all dependencies from scaffold configs
+- Standard scripts: dev, build, start, lint, type-check, clean
+
+### 10.2: `tsconfig.json`
+- Monorepo: Base config in `tooling/typescript/`, extended per app
+- Separate: Individual per project
+- Strict mode, correct module resolution per stack
+
+### 10.3: `next.config.ts`
+- React compiler (if React 19)
+- Transpile packages (monorepo)
+- Image domains, rewrites as needed
+
+### 10.4: `.env.example`
+Document ALL required environment variables:
+```env
+# Backend
+DATABASE_URL=postgresql://user:pass@localhost:5432/dbname
+PORT=3001
+JWT_SECRET=change-me-to-a-secure-random-string
+NODE_ENV=development
+
+# Frontend
+NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# Optional
+REDIS_URL=redis://localhost:6379
+LOG_LEVEL=info
+```
+
+### 10.5: `.gitignore`
+Standard ignores for Node.js + Next.js + Prisma:
+```
+node_modules/
+.next/
+dist/
+.turbo/
+.env
+.env.local
+.env.*.local
+*.tsbuildinfo
+```
+
+### 10.6: Monorepo-Specific (if applicable)
+- `pnpm-workspace.yaml` -- Workspace package paths
+- `turbo.json` -- Pipeline configuration with dependency graph
+- `tooling/` -- Shared configs (TypeScript, ESLint, Tailwind)
+
+## Step 11: Quality Check
+
+Before preview, verify:
+- [ ] All bundled scaffold files have been split into individual files
+- [ ] No code from scaffold files was lost during splitting
+- [ ] Backend entry points wire all plugins and routes correctly
+- [ ] Frontend providers are nested in correct dependency order
+- [ ] All imports use correct relative paths and file extensions
+- [ ] TypeScript config has correct module resolution for the stack
+- [ ] Package.json includes all dependencies from both scaffolds
+- [ ] .env.example documents every environment variable
+- [ ] .gitignore covers all build artifacts and secrets
+- [ ] Monorepo config (if selected) has correct workspace paths
+- [ ] No hardcoded paths or placeholder TODOs remain in generated code
+
+If any check fails, fix before preview.
+
+## Step 12: Preview & Approval
+
+Present complete file list with sizes and key content:
+```
+ASSEMBLY PREVIEW
+================
+
+{target}/
+  {full directory tree with file sizes}
+
+Key Generated Files:
+  - src/app.ts: {brief description}
+  - src/app/layout.tsx: {brief description}
+  - src/app/providers.tsx: {providers listed}
+  - package.json: {dependency count}
+  - .env.example: {variable count}
+```
+
+Use AskUserQuestion:
+- Question: "Write all files to the project directory?"
+- Header: "Write Files"
+- Options:
+  - "Yes" -- Write all files
+  - "No" -- Cancel
+  - "Refine" -- Make adjustments first
+
+## Step 13: Write Project Files
+
+If approved:
+1. Create directory structure
+2. Write all backend files (routes, schemas, services, plugins, entry points)
+3. Write all frontend files (components, hooks, types, pages, entry points)
+4. Write config files (package.json, tsconfig.json, next.config.ts, etc.)
+5. Write .env.example and .gitignore
+6. Write monorepo configs if applicable (turbo.json, pnpm-workspace.yaml)
+
+Confirm each batch:
+> Backend files written: {count} files
+> Frontend files written: {count} files
+> Config files written: {count} files
+
+## Step 14: Generate Assembly Log
+
+Write assembly log to `$JAAN_OUTPUTS_DIR/dev/project-assemble/`:
+
+### 14.1: Generate ID and Folder Structure
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/project-assemble"
+mkdir -p "$SUBDOMAIN_DIR"
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+slug="{project-name-slug}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+```
+
+### 14.2: Write Assembly Log
+Write `{NEXT_ID}-{slug}.md` with:
+- Executive Summary
+- Input scaffolds used
+- Project structure chosen
+- File manifest (every file written with path)
+- Provider wiring map
+- Config inheritance chain
+- Environment variables documented
+- Next steps for the developer
+
+### 14.3: Update Index
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Project Title}" \
+  "{Executive summary -- 1-2 sentences}"
+```
+
+Confirm:
+> Assembly log written to: `$JAAN_OUTPUTS_DIR/dev/project-assemble/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md`
+> Index updated: `$JAAN_OUTPUTS_DIR/dev/project-assemble/README.md`
+
+## Step 15: Suggest Next Actions
+
+> **Project assembled successfully!**
+>
+> **Immediate Steps:**
+> - Run `pnpm install` (or `npm install`) to install dependencies
+> - Copy `.env.example` to `.env.local` and fill in values
+> - Run `pnpm db:generate && pnpm db:push` to set up database
+> - Run `pnpm dev` to start development
+>
+> **Next Skills in Pipeline:**
+> - Run `/jaan-to:backend-service-implement` to fill in service layer business logic
+> - Run `/jaan-to:qa-test-generate` to generate test suites
+> - Run `/jaan-to:devops-infra-scaffold` to generate deployment configs
+
+## Step 16: Capture Feedback
+
+Use AskUserQuestion:
+- Question: "How did the assembly turn out?"
+- Header: "Feedback"
+- Options:
+  - "Perfect!" -- Done
+  - "Needs fixes" -- What should I adjust?
+  - "Learn from this" -- Capture a lesson for future runs
+
+If "Learn from this": Run `/jaan-to:learn-add dev-project-assemble "{feedback}"`
+
+---
+
+## Multi-Stack Assembly Rules (Research-Informed)
+
+### Node.js/TypeScript + Next.js (Primary Stack)
+
+**Monorepo (Turborepo + pnpm):**
+- `pnpm-workspace.yaml`: `packages: ["apps/*", "packages/*", "tooling/*"]`
+- Internal packages use `"main": "./src/index.ts"` for dev-time source imports
+- Workspace protocol: `"@{scope}/{pkg}": "workspace:*"`
+- Root scripts delegate to Turborepo: `"dev": "turbo dev"`, `"build": "turbo build"`
+- `turbo.json` pipeline: build depends on `^build`, dev is persistent + uncached
+- Shared tsconfig in `tooling/typescript/` with base, nextjs, and library presets
+
+**Backend Entry Point (Fastify):**
+- `app.ts` (configuration) separate from `server.ts` (runtime) for testability
+- Plugin registration order: infrastructure -> auth -> database -> routes
+- `@fastify/autoload` for file-based route loading with `ignorePattern` for non-route files
+- Graceful shutdown with `signal.NotifyContext` or process signal handlers
+
+**Frontend Entry Point (Next.js App Router):**
+- `layout.tsx` is Server Component -- delegates to `providers.tsx` (Client Component)
+- Provider nesting: Session -> Theme -> QueryClient -> State
+- `providers.tsx` marked with `"use client"`
+- `global.css` with TailwindCSS v4 `@import "tailwindcss"` + `@theme {}`
+
+**Environment Variables:**
+- Backend: Zod schema validation at startup, crash on invalid
+- Frontend: `@t3-oss/env-nextjs` with server/client separation
+- Shared `.env.example` documenting all variables with descriptions
+- Layered strategy: `.env` < `.env.local` < `.env.{environment}` < `.env.{environment}.local`
+
+### PHP/Laravel (Secondary Stack)
+
+**Directory Layout:**
+- Laravel backend in `backend/` with standard Artisan structure
+- Next.js frontend in `frontend/` consuming Laravel API
+- Shared `.env.example` for both
+
+**Entry Points:**
+- Laravel: `public/index.php` (standard), `routes/api.php` for API
+- API Resources for response shaping (never expose raw Eloquent models)
+
+### Go (Tertiary Stack)
+
+**Directory Layout:**
+- Go backend in `backend/` with `internal/` feature-based packages
+- Next.js frontend in `frontend/`
+
+**Entry Points:**
+- `cmd/api/main.go` -- Wire dependencies, start server
+- `internal/{feature}/handler.go`, `service.go`, `repository.go`
+- Manual DI in `main.go` (no framework)
+
+## Anti-Patterns to NEVER Generate
+
+- **File splitting**: Losing code during bundled-to-individual file conversion
+- **Imports**: Wrong relative paths, missing `.js` extensions in ESM
+- **Providers**: Wrong nesting order (auth must be outermost)
+- **Config**: Hardcoded values instead of environment variables
+- **Monorepo**: Circular dependencies between packages
+- **TypeScript**: `any` types, loose module resolution
+- **.env**: Committing secrets, missing variables in .env.example
+- **Entry points**: Business logic in entry points (keep thin)
+
+---
+
+## Definition of Done
+
+- [ ] All bundled scaffold files split into individual project files
+- [ ] Backend entry points generated (app.ts, server.ts, env.ts)
+- [ ] Frontend entry points generated (layout.tsx, providers.tsx, page.tsx)
+- [ ] Provider wiring in correct dependency order
+- [ ] All config files generated (package.json, tsconfig.json, etc.)
+- [ ] .env.example documents every required variable
+- [ ] .gitignore covers all build artifacts
+- [ ] Monorepo config generated (if applicable)
+- [ ] No code lost during file splitting
+- [ ] Assembly log written to output directory
+- [ ] Index updated with executive summary
+- [ ] User approved final result

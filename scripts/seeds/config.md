@@ -21,7 +21,7 @@
 - core (Internal)
 
 ## Planned Roles (Phase 5)
-- dev (Development) - 17 skills [7 active: frontend-task-breakdown, backend-task-breakdown, backend-data-model, backend-api-contract, backend-scaffold, frontend-scaffold, frontend-design]
+- dev (Development) - 17 skills [8 active: frontend-task-breakdown, backend-task-breakdown, backend-data-model, backend-api-contract, backend-scaffold, backend-service-implement, frontend-scaffold, frontend-design]
 - qa (Quality Assurance) - 12 skills
 - growth (SEO + Content) - 15 skills
 
@@ -58,11 +58,16 @@
 | backend-data-model | `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | backend-api-contract | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
+| qa-test-generate | `/jaan-to:qa-test-generate` | Generate runnable Vitest and Playwright tests from BDD test cases |
 | backend-scaffold | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
+| backend-service-implement | `/jaan-to:backend-service-implement` | Generate service implementations with business logic from specs and stubs |
 | frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
+| dev-project-assemble | `/jaan-to:dev-project-assemble` | Wire scaffold outputs into runnable project with configs and entry points |
 | wp-pr-review | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
 | release-iterate-changelog | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact notes and support guidance |
 | jaan-issue-report | `/jaan-to:jaan-issue-report` | [Internal] Report issues to jaan-to GitHub repo or save locally |
+| sec-audit-remediate | `/jaan-to:sec-audit-remediate` | Generate security fixes from detect-dev findings with regression tests |
+| devops-infra-scaffold | `/jaan-to:devops-infra-scaffold` | Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack |
 
 ## Language
 - language: ask

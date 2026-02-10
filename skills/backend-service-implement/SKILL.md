@@ -1,0 +1,730 @@
+---
+name: backend-service-implement
+description: Generate service implementations with business logic from specs and scaffold stubs.
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/service-implement/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+argument-hint: [backend-scaffold, backend-api-contract, backend-data-model, backend-task-breakdown]
+---
+
+# backend-service-implement
+
+> Bridge spec to code — generate full service implementations with business logic from TODO stubs and upstream specs.
+
+## Context Files
+
+- `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL — determines framework, ORM, patterns)
+  - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
+- `$JAAN_CONTEXT_DIR/config.md` - Project configuration
+- `$JAAN_TEMPLATES_DIR/jaan-to:backend-service-implement.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to:backend-service-implement.learn.md` - Past lessons (loaded in Pre-Execution)
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
+- `${CLAUDE_PLUGIN_ROOT}/docs/research/70-dev-backend-service-implementation-generation.md` - Research: service layer architecture, ORM queries, RFC 9457 errors, pagination, transactions, idempotency, JWT lifecycle
+
+## Input
+
+**Upstream Artifacts**: $ARGUMENTS
+
+Accepts 1-4 file paths or directory references:
+- **backend-scaffold** — Path to scaffold output (route handlers with TODO stubs, service stubs, ORM schema)
+- **backend-api-contract** — Path to OpenAPI 3.1 YAML (endpoint specs, request/response schemas, error codes)
+- **backend-data-model** — Path to data model document (table definitions, relationships, constraints, indexes)
+- **backend-task-breakdown** — Path to BE task breakdown (vertical slices with implementation notes)
+- **Empty** — Interactive wizard prompting for each artifact
+
+---
+
+## Pre-Execution: Apply Past Lessons
+Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `backend-service-implement`
+
+Also read context files if available:
+- `$JAAN_CONTEXT_DIR/tech.md` — Know the tech stack for framework-specific service generation
+- `$JAAN_CONTEXT_DIR/config.md` — Project configuration
+
+### Language Settings
+Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
+Override field for this skill: `language_backend-service-implement`
+
+> **Language exception**: Generated code output (variable names, code blocks, schemas, SQL, API specs) is NOT affected by this setting and remains in the project's programming language.
+
+---
+
+# PHASE 1: Analysis (Read-Only)
+
+## Thinking Mode
+
+ultrathink
+
+Use extended reasoning for:
+- Cross-referencing scaffold TODO stubs against API contract + data model + task breakdown
+- Deriving business logic from endpoint relationships and status code semantics
+- Planning service implementation order (dependency graph)
+- Identifying state machines, transactions, and idempotency requirements
+
+## Step 1: Validate & Parse Inputs
+
+For each provided path:
+- **backend-scaffold**: Read route handlers, service stubs, ORM schema. Extract all `// TODO` comments and map to endpoint operations
+- **backend-api-contract**: Read api.yaml. Extract paths, schemas, error responses, security schemes, pagination config
+- **backend-data-model**: Read data model doc. Extract table definitions, constraints, indexes, relationships, migration notes
+- **backend-task-breakdown**: Read task breakdown. Extract vertical slices, implementation notes, acceptance criteria, business rules
+
+Report which inputs found vs missing; suggest fallback for missing:
+- Missing scaffold: generate service implementations from API contract + data model (scaffold-less mode)
+- Missing API contract: derive endpoints from scaffold route definitions
+- Missing data model: derive from Prisma/Eloquent schema in scaffold
+- Missing task breakdown: derive business rules from API contract status codes and schema differences
+
+Present input summary:
+```
+INPUT SUMMARY
+─────────────
+Sources Found:    {list}
+Sources Missing:  {list with fallback suggestions}
+Entities:         {extracted entity/resource names}
+TODO Stubs:       {count from scaffold}
+Endpoints:        {count from API contract}
+Tables:           {count from data model}
+Task Slices:      {count from task breakdown}
+Business Rules:   {count of derived rules}
+```
+
+## Step 2: Detect Tech Stack
+
+Read `$JAAN_CONTEXT_DIR/tech.md`:
+- Extract framework from `#current-stack` (default: Fastify v5+)
+- Extract ORM from `#current-stack` (default: Prisma)
+- Extract DB from `#current-stack` (default: PostgreSQL)
+- Extract patterns from `#patterns` (auth, error handling, logging)
+- If tech.md missing: ask framework/ORM/DB via AskUserQuestion
+
+**Multi-Stack Detection:**
+
+| tech.md value | Framework | ORM/DB | Service Pattern | Output |
+|---------------|-----------|--------|-----------------|--------|
+| Node.js / TypeScript | Fastify v5+ | Prisma | Plain exported functions + Prisma singleton | `.ts` files |
+| PHP | Laravel 12 / Symfony 7 | Eloquent / Doctrine | Service classes + Repository pattern | `.php` files |
+| Go | Chi / stdlib (Go 1.22+) | sqlc / GORM | Feature-based internal packages | `.go` files |
+
+## Step 3: Map TODOs to Implementation Plan
+
+Cross-reference all sources to build the implementation map:
+
+### 3.1: TODO Inventory
+
+Parse all `// TODO: implement` stubs from scaffold. For each:
+1. Identify the endpoint (method + path)
+2. Match to API contract operation (request/response schemas, error codes)
+3. Match to data model tables (required queries, relationships)
+4. Match to task breakdown slice (business rules, acceptance criteria)
+
+### 3.2: Business Logic Derivation
+
+Derive implementation patterns from API spec semantics:
+
+**From HTTP Status Codes:**
+- `201 Created` — creation logic, uniqueness checks, default value assignment
+- `409 Conflict` — duplicate detection or state conflict checking
+- `402 Payment Required` — payment gateway integration
+- `429 Too Many Requests` — rate limiting logic
+
+**From Request/Response Schema Differences:**
+- Fields in response but not in request (e.g., `id`, `createdAt`) — server-generated values
+- Fields in request but not in response (e.g., `idempotencyKey`) — processing-only inputs
+- Optional fields with defaults — fallback logic
+
+**From Endpoint Relationships:**
+- POST + POST /{id}/confirm — state machine pattern
+- GET ?status=pending — filterable list with business states
+- DELETE + 404 — soft or hard delete policy
+
+**From Task Breakdown:**
+- Acceptance criteria encode validation rules
+- Implementation notes encode architectural decisions
+- Cross-cutting concerns (auth, audit, notifications)
+
+### 3.3: State Machine Detection
+
+When API specs include status fields with constrained transitions:
+- Extract enum values from schema
+- Map action endpoints to transitions (e.g., POST /orders/{id}/confirm)
+- Generate transition map and validation function
+
+### 3.4: Dependency Graph
+
+Order implementations by dependency:
+1. Shared helpers (error factory, pagination, cursor encoding)
+2. Auth service (JWT lifecycle — if auth endpoints exist)
+3. Independent resource services (no cross-service dependencies)
+4. Dependent resource services (reference other services)
+5. Cross-cutting middleware (idempotency, rate limiting)
+
+## Step 4: Clarify Implementation Scope
+
+Use AskUserQuestion:
+
+1. **Scope question:**
+   - Question: "Implement all TODOs or select vertical slices?"
+   - Header: "Scope"
+   - Options:
+     - "All TODOs" — Implement every TODO stub found
+     - "Select slices" — Choose specific vertical slices from task breakdown
+     - "Priority subset" — Start with core CRUD, add complex logic later
+
+2. **Auth question** (if auth endpoints detected):
+   - Question: "What JWT library should be used for authentication?"
+   - Header: "Auth"
+   - Options:
+     - "jose (Recommended)" — Modern JWT with Web Crypto API, edge-compatible
+     - "jsonwebtoken" — Legacy but widely used
+     - "Already implemented" — Auth service exists, skip generation
+     - "No auth" — Skip auth implementation
+
+3. **Pagination question** (if list endpoints detected):
+   - Question: "Which pagination strategy for list endpoints?"
+   - Header: "Pagination"
+   - Options:
+     - "Cursor-based (Recommended)" — Stable under writes, O(1) seek, opaque cursor
+     - "Offset-based" — Simple page + limit, for admin/dashboard endpoints
+     - "Both" — Cursor for public API, offset for admin
+     - "Already implemented" — Pagination helpers exist
+
+4. **Transaction depth** (if multi-step operations detected):
+   - Question: "How should multi-step operations be handled?"
+   - Header: "Transactions"
+   - Options:
+     - "Interactive transactions (Recommended)" — Prisma $transaction with isolation levels
+     - "Sequential batch" — Simple array transactions for independent writes
+     - "Optimistic concurrency" — Version-based updates with conflict detection
+     - "Mix by operation" — Choose per operation based on complexity
+
+5. **Idempotency question** (if POST/PUT endpoints exist):
+   - Question: "Should POST/PUT endpoints support idempotency keys?"
+   - Header: "Idempotency"
+   - Options:
+     - "Yes (Recommended)" — Idempotency-Key header with DB storage, 24h TTL
+     - "Critical endpoints only" — Only for payment/order creation
+     - "No" — Skip idempotency support
+
+## Step 5: Present Implementation Plan
+
+```
+IMPLEMENTATION PLAN
+═══════════════════
+
+STACK: {framework} + {orm} + {database}
+
+TODO COVERAGE
+─────────────
+Total TODOs:     {count}
+Implementing:    {count} ({scope choice})
+Skipping:        {count} (if partial scope)
+
+SERVICES ({count})
+──────────────────
+{For each service:}
+  {resource}.service.ts
+    - {method}: {description} ({status codes})
+    ...
+
+SHARED HELPERS
+──────────────
+  - error-factory.ts (RFC 9457 problem details, error type registry)
+  - pagination.ts ({strategy} pagination helper)
+  {- cursor.ts (cursor encode/decode) — if cursor pagination}
+  {- auth.service.ts (JWT lifecycle with jose) — if auth}
+  {- idempotency.ts (Idempotency-Key middleware) — if enabled}
+
+STATE MACHINES ({count if any})
+───────────────────────────────
+  {resource}: {state1} → {state2} → ...
+
+DEPENDENCY ORDER
+────────────────
+1. Shared helpers
+2. {ordered service list}
+```
+
+---
+
+# HARD STOP — Review Implementation Plan
+
+Use AskUserQuestion:
+- Question: "Proceed with generating service implementations?"
+- Header: "Generate"
+- Options:
+  - "Yes" — Generate all planned service files
+  - "No" — Cancel
+  - "Edit" — Let me revise the scope or architecture first
+
+**Do NOT proceed to Phase 2 without explicit approval.**
+
+---
+
+# PHASE 2: Generation (Write Phase)
+
+## Phase 2 Output — Flat folder (no nested subfolder)
+
+All files in `$JAAN_OUTPUTS_DIR/backend/service-implement/{id}-{slug}/`:
+
+```
+{id}-{slug}/
+├── {id}-{slug}.md                        # Implementation guide + decisions log
+├── {id}-{slug}-services/                  # Service files by domain
+│   ├── {resource}.service.ts              # Per-resource service implementation
+│   ├── auth.service.ts                    # Auth/JWT service (if applicable)
+│   └── ...
+├── {id}-{slug}-helpers/                   # Shared helper files
+│   ├── error-factory.ts                   # RFC 9457 error creation
+│   ├── pagination.ts                      # Pagination utility
+│   ├── cursor.ts                          # Cursor encode/decode (if cursor pagination)
+│   └── idempotency.ts                     # Idempotency middleware (if enabled)
+└── {id}-{slug}-readme.md                  # Integration instructions
+```
+
+> File extensions adapt to detected stack (.ts for Node.js, .php for PHP, .go for Go).
+
+## Step 6: Generate Shared Helpers
+
+Generate helpers in dependency order (these are used by services):
+
+### 6.1: Error Factory (RFC 9457)
+
+Generate `error-factory.ts` with:
+- `ProblemDetail` interface (type, title, status, detail, instance, extensions)
+- `createProblemDetail()` factory function
+- `BusinessError` class extending Error with ProblemDetail fields
+- Error type registry derived from API contract error responses:
+  ```typescript
+  const PROBLEM_TYPES = {
+    'validation-error':           { status: 400, title: 'Validation Failed' },
+    'authentication-required':    { status: 401, title: 'Authentication Required' },
+    'insufficient-permissions':   { status: 403, title: 'Insufficient Permissions' },
+    'resource-not-found':         { status: 404, title: 'Not Found' },
+    'unique-constraint-violation': { status: 409, title: 'Resource Already Exists' },
+    'invalid-state-transition':   { status: 409, title: 'Invalid State Transition' },
+    'rate-limit-exceeded':        { status: 429, title: 'Rate Limit Exceeded' },
+    // ... derived from API contract error responses
+  } as const;
+  ```
+- Prisma error mapper (P2002 → 409, P2003 → 409, P2025 → 404)
+- Fastify `setErrorHandler` plugin (NOT Express-style middleware)
+  - Use `hasZodFastifySchemaValidationErrors(error)` for 400 (NOT `instanceof ZodError`)
+  - Use `isResponseSerializationError(error)` for 500
+  - Always set `Content-Type: application/problem+json`
+
+**PHP Stack:** Generate RFC 9457 via `crell/api-problem` v3.8.0
+**Go Stack:** Generate custom `ProblemDetail` struct with `application/problem+json`
+
+### 6.2: Pagination Helper
+
+**If cursor-based:**
+Generate `pagination.ts` + `cursor.ts` with:
+- `CursorPaginationParams` interface (cursor, limit, direction)
+- `CursorPaginatedResponse<T>` interface (data, pagination: {hasNextPage, hasPreviousPage, startCursor, endCursor})
+- `paginateWithCursor()` — Prisma cursor API with `take: limit + 1` pattern
+- `encodeCursor()` / `decodeCursor()` — base64url encoding for opaque cursors
+- Default limit: 20, max: 100
+
+**If offset-based:**
+Generate `pagination.ts` with:
+- `OffsetPaginationParams` (page, pageSize)
+- `OffsetPaginatedResponse<T>` (data, pagination with totalCount/totalPages)
+- `paginateWithOffset()` — Prisma skip/take with `$transaction` for count
+
+**PHP Stack:** Use Laravel's built-in `->paginate()` / `->cursorPaginate()`
+**Go Stack:** Generate pagination struct with sqlc query helpers
+
+### 6.3: Auth Service (if applicable)
+
+Generate `auth.service.ts` with `jose` library:
+- `AuthTokenService` class:
+  - `generateAccessToken(user)` — 15min TTL, HS256, includes sub/role/tid claims, jti for identification
+  - `generateRefreshToken(user)` — 7d TTL, stored in DB for revocability
+  - `verifyAccessToken(token)` — issuer/audience validation, 30s clock skew tolerance
+  - `rotateRefreshToken(oldToken)` — revoke old, issue new pair, family revocation on reuse detection
+  - `revokeAllUserTokens(userId)` — force logout
+- Fastify auth hook plugin (decorateRequest, onRequest hook, Bearer extraction)
+- Public route config support (`routeOptions.config?.public`)
+
+**PHP Stack:** Use Laravel Sanctum or `lexik/jwt-authentication-bundle`
+**Go Stack:** Use `golang-jwt/jwt/v5`
+
+### 6.4: Idempotency Middleware (if enabled)
+
+Generate `idempotency.ts` with:
+- Fastify `preHandler` hook for POST/PUT methods
+- `Idempotency-Key` header extraction
+- Database-backed key storage (IdempotencyKey model)
+- Same-request validation (method + path must match)
+- In-flight concurrent request handling (409)
+- `onSend` hook to store response
+- 24h TTL with cleanup job
+- `idempotency-replayed: true` header on cached responses
+
+## Step 7: Generate Service Implementations
+
+For each resource service, generate complete business logic:
+
+### 7.1: Service Structure
+
+**Node.js/TypeScript (Fastify + Prisma):**
+```typescript
+// Plain exported functions importing Prisma singleton
+// Module caching acts as built-in singleton (no DI container needed)
+// Testable via vi.mock()
+
+import { prisma } from '../lib/prisma.js';
+import { createProblemDetail, BusinessError } from '../helpers/error-factory.js';
+import { paginateWithCursor } from '../helpers/pagination.js';
+import type { RequestContext } from '../types.js';
+```
+
+**PHP (Laravel + Eloquent):**
+```php
+// Service class with constructor injection
+// Repository pattern optional (Eloquent IS the repository)
+// API Resources for response transformation
+```
+
+**Go (Chi/stdlib + sqlc):**
+```go
+// Feature-based internal package
+// Constructor injection with small interfaces (1-3 methods)
+// Accept interfaces, return structs
+```
+
+### 7.2: Per-Method Implementation
+
+For each TODO stub, generate the full implementation:
+
+**CREATE operations (POST → 201):**
+1. Business rule validation (beyond schema validation)
+2. Uniqueness checks (pre-check for better error messages, DB constraint as safety net)
+3. Default value assignment (server-generated fields)
+4. Transaction wrapping (if multi-step: inventory reservation, related records)
+5. Prisma `create` with `include` for response data
+6. Idempotency key storage (if enabled)
+7. Post-transaction side effects (notifications, events) — OUTSIDE transaction
+8. DTO mapping: internal model → API response
+
+**READ operations (GET → 200):**
+1. Authorization check (ownership, org-level access)
+2. Prisma `findUniqueOrThrow` with `select` (prefer over `include` for specific fields)
+3. Define reusable `select` objects per use-case (list view vs detail view)
+4. DTO mapping
+
+**LIST operations (GET → 200):**
+1. Filter parameter extraction and validation
+2. Pagination (cursor or offset per Step 4 choice)
+3. Prisma `findMany` with composable where clauses
+4. Use `Prisma.validator<>()` for type-safe query fragments
+5. DTO mapping for each item
+
+**UPDATE operations (PATCH → 200):**
+1. Authorization check
+2. Existence check (findUniqueOrThrow → 404)
+3. Business rule validation
+4. State transition validation (if status field, use state machine)
+5. Optimistic concurrency (if version field: `where: { id, version }`, catch P2025)
+6. Prisma `update` with `select`
+7. DTO mapping
+
+**DELETE operations (DELETE → 204):**
+1. Authorization check
+2. Existence check
+3. Soft delete: `update({ data: { deletedAt: new Date() } })`
+4. Hard delete: `delete()`
+5. Cascade considerations (from data model FK constraints)
+
+**ACTION operations (POST /{id}/action → 200):**
+1. Authorization check
+2. Existence check
+3. State transition validation
+4. Business logic execution (within transaction if multi-step)
+5. Side effects (notifications, events)
+6. DTO mapping
+
+### 7.3: State Machine Generation
+
+For resources with status enum + transition endpoints:
+
+```typescript
+const TRANSITIONS: Record<Status, Status[]> = {
+  pending:   ['confirmed', 'cancelled'],
+  confirmed: ['shipped', 'cancelled'],
+  shipped:   ['delivered', 'returned'],
+  delivered: ['returned'],
+  cancelled: [],
+  returned:  [],
+};
+
+function validateTransition(current: Status, next: Status): void {
+  if (!TRANSITIONS[current].includes(next)) {
+    throw new BusinessError(
+      'invalid-state-transition',
+      `Cannot transition from ${current} to ${next}`,
+      409,
+      undefined,
+      { current, next, allowed: TRANSITIONS[current] }
+    );
+  }
+}
+```
+
+### 7.4: Cross-Service Operations
+
+For operations spanning multiple services:
+- Use Prisma interactive `$transaction` with explicit isolation level
+- Pass `tx` (transaction client) to all participating service methods
+- Keep transactions short — move side effects outside
+- Set `maxWait: 5000` and `timeout: 10000`
+
+## Step 8: Generate Implementation Guide
+
+Generate `{id}-{slug}.md` with:
+
+### 8.1: Executive Summary
+1-2 sentences: resource count, stack, key patterns implemented (pagination, auth, idempotency).
+
+### 8.2: Implementation Decisions Log
+For each decision made during generation:
+| Decision | Choice | Rationale |
+|----------|--------|-----------|
+| Pagination | Cursor-based | Stable under concurrent writes, O(1) seek |
+| Auth | jose JWT | Web Crypto API, edge-compatible |
+| Transactions | Interactive | Multi-step inventory reservation |
+| ... | ... | ... |
+
+### 8.3: TODO Coverage Report
+| Service | TODOs Found | TODOs Implemented | Coverage |
+|---------|------------|-------------------|----------|
+| user.service.ts | 5 | 5 | 100% |
+| order.service.ts | 8 | 8 | 100% |
+| ... | ... | ... | ... |
+| **Total** | **{n}** | **{n}** | **100%** |
+
+### 8.4: Service Dependency Map
+Mermaid diagram showing service dependencies and shared helpers.
+
+## Step 9: Generate Integration README
+
+Generate `{id}-{slug}-readme.md` with:
+
+1. **Setup** — How to integrate generated services into the scaffold project
+2. **File Placement** — Where each generated file goes relative to the project root
+3. **Dependencies** — NPM packages to install (jose, etc.)
+4. **Configuration** — Environment variables needed (JWT_SECRET, etc.)
+5. **Testing** — How to test individual services (`vi.mock()` pattern)
+6. **Next Steps** — Downstream skills:
+   - `/jaan-to:qa-test-generate` — Generate tests for these implementations
+   - `/jaan-to:sec-audit-remediate` — Security audit the implementations
+
+## Step 10: Quality Check
+
+Before preview, verify every item:
+
+**Coverage:**
+- [ ] Every TODO stub from scaffold has a corresponding implementation
+- [ ] Every API contract endpoint has service method coverage
+- [ ] Every data model relationship is correctly queried
+
+**Error Handling:**
+- [ ] All services use RFC 9457 ProblemDetail format
+- [ ] Prisma errors mapped (P2002 → 409, P2025 → 404)
+- [ ] Business errors use error type registry
+- [ ] `Content-Type: application/problem+json` set on all error responses
+
+**Patterns:**
+- [ ] No business logic in route handlers (only in service layer)
+- [ ] No direct Prisma calls in route handlers
+- [ ] Service methods do not reference `request`/`reply` objects
+- [ ] Transactions keep side effects outside transaction boundary
+- [ ] State machines validate transitions before applying
+
+**Security:**
+- [ ] Auth tokens validated on protected routes
+- [ ] Authorization checks (ownership, org-level) in service methods
+- [ ] No hardcoded secrets
+- [ ] Refresh token rotation with family revocation (if auth generated)
+
+**Code Quality:**
+- [ ] TypeScript strict mode compatible (no `any` types)
+- [ ] ESM imports with `.js` extensions (if Node.js + NodeNext)
+- [ ] Reusable select objects for Prisma queries
+- [ ] Type-safe query fragments via `Prisma.validator<>()`
+
+If any check fails, fix before preview.
+
+## Step 11: Preview & Approval
+
+Present generated output summary:
+- File count and total lines
+- TODO coverage percentage
+- Service list with method counts
+- Helpers generated
+
+Use AskUserQuestion:
+- Question: "Write service implementation files to output?"
+- Header: "Write Files"
+- Options:
+  - "Yes" — Write the files
+  - "No" — Cancel
+  - "Refine" — Make adjustments first
+
+## Step 12: Generate ID and Folder Structure
+
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/backend/service-implement"
+mkdir -p "$SUBDOMAIN_DIR"
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+slug="{project-name-slug}"
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
+```
+
+Preview output configuration:
+> **Output Configuration**
+> - ID: {NEXT_ID}
+> - Folder: `$JAAN_OUTPUTS_DIR/backend/service-implement/{NEXT_ID}-{slug}/`
+> - Main file: `{NEXT_ID}-{slug}.md`
+
+## Step 13: Write Output
+
+1. Create output folder: `mkdir -p "$OUTPUT_FOLDER"`
+2. Create services subdirectory: `mkdir -p "$OUTPUT_FOLDER/${NEXT_ID}-${slug}-services"`
+3. Create helpers subdirectory: `mkdir -p "$OUTPUT_FOLDER/${NEXT_ID}-${slug}-helpers"`
+4. Write all files:
+   - Main doc: `$OUTPUT_FOLDER/${NEXT_ID}-${slug}.md`
+   - Service files: `$OUTPUT_FOLDER/${NEXT_ID}-${slug}-services/{resource}.service.ts`
+   - Helper files: `$OUTPUT_FOLDER/${NEXT_ID}-${slug}-helpers/{helper}.ts`
+   - Integration readme: `$OUTPUT_FOLDER/${NEXT_ID}-${slug}-readme.md`
+5. Update subdomain index:
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
+add_to_index \
+  "$SUBDOMAIN_DIR/README.md" \
+  "$NEXT_ID" \
+  "${NEXT_ID}-${slug}" \
+  "{Project Title} Service Implementations" \
+  "{Executive summary — 1-2 sentences}"
+```
+
+6. Confirm completion:
+> Service implementations written to: `$JAAN_OUTPUTS_DIR/backend/service-implement/{NEXT_ID}-{slug}/`
+> Index updated: `$JAAN_OUTPUTS_DIR/backend/service-implement/README.md`
+
+## Step 14: Suggest Next Actions
+
+> **Service implementations generated successfully!**
+>
+> **TODO Coverage: {n}/{n} (100%)**
+>
+> **Next Steps:**
+> - Copy service files to your project (see integration readme for placement)
+> - Run `/jaan-to:qa-test-generate` to generate tests for these implementations
+> - Run `/jaan-to:sec-audit-remediate` to audit the implementations for security issues
+> - Run your existing test suite to verify integration
+
+## Step 15: Capture Feedback
+
+Use AskUserQuestion:
+- Question: "How did the service implementations turn out?"
+- Header: "Feedback"
+- Options:
+  - "Perfect!" — Done
+  - "Needs fixes" — What should I improve?
+  - "Learn from this" — Capture a lesson for future runs
+
+If "Learn from this": Run `/jaan-to:learn-add backend-service-implement "{feedback}"`
+
+---
+
+## Key Generation Rules — Node.js/TypeScript (Research-Informed)
+
+- **Service Layer**: Plain exported functions importing the Prisma singleton — module caching acts as built-in singleton, making DI containers (tsyringe, inversify) unnecessary; testable via `vi.mock()`; callable from CRON jobs or queue consumers outside HTTP context
+- **Prisma Queries**: Use `select` over `include` when possible; define reusable select objects per use-case; use `Prisma.validator<>()` for composable, type-safe query fragments; leverage `$transaction` for multi-step operations
+- **Error Handler**: Use Fastify's `setErrorHandler` (NOT Express-style middleware) — use `hasZodFastifySchemaValidationErrors(error)` for 400 (NOT `instanceof ZodError`), use `isResponseSerializationError(error)` for 500; map PrismaClientKnownRequestError P2002 → 409, P2003 → 409, P2025 → 404; always set `Content-Type: application/problem+json`
+- **RFC 9457 Fields**: `type` (URI), `title`, `status`, `detail`, `instance`; extension `errors[]` for validation details
+- **JWT with jose**: HS256, 15min access / 7d refresh, jti claims, refresh token rotation with family revocation, 30s clock skew tolerance, issuer + audience validation
+- **Cursor Pagination**: Prisma cursor API with `take: limit + 1` pattern; base64url cursor encoding; default limit 20, max 100
+- **Idempotency**: `Idempotency-Key` header, DB-backed storage, same-request validation, in-flight 409, 24h TTL, onSend response caching
+- **Transactions**: Interactive `$transaction` with `maxWait: 5000`, `timeout: 10000`; side effects outside transaction; optimistic concurrency via `where: { id, version }` + catch P2025
+- **Import Extensions**: With `"type": "module"` and `moduleResolution: "NodeNext"`, all imports MUST include `.js` extensions
+- **DTO Mapping**: Always map internal models to API response format in service methods; never expose raw ORM models
+
+## Multi-Stack Support (Research-Informed)
+
+**PHP Stack (Laravel):**
+- Service classes with constructor injection + Eloquent models
+- Form Requests for validation (`$request->validated()`, never `$request->all()`)
+- API Resources for response transformation (never expose raw models)
+- Eloquent scopes for composable query conditions
+- `preventLazyLoading()`, `preventSilentlyDiscardingAttributes()` in `AppServiceProvider::boot()`
+- RFC 9457 via `crell/api-problem` v3.8.0
+- Sanctum for auth (SPA cookies + API tokens)
+- DB::transaction for multi-step operations
+
+**PHP Stack (Symfony):**
+- Service classes with autowired constructor injection
+- Doctrine EntityManager for data access (Data Mapper pattern)
+- DTOs with `#[MapRequestPayload]` and Symfony Validator constraints
+- API Platform v4.x for automatic CRUD operations
+- JWT via `lexik/jwt-authentication-bundle` v3.2.0 with RS256
+
+**Go Stack:**
+- Feature-based `internal/` packages (`internal/user/service.go`)
+- Constructor injection with small interfaces (1-3 methods) defined at consumer site
+- Accept interfaces, return structs; wire manually in `main.go`
+- sqlc for type-safe queries from annotated SQL
+- go-playground/validator v10 for struct validation
+- Custom `ProblemDetail` struct for RFC 9457
+- `database/sql` transactions with `context.Context`
+
+## Anti-Patterns to NEVER Generate
+
+**All Stacks:**
+- Business logic in route handlers
+- Direct ORM calls in route handlers
+- Hardcoded secrets
+- Missing error handling
+- Side effects inside transactions
+- Exposing raw ORM models in API responses
+- `any` types in TypeScript
+
+**Node.js:**
+- Multiple PrismaClient instances (use singleton)
+- `instanceof ZodError` (use v6 helpers)
+- Express-style error middleware (use Fastify's `setErrorHandler`)
+- Missing `.js` extensions in ESM imports
+- `moduleResolution: "bundler"` for backends
+
+**PHP:**
+- Fat controllers with business logic
+- N+1 queries (use eager loading)
+- `env()` outside config files
+- `$request->all()` (use `$request->validated()`)
+
+**Go:**
+- Global database connections
+- Ignoring errors
+- Generic package names (`utils/`)
+- Layer-based `internal/handlers/` structure
+
+---
+
+## Definition of Done
+
+- [ ] All TODO stubs from scaffold have corresponding implementations
+- [ ] Every API contract endpoint has service method coverage
+- [ ] RFC 9457 error handling implemented with type registry
+- [ ] Pagination helper generated and used in all list endpoints
+- [ ] Auth service generated (if auth endpoints exist) with JWT lifecycle
+- [ ] Idempotency middleware generated (if enabled) for POST/PUT
+- [ ] State machines generated for resources with status transitions
+- [ ] Transactions used for multi-step operations with side effects outside
+- [ ] Quality checks passed (coverage, error handling, patterns, security, code quality)
+- [ ] Implementation guide with decisions log and TODO coverage report
+- [ ] Integration readme with setup instructions and next steps
+- [ ] Output follows v3.0.0 structure (ID, folder, index)
+- [ ] Index updated with executive summary
+- [ ] User approved final result
