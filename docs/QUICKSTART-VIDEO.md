@@ -56,12 +56,12 @@ claude
 ```
 
 **NARRATION (continued):**
-> "The first time you run Claude, jaan.to automatically creates a context directory in your project with templates, learning files, and config. No manual setup needed."
+> "Then run /jaan-to:jaan-init to activate jaan.to for your project. It creates a context directory with templates, learning files, and config — one command, fully set up."
 
-**VISUAL:** Show `ls jaan-to/` output with directory structure
+**VISUAL:** Show `/jaan-to:jaan-init` command and `ls jaan-to/` output with directory structure
 
 **ON-SCREEN TEXT:**
-- ✅ Auto-bootstraps on first run
+- ✅ One-command activation per project
 - ✅ Creates jaan-to/ directory
 - ✅ Copies templates and context files
 

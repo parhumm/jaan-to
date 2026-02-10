@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [5.1.0] - 2026-02-10
+
+### Added
+- **`jaan-issue-report` skill** (`/jaan-to:jaan-issue-report`) — Report bugs, feature requests, skill issues, or documentation problems to the jaan-to GitHub repo. Two delivery modes: `--submit` for direct GitHub issue creation via `gh` CLI, or local-only (default) saving to `$JAAN_OUTPUTS_DIR/jaan-issues/`. Features session context awareness (auto-drafts from conversation history when invoked mid-session), privacy sanitization (redacts private paths, tokens, credentials before preview), 4 issue types with auto-classification, upfront `gh auth status` check, and type-specific templates with environment info collection
+- **`jaan-issue-report` documentation** — `docs/skills/core/jaan-issue-report.md` and updated Core Skills README index
+
+### Changed
+- **Bootstrap now opt-in per project** — Projects require `/jaan-to:jaan-init` to activate. Existing projects with `jaan-to/` directory continue working unchanged. New skill: `/jaan-to:jaan-init`
+
+---
+
 ## [5.0.0] - 2026-02-10
 
 ### Changed
@@ -932,6 +943,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[5.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.1.0
 [5.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.0.0
 [4.5.1]: https://github.com/parhumm/jaan-to/releases/tag/v4.5.1
 [4.5.0]: https://github.com/parhumm/jaan-to/releases/tag/v4.5.0

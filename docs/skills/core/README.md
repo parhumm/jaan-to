@@ -21,6 +21,7 @@ slug: /skills/core
 | [/jaan-to:docs-update](docs-update.md) | Audit and fix documentation |
 | [/jaan-to:skill-create](skill-create.md) | Create new skill with wizard |
 | [/jaan-to:skill-update](skill-update.md) | Update existing skill |
+| [/jaan-to:jaan-issue-report](jaan-issue-report.md) | Report issues to jaan-to GitHub repo |
 
 ---
 

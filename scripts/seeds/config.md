@@ -62,6 +62,7 @@
 | frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
 | wp-pr-review | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
 | release-iterate-changelog | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact notes and support guidance |
+| jaan-issue-report | `/jaan-to:jaan-issue-report` | [Internal] Report issues to jaan-to GitHub repo or save locally |
 
 ## Language
 - language: ask
