@@ -426,17 +426,17 @@ State management, routing, testing, responsive strategy
 User approves before generation
 
 ### Phase 2 Output — Flat folder
-All files in `$JAAN_OUTPUTS_DIR/dev/frontend/{id}-{slug}/`:
+All files in `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`:
 
 ```
 {id}-{slug}/
-├── {id}-frontend-scaffold-{slug}.md                     # Main doc (architecture + component map)
-├── {id}-frontend-scaffold-components-{slug}.tsx          # React components
-├── {id}-frontend-scaffold-hooks-{slug}.ts               # Typed API client hooks
-├── {id}-frontend-scaffold-types-{slug}.ts               # TypeScript interfaces from API schemas
-├── {id}-frontend-scaffold-pages-{slug}.tsx               # Page layouts / routes
-├── {id}-frontend-scaffold-config-{slug}.ts              # Package.json + tsconfig + tailwind config
-└── {id}-frontend-scaffold-readme-{slug}.md              # Setup + run instructions
+├── {id}-{slug}.md                                       # Main doc (architecture + component map)
+├── {id}-{slug}-components.tsx                            # React components
+├── {id}-{slug}-hooks.ts                                 # Typed API client hooks
+├── {id}-{slug}-types.ts                                 # TypeScript interfaces from API schemas
+├── {id}-{slug}-pages.tsx                                # Page layouts / routes
+├── {id}-{slug}-config.ts                                # Package.json + tsconfig + tailwind config
+└── {id}-{slug}-readme.md                                # Setup + run instructions
 ```
 
 ### Phase 2 Steps
@@ -463,7 +463,7 @@ Present generated output summary. Use AskUserQuestion:
 #### Step 10: Generate ID and Folder Structure
 ```bash
 source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/dev/frontend"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/frontend/scaffold"
 mkdir -p "$SUBDOMAIN_DIR"
 NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 slug="{project-name-slug}"

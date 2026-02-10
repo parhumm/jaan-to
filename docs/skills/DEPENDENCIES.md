@@ -29,7 +29,7 @@ Product Development Flow:
                  ├──> /jaan-to:frontend-task-breakdown
                  │    "Frontend task breakdown from PRD"
                  │     │
-                 │     └──> /jaan-to:dev-fe-state-machine (Future)
+                 │     └──> /jaan-to:frontend-state-machine (Future)
                  │          "State machine definitions"
                  │
                  ├──> /jaan-to:backend-task-breakdown
@@ -193,7 +193,7 @@ These skills are referenced but not yet implemented:
 
 | Skill | Referenced By | Purpose |
 |-------|---------------|---------|
-| `/jaan-to:dev-fe-state-machine` | fe-task-breakdown | Component state machine definitions |
+| `/jaan-to:frontend-state-machine` | frontend-task-breakdown | Component state machine definitions |
 | `/jaan-to:backend-data-model` | be-task-breakdown | Detailed data model specification |
 
 See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.

@@ -30,7 +30,7 @@ const features = [
 
 const roles = [
   {name: 'PM', skills: ['pm-prd-write', 'pm-story-write', 'pm-research-about']},
-  {name: 'Dev', skills: ['dev-api-contract', 'dev-be-data-model', 'dev-be-task-breakdown', 'dev-fe-design', 'dev-fe-task-breakdown', 'detect-dev']},
+  {name: 'Dev', skills: ['backend-api-contract', 'backend-data-model', 'backend-task-breakdown', 'frontend-design', 'frontend-task-breakdown', 'detect-dev']},
   {name: 'UX', skills: ['ux-heatmap-analyze', 'ux-microcopy-write', 'ux-research-synthesize']},
   {name: 'QA', skills: ['qa-test-cases']},
   {name: 'Data', skills: ['data-gtm-datalayer']},

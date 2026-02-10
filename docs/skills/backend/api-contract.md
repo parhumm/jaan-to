@@ -51,12 +51,12 @@ Questions are skipped when already answered by input or `$JAAN_CONTEXT_DIR/tech.
 
 ## What It Produces
 
-Two files at `$JAAN_OUTPUTS_DIR/dev/contract/{id}-{slug}/`:
+Two files at `$JAAN_OUTPUTS_DIR/backend/api-contract/{id}-{slug}/`:
 
 | File | Content |
 |------|---------|
 | `api.yaml` | OpenAPI 3.1 specification with all components and paths |
-| `{id}-contract-{slug}.md` | Quick-start guide with auth, examples, error handling, and tooling commands |
+| `{id}-{slug}.md` | Quick-start guide with auth, examples, error handling, and tooling commands |
 
 ### OpenAPI Spec Includes
 

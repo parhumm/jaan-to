@@ -61,6 +61,54 @@ if [ -d "$PROJECT_DIR/jaan-to/outputs/dev" ]; then
   rmdir "$PROJECT_DIR/jaan-to/outputs/dev" 2>/dev/null || true
 fi
 
+# Migration: move dev/contract outputs to backend/api-contract
+if [ -d "$PROJECT_DIR/jaan-to/outputs/dev/contract" ]; then
+  mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend/api-contract"
+  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/dev/contract" 2>/dev/null)" ]; then
+    mv "$PROJECT_DIR/jaan-to/outputs/dev/contract"/* "$PROJECT_DIR/jaan-to/outputs/backend/api-contract/" 2>/dev/null || true
+  fi
+  rmdir "$PROJECT_DIR/jaan-to/outputs/dev/contract" 2>/dev/null || true
+fi
+
+# Migration: split backend/ numbered folders into subdomain folders
+for folder in "$PROJECT_DIR/jaan-to/outputs/backend"/*/; do
+  [ -d "$folder" ] || continue
+  foldername=$(basename "$folder")
+  case "$foldername" in data-model|task-breakdown|api-contract|scaffold) continue ;; esac
+
+  if ls "$folder"/*-data-model-* 1>/dev/null 2>&1; then
+    mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend/data-model"
+    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/backend/data-model/$foldername" 2>/dev/null || true
+  elif ls "$folder"/*-be-tasks-* 1>/dev/null 2>&1; then
+    mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend/task-breakdown"
+    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/backend/task-breakdown/$foldername" 2>/dev/null || true
+  fi
+done
+
+# Migration: move frontend/components outputs to frontend/design
+if [ -d "$PROJECT_DIR/jaan-to/outputs/frontend/components" ]; then
+  mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend/design"
+  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/frontend/components" 2>/dev/null)" ]; then
+    mv "$PROJECT_DIR/jaan-to/outputs/frontend/components"/* "$PROJECT_DIR/jaan-to/outputs/frontend/design/" 2>/dev/null || true
+  fi
+  rmdir "$PROJECT_DIR/jaan-to/outputs/frontend/components" 2>/dev/null || true
+fi
+
+# Migration: split frontend/ numbered folders into subdomain folders
+for folder in "$PROJECT_DIR/jaan-to/outputs/frontend"/*/; do
+  [ -d "$folder" ] || continue
+  foldername=$(basename "$folder")
+  case "$foldername" in design|task-breakdown|scaffold) continue ;; esac
+
+  if ls "$folder"/*-component-* 1>/dev/null 2>&1; then
+    mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend/design"
+    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/frontend/design/$foldername" 2>/dev/null || true
+  elif ls "$folder"/*-fe-tasks-* 1>/dev/null 2>&1; then
+    mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend/task-breakdown"
+    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/frontend/task-breakdown/$foldername" 2>/dev/null || true
+  fi
+done
+
 # 1. Create all necessary directories (using resolved paths)
 mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR"
 mkdir -p "$PROJECT_DIR/$LEARN_DIR"

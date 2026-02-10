@@ -5,7 +5,7 @@ doc_type: skill
 created_date: 2026-02-03
 updated_date: 2026-02-03
 tags: [dev, frontend, component, design, accessibility, responsive, react, vue]
-related: [fe-task-breakdown, stack-detect]
+related: [frontend-task-breakdown, stack-detect]
 ---
 
 # /jaan-to:frontend-design
@@ -36,13 +36,13 @@ Generates working component code (HTML/CSS/JS, React, Vue, vanilla) with bold de
 
 ## What It Produces
 
-Three files at `$JAAN_OUTPUTS_DIR/dev/components/{id}-{slug}/`:
+Three files at `$JAAN_OUTPUTS_DIR/frontend/design/{id}-{slug}/`:
 
 | File | Content |
 |------|---------|
-| `{id}-component-{slug}.md` | Documentation with design rationale, usage guide, accessibility notes |
-| `{id}-component-code-{slug}.{ext}` | Production-ready component code (.jsx/.vue/.html based on tech stack) |
-| `{id}-component-preview-{slug}.html` | Standalone preview showing component in multiple states |
+| `{id}-{slug}.md` | Documentation with design rationale, usage guide, accessibility notes |
+| `{id}-{slug}-code.{ext}` | Production-ready component code (.jsx/.vue/.html based on tech stack) |
+| `{id}-{slug}-preview.html` | Standalone preview showing component in multiple states |
 
 ---
 
@@ -104,7 +104,7 @@ This skill fits in the dev workflow:
 ```
 
 - **task-breakdown** plans what to build (component inventory, tasks)
-- **fe-design** builds the actual component code
+- **frontend-design** builds the actual component code
 - **qa-test-cases** generates tests for the component
 
 ---
@@ -117,9 +117,9 @@ This skill fits in the dev workflow:
 ```
 
 **Output:**
-- `jaan-to/outputs/dev/components/01-hero-section/01-component-hero-section.md`
-- `jaan-to/outputs/dev/components/01-hero-section/01-component-code-hero-section.jsx`
-- `jaan-to/outputs/dev/components/01-hero-section/01-component-preview-hero-section.html`
+- `jaan-to/outputs/frontend/design/01-hero-section/01-hero-section.md`
+- `jaan-to/outputs/frontend/design/01-hero-section/01-hero-section-code.jsx`
+- `jaan-to/outputs/frontend/design/01-hero-section/01-hero-section-preview.html`
 
 Component includes:
 - Asymmetric layout with diagonal flow

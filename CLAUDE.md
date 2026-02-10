@@ -126,7 +126,7 @@ jaan-to/outputs/{role}/{subdomain}/{id}-{slug}/
 **Key Features:**
 - **Per-subdomain IDs**: Each subdomain (pm/prd, pm/stories, data/gtm) has independent ID sequences
 - **Slug reusability**: Same slug can exist across different role/subdomain combinations
-  - Example: "user-auth" can appear in `pm/prd/01-user-auth/`, `data/gtm/01-user-auth/`, and `dev/frontend/01-user-auth/`
+  - Example: "user-auth" can appear in `pm/prd/01-user-auth/`, `data/gtm/01-user-auth/`, and `frontend/design/01-user-auth/`
 - **Automatic indexing**: Skills update README.md indexes automatically after each output
 
 **Examples:**

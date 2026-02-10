@@ -524,7 +524,7 @@ When tech.md is available, incorporate these sections:
 
 ## Companion Markdown Template
 
-Use this structure for the `{id}-contract-{slug}.md` companion guide:
+Use this structure for the `{id}-{slug}.md` companion guide:
 
 ```markdown
 # {{title}} API — Quick Start Guide
@@ -622,7 +622,7 @@ schemathesis run --url http://localhost:4010 api.yaml
 | Field | Value |
 |-------|-------|
 | Generated | {{date}} |
-| Skill | dev-api-contract |
+| Skill | backend-api-contract |
 | OpenAPI | 3.1.0 |
 | Status | Draft |
 ```

@@ -1,7 +1,7 @@
 ---
 name: backend-scaffold
 description: Generate production-ready backend code with routes, data models, service layers, and validation.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/scaffold/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [backend-api-contract, backend-task-breakdown, backend-data-model]
 ---
 
@@ -161,14 +161,14 @@ All files in `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/`:
 
 ```
 {id}-{slug}/
-├── {id}-backend-scaffold-{slug}.md                    # Main doc (setup guide + architecture)
-├── {id}-backend-scaffold-routes-{slug}.ts              # Route handlers (all resources)
-├── {id}-backend-scaffold-services-{slug}.ts            # Service layer (business logic)
-├── {id}-backend-scaffold-schemas-{slug}.ts             # Validation schemas
-├── {id}-backend-scaffold-middleware-{slug}.ts           # Auth + error handling middleware
-├── {id}-backend-scaffold-prisma-{slug}.prisma          # ORM data model
-├── {id}-backend-scaffold-config-{slug}.ts              # Package.json + tsconfig content
-└── {id}-backend-scaffold-readme-{slug}.md              # Setup + run instructions
+├── {id}-{slug}.md                    # Main doc (setup guide + architecture)
+├── {id}-{slug}-routes.ts              # Route handlers (all resources)
+├── {id}-{slug}-services.ts            # Service layer (business logic)
+├── {id}-{slug}-schemas.ts             # Validation schemas
+├── {id}-{slug}-middleware.ts           # Auth + error handling middleware
+├── {id}-{slug}-prisma.prisma          # ORM data model
+├── {id}-{slug}-config.ts              # Package.json + tsconfig content
+└── {id}-{slug}-readme.md              # Setup + run instructions
 ```
 
 > File extensions adapt to detected stack (.ts for Node.js, .php for PHP, .go for Go).
@@ -221,7 +221,7 @@ Preview output configuration:
 > **Output Configuration**
 > - ID: {NEXT_ID}
 > - Folder: `$JAAN_OUTPUTS_DIR/backend/scaffold/{NEXT_ID}-{slug}/`
-> - Main file: `{NEXT_ID}-backend-scaffold-{slug}.md`
+> - Main file: `{NEXT_ID}-{slug}.md`
 
 ## Step 10: Write Output
 

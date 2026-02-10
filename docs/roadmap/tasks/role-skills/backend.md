@@ -75,7 +75,7 @@ flowchart TD
 - **→ Next**: `backend-api-versioning`, `dev-docs-generate`
 - **MCP Required**: OpenAPI/Swagger, Postman (optional)
 - **Input**: [entities]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/api.yaml`
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/api-contract/{slug}/api.yaml`
 - **Reference**: [`59-backend-api-contract.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/59-backend-api-contract.md)
 
 ### /jaan-to:backend-scaffold
@@ -108,4 +108,4 @@ flowchart TD
 - **→ Next**: `dev-docs-generate`
 - **MCP Required**: None
 - **Input**: [api]
-- **Output**: `$JAAN_OUTPUTS_DIR/dev/contract/{slug}/versioning-plan.md`
+- **Output**: `$JAAN_OUTPUTS_DIR/backend/api-contract/{slug}/versioning-plan.md`

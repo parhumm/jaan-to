@@ -136,7 +136,7 @@ NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
 **Example**: "user-auth" can exist in:
 - `pm/prd/01-user-auth/` (PRD for user authentication)
 - `data/gtm/01-user-auth/` (GTM tracking for user authentication)
-- `dev/frontend/01-user-auth/` (Frontend tasks for user authentication)
+- `frontend/task-breakdown/01-user-auth/` (Frontend tasks for user authentication)
 
 **Benefit**: Natural feature/topic naming across different roles and output types.
 

@@ -168,7 +168,7 @@ graph TD
 | Field | Value |
 |-------|-------|
 | Generated | {{date}} |
-| Skill | dev-fe-task-breakdown |
-| Output Path | {{env:JAAN_OUTPUTS_DIR}}/dev/frontend/ |
+| Skill | frontend-task-breakdown |
+| Output Path | {{env:JAAN_OUTPUTS_DIR}}/frontend/task-breakdown/ |
 | Status | Draft |
 | Version | 3.0 |
