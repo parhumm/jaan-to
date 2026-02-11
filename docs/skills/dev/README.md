@@ -29,6 +29,10 @@ See [Frontend Skills](../frontend/README.md) for complete documentation:
 - [/jaan-to:frontend-task-breakdown](../frontend/task-breakdown.md) - Transform UX design handoffs into production-ready task breakdowns
 - [/jaan-to:frontend-scaffold](../frontend/scaffold.md) - Convert designs to React/Next.js components with TailwindCSS and typed API hooks
 
+### Assembly Skills
+
+- [/jaan-to:dev-project-assemble](project-assemble.md) - Wire scaffold outputs into runnable project with configs and entry points
+
 ### Planned Dev Skills
 
 | Skill | Description | Depends On |

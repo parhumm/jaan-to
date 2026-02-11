@@ -210,3 +210,17 @@ flowchart TD
 - **MCP Required**: GitLab (pipeline), Jira (test evidence)
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/signoff/{slug}/release-signoff.md`
+
+### ✅ /jaan-to:qa-test-generate
+
+- **Logical**: `qa-test-generate`
+- **Description**: Generate runnable Vitest and Playwright test files from BDD test cases and scaffold code
+- **Quick Win**: Yes - structured code generation
+- **Key Points**:
+  - BDD-to-code: jest-cucumber for unit, playwright-bdd for E2E
+  - Tag-based routing (@unit, @integration, @e2e, @api)
+  - Generates test data factories, MSW handlers, page objects
+- **→ Next**: —
+- **MCP Required**: None
+- **Input**: [qa-test-cases] [backend-scaffold | frontend-scaffold]
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/test-generate/{id}-{slug}/`

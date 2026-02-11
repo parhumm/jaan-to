@@ -17,6 +17,7 @@ sidebar_position: 2
 | [/jaan-to:backend-data-model](data-model.md) | Generate data model docs with constraints, indexes, and migrations |
 | [/jaan-to:backend-task-breakdown](task-breakdown.md) | Convert PRDs into structured backend development tasks |
 | [/jaan-to:backend-scaffold](scaffold.md) | Generate production-ready backend code with routes, services, and validation |
+| [/jaan-to:backend-service-implement](service-implement.md) | Generate service implementations with business logic from specs and scaffold stubs |
 
 ---
 

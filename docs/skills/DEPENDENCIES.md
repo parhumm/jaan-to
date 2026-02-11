@@ -89,6 +89,34 @@ UX Research & Design:
                       "Analyze interaction patterns from heatmaps"
 ```
 
+### Spec-to-Ship Flow (New)
+
+```
+Code Generation & Deployment:
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:backend-scaffold + /jaan-to:frontend-scaffold  │
+│  "Generate code stubs from specs"                        │
+└────────────────┬────────────────────────────────────────┘
+                 │
+                 ├──> /jaan-to:backend-service-implement
+                 │    "Fill service stubs with business logic"
+                 │
+                 ├──> /jaan-to:dev-project-assemble
+                 │    "Wire scaffolds into runnable project"
+                 │
+                 ├──> /jaan-to:qa-test-generate
+                 │    "Generate runnable tests from BDD cases"
+                 │
+                 ├──> /jaan-to:detect-dev
+                 │    "Security audit of generated code"
+                 │     │
+                 │     └──> /jaan-to:sec-audit-remediate
+                 │          "Fix security findings with patches"
+                 │
+                 └──> /jaan-to:devops-infra-scaffold
+                      "Generate CI/CD, Docker, deployment configs"
+```
+
 ### Skill Development Flow
 
 ```
@@ -195,6 +223,16 @@ These skills are referenced but not yet implemented:
 |-------|---------------|---------|
 | `/jaan-to:frontend-state-machine` | frontend-task-breakdown | Component state machine definitions |
 | `/jaan-to:backend-data-model` | be-task-breakdown | Detailed data model specification |
+
+## Recently Added Skills
+
+| Skill | Role | Purpose |
+|-------|------|---------|
+| `/jaan-to:dev-project-assemble` | dev | Wire scaffold outputs into runnable project |
+| `/jaan-to:backend-service-implement` | backend | Generate service implementations from stubs |
+| `/jaan-to:qa-test-generate` | qa | Generate runnable tests from BDD cases |
+| `/jaan-to:sec-audit-remediate` | sec | Fix security findings with patches + tests |
+| `/jaan-to:devops-infra-scaffold` | devops | Generate CI/CD, Docker, deployment configs |
 
 See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.
 
