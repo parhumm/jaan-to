@@ -95,7 +95,7 @@ Body-trimmed 8 large skills with reference extraction. Extracted language settin
 
 **Savings**: ~2,000 tokens/session permanently, ~7K-48K tokens per skill invocation.
 
-### v5.2.0 Spec-to-Ship Skills
+### v6.0.0 Spec-to-Ship Skills
 
 5 new skills created at 3,351 total lines, then token-optimized to 2,507 lines (~25% reduction) via reference extraction:
 

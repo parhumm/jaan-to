@@ -27,9 +27,9 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v5.2.0 — Add 5 spec-to-ship skills + token optimization
+**Latest:** v6.0.0 — Add 5 spec-to-ship skills + token optimization
 
-### v5.2.0 — Add 5 spec-to-ship skills + token optimization
+### v6.0.0 — Add 5 spec-to-ship skills + token optimization
 - Added `dev-project-assemble` skill — wire backend + frontend scaffold outputs into runnable project with configs and entry points (`221280a`)
 - Added `backend-service-implement` skill — generate full service implementations with business logic from scaffold stubs and upstream specs (`221280a`)
 - Added `qa-test-generate` skill — generate runnable Vitest unit tests and Playwright E2E specs from BDD test cases (`221280a`)
@@ -38,7 +38,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 - Token-optimized all 5 new skills: extracted reference material into `docs/extending/*-reference.md`, total reduction ~844 lines (~25%) (`e70aeb4`)
 - Added Token Optimization Strategy section to `docs/extending/create-skill.md` for future skill development (`e70aeb4`)
 - New roles: `sec` (Security), `devops` (DevOps/Infrastructure)
-- Plugin skill count updated from 32 to 37
+- Plugin skill count updated from 33 to 38
 
 ### v5.1.0 — Add jaan-init + jaan-issue-report skills, make bootstrap opt-in
 - Added `jaan-init` skill — initialize jaan-to for a project (`3fbf8c5`)
@@ -204,7 +204,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
-### v5.2.0 — Add 5 spec-to-ship skills (`221280a`)
+### v6.0.0 — Add 5 spec-to-ship skills (`221280a`)
 
 - [x] `/jaan-to:dev-project-assemble` — Wire scaffold outputs into runnable project structure (`221280a`)
 - [x] `/jaan-to:backend-service-implement` — Generate service implementations from scaffold stubs (`221280a`)
