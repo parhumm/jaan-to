@@ -308,6 +308,66 @@ Claude Code allocates a **15,000 character budget** for all skill descriptions i
 
 **Override:** Set `SLASH_COMMAND_TOOL_CHAR_BUDGET` environment variable to adjust the budget.
 
+### Token Optimization Strategy
+
+When skills grow large, use reference extraction to keep SKILL.md within token targets while preserving all content.
+
+#### Line Targets
+
+| Skill Complexity | SKILL.md Target | Max |
+|---|---|---|
+| Simple (single-phase, few steps) | 150-300 | 400 |
+| Standard (two-phase, multi-step) | 300-500 | 500 |
+| Complex (multi-stack, code generation) | 400-500 | 600 |
+
+#### Reference Extraction Pattern
+
+When a SKILL.md exceeds ~500 lines, extract **reference material** (not execution instructions) into a dedicated reference file:
+
+**Create**: `docs/extending/{skill-name}-reference.md`
+
+**Header**:
+```markdown
+# {Skill Name} — Reference Material
+
+> Extracted reference tables, code templates, and patterns for the `{skill-name}` skill.
+> This file is loaded by `{skill-name}` SKILL.md via inline pointers.
+> Do not duplicate content back into SKILL.md.
+
+---
+```
+
+**Replace extracted section in SKILL.md with inline pointer**:
+```markdown
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/{skill-name}-reference.md` section "{Section Name}" for {brief description}.
+```
+
+#### What to Extract (reference material)
+
+- Code template blocks (TypeScript/PHP/Go examples)
+- Multi-stack pattern tables (per-language comparison tables)
+- CWE/OWASP mapping tables
+- Configuration file content examples (.env, .gitignore, docker-compose patterns)
+- Anti-pattern lists (when > 10 items)
+- Directory layout ASCII trees (when > 10 lines)
+
+#### What to Keep Inline (execution instructions)
+
+- Phase structure (PHASE 1 / HARD STOP / PHASE 2)
+- Step headings and brief instructions
+- AskUserQuestion flows
+- Tech detection tables (compact, < 10 rows — needed for every invocation)
+- Quality checklists
+- Definition of Done
+- Key generation rules (< 15 lines — critical for every invocation)
+
+#### Frontmatter Flags for Token Control
+
+| Flag | Effect | Use When |
+|---|---|---|
+| `disable-model-invocation: true` | Removes from auto-suggestions, saves ~280 tokens/session | Internal/infrastructure skills not directly user-invoked |
+| `context: fork` | Runs in isolated subagent, saves 30-48K tokens | Heavy analysis skills (detect-*) that produce bounded output |
+
 ### Tool Permission Patterns (v3.0.0)
 
 **Always use environment variables** for path-based permissions:
