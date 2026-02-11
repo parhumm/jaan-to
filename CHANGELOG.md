@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Template/learn naming mismatch** — Bootstrap created files as `{skill}.template.md` / `{skill}.learn.md` (without `jaan-to:` prefix) but all 38 skills expected `jaan-to:{skill}.template.md` / `jaan-to:{skill}.learn.md`. Eagerly-copied files were never found by skills. The pre-execution protocol and path-resolver now support both naming conventions for backward compatibility.
+- **Seed settings.yaml showed wrong default paths** — Commented-out path examples showed `artifacts/jaan-to` instead of actual default `jaan-to/outputs` (and similar mismatches for templates, learning, context). Existing projects auto-corrected on next session via bootstrap migration. Fixes [#64](https://github.com/parhumm/jaan-to/issues/64)
 
 ---
 

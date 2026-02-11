@@ -6,11 +6,11 @@
 version: "3.0"
 
 # Path Customization
-# Uncomment and modify to change default locations
-# paths_templates: "docs/templates"
-# paths_learning: "docs/learning"
-# paths_context: "docs/context"
-# paths_outputs: "artifacts/jaan-to"
+# These are the defaults — uncomment and modify to change locations
+# paths_templates: "jaan-to/templates"
+# paths_learning: "jaan-to/learn"
+# paths_context: "jaan-to/context"
+# paths_outputs: "jaan-to/outputs"
 
 # Template Customization
 # Uncomment to use custom template files
