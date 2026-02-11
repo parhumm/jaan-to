@@ -33,6 +33,13 @@ language: "ask"
 # language_pm-prd-write: "en"
 # language_ux-microcopy-write: "en"
 
+# Issue Report Submission
+# Controls whether jaan-issue-report submits directly to GitHub
+# Default: "ask" (prompts on first run if gh CLI is available, saves your choice)
+# Options: true (always submit), false (always save locally)
+# Override per-invocation with --submit or --no-submit flags
+# issue_report_submit: true
+
 # Tech Stack Configuration
 # Edit jaan-to/context/tech.md to define your project's tech stack
 # Skills will automatically reference it in generated outputs

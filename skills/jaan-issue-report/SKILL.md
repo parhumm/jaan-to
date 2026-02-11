@@ -2,7 +2,7 @@
 name: jaan-issue-report
 description: Report bugs, feature requests, or skill issues to the jaan-to GitHub repo or save locally
 allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(uname *), Bash(awk *), Bash(rm -f /tmp/jaan-issue-body-*), Write($JAAN_OUTPUTS_DIR/jaan-issues/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: "<issue-description> [--type bug|feature|skill|docs] [--submit]"
+argument-hint: "<issue-description> [--type bug|feature|skill|docs] [--submit | --no-submit]"
 disable-model-invocation: true
 ---
 
@@ -26,7 +26,10 @@ Read these before execution:
 Parse from arguments:
 1. **Issue description** — Free text describing the issue
 2. **--type** — Issue type: `bug`, `feature`, `skill`, `docs`. Default: auto-detect from description or session context.
-3. **--submit** — If present, submit directly to GitHub after approval. Otherwise, save locally only.
+3. **--submit** — Force submit to GitHub (overrides saved preference)
+4. **--no-submit** — Force local-only mode (overrides saved preference)
+
+If neither `--submit` nor `--no-submit` is provided, submit mode is resolved in Step 1 via saved preference or smart detection.
 
 If no arguments provided, proceed to session context scan (Step 0) or ask: "What issue would you like to report?"
 
@@ -100,32 +103,80 @@ If signals were found:
 - Draft a 2-3 sentence description based on session signals
 - Pre-fill template fields where possible (related skill, steps to reproduce)
 
-**Present to user** (in their conversation language):
+**Present to user** using AskUserQuestion (in their conversation language):
 
+Show the draft context first:
 > "Based on this session, it looks like you hit an issue with `/jaan-to:{skill-name}`:
 >
 > **Suggested issue:** {draft title}
-> {draft description — 2-3 sentences}
->
-> Is this what you'd like to report? [yes / no, it's something else / close but let me adjust]"
+> {draft description — 2-3 sentences}"
 
-- **yes**: Continue to Step 1 with draft pre-filled. Step 3 will ask only deepening questions.
-- **no**: Discard draft, proceed to Step 1 with standard flow.
-- **adjust**: User modifies the draft, then continue to Step 1 with the adjusted version.
+Then ask:
+```
+AskUserQuestion:
+  question: "Is this what you'd like to report?"
+  header: "Draft"
+  options:
+    - label: "Yes, report this"
+      description: "Continue with this draft. Only deepening questions will be asked."
+    - label: "No, something else"
+      description: "Discard this draft and start fresh."
+    - label: "Close, let me adjust"
+      description: "Edit the draft before continuing."
+```
+
+- **Yes, report this**: Continue to Step 1 with draft pre-filled. Step 3 will ask only deepening questions.
+- **No, something else**: Discard draft, proceed to Step 1 with standard flow.
+- **Close, let me adjust**: User modifies the draft, then continue to Step 1 with the adjusted version.
 
 ---
 
-## Step 1: Check Submit Capability
+## Step 1: Resolve Submit Mode
 
-If `--submit` flag is present:
+Determine submit mode using this priority order:
 
-1. Run `gh auth status` to check if GitHub CLI is installed and authenticated
-2. If **available**: Confirm submit mode is active
-3. If **not available**: Inform user immediately in their conversation language:
+### 1.1 Check for explicit flags (highest priority)
+
+- If `--submit` flag is present: set submit mode = **submit**. Proceed to 1.4.
+- If `--no-submit` flag is present: set submit mode = **local-only**. Skip to Step 2.
+
+### 1.2 Check saved preference
+
+Read `jaan-to/config/settings.yaml` and look for the `issue_report_submit` key.
+
+- If `issue_report_submit: true`: set submit mode = **submit**. Proceed to 1.4.
+- If `issue_report_submit: false`: set submit mode = **local-only**. Skip to Step 2.
+- If key is missing or `"ask"`: proceed to 1.3.
+
+### 1.3 Smart detection (first-time flow)
+
+1. Run `gh auth status` silently.
+2. If `gh` is **not available or not authenticated**:
+   > "GitHub CLI is not installed or not authenticated. Issues will be saved locally. You can submit them manually later."
+   Set submit mode = **local-only**. Skip to Step 2. Do NOT save this as a preference (user may install gh later).
+3. If `gh` **is authenticated**: ask the user using AskUserQuestion (in their conversation language):
+   ```
+   AskUserQuestion:
+     question: "GitHub CLI is available. Would you like to submit issues directly to GitHub?"
+     header: "Submit mode"
+     options:
+       - label: "Yes, submit to GitHub (Recommended)"
+         description: "Issues will be created directly on GitHub. This preference is saved for future runs."
+       - label: "No, save locally"
+         description: "Issues will be saved as local files only. This preference is saved for future runs."
+   ```
+   - **Yes**: Set submit mode = **submit**. Save `issue_report_submit: true` to `jaan-to/config/settings.yaml`. Proceed to 1.4.
+   - **No**: Set submit mode = **local-only**. Save `issue_report_submit: false` to `jaan-to/config/settings.yaml`. Skip to Step 2.
+
+### 1.4 Verify gh availability (for submit mode)
+
+If submit mode is **submit** (from any source):
+
+1. Run `gh auth status` to verify GitHub CLI is still installed and authenticated.
+2. If **available**: Confirm submit mode is active.
+3. If **not available**: Inform user in their conversation language:
    > "GitHub CLI is not installed or not authenticated. Your issue will be saved locally instead. You can submit it manually later."
    Override to local-only mode.
-
-If `--submit` is not present, skip this step (default is local-only).
 
 ---
 
@@ -144,7 +195,21 @@ Determine issue type using this priority order:
 | skill, `/jaan-to:`, command, workflow, generate | `skill` |
 | docs, documentation, readme, guide, typo, unclear | `docs` |
 
-4. **If uncertain**, ask: "What type of issue is this? [bug / feature / skill / docs]"
+4. **If uncertain**, ask using AskUserQuestion:
+   ```
+   AskUserQuestion:
+     question: "What type of issue is this?"
+     header: "Issue type"
+     options:
+       - label: "Bug"
+         description: "Something is broken or not working as expected"
+       - label: "Feature"
+         description: "A new capability or enhancement"
+       - label: "Skill"
+         description: "Issue with a specific jaan-to skill"
+       - label: "Docs"
+         description: "Documentation is incorrect, missing, or unclear"
+   ```
 
 Map type to GitHub label:
 
@@ -300,14 +365,25 @@ BODY:
 If items were sanitized in Step 7, flag:
 > "Sanitized {N} private path(s)/value(s). Please review the preview carefully before approving."
 
-Ask in the user's conversation language:
-> "Does this look correct? [y/n/edit]"
+Ask using AskUserQuestion (in the user's conversation language):
+```
+AskUserQuestion:
+  question: "Does this look correct?"
+  header: "Approve"
+  options:
+    - label: "Yes, looks good"
+      description: "Proceed to save and/or submit the issue"
+    - label: "No, abort"
+      description: "Cancel — nothing will be saved or submitted"
+    - label: "Edit"
+      description: "Make changes to the issue before proceeding"
+```
 
-- **y**: Proceed to Phase 2
-- **n**: Abort, nothing saved
-- **edit**: User provides changes → revise body, re-run sanitization, show preview again
+- **Yes**: Proceed to Phase 2
+- **No**: Abort, nothing saved
+- **Edit**: User provides changes → revise body, re-run sanitization, show preview again
 
-**Do NOT proceed to Phase 2 without explicit "y" approval.**
+**Do NOT proceed to Phase 2 without explicit approval.**
 
 ---
 
@@ -370,9 +446,9 @@ add_to_index \
 Confirm:
 > "Local copy saved to: `$JAAN_OUTPUTS_DIR/jaan-issues/{NEXT_ID}-{SLUG}/{NEXT_ID}-{SLUG}.md`"
 
-## Step 10: Submit to GitHub (if --submit and gh auth passed)
+## Step 10: Submit to GitHub (if submit mode is active)
 
-If `--submit` flag was provided and `gh auth status` passed in Step 1:
+If submit mode is **submit** (as resolved in Step 1) and `gh auth status` passed in Step 1.4:
 
 ### 10.1 Strip YAML Frontmatter
 
@@ -427,10 +503,18 @@ Show in the user's conversation language:
 
 ## Step 12: Capture Feedback
 
-> "Any feedback on this issue report? [y/n]"
+```
+AskUserQuestion:
+  question: "Any feedback on this issue reporting experience?"
+  header: "Feedback"
+  options:
+    - label: "No feedback"
+      description: "All good, skip feedback"
+    - label: "Yes, I have feedback"
+      description: "Share feedback to improve this skill"
+```
 
-If yes:
-- Run `/jaan-to:learn-add jaan-issue-report "{feedback}"`
+If **Yes, I have feedback**: ask for details, then run `/jaan-to:learn-add jaan-issue-report "{feedback}"`
 
 ---
 
@@ -447,6 +531,6 @@ If yes:
 - [ ] HARD STOP approved by user (full preview shown)
 - [ ] Local copy saved to `$JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/`
 - [ ] Index updated
-- [ ] If --submit: GitHub issue created and URL captured
-- [ ] If --submit: Local copy updated with issue URL and number
+- [ ] If submit mode active: GitHub issue created and URL captured
+- [ ] If submit mode active: Local copy updated with issue URL and number
 - [ ] User informed of result and next steps

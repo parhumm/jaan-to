@@ -39,7 +39,7 @@ Process improvements:
 
 Things to avoid:
 
-- Don't assume the user wants to submit to GitHub — default to local-only mode, require explicit `--submit` flag
+- Don't skip the submit mode resolution in Step 1 — respect the priority: `--submit`/`--no-submit` flags > saved `issue_report_submit` preference > smart detection with user prompt
 - Don't include absolute user paths (`/Users/name/...`, `/home/name/...`) — sanitize to `{USER_HOME}/{PROJECT_PATH}/...`
 - Don't include credentials, tokens, secrets, or `.env` values — replace with `[REDACTED]`
 - Don't include personal info (real name, email, IP addresses) unless user explicitly approves
