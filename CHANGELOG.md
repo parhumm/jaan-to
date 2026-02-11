@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Pre-execution protocol extended** — Added template resolution (Step B) alongside the existing learn file loading (Step A), with backward-compatible fallback for both naming conventions
 - **learn-add seeds from plugin** — When creating a new project learn file via `/jaan-to:learn-add`, the plugin's LEARN.md is used as a starting point (preserving seed lessons) instead of an empty template
 
+### Removed
+- **Legacy migration code removed from bootstrap** — Removed all v2.0→v4.5.1 migration logic from session startup (`.jaan-to/` directory rename, output path moves, old skill detection, `.gitignore` rewriting). Bootstrap is now simpler and faster for current users. Deleted `scripts/lib/v3-autofix.sh`, `docs/guides/migration-v3.md`, and `docs/guides/migration-v3.24.md` (-767 lines)
+
 ### Fixed
 - **Template/learn naming mismatch** — Bootstrap created files as `{skill}.template.md` / `{skill}.learn.md` (without `jaan-to:` prefix) but all 38 skills expected `jaan-to:{skill}.template.md` / `jaan-to:{skill}.learn.md`. Eagerly-copied files were never found by skills. The pre-execution protocol and path-resolver now support both naming conventions for backward compatibility.
 
