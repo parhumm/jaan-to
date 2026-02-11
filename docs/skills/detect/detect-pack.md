@@ -93,6 +93,21 @@ Before consolidation, checks which detect skills have run:
 
 ---
 
+## Seed Reconciliation (Step 8a)
+
+After writing output files, detect-pack compares consolidated detection results against all project seed files and proposes updates:
+
+- **Reads**: `$JAAN_CONTEXT_DIR/tech.md`, `team.md`, `integrations.md`, `boundaries.md`, `tone-of-voice.template.md`, `localization.template.md`
+- **Classifies changes**: `[UPDATE]` (version drift), `[ADD]` (missing entry), `[STALE]` (not detected — user decides keep/remove)
+- **Presents diff-style summary** per seed file with approval prompt: `[y/all/n/pick]`
+- **Applies approved changes** preserving section anchors and user-added custom sections
+- **Suggests `/learn-add`** for findings that don't map to any seed file
+- **Writes report**: `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`
+
+See [seed-reconciliation-reference.md](../../extending/seed-reconciliation-reference.md) for mapping rules and preservation conventions.
+
+---
+
 ## Key Points
 
 - Enforces universal frontmatter: `target.commit` (must match git HEAD), `target.platform`, `tool.rules_version`, `confidence_scheme`, `findings_summary`, `overall_score`, `lifecycle_phase` (CycloneDX)
