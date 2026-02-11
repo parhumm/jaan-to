@@ -3,14 +3,14 @@ title: Bootstrap
 sidebar_position: 2
 doc_type: hook
 created_date: 2026-01-29
-updated_date: 2026-02-08
+updated_date: 2026-02-11
 tags: [hooks, bootstrap, setup]
 related: [README.md, ../config/context-system.md]
 ---
 
 # bootstrap
 
-> Idempotent first-run setup that creates project directories, copies seed data, and detects legacy installations.
+> Idempotent first-run setup that creates project directories and copies seed data.
 
 ---
 
@@ -24,7 +24,7 @@ related: [README.md, ../config/context-system.md]
 
 ## Per-Project Opt-In
 
-Bootstrap checks if the project has been initialized before running. If neither `jaan-to/` nor `.jaan-to/` (legacy) directory exists, bootstrap exits early:
+Bootstrap checks if the project has been initialized before running. If `jaan-to/` directory does not exist, bootstrap exits early:
 
 ```json
 {
@@ -40,16 +40,7 @@ To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, boots
 ## What It Does
 
 1. **Loads config system** — Sources `scripts/lib/config-loader.sh` to resolve customizable paths for templates, learn, context, and outputs. Falls back to defaults if missing.
-2. **Migrates legacy directory** — Renames `.jaan-to/` to `jaan-to/` if the old directory exists and the new one doesn't.
-3. **Migrates output directories** — Moves outputs from deprecated paths:
-   - `jaan-to/outputs/dev/backend/**/*` → `jaan-to/outputs/backend/**/*`
-   - `jaan-to/outputs/dev/frontend/**/*` → `jaan-to/outputs/frontend/**/*`
-   - `jaan-to/outputs/dev/contract/**/*` → `jaan-to/outputs/backend/api-contract/**/*`
-   - Splits `backend/` numbered folders into subdomain folders by filename pattern (data-model, task-breakdown)
-   - Moves `frontend/components/**/*` → `frontend/design/**/*`
-   - Splits `frontend/` numbered folders into subdomain folders by filename pattern (design, task-breakdown)
-   - Removes empty parent directories after migration
-4. **Creates directories** — Ensures all required project directories exist:
+2. **Creates directories** — Ensures all required project directories exist:
    - `jaan-to/outputs/`
    - `jaan-to/outputs/research/`
    - `jaan-to/learn/`
@@ -57,16 +48,15 @@ To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, boots
    - `jaan-to/templates/`
    - `jaan-to/config/`
    - `jaan-to/docs/`
-5. **Manages `.gitignore`** — Adds `jaan-to/` to `.gitignore`, migrating old `.jaan-to` entries if present. Creates `.gitignore` if it doesn't exist.
-6. **Seeds config** — Copies `settings.yaml` from `scripts/seeds/` to `jaan-to/config/` if not present.
-7. **Copies context files** — Copies `.md` seed files from `scripts/seeds/` to `jaan-to/context/` (skips existing).
-8. **Copies docs** — Copies `STYLE.md` and `create-skill.md` to `jaan-to/docs/` (skips existing).
-9. **Creates research README** — Generates `jaan-to/outputs/research/README.md` with index scaffold if not present.
+3. **Manages `.gitignore`** — Adds `jaan-to/` to `.gitignore` if not present. Creates `.gitignore` if it doesn't exist.
+4. **Seeds config** — Copies `settings.yaml` from `scripts/seeds/` to `jaan-to/config/` if not present.
+5. **Copies context files** — Copies `.md` seed files from `scripts/seeds/` to `jaan-to/context/` (skips existing).
+6. **Copies docs** — Copies `STYLE.md` and `create-skill.md` to `jaan-to/docs/` (skips existing).
+7. **Creates research README** — Generates `jaan-to/outputs/research/README.md` with index scaffold if not present.
 
 > **Note**: Templates and learn files are **not** copied during bootstrap. They are loaded from the plugin at runtime (lazy loading). Project-level overrides can be created in `jaan-to/templates/` for templates and via `/jaan-to:learn-add` for learn files.
-10. **Detects old standalone skills** — Scans `.claude/skills/` for legacy naming conventions (pre-v3.16 names).
-11. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
-12. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:detect-pack` to perform full repo analysis.
+8. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
+9. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:detect-pack` to perform full repo analysis.
 
 ---
 
@@ -74,14 +64,7 @@ To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, boots
 
 | Result | Condition | Action |
 |--------|-----------|--------|
-| Migrates directory | `.jaan-to/` exists, `jaan-to/` doesn't | Renames `.jaan-to/` → `jaan-to/` |
-| Migrates output paths | `outputs/dev/backend` or `outputs/dev/frontend` exist | Moves to `outputs/backend` and `outputs/frontend` |
-| Migrates api-contract | `outputs/dev/contract` exists | Moves to `outputs/backend/api-contract` |
-| Splits backend outputs | Numbered folders in `outputs/backend/` | Routes to `backend/data-model/` or `backend/task-breakdown/` by filename pattern |
-| Migrates design outputs | `outputs/frontend/components` exists | Moves to `outputs/frontend/design` |
-| Splits frontend outputs | Numbered folders in `outputs/frontend/` | Routes to `frontend/design/` or `frontend/task-breakdown/` by filename pattern |
 | Creates directories | Any missing | Creates all 7 directories listed above |
-| Replaces gitignore entry | `.gitignore` has `.jaan-to` entry | Replaces with `jaan-to/` |
 | Appends to gitignore | `.gitignore` exists without entry | Appends `jaan-to/` |
 | Creates gitignore | No `.gitignore` exists | Creates file with `jaan-to/` |
 | Seeds config | `jaan-to/config/settings.yaml` missing | Copies from plugin seeds |
@@ -90,7 +73,6 @@ To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, boots
 | Seeds research index | `outputs/research/README.md` missing | Generates scaffold README |
 | Skips copy | Any destination file already exists | Preserves existing files |
 | Suggests detect skills | `tech.md` contains `{project-name}` | Sets `suggest_detect: true` |
-| Warns | Old standalone skills detected | Reports `migration_needed: true` |
 | Warns | Context seed files missing from plugin | Lists missing files |
 
 ---
@@ -116,8 +98,6 @@ To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, boots
     "learn": 0
   },
   "missing_context": [],
-  "old_standalone_skills": [],
-  "migration_needed": false,
   "suggest_detect": true
 }
 ```
@@ -141,17 +121,7 @@ To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, boots
     "learn": 0
   },
   "missing_context": [],
-  "old_standalone_skills": [],
-  "migration_needed": false,
   "suggest_detect": false
-}
-```
-
-**With old standalone skills**:
-```json
-{
-  "old_standalone_skills": ["pm-prd-write", "jaan-to-pm-prd-write"],
-  "migration_needed": true
 }
 ```
 

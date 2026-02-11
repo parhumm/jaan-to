@@ -270,7 +270,7 @@ Use AskUserQuestion to ask the user:
 - Options:
   - "Auto-fix all" — Apply all v3.0.0 patterns automatically
   - "Interactive" — Review each change before applying
-  - "Manual script" — Generate `scripts/lib/v3-autofix.sh` for user to run
+  - "Manual checklist" — Show what needs fixing step by step
   - "Guidance only" — Show what needs fixing, don't auto-apply
 
 #### Option 8.1: Auto-Fix All
@@ -326,53 +326,7 @@ For each detected v2.x pattern:
 2. Show proposed v3.0.0 replacement
 3. Ask: "Apply this change? [y/n/skip-all]"
 
-#### Option 8.3: Generate Auto-Fix Script
-
-Create `scripts/lib/v3-autofix.sh`:
-
-```bash
-#!/bin/bash
-# Auto-generated migration script for {skill-name}
-# v2.x → v3.0.0 migration
-
-SKILL_DIR="skills/{name}"
-
-# Backup
-cp "$SKILL_DIR/SKILL.md" "$SKILL_DIR/SKILL.md.v2.backup"
-
-# Transform frontmatter
-sed -i '' 's|Write(jaan-to/outputs/\*\*)|Write($JAAN_OUTPUTS_DIR/**)|g' "$SKILL_DIR/SKILL.md"
-sed -i '' 's|Read(jaan-to/context/\*\*)|Read($JAAN_CONTEXT_DIR/**)|g' "$SKILL_DIR/SKILL.md"
-
-# Transform context files section
-sed -i '' 's|jaan-to/context/|$JAAN_CONTEXT_DIR/|g' "$SKILL_DIR/SKILL.md"
-sed -i '' 's|jaan-to/learn/|$JAAN_LEARN_DIR/|g' "$SKILL_DIR/SKILL.md"
-sed -i '' 's|skills/{name}/template.md|$JAAN_TEMPLATES_DIR/{name}.template.md|g' "$SKILL_DIR/SKILL.md"
-
-# Transform output paths
-sed -i '' 's|jaan-to/outputs/|$JAAN_OUTPUTS_DIR/|g' "$SKILL_DIR/SKILL.md"
-
-# Validate
-if grep -q 'jaan-to/' "$SKILL_DIR/SKILL.md"; then
-  echo "⚠ WARNING: Some hardcoded paths remain. Review manually."
-else
-  echo "✓ Migration complete. Review and test before committing."
-fi
-
-# template.md (if exists)
-if [ -f "$SKILL_DIR/template.md" ]; then
-  cp "$SKILL_DIR/template.md" "$SKILL_DIR/template.md.v2.backup"
-  # Add template variables (manual step - template structure varies)
-  echo "⚠ template.md backed up. Add template variables manually."
-fi
-```
-
-> "Script created. Run it with:"
-> ```bash
-> bash scripts/lib/v3-autofix.sh
-> ```
-
-#### Option 8.4: Guidance Only
+#### Option 8.3: Guidance Only
 
 Display migration checklist:
 
