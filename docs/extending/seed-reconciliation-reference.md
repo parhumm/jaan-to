@@ -1,3 +1,8 @@
+---
+title: "Seed Reconciliation Reference"
+sidebar_position: 10
+---
+
 # Seed Reconciliation Reference
 
 > Shared reference for post-detect seed reconciliation across all detect skills.
