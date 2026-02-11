@@ -613,12 +613,8 @@ allowed-tools: Write($JAAN_OUTPUTS_DIR/pm/**)
 Create path: `$JAAN_OUTPUTS_DIR/pm/{slug}/`
 ```
 
-**Auto-migration**:
+**Migration**:
 ```bash
-# Use auto-fix script
-bash scripts/lib/v3-autofix.sh {skill-name}
-
-# Or use skill validator
 /jaan-to:skill-update {skill-name}
 # → Select option [8] Migrate to v3.0.0
 ```
@@ -1528,16 +1524,12 @@ If yes:
 
 ### Automated Migration
 
-Use the auto-fix script for quick migration:
+Use the skill validator for migration:
 
 ```bash
-# Migrate a single skill
-bash scripts/lib/v3-autofix.sh {skill-name}
-
-# Or use the skill validator
 /jaan-to:skill-update {skill-name}
 # → Select option [8] Migrate to v3.0.0
-# → Choose migration approach (auto-fix, interactive, script, guidance)
+# → Choose migration approach (auto-fix, interactive, guidance)
 ```
 
 ### Manual Migration Steps

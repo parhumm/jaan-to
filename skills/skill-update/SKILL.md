@@ -391,7 +391,7 @@ If skill was migrated to v3.0.0, capture migration-specific learnings:
 
 **Categories**: migration approach effectiveness, missed patterns, template variable adoption, tech stack integration.
 
-**Auto-categorize**: patterns to v3-autofix.sh, edge cases to Step 2.1, workflow to Migration Wizard.
+**Auto-categorize**: patterns to compliance checks, edge cases to Step 2.1, workflow to Migration Wizard.
 
 Example:
 ```
