@@ -9,8 +9,7 @@ PROJECT_DIR="${CLAUDE_PROJECT_DIR:-.}"
 PLUGIN_DIR="${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}"
 
 # Opt-in: skip if project not initialized (jaan-to/ doesn't exist)
-# Existing projects with jaan-to/ continue normally
-if [ ! -d "$PROJECT_DIR/jaan-to" ] && [ ! -d "$PROJECT_DIR/.jaan-to" ]; then
+if [ ! -d "$PROJECT_DIR/jaan-to" ]; then
   cat <<RESULT
 {
   "status": "not_initialized",
@@ -42,85 +41,6 @@ DOCS_COPIED=0
 LEARN_COPIED=0
 CONFIG_COPIED=0
 
-# Migration: rename old .jaan-to/ to jaan-to/ if it exists
-if [ -d "$PROJECT_DIR/.jaan-to" ] && [ ! -d "$PROJECT_DIR/jaan-to" ]; then
-  mv "$PROJECT_DIR/.jaan-to" "$PROJECT_DIR/jaan-to"
-fi
-
-# Migration: move outputs from old dev/backend and dev/frontend to new structure
-if [ -d "$PROJECT_DIR/jaan-to/outputs/dev/backend" ]; then
-  mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend"
-  # Move all contents from old path to new path
-  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/dev/backend" 2>/dev/null)" ]; then
-    mv "$PROJECT_DIR/jaan-to/outputs/dev/backend"/* "$PROJECT_DIR/jaan-to/outputs/backend/" 2>/dev/null || true
-  fi
-  # Remove old directory if empty
-  rmdir "$PROJECT_DIR/jaan-to/outputs/dev/backend" 2>/dev/null || true
-fi
-
-if [ -d "$PROJECT_DIR/jaan-to/outputs/dev/frontend" ]; then
-  mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend"
-  # Move all contents from old path to new path
-  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/dev/frontend" 2>/dev/null)" ]; then
-    mv "$PROJECT_DIR/jaan-to/outputs/dev/frontend"/* "$PROJECT_DIR/jaan-to/outputs/frontend/" 2>/dev/null || true
-  fi
-  # Remove old directory if empty
-  rmdir "$PROJECT_DIR/jaan-to/outputs/dev/frontend" 2>/dev/null || true
-fi
-
-# Clean up parent dev directory if empty
-if [ -d "$PROJECT_DIR/jaan-to/outputs/dev" ]; then
-  rmdir "$PROJECT_DIR/jaan-to/outputs/dev" 2>/dev/null || true
-fi
-
-# Migration: move dev/contract outputs to backend/api-contract
-if [ -d "$PROJECT_DIR/jaan-to/outputs/dev/contract" ]; then
-  mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend/api-contract"
-  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/dev/contract" 2>/dev/null)" ]; then
-    mv "$PROJECT_DIR/jaan-to/outputs/dev/contract"/* "$PROJECT_DIR/jaan-to/outputs/backend/api-contract/" 2>/dev/null || true
-  fi
-  rmdir "$PROJECT_DIR/jaan-to/outputs/dev/contract" 2>/dev/null || true
-fi
-
-# Migration: split backend/ numbered folders into subdomain folders
-for folder in "$PROJECT_DIR/jaan-to/outputs/backend"/*/; do
-  [ -d "$folder" ] || continue
-  foldername=$(basename "$folder")
-  case "$foldername" in data-model|task-breakdown|api-contract|scaffold) continue ;; esac
-
-  if ls "$folder"/*-data-model-* 1>/dev/null 2>&1; then
-    mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend/data-model"
-    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/backend/data-model/$foldername" 2>/dev/null || true
-  elif ls "$folder"/*-be-tasks-* 1>/dev/null 2>&1; then
-    mkdir -p "$PROJECT_DIR/jaan-to/outputs/backend/task-breakdown"
-    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/backend/task-breakdown/$foldername" 2>/dev/null || true
-  fi
-done
-
-# Migration: move frontend/components outputs to frontend/design
-if [ -d "$PROJECT_DIR/jaan-to/outputs/frontend/components" ]; then
-  mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend/design"
-  if [ "$(ls -A "$PROJECT_DIR/jaan-to/outputs/frontend/components" 2>/dev/null)" ]; then
-    mv "$PROJECT_DIR/jaan-to/outputs/frontend/components"/* "$PROJECT_DIR/jaan-to/outputs/frontend/design/" 2>/dev/null || true
-  fi
-  rmdir "$PROJECT_DIR/jaan-to/outputs/frontend/components" 2>/dev/null || true
-fi
-
-# Migration: split frontend/ numbered folders into subdomain folders
-for folder in "$PROJECT_DIR/jaan-to/outputs/frontend"/*/; do
-  [ -d "$folder" ] || continue
-  foldername=$(basename "$folder")
-  case "$foldername" in design|task-breakdown|scaffold) continue ;; esac
-
-  if ls "$folder"/*-component-* 1>/dev/null 2>&1; then
-    mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend/design"
-    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/frontend/design/$foldername" 2>/dev/null || true
-  elif ls "$folder"/*-fe-tasks-* 1>/dev/null 2>&1; then
-    mkdir -p "$PROJECT_DIR/jaan-to/outputs/frontend/task-breakdown"
-    mv "$folder" "$PROJECT_DIR/jaan-to/outputs/frontend/task-breakdown/$foldername" 2>/dev/null || true
-  fi
-done
-
 # 1. Create all necessary directories (using resolved paths)
 mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR"
 mkdir -p "$PROJECT_DIR/$LEARN_DIR"
@@ -132,17 +52,14 @@ mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR/research"
 
 # 2. Add to .gitignore if not present
 if [ -f "$PROJECT_DIR/.gitignore" ]; then
-  # Migration: replace old .jaan-to entry with jaan-to/
-  if grep -q "^\.jaan-to" "$PROJECT_DIR/.gitignore" 2>/dev/null; then
-    sed -i.bak 's|^\.jaan-to.*|jaan-to/|' "$PROJECT_DIR/.gitignore" && rm -f "$PROJECT_DIR/.gitignore.bak"
-  elif ! grep -q "jaan-to/" "$PROJECT_DIR/.gitignore" 2>/dev/null; then
+  if ! grep -q "jaan-to/" "$PROJECT_DIR/.gitignore" 2>/dev/null; then
     echo "jaan-to/" >> "$PROJECT_DIR/.gitignore"
   fi
 else
   echo "jaan-to/" > "$PROJECT_DIR/.gitignore"
 fi
 
-# 2.5. Initialize project config if not exists
+# 3. Initialize project config if not exists
 if [ ! -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ]; then
   if [ -f "$PLUGIN_DIR/scripts/seeds/settings.yaml" ]; then
     cp "$PLUGIN_DIR/scripts/seeds/settings.yaml" "$PROJECT_DIR/$CONFIG_DIR/settings.yaml"
@@ -150,7 +67,7 @@ if [ ! -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ]; then
   fi
 fi
 
-# 3. Copy context files (skip if exists)
+# 4. Copy context files (skip if exists)
 if [ -d "$PLUGIN_DIR/scripts/seeds" ]; then
   for context_file in "$PLUGIN_DIR/scripts/seeds"/*.md; do
     [ -f "$context_file" ] || continue
@@ -163,11 +80,11 @@ if [ -d "$PLUGIN_DIR/scripts/seeds" ]; then
   done
 fi
 
-# 4. Templates — loaded from plugin at runtime (lazy loading)
+# 5. Templates — loaded from plugin at runtime (lazy loading)
 # Users can copy templates to $TEMPLATES_DIR for customization
 # See: docs/guides/customization.md
 
-# 5. Copy docs needed by skills (skip if exists)
+# 6. Copy docs needed by skills (skip if exists)
 if [ -f "$PLUGIN_DIR/docs/STYLE.md" ]; then
   dest="$PROJECT_DIR/jaan-to/docs/STYLE.md"
   if [ ! -f "$dest" ]; then
@@ -184,7 +101,7 @@ if [ -f "$PLUGIN_DIR/docs/extending/create-skill.md" ]; then
   fi
 fi
 
-# 6. Create research README if it doesn't exist
+# 7. Create research README if it doesn't exist
 research_readme="$PROJECT_DIR/$OUTPUTS_DIR/research/README.md"
 if [ ! -f "$research_readme" ]; then
   cat > "$research_readme" <<'EOF'
@@ -198,37 +115,8 @@ This directory contains deep research outputs generated by the `/jaan-to:pm-rese
 EOF
 fi
 
-# 7. Learning — loaded from plugin at runtime, project files created via /jaan-to:learn-add
+# 8. Learning — loaded from plugin at runtime, project files created via /jaan-to:learn-add
 # Plugin LEARN.md files used as seed data when creating new project learn files
-
-# 8. Detect old standalone skills (with old naming convention)
-OLD_SKILLS=()
-# Old naming: pm-prd-write, data-gtm-datalayer, jaan-docs-*, jaan-skill-*, etc.
-OLD_PATTERNS=(
-  "pm-prd-write" "data-gtm-datalayer"
-  "jaan-docs-create" "jaan-docs-update"
-  "jaan-learn-add" "jaan-research-about" "jaan-research-add"
-  "research-about" "research-add"
-  "jaan-roadmap-add" "jaan-skill-create" "jaan-skill-update"
-  # v3.15.2 → v3.16.0 rename: old prefixed names
-  "jaan-to-pm-prd-write" "jaan-to-pm-story-write" "jaan-to-pm-research-about"
-  "jaan-to-dev-fe-design" "jaan-to-dev-fe-task-breakdown" "jaan-to-dev-be-task-breakdown"
-  "jaan-to-dev-be-data-model" "jaan-to-dev-api-contract"
-  "jaan-to-qa-test-cases"
-  # v3.x → v4.0.0 rename: old dev-be-*/dev-fe-*/dev-api-* names
-  "dev-be-data-model" "dev-be-task-breakdown" "dev-api-contract"
-  "dev-fe-design" "dev-fe-task-breakdown"
-  "jaan-to-ux-research-synthesize" "jaan-to-ux-microcopy-write" "jaan-to-ux-heatmap-analyze"
-  "jaan-to-data-gtm-datalayer"
-  "to-jaan-docs-create" "to-jaan-docs-update" "to-jaan-learn-add"
-  "to-jaan-roadmap-add" "to-jaan-roadmap-update"
-  "to-jaan-skill-create" "to-jaan-skill-update"
-)
-for pattern in "${OLD_PATTERNS[@]}"; do
-  if [ -d "$PROJECT_DIR/.claude/skills/$pattern" ]; then
-    OLD_SKILLS+=("$pattern")
-  fi
-done
 
 # 9. Check context files
 MISSING_CONTEXT=()
@@ -247,12 +135,6 @@ if [ -f "$PROJECT_DIR/$CONTEXT_DIR/tech.md" ]; then
 fi
 
 # 11. Output structured result
-if [ ${#OLD_SKILLS[@]} -gt 0 ]; then
-  OLD_LIST=$(printf '"%s",' "${OLD_SKILLS[@]}" | sed 's/,$//')
-else
-  OLD_LIST=""
-fi
-
 if [ ${#MISSING_CONTEXT[@]} -gt 0 ]; then
   MISSING_LIST=$(printf '"%s",' "${MISSING_CONTEXT[@]}" | sed 's/,$//')
 else
@@ -277,8 +159,6 @@ cat <<RESULT
     "learn": ${LEARN_COPIED}
   },
   "missing_context": [${MISSING_LIST}],
-  "old_standalone_skills": [${OLD_LIST}],
-  "migration_needed": $([ ${#OLD_SKILLS[@]} -gt 0 ] && echo "true" || echo "false"),
   "suggest_detect": ${SUGGEST_DETECT}
 }
 RESULT
