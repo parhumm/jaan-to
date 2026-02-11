@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Post-detect seed reconciliation** ([#63](https://github.com/parhumm/jaan-to/issues/63)) — All detect skills now check findings against project seed files after detection and report discrepancies. `detect-pack` goes further: it uses consolidated detection data as source of truth to **actively update seed files** (`context/tech.md`, `tone-of-voice.template.md`, `integrations.md`, `localization.template.md`) with a diff-style preview and user approval workflow (`[y/all/n/pick]`). Updates framework versions, adds missing tech entries, flags stale references for user decision, and suggests `/jaan-to:learn-add` commands for non-seed findings. Reconciliation report written to `detect/seed-reconciliation.md`. Shared logic in `docs/extending/seed-reconciliation-reference.md`. Closes [#63](https://github.com/parhumm/jaan-to/issues/63)
+
 ### Changed
 - **`jaan-issue-report` defaults to smart GitHub submission** — Skill now detects `gh` CLI availability on first run, asks once whether to submit directly to GitHub (recommended), and saves the preference to `jaan-to/config/settings.yaml`. Added `--no-submit` flag for explicit opt-out. Submit mode resolution priority: `--submit`/`--no-submit` flags > saved `issue_report_submit` preference > smart detection with user prompt. Closes [#61](https://github.com/parhumm/jaan-to/issues/61)
 - **Lazy template/learn seeding** ([#60](https://github.com/parhumm/jaan-to/issues/60)) — Bootstrap no longer eagerly copies 34 templates and 37 learn files into the project. Templates and learn files are now loaded from the plugin at runtime using a three-tier fallback: project (prefixed) → project (unprefixed) → plugin source. New projects get clean, empty `templates/` and `learn/` directories.

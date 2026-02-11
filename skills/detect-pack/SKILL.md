@@ -1,7 +1,7 @@
 ---
 name: detect-pack
 description: Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
 ---
@@ -517,6 +517,21 @@ Each file MUST include universal YAML frontmatter.
 
 ---
 
+## Step 8a: Seed Update from Detection Data
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/seed-reconciliation-reference.md` for mapping tables, change categories, approval options, preservation rules, and report format.
+
+Use consolidated detection results as source of truth to update all project seed files.
+
+1. **Read** all seed files in `$JAAN_CONTEXT_DIR/` (tech.md, team.md, integrations.md, boundaries.md, tone-of-voice.template.md, localization.template.md) — skip any that don't exist
+2. **Build proposed updates** by cross-referencing detect outputs against each seed file using the mapping table and section anchors from the reference doc
+3. **Present diff-style summary** per seed file using [UPDATE] / [ADD] / [STALE] categories — **HARD STOP**: require explicit approval (`[y/all/n/pick]`)
+4. **Apply approved updates** — edit seed files preserving section anchors, custom sections, and `<!-- keep -->` markers
+5. **Suggest `/jaan-to:learn-add`** commands for detection findings that don't map to any seed file
+6. **Write reconciliation report** to `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`
+
+---
+
 ## Step 9: Capture Feedback
 
 > "Any feedback on the knowledge pack? [y/n]"
@@ -554,6 +569,8 @@ If yes:
 - [ ] Partial runs clearly labeled with coverage %
 - [ ] Frontmatter validation issues flagged
 - [ ] User approved output
+- [ ] Seed files updated from detection data (or user declined updates)
+- [ ] Seed reconciliation report written to `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`
 
 **Multi-Platform Mode:**
 
@@ -571,3 +588,5 @@ If yes:
 - [ ] Overall weighted average score calculated from platform scores
 - [ ] Platform detection logic executed in Step 0
 - [ ] User approved output
+- [ ] Seed files updated from detection data (or user declined updates)
+- [ ] Seed reconciliation report written to `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`

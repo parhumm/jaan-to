@@ -84,9 +84,20 @@ All detect skills share:
 
 ---
 
+## Seed Reconciliation
+
+After detection completes, each skill checks findings against project seed files (`context/tech.md`, `tone-of-voice.template.md`, `integrations.md`, `localization.template.md`) and reports discrepancies (version drift, missing references, contradictions, stale patterns).
+
+**detect-pack** goes further: it uses consolidated detection data as source of truth to **actively update seed files** with a diff-style preview and user approval workflow (`[y/all/n/pick]`). A reconciliation report is written to `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`.
+
+See [seed-reconciliation-reference.md](../../extending/seed-reconciliation-reference.md) for full comparison rules and update protocol.
+
+---
+
 ## Reference
 
 - [Repo-analysis output & content detection standards](../../research/61-detect-pack.md)
+- [Seed reconciliation reference](../../extending/seed-reconciliation-reference.md)
 
 ---
 

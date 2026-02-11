@@ -155,6 +155,8 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 - [x] `/jaan-to:jaan-issue-report` — Issue reporting skill with session context awareness, privacy sanitization, and dual delivery (GitHub submit / local save)
 - [x] Documentation: `docs/skills/core/jaan-issue-report.md` and Core Skills README updated
+- [x] **Post-detect seed reconciliation** ([#63](https://github.com/parhumm/jaan-to/issues/63)) — All detect skills check findings against seed files and report discrepancies; `detect-pack` actively updates seed files with user approval workflow
+- [x] Shared reference: `docs/extending/seed-reconciliation-reference.md`
 
 ---
 
@@ -185,6 +187,7 @@ Pipeline: detect-dev + detect-design + detect-writing + detect-product + detect-
 - [x] Merge `dev-stack-detect` into `detect-dev` and remove (`bb9d0a7`)
 - [x] Update all references (30+ files) (`9d944de`)
 - [x] Align detect docs with implementations (`29901ae`)
+- [x] Post-detect seed reconciliation — detect skills report discrepancies, detect-pack actively updates seed files ([#63](https://github.com/parhumm/jaan-to/issues/63))
 
 ---
 

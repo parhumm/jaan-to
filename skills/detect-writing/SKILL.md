@@ -1,7 +1,7 @@
 ---
 name: detect-writing
 description: Writing system extraction with NNg tone dimensions, UI copy classification, and i18n maturity scoring.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
 ---
@@ -565,6 +565,20 @@ Each file MUST include:
 
 ---
 
+## Step 9a: Seed Reconciliation
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/seed-reconciliation-reference.md` for comparison rules, discrepancy format, and auto-update protocol.
+
+1. Read domain-relevant seed files: `$JAAN_CONTEXT_DIR/tone-of-voice.template.md`, `$JAAN_CONTEXT_DIR/localization.template.md`
+2. Compare detection results against seed content (tone dimensions, voice characteristics, error message guidelines, i18n maturity, supported languages)
+3. If discrepancies found:
+   - Display discrepancy table to user
+   - Offer auto-updates for non-destructive changes: `[y/n]`
+   - Suggest `/jaan-to:learn-add` commands for patterns worth documenting
+4. If no discrepancies: display "Seed files are aligned with detection results."
+
+---
+
 ## Step 10: Capture Feedback
 
 > "Any feedback on the writing system detection? [y/n]"
@@ -599,3 +613,4 @@ If yes:
 - [ ] If partial analysis mode (backend/cli), minimal "Not Applicable" files created for ui-copy.md and samples.md
 - [ ] Confidence scores assigned to all findings
 - [ ] User approved output
+- [ ] Seed reconciliation check performed (discrepancies reported or alignment confirmed)
