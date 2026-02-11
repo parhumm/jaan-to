@@ -2,7 +2,7 @@
 name: jaan-issue-report
 description: Report bugs, feature requests, or skill issues to the jaan-to GitHub repo or save locally
 allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(uname *), Bash(awk *), Bash(rm -f /tmp/jaan-issue-body-*), Write($JAAN_OUTPUTS_DIR/jaan-issues/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: "<issue-description> [--type bug|feature|skill|docs] [--submit]"
+argument-hint: "<issue-description> [--type bug|feature|skill|docs] [--submit | --no-submit]"
 disable-model-invocation: true
 ---
 
@@ -26,7 +26,10 @@ Read these before execution:
 Parse from arguments:
 1. **Issue description** — Free text describing the issue
 2. **--type** — Issue type: `bug`, `feature`, `skill`, `docs`. Default: auto-detect from description or session context.
-3. **--submit** — If present, submit directly to GitHub after approval. Otherwise, save locally only.
+3. **--submit** — Force submit to GitHub (overrides saved preference)
+4. **--no-submit** — Force local-only mode (overrides saved preference)
+
+If neither `--submit` nor `--no-submit` is provided, submit mode is resolved in Step 1 via saved preference or smart detection.
 
 If no arguments provided, proceed to session context scan (Step 0) or ask: "What issue would you like to report?"
 
@@ -115,17 +118,43 @@ If signals were found:
 
 ---
 
-## Step 1: Check Submit Capability
+## Step 1: Resolve Submit Mode
 
-If `--submit` flag is present:
+Determine submit mode using this priority order:
 
-1. Run `gh auth status` to check if GitHub CLI is installed and authenticated
-2. If **available**: Confirm submit mode is active
-3. If **not available**: Inform user immediately in their conversation language:
+### 1.1 Check for explicit flags (highest priority)
+
+- If `--submit` flag is present: set submit mode = **submit**. Proceed to 1.4.
+- If `--no-submit` flag is present: set submit mode = **local-only**. Skip to Step 2.
+
+### 1.2 Check saved preference
+
+Read `jaan-to/config/settings.yaml` and look for the `issue_report_submit` key.
+
+- If `issue_report_submit: true`: set submit mode = **submit**. Proceed to 1.4.
+- If `issue_report_submit: false`: set submit mode = **local-only**. Skip to Step 2.
+- If key is missing or `"ask"`: proceed to 1.3.
+
+### 1.3 Smart detection (first-time flow)
+
+1. Run `gh auth status` silently.
+2. If `gh` is **not available or not authenticated**:
+   > "GitHub CLI is not installed or not authenticated. Issues will be saved locally. You can submit them manually later."
+   Set submit mode = **local-only**. Skip to Step 2. Do NOT save this as a preference (user may install gh later).
+3. If `gh` **is authenticated**: ask the user in their conversation language:
+   > "GitHub CLI is available. Would you like to submit issues directly to GitHub? (recommended) [yes / no]"
+   - **yes**: Set submit mode = **submit**. Save `issue_report_submit: true` to `jaan-to/config/settings.yaml`. Proceed to 1.4.
+   - **no**: Set submit mode = **local-only**. Save `issue_report_submit: false` to `jaan-to/config/settings.yaml`. Skip to Step 2.
+
+### 1.4 Verify gh availability (for submit mode)
+
+If submit mode is **submit** (from any source):
+
+1. Run `gh auth status` to verify GitHub CLI is still installed and authenticated.
+2. If **available**: Confirm submit mode is active.
+3. If **not available**: Inform user in their conversation language:
    > "GitHub CLI is not installed or not authenticated. Your issue will be saved locally instead. You can submit it manually later."
    Override to local-only mode.
-
-If `--submit` is not present, skip this step (default is local-only).
 
 ---
 
@@ -370,9 +399,9 @@ add_to_index \
 Confirm:
 > "Local copy saved to: `$JAAN_OUTPUTS_DIR/jaan-issues/{NEXT_ID}-{SLUG}/{NEXT_ID}-{SLUG}.md`"
 
-## Step 10: Submit to GitHub (if --submit and gh auth passed)
+## Step 10: Submit to GitHub (if submit mode is active)
 
-If `--submit` flag was provided and `gh auth status` passed in Step 1:
+If submit mode is **submit** (as resolved in Step 1) and `gh auth status` passed in Step 1.4:
 
 ### 10.1 Strip YAML Frontmatter
 
@@ -447,6 +476,6 @@ If yes:
 - [ ] HARD STOP approved by user (full preview shown)
 - [ ] Local copy saved to `$JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/`
 - [ ] Index updated
-- [ ] If --submit: GitHub issue created and URL captured
-- [ ] If --submit: Local copy updated with issue URL and number
+- [ ] If submit mode active: GitHub issue created and URL captured
+- [ ] If submit mode active: Local copy updated with issue URL and number
 - [ ] User informed of result and next steps

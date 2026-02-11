@@ -26,3 +26,7 @@ customization_context_variables: true
 # Language preference for conversation and output
 # "ask" = prompt on first skill run, then save choice
 language: "ask"
+
+# Issue report submission preference
+# "ask" = prompt on first run if gh CLI is available, then save choice
+issue_report_submit: "ask"
