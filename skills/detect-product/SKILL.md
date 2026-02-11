@@ -1,7 +1,7 @@
 ---
 name: detect-product
 description: Product reality extraction with evidence-backed features, monetization, and metrics.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
 ---
@@ -501,6 +501,20 @@ Each file MUST include:
 
 ---
 
+## Step 7a: Seed Reconciliation
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/seed-reconciliation-reference.md` for comparison rules, discrepancy format, and auto-update protocol.
+
+1. Read domain-relevant seed files: `$JAAN_CONTEXT_DIR/tech.md`, `$JAAN_CONTEXT_DIR/integrations.md`
+2. Compare detection results against seed content (feature references, analytics tools, external integrations, monetization providers)
+3. If discrepancies found:
+   - Display discrepancy table to user
+   - Offer auto-updates for non-destructive changes: `[y/n]`
+   - Suggest `/jaan-to:learn-add` commands for patterns worth documenting
+4. If no discrepancies: display "Seed files are aligned with detection results."
+
+---
+
 ## Step 8: Capture Feedback
 
 > "Any feedback on the product detection? [y/n]"
@@ -534,3 +548,4 @@ If yes:
 - [ ] Confidence scores assigned to all findings
 - [ ] Output filenames match platform suffix convention (no suffix for single-platform, -{platform} suffix for multi-platform)
 - [ ] User approved output
+- [ ] Seed reconciliation check performed (discrepancies reported or alignment confirmed)

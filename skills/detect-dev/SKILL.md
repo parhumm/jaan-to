@@ -1,7 +1,7 @@
 ---
 name: detect-dev
 description: Engineering audit with SARIF evidence, 4-level confidence, and OpenSSF scoring.
-allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
 ---
@@ -438,6 +438,20 @@ Each file MUST include:
 5. Recommendations
 6. Appendices (if applicable)
 
+## Step 10a: Seed Reconciliation
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/seed-reconciliation-reference.md` for comparison rules, discrepancy format, and auto-update protocol.
+
+1. Read domain-relevant seed files: `$JAAN_CONTEXT_DIR/tech.md`
+2. Compare detection results against seed content (versions, frameworks, patterns, infrastructure, CI/CD, constraints, tech debt)
+3. If discrepancies found:
+   - Display discrepancy table to user
+   - Offer auto-updates for non-destructive changes (version bumps, new entries): `[y/n]`
+   - Suggest `/jaan-to:learn-add` commands for patterns worth documenting
+4. If no discrepancies: display "Seed files are aligned with detection results."
+
+---
+
 ## Step 11: Quality Check & Definition of Done
 
 **If `run_depth == "light"`:**
@@ -462,6 +476,7 @@ Each file MUST include:
 - [ ] Overall score calculated (OpenSSF 0-10)
 - [ ] Output filenames match platform suffix convention
 - [ ] Detection summary shown to user; user approved output
+- [ ] Seed reconciliation check performed (discrepancies reported or alignment confirmed)
 
 ---
 

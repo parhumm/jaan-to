@@ -1,7 +1,7 @@
 ---
 name: detect-pack
 description: Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
 ---
@@ -517,6 +517,89 @@ Each file MUST include universal YAML frontmatter.
 
 ---
 
+## Step 8a: Seed Update from Detection Data
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/seed-reconciliation-reference.md` for mapping rules, update templates, and section-anchor conventions.
+
+**Purpose**: Use consolidated detection results as source of truth to update all project seed files.
+
+### 8a.1: Read Current Seed Files
+
+Read ALL project seed files (skip any that don't exist):
+- `$JAAN_CONTEXT_DIR/tech.md`
+- `$JAAN_CONTEXT_DIR/team.md`
+- `$JAAN_CONTEXT_DIR/integrations.md`
+- `$JAAN_CONTEXT_DIR/boundaries.md`
+- `$JAAN_CONTEXT_DIR/tone-of-voice.template.md`
+- `$JAAN_CONTEXT_DIR/localization.template.md`
+
+### 8a.2: Build Proposed Updates from Detect Outputs
+
+Cross-reference ALL consolidated detect outputs against each seed file:
+
+| Source | Updates To | Sections Updated |
+|--------|-----------|-----------------|
+| detect/dev/ stack, architecture, cicd, security | tech.md | Current Stack, Frameworks, Infrastructure, Patterns, Constraints, Tech Debt |
+| detect/dev/ testing | tech.md | Frameworks > Testing |
+| detect/product/ features, monetization | integrations.md | External integrations, analytics tools |
+| detect/design/ brand, tokens | tone-of-voice.template.md | Brand Voice (if design findings include voice/tone signals) |
+| detect/writing/ writing-system, glossary, i18n | tone-of-voice.template.md | Tone Characteristics, Error Message Tone |
+| detect/writing/ i18n | localization.template.md | i18n maturity, supported languages |
+| detect/ux/ personas, flows | (learn-add suggestions only — no direct seed mapping) |
+
+For each seed file, generate a **proposed new version** preserving:
+- Section anchors (`{#current-stack}`, `{#constraints}`, etc.)
+- User-added custom sections (anything not in the seed template)
+- Comments and notes marked with `<!-- keep -->`
+
+### 8a.3: Present Changes to User (HARD STOP)
+
+Display a **diff-style summary** per seed file:
+
+```
+tech.md — N changes proposed:
+  [UPDATE] Backend > Language: Python 3.11 → Python 3.12
+  [ADD]    Infrastructure > Container: Kubernetes (not previously listed)
+  [STALE]  Mobile > iOS: Swift 5.9 — not detected in repo (keep? [y/n])
+```
+
+Categories:
+- **[UPDATE]**: Detected value differs from seed — propose replacement
+- **[ADD]**: Detected tech/pattern not in seed — propose addition
+- **[STALE]**: Seed lists something not detected — flag for user decision (keep or remove)
+
+Require explicit approval: `"Apply these seed updates? [y/all/n/pick]"`
+- `y` / `all`: Apply all [UPDATE] + [ADD] changes; keep [STALE] entries unchanged
+- `n`: Skip seed updates entirely
+- `pick`: Let user approve each change individually
+
+### 8a.4: Apply Approved Updates
+
+- Edit seed files with approved changes
+- Preserve section structure and anchors
+- For [STALE] items user chose to remove: delete the line
+- For [STALE] items user chose to keep: leave unchanged
+
+### 8a.5: Suggest `/learn-add` for Non-Seed Patterns
+
+For detection findings that don't map to any seed file:
+
+```
+Suggested lessons:
+1. /jaan-to:learn-add detect-ux "Primary user flow has 7 steps — consider reducing"
+2. /jaan-to:learn-add detect-dev "Monorepo uses Turborepo — document in tech.md patterns"
+```
+
+### 8a.6: Write Reconciliation Report
+
+Write `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md` containing:
+- Summary of all changes applied
+- List of stale entries kept/removed
+- `/learn-add` suggestions
+- Timestamp and detect output versions used
+
+---
+
 ## Step 9: Capture Feedback
 
 > "Any feedback on the knowledge pack? [y/n]"
@@ -554,6 +637,8 @@ If yes:
 - [ ] Partial runs clearly labeled with coverage %
 - [ ] Frontmatter validation issues flagged
 - [ ] User approved output
+- [ ] Seed files updated from detection data (or user declined updates)
+- [ ] Seed reconciliation report written to `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`
 
 **Multi-Platform Mode:**
 
@@ -571,3 +656,5 @@ If yes:
 - [ ] Overall weighted average score calculated from platform scores
 - [ ] Platform detection logic executed in Step 0
 - [ ] User approved output
+- [ ] Seed files updated from detection data (or user declined updates)
+- [ ] Seed reconciliation report written to `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`
