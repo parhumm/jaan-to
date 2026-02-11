@@ -28,9 +28,9 @@ Every seed follows a **skip-if-exists** rule: your edits are never overwritten. 
 |----------|----------------|----------------------|---------------|
 | Settings | `scripts/seeds/settings.yaml` | `jaan-to/config/settings.yaml` | Path overrides, learning strategy, language preference, template paths |
 | Context | `scripts/seeds/*.md` | `jaan-to/context/` | 5 required: tech.md, team.md, integrations.md, config.md, boundaries.md + 2 optional: localization.md, tone-of-voice.md |
-| Templates | `skills/*/template.md` | `jaan-to/templates/{skill}.template.md` | Output structure for each skill (~16 files) |
 | Docs | plugin `docs/STYLE.md` + `docs/extending/create-skill.md` | `jaan-to/docs/` | Style guide, skill creation spec |
-| Learn files | `skills/*/LEARN.md` | `jaan-to/learn/{skill}.learn.md` | Better questions, edge cases, workflow tips (~16 files) |
+| Templates | `skills/*/template.md` | _(loaded from plugin at runtime)_ | Output structure for each skill — copy to `jaan-to/templates/jaan-to:{skill}.template.md` to customize |
+| Learn files | `skills/*/LEARN.md` | _(loaded from plugin at runtime)_ | Better questions, edge cases, workflow tips — project files created via `/jaan-to:learn-add` |
 | Research index | (generated) | `jaan-to/outputs/research/README.md` | Index scaffold for research outputs |
 
 ---
@@ -42,7 +42,7 @@ After bootstrap runs, customize files in this order:
 1. **Edit `jaan-to/context/tech.md`** — Replace the placeholder stack with yours. Or run `/jaan-to:detect-dev` to audit your codebase and produce evidence-backed findings.
 2. **Fill `jaan-to/context/team.md`** — Team size, ceremonies, sprint settings, approval workflows.
 3. **Add tools to `jaan-to/context/integrations.md`** — Jira project keys, GitHub repos, Slack channels, analytics IDs.
-4. **Customize a template** (optional) — Edit any file in `jaan-to/templates/` to change how a skill structures its output.
+4. **Customize a template** (optional) — Copy a template from the plugin (`skills/{skill}/template.md`) to `jaan-to/templates/jaan-to:{skill}.template.md` and edit it to change how a skill structures its output.
 5. **Override paths** (advanced) — Uncomment settings in `jaan-to/config/settings.yaml` to redirect where outputs, templates, or learn files live. See [Customization Guide](../guides/customization.md).
 
 ---
@@ -91,7 +91,7 @@ The plugin tracks usage locally. Nothing leaves your machine.
 
 ## Tips
 
-- **Reset a file**: Delete it from `jaan-to/` and start a new session — bootstrap restores the default.
+- **Reset a file**: Delete it from `jaan-to/` and start a new session — bootstrap restores the default (for context and config files). Templates and learn files are read from the plugin at runtime and don't need resetting.
 - **Check completeness**: Run `scripts/verify-install.sh` for a full health report.
 - **Placeholders**: Context seeds use `{placeholder}` syntax. Fill what's relevant, delete sections you don't need.
 - **Template variables**: Templates use `{{handlebars}}` variables. Change the structure around them, but keep the variables so skills can fill them.

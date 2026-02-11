@@ -26,8 +26,13 @@ resolve_template_path() {
     fi
   fi
 
-  # Check standard project location
+  # Check standard project location (both naming conventions)
   local templates_dir=$(get_config "paths_templates" "jaan-to/templates")
+  local prefixed_file="jaan-to:${template_file}"
+  if [ -f "${PROJECT_DIR:-.}/${templates_dir}/${prefixed_file}" ]; then
+    echo "${templates_dir}/${prefixed_file}"
+    return 0
+  fi
   if [ -f "${PROJECT_DIR:-.}/${templates_dir}/${template_file}" ]; then
     echo "${templates_dir}/${template_file}"
     return 0
@@ -67,13 +72,20 @@ resolve_learning_path() {
       sources="${plugin_root}/skills/${skill_name}/LEARN.md"
     fi
 
-    # Project source
+    # Project source (check both naming conventions)
     local learn_dir=$(get_config "paths_learning" "jaan-to/learn")
-    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${learn_file}" ]; then
+    local prefixed_learn="jaan-to:${learn_file}"
+    local project_learn=""
+    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}" ]; then
+      project_learn="${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}"
+    elif [ -f "${PROJECT_DIR:-.}/${learn_dir}/${learn_file}" ]; then
+      project_learn="${PROJECT_DIR:-.}/${learn_dir}/${learn_file}"
+    fi
+    if [ -n "$project_learn" ]; then
       if [ -n "$sources" ]; then
-        sources="${sources}|${PROJECT_DIR:-.}/${learn_dir}/${learn_file}"
+        sources="${sources}|${project_learn}"
       else
-        sources="${PROJECT_DIR:-.}/${learn_dir}/${learn_file}"
+        sources="${project_learn}"
       fi
     fi
 
@@ -82,6 +94,11 @@ resolve_learning_path() {
   else
     # Override strategy: project only, or plugin if project doesn't exist
     local learn_dir=$(get_config "paths_learning" "jaan-to/learn")
+    local prefixed_learn="jaan-to:${learn_file}"
+    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}" ]; then
+      echo "${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}"
+      return 0
+    fi
     if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${learn_file}" ]; then
       echo "${PROJECT_DIR:-.}/${learn_dir}/${learn_file}"
       return 0

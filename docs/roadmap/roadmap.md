@@ -27,7 +27,15 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v6.0.0 — Add 5 spec-to-ship skills + token optimization
+**Latest:** v6.1.0 — Lazy template/learn seeding ([#60](https://github.com/parhumm/jaan-to/issues/60))
+
+### v6.1.0 — Lazy template/learn seeding ([#60](https://github.com/parhumm/jaan-to/issues/60))
+- Switched bootstrap from eager to lazy template/learn file seeding — templates and learn files loaded from plugin at runtime
+- Added three-tier fallback to pre-execution protocol: project (prefixed) → project (unprefixed) → plugin source
+- Fixed template/learn naming mismatch: bootstrap created files without `jaan-to:` prefix but skills expected it
+- Updated `learn-add` to seed from plugin LEARN.md when creating new project learn files
+- Updated `path-resolver.sh` to support both naming conventions for backward compatibility
+- Updated `verify-install.sh`, `jaan-init`, and documentation for lazy loading
 
 ### v6.0.0 — Add 5 spec-to-ship skills + token optimization
 - Added `dev-project-assemble` skill — wire backend + frontend scaffold outputs into runnable project with configs and entry points (`221280a`)

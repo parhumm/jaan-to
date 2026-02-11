@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - **`jaan-issue-report` defaults to smart GitHub submission** — Skill now detects `gh` CLI availability on first run, asks once whether to submit directly to GitHub (recommended), and saves the preference to `jaan-to/config/settings.yaml`. Added `--no-submit` flag for explicit opt-out. Submit mode resolution priority: `--submit`/`--no-submit` flags > saved `issue_report_submit` preference > smart detection with user prompt. Closes [#61](https://github.com/parhumm/jaan-to/issues/61)
+- **Lazy template/learn seeding** ([#60](https://github.com/parhumm/jaan-to/issues/60)) — Bootstrap no longer eagerly copies 34 templates and 37 learn files into the project. Templates and learn files are now loaded from the plugin at runtime using a three-tier fallback: project (prefixed) → project (unprefixed) → plugin source. New projects get clean, empty `templates/` and `learn/` directories.
+- **Pre-execution protocol extended** — Added template resolution (Step B) alongside the existing learn file loading (Step A), with backward-compatible fallback for both naming conventions
+- **learn-add seeds from plugin** — When creating a new project learn file via `/jaan-to:learn-add`, the plugin's LEARN.md is used as a starting point (preserving seed lessons) instead of an empty template
+
+### Fixed
+- **Template/learn naming mismatch** — Bootstrap created files as `{skill}.template.md` / `{skill}.learn.md` (without `jaan-to:` prefix) but all 38 skills expected `jaan-to:{skill}.template.md` / `jaan-to:{skill}.learn.md`. Eagerly-copied files were never found by skills. The pre-execution protocol and path-resolver now support both naming conventions for backward compatibility.
 
 ---
 

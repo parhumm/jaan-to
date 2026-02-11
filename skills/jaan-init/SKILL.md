@@ -55,9 +55,9 @@ Show the user what initialization will create:
 jaan-to/
   config/settings.yaml    — Project configuration
   context/                 — Project context files (tech.md, team.md, etc.)
-  templates/               — Output templates (customizable)
+  templates/               — Custom template overrides (initially empty; read from plugin at runtime)
   outputs/                 — Generated outputs from skills
-  learn/                   — Accumulated skill lessons
+  learn/                   — Project-specific lessons (initially empty; created via /jaan-to:learn-add)
   docs/                    — Reference docs (STYLE.md, create-skill.md)
 ```
 
@@ -95,10 +95,13 @@ ${CLAUDE_PLUGIN_ROOT}/scripts/bootstrap.sh
 Note: The bootstrap script creates the `jaan-to/` directory and all subdirectories internally. It handles:
 1. Creating all subdirectories (outputs, learn, context, templates, config, docs)
 2. Copying seed context files (tech.md, team.md, integrations.md, etc.)
-3. Copying skill templates
-4. Copying reference docs
-5. Initializing settings.yaml
-6. Adding `jaan-to/` to `.gitignore`
+3. Copying reference docs
+4. Initializing settings.yaml
+5. Adding `jaan-to/` to `.gitignore`
+
+Templates and learn files are loaded from the plugin at runtime (lazy loading).
+Customize templates by copying them to `jaan-to/templates/`.
+Add project lessons via `/jaan-to:learn-add`.
 
 ## Step 4: Report Result
 

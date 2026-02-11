@@ -51,19 +51,25 @@ for f in config.md boundaries.md tech.md team.md integrations.md; do
   check "$([ -f "$PROJECT_DIR/jaan-to/context/$f" ] && echo true || echo false)" "context/$f"
 done
 
-# 3. Templates
+# 3. Templates (loaded from plugin at runtime — directory should exist but may be empty)
 echo ""
 echo "3. Templates:"
-for skill in pm-prd-write data-gtm-datalayer docs-create skill-create pm-research-about roadmap-add; do
-  check "$([ -f "$PROJECT_DIR/jaan-to/templates/${skill}.template.md" ] && echo true || echo false)" "templates/${skill}.template.md"
-done
+echo "  ℹ Templates are loaded from the plugin at runtime (lazy loading)"
+echo "  ℹ Users can copy templates to jaan-to/templates/ for customization"
+if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/skills" ]; then
+  template_count=$(find "$PLUGIN_DIR/skills" -name "template.md" -type f 2>/dev/null | wc -l | tr -d ' ')
+  check "$([ $template_count -gt 0 ] && echo true || echo false)" "Plugin has $template_count skill templates available"
+fi
 
-# 4. Learning seeds
+# 4. Learning (loaded from plugin at runtime — project files created via /jaan-to:learn-add)
 echo ""
-echo "4. Learning seeds:"
-for skill in pm-prd-write data-gtm-datalayer docs-create docs-update skill-create skill-update pm-research-about learn-add roadmap-add; do
-  check "$([ -f "$PROJECT_DIR/jaan-to/learn/${skill}.learn.md" ] && echo true || echo false)" "learn/${skill}.learn.md"
-done
+echo "4. Learning:"
+echo "  ℹ Learn files are loaded from the plugin at runtime"
+echo "  ℹ Project-specific lessons created via /jaan-to:learn-add"
+if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/skills" ]; then
+  learn_count=$(find "$PLUGIN_DIR/skills" -name "LEARN.md" -type f 2>/dev/null | wc -l | tr -d ' ')
+  check "$([ $learn_count -gt 0 ] && echo true || echo false)" "Plugin has $learn_count skill learn seeds available"
+fi
 
 # 5. Docs for skills
 echo ""
