@@ -149,11 +149,11 @@ tech_section=$(extract_section "$TEST_DIR/jaan-to/context/tech.md" "Current Stac
 [[ -n "$tech_section" ]] && echo "✓ Tech stack extractable" || (echo "✗ FAIL"; exit 1)
 
 # ========================================
-# Phase 6: Migration Verification
+# Phase 6: Skills Verification
 # ========================================
-echo -e "\n========== PHASE 6: Migration Verification =========="
+echo -e "\n========== PHASE 6: Skills Verification =========="
 
-# Count migrated skills
+# Count skills using $JAAN_* environment variables
 migrated_count=0
 for skill_file in "$CLAUDE_PLUGIN_ROOT/skills"/*/SKILL.md; do
   [ -f "$skill_file" ] || continue
@@ -162,11 +162,8 @@ for skill_file in "$CLAUDE_PLUGIN_ROOT/skills"/*/SKILL.md; do
   fi
 done
 
-echo "   Migrated skills: $migrated_count"
-[ "$migrated_count" -ge 8 ] && echo "✓ Skills migrated" || echo "⚠ Only $migrated_count skills"
-
-# Verify documentation exists
-[ -f "$CLAUDE_PLUGIN_ROOT/docs/guides/migration-v3.md" ] && echo "✓ Migration guide exists" || echo "⚠ Guide missing"
+echo "   Skills using env vars: $migrated_count"
+[ "$migrated_count" -ge 8 ] && echo "✓ Skills compliant" || echo "⚠ Only $migrated_count skills"
 
 # ========================================
 # Integration: Full Workflow Simulation
