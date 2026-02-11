@@ -10,9 +10,9 @@ import styles from './index.module.css';
 const features = [
   {
     label: 'Skills',
-    title: '21 structured commands',
+    title: '38 structured commands',
     description:
-      'Across 6 roles — PM, Dev, UX, QA, Data, and Core. Each skill knows its questions, its template, and its output format.',
+      'Across 13 roles — PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WP, Release, Security, DevOps, and Core. Each skill knows its questions, its template, and its output format.',
   },
   {
     label: 'Two-Phase Workflow',
@@ -30,11 +30,18 @@ const features = [
 
 const roles = [
   {name: 'PM', skills: ['pm-prd-write', 'pm-story-write', 'pm-research-about']},
-  {name: 'Dev', skills: ['backend-api-contract', 'backend-data-model', 'backend-task-breakdown', 'frontend-design', 'frontend-task-breakdown', 'detect-dev']},
-  {name: 'UX', skills: ['ux-heatmap-analyze', 'ux-microcopy-write', 'ux-research-synthesize']},
-  {name: 'QA', skills: ['qa-test-cases']},
+  {name: 'Backend', skills: ['backend-api-contract', 'backend-data-model', 'backend-task-breakdown', 'backend-scaffold', 'backend-service-implement']},
+  {name: 'Frontend', skills: ['frontend-design', 'frontend-task-breakdown', 'frontend-scaffold']},
+  {name: 'Dev', skills: ['dev-project-assemble', 'detect-dev']},
+  {name: 'QA', skills: ['qa-test-cases', 'qa-test-generate']},
+  {name: 'UX', skills: ['ux-heatmap-analyze', 'ux-microcopy-write', 'ux-research-synthesize', 'ux-flowchart-generate']},
+  {name: 'Security', skills: ['sec-audit-remediate']},
+  {name: 'DevOps', skills: ['devops-infra-scaffold']},
+  {name: 'Detect', skills: ['detect-design', 'detect-writing', 'detect-product', 'detect-ux', 'detect-pack']},
   {name: 'Data', skills: ['data-gtm-datalayer']},
-  {name: 'Core', skills: ['docs-create', 'docs-update', 'learn-add', 'roadmap-add', 'roadmap-update', 'skill-create', 'skill-update']},
+  {name: 'Release', skills: ['release-iterate-changelog']},
+  {name: 'WP', skills: ['wp-pr-review']},
+  {name: 'Core', skills: ['docs-create', 'docs-update', 'learn-add', 'roadmap-add', 'roadmap-update', 'skill-create', 'skill-update', 'jaan-init', 'jaan-issue-report']},
 ];
 
 function HomepageHeader() {
@@ -85,7 +92,7 @@ function SkillCategories() {
       <div className="container">
         <div style={{textAlign: 'center', marginBottom: '2rem'}}>
           <Heading as="h2">Skills by Role</Heading>
-          <p style={{color: '#6b6b6b'}}>21 skills across 6 roles. Run any skill with <code>/jaan-to:skill-name</code></p>
+          <p style={{color: '#6b6b6b'}}>38 skills across 13 roles. Run any skill with <code>/jaan-to:skill-name</code></p>
         </div>
         <div className="row">
           {roles.map(({name, skills}) => (
@@ -129,7 +136,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="Documentation"
-      description="jaan.to documentation — a workflow layer for Claude Code. 21 skills across 6 roles.">
+      description="jaan.to documentation — a workflow layer for Claude Code. 38 skills across 13 roles.">
       <HomepageHeader />
       <main>
         <Features />

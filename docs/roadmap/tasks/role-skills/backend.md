@@ -26,9 +26,13 @@ flowchart TD
 
     style jaan-to-dev-tech-plan fill:#f0f0f0,stroke:#999
     style jaan-to-frontend-scaffold fill:#f0f0f0,stroke:#999
+    jaan-to-backend-scaffold["backend-scaffold<br>BE Scaffold<br>Fastify routes + Prisma + services"] --> jaan-to-backend-service-implement["backend-service-implement<br>BE Service Implement<br>Business logic from stubs + specs"]
+    jaan-to-backend-service-implement["backend-service-implement<br>BE Service Implement<br>Business logic from stubs + specs"] --> jaan-to-qa-test-generate["qa-test-generate<br>QA: test-generate"]
+
     style jaan-to-dev-docs-generate fill:#f0f0f0,stroke:#999
     style jaan-to-dev-integration-plan fill:#f0f0f0,stroke:#999
     style jaan-to-dev-test-plan fill:#f0f0f0,stroke:#999
+    style jaan-to-qa-test-generate fill:#f0f0f0,stroke:#999
 ```
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles

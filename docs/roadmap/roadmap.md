@@ -27,7 +27,23 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v5.0.0 — Token optimization — save ~2K tokens/session, ~7K-48K per skill invocation
+**Latest:** v6.0.0 — Add 5 spec-to-ship skills + token optimization
+
+### v6.0.0 — Add 5 spec-to-ship skills + token optimization
+- Added `dev-project-assemble` skill — wire backend + frontend scaffold outputs into runnable project with configs and entry points (`221280a`)
+- Added `backend-service-implement` skill — generate full service implementations with business logic from scaffold stubs and upstream specs (`221280a`)
+- Added `qa-test-generate` skill — generate runnable Vitest unit tests and Playwright E2E specs from BDD test cases (`221280a`)
+- Added `sec-audit-remediate` skill — generate targeted security fixes from detect-dev SARIF findings with regression tests (`221280a`)
+- Added `devops-infra-scaffold` skill — generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack (`221280a`)
+- Token-optimized all 5 new skills: extracted reference material into `docs/extending/*-reference.md`, total reduction ~844 lines (~25%) (`e70aeb4`)
+- Added Token Optimization Strategy section to `docs/extending/create-skill.md` for future skill development (`e70aeb4`)
+- New roles: `sec` (Security), `devops` (DevOps/Infrastructure)
+- Plugin skill count updated from 33 to 38
+
+### v5.1.0 — Add jaan-init + jaan-issue-report skills, make bootstrap opt-in
+- Added `jaan-init` skill — initialize jaan-to for a project (`3fbf8c5`)
+- Added `jaan-issue-report` skill — generate structured issue reports (`3fbf8c5`)
+- Made bootstrap opt-in per project (`3fbf8c5`)
 
 ### v5.0.0 — Token optimization — save ~2K tokens/session, ~7K-48K per skill invocation
 - Trimmed CLAUDE.md from 282 → 97 lines, extracted to `docs/extending/` (`2c854a4`)
@@ -188,6 +204,18 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
+### v6.0.0 — Add 5 spec-to-ship skills (`221280a`)
+
+- [x] `/jaan-to:dev-project-assemble` — Wire scaffold outputs into runnable project structure (`221280a`)
+- [x] `/jaan-to:backend-service-implement` — Generate service implementations from scaffold stubs (`221280a`)
+- [x] `/jaan-to:qa-test-generate` — Generate runnable Vitest/Playwright tests from BDD cases (`221280a`)
+- [x] `/jaan-to:sec-audit-remediate` — Generate security fixes from detect-dev findings (`221280a`)
+- [x] `/jaan-to:devops-infra-scaffold` — Generate CI/CD, Dockerfiles, deployment configs (`221280a`)
+- [x] Token-optimize all 5 new skills with reference extraction (`e70aeb4`)
+- [x] Add Token Optimization Strategy to create-skill.md (`e70aeb4`)
+- [x] New roles: sec, devops with documentation
+- [x] Update roadmap, docs, and dependencies
+
 ### v4.5.1 — Standardize backend + frontend skill output paths (`387a084`)
 
 - [x] Standardize output paths to `{role}/{domain}/{id}-{slug}/` convention across all 7 backend/frontend skills (`387a084`)
@@ -283,6 +311,11 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase |
 | `/jaan-to:qa-test-cases` | Generate test cases from PRDs |
 | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
+| `/jaan-to:dev-project-assemble` | Wire scaffold outputs into runnable project structure |
+| `/jaan-to:backend-service-implement` | Generate service implementations from scaffold stubs |
+| `/jaan-to:qa-test-generate` | Generate runnable Vitest/Playwright tests from BDD cases |
+| `/jaan-to:sec-audit-remediate` | Generate security fixes from detect-dev findings |
+| `/jaan-to:devops-infra-scaffold` | Generate CI/CD, Dockerfiles, deployment configs |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
 | `/jaan-to:skill-create` | Create new skill with wizard |
 | `/jaan-to:skill-update` | Update existing skill |

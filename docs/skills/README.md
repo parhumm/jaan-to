@@ -49,6 +49,8 @@ Two naming conventions based on skill type:
 | [ux](ux/README.md) | UX Designer | Active |
 | [detect](detect/README.md) | Repo audits & knowledge | Active |
 | [wp](wp/README.md) | WordPress | Active |
+| [sec](sec/README.md) | Security | Active |
+| [devops](devops/README.md) | DevOps/Infrastructure | Active |
 | [release](release/README.md) | Release management | Active |
 | growth | Growth/SEO | Planned |
 

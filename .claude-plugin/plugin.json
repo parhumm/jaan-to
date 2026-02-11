@@ -1,7 +1,7 @@
 {
   "name": "jaan-to",
-  "version": "5.1.0",
-  "description": "Give soul to your workflow. 33 AI-powered skills for product management (PRDs, user stories), development (frontend/backend scaffolds, task breakdowns, data models, API contracts, component design), WordPress plugin PR review, release management (changelog generation), evidence-based repo audits (detect suite: dev, design, writing, product, UX + knowledge pack), UX research synthesis, UX flowchart generation, QA test cases (BDD/Gherkin), and data analytics (GTM tracking). Features two-phase workflow with human approval, quality-reviewer agent, and continuous improvement via LEARN.md system.",
+  "version": "6.0.0",
+  "description": "Give soul to your workflow. 38 AI-powered skills across 13 roles — PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, and Core. Spec-to-ship pipeline: scaffold, implement, test, secure, deploy. Features two-phase workflow with human approval, quality-reviewer agent, token optimization, and continuous improvement via LEARN.md system.",
   "author": {
     "name": "Parhum Khoshbakht",
     "email": "parhum.kh@gmail.com"

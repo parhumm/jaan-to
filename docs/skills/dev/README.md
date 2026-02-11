@@ -20,6 +20,7 @@ See [Backend Skills](../backend/README.md) for complete documentation:
 - [/jaan-to:backend-data-model](../backend/data-model.md) - Generate data model docs with constraints, indexes, and migrations
 - [/jaan-to:backend-task-breakdown](../backend/task-breakdown.md) - Convert PRDs into structured backend development tasks
 - [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate production-ready backend code from specs
+- [/jaan-to:backend-service-implement](../backend/service-implement.md) - Generate service implementations with business logic from specs
 
 ### Frontend Skills
 
@@ -28,6 +29,10 @@ See [Frontend Skills](../frontend/README.md) for complete documentation:
 - [/jaan-to:frontend-design](../frontend/design.md) - Create distinctive, production-grade frontend interfaces
 - [/jaan-to:frontend-task-breakdown](../frontend/task-breakdown.md) - Transform UX design handoffs into production-ready task breakdowns
 - [/jaan-to:frontend-scaffold](../frontend/scaffold.md) - Convert designs to React/Next.js components with TailwindCSS and typed API hooks
+
+### Assembly Skills
+
+- [/jaan-to:dev-project-assemble](project-assemble.md) - Wire scaffold outputs into runnable project with configs and entry points
 
 ### Planned Dev Skills
 

@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.0.0] - 2026-02-11
+
+### Added
+- **5 spec-to-ship skills** closing the scaffold-to-deployment pipeline:
+  - **`dev-project-assemble`** (`/jaan-to:dev-project-assemble`) — Wire backend + frontend scaffold outputs into a runnable project with directory tree, configs, entry points, and provider wiring. Supports monorepo (Turborepo/Nx) and separate-project layouts, auto-detected from `tech.md`
+  - **`backend-service-implement`** (`/jaan-to:backend-service-implement`) — Generate full service implementations with business logic from TODO stubs and upstream specs (API contract, data model, task breakdown). Includes CRUD patterns, state machines, RFC 9457 error handling, pagination, and idempotency helpers
+  - **`qa-test-generate`** (`/jaan-to:qa-test-generate`) — Produce runnable Vitest unit tests and Playwright E2E specs from BDD test cases. Features tag-based routing (@unit/@integration/@e2e/@api), test data factories (Fishery + zod-mock), MSW mock handlers, and page objects
+  - **`sec-audit-remediate`** (`/jaan-to:sec-audit-remediate`) — Generate targeted security fixes from detect-dev SARIF findings with CWE-mapped fix strategies, severity triage, and regression tests for OWASP Top 10 vulnerability types
+  - **`devops-infra-scaffold`** (`/jaan-to:devops-infra-scaffold`) — Generate CI/CD workflows (GitHub Actions/GitLab CI), multi-stage Dockerfiles, docker-compose, environment configs, and deployment platform configs (Vercel/Railway/Fly.io/AWS ECS)
+- **New roles**: `sec` (Security) and `devops` (DevOps/Infrastructure) with documentation
+- **Token strategy documentation** — `docs/token-strategy.md` explaining the three-layer token optimization approach
+- **Skill documentation pages** for all 5 new skills in `docs/skills/`
+- **Spec-to-Ship workflow** added to `docs/skills/DEPENDENCIES.md`
+
+### Changed
+- **Token-optimized all 5 new skills** — Extracted reference material into `docs/extending/*-reference.md` files, reducing total SKILL.md lines by 844 (~25%)
+- **Updated `create-skill.md`** — Added Token Optimization Strategy section with line targets, reference extraction pattern, and frontmatter flags guidance for future skill development
+- **Plugin skill count** updated from 33 to 38
+- **Roadmap** updated with v6.0.0 changelog, task checklists, and quick reference table
+
+---
+
 ## [5.1.0] - 2026-02-10
 
 ### Added
@@ -943,6 +965,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
+[6.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.0.0
 [5.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.1.0
 [5.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.0.0
 [4.5.1]: https://github.com/parhumm/jaan-to/releases/tag/v4.5.1

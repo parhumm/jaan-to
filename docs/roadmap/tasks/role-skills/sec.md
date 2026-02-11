@@ -75,3 +75,17 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [controls]
 - **Output**: `$JAAN_OUTPUTS_DIR/sec/compliance/{slug}/evidence-pack.md`
+
+### ✅ /jaan-to:sec-audit-remediate
+
+- **Logical**: `sec-audit-remediate`
+- **Description**: Generate security fixes from detect-dev SARIF findings with regression tests
+- **Quick Win**: Yes - structured fix generation
+- **Key Points**:
+  - CWE-mapped fix strategies with severity triage
+  - Generates fix patches + regression tests
+  - Supports OWASP Top 10 vulnerability types
+- **→ Next**: `devops-infra-scaffold` (security in CI)
+- **MCP Required**: None
+- **Input**: [detect-dev-output] [backend-scaffold | frontend-scaffold]
+- **Output**: `$JAAN_OUTPUTS_DIR/sec/remediate/{id}-{slug}/`

@@ -192,6 +192,20 @@ flowchart TD
 - **Input**: [pr-link-or-branch]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/review/{id}-{slug}/{id}-{slug}.md`
 
+### ✅ /jaan-to:dev-project-assemble
+
+- **Logical**: `dev-project-assemble`
+- **Description**: Wire scaffold outputs into runnable project structure with configs and entry points
+- **Quick Win**: No - multi-artifact assembly
+- **Key Points**:
+  - Wires backend + frontend scaffold outputs into working project
+  - Supports monorepo (Turborepo/Nx) and separate project layouts
+  - Auto-detects stack from tech.md
+- **→ Next**: `devops-infra-scaffold`
+- **MCP Required**: None
+- **Input**: [backend-scaffold] [frontend-scaffold] [target-dir]
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/project-assemble/{id}-{slug}/`
+
 ### /jaan-to:dev-ship-check
 
 - **Logical**: `dev-ship-check`
