@@ -67,6 +67,17 @@ if [ ! -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ]; then
   fi
 fi
 
+# 3.5. Migration: fix wrong default path examples in settings.yaml (issue #64)
+if [ -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ] && grep -q 'artifacts/jaan-to' "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" 2>/dev/null; then
+  sed -i.bak \
+    -e 's|# paths_templates: "docs/templates"|# paths_templates: "jaan-to/templates"|' \
+    -e 's|# paths_learning: "docs/learning"|# paths_learning: "jaan-to/learn"|' \
+    -e 's|# paths_context: "docs/context"|# paths_context: "jaan-to/context"|' \
+    -e 's|# paths_outputs: "artifacts/jaan-to"|# paths_outputs: "jaan-to/outputs"|' \
+    -e 's|# Uncomment and modify to change default locations|# These are the defaults — uncomment and modify to change locations|' \
+    "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" && rm -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml.bak"
+fi
+
 # 4. Copy context files (skip if exists)
 if [ -d "$PLUGIN_DIR/scripts/seeds" ]; then
   for context_file in "$PLUGIN_DIR/scripts/seeds"/*.md; do
