@@ -13,6 +13,8 @@ sidebar_position: 8
 
 Guides you through creating a structured issue report for the jaan-to plugin. Gathers details through clarifying questions, auto-collects environment info, sanitizes private data, and either submits directly to GitHub or saves locally for manual submission.
 
+On first run, the skill detects whether `gh` CLI is available and asks your preferred submission mode. Your choice is saved to `jaan-to/config/settings.yaml` so you're only asked once.
+
 When invoked mid-session, the skill scans the conversation for errors, failed tool calls, and frustrations to auto-draft a suggested issue.
 
 ---
@@ -22,6 +24,7 @@ When invoked mid-session, the skill scans the conversation for errors, failed to
 ```
 /jaan-to:jaan-issue-report "<description>"
 /jaan-to:jaan-issue-report "<description>" --type bug --submit
+/jaan-to:jaan-issue-report "<description>" --no-submit
 /jaan-to:jaan-issue-report
 ```
 
@@ -30,7 +33,13 @@ When invoked mid-session, the skill scans the conversation for errors, failed to
 | Flag | Values | Default | Description |
 |------|--------|---------|-------------|
 | `--type` | `bug`, `feature`, `skill`, `docs` | Auto-detect | Issue category |
-| `--submit` | (no value) | Off | Submit directly to GitHub |
+| `--submit` | (no value) | — | Force submit to GitHub (overrides saved preference) |
+| `--no-submit` | (no value) | — | Force local-only mode (overrides saved preference) |
+
+**Submit mode resolution** (when neither flag is provided):
+
+1. Saved preference in `jaan-to/config/settings.yaml` (`issue_report_submit: true/false`)
+2. If no preference saved: detects `gh` CLI, asks once, saves your choice
 
 ---
 
@@ -51,12 +60,12 @@ When a session draft is available, only deepening questions are asked.
 
 ## Output
 
-**Local mode** (default):
+**Local mode**:
 ```
 $JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/{id}-{slug}.md
 ```
 
-**Submit mode** (`--submit`):
+**Submit mode** (default when `gh` is available):
 - Creates a GitHub issue at `parhumm/jaan-to`
 - Also saves a local copy with the issue URL
 
@@ -96,6 +105,7 @@ Safe to include: jaan-to version, skill names, hook names, OS type, sanitized er
 ## Tips
 
 - Invoke mid-session right after hitting a problem for the best auto-draft
-- Use `--submit` only if you have `gh` CLI installed and authenticated
+- On first run, you'll be asked whether to submit to GitHub if `gh` CLI is available — your choice is saved for future runs
+- Use `--submit` or `--no-submit` to override your saved preference for a single invocation
 - The HARD STOP preview lets you review and edit before anything is saved or submitted
 - All issue content is written in English regardless of your conversation language

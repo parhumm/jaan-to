@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **`jaan-issue-report` defaults to smart GitHub submission** — Skill now detects `gh` CLI availability on first run, asks once whether to submit directly to GitHub (recommended), and saves the preference to `jaan-to/config/settings.yaml`. Added `--no-submit` flag for explicit opt-out. Submit mode resolution priority: `--submit`/`--no-submit` flags > saved `issue_report_submit` preference > smart detection with user prompt. Closes [#61](https://github.com/parhumm/jaan-to/issues/61)
+
 ---
 
 ## [6.0.0] - 2026-02-11
