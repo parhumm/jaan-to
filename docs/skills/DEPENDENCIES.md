@@ -115,6 +115,12 @@ Code Generation & Deployment:
                  │
                  └──> /jaan-to:devops-infra-scaffold
                       "Generate CI/CD, Docker, deployment configs"
+                 │
+                 ├──> /jaan-to:dev-output-integrate
+                 │    "Copy outputs into project locations"
+                 │
+                 └──> /jaan-to:devops-deploy-activate
+                      "Activate deployment pipeline"
 ```
 
 ### Skill Development Flow
@@ -233,6 +239,8 @@ These skills are referenced but not yet implemented:
 | `/jaan-to:qa-test-generate` | qa | Generate runnable tests from BDD cases |
 | `/jaan-to:sec-audit-remediate` | sec | Fix security findings with patches + tests |
 | `/jaan-to:devops-infra-scaffold` | devops | Generate CI/CD, Docker, deployment configs |
+| `/jaan-to:dev-output-integrate` | dev | Copy outputs into project with entry point wiring |
+| `/jaan-to:devops-deploy-activate` | devops | Activate deployment pipeline with secrets and platforms |
 
 See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.
 
@@ -258,4 +266,4 @@ Skills may invoke agents automatically:
 
 ---
 
-**Last Updated:** 2026-02-03
+**Last Updated:** 2026-02-12

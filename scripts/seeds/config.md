@@ -68,6 +68,8 @@
 | jaan-issue-report | `/jaan-to:jaan-issue-report` | [Internal] Report issues to jaan-to GitHub repo or save locally |
 | sec-audit-remediate | `/jaan-to:sec-audit-remediate` | Generate security fixes from detect-dev findings with regression tests |
 | devops-infra-scaffold | `/jaan-to:devops-infra-scaffold` | Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack |
+| dev-output-integrate | `/jaan-to:dev-output-integrate` | Copy generated jaan-to outputs into project locations with entry point wiring and validation |
+| devops-deploy-activate | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets, platform provisioning, and supply chain hardening |
 
 ## Language
 - language: ask
