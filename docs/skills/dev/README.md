@@ -33,6 +33,7 @@ See [Frontend Skills](../frontend/README.md) for complete documentation:
 ### Assembly Skills
 
 - [/jaan-to:dev-project-assemble](project-assemble.md) - Wire scaffold outputs into runnable project with configs and entry points
+- [/jaan-to:dev-output-integrate](output-integrate.md) - Copy generated jaan-to outputs into project locations with entry point wiring and validation
 
 ### Planned Dev Skills
 
