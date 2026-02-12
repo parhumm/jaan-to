@@ -27,15 +27,17 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v6.1.0 — Lazy template/learn seeding ([#60](https://github.com/parhumm/jaan-to/issues/60))
+**Latest:** v6.1.0 — dev-output-integrate, devops-deploy-activate, seed reconciliation, lazy seeding ([#70](https://github.com/parhumm/jaan-to/issues/70), [#63](https://github.com/parhumm/jaan-to/issues/63), [#60](https://github.com/parhumm/jaan-to/issues/60))
 
-### v6.1.0 — Lazy template/learn seeding ([#60](https://github.com/parhumm/jaan-to/issues/60))
-- Switched bootstrap from eager to lazy template/learn file seeding — templates and learn files loaded from plugin at runtime
-- Added three-tier fallback to pre-execution protocol: project (prefixed) → project (unprefixed) → plugin source
-- Fixed template/learn naming mismatch: bootstrap created files without `jaan-to:` prefix but skills expected it
-- Updated `learn-add` to seed from plugin LEARN.md when creating new project learn files
-- Updated `path-resolver.sh` to support both naming conventions for backward compatibility
-- Updated `verify-install.sh`, `jaan-init`, and documentation for lazy loading
+### v6.1.0 — Add dev-output-integrate & devops-deploy-activate + lazy seeding
+- Added `dev-output-integrate` skill — copy generated outputs into project with config merging and entry point wiring (`eedcbab`)
+- Added `devops-deploy-activate` skill — activate deployment pipeline with secrets, SHA pinning, and platform provisioning (`eedcbab`)
+- Added post-detect seed reconciliation — detect skills check/update seed files with user approval (`0c66bcb`)
+- `jaan-issue-report` defaults to smart GitHub submission with `gh` CLI detection (`6b6a6fe`)
+- Switched bootstrap from eager to lazy template/learn file seeding (`35135b2`)
+- Removed legacy v2.0→v4.5.1 migration code from bootstrap (-767 lines) (`79eb45d`)
+- Fixed template/learn naming mismatch and seed settings.yaml default paths
+- Plugin skill count updated from 38 to 40
 
 ### v6.0.0 — Add 5 spec-to-ship skills + token optimization
 - Added `dev-project-assemble` skill — wire backend + frontend scaffold outputs into runnable project with configs and entry points (`221280a`)
@@ -153,10 +155,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## Unreleased
 
-- [x] `/jaan-to:jaan-issue-report` — Issue reporting skill with session context awareness, privacy sanitization, and dual delivery (GitHub submit / local save)
-- [x] Documentation: `docs/skills/core/jaan-issue-report.md` and Core Skills README updated
-- [x] **Post-detect seed reconciliation** ([#63](https://github.com/parhumm/jaan-to/issues/63)) — All detect skills check findings against seed files and report discrepancies; `detect-pack` actively updates seed files with user approval workflow
-- [x] Shared reference: `docs/extending/seed-reconciliation-reference.md`
+(empty)
 
 ---
 
@@ -214,6 +213,17 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 | RELEASE | 8 | 8 | 0 | [release.md](tasks/role-skills/release.md) |
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
+
+### v6.1.0 — Add dev-output-integrate & devops-deploy-activate (`eedcbab`)
+
+- [x] `/jaan-to:dev-output-integrate` — Copy generated outputs into project with config merging and entry point wiring (`eedcbab`)
+- [x] `/jaan-to:devops-deploy-activate` — Activate deployment pipeline with secrets, SHA pinning, platform provisioning (`eedcbab`)
+- [x] Post-detect seed reconciliation for all detect skills (`0c66bcb`)
+- [x] `jaan-issue-report` smart GitHub submission (`6b6a6fe`)
+- [x] Lazy template/learn seeding with three-tier fallback (`35135b2`)
+- [x] Remove legacy migration code from bootstrap (`79eb45d`)
+- [x] Fix template/learn naming mismatch and seed settings.yaml paths
+- [x] Update skill count 38 → 40
 
 ### v6.0.0 — Add 5 spec-to-ship skills (`221280a`)
 
@@ -326,8 +336,12 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:backend-service-implement` | Generate service implementations from scaffold stubs |
 | `/jaan-to:qa-test-generate` | Generate runnable Vitest/Playwright tests from BDD cases |
 | `/jaan-to:sec-audit-remediate` | Generate security fixes from detect-dev findings |
+| `/jaan-to:dev-output-integrate` | Copy generated outputs into project with config merging |
 | `/jaan-to:devops-infra-scaffold` | Generate CI/CD, Dockerfiles, deployment configs |
+| `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
+| `/jaan-to:jaan-init` | Initialize jaan-to for a project |
+| `/jaan-to:jaan-issue-report` | Report issues to jaan-to GitHub repo |
 | `/jaan-to:skill-create` | Create new skill with wizard |
 | `/jaan-to:skill-update` | Update existing skill |
 | `/jaan-to:docs-create` | Create documentation with templates |

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.1.0] - 2026-02-12
+
 ### Added
 - **`dev-output-integrate`** (`/jaan-to:dev-output-integrate`) — Copy generated jaan-to outputs into operational project locations with README-based placement parsing, config file merging (package.json deep merge, tsconfig.json extends), entry point wiring (security plugin order, provider registration), dependency installation, and post-integration validation. Reference material extracted to `docs/extending/dev-output-integrate-reference.md`. Closes [#70](https://github.com/parhumm/jaan-to/issues/70)
 - **`devops-deploy-activate`** (`/jaan-to:devops-deploy-activate`) — Activate deployment pipeline from infra-scaffold output: configure GitHub secrets, pin GitHub Actions to SHA digests for supply chain security, provision backend/frontend platforms (Railway, Vercel, Fly.io), set up Turborepo remote cache, and trigger verification pipeline. Reference material extracted to `docs/extending/devops-deploy-activate-reference.md`. Closes [#70](https://github.com/parhumm/jaan-to/issues/70)
