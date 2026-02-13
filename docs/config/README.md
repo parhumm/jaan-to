@@ -18,6 +18,7 @@ sidebar_position: 1
 | [Context System](context-system.md) | `jaan-to/context/` | Context injection system |
 | [Permissions](permissions.md) | `.claude/settings.json` | Allow/deny rules |
 | [Guardrails](guardrails.md) | `jaan-to/context/boundaries.md` | Safety boundaries |
+| [Template Seeding](seed-template.md) | `scripts/seed-template.sh` | Copy plugin templates to project |
 
 ---
 
