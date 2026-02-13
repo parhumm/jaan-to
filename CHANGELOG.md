@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.1.1] - 2026-02-12
+
 ### Fixed
 - **Template seeding on plugin-source fallback** ([#73](https://github.com/parhumm/jaan-to/issues/73)) — Pre-execution protocol now offers to seed a skill's template into `jaan-to/templates/jaan-to:{skill}.template.md` when it resolves from the plugin source fallback. Users accept or decline; subsequent runs find the project copy and skip the offer. New `scripts/seed-template.sh` helper handles the copy. Affects all 36 template-using skills via the shared protocol. Closes [#73](https://github.com/parhumm/jaan-to/issues/73)
 
