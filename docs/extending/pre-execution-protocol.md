@@ -32,4 +32,18 @@ When this skill's instructions reference a template path like
 
 Use the first file found. If none exist, proceed without a template.
 
-Do NOT create or copy template files during skill execution.
+## Step C: Offer Template Seeding
+
+If Step B resolved the template from the **plugin source** (step 3 — the `${CLAUDE_PLUGIN_ROOT}/skills/{SKILL_NAME}/template.md` path), offer to seed it into the project for future customization:
+
+> "This skill used the default plugin template. Copy it to `$JAAN_TEMPLATES_DIR/jaan-to:{SKILL_NAME}.template.md` so you can customize it for future runs? [y/n]"
+
+**If yes:**
+1. Run: `${CLAUDE_PLUGIN_ROOT}/scripts/seed-template.sh {SKILL_NAME}`
+2. Confirm the seeded path from the script output.
+3. Continue skill execution using the **newly seeded project copy** as the resolved template.
+
+**If no:**
+- Continue skill execution using the plugin source template. No file is created.
+
+**Skip this step** if the template was found at step 1 or 2 (project copy already exists), or if no template exists anywhere.

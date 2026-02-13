@@ -92,7 +92,8 @@ if [ -d "$PLUGIN_DIR/scripts/seeds" ]; then
 fi
 
 # 5. Templates — loaded from plugin at runtime (lazy loading)
-# Users can copy templates to $TEMPLATES_DIR for customization
+# On first use, pre-execution protocol Step C offers to seed into $TEMPLATES_DIR
+# Users can also manually copy templates for customization
 # See: docs/guides/customization.md
 
 # 6. Copy docs needed by skills (skip if exists)
