@@ -60,6 +60,7 @@ Use extended reasoning for:
 
 Read infra-scaffold README and CI/CD workflow files:
 1. Extract secret names referenced in workflows (`${{ secrets.* }}`)
+1b. Extract variable names referenced in workflows (`${{ vars.* }}`)
 2. Identify deployment platform targets (Vercel, Railway, Fly.io)
 3. Detect Docker registry configuration
 4. List GitHub Actions used (for SHA pinning)
@@ -102,8 +103,9 @@ If `gh` is missing or not authenticated: stop and ask user to install/authentica
 
 Check what is already configured:
 1. `gh secret list` — which secrets already exist
-2. Check for existing platform project links (`.vercel/`, `fly.toml`, `railway.toml`)
-3. Check `.github/workflows/` for existing CI/CD workflows
+2. `gh variable list` — which repository variables already exist
+3. Check for existing platform project links (`.vercel/`, `fly.toml`, `railway.toml`)
+4. Check `.github/workflows/` for existing CI/CD workflows
 
 Present state:
 ```
@@ -111,6 +113,8 @@ CURRENT STATE
 =============
 Secrets Configured:    {count}/{total} ({list})
 Secrets Missing:       {list}
+Variables Configured:  {count}/{total} ({list})
+Variables Missing:     {list}
 Platform Links:        {found / none}
 Existing Workflows:    {list or "none"}
 ```
@@ -124,11 +128,13 @@ ACTIVATION CHECKLIST
 ====================
                                           Status
 1. GitHub Secrets                         {needed / configured / partial}
-2. GitHub Actions SHA Pinning             {needed / done}
-3. Backend Platform ({platform})          {needed / linked}
-4. Frontend Platform ({platform})         {needed / linked}
-5. Remote Cache (Turborepo)               {needed / n/a}
-6. Verification Pipeline                  {needed}
+2. GitHub Repository Variables            {needed / configured / partial}
+3. GitHub Actions SHA Pinning             {needed / done}
+4. Backend Platform ({platform})          {needed / linked}
+5. Frontend Platform ({platform})         {needed / linked}
+6. Repository Variables (post-provision)  {needed / configured}
+7. Remote Cache (Turborepo)               {needed / n/a}
+8. Verification Pipeline                  {needed}
 
 Items to activate: {count}
 Already configured: {count}
@@ -203,6 +209,8 @@ Based on detected deployment target:
 2. `fly secrets set` — Configure secrets
 3. Verify: `fly status`
 
+Capture service URL from platform CLI output for repository variables (Step 8b).
+
 Confirm:
 > Backend platform ({platform}) provisioned and linked.
 
@@ -216,8 +224,32 @@ Based on detected deployment target:
 3. Set up preview deployments for PRs
 4. Verify: `vercel inspect`
 
+Capture production URL from platform CLI output for repository variables (Step 8b).
+
 Confirm:
 > Frontend platform ({platform}) connected with preview deployments.
+
+## Step 8b: Configure Repository Variables
+
+Set non-sensitive configuration values as GitHub repository variables:
+
+1. `gh variable list` — show currently configured variables
+2. For each required variable (from Step 1b `${{ vars.* }}` extraction):
+   - Detect value from platform provisioning output if possible (service URLs)
+   - Confirm value via AskUserQuestion before setting
+   - Run `gh variable set {NAME} --body "{value}"`
+   - For environment-scoped: `gh variable set {NAME} --env production --body "{value}"`
+3. Present configured variables:
+
+```
+REPOSITORY VARIABLES
+====================
+{NAME}:           {value}
+{NAME}:           {value}
+Environment-scoped: {list}
+```
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/devops-deploy-activate-reference.md` section "Repository Variable Patterns" for common variables, URL capture commands, and secrets-vs-variables guidance.
 
 ## Step 9: Configure Remote Cache (if monorepo)
 
@@ -264,6 +296,11 @@ If failed: show failure details and suggest fixes.
 - [ ] Frontend platform connected with preview deployments
 - [ ] Remote cache configured (if applicable)
 
+**Repository Variables:**
+- [ ] All required `${{ vars.* }}` references have corresponding variables set
+- [ ] Non-sensitive values used as variables (not secrets)
+- [ ] Environment-scoped variables set where needed
+
 **Pipeline:**
 - [ ] CI pipeline triggered and completed
 - [ ] All workflow stages passed
@@ -296,6 +333,7 @@ Write `{NEXT_ID}-{slug}.md` with:
 - Secrets configured (names only, never values)
 - Actions hardened (SHA pinning results)
 - Platforms provisioned (with connection status)
+- Repository variables configured (names and values — non-secret)
 - Pipeline verification results
 - Remote cache status
 - Next steps for ongoing maintenance
@@ -367,6 +405,7 @@ devops-deploy-activate
 ## Definition of Done
 
 - [ ] All required GitHub secrets configured
+- [ ] All required GitHub repository variables configured
 - [ ] GitHub Actions pinned to SHA digests
 - [ ] Backend platform provisioned and connected
 - [ ] Frontend platform connected with preview deployments
