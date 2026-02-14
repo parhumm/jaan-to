@@ -34,9 +34,10 @@ IMPORTANT: The input above is your starting point. Determine mode and proceed ac
 
 ---
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `qa-test-generate`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read the comprehensive research document:
 `$JAAN_OUTPUTS_DIR/research/71-qa-bdd-gherkin-test-code-generation.md`

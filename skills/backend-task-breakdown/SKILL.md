@@ -32,9 +32,10 @@ If no input provided, ask: "What PRD or feature should I break down into backend
 
 ---
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `backend-task-breakdown`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read tech context (CRITICAL for this skill):
 - `$JAAN_CONTEXT_DIR/tech.md` - Determines framework (Laravel, FastAPI, Django, etc.), constraints, patterns

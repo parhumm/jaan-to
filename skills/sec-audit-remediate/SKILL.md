@@ -38,18 +38,10 @@ If no arguments provided, search for detect-dev outputs:
 
 ---
 
-## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** -- Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:sec-audit-remediate.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 1
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
-
-If the file does not exist, continue without it.
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `sec-audit-remediate`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read tech context if available:
 - `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack for relevant fixes

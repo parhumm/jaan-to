@@ -37,9 +37,10 @@ If input doesn't match any pattern, treat as `from-input` mode.
 
 # PHASE 1: Analysis (Read-Only)
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `release-iterate-changelog`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read context files if available:
 - `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack for context

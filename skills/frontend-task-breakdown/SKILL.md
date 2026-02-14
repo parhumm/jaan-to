@@ -33,9 +33,10 @@ If no input provided, ask: "What feature or UX handoff should I break down?"
 
 ---
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `frontend-task-breakdown`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read tech context if available:
 - `$JAAN_CONTEXT_DIR/tech.md` - Know the tech stack for framework-specific patterns

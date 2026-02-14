@@ -39,9 +39,10 @@ IMPORTANT: The input above is your starting point. Use it directly. Do NOT ask f
 
 ---
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `pm-story-write`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also optionally reference research insights:
 `$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md`

@@ -424,16 +424,11 @@ Read these before execution:
 
 # PHASE 1: Analysis (Read-Only)
 
-## Pre-Execution: Apply Past Lessons
+## Pre-Execution Protocol
 
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/{name}.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 1
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `{name}`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 ## Step 1: Gather Information
 {Questions to ask user}
@@ -512,7 +507,7 @@ If yes:
 | `## Context Files` | H2 | Files to read before execution |
 | `## Input` | H2 | How to interpret $ARGUMENTS |
 | `# PHASE 1: Analysis` | H1 | Read-only operations |
-| `## Step 0: Apply Past Lessons` | H2 | LEARN.md integration |
+| `## Pre-Execution Protocol` | H2 | Protocol steps (init, lessons, template, seeding) |
 | `# HARD STOP` | H1 | Human approval gate |
 | `# PHASE 2: Generation` | H1 | Write operations |
 | `## Definition of Done` | H2 | Completion checklist |
