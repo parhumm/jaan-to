@@ -535,18 +535,10 @@ The following sections document the v3.0.0 patterns that `skill-create` enforces
 
 **Standard pattern for all skills**:
 ```markdown
-## Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** -- Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/{skill-name}.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 1
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
-
-If the file does not exist, continue without it.
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `{skill-name}`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 ### Language Settings
 

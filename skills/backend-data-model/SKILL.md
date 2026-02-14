@@ -32,9 +32,10 @@ If no input provided, ask: "What entities or features should the data model cove
 
 ---
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `backend-data-model`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read tech context (CRITICAL for this skill):
 - `$JAAN_CONTEXT_DIR/tech.md` - Determines database engine, constraints, common patterns

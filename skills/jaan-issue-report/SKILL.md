@@ -37,10 +37,11 @@ If no arguments provided, proceed to session context scan (Step 0) or ask: "What
 
 # PHASE 1: Analysis (Read-Only)
 
-## Pre-Execution: Apply Past Lessons
+## Pre-Execution Protocol
 
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `jaan-issue-report`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
 `$JAAN_LEARN_DIR/jaan-to:jaan-issue-report.learn.md`

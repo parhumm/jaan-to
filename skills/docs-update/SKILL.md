@@ -18,9 +18,10 @@ disable-model-invocation: true
 
 **Note:** Style guide is intentionally read from the project's `jaan-to/docs/` directory (not from the skill directory). The bootstrap hook copies it there on first run, allowing project-level customization.
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `docs-update`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 ### Language Settings
 Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`

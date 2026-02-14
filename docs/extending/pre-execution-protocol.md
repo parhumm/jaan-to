@@ -2,6 +2,9 @@
 
 **MANDATORY FIRST ACTION** — Before any other step, check project initialization, load lessons, and resolve the template for this skill.
 
+> **Execution requirement**: Skills MUST execute Steps 0 → A → B → C in order.
+> Do not skip any step. Each step has its own skip conditions documented below.
+
 ## Step 0: Initialization Guard
 
 **Skip this step** if the current skill is `jaan-init`.

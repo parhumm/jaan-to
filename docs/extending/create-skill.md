@@ -424,16 +424,11 @@ Read these before execution:
 
 # PHASE 1: Analysis (Read-Only)
 
-## Pre-Execution: Apply Past Lessons
+## Pre-Execution Protocol
 
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/{name}.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 1
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `{name}`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 ## Step 1: Gather Information
 {Questions to ask user}
@@ -512,7 +507,7 @@ If yes:
 | `## Context Files` | H2 | Files to read before execution |
 | `## Input` | H2 | How to interpret $ARGUMENTS |
 | `# PHASE 1: Analysis` | H1 | Read-only operations |
-| `## Step 0: Apply Past Lessons` | H2 | LEARN.md integration |
+| `## Pre-Execution Protocol` | H2 | Protocol steps (init, lessons, template, seeding) |
 | `# HARD STOP` | H1 | Human approval gate |
 | `# PHASE 2: Generation` | H1 | Write operations |
 | `## Definition of Done` | H2 | Completion checklist |
@@ -806,11 +801,11 @@ Skills should be "tech-aware" when they:
 **2. Read in Pre-Execution or Step 1**:
 
 ```markdown
-## Pre-Execution: Apply Past Lessons
+## Pre-Execution Protocol
 
-**MANDATORY FIRST ACTION** — Read:
-1. `$JAAN_LEARN_DIR/{name}.learn.md`
-2. `$JAAN_CONTEXT_DIR/tech.md` (if exists)
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `{name}`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 ```
 
 **3. Use in Generation**:
@@ -1275,16 +1270,11 @@ argument-hint: [topic]
 
 # PHASE 1: Analysis (Read-Only)
 
-## Pre-Execution: Apply Past Lessons
+## Pre-Execution Protocol
 
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/example-minimal-demo.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions"
-- Note edge cases from "Edge Cases"
-- Follow improvements from "Workflow"
-- Avoid items in "Common Mistakes"
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `example-minimal-demo`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 ## Step 1: Gather Information
 
@@ -1397,16 +1387,11 @@ Use extended reasoning for:
 - Planning comprehensive test scenarios
 - Ensuring edge case coverage
 
-## Pre-Execution: Apply Past Lessons
+## Pre-Execution Protocol
 
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:qa-test-matrix.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 1
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `qa-test-matrix`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read tech context if available:
 - `$JAAN_CONTEXT_DIR/tech.md` - Know test frameworks and tooling
@@ -1583,20 +1568,17 @@ allowed-tools: Write($JAAN_OUTPUTS_DIR/**), Read($JAAN_CONTEXT_DIR/**)
 ## Step 0: Apply Past Lessons
 Read `jaan-to/learn/{name}.learn.md` if it exists:
 
-# After (v3.0.0)
-## Pre-Execution: Apply Past Lessons
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/{name}.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 1
+# After (v3.0.0+)
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `{name}`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 ```
 
 **Changes**:
-- Rename "Step 0" → "Pre-Execution"
-- Add MANDATORY FIRST ACTION emphasis
-- Use `$JAAN_LEARN_DIR` variable
-- Expand explanation of how to apply lessons
+- Rename "Step 0" → "Pre-Execution Protocol"
+- Delegate to shared protocol document for all pre-execution steps
+- Add explicit step enumeration to ensure all steps execute
 
 #### 4. Update Template References
 

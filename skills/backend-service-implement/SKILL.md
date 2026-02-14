@@ -32,9 +32,10 @@ Accepts 1-4 file paths or directory references:
 
 ---
 
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `backend-service-implement`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read context files if available:
 - `$JAAN_CONTEXT_DIR/tech.md` — Know the tech stack for framework-specific service generation

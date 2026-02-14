@@ -68,9 +68,10 @@ Override field for this skill: `language_{skill-name}`
 
 **For 16 "clean" skills** (no custom additions): Replace full Pre-Execution with:
 ```markdown
-## Pre-Execution: Apply Past Lessons
-Read and apply: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+## Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `{skill-name}`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 ```
 
 **For 10 skills with custom additions** (skill-create, qa-test-cases, pm-story-write, pm-prd-write, frontend-design, backend-api-contract, backend-data-model, backend-task-breakdown, frontend-task-breakdown, learn-add): Use the reference PLUS retain custom lines inline below it.
