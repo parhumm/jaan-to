@@ -106,6 +106,9 @@ Code Generation & Deployment:
                  │
                  ├──> /jaan-to:qa-test-generate
                  │    "Generate runnable tests from BDD cases"
+                 │     │
+                 │     └──> /jaan-to:qa-test-run
+                 │          "Execute tests, diagnose failures, report coverage"
                  │
                  ├──> /jaan-to:detect-dev
                  │    "Security audit of generated code"
@@ -245,6 +248,7 @@ These skills are referenced but not yet implemented:
 | `/jaan-to:dev-output-integrate` | dev | Copy outputs into project with entry point wiring |
 | `/jaan-to:dev-verify` | dev | Validate build pipeline and running services with health checks |
 | `/jaan-to:devops-deploy-activate` | devops | Activate deployment pipeline with secrets and platforms |
+| `/jaan-to:qa-test-run` | qa | Execute tests, diagnose failures, report coverage |
 
 See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.
 
