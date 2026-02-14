@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.2.3] - 2026-02-14
+
 ### Fixed
 - **Pre-execution Step C (template seeding) now explicitly invoked** ([#92](https://github.com/parhumm/jaan-to/issues/92)) — All 39 skills now use `## Pre-Execution Protocol` with explicit step enumeration (`Step 0 → A → B → C`) instead of the previous `## Pre-Execution: Apply Past Lessons` heading which biased execution toward only Step A (Load Lessons). Step C (Offer Template Seeding) was consistently skipped because skills delegated to the protocol document without enumerating steps. Also updates `create-skill.md` skeleton and adds a mandatory execution note to the protocol document. Closes [#92](https://github.com/parhumm/jaan-to/issues/92)
 
