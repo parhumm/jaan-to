@@ -11,10 +11,9 @@ PLUGIN_DIR="${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}"
 # Opt-in: skip if project not initialized (jaan-to/ doesn't exist)
 if [ ! -d "$PROJECT_DIR/jaan-to" ]; then
   cat <<RESULT
-{
-  "status": "not_initialized",
-  "message": "Run /jaan-to:jaan-init to activate jaan-to for this project"
-}
+JAAN-TO: Project not initialized.
+Before running any /jaan-to:* skill, recommend running /jaan-init first.
+Without initialization, context files (tech.md, team.md, boundaries.md, settings.yaml) are missing and skill output quality will be degraded.
 RESULT
   exit 0
 fi
