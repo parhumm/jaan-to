@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.2.2] - 2026-02-14
+
 ### Fixed
 - **Pre-execution protocol adds initialization guard (Step 0)** ([#87](https://github.com/parhumm/jaan-to/issues/87)) — All skills now actively check for `jaan-to/` directory before executing and recommend `/jaan-init` if missing. Prevents partial directory creation and degraded output on uninitialized projects. Skips for `jaan-init` itself to avoid circular dependency. Complements the bootstrap hook message from v6.2.1 with invocation-level enforcement.
 
