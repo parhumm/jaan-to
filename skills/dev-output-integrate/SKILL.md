@@ -104,6 +104,21 @@ Build ordered list of Edit operations needed.
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-output-integrate-reference.md` section "Entry Point Wiring Patterns" for Fastify plugin order, Next.js config, and provider registration.
 
+## Step 4b: Detect Route File Wiring
+
+Read `$JAAN_CONTEXT_DIR/tech.md` `#current-stack` to determine the framework routing convention.
+
+For each output file, classify as:
+- **Route-level** (pages, views, layouts) — must go into framework-specific route directories
+- **Component/library-level** — process normally via Step 6
+
+For route-level files:
+1. Detect target route from README placement instructions or filename convention
+2. Verify destination directory exists (create if needed)
+3. Check for existing files at destination — classify as REPLACE
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-output-integrate-reference.md` section "Route File Wiring" for per-stack detection tables and wiring rules.
+
 ## Step 5: Present Integration Plan
 
 Group operations by type:
@@ -127,6 +142,10 @@ MERGES ({count})
 ENTRY POINT MODIFICATIONS ({count})
 ------------------------------------
 {list with file + description of change}
+
+ROUTE FILE WIRING ({count})
+----------------------------
+{list with source → route destination + framework convention}
 
 DIRECTORIES TO CREATE ({count})
 -------------------------------
@@ -180,6 +199,7 @@ Modification order:
 2. Route registrations
 3. Config file modifications
 4. Package.json script additions
+5. Route file wiring (framework-specific page/view placement)
 
 ## Step 8: Install Dependencies
 
@@ -224,6 +244,10 @@ Tests:       ✓ Pass / ✗ {failure count} failures / ⊘ Skipped
 - [ ] All import statements added
 - [ ] All config modifications applied
 - [ ] All package.json script additions applied
+
+**Route Wiring:**
+- [ ] Route-level outputs placed in framework-correct route directories
+- [ ] Route convention matches tech.md `#current-stack` framework
 
 **Validation:**
 - [ ] TypeScript check passes (or errors explained)

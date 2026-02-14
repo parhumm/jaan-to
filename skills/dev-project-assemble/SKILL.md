@@ -326,9 +326,12 @@ Parse `{id}-{slug}-pages.tsx` and split per route:
 - Strict mode, correct module resolution per stack
 
 ### 10.3: `next.config.ts`
-- React compiler (if React 19)
+- React compiler (if React 19) — ensure `babel-plugin-react-compiler` is in devDependencies when `reactCompiler: true`
 - Transpile packages (monorepo)
 - Image domains, rewrites as needed
+- Check tech.md `#current-stack` — PHP/Go projects may have equivalent config-implied dependencies (see reference)
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-project-assemble-reference.md` section "Build Plugin Detection" for multi-stack config-implied dependency detection.
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-project-assemble-reference.md` section "Config File Content Patterns" for .env.example, .gitignore, and monorepo-specific config content.
 
@@ -346,6 +349,7 @@ Before preview, verify:
 - [ ] .gitignore covers all build artifacts and secrets
 - [ ] Monorepo config (if selected) has correct workspace paths
 - [ ] No hardcoded paths or placeholder TODOs remain in generated code
+- [ ] Config-implied build dependencies present in dependency manifest
 
 If any check fails, fix before preview.
 

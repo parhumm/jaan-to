@@ -37,3 +37,4 @@
 - Missing `"use client"` on the providers.tsx file -- layout.tsx is Server Component, providers.tsx must be Client Component
 - Duplicating dependencies between root and app package.json in monorepo -- use workspace protocol
 - Not including `postinstall: "prisma generate"` script for projects using Prisma
+- Enabling a framework compiler/optimizer in config without adding its required build dependency — causes CI build failure

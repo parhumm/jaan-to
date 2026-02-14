@@ -97,6 +97,39 @@
 - `.env.example` -- All required environment variables documented
 - `.gitignore` -- Standard ignores
 
+## Build Plugin Detection
+
+Framework configuration files can imply build-time dependencies that must be present in the dependency manifest. If a config signal is detected, the corresponding dependency **must** be added.
+
+**Principle**: If framework config implies a build-time dependency, the dependency manifest must include it.
+
+### Detection Table
+
+| Stack | Config Signal | Required Dependency | Manifest |
+|-------|--------------|-------------------|----------|
+| Node.js / Next.js | `reactCompiler: true` in `next.config.ts` | `babel-plugin-react-compiler` | `devDependencies` in `package.json` |
+| Node.js / Next.js | `@next/mdx` in `next.config.ts` | `@next/mdx`, `@mdx-js/react` | `dependencies` in `package.json` |
+| PHP / Laravel | `octane` in `config/octane.php` | `laravel/octane`, `swoole` or `roadrunner` | `require` in `composer.json` |
+| PHP / Laravel | `horizon` in `config/horizon.php` | `laravel/horizon` | `require` in `composer.json` |
+| Go | `sqlc.yaml` or `sqlc.json` present | `sqlc` CLI | `tools.go` or Makefile |
+| Go | `go:generate` directives | Referenced generator tool | `tools.go` or Makefile |
+
+### Example: Next.js React Compiler
+
+```typescript
+// next.config.ts
+const nextConfig: NextConfig = {
+  reactCompiler: true,  // ← config signal
+  // ...
+};
+```
+
+When `reactCompiler: true` is detected:
+- Add `babel-plugin-react-compiler` to `devDependencies`
+- Without it, build fails: `Module not found: Can't resolve 'babel-plugin-react-compiler'`
+
+---
+
 ## Backend Entry Point Templates
 
 ### 7.1: App Builder (`src/app.ts`)

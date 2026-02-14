@@ -11,7 +11,7 @@ sidebar_position: 1
 
 **Research**:
 - [WordPress Plugin Development: Complete Role-Based Skills Guide](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/54-roles-wp-details.md) - PM, Engineering, Admin UX, Integrations, Security, QA, Release
-- [WordPress Analytics Plugin Development](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/58-role-wp-dev.md) - Privacy-compliant tracking, database patterns, competitor analysis, JavaScript beacons
+- [WordPress Analytics Plugin Development](docs/research/58-role-wp-dev.md) - Privacy-compliant tracking, database patterns, competitor analysis, JavaScript beacons
 
 ## Userflow Schema
 
