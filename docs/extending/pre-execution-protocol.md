@@ -1,6 +1,23 @@
 # Pre-Execution Protocol
 
-**MANDATORY FIRST ACTION** — Before any other step, load lessons and resolve the template for this skill.
+**MANDATORY FIRST ACTION** — Before any other step, check project initialization, load lessons, and resolve the template for this skill.
+
+## Step 0: Initialization Guard
+
+**Skip this step** if the current skill is `jaan-init`.
+
+Check if the `jaan-to/` directory exists in the project root.
+
+**If `jaan-to/` exists** → proceed to Step A.
+
+**If `jaan-to/` does NOT exist** → the project has not been initialized. Ask the user:
+
+> "This project hasn't been initialized with jaan-to yet. Context files and configuration won't be available, which may reduce output quality. Run `/jaan-init` to set up the project first?"
+>
+> Options: [1] Yes, run /jaan-init first (Recommended) — [2] No, continue without initialization
+
+- **Option 1**: Run `/jaan-init` and follow its full workflow. After initialization completes, return here and continue from Step A.
+- **Option 2**: Continue to Step A. Skills will operate with plugin defaults only (no project-specific context).
 
 ## Step A: Load Lessons
 
