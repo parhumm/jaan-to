@@ -30,3 +30,7 @@ language: "ask"
 # Issue report submission preference
 # "ask" = prompt on first run if gh CLI is available, then save choice
 issue_report_submit: "ask"
+
+# Integration drift detection
+# When true, PostToolUse hook warns about un-integrated outputs
+integration_drift_check: true
