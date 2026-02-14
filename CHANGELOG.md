@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Integration drift detection** ([#75](https://github.com/parhumm/jaan-to/issues/75)) — PostToolUse hook warns when new outputs appear in `$JAAN_OUTPUTS_DIR/` after `dev-output-integrate` has run. Writes `.last-integration-manifest` at integration time and compares subsequent writes against it. Non-blocking, configurable via `integration_drift_check` setting. Works with all generation skills. Closes [#75](https://github.com/parhumm/jaan-to/issues/75)
+- **Route file wiring in `dev-output-integrate`** ([#84](https://github.com/parhumm/jaan-to/issues/84)) — Skill now distinguishes route-level outputs (pages, views, layouts) from component/library files and wires them into framework-specific route directories. Detection heuristic and per-stack wiring rules cover Next.js App Router, Laravel Inertia/Blade, and Go templates. Reference material in `docs/extending/dev-output-integrate-reference.md`
+- **Build plugin dependency detection** ([#84](https://github.com/parhumm/jaan-to/issues/84)) — `frontend-scaffold` and `dev-project-assemble` now detect that framework config can imply build dependencies (e.g., `reactCompiler: true` requires `babel-plugin-react-compiler` in devDependencies). Multi-stack detection table covers Node.js, PHP, and Go. Reference material in `docs/extending/dev-project-assemble-reference.md`
+- **Repository variables in `devops-deploy-activate`** ([#84](https://github.com/parhumm/jaan-to/issues/84)) — Skill now manages GitHub repository variables (`gh variable set`) for non-sensitive config values (service URLs, feature flags) after platform provisioning. Includes secrets-vs-variables guidance, URL capture commands per platform, and environment-scoped variable support. Reference material in `docs/extending/devops-deploy-activate-reference.md`. Closes [#84](https://github.com/parhumm/jaan-to/issues/84)
 
 ---
 
