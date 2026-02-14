@@ -77,18 +77,10 @@ argument-hint: [backend-api-contract, backend-task-breakdown, backend-data-model
 - `$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 ```
 
-### Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 3
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
-
-If the file does not exist, continue without it.
+### Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `backend-scaffold`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read context files if available:
 - `$JAAN_CONTEXT_DIR/tech.md` — Know the tech stack for framework-specific code generation
@@ -353,18 +345,10 @@ argument-hint: [frontend-design, frontend-task-breakdown, backend-api-contract]
 - `$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 ```
 
-### Pre-Execution: Apply Past Lessons
-
-**MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md`
-
-If the file exists, apply its lessons throughout this execution:
-- Add questions from "Better Questions" to Step 4
-- Note edge cases to check from "Edge Cases"
-- Follow workflow improvements from "Workflow"
-- Avoid mistakes listed in "Common Mistakes"
-
-If the file does not exist, continue without it.
+### Pre-Execution Protocol
+**MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
+Skill name: `frontend-scaffold`
+Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 Also read context files if available:
 - `$JAAN_CONTEXT_DIR/tech.md` — Know the tech stack for framework-specific code generation
