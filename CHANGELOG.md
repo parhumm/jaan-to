@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.2.1] - 2026-02-14
+
 ### Fixed
 - **Bootstrap outputs actionable init guard for uninitialized projects** ([#87](https://github.com/parhumm/jaan-to/issues/87)) — When `jaan-to/` directory is missing, the `SessionStart` hook now outputs a clear instruction telling the AI to recommend `/jaan-init` before running any skill. Previously output a quiet JSON blob that was ignored, allowing skills to create partial directory structures without context files. Zero token cost — runs once as a shell script, not as LLM instructions per skill.
 
