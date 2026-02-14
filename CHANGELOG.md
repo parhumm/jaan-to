@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.2.0] - 2026-02-14
+
+### Changed
+- **`jaan-issue-report` conditional local file + default submit** — Skill now defaults to GitHub submission when `gh` is authenticated (no first-run prompt). When submission succeeds, no local `.md` file is created. When in local-only mode or on submission failure, a copy-paste ready version of the issue is shown first, then the user is asked whether to save a local file. Phase 2 steps restructured: GitHub submission (Step 9) now runs before local file handling (Step 10). Users can opt out with `--no-submit` or `issue_report_submit: false` in settings.
+
+---
+
 ## [6.1.1] - 2026-02-12
 
 ### Fixed
