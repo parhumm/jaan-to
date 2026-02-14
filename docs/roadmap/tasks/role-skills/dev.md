@@ -1,9 +1,9 @@
 ---
-title: "DEV Skills (11)"
+title: "DEV Skills (12)"
 sidebar_position: 3
 ---
 
-# DEV Skills (11)
+# DEV Skills (12)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
 
@@ -205,6 +205,20 @@ flowchart TD
 - **MCP Required**: None
 - **Input**: [backend-scaffold] [frontend-scaffold] [target-dir]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/project-assemble/{id}-{slug}/`
+
+### ✅ /jaan-to:dev-verify
+
+- **Logical**: `dev-verify`
+- **Description**: Validate integrated build pipeline and running services with health checks and smoke tests
+- **Quick Win**: Yes - structured verification
+- **Key Points**:
+  - Build phase: type/compile checks, error categorization, auto-fix for safe issues
+  - Runtime phase: service discovery, health checks, OpenAPI contract validation, smoke tests
+  - Supports `--build-only`, `--runtime-only`, `--skip-smoke`, `--skip-fix` modes
+- **→ Next**: `devops-deploy-activate`
+- **MCP Required**: None
+- **Input**: [project-root] or (auto-detect)
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/verify/{id}-{slug}/`
 
 ### /jaan-to:dev-ship-check
 
