@@ -69,6 +69,7 @@
 | sec-audit-remediate | `/jaan-to:sec-audit-remediate` | Generate security fixes from detect-dev findings with regression tests |
 | devops-infra-scaffold | `/jaan-to:devops-infra-scaffold` | Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack |
 | dev-output-integrate | `/jaan-to:dev-output-integrate` | Copy generated jaan-to outputs into project locations with entry point wiring and validation |
+| dev-verify | `/jaan-to:dev-verify` | Validate integrated build pipeline and running services with health checks and smoke tests |
 | devops-deploy-activate | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets, platform provisioning, and supply chain hardening |
 
 ## Language
