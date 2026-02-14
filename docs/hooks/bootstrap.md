@@ -24,16 +24,15 @@ related: [README.md, ../config/context-system.md]
 
 ## Per-Project Opt-In
 
-Bootstrap checks if the project has been initialized before running. If `jaan-to/` directory does not exist, bootstrap exits early:
+Bootstrap checks if the project has been initialized before running. If `jaan-to/` directory does not exist, bootstrap exits early with an actionable message:
 
-```json
-{
-  "status": "not_initialized",
-  "message": "Run /jaan-to:jaan-init to activate jaan-to for this project"
-}
+```
+JAAN-TO: Project not initialized.
+Before running any /jaan-to:* skill, recommend running /jaan-init first.
+Without initialization, context files (tech.md, team.md, boundaries.md, settings.yaml) are missing and skill output quality will be degraded.
 ```
 
-To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, bootstrap runs normally on every session start.
+This message flows through the `SessionStart` hook into the conversation context, prompting the AI to recommend `/jaan-init` before executing any skill. To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, bootstrap runs normally on every session start.
 
 ---
 
