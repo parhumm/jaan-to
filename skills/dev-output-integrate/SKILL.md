@@ -1,7 +1,7 @@
 ---
 name: dev-output-integrate
 description: Copy generated jaan-to outputs into project locations with entry point wiring and validation.
-allowed-tools: Read, Glob, Grep, Write(src/**), Write(apps/**), Write(prisma/**), Write(test/**), Write(tests/**), Write(.github/**), Write(docker/**), Write(deploy/**), Write(package.json), Write(tsconfig.json), Write(vitest.config.*), Write(playwright.config.*), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.env.test), Write(.gitignore), Write(.dockerignore), Write(Dockerfile*), Write(docker-compose*), Write(turbo.json), Write($JAAN_OUTPUTS_DIR/dev/output-integrate/**), Bash(pnpm:*), Bash(npm:*), Bash(npx tsc:*), Bash(ls:*), Bash(mkdir:*), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(next.config.*), Edit(turbo.json)
+allowed-tools: Read, Glob, Grep, Write(src/**), Write(apps/**), Write(prisma/**), Write(test/**), Write(tests/**), Write(.github/**), Write(docker/**), Write(deploy/**), Write(package.json), Write(tsconfig.json), Write(vitest.config.*), Write(playwright.config.*), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.env.test), Write(.gitignore), Write(.dockerignore), Write(Dockerfile*), Write(docker-compose*), Write(turbo.json), Write($JAAN_OUTPUTS_DIR/dev/output-integrate/**), Write($JAAN_OUTPUTS_DIR/.last-integration-manifest), Bash(pnpm:*), Bash(npm:*), Bash(npx tsc:*), Bash(ls:*), Bash(mkdir:*), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(next.config.*), Edit(turbo.json)
 argument-hint: [output-path...] or (interactive scan)
 ---
 
@@ -276,7 +276,26 @@ Confirm:
 > Integration log written to: `$JAAN_OUTPUTS_DIR/dev/output-integrate/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md`
 > Index updated: `$JAAN_OUTPUTS_DIR/dev/output-integrate/README.md`
 
-## Step 13: Suggest Next Actions
+## Step 13: Write Integration Manifest
+
+Write `.last-integration-manifest` to `$JAAN_OUTPUTS_DIR/`:
+
+```bash
+MANIFEST_PATH="$JAAN_OUTPUTS_DIR/.last-integration-manifest"
+```
+
+The manifest contains one file path per line (relative to project root), listing ALL files currently in `$JAAN_OUTPUTS_DIR/` at the time of integration.
+
+**Exclude from manifest:**
+- Files under `$JAAN_OUTPUTS_DIR/dev/output-integrate/` (integration logs, not source outputs)
+- The manifest file itself (`.last-integration-manifest`)
+- `README.md` index files
+
+Use Glob to scan `$JAAN_OUTPUTS_DIR/**/*` and write the filtered list.
+
+This enables the integration-drift-check hook to detect outputs created after this run.
+
+## Step 14: Suggest Next Actions
 
 > **Output integration complete!**
 >
@@ -291,7 +310,7 @@ Confirm:
 > - Run `/jaan-to:qa-test-generate` to generate tests for integrated code
 > - Run `/jaan-to:release-iterate-changelog` to document the integration
 
-## Step 14: Capture Feedback
+## Step 15: Capture Feedback
 
 Use AskUserQuestion:
 - Question: "How did the output integration turn out?"

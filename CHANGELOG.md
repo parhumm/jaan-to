@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Integration drift detection** ([#75](https://github.com/parhumm/jaan-to/issues/75)) — PostToolUse hook warns when new outputs appear in `$JAAN_OUTPUTS_DIR/` after `dev-output-integrate` has run. Writes `.last-integration-manifest` at integration time and compares subsequent writes against it. Non-blocking, configurable via `integration_drift_check` setting. Works with all generation skills. Closes [#75](https://github.com/parhumm/jaan-to/issues/75)
+
 ---
 
 ## [6.2.3] - 2026-02-14
