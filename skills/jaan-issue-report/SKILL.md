@@ -1,7 +1,7 @@
 ---
 name: jaan-issue-report
 description: Report bugs, feature requests, or skill issues to the jaan-to GitHub repo or save locally
-allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(uname *), Bash(awk *), Bash(rm -f /tmp/jaan-issue-body-*), Write($JAAN_OUTPUTS_DIR/jaan-issues/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(uname *), Bash(awk *), Bash(rm -f /tmp/jaan-issue-body-*), Bash(mkdir -p $JAAN_OUTPUTS_DIR/jaan-issues/*), Write($JAAN_OUTPUTS_DIR/jaan-issues/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "<issue-description> [--type bug|feature|skill|docs] [--submit | --no-submit]"
 disable-model-invocation: true
 ---
@@ -148,25 +148,14 @@ Read `jaan-to/config/settings.yaml` and look for the `issue_report_submit` key.
 - If `issue_report_submit: false`: set submit mode = **local-only**. Skip to Step 2.
 - If key is missing or `"ask"`: proceed to 1.3.
 
-### 1.3 Smart detection (first-time flow)
+### 1.3 Smart detection (default: submit)
 
 1. Run `gh auth status` silently.
 2. If `gh` is **not available or not authenticated**:
    > "GitHub CLI is not installed or not authenticated. Issues will be saved locally. You can submit them manually later."
    Set submit mode = **local-only**. Skip to Step 2. Do NOT save this as a preference (user may install gh later).
-3. If `gh` **is authenticated**: ask the user using AskUserQuestion (in their conversation language):
-   ```
-   AskUserQuestion:
-     question: "GitHub CLI is available. Would you like to submit issues directly to GitHub?"
-     header: "Submit mode"
-     options:
-       - label: "Yes, submit to GitHub (Recommended)"
-         description: "Issues will be created directly on GitHub. This preference is saved for future runs."
-       - label: "No, save locally"
-         description: "Issues will be saved as local files only. This preference is saved for future runs."
-   ```
-   - **Yes**: Set submit mode = **submit**. Save `issue_report_submit: true` to `jaan-to/config/settings.yaml`. Proceed to 1.4.
-   - **No**: Set submit mode = **local-only**. Save `issue_report_submit: false` to `jaan-to/config/settings.yaml`. Skip to Step 2.
+3. If `gh` **is authenticated**: Set submit mode = **submit**. Proceed to 1.4.
+   No question asked — submit is the default. Users can opt out with `--no-submit` or by setting `issue_report_submit: false` in `jaan-to/config/settings.yaml`.
 
 ### 1.4 Verify gh availability (for submit mode)
 
@@ -403,15 +392,126 @@ OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${SLUG}"
 MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${SLUG}.md"
 ```
 
-Preview:
-> **Output Configuration**
-> - ID: {NEXT_ID}
-> - Folder: `$JAAN_OUTPUTS_DIR/jaan-issues/{NEXT_ID}-{SLUG}/`
-> - Main file: `{NEXT_ID}-{SLUG}.md`
+Store variables for potential local save:
+- `NEXT_ID`: {NEXT_ID}
+- `SLUG`: {kebab-case from title}
+- `OUTPUT_FOLDER`: `$JAAN_OUTPUTS_DIR/jaan-issues/{NEXT_ID}-{SLUG}/`
+- `MAIN_FILE`: `{NEXT_ID}-{SLUG}.md`
 
-## Step 9: Save Local Copy
+(These will be used only if local file creation is requested in Step 10.)
 
-Write the issue to `$JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/{id}-{slug}.md`:
+## Step 9: Submit to GitHub (if submit mode is active)
+
+If submit mode is **local-only** (as resolved in Step 1), skip this step entirely and proceed to Step 10.
+
+If submit mode is **submit**:
+
+### 9.1 Prepare Issue Body
+
+Write the sanitized issue body (without YAML frontmatter) directly to a temp file:
+
+```bash
+cat > /tmp/jaan-issue-body-clean.md <<'EOF'
+{full issue body content — generated in Step 6, sanitized in Step 7}
+EOF
+```
+
+### 9.2 Create Label (best effort)
+
+```bash
+gh label create "{label}" --repo parhumm/jaan-to --description "{description}" 2>/dev/null || true
+```
+
+### 9.3 Create Issue
+
+```bash
+gh issue create --repo parhumm/jaan-to \
+  --title "{title}" \
+  --label "{label}" \
+  --body-file /tmp/jaan-issue-body-clean.md
+```
+
+### 9.4 Clean Up Temp File
+
+```bash
+rm -f /tmp/jaan-issue-body-clean.md
+```
+
+### 9.5 Handle Result
+
+**If successful:**
+1. Capture the returned issue URL (e.g., `https://github.com/parhumm/jaan-to/issues/123`)
+2. Extract issue number from URL
+3. Store both for Step 11 confirmation
+4. **Skip Step 10 entirely** — proceed directly to Step 11 (do NOT create local file)
+
+**If failed** (authentication error, network issue, API error):
+1. Capture error message
+2. Continue to Step 10 to handle local copy options
+
+---
+
+## Step 10: Handle Local Copy (conditional)
+
+**This step is reached in two scenarios:**
+1. Submit mode is **local-only** (GitHub was never attempted)
+2. Submit mode was **submit** but GitHub submission failed in Step 9
+
+**This step is SKIPPED if:**
+- GitHub submission succeeded in Step 9 (proceed directly to Step 11)
+
+### 10.1 Show Copy-Paste Ready Version
+
+Present the issue content in the user's conversation language:
+
+```
+──────────────────────────────────────────
+COPY-PASTE READY ISSUE
+──────────────────────────────────────────
+
+Title: {title}
+
+{full issue body without YAML frontmatter}
+
+──────────────────────────────────────────
+```
+
+**Contextual message:**
+
+If GitHub submission failed (came from Step 9.5):
+> "GitHub submission failed: {error}. You can copy the content above and submit manually at: https://github.com/parhumm/jaan-to/issues/new"
+
+If local-only mode (never attempted GitHub):
+> "You can copy the content above and submit manually at: https://github.com/parhumm/jaan-to/issues/new"
+
+### 10.2 Ask About Local File
+
+Use AskUserQuestion (in the user's conversation language):
+
+```
+AskUserQuestion:
+  question: "Would you like to save a local copy of this issue as a file?"
+  header: "Save file"
+  options:
+    - label: "Yes, save local copy"
+      description: "Save the issue as a .md file with metadata for future reference"
+    - label: "No, skip"
+      description: "Don't create a file — use the copy-paste version above instead"
+```
+
+### 10.3 Save Local File (if user chooses "Yes")
+
+If user selected **"Yes, save local copy"**:
+
+#### 10.3.1 Create Folder Structure
+
+```bash
+mkdir -p "$OUTPUT_FOLDER"
+```
+
+#### 10.3.2 Write Issue File
+
+Write to `$MAIN_FILE` (the path generated in Step 8):
 
 ```markdown
 ---
@@ -432,7 +532,10 @@ session_context: {true|false}
 {full issue body}
 ```
 
-Update subdomain index:
+**Note**: `issue_url` and `issue_number` remain empty for local-only issues.
+
+#### 10.3.3 Update Index
+
 ```bash
 source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
 add_to_index \
@@ -446,60 +549,61 @@ add_to_index \
 Confirm:
 > "Local copy saved to: `$JAAN_OUTPUTS_DIR/jaan-issues/{NEXT_ID}-{SLUG}/{NEXT_ID}-{SLUG}.md`"
 
-## Step 10: Submit to GitHub (if submit mode is active)
+### 10.4 Skip Local File (if user chooses "No")
 
-If submit mode is **submit** (as resolved in Step 1) and `gh auth status` passed in Step 1.4:
+If user selected **"No, skip"**:
+- Do NOT create any folders or files
+- Do NOT update the index
+- Proceed directly to Step 11
 
-### 10.1 Strip YAML Frontmatter
+---
 
-```bash
-awk 'BEGIN{n=0} /^---$/{n++; next} n>=2{print}' "{MAIN_FILE}" > /tmp/jaan-issue-body-clean.md
-```
+## Step 11: Confirm Result
 
-### 10.2 Create Label (best effort)
+Show the appropriate result message in the user's conversation language.
 
-```bash
-gh label create "{label}" --repo parhumm/jaan-to --description "{description}" 2>/dev/null || true
-```
+### Scenario A: GitHub Submission Succeeded (No Local File)
 
-### 10.3 Create Issue
+**When**: Step 9 succeeded, Step 10 was skipped.
 
-```bash
-gh issue create --repo parhumm/jaan-to \
-  --title "{title}" \
-  --label "{label}" \
-  --body-file /tmp/jaan-issue-body-clean.md
-```
+> Issue submitted to GitHub:
+> - URL: {clickable GitHub issue URL}
+> - Issue #: {issue_number}
+> - Label: {label}
 
-### 10.4 Clean Up
+### Scenario B: Local-Only Mode + Local File Saved
 
-```bash
-rm -f /tmp/jaan-issue-body-clean.md
-```
+**When**: Step 1 set local-only mode, Step 10.3 created file.
 
-### 10.5 Handle Result
+> Issue saved locally:
+> - Path: `{full path to .md file}`
+>
+> To submit manually, copy the content below the second `---` line and create a new issue at: https://github.com/parhumm/jaan-to/issues/new
 
-Capture the returned issue URL and extract the issue number.
+### Scenario C: Local-Only Mode + No Local File
 
-**If successful**: Update the local copy frontmatter:
-- Set `issue_url` to the returned GitHub URL
-- Set `issue_number` to the extracted issue number
+**When**: Step 1 set local-only mode, Step 10.2 user chose "No, skip".
 
-**If failed** (auth error, network, permissions):
-> "GitHub submission failed: {error}. Your issue is saved locally at {path}. You can copy the content and create an issue manually at: https://github.com/parhumm/jaan-to/issues/new"
+> No file was created. You can use the copy-paste version shown above to submit manually at: https://github.com/parhumm/jaan-to/issues/new
 
-## Step 11: Confirm
+### Scenario D: GitHub Failed + Local File Saved
 
-Show in the user's conversation language:
+**When**: Step 9 failed, Step 10.3 created file.
 
-**If submitted to GitHub:**
-- Issue URL (clickable)
-- Local copy path
-- Label applied
+> GitHub submission failed: {error}
+>
+> Issue saved locally:
+> - Path: `{full path to .md file}`
+>
+> To submit manually, copy the content below the second `---` line and create a new issue at: https://github.com/parhumm/jaan-to/issues/new
 
-**If saved locally only:**
-- Local file path
-- Instructions: "To submit manually, open `{file_path}`, copy the content below the YAML frontmatter (below the second `---`), and create a new issue at: https://github.com/parhumm/jaan-to/issues/new"
+### Scenario E: GitHub Failed + No Local File
+
+**When**: Step 9 failed, Step 10.2 user chose "No, skip".
+
+> GitHub submission failed: {error}
+>
+> No file was created. You can use the copy-paste version shown above to submit manually at: https://github.com/parhumm/jaan-to/issues/new
 
 ## Step 12: Capture Feedback
 
@@ -529,8 +633,9 @@ If **Yes, I have feedback**: ask for details, then run `/jaan-to:learn-add jaan-
 - [ ] Issue body is in English regardless of conversation language
 - [ ] Privacy sanitization completed (paths, tokens, personal info)
 - [ ] HARD STOP approved by user (full preview shown)
-- [ ] Local copy saved to `$JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/`
-- [ ] Index updated
-- [ ] If submit mode active: GitHub issue created and URL captured
-- [ ] If submit mode active: Local copy updated with issue URL and number
-- [ ] User informed of result and next steps
+- [ ] If submit mode active: GitHub issue creation attempted in Step 9
+- [ ] If GitHub submission succeeded: Issue URL and number captured, Step 10 skipped
+- [ ] If GitHub submission failed OR local-only mode: Copy-paste ready version shown in Step 10
+- [ ] If copy-paste version shown: User asked whether to save local file
+- [ ] If local file requested: File saved to `$JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/` and index updated
+- [ ] User informed of result via appropriate scenario in Step 11

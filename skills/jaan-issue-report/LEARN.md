@@ -30,7 +30,9 @@ Special cases to check and handle:
 Process improvements:
 
 - Run session context scan (Step 0) before anything else when mid-session — pre-drafting from conversation saves user time and produces more accurate reports
-- Always save the local copy BEFORE attempting GitHub submission — if the API call fails, the user still has their report
+- When GitHub submission succeeds, skip local file creation to reduce clutter — the GitHub issue is the source of truth
+- Show copy-paste ready version before asking about local file creation — gives users immediate access to the content even if they skip saving
+- Local files are created only when: (1) GitHub submission fails, (2) user is in local-only mode, AND (3) user explicitly requests it
 - Strip YAML frontmatter using `awk` before `gh issue create` — frontmatter renders as visible text in GitHub issues
 - Always run privacy sanitization scan before HARD STOP preview — never show unsanitized content to the user for approval
 - When generating the issue body, merge session context signals with user's clarifying answers for the most complete picture
@@ -39,7 +41,7 @@ Process improvements:
 
 Things to avoid:
 
-- Don't skip the submit mode resolution in Step 1 — respect the priority: `--submit`/`--no-submit` flags > saved `issue_report_submit` preference > smart detection with user prompt
+- Don't skip the submit mode resolution in Step 1 — respect the priority: `--submit`/`--no-submit` flags > saved `issue_report_submit` preference > default submit (if `gh` authenticated)
 - Don't include absolute user paths (`/Users/name/...`, `/home/name/...`) — sanitize to `{USER_HOME}/{PROJECT_PATH}/...`
 - Don't include credentials, tokens, secrets, or `.env` values — replace with `[REDACTED]`
 - Don't include personal info (real name, email, IP addresses) unless user explicitly approves
