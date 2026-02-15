@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [6.3.0] - 2026-02-15
+
 ### Added
 - **detect-dev incremental audit mode** ([#81](https://github.com/parhumm/jaan-to/issues/81)) — `detect-dev` now supports `--incremental` flag to scope scans to files changed since the last audit via `git diff` and `.audit-state.yaml` state tracking. Graceful fallback to full scan on missing state, invalid commit hash, or unreachable commits. Combines with `--full` for scoped full-depth analysis. Integration-aware evidence tagging (`origin: integrated | hand-written`) from `dev-output-integrate` logs. Post-integration suggestion added to `dev-output-integrate` Step 14. Reference material in `docs/extending/detect-dev-reference.md`. Closes [#81](https://github.com/parhumm/jaan-to/issues/81)
 - **Health monitoring workflow** ([#83](https://github.com/parhumm/jaan-to/issues/83)) — `devops-infra-scaffold` now generates `ci/health-check.yml` with cron endpoint monitoring, automatic incident issue creation, deduplication, and auto-close on recovery
