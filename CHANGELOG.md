@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **`wp-pr-review` large PR fallback** ([#107](https://github.com/parhumm/jaan-to/issues/107)) — Added paginated REST API fallback (`gh api`) when `gh pr diff` fails with HTTP 406 on large PRs (300+ files). PRs with 50+ PHP files are now processed in batches of 30 to reduce per-call context size, mitigating ECONNRESET from network intermediaries. Closes [#107](https://github.com/parhumm/jaan-to/issues/107)
+
 ---
 
 ## [6.3.0] - 2026-02-15
