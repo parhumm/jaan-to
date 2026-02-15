@@ -155,7 +155,8 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## Unreleased
 
-(empty)
+- [ ] `/jaan-to:backend-pr-review` — Multi-stack backend PR review skill with two-pass LLM analysis, risk-based file prioritization, and GitHub + GitLab support ([#110](https://github.com/parhumm/jaan-to/issues/110))
+- [ ] Update skill count 42 → 43
 
 ---
 
@@ -324,6 +325,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 | `/jaan-to:frontend-design` | Frontend component design |
 | `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| `/jaan-to:backend-pr-review` | Review backend PRs for security, performance, and code quality |
 | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
 | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
 | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
