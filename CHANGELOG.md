@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - **pnpm packageManager conflict** ([#83](https://github.com/parhumm/jaan-to/issues/83)) — CI workflow generation now checks `packageManager` field in `package.json` and omits explicit `version` parameter from `pnpm/action-setup@v4` when present, preventing `ERR_PNPM_BAD_PM_VERSION`
 - **Next.js standalone output consistency** ([#83](https://github.com/parhumm/jaan-to/issues/83)) — generates `config/next.config.standalone.ts` reference snippet and adds README verification step when Dockerfile.frontend expects `.next/standalone` output
+- **`docs-create` and `docs-update` output to correct `jaan-to/docs/` namespace** ([#95](https://github.com/parhumm/jaan-to/issues/95)) — Both documentation skills now write generated docs to `jaan-to/docs/` instead of the project root `docs/`. Path tables, `allowed-tools` permissions, staleness detection, and archive operations all updated to the correct namespace. Skills also updated to shared template/learn files (`jaan-to:docs.template.md`, `jaan-to:docs.learn.md`) and reference STYLE.md from the plugin source. Closes [#95](https://github.com/parhumm/jaan-to/issues/95)
+- **Bootstrap no longer creates extra scaffold files** ([#98](https://github.com/parhumm/jaan-to/issues/98)) — Removed `jaan-to/outputs/research/` directory creation, `jaan-to/docs/STYLE.md` copy, and `jaan-to/docs/create-skill.md` copy from bootstrap. These were remnants from before lazy loading (v6.1.0) — skills now read STYLE.md and create-skill.md directly from the plugin source at runtime. Closes [#98](https://github.com/parhumm/jaan-to/issues/98)
 
 ---
 
