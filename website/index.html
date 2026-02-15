@@ -537,6 +537,112 @@
             font-size: 0.95rem;
         }
 
+        /* ---- Efficiency ---- */
+        .efficiency {
+            padding: clamp(80px, 12vw, 160px) 24px;
+            background: var(--color-bg-dark);
+            color: white;
+        }
+
+        .efficiency .section-label {
+            color: var(--color-accent);
+        }
+
+        .efficiency .section-heading {
+            color: white;
+        }
+
+        .efficiency .section-heading .dim {
+            color: #666;
+        }
+
+        .efficiency-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            max-width: 600px;
+            margin: 56px auto 64px;
+            text-align: center;
+        }
+
+        .efficiency-metric-value {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 300;
+            color: var(--color-accent);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .efficiency-metric-label {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.5;
+            letter-spacing: 0.02em;
+        }
+
+        .efficiency-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .efficiency-pillar {
+            padding-top: 20px;
+            border-top: 2px solid var(--color-accent);
+        }
+
+        .efficiency-pillar h3 {
+            font-family: var(--font-serif);
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .efficiency-pillar p {
+            font-size: 0.95rem;
+            color: #888;
+            line-height: 1.7;
+        }
+
+        .efficiency-quote {
+            margin-top: 64px;
+            text-align: center;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .efficiency-article {
+            max-width: 600px;
+            margin: 24px auto 0;
+            padding: 20px 24px;
+            border-left: 2px solid var(--color-accent);
+        }
+
+        .efficiency-article a {
+            color: var(--color-accent);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .efficiency-article a:hover {
+            text-decoration: underline;
+        }
+
+        .efficiency-article span {
+            display: block;
+            color: #666;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
         /* ---- Skills Catalog ---- */
         .skills-catalog {
             padding: clamp(80px, 12vw, 160px) 24px;
@@ -941,6 +1047,15 @@
                 min-height: auto;
                 padding-bottom: 60px;
             }
+
+            .efficiency-pillars {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .efficiency-metrics {
+                gap: 24px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -980,7 +1095,7 @@
                    class="nav-version-badge"
                    target="_blank"
                    rel="noopener noreferrer"
-                   title="Version 4.5.0 - View changelog">v4.5.0</a>
+                   title="Version 6.1.0 - View changelog">v6.1.0</a>
             </div>
             <div class="nav-links">
                 <a href="#skills">Skills</a>
@@ -1016,23 +1131,6 @@
         </div>
     </section>
 
-    <!-- The Problem -->
-    <section class="problem" id="problem">
-        <div class="container">
-            <span class="section-label reveal">The Problem</span>
-            <hr class="accent reveal">
-            <h2 class="section-heading reveal">
-                <span class="dim">AI doesn't have a consistency problem.</span>
-                <span class="punchline">Teams do.</span>
-            </h2>
-            <div class="section-body reveal">
-                <p>The same request produces different outcomes depending on who asks, how they phrase it, and what context they remember to include.</p>
-                <p>Most people blame the AI model. The harder truth: humans are the inconsistent part.</p>
-                <p>40&ndash;60% of product work is repetitive &mdash; PRDs, specs, test plans, tracking setups, microcopy. It isn't hard work. It's work that shouldn't require thinking every time.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Philosophy -->
     <section class="philosophy" id="philosophy">
         <div class="container-wide">
@@ -1053,6 +1151,7 @@
                         <li>Following templates consistently</li>
                         <li>Remembering every edge case</li>
                         <li>Producing structured outputs</li>
+                        <li>AI doesn&rsquo;t have a consistency problem.</li>
                     </ul>
                 </div>
                 <div class="reveal">
@@ -1129,7 +1228,7 @@
                 <div class="system-card reveal">
                     <div class="system-card-label">Skills</div>
                     <h3>What to do</h3>
-                    <p>31 structured commands across 9 roles &mdash; PM, Data, Dev, UX, Core, QA, Detect, Release, and WP &mdash; with Growth planned. Each skill knows its questions, its template, and its output format.</p>
+                    <p>40 structured commands across 11 roles &mdash; PM, Data, Dev, UX, Core, QA, Detect, Release, WP, Sec, and DevOps &mdash; with Growth planned. Each skill knows its questions, its template, and its output format.</p>
                 </div>
                 <div class="system-card reveal">
                     <div class="system-card-label">Stacks</div>
@@ -1148,7 +1247,7 @@
                 </div>
             </div>
 
-            <p class="system-stats reveal">31 skills available now. 9 active roles. 1 more role planned.</p>
+            <p class="system-stats reveal">40 skills available now. 11 active roles. 1 more role planned.</p>
         </div>
     </section>
 
@@ -1258,6 +1357,24 @@
                             <span class="catalog-skill-sep">&mdash;</span>
                             <span class="catalog-skill-desc">Generate production-ready backend code with routes and services</span>
                         </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/dev-project-assemble</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Wire backend + frontend scaffolds into runnable project</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/backend-service-implement</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate full service implementations with business logic</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/dev-output-integrate</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Copy generated outputs into operational project locations with config merging</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -1344,6 +1461,18 @@
                             <span class="catalog-skill-sep">&mdash;</span>
                             <span class="catalog-skill-desc">Update existing skill</span>
                         </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-init</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Initialize Jaan.to in a project</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/jaan-issue-report</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Report bugs, feature requests, or issues to GitHub</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -1359,6 +1488,12 @@
                             <code class="catalog-skill-command">/qa-test-cases</code>
                             <span class="catalog-skill-sep">&mdash;</span>
                             <span class="catalog-skill-desc">Generate BDD/Gherkin test cases from acceptance criteria</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/qa-test-generate</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Produce runnable Vitest unit tests and Playwright E2E specs from BDD test cases</span>
                         </li>
                     </ul>
                 </div>
@@ -1441,6 +1576,44 @@
                     </ul>
                 </div>
 
+                <!-- Sec -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">Sec</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/sec-audit-remediate</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate targeted security fixes from SARIF findings</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- DevOps -->
+                <div class="catalog-role reveal">
+                    <div class="catalog-role-header">
+                        <span class="catalog-role-name">DevOps</span>
+                        <span class="catalog-badge available">Available</span>
+                    </div>
+                    <ul class="catalog-skills">
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/devops-infra-scaffold</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Generate CI/CD workflows, Dockerfiles, and deployment configs</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/devops-deploy-activate</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Activate deployment pipeline with secrets, platform provisioning, and verification</span>
+                        </li>
+                    </ul>
+                </div>
+
                 <!-- Planned: Growth -->
                 <div class="catalog-role planned reveal">
                     <div class="catalog-role-header">
@@ -1450,6 +1623,56 @@
                     <p class="catalog-planned-note">SEO and content workflows &mdash; coming soon</p>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- Efficiency -->
+    <section class="efficiency" id="efficiency">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="section-label reveal">Token Intelligence</span>
+                <h2 class="section-heading reveal">
+                    <span class="dim">Most plugins waste your context window.</span><br>
+                    Since v5, not this one.
+                </h2>
+            </div>
+
+            <div class="efficiency-metrics reveal-group">
+                <div class="efficiency-metric reveal">
+                    <div class="efficiency-metric-value">2,000</div>
+                    <div class="efficiency-metric-label">per<br>session</div>
+                </div>
+                <div class="efficiency-metric reveal">
+                    <div class="efficiency-metric-value">48K</div>
+                    <div class="efficiency-metric-label">per<br>skill</div>
+                </div>
+                <div class="efficiency-metric reveal">
+                    <div class="efficiency-metric-value">61%</div>
+                    <div class="efficiency-metric-label">config<br>reduction</div>
+                </div>
+            </div>
+
+            <div class="efficiency-pillars reveal-group">
+                <div class="efficiency-pillar reveal">
+                    <h3>Smart Loading</h3>
+                    <p>Load nothing by default. Call what you need.</p>
+                </div>
+                <div class="efficiency-pillar reveal">
+                    <h3>Context Isolation</h3>
+                    <p>Heavy work runs forked. Your session stays clean.</p>
+                </div>
+                <div class="efficiency-pillar reveal">
+                    <h3>Shared Protocols</h3>
+                    <p>31 skills. One foundation. Zero repetition.</p>
+                </div>
+            </div>
+
+            <p class="efficiency-quote reveal">&ldquo;Three layers deep. Not a single token wasted.&rdquo;</p>
+
+            <div class="efficiency-article reveal">
+                <a href="https://docs.jaan.to/docs/token-strategy">Read the Token Strategy</a>
+                <span>How three optimization layers keep your context lean.</span>
             </div>
         </div>
     </section>
@@ -1468,11 +1691,11 @@
             <div class="vision-horizons">
                 <div class="horizon horizon-now reveal">
                     <div class="horizon-label">Now</div>
-                    <p>31 production skills. Learning system that improves from feedback. Two-phase workflow with human approval. Open source, MIT licensed.</p>
+                    <p>40 production skills. Learning system that improves from feedback. Two-phase workflow with human approval. Open source, MIT licensed.</p>
                 </div>
                 <div class="horizon horizon-next reveal">
                     <div class="horizon-label">Next</div>
-                    <p>35+ skills across 8 product roles. MCP connectors to real systems &mdash; Figma, Jira, GA4, Sentry, Clarity, and more.</p>
+                    <p>50+ skills across 12+ product roles. MCP connectors to real systems &mdash; Figma, Jira, GA4, Sentry, Clarity, and more.</p>
                 </div>
                 <div class="horizon horizon-ahead reveal">
                     <div class="horizon-label">Ahead</div>
@@ -1497,6 +1720,7 @@
                 <span class="prompt">$</span> <span class="command">claude</span><br>
                 <span class="prompt">$</span> <span class="command">/plugin marketplace add parhumm/jaan-to</span><br>
                 <span class="prompt">$</span> <span class="command">/plugin install jaan-to/jaan-to</span><br>
+                <span class="prompt">$</span> <span class="command">/jaan-init</span><br>
                 <span class="prompt">$</span> <span class="command">/frontend-design "A landingpage for Personal Branding"</span>
             </div>
 

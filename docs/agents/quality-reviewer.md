@@ -24,17 +24,17 @@ The quality-reviewer agent checks generated documents against project standards.
 
 | Check | Description |
 |-------|-------------|
-| Required sections | Compares output against the skill's `jaan-to/templates/{skill}.template.md` structure |
-| STYLE.md compliance | Validates formatting rules from `jaan-to/docs/STYLE.md` |
-| LEARN.md patterns | Checks accumulated lessons from `jaan-to/learn/{skill}.learn.md` |
+| Required sections | Compares output against the skill's `$JAAN_TEMPLATES_DIR/jaan-to:{skill}.template.md` structure |
+| STYLE.md compliance | Validates formatting rules from `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md` |
+| LEARN.md patterns | Checks accumulated lessons from `$JAAN_LEARN_DIR/jaan-to:{skill}.learn.md` |
 | Placeholder text | Flags leftover `{placeholders}` or TODO markers |
 
 ---
 
 ## How It Works
 
-1. Reads the skill's `jaan-to/templates/{skill}.template.md` to know expected structure
-2. Reads `jaan-to/docs/STYLE.md` for formatting rules
+1. Reads the skill's `$JAAN_TEMPLATES_DIR/jaan-to:{skill}.template.md` to know expected structure
+2. Reads `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md` for formatting rules
 3. Reads the skill's LEARN.md for accumulated patterns
 4. Compares the generated output against all three
 5. Returns a list of issues with severity levels
