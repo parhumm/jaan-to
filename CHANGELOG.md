@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`jaan-init` Co-Authored-By attribution** ([#109](https://github.com/parhumm/jaan-to/issues/109)) — `/jaan-init` now automatically configures `.claude/settings.json` with Co-Authored-By attribution for git commits and PRs. Uses `jq` with `python3` fallback for JSON manipulation. Smart merge preserves existing settings and never overwrites user-customized attribution. New config keys: `attribution_enabled`, `attribution_commit`, `attribution_pr` in settings.yaml. Closes [#109](https://github.com/parhumm/jaan-to/issues/109)
+
 ### Fixed
 - **`wp-pr-review` large PR fallback** ([#107](https://github.com/parhumm/jaan-to/issues/107)) — Added paginated REST API fallback (`gh api`) when `gh pr diff` fails with HTTP 406 on large PRs (300+ files). PRs with 50+ PHP files are now processed in batches of 30 to reduce per-call context size, mitigating ECONNRESET from network intermediaries. Closes [#107](https://github.com/parhumm/jaan-to/issues/107)
 
