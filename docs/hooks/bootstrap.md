@@ -41,7 +41,6 @@ This message flows through the `SessionStart` hook into the conversation context
 1. **Loads config system** — Sources `scripts/lib/config-loader.sh` to resolve customizable paths for templates, learn, context, and outputs. Falls back to defaults if missing.
 2. **Creates directories** — Ensures all required project directories exist:
    - `jaan-to/outputs/`
-   - `jaan-to/outputs/research/`
    - `jaan-to/learn/`
    - `jaan-to/context/`
    - `jaan-to/templates/`
@@ -50,12 +49,10 @@ This message flows through the `SessionStart` hook into the conversation context
 3. **Manages `.gitignore`** — Adds `jaan-to/` to `.gitignore` if not present. Creates `.gitignore` if it doesn't exist.
 4. **Seeds config** — Copies `settings.yaml` from `scripts/seeds/` to `jaan-to/config/` if not present.
 5. **Copies context files** — Copies `.md` seed files from `scripts/seeds/` to `jaan-to/context/` (skips existing).
-6. **Copies docs** — Copies `STYLE.md` and `create-skill.md` to `jaan-to/docs/` (skips existing).
-7. **Creates research README** — Generates `jaan-to/outputs/research/README.md` with index scaffold if not present.
 
-> **Note**: Templates and learn files are **not** copied during bootstrap. They are loaded from the plugin at runtime (lazy loading). Project-level overrides can be created in `jaan-to/templates/` for templates and via `/jaan-to:learn-add` for learn files.
-8. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
-9. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:detect-pack` to perform full repo analysis.
+> **Note**: Templates, learn files, and reference docs (STYLE.md, create-skill.md) are **not** copied during bootstrap. They are loaded from the plugin at runtime (lazy loading). Project-level overrides can be created in `jaan-to/templates/` for templates and via `/jaan-to:learn-add` for learn files.
+6. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
+7. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:detect-pack` to perform full repo analysis.
 
 ---
 
@@ -63,13 +60,11 @@ This message flows through the `SessionStart` hook into the conversation context
 
 | Result | Condition | Action |
 |--------|-----------|--------|
-| Creates directories | Any missing | Creates all 7 directories listed above |
+| Creates directories | Any missing | Creates all required directories listed above |
 | Appends to gitignore | `.gitignore` exists without entry | Appends `jaan-to/` |
 | Creates gitignore | No `.gitignore` exists | Creates file with `jaan-to/` |
 | Seeds config | `jaan-to/config/settings.yaml` missing | Copies from plugin seeds |
 | Seeds context | Context `.md` files missing | Copies from `scripts/seeds/` |
-| Seeds docs | `STYLE.md` or `create-skill.md` missing | Copies from plugin docs |
-| Seeds research index | `outputs/research/README.md` missing | Generates scaffold README |
 | Skips copy | Any destination file already exists | Preserves existing files |
 | Suggests detect skills | `tech.md` contains `{project-name}` | Sets `suggest_detect: true` |
 | Warns | Context seed files missing from plugin | Lists missing files |
@@ -87,13 +82,14 @@ This message flows through the `SessionStart` hook into the conversation context
   "learn_dir": "jaan-to/learn",
   "context_dir": "jaan-to/context",
   "templates_dir": "jaan-to/templates",
+  "docs_dir": "jaan-to/docs",
   "config_dir": "jaan-to/config",
   "paths_customized": false,
   "files_copied": {
     "config": 1,
     "context": 5,
     "templates": 0,
-    "docs": 2,
+    "docs": 0,
     "learn": 0
   },
   "missing_context": [],
@@ -110,6 +106,7 @@ This message flows through the `SessionStart` hook into the conversation context
   "learn_dir": "jaan-to/learn",
   "context_dir": "jaan-to/context",
   "templates_dir": "jaan-to/templates",
+  "docs_dir": "jaan-to/docs",
   "config_dir": "jaan-to/config",
   "paths_customized": false,
   "files_copied": {
@@ -136,6 +133,7 @@ paths_outputs: "artifacts/generated"
 paths_templates: "my-templates"
 paths_learning: "knowledge/learn"
 paths_context: "knowledge/context"
+paths_docs: "my-docs"
 ```
 
 When custom paths are active, the output includes `"paths_customized": true`.

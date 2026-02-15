@@ -41,12 +41,12 @@ Creates documentation files following STYLE.md standards. Includes templates for
 
 | Type | Path |
 |------|------|
-| skill | `docs/skills/{role}/{name}.md` |
-| hook | `docs/hooks/{name}.md` |
-| config | `docs/config/{name}.md` |
-| guide | `docs/extending/{name}.md` |
-| concept | `docs/{name}.md` |
-| index | `docs/{section}/README.md` |
+| skill | `$JAAN_DOCS_DIR/skills/{role}/{name}.md` |
+| hook | `$JAAN_DOCS_DIR/hooks/{name}.md` |
+| config | `$JAAN_DOCS_DIR/config/{name}.md` |
+| guide | `$JAAN_DOCS_DIR/extending/{name}.md` |
+| concept | `$JAAN_DOCS_DIR/{name}.md` |
+| index | `$JAAN_DOCS_DIR/{section}/README.md` |
 
 ---
 
@@ -61,7 +61,7 @@ Creates documentation files following STYLE.md standards. Includes templates for
 - Which role? → "qa"
 - What does this command do? → "Runs test suites"
 
-**Output** (`docs/skills/qa/test-runner.md`):
+**Output** (`$JAAN_DOCS_DIR/skills/qa/test-runner.md`):
 ```markdown
 ---
 title: Test Runner

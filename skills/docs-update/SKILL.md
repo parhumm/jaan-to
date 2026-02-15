@@ -1,7 +1,7 @@
 ---
 name: docs-update
 description: Audit and maintain documentation quality using smart staleness checks.
-allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
+allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 disable-model-invocation: true
 ---
@@ -12,16 +12,20 @@ disable-model-invocation: true
 
 ## Context Files
 
-- `jaan-to/docs/STYLE.md` - Documentation standards (copied by bootstrap from plugin)
-- `$JAAN_LEARN_DIR/jaan-to:docs-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md` - Documentation standards (read from plugin source)
+- `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md` - Shared docs template (shared with docs-create)
+- `$JAAN_LEARN_DIR/jaan-to:docs.learn.md` - Shared docs lessons (shared with docs-create, loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
-**Note:** Style guide is intentionally read from the project's `jaan-to/docs/` directory (not from the skill directory). The bootstrap hook copies it there on first run, allowing project-level customization.
+**Note:** STYLE.md is read from the plugin source. Templates are read from `$JAAN_TEMPLATES_DIR`. Pre-execution protocol Step C offers to seed from the plugin on first use.
 
 ## Pre-Execution Protocol
 **MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `docs-update`
 Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
+**Shared resource override:** Template and learn files are shared with `docs-create`. For Steps A/B/C, resolve using `docs` as the resource name:
+- Learn: `$JAAN_LEARN_DIR/jaan-to:docs.learn.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/LEARN.md`)
+- Template: `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/template.md`)
 
 ### Language Settings
 Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
@@ -33,12 +37,12 @@ Override field for this skill: `language_docs-update`
 
 | Code Path | Related Doc |
 |-----------|-------------|
-| `skills/{name}/SKILL.md` | `docs/skills/{role}/{slug}.md` |
+| `skills/{name}/SKILL.md` | `$JAAN_DOCS_DIR/skills/{role}/{slug}.md` |
 | `$JAAN_LEARN_DIR/{name}.learn.md` | (referenced in skill doc) |
-| `$JAAN_CONTEXT_DIR/hooks/{name}.sh` | `docs/hooks/{name}.md` |
-| `$JAAN_CONTEXT_DIR/config.md` | `docs/config/README.md` |
-| `$JAAN_CONTEXT_DIR/*.md` | `docs/config/context.md` |
-| `$JAAN_CONTEXT_DIR/boundaries.md` | `docs/config/boundaries.md` |
+| `$JAAN_CONTEXT_DIR/hooks/{name}.sh` | `$JAAN_DOCS_DIR/hooks/{name}.md` |
+| `$JAAN_CONTEXT_DIR/config.md` | `$JAAN_DOCS_DIR/config/README.md` |
+| `$JAAN_CONTEXT_DIR/*.md` | `$JAAN_DOCS_DIR/config/context.md` |
+| `$JAAN_CONTEXT_DIR/boundaries.md` | `$JAAN_DOCS_DIR/config/boundaries.md` |
 
 **Slug extraction:** `pm-prd-write` → `prd-write` (remove role prefix)
 
@@ -79,7 +83,7 @@ For each changed code file, find related doc:
 
 **Skills:**
 ```
-skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
+skills/{name}/SKILL.md → $JAAN_DOCS_DIR/skills/{role}/{slug}.md
 
 # Extract slug: remove brand prefix and role
 # pm-prd-write → prd-write
@@ -88,14 +92,14 @@ skills/{name}/SKILL.md → docs/skills/{role}/{slug}.md
 
 **Hooks:**
 ```
-$JAAN_CONTEXT_DIR/hooks/{name}.sh → docs/hooks/{name}.md
+$JAAN_CONTEXT_DIR/hooks/{name}.sh → $JAAN_DOCS_DIR/hooks/{name}.md
 ```
 
 **Config:**
 ```
-$JAAN_CONTEXT_DIR/config.md → docs/config/README.md
-$JAAN_CONTEXT_DIR/*.md → docs/config/context.md
-$JAAN_CONTEXT_DIR/boundaries.md → docs/config/boundaries.md
+$JAAN_CONTEXT_DIR/config.md → $JAAN_DOCS_DIR/config/README.md
+$JAAN_CONTEXT_DIR/*.md → $JAAN_DOCS_DIR/config/context.md
+$JAAN_CONTEXT_DIR/boundaries.md → $JAAN_DOCS_DIR/config/boundaries.md
 ```
 
 ## Step 0.4: Compare Timestamps
@@ -131,13 +135,13 @@ If code exists but doc doesn't → Flag as MISSING
 
 | Doc | Related Code | Code Changed | Doc Updated | Delta |
 |-----|--------------|--------------|-------------|-------|
-| docs/skills/pm/prd-write.md | skills/pm-prd-write/SKILL.md | 2026-01-25 | 2026-01-10 | 15d stale |
+| $JAAN_DOCS_DIR/skills/pm/prd-write.md | skills/pm-prd-write/SKILL.md | 2026-01-25 | 2026-01-10 | 15d stale |
 
 ## Missing Documentation
 
 | Code File | Expected Doc | Action |
 |-----------|--------------|--------|
-| skills/new-skill/SKILL.md | docs/skills/?/new-skill.md | Create |
+| skills/new-skill/SKILL.md | $JAAN_DOCS_DIR/skills/?/new-skill.md | Create |
 
 ## Up to Date
 
@@ -171,15 +175,15 @@ What would you like to do?
 
 Use Glob to count docs (don't read all):
 ```
-Glob: docs/**/*.md
+Glob: $JAAN_DOCS_DIR/**/*.md
 ```
 
-Exclude: `jaan-to/`, `node_modules/`
+Exclude: `node_modules/`
 
 ## Step 1.2: Check Recent Doc Changes
 
 ```bash
-git log --since="30 days ago" --oneline --name-only -- docs/ | head -30
+git log --since="30 days ago" --oneline --name-only -- $JAAN_DOCS_DIR/ | head -30
 ```
 
 ## Step 1.3: Quick Scan for Issues
@@ -188,12 +192,12 @@ Use Grep to detect problems without reading files:
 
 **Missing frontmatter:**
 ```
-Grep: "^---$" in docs/**/*.md (check first line)
+Grep: "^---$" in $JAAN_DOCS_DIR/**/*.md (check first line)
 ```
 
 **Missing tagline:**
 ```
-Grep: "^>" in docs/**/*.md
+Grep: "^>" in $JAAN_DOCS_DIR/**/*.md
 ```
 
 ## Step 1.4: Generate Audit Proposal
@@ -254,7 +258,7 @@ Check all internal links:
 
 ### README Index Consistency
 
-For each `docs/skills/{role}/README.md`:
+For each `$JAAN_DOCS_DIR/skills/{role}/README.md`:
 
 1. **List all `.md` files** in the same directory (excluding README.md itself)
 2. **Parse the "## Available Skills" table** rows in the README
@@ -263,8 +267,8 @@ For each `docs/skills/{role}/README.md`:
    - **PHANTOM**: Listed in table but `.md` file doesn't exist in directory
    - **STALE DESCRIPTION**: Description in table differs significantly from the skill's SKILL.md `description:` field
 
-4. **Also check `docs/skills/README.md` root Available Roles table:**
-   - Compare against actual `docs/skills/*/` subdirectories that contain files
+4. **Also check `$JAAN_DOCS_DIR/skills/README.md` root Available Roles table:**
+   - Compare against actual `$JAAN_DOCS_DIR/skills/*/` subdirectories that contain files
    - Flag roles with directories but missing from table as MISSING ROLE
    - Flag roles listed as "Planned" that have active skill docs as STALE STATUS
 
@@ -293,10 +297,10 @@ Verify docs are in correct folders:
 
 | Content Type | Correct Location |
 |--------------|------------------|
-| Skill docs | `docs/skills/{role}/` |
-| Hook docs | `docs/hooks/` |
-| Config docs | `docs/config/` |
-| Guides | `docs/extending/` |
+| Skill docs | `$JAAN_DOCS_DIR/skills/{role}/` |
+| Hook docs | `$JAAN_DOCS_DIR/hooks/` |
+| Config docs | `$JAAN_DOCS_DIR/config/` |
+| Guides | `$JAAN_DOCS_DIR/extending/` |
 
 ## Step 2.2: Compile Issues
 
@@ -355,8 +359,8 @@ Apply fixes? [yes/no/selective]
 ## Step 3.1: Archive Deprecated Docs
 
 ```bash
-mkdir -p docs/archive
-git mv docs/deprecated-file.md docs/archive/
+mkdir -p $JAAN_DOCS_DIR/archive
+git mv $JAAN_DOCS_DIR/deprecated-file.md $JAAN_DOCS_DIR/archive/
 ```
 
 Add note at top: "ARCHIVED: See [new-doc.md] for current information."
@@ -402,7 +406,7 @@ updated_date: {today}
 ## Step 3.7: Move Misplaced Files
 
 ```bash
-git mv docs/wrong-location/file.md docs/correct-location/
+git mv $JAAN_DOCS_DIR/wrong-location/file.md $JAAN_DOCS_DIR/correct-location/
 ```
 
 Update any references to moved file.
@@ -417,7 +421,7 @@ Ask: "Commit documentation updates? [y/n]"
 
 If yes:
 ```bash
-git add docs/
+git add $JAAN_DOCS_DIR/
 git commit -m "docs: Audit and update documentation
 
 - Fixed: X files

@@ -1,7 +1,7 @@
 ---
 name: dev-output-integrate
 description: Copy generated jaan-to outputs into project locations with entry point wiring and validation.
-allowed-tools: Read, Glob, Grep, Write(src/**), Write(apps/**), Write(prisma/**), Write(test/**), Write(tests/**), Write(.github/**), Write(docker/**), Write(deploy/**), Write(package.json), Write(tsconfig.json), Write(vitest.config.*), Write(playwright.config.*), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.env.test), Write(.gitignore), Write(.dockerignore), Write(Dockerfile*), Write(docker-compose*), Write(turbo.json), Write($JAAN_OUTPUTS_DIR/dev/output-integrate/**), Bash(pnpm:*), Bash(npm:*), Bash(npx tsc:*), Bash(ls:*), Bash(mkdir:*), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(next.config.*), Edit(turbo.json)
+allowed-tools: Read, Glob, Grep, Write(src/**), Write(apps/**), Write(prisma/**), Write(test/**), Write(tests/**), Write(.github/**), Write(docker/**), Write(deploy/**), Write(package.json), Write(tsconfig.json), Write(vitest.config.*), Write(playwright.config.*), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.env.test), Write(.gitignore), Write(.dockerignore), Write(Dockerfile*), Write(docker-compose*), Write(turbo.json), Write($JAAN_OUTPUTS_DIR/dev/output-integrate/**), Write($JAAN_OUTPUTS_DIR/.last-integration-manifest), Bash(pnpm:*), Bash(npm:*), Bash(npx tsc:*), Bash(ls:*), Bash(mkdir:*), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(next.config.*), Edit(turbo.json)
 argument-hint: [output-path...] or (interactive scan)
 ---
 
@@ -104,6 +104,21 @@ Build ordered list of Edit operations needed.
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-output-integrate-reference.md` section "Entry Point Wiring Patterns" for Fastify plugin order, Next.js config, and provider registration.
 
+## Step 4b: Detect Route File Wiring
+
+Read `$JAAN_CONTEXT_DIR/tech.md` `#current-stack` to determine the framework routing convention.
+
+For each output file, classify as:
+- **Route-level** (pages, views, layouts) — must go into framework-specific route directories
+- **Component/library-level** — process normally via Step 6
+
+For route-level files:
+1. Detect target route from README placement instructions or filename convention
+2. Verify destination directory exists (create if needed)
+3. Check for existing files at destination — classify as REPLACE
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-output-integrate-reference.md` section "Route File Wiring" for per-stack detection tables and wiring rules.
+
 ## Step 5: Present Integration Plan
 
 Group operations by type:
@@ -127,6 +142,10 @@ MERGES ({count})
 ENTRY POINT MODIFICATIONS ({count})
 ------------------------------------
 {list with file + description of change}
+
+ROUTE FILE WIRING ({count})
+----------------------------
+{list with source → route destination + framework convention}
 
 DIRECTORIES TO CREATE ({count})
 -------------------------------
@@ -180,6 +199,7 @@ Modification order:
 2. Route registrations
 3. Config file modifications
 4. Package.json script additions
+5. Route file wiring (framework-specific page/view placement)
 
 ## Step 8: Install Dependencies
 
@@ -224,6 +244,10 @@ Tests:       ✓ Pass / ✗ {failure count} failures / ⊘ Skipped
 - [ ] All import statements added
 - [ ] All config modifications applied
 - [ ] All package.json script additions applied
+
+**Route Wiring:**
+- [ ] Route-level outputs placed in framework-correct route directories
+- [ ] Route convention matches tech.md `#current-stack` framework
 
 **Validation:**
 - [ ] TypeScript check passes (or errors explained)
@@ -276,7 +300,26 @@ Confirm:
 > Integration log written to: `$JAAN_OUTPUTS_DIR/dev/output-integrate/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md`
 > Index updated: `$JAAN_OUTPUTS_DIR/dev/output-integrate/README.md`
 
-## Step 13: Suggest Next Actions
+## Step 13: Write Integration Manifest
+
+Write `.last-integration-manifest` to `$JAAN_OUTPUTS_DIR/`:
+
+```bash
+MANIFEST_PATH="$JAAN_OUTPUTS_DIR/.last-integration-manifest"
+```
+
+The manifest contains one file path per line (relative to project root), listing ALL files currently in `$JAAN_OUTPUTS_DIR/` at the time of integration.
+
+**Exclude from manifest:**
+- Files under `$JAAN_OUTPUTS_DIR/dev/output-integrate/` (integration logs, not source outputs)
+- The manifest file itself (`.last-integration-manifest`)
+- `README.md` index files
+
+Use Glob to scan `$JAAN_OUTPUTS_DIR/**/*` and write the filtered list.
+
+This enables the integration-drift-check hook to detect outputs created after this run.
+
+## Step 14: Suggest Next Actions
 
 > **Output integration complete!**
 >
@@ -287,11 +330,12 @@ Confirm:
 > - Commit your changes
 >
 > **Next Skills in Pipeline:**
+> - Run `/jaan-to:detect-dev --incremental` to re-audit integrated files for security and quality findings
 > - Run `/jaan-to:devops-deploy-activate` if CI/CD configs were integrated
 > - Run `/jaan-to:qa-test-generate` to generate tests for integrated code
 > - Run `/jaan-to:release-iterate-changelog` to document the integration
 
-## Step 14: Capture Feedback
+## Step 15: Capture Feedback
 
 Use AskUserQuestion:
 - Question: "How did the output integration turn out?"

@@ -18,6 +18,7 @@ Accumulated lessons from past executions.
 - Multiple outputs may declare conflicting dependency versions — detect and present conflicts before install
 - Partial integration failure: if entry point edit fails, previously copied files are already in place — document rollback path
 - Config files with user customizations: never blindly overwrite package.json or tsconfig.json
+- Route-level outputs must go into framework-specific route directories (e.g., app/ for Next.js, resources/js/Pages/ for Inertia) — not into component or library directories. Check tech.md for the active framework.
 
 ## Workflow
 

@@ -11,6 +11,7 @@ version: "3.0"
 # paths_learning: "jaan-to/learn"
 # paths_context: "jaan-to/context"
 # paths_outputs: "jaan-to/outputs"
+# paths_docs: "jaan-to/docs"
 
 # Template Customization
 # Uncomment to use custom template files
@@ -43,6 +44,11 @@ language: "ask"
 # Tech Stack Configuration
 # Edit jaan-to/context/tech.md to define your project's tech stack
 # Skills will automatically reference it in generated outputs
+
+# Integration Drift Detection
+# When true, you'll see a reminder when new outputs appear after dev-output-integrate has run
+# Default: true (non-blocking hint only)
+# integration_drift_check: true
 
 # Notes:
 # - Paths are relative to project root

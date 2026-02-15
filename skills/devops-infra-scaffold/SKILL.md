@@ -135,6 +135,8 @@ OUTPUT STRUCTURE
 +-- ci/
 |   +-- ci.yml                              # CI workflow (lint, type-check, test, build)
 |   +-- cd.yml                              # CD workflow (deploy to environments)
+|   +-- health-check.yml                    # Health monitoring (cron, 15-min interval)
+|   +-- secret-rotation-reminder.yml        # Secret rotation reminder (quarterly)
 +-- docker/
 |   +-- Dockerfile.backend                  # Multi-stage backend build
 |   +-- Dockerfile.frontend                 # Multi-stage frontend build
@@ -145,6 +147,7 @@ OUTPUT STRUCTURE
 |   +-- .env.example                        # All variables with safe defaults
 |   +-- .env.test                           # Test environment variables
 |   +-- .env.production.example             # Production template (no secrets)
+|   +-- next.config.standalone.ts           # Next.js standalone config (if Next.js detected)
 +-- deploy/
 |   +-- {platform}.yml                      # Platform-specific config
 |   +-- migration.sh                        # Database migration script
@@ -188,6 +191,8 @@ All files in `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{id}-{slug}/`:
 +-- ci/
 |   +-- ci.yml                              # GitHub Actions CI workflow
 |   +-- cd.yml                              # GitHub Actions CD workflow
+|   +-- health-check.yml                    # Health monitoring (cron, 15-min interval)
+|   +-- secret-rotation-reminder.yml        # Secret rotation reminder (quarterly)
 +-- docker/
 |   +-- Dockerfile.backend                  # Multi-stage backend Dockerfile
 |   +-- Dockerfile.frontend                 # Multi-stage frontend Dockerfile
@@ -198,6 +203,7 @@ All files in `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{id}-{slug}/`:
 |   +-- .env.example                        # All env vars with safe defaults
 |   +-- .env.test                           # Test environment config
 |   +-- .env.production.example             # Production template (no secrets)
+|   +-- next.config.standalone.ts           # Next.js standalone config (if Next.js detected)
 +-- deploy/
 |   +-- {platform}.yml                      # Deployment platform config
 |   +-- migration.sh                        # Database migration script
@@ -226,6 +232,15 @@ Key patterns from research:
 - `retention-days: 1` for ephemeral build artifacts
 - Pin actions by SHA for supply chain security
 
+### pnpm packageManager Conflict Prevention
+
+When tech.md `#current-stack` indicates **pnpm** as package manager, check the project's `package.json` for a `packageManager` field:
+
+- **If `packageManager` field exists** (e.g., `"packageManager": "pnpm@9.x.x"`): Use `pnpm/action-setup@v4` **without** the `version` parameter — the action reads version from `package.json` automatically. Explicit `version` causes `ERR_PNPM_BAD_PM_VERSION`.
+- **If `packageManager` field is absent**: Use `pnpm/action-setup@v4` **with** explicit `version` parameter.
+
+Applies to both `ci.yml` and `cd.yml`.
+
 ## Step 6: Generate CD Workflow (cd.yml)
 
 Generate deployment workflow triggered on:
@@ -245,11 +260,45 @@ Environment protection:
 - Use OIDC federation for cloud credentials (no stored secrets)
 - Separate secrets per environment
 
-## Step 7: Generate Dockerfiles
+## Step 7: Generate Health Check Workflow (health-check.yml) — GitHub Actions Only
+
+> **Platform conditional**: Skip this step when CI platform is GitLab CI.
+
+Generate a scheduled health monitoring workflow:
+
+- **Triggers**: Cron every 15 min (`*/15 * * * *`) + `workflow_dispatch` for manual testing
+- **Endpoint checks**: `curl` with 30s timeout against configurable endpoints
+- **Endpoint URLs**: Stored as repository variables (`vars.API_URL`, `vars.WEB_URL`) — not secrets
+- **On failure**: `actions/github-script` (pinned by SHA) creates issue with `incident` label
+- **Deduplication**: Search open issues with `incident` label before creating — skip if duplicate exists
+- **On recovery**: Auto-close open incident issue with resolution comment and timestamp
+- **Stack-agnostic**: Works for any tech stack with HTTP endpoints (Node.js, PHP, Go, etc.)
+
+## Step 8: Generate Secret Rotation Reminder (secret-rotation-reminder.yml) — GitHub Actions Only
+
+> **Platform conditional**: Skip this step when CI platform is GitLab CI.
+
+Generate a quarterly secret rotation reminder workflow:
+
+- **Trigger**: Quarterly cron `0 9 1 1,4,7,10 *` (Jan/Apr/Jul/Oct, 9 AM UTC)
+- **Action**: `actions/github-script` (pinned by SHA) creates issue with `security` + `maintenance` labels
+- **Checklist body**: Generated from project's `.env.example` / `.env.production.example`:
+  - **Rotate** (credentials): Variables containing TOKEN, SECRET, KEY, PASSWORD, or URL-with-credentials
+  - **Static** (no rotation needed): Variables containing ID, NAME, REGION, ENV, PORT
+- **Stack-agnostic**: Classification heuristic works for any project's environment variables
+
+## Step 9: Generate Dockerfiles
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/devops-infra-scaffold-reference.md` section "Dockerfile Generation Patterns" for per-stack Dockerfile patterns (backend, frontend, .dockerignore).
 
-## Step 8: Generate docker-compose.yml
+### Next.js Standalone Output Consistency
+
+When tech.md `#current-stack` indicates **Next.js** and generating `Dockerfile.frontend` with standalone COPY stage:
+1. Check if project's `next.config.ts` (or `.js`/`.mjs`) already has `output: 'standalone'`
+2. If missing: generate `config/next.config.standalone.ts` reference snippet showing the required config
+3. Add README step: "Verify `output: 'standalone'` in `next.config.ts` — required for Docker multi-stage build"
+
+## Step 10: Generate docker-compose.yml
 
 Full-stack development environment with:
 
@@ -276,7 +325,7 @@ Full-stack development environment with:
 - Resource limits
 - Restart policies
 
-## Step 9: Generate Environment Config Files
+## Step 11: Generate Environment Config Files
 
 ### .env.example
 All variables with safe defaults and descriptions:
@@ -318,13 +367,13 @@ NODE_ENV=production
 PORT=4000
 ```
 
-## Step 10: Generate Deployment Config
+## Step 12: Generate Deployment Config
 
 Based on selected deployment target:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/devops-infra-scaffold-reference.md` section "Deployment Platform Configurations" for Vercel, Railway, Fly.io, AWS ECS configs and migration.sh.
 
-## Step 11: Quality Check
+## Step 13: Quality Check
 
 Validate generated output against checklist:
 - [ ] CI workflow covers lint, type-check, test, build stages
@@ -337,6 +386,10 @@ Validate generated output against checklist:
 - [ ] migration.sh handles the correct ORM/migration tool
 - [ ] All files have inline comments explaining each section
 - [ ] No hardcoded secrets or credentials in any file
+- [ ] Health check workflow has deduplication logic (no duplicate incidents)
+- [ ] Secret rotation reminder classifies env vars correctly (rotate vs static)
+- [ ] pnpm version handling respects `packageManager` field in `package.json`
+- [ ] Next.js standalone config snippet generated when Dockerfile expects standalone output
 
 **Output Structure**:
 - [ ] ID generated using scripts/lib/id-generator.sh
@@ -347,7 +400,7 @@ Validate generated output against checklist:
 
 If any check fails, fix before preview.
 
-## Step 12: Preview & Approval
+## Step 14: Preview & Approval
 
 Present generated output summary showing:
 - File count and structure
@@ -364,7 +417,7 @@ Use AskUserQuestion:
   - "No" -- Cancel
   - "Refine" -- Make adjustments first
 
-## Step 13: Generate ID and Folder Structure
+## Step 15: Generate ID and Folder Structure
 
 ```bash
 source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
@@ -381,7 +434,7 @@ Preview output configuration:
 > - Folder: `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{NEXT_ID}-{slug}/`
 > - Main file: `{NEXT_ID}-{slug}.md`
 
-## Step 14: Write Output
+## Step 16: Write Output
 
 1. Create output folder and subfolders:
 ```bash
@@ -396,6 +449,8 @@ mkdir -p "$OUTPUT_FOLDER/deploy"
    - `{id}-{slug}.md` -- Main infrastructure guide (from template)
    - `ci/ci.yml` -- CI workflow
    - `ci/cd.yml` -- CD workflow
+   - `ci/health-check.yml` -- Health monitoring workflow (GitHub Actions only)
+   - `ci/secret-rotation-reminder.yml` -- Secret rotation reminder (GitHub Actions only)
    - `docker/Dockerfile.backend` -- Backend Dockerfile
    - `docker/Dockerfile.frontend` -- Frontend Dockerfile
    - `docker/docker-compose.yml` -- Dev docker-compose
@@ -404,6 +459,7 @@ mkdir -p "$OUTPUT_FOLDER/deploy"
    - `config/.env.example` -- All env vars
    - `config/.env.test` -- Test env vars
    - `config/.env.production.example` -- Production template
+   - `config/next.config.standalone.ts` -- Next.js standalone config (if Next.js detected)
    - `deploy/{platform}.yml` -- Deployment config
    - `deploy/migration.sh` -- Migration script
    - `{id}-{slug}-readme.md` -- Setup + deployment instructions
@@ -423,7 +479,7 @@ add_to_index \
 > Scaffold written to: `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{NEXT_ID}-{slug}/`
 > Index updated: `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/README.md`
 
-## Step 15: Suggest Next Actions
+## Step 17: Suggest Next Actions
 
 > **Infrastructure scaffold generated successfully!**
 >
@@ -434,10 +490,12 @@ add_to_index \
 > - Copy deployment config to project root
 > - Run `docker compose up` to verify local development environment
 > - Push a branch to test CI workflow
+> - Configure endpoint repository variables (`API_URL`, `WEB_URL`) for health monitoring workflow
+> - Verify `output: 'standalone'` in `next.config.ts` (if using Next.js Docker build)
 > - Run `/jaan-to:sec-audit-remediate` to audit security of generated configs
 > - Run `/jaan-to:learn-add devops-infra-scaffold "{feedback}"` to capture lessons
 
-## Step 16: Capture Feedback
+## Step 18: Capture Feedback
 
 Use AskUserQuestion:
 - Question: "How did the infrastructure scaffold turn out?"
@@ -487,4 +545,8 @@ devops-infra-scaffold
 - [ ] Output follows v3.0.0 structure (ID, folder, index)
 - [ ] Index updated with executive summary
 - [ ] README with setup + deployment instructions is complete
+- [ ] Health check workflow monitors endpoints with incident deduplication
+- [ ] Secret rotation reminder generates quarterly issues with correct classification
+- [ ] pnpm workflows respect `packageManager` field when present
+- [ ] Next.js Dockerfile and config are consistent (standalone output)
 - [ ] User approved final result

@@ -182,6 +182,7 @@ Validate generated output against checklist:
 - [ ] Loading/error/empty/success states on all data components
 - [ ] Accessibility: ARIA, semantic HTML, keyboard nav
 - [ ] No anti-patterns present in generated code
+- [ ] Framework-implied build dependencies included (e.g., `babel-plugin-react-compiler` when `reactCompiler: true`)
 
 If any check fails, fix before preview.
 
@@ -263,7 +264,7 @@ If "Learn from this": Run `/jaan-to:learn-add frontend-scaffold "{feedback}"`
 - `async/await` in Server Components, NOT `useEffect` + `useState`
 - `use(promise)` with Suspense, NOT `useEffect`; never create promises during render (infinite loops)
 - `ref` is a regular prop, NOT `forwardRef`
-- React Compiler (stable v1.0, October 2025) handles memoization — no `useMemo`/`useCallback`/`React.memo`; enable in `next.config.ts` with `{ reactCompiler: true }`; up to 12% faster initial loads
+- React Compiler (stable v1.0, October 2025) handles memoization — no `useMemo`/`useCallback`/`React.memo`; enable in `next.config.ts` with `{ reactCompiler: true }`; requires `babel-plugin-react-compiler` in devDependencies; up to 12% faster initial loads
 - `useActionState` + `useFormStatus` (must be in **child component** of `<form>`) for forms
 - Server Actions for mutations, ES6 default parameters (NOT `defaultProps`)
 - `<Context.Provider>` deprecated — use `<Context>` directly
@@ -320,7 +321,7 @@ If "Learn from this": Run `/jaan-to:learn-add frontend-scaffold "{feedback}"`
 
 **Production**: `react` ^19, `react-dom` ^19, `next` ^15, `@tanstack/react-query` ^5.60, `zustand` ^5, `nuqs` ^2.5, `next-themes` ^0.4, `clsx` ^2.1, `tailwind-merge` ^2.6, `zod` ^3.23, `axios` ^1.7
 
-**Dev**: `typescript` ^5.7, `@types/react` ^19, `@types/node` ^22, `@tailwindcss/postcss` ^4, `tailwindcss` ^4, `eslint` ^9, `prettier` ^3.4, `orval` ^7, `vitest` ^2, `@testing-library/react` ^16, `eslint-plugin-jsx-a11y`
+**Dev**: `typescript` ^5.7, `@types/react` ^19, `@types/node` ^22, `@tailwindcss/postcss` ^4, `tailwindcss` ^4, `eslint` ^9, `prettier` ^3.4, `orval` ^7, `vitest` ^2, `@testing-library/react` ^16, `eslint-plugin-jsx-a11y`, `babel-plugin-react-compiler` (when `reactCompiler: true`)
 
 ---
 

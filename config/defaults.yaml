@@ -10,6 +10,7 @@ paths_templates: "jaan-to/templates"
 paths_learning: "jaan-to/learn"
 paths_context: "jaan-to/context"
 paths_outputs: "jaan-to/outputs"
+paths_docs: "jaan-to/docs"
 
 # Template settings
 templates_inheritance_enabled: true
@@ -30,3 +31,7 @@ language: "ask"
 # Issue report submission preference
 # "ask" = prompt on first run if gh CLI is available, then save choice
 issue_report_submit: "ask"
+
+# Integration drift detection
+# When true, PostToolUse hook warns about un-integrated outputs
+integration_drift_check: true

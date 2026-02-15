@@ -42,7 +42,6 @@ check "$([ -d "$PROJECT_DIR/jaan-to/templates" ] && echo true || echo false)" "j
 check "$([ -d "$PROJECT_DIR/jaan-to/learn" ] && echo true || echo false)" "jaan-to/learn/ exists"
 check "$([ -d "$PROJECT_DIR/jaan-to/outputs" ] && echo true || echo false)" "jaan-to/outputs/ exists"
 check "$([ -d "$PROJECT_DIR/jaan-to/docs" ] && echo true || echo false)" "jaan-to/docs/ exists"
-check "$([ -d "$PROJECT_DIR/jaan-to/outputs/research" ] && echo true || echo false)" "jaan-to/outputs/research/ exists"
 
 # 2. Context files
 echo ""
@@ -71,26 +70,24 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/skills" ]; then
   check "$([ $learn_count -gt 0 ] && echo true || echo false)" "Plugin has $learn_count skill learn seeds available"
 fi
 
-# 5. Docs for skills
+# 5. Reference docs (loaded from plugin at runtime)
 echo ""
 echo "5. Reference docs:"
-check "$([ -f "$PROJECT_DIR/jaan-to/docs/STYLE.md" ] && echo true || echo false)" "docs/STYLE.md"
-check "$([ -f "$PROJECT_DIR/jaan-to/docs/create-skill.md" ] && echo true || echo false)" "docs/create-skill.md"
+echo "  ℹ STYLE.md and create-skill.md are loaded from the plugin at runtime"
+if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/docs" ]; then
+  check "$([ -f "$PLUGIN_DIR/docs/STYLE.md" ] && echo true || echo false)" "Plugin has STYLE.md"
+  check "$([ -f "$PLUGIN_DIR/docs/extending/create-skill.md" ] && echo true || echo false)" "Plugin has create-skill.md"
+fi
 
-# 6. Research scaffold
+# 6. .gitignore
 echo ""
-echo "6. Research scaffold:"
-check "$([ -f "$PROJECT_DIR/jaan-to/outputs/research/README.md" ] && echo true || echo false)" "outputs/research/README.md"
-
-# 7. .gitignore
-echo ""
-echo "7. .gitignore:"
+echo "6. .gitignore:"
 check "$(grep -q 'jaan-to/' "$PROJECT_DIR/.gitignore" 2>/dev/null && echo true || echo false)" "jaan-to in .gitignore"
 
-# 8. Plugin manifest validation (if plugin dir available)
+# 7. Plugin manifest validation (if plugin dir available)
 if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   echo ""
-  echo "8. Plugin manifest:"
+  echo "7. Plugin manifest:"
   check "$([ -f "$PLUGIN_DIR/.claude-plugin/plugin.json" ] && echo true || echo false)" "plugin.json exists"
   check "$([ -f "$PLUGIN_DIR/.claude-plugin/marketplace.json" ] && echo true || echo false)" "marketplace.json exists"
 
@@ -107,10 +104,10 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   fi
 fi
 
-# 9. Hooks validation (if plugin dir available)
+# 8. Hooks validation (if plugin dir available)
 if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   echo ""
-  echo "9. Hooks:"
+  echo "8. Hooks:"
   check "$([ -f "$PLUGIN_DIR/hooks/hooks.json" ] && echo true || echo false)" "hooks/hooks.json exists"
 
   if command -v jq >/dev/null 2>&1 && [ -f "$PLUGIN_DIR/hooks/hooks.json" ]; then
@@ -123,10 +120,10 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   fi
 fi
 
-# 10. Skills validation (if plugin dir available)
+# 9. Skills validation (if plugin dir available)
 if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/skills" ]; then
   echo ""
-  echo "10. Skills (plugin directory):"
+  echo "9. Skills (plugin directory):"
 
   skill_count=0
   skill_with_frontmatter=0
@@ -147,9 +144,9 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/skills" ]; then
   fi
 fi
 
-# 11. Configuration loading test
+# 10. Configuration loading test
 echo ""
-echo "11. Configuration files (markdown syntax):"
+echo "10. Configuration files (markdown syntax):"
 
 config_files=(
   "jaan-to/context/config.md"
@@ -166,9 +163,9 @@ for config_file in "${config_files[@]}"; do
   fi
 done
 
-# 12. Installation report
+# 11. Installation report
 echo ""
-echo "12. Installation Summary:"
+echo "11. Installation Summary:"
 
 # Count files created
 total_files=$(find "$PROJECT_DIR/jaan-to" -type f 2>/dev/null | wc -l | tr -d ' ')

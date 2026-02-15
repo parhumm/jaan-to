@@ -178,6 +178,79 @@ gh secret set DATABASE_URL --env staging
 
 ---
 
+## Repository Variable Patterns
+
+### Secrets vs Variables
+
+| Property | GitHub Secrets | GitHub Variables |
+|----------|---------------|-----------------|
+| Encrypted | Yes — encrypted at rest | No — stored as plaintext |
+| CLI command | `gh secret set {NAME}` | `gh variable set {NAME} --body "{value}"` |
+| Workflow access | `${{ secrets.NAME }}` | `${{ vars.NAME }}` |
+| Visible in logs | Masked automatically | Visible in logs |
+| Use cases | API keys, tokens, passwords, connection strings | Service URLs, feature flags, environment names |
+| Environment-scoped | `gh secret set --env production` | `gh variable set --env production` |
+
+**Rule of thumb**: If the value appears in logs or public config, use a variable. If leaking it would be a security incident, use a secret.
+
+### Common Repository Variables
+
+| Variable | Description | Source |
+|----------|------------|--------|
+| `BACKEND_URL` | Backend service production URL | Platform CLI output after provisioning |
+| `FRONTEND_URL` | Frontend production URL | Platform CLI output after provisioning |
+| `BACKEND_STAGING_URL` | Backend staging URL | Platform CLI output (staging environment) |
+| `FRONTEND_STAGING_URL` | Frontend staging URL | Platform CLI output (staging environment) |
+| `API_VERSION` | Current API version prefix | Project config (e.g., `/api/v1`) |
+| `HEALTH_CHECK_PATH` | Health endpoint path | Backend scaffold (e.g., `/health`) |
+
+### URL Capture Commands
+
+After platform provisioning, capture service URLs for repository variables:
+
+**Railway:**
+```bash
+# Get the public URL for the deployed service
+railway status --json | jq -r '.url'
+# Or from domain list
+railway domain
+```
+
+**Vercel:**
+```bash
+# Get the production URL
+vercel inspect --json | jq -r '.alias[0]'
+# Or from project info
+vercel project ls
+```
+
+**Fly.io:**
+```bash
+# Get the app URL
+fly status --json | jq -r '.Hostname'
+# Format: {app-name}.fly.dev
+```
+
+### Workflow Usage Example
+
+```yaml
+# In health-check workflow
+- name: Health Check
+  run: |
+    curl --fail --max-time 10 "${{ vars.BACKEND_URL }}/health"
+    curl --fail --max-time 10 "${{ vars.FRONTEND_URL }}"
+```
+
+### Environment-Scoped Variables
+
+```bash
+# Set different URLs per environment
+gh variable set BACKEND_URL --env staging --body "https://api-staging.example.com"
+gh variable set BACKEND_URL --env production --body "https://api.example.com"
+```
+
+---
+
 ## Supply Chain Hardening
 
 ### .npmrc Security Defaults

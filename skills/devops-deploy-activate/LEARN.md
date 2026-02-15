@@ -18,6 +18,8 @@ Accumulated lessons from past executions.
 - Some org-scoped actions use branch references instead of tags — handle differently for SHA pinning
 - Platform CLI tools may require interactive auth flows — guide user through these
 - OIDC federation requires specific IAM permissions — user may not have admin access
+- Platform CLI URL output format varies (some include protocol, some don't) — normalize before setting as repository variable
+- Repository variables are NOT encrypted — never store sensitive values as variables, only as secrets
 
 ## Workflow
 
@@ -33,3 +35,5 @@ Accumulated lessons from past executions.
 - Forgetting to set secrets per-environment (staging vs production)
 - Not verifying CLI tool authentication before attempting platform commands
 - Skipping the verification pipeline run — always validate the full pipeline works
+- Using secrets for non-sensitive values like service URLs — use repository variables instead (cheaper, visible in logs for debugging)
+- Forgetting to capture platform URLs after provisioning — set them as repository variables immediately

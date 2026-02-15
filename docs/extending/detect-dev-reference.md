@@ -37,6 +37,38 @@ else:  # Multi-platform
 
 Evidence IDs use namespace `E-DEV-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
 
+### Evidence Origin (optional)
+
+When integration context is available (from `dev-output-integrate` logs), evidence blocks MAY include an `origin` field:
+
+```yaml
+evidence:
+  id: E-DEV-001
+  type: code-location
+  confidence: 0.95
+  origin: integrated        # or "hand-written"
+  location:
+    uri: "src/auth/login.py"
+    startLine: 42
+```
+
+**Field values:**
+
+| Value | Meaning |
+|-------|---------|
+| `integrated` | File was copied into the project by `dev-output-integrate` |
+| `hand-written` | File was not part of any integration (written manually or by other tools) |
+
+**Resolution logic:**
+
+1. In Step 0.2, detect-dev reads integration logs from `$JAAN_OUTPUTS_DIR/dev/output-integrate/*/*.md`
+2. Parses "Files Copied" / "Files modified" sections to build an `integrated_files` set
+3. Only logs newer than `last_audit.timestamp` (from `.audit-state.yaml`) are read
+4. In Steps 2-8, each finding's `location.uri` is checked against `integrated_files`
+5. If match → `origin: integrated`; otherwise → `origin: hand-written`
+
+**Omission:** If no integration logs exist or `integrated_files` is empty, the `origin` field is omitted entirely. Downstream consumers (`sec-audit-remediate`, `detect-pack`) treat `origin` as optional — missing means "unknown origin."
+
 ---
 
 ## Frontmatter Schema (Universal)

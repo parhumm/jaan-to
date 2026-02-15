@@ -35,6 +35,8 @@ last_updated: {{date}}
 | **Environments** | {{environments}} |
 | **Migration Tool** | {{migration_tool}} |
 | **Security Scanning** | {{security_scanning}} |
+| **Health Monitoring** | {{health_monitoring_enabled}} |
+| **Secret Rotation** | {{secret_rotation_enabled}} |
 | **Total Files** | {{file_count}} |
 | **Generated** | {{date}} |
 
@@ -83,6 +85,31 @@ last_updated: {{date}}
 ```
 {{cd_deployment_flow}}
 ```
+
+---
+
+## Health Monitoring (health-check.yml)
+
+| Field | Value |
+|-------|-------|
+| **Schedule** | Every 15 minutes (`*/15 * * * *`) |
+| **Endpoints** | {{health_check_endpoints}} |
+| **Incident Label** | `incident` |
+| **Deduplication** | Search open issues before creating |
+| **Auto-Recovery** | Close incident on successful check |
+
+---
+
+## Secret Rotation Reminder (secret-rotation-reminder.yml)
+
+| Field | Value |
+|-------|-------|
+| **Schedule** | Quarterly (`0 9 1 1,4,7,10 *`) |
+| **Labels** | `security`, `maintenance` |
+
+### Rotation Checklist
+
+{{secrets_rotation_checklist}}
 
 ---
 

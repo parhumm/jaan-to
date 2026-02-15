@@ -9,21 +9,25 @@
 ## Bug Report Template
 
 ```markdown
-## Description
+## Problem Description
 
 {{bug_description}}
+
+## Impact
+
+{{impact_description}}
 
 ## Steps to Reproduce
 
 {{steps_to_reproduce}}
 
-## Expected Behavior
+## Expected Outcome
 
-{{expected_behavior}}
+{{expected_outcome}}
 
-## Actual Behavior
+## Actual Outcome
 
-{{actual_behavior}}
+{{actual_outcome}}
 
 ## Environment
 
@@ -47,17 +51,19 @@
 
 {{problem_description}}
 
-## Proposed Solution
+## Impact
 
-{{proposed_solution}}
+{{impact_description}}
 
 ## Use Case
 
 {{use_case}}
 
-## Alternatives Considered
+## Possible Approaches (Optional)
 
-{{alternatives}}
+{{possible_approaches}}
+
+_Note: This section is optional. Focus on describing the problem above. If you have ideas for how to address it, you can share them here as suggestions for consideration._
 
 ## Related Skills/Features
 
@@ -89,19 +95,23 @@
 
 {{current_behavior}}
 
-## Expected Behavior
+## Challenge/Gap
 
-{{expected_behavior}}
+{{challenge_description}}
+
+## Desired Outcome
+
+{{desired_outcome}}
 
 ## Workflow Impact
 
 {{workflow_impact}}
 
-## Example
+## Example Scenario
 
-**Input:** {{example_input}}
-**Expected output:** {{example_expected_output}}
-**Actual output:** {{example_actual_output}}
+**Scenario:** {{example_scenario}}
+**What happens:** {{what_happens}}
+**What should happen:** {{what_should_happen}}
 
 ## Environment
 
@@ -124,9 +134,15 @@
 
 {{issue_description}}
 
-## Suggested Fix
+## Context
 
-{{suggested_fix}}
+What I was trying to accomplish: {{user_goal}}
+
+## What Would Help
+
+{{what_would_help}}
+
+_Note: Rather than prescribing a specific fix, this describes the information or clarity that would address the knowledge gap._
 
 ## Environment
 

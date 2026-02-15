@@ -9,8 +9,8 @@
 - version: 4.5.1
 
 ## References
-- Skill Specification: `jaan-to/docs/create-skill.md` (project)
-- Style Guide: `jaan-to/docs/STYLE.md` (project)
+- Skill Specification: `${CLAUDE_PLUGIN_ROOT}/docs/extending/create-skill.md` (plugin source)
+- Style Guide: `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md` (plugin source)
 
 ## Enabled Roles
 - pm (Product Manager)
@@ -59,6 +59,7 @@
 | backend-api-contract | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 | qa-test-generate | `/jaan-to:qa-test-generate` | Generate runnable Vitest and Playwright tests from BDD test cases |
+| qa-test-run | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, generate coverage reports |
 | backend-scaffold | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
 | backend-service-implement | `/jaan-to:backend-service-implement` | Generate service implementations with business logic from specs and stubs |
 | frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
@@ -69,6 +70,7 @@
 | sec-audit-remediate | `/jaan-to:sec-audit-remediate` | Generate security fixes from detect-dev findings with regression tests |
 | devops-infra-scaffold | `/jaan-to:devops-infra-scaffold` | Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack |
 | dev-output-integrate | `/jaan-to:dev-output-integrate` | Copy generated jaan-to outputs into project locations with entry point wiring and validation |
+| dev-verify | `/jaan-to:dev-verify` | Validate integrated build pipeline and running services with health checks and smoke tests |
 | devops-deploy-activate | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets, platform provisioning, and supply chain hardening |
 
 ## Language

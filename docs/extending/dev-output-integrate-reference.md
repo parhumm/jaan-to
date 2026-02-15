@@ -141,6 +141,55 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
 ---
 
+## Route File Wiring
+
+Route-level outputs (pages, views, layouts) must be placed in framework-specific route directories — not in generic component or library directories.
+
+### Detection Heuristic
+
+1. **Check README placement instructions** — look for paths containing `app/`, `pages/`, `resources/views/`, `resources/js/Pages/`, or `templates/`
+2. **Check filename conventions** — files named `page.tsx`, `layout.tsx`, `loading.tsx`, or ending in `.blade.php`, `.html.tmpl` are route-level
+3. **Check output folder structure** — files in folders named `pages/` or `routes/` in the output are route-level
+
+### Per-Stack Routing Conventions
+
+| Stack | Framework | Route Directory | Route File Pattern |
+|-------|-----------|----------------|-------------------|
+| Node.js / Next.js (App Router) | Next.js 13+ | `src/app/{route}/` | `page.tsx`, `layout.tsx`, `loading.tsx`, `error.tsx` |
+| Node.js / Next.js (Pages Router) | Next.js 12 | `src/pages/{route}.tsx` | Single file per route |
+| PHP / Laravel (Inertia) | Laravel + Inertia | `resources/js/Pages/{Route}.vue` or `.tsx` | PascalCase component |
+| PHP / Laravel (Blade) | Laravel | `resources/views/{route}.blade.php` | Dot-notation directories |
+| Go | stdlib / Chi | `templates/{route}.html.tmpl` | Template files |
+
+### Wiring Rules
+
+**Next.js App Router:**
+- Route groups: `(group)/` directories — parentheses are part of the path
+- Dynamic segments: `[param]/` — brackets are part of the path
+- Layout inheritance: `layout.tsx` applies to all children in the directory
+- `page.tsx` is the route entry point — if output contains a component meant for a route, create or update the `page.tsx` to import and render it
+
+**Laravel Inertia:**
+- Pages are React/Vue components in `resources/js/Pages/`
+- Route registration in `routes/web.php` — `Inertia::render('PageName')`
+- Nested routes use folder structure: `Pages/Auth/Login.tsx`
+
+**Laravel Blade:**
+- Views in `resources/views/` with dot-notation: `auth.login` → `resources/views/auth/login.blade.php`
+- Layouts use `@extends` or component-based `<x-layout>`
+
+### Example Integration Mapping
+
+```
+Output file                          → Route destination (Next.js App Router)
+{id}-{slug}-pages/landing.tsx        → src/app/(marketing)/page.tsx
+{id}-{slug}-pages/dashboard.tsx      → src/app/dashboard/page.tsx
+{id}-{slug}-pages/settings.tsx       → src/app/settings/page.tsx
+{id}-{slug}-pages/auth/login.tsx     → src/app/auth/login/page.tsx
+```
+
+---
+
 ## Security Plugin Registration Order
 
 When modifying entry points to wire security plugins, follow this exact order:

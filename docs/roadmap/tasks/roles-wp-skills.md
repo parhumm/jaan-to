@@ -17,7 +17,7 @@ Skills are split by effort:
 
 Skills within each role are **sorted by workflow dependency order** (topological). Skills you call first in a workflow appear first.
 
-**Research source**: [54-roles-wp-details.md](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/54-roles-wp-details.md) — WordPress Plugin Development: Complete Role-Based Skills Guide
+**Research source**: [54-roles-wp-details.md](docs/research/58-role-wp-dev.md) — WordPress Plugin Development: Complete Role-Based Skills Guide
 
 ## v3.0.0 Implementation Requirements
 

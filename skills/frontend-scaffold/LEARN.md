@@ -31,6 +31,7 @@ Special cases to check and handle:
 - ESLint 9 flat config (`eslint.config.mjs`) replaces `.eslintrc.json` — no backwards compatibility
 - `use(promise)` must not create promises during render — causes infinite loops
 - React Compiler handles memoization — manual `useMemo`/`useCallback`/`React.memo` causes conflicts
+- Framework config can imply build dependencies not listed in package.json — verify config signals match dependency manifest
 
 ## Workflow
 

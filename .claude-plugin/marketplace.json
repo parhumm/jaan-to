@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
-  "version": "6.2.2",
-  "description": "Give soul to your workflow — 40 AI-powered skills across 13 roles with spec-to-ship pipeline",
+  "version": "6.3.0",
+  "description": "Give soul to your workflow — 42 AI-powered skills across 13 roles with spec-to-ship pipeline",
   "owner": {
     "name": "Parhum Khoshbakht",
     "email": "parhum.kh@gmail.com",
@@ -11,8 +11,8 @@
   "plugins": [
     {
       "name": "jaan-to",
-      "description": "AI-powered plugin with 40 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
-      "version": "6.2.2",
+      "description": "AI-powered plugin with 42 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
+      "version": "6.3.0",
       "author": {
         "name": "Parhum Khoshbakht",
         "email": "parhum.kh@gmail.com"

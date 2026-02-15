@@ -26,8 +26,9 @@ Questions to ask during information gathering:
 Special cases to check and handle:
 
 - Monorepo with shared packages -- path filters must include `packages/shared/**` as trigger for all dependent services
-- Next.js standalone mode requires `output: 'standalone'` in next.config.js -- remind user to set this
+- Next.js standalone mode requires `output: 'standalone'` in next.config -- when generating Dockerfile.frontend with standalone COPY stage, check if config already has it; if missing, generate `config/next.config.standalone.ts` reference snippet and add README verification step
 - pnpm store cache path differs between CI runners -- use `actions/setup-node@v4` built-in cache, not manual paths
+- pnpm `packageManager` field in package.json: check for field presence before configuring `pnpm/action-setup@v4` -- if `packageManager` exists, omit the `version` parameter (action reads it from package.json); if absent, set `version` explicitly. Mismatch causes `ERR_PNPM_BAD_PM_VERSION`
 - Docker BuildKit cache mounts need `DOCKER_BUILDKIT=1` on older Docker versions
 - PostgreSQL healthcheck needs the correct `-U` flag matching `POSTGRES_USER`
 - docker-compose volume mounts: anonymous volume for node_modules prevents host/container architecture mismatch
@@ -66,3 +67,6 @@ Things to avoid:
 - Committing `.env` in generated .gitignore exclusions -- make sure `.env*` pattern is in .gitignore
 - Using `latest` tag for Docker base images -- pin to specific versions (e.g., `node:20-alpine`)
 - Forgetting `NEXT_TELEMETRY_DISABLED=1` in Next.js Docker builds
+- Passing explicit `version` to `pnpm/action-setup@v4` when `packageManager` field exists in package.json -- causes `ERR_PNPM_BAD_PM_VERSION` because action reads version from package.json and conflicts with explicit param
+- Generating Dockerfile.frontend with standalone COPY stage but no `output: 'standalone'` in next.config -- Docker build succeeds but `.next/standalone` directory is empty, causing runtime failure
+- Creating duplicate incident issues in health-check workflow -- always search for existing open issues with `incident` label before creating a new one
