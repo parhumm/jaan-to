@@ -54,6 +54,42 @@ Projects without a `jaan-to/` directory are not affected by the plugin.
 
 When adding functionality, first check if a skill/command exists.
 
+**Skill-First Decision Tree:**
+1. Is this a simple tool operation (read one file, edit one value)? → Use tools directly
+2. Does this involve templates, workflows, multi-step processes, or validation? → Check for skill
+3. Is this a meta-operation on the plugin itself (docs, skills, roadmap, issues)? → Dedicated skill exists
+4. Uncertain? → Available skills are listed in system reminders
+
+**Meta-Operations - ALWAYS use these skills:**
+- **Documentation**: `/jaan-to:docs-create` (create), `/jaan-to:docs-update` (audit/fix)
+- **Skills**: `/jaan-to:skill-create` (new), `/jaan-to:skill-update` (modify)
+- **Roadmap**: `/jaan-to:roadmap-add` (tasks), `/jaan-to:roadmap-update` (sync/release)
+- **Issues**: `/jaan-to:jaan-issue-report` (report), `/jaan-issue-review` (review), `/jaan-issue-solve` (answer warmly)
+- **Learning**: `/jaan-to:learn-add` (capture lessons)
+- **Releases**: `/jaan-to:release-iterate-changelog` (version history), `/jaan-release` (dev to main)
+
+**User-Facing Skills** - Check system reminders for available skills by category:
+- Detection/Audit: `detect-dev`, `detect-design`, `detect-ux`, `detect-product`, `detect-writing`, `detect-pack`
+- Specification: `pm-*`, `ux-*`, `backend-*`, `frontend-*`, `qa-*`
+- Implementation: `*-scaffold`, `*-implement`, `*-generate`, `*-integrate`, `*-deploy`
+
+### Generic & Scalable
+
+**This is a generic plugin for all tech stacks and ideas.**
+
+In all decisions, prioritize:
+- **Generic patterns** over specific implementations
+- **Scalable approaches** that work for 1 or 1000 skills
+- **Tech-agnostic guidance** that applies to React, Laravel, Go, etc.
+- **Pattern recognition** over hardcoded lists
+- **Principles** over prescriptions
+
+Examples:
+- ✅ "Check for skills by category pattern (`detect-*`, `pm-*`)"
+- ❌ "Use these 40 specific skills: /jaan-to:skill1, /jaan-to:skill2..."
+- ✅ "Support any framework via tech stack config"
+- ❌ "Only works with React and Next.js"
+
 ---
 
 ## AI Behavioral Rules
