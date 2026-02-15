@@ -28,10 +28,9 @@ Every seed follows a **skip-if-exists** rule: your edits are never overwritten. 
 |----------|----------------|----------------------|---------------|
 | Settings | `scripts/seeds/settings.yaml` | `jaan-to/config/settings.yaml` | Path overrides, learning strategy, language preference, template paths |
 | Context | `scripts/seeds/*.md` | `jaan-to/context/` | 5 required: tech.md, team.md, integrations.md, config.md, boundaries.md + 2 optional: localization.md, tone-of-voice.md |
-| Docs | plugin `docs/STYLE.md` + `docs/extending/create-skill.md` | `jaan-to/docs/` | Style guide, skill creation spec |
+| Docs | _(loaded from plugin at runtime)_ | — | STYLE.md and create-skill.md read from plugin source; not copied to project |
 | Templates | `skills/*/template.md` | `jaan-to/templates/jaan-to:{skill}.template.md` | Output structure for each skill — seeded on first use (with approval) via [pre-execution protocol Step C](../extending/pre-execution-protocol.md#step-c-offer-template-seeding) |
 | Learn files | `skills/*/LEARN.md` | _(loaded from plugin at runtime)_ | Better questions, edge cases, workflow tips — project files created via `/jaan-to:learn-add` |
-| Research index | (generated) | `jaan-to/outputs/research/README.md` | Index scaffold for research outputs |
 
 ---
 
