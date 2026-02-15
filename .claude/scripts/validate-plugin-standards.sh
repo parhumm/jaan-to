@@ -160,7 +160,7 @@ if [ ! -d "$PLUGIN_ROOT/jaan-to/context" ]; then
   echo "  ::warning::No jaan-to/context/ directory (bootstrap creates it)"
 else
   # All context markdown files must have headers
-  for ctx in "$PLUGIN_ROOT"/jaan-to/context/*.md 2>/dev/null; do
+  for ctx in "$PLUGIN_ROOT"/jaan-to/context/*.md; do
     [ -f "$ctx" ] || continue
 
     if ! grep -q '^#' "$ctx" 2>/dev/null; then
