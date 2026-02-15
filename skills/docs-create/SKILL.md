@@ -1,7 +1,7 @@
 ---
 name: docs-create
 description: Create new documentation with templates following STYLE.md.
-allowed-tools: Read, Glob, Grep, Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write(jaan-to/docs/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "{type} {name}"
 disable-model-invocation: true
 ---
@@ -12,12 +12,12 @@ disable-model-invocation: true
 
 ## Context Files
 
-- `jaan-to/docs/STYLE.md` - Documentation standards (copied by bootstrap from plugin)
-- `$JAAN_TEMPLATES_DIR/jaan-to:docs-create.template.md` - All templates (copied by bootstrap from plugin)
-- `$JAAN_LEARN_DIR/jaan-to:docs-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md` - Documentation standards (read from plugin source)
+- `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md` - Shared docs template (shared with docs-update)
+- `$JAAN_LEARN_DIR/jaan-to:docs.learn.md` - Shared docs lessons (shared with docs-update, loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
-**Note:** Templates are intentionally read from the project's `$JAAN_TEMPLATES_DIR` directory (not from the skill directory). The bootstrap hook copies them there on first run, allowing project-level customization.
+**Note:** Templates are read from the project's `$JAAN_TEMPLATES_DIR` directory. Pre-execution protocol Step C offers to seed from the plugin on first use.
 
 ---
 
@@ -25,6 +25,9 @@ disable-model-invocation: true
 **MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
 Skill name: `docs-create`
 Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
+**Shared resource override:** Template and learn files are shared with `docs-update`. For Steps A/B/C, resolve using `docs` as the resource name:
+- Learn: `$JAAN_LEARN_DIR/jaan-to:docs.learn.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/LEARN.md`)
+- Template: `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/template.md`)
 
 ### Language Settings
 Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
@@ -96,12 +99,12 @@ After determining type, ask for name if not provided:
 
 | Type | Path Pattern |
 |------|--------------|
-| skill | `docs/skills/{role}/{name}.md` |
-| hook | `docs/hooks/{name}.md` |
-| config | `docs/config/{name}.md` |
-| guide | `docs/extending/{name}.md` |
-| concept | `docs/{name}.md` |
-| index | `docs/{section}/README.md` |
+| skill | `jaan-to/docs/skills/{role}/{name}.md` |
+| hook | `jaan-to/docs/hooks/{name}.md` |
+| config | `jaan-to/docs/config/{name}.md` |
+| guide | `jaan-to/docs/extending/{name}.md` |
+| concept | `jaan-to/docs/{name}.md` |
+| index | `jaan-to/docs/{section}/README.md` |
 
 For skill type, ask: "Which role? [pm/dev/qa/ux/data/core]"
 
@@ -109,8 +112,8 @@ For skill type, ask: "Which role? [pm/dev/qa/ux/data/core]"
 
 Search for similar docs:
 ```
-Glob: docs/**/*{name}*.md
-Grep: "{name}" in docs/
+Glob: jaan-to/docs/**/*{name}*.md
+Grep: "{name}" in jaan-to/docs/
 ```
 
 If potential duplicate found:
@@ -118,7 +121,7 @@ If potential duplicate found:
 
 ## Step 4: Read STYLE.md
 
-Read `jaan-to/docs/STYLE.md` for:
+Read `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md` for:
 - Structure rules (H1, tagline, ---)
 - Length limits
 - Formatting patterns
@@ -174,7 +177,7 @@ Proceed? [y/n/edit]
 
 ## Step 6: Load Template
 
-Read template for doc type from `$JAAN_TEMPLATES_DIR/jaan-to:docs-create.template.md`
+Read template for doc type from `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md`
 
 ## Step 7: Fill Template
 
@@ -201,7 +204,7 @@ related: []
 
 ## Step 9: Validate
 
-Check against `jaan-to/docs/STYLE.md`:
+Check against `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md`:
 - [ ] Has H1 title
 - [ ] Has tagline (`>`)
 - [ ] Sections separated with `---`
@@ -222,8 +225,8 @@ If approved, write file.
 After writing the new doc file, update the parent folder's README.md to keep indexes in sync:
 
 1. **Determine parent README path:**
-   - For `docs/skills/{role}/{name}.md` → `docs/skills/{role}/README.md`
-   - For `docs/hooks/{name}.md` → `docs/hooks/README.md`
+   - For `jaan-to/docs/skills/{role}/{name}.md` → `jaan-to/docs/skills/{role}/README.md`
+   - For `jaan-to/docs/hooks/{name}.md` → `jaan-to/docs/hooks/README.md`
    - For other types → skip this step
 
 2. **Read the parent README.md** (if it doesn't exist, create one using the index template with frontmatter, H1, tagline, empty Available Skills table, and back-link)
@@ -239,7 +242,7 @@ After writing the new doc file, update the parent folder's README.md to keep ind
    | [/jaan-to:{skill-name}]({filename}.md) | {description from SKILL.md} |
    ```
 
-6. **Also check `docs/skills/README.md` (root) Available Roles table:**
+6. **Also check `jaan-to/docs/skills/README.md` (root) Available Roles table:**
    - If the role folder is new → add a row for the new role with "Active" status and link to its README
    - If the role is listed as "Planned" → update to "Active" and add link
 
