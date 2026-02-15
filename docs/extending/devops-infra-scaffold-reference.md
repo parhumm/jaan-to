@@ -116,6 +116,7 @@ The skill reads tech.md `#current-stack` to determine which stack to generate:
 
 **CI:**
 - `pnpm install --frozen-lockfile` with cache
+- Check `package.json` for `packageManager` field — if present, omit `version` from `pnpm/action-setup@v4` (action reads version automatically; explicit `version` causes `ERR_PNPM_BAD_PM_VERSION`)
 - Monorepo: `dorny/paths-filter@v3` for selective builds
 - Turbo remote cache with `TURBO_TOKEN` and `TURBO_TEAM`
 - PostgreSQL + Redis service containers with healthchecks
@@ -173,3 +174,29 @@ The skill reads tech.md `#current-stack` to determine which stack to generate:
 - Use `--frozen-lockfile` for reproducible installs
 - Set `NODE_ENV=production` in runtime Docker stage
 - Use healthchecks for all docker-compose services
+
+## Operational Workflow Patterns
+
+### Health Check Workflow (health-check.yml) — GitHub Actions Only
+
+Scheduled endpoint monitoring with automatic incident management:
+
+- **Schedule**: `*/15 * * * *` (every 15 minutes) + `workflow_dispatch` for manual runs
+- **Endpoint checking**: `curl --fail --silent --max-time 30` against repository variables (`vars.API_URL`, `vars.WEB_URL`)
+- **On failure**: `actions/github-script` (pinned by SHA) creates issue with `incident` label
+- **Deduplication**: Before creating, search open issues with `incident` label — skip if matching issue exists
+- **On recovery**: Search for open `incident` issues and auto-close with resolution comment including timestamp
+- **Action pinning**: Always pin `actions/github-script` by full commit SHA, not version tag
+- **Stack-agnostic**: Works for any tech stack with HTTP endpoints
+
+### Secret Rotation Reminder (secret-rotation-reminder.yml) — GitHub Actions Only
+
+Quarterly reminder to review and rotate credentials:
+
+- **Schedule**: `0 9 1 1,4,7,10 *` (quarterly: Jan/Apr/Jul/Oct, 9 AM UTC)
+- **Labels**: `security` + `maintenance`
+- **Classification heuristic** (from `.env.example` / `.env.production.example`):
+  - **Rotate** (credentials): Variable names containing `TOKEN`, `SECRET`, `KEY`, `PASSWORD`, or URLs with embedded credentials
+  - **Static** (no rotation): Variable names containing `ID`, `NAME`, `REGION`, `ENV`, `PORT`
+- **Action pinning**: Always pin `actions/github-script` by full commit SHA
+- **Stack-agnostic**: Classification heuristic works for any project's environment variables
