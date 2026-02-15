@@ -121,6 +121,9 @@ Code Generation & Deployment:
                  │
                  ├──> /jaan-to:dev-output-integrate
                  │    "Copy outputs into project locations"
+                 │    │
+                 │    └──> (suggested) /jaan-to:detect-dev --incremental
+                 │         "Re-audit integrated files for security and quality"
                  │
                  ├──> /jaan-to:dev-verify
                  │    "Validate build pipeline and running services"

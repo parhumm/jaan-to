@@ -330,6 +330,7 @@ This enables the integration-drift-check hook to detect outputs created after th
 > - Commit your changes
 >
 > **Next Skills in Pipeline:**
+> - Run `/jaan-to:detect-dev --incremental` to re-audit integrated files for security and quality findings
 > - Run `/jaan-to:devops-deploy-activate` if CI/CD configs were integrated
 > - Run `/jaan-to:qa-test-generate` to generate tests for integrated code
 > - Run `/jaan-to:release-iterate-changelog` to document the integration

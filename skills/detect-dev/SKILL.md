@@ -1,8 +1,8 @@
 ---
 name: detect-dev
 description: Engineering audit with SARIF evidence, 4-level confidence, and OpenSSF scoring.
-allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
-argument-hint: "[repo] [--full]"
+allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Bash(git diff:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
+argument-hint: "[repo] [--full] [--incremental]"
 context: fork
 ---
 
@@ -17,6 +17,7 @@ context: fork
 - `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` - Evidence format, scoring tables, scan patterns
+- `$JAAN_OUTPUTS_DIR/dev/output-integrate/*/*.md` - Integration logs (for origin tagging, if present)
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/dev/` — flat files, overwritten each run (no IDs).
 
@@ -73,14 +74,17 @@ Override field for this skill: `language_detect-dev`
 | Argument | Effect |
 |----------|--------|
 | (none) | **Light mode** (default): Layers 1-2 detection, single summary file |
-| `[repo]` | Scan specified repo (applies to both modes) |
+| `[repo]` | Scan specified repo (applies to all modes) |
 | `--full` | **Full mode**: All detection layers (1-5), 9 output files (current behavior) |
+| `--incremental` | **Incremental mode**: Scope scan to files changed since last audit (reads `.audit-state.yaml`). Combines with `--full` for scoped full-depth analysis. Falls back to full scan if no prior audit state exists. |
 
 **Mode determination:**
 - If `$ARGUMENTS` contains `--full` as a standalone token → set `run_depth = "full"`
 - Otherwise → set `run_depth = "light"`
+- If `$ARGUMENTS` contains `--incremental` as a standalone token → set `incremental = true`
+- Otherwise → set `incremental = false`
 
-Strip `--full` token from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
+Strip `--full` and `--incremental` tokens from arguments. Set `repo_path` to remaining arguments (or current working directory if empty).
 
 ## Thinking Mode
 
@@ -154,6 +158,34 @@ For each platform in platforms:
 5. Use platform-specific output paths in Step 10
 
 **Note**: If single-platform mode (`platform.name == 'all'`), output paths have NO suffix. If multi-platform mode, output paths include `-{platform}` suffix.
+
+## Step 0.1: Resolve Incremental Scope
+
+**Skip this step** if `incremental == false`.
+
+1. Read `$JAAN_OUTPUTS_DIR/detect/dev/.audit-state.yaml`
+   - If file does not exist → warn: "No prior audit state found. Running full scan." → set `incremental = false` and continue
+2. Extract `last_audit.commit` value
+   - **Validate** the commit matches `^[0-9a-f]{7,40}$` — if invalid, warn: "Invalid commit hash in audit state. Running full scan." → set `incremental = false` and continue
+3. Run: `git diff --name-only {last_audit.commit}..HEAD`
+   - If command fails (commit unreachable, e.g., after rebase) → warn: "Previous audit commit unreachable. Running full scan." → set `incremental = false` and continue
+4. If no files returned → print: "Audit is up to date (no files changed since last audit at {last_audit.timestamp}, commit {last_audit.commit})." → **exit skill**
+5. Set `incremental_scope` = list of changed file paths
+6. Display: "Incremental mode: {n} files changed since last audit ({last_audit.timestamp}, branch: {last_audit.branch})"
+
+In Steps 1-8, when `incremental == true`: only scan files in `incremental_scope` (filter Glob results and Read targets to this set). Per-platform filtering: intersect `incremental_scope` with each platform's `base_path`.
+
+## Step 0.2: Load Integration Context
+
+**Skip this step** if no integration logs exist.
+
+1. Glob `$JAAN_OUTPUTS_DIR/dev/output-integrate/*/*.md` (excluding README.md files)
+   - If no files found → set `integrated_files = empty set` and continue
+2. If `.audit-state.yaml` exists, only read logs with modification time newer than `last_audit.timestamp` (avoid stale origin tags)
+3. For each integration log, parse "Files Copied" or "Files modified" sections → extract file paths
+4. Build `integrated_files` set from all extracted paths
+
+In Steps 2-8, when tagging evidence blocks: if the finding's `location.uri` matches a path in `integrated_files`, add `origin: integrated` to the evidence block. Otherwise, add `origin: hand-written`. The `origin` field is optional — omit it if `integrated_files` is empty.
 
 ## Step 1: Read Existing Context
 
@@ -337,6 +369,9 @@ OUTPUT FILE (1):
 
 Note: Score based on Layers 1-2 only. Run with --full for complete analysis
 including CI/CD, security, infrastructure, observability, and risk assessment.
+
+{If incremental == true:}
+INCREMENTAL SCOPE: {n} files changed since {last_audit.timestamp} (branch: {last_audit.branch})
 ```
 
 > "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
@@ -372,6 +407,9 @@ OUTPUT FILES (9):
   $JAAN_OUTPUTS_DIR/detect/dev/risks{-platform}.md           - {n} findings
 
 Note: {-platform} suffix only if multi-platform mode (e.g., -web, -backend). Single-platform mode has no suffix.
+
+{If incremental == true:}
+INCREMENTAL SCOPE: {n} files changed since {last_audit.timestamp} (branch: {last_audit.branch})
 ```
 
 > "Proceed with writing 9 output files to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
@@ -451,6 +489,30 @@ Each file MUST include:
    - Suggest `/jaan-to:learn-add` commands for patterns worth documenting
 4. If no discrepancies: display "Seed files are aligned with detection results."
 
+## Step 10b: Record Audit State
+
+Write audit state to `$JAAN_OUTPUTS_DIR/detect/dev/.audit-state.yaml`:
+
+```yaml
+last_audit:
+  timestamp: "{ISO 8601 UTC}"
+  commit: "{git HEAD short hash}"
+  branch: "{current branch name}"
+  mode: "{light|full}"
+  incremental: {true|false}
+  platforms: ["{platform_name}"]
+  findings_count:
+    critical: 0
+    high: 0
+    medium: 0
+    low: 0
+    informational: 0
+  overall_score: 0.0
+  files_written: ["summary.md"]
+```
+
+This file enables `--incremental` mode on subsequent runs.
+
 ---
 
 ## Step 11: Quality Check & Definition of Done
@@ -464,6 +526,7 @@ Each file MUST include:
 - [ ] No speculation presented as evidence
 - [ ] Score disclaimer included (partial analysis note)
 - [ ] Output filename matches platform suffix convention
+- [ ] Audit state written to `.audit-state.yaml`
 - [ ] Detection summary shown to user; user approved output
 
 **If `run_depth == "full"`:**
@@ -476,6 +539,7 @@ Each file MUST include:
 - [ ] CI/CD security explicitly checked (secrets, runner trust, permissions, pinning, provenance)
 - [ ] Overall score calculated (OpenSSF 0-10)
 - [ ] Output filenames match platform suffix convention
+- [ ] Audit state written to `.audit-state.yaml`
 - [ ] Detection summary shown to user; user approved output
 - [ ] Seed reconciliation check performed (discrepancies reported or alignment confirmed)
 

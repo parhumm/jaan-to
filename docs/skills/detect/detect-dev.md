@@ -24,17 +24,20 @@ Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), D
 ## Usage
 
 ```
-/jaan-to:detect-dev [repo] [--full]
+/jaan-to:detect-dev [repo] [--full] [--incremental]
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | repo | No | Target repository (defaults to current) |
 | `--full` | No | Run full analysis (9 detection steps, 9 output files). Default is light mode. |
+| `--incremental` | No | Scope scan to files changed since last audit. Combines with `--full`. |
 
 **Light mode** (default): Scans config/manifest files and Docker/database layers, produces 1 summary file with tech stack, database/container table, top-5 findings, and overall score (score notes limited scope).
 
 **Full mode** (`--full`): Runs all detection steps including CI/CD, git analysis, infrastructure, and project structure. Produces 9 detailed output files.
+
+**Incremental mode** (`--incremental`): Reads `.audit-state.yaml` from the previous run, then uses `git diff` to scope the scan to only changed files. Falls back to a full scan if no prior audit state exists, the commit is unreachable (e.g., after rebase), or the stored commit hash is invalid. Exits early with "Audit is up to date" if no files have changed. Combines with `--full` for scoped full-depth analysis.
 
 ---
 
@@ -87,6 +90,34 @@ Each file includes standardized YAML frontmatter + Findings blocks (ID/severity/
 - **Output paths**: Platform-scoped filenames (`stack-web.md`) instead of nested folders
 - **Fully applicable**: detect-dev analyzes all platforms (no skip logic)
 - **Cross-platform linking**: Use `related_evidence` field for findings appearing in multiple platforms
+
+---
+
+## Incremental Mode
+
+When `--incremental` is used, detect-dev reads `$JAAN_OUTPUTS_DIR/detect/dev/.audit-state.yaml` (written at the end of every audit run) and scopes the scan to files changed since the last audit commit.
+
+| Flags | Behavior |
+|-------|----------|
+| *(none)* | Light mode, full scan |
+| `--full` | Full mode, full scan |
+| `--incremental` | Light mode, scoped to changed files |
+| `--incremental --full` | Full mode, scoped to changed files |
+
+**Graceful fallback**: If no state file exists, the commit is unreachable, or the hash is invalid, detect-dev warns and falls back to a full scan. If no files have changed, it exits with "Audit is up to date."
+
+**Post-integration workflow**: After running `/jaan-to:dev-output-integrate`, run `/jaan-to:detect-dev --incremental` to re-audit only the integrated files.
+
+---
+
+## Integration-Aware Evidence
+
+When integration logs exist (from `/jaan-to:dev-output-integrate`), detect-dev tags evidence blocks with an `origin` field:
+
+- `origin: integrated` — file was copied into the project by dev-output-integrate
+- `origin: hand-written` — file was not part of any integration
+
+This helps prioritize findings: issues in integrated (generated) code may indicate upstream generation problems, while issues in hand-written code are direct developer concerns. The `origin` field is optional and omitted when no integration logs are available.
 
 ---
 
