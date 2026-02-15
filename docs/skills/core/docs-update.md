@@ -43,10 +43,10 @@ related: [docs-create.md, ../../hooks/bootstrap.md]
 
 | Code Path | Related Doc |
 |-----------|-------------|
-| `skills/{name}/` | `docs/skills/{role}/{slug}.md` |
-| `scripts/{name}.sh` | `docs/hooks/{name}.md` |
-| `jaan-to/context/config.md` | `docs/config/README.md` |
-| `jaan-to/context/*.md` | `docs/config/context-system.md` |
+| `skills/{name}/` | `jaan-to/docs/skills/{role}/{slug}.md` |
+| `$JAAN_CONTEXT_DIR/hooks/{name}.sh` | `jaan-to/docs/hooks/{name}.md` |
+| `$JAAN_CONTEXT_DIR/config.md` | `jaan-to/docs/config/README.md` |
+| `$JAAN_CONTEXT_DIR/*.md` | `jaan-to/docs/config/context.md` |
 
 ---
 
@@ -72,12 +72,12 @@ related: [docs-create.md, ../../hooks/bootstrap.md]
 ## Potentially Outdated
 | Doc | Related Code | Delta |
 |-----|--------------|-------|
-| docs/skills/pm/prd-write.md | pm-prd-write/SKILL.md | 15d stale |
+| jaan-to/docs/skills/pm/prd-write.md | pm-prd-write/SKILL.md | 15d stale |
 
 ## Missing Documentation
 | Code File | Expected Doc |
 |-----------|--------------|
-| new-skill/SKILL.md | docs/skills/?/new-skill.md |
+| new-skill/SKILL.md | jaan-to/docs/skills/?/new-skill.md |
 
 [1] Review stale  [2] Full audit  [3] Quick fix  [4] Exit
 ```
@@ -124,7 +124,7 @@ related: [docs-create.md, ../../hooks/bootstrap.md]
 
 **Check specific path**:
 ```
-/jaan-to:docs-update docs/skills/ --check-only
+/jaan-to:docs-update jaan-to/docs/skills/ --check-only
 ```
 
 ---
@@ -137,7 +137,7 @@ related: [docs-create.md, ../../hooks/bootstrap.md]
 | Missing dates | Adds current date |
 | Missing separators | Adds `---` |
 | H4+ headings | Converts to H3 |
-| Deprecated docs | Archives to docs/archive/ |
+| Deprecated docs | Archives to jaan-to/docs/archive/ |
 | Broken links | Reports with suggestions |
 | Duplicates | Suggests consolidation |
 
