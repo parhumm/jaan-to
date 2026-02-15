@@ -453,6 +453,33 @@ Both `dev` and `main` use the same `X.Y.Z` format (e.g., `3.15.0`). No `-dev` su
 
 ### Release Checklist (Maintainers Only)
 
+**Automated Approach (Recommended):**
+
+Use the `/jaan-release` skill to automate validation, documentation sync, version bump, and PR creation:
+
+```bash
+# From dev branch (ensure working tree is clean)
+/jaan-release
+```
+
+**This skill automatically:**
+1. ✅ Runs 24 validation checks (compliance + plugin standards)
+2. ✅ Syncs documentation (roadmap, docs, website, CHANGELOG)
+3. ✅ Bumps version atomically across 4 files
+4. ✅ Creates PR (dev → main) and waits for CI
+5. ⏸️ Stops for human review and merge approval
+
+**After skill creates PR:**
+1. Review and merge PR via GitHub UI
+2. Follow post-merge steps (detailed in PR description):
+   - Tag release on main
+   - Create GitHub release
+   - Sync dev branch
+   - Bump dev to next version
+   - Acknowledge closed issues
+
+**Manual Approach (If `/jaan-release` unavailable):**
+
 1. **Ensure version and CHANGELOG are ready on `dev`:**
    - Version should already be bumped in all 3 places via `./scripts/bump-version.sh X.Y.Z`
    - CHANGELOG.md should have an entry for the version
@@ -492,6 +519,11 @@ Both `dev` and `main` use the same `X.Y.Z` format (e.g., `3.15.0`). No `-dev` su
    Confirm skills appear with `/jaan-to:pm-prd-write --help` or similar.
 
 **IMPORTANT:** Version bump, CHANGELOG entry, and git tag are inseparable. Never do one without the others.
+
+**See also:**
+- [Validation Architecture](docs/development/validation-architecture.md) - How validation works
+- [CI Workflows](docs/development/ci-workflows.md) - What CI checks run
+- [/jaan-release skill](.claude/skills/jaan-release/SKILL.md) - Full skill documentation (LOCAL)
 
 ---
 
