@@ -62,6 +62,7 @@
 | qa-test-run | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, generate coverage reports |
 | backend-scaffold | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
 | backend-service-implement | `/jaan-to:backend-service-implement` | Generate service implementations with business logic from specs and stubs |
+| backend-pr-review | `/jaan-to:backend-pr-review` | Review backend PRs for security, performance, and code quality across any stack |
 | frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
 | dev-project-assemble | `/jaan-to:dev-project-assemble` | Wire scaffold outputs into runnable project with configs and entry points |
 | wp-pr-review | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |

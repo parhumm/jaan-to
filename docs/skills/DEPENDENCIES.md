@@ -24,7 +24,10 @@ Product Development Flow:
                  │    "Generate user stories from PRD"
                  │
                  ├──> /jaan-to:detect-dev
-                 │    "Auto-detect tech stack for context"
+                 │    "Engineering audit of codebase"
+                 │
+                 ├──> /jaan-to:ux-flowchart-generate
+                 │    "Generate Mermaid flowcharts from PRD"
                  │
                  ├──> /jaan-to:frontend-task-breakdown
                  │    "Frontend task breakdown from PRD"
@@ -32,11 +35,17 @@ Product Development Flow:
                  │     └──> /jaan-to:frontend-state-machine (Future)
                  │          "State machine definitions"
                  │
+                 ├──> /jaan-to:frontend-design
+                 │    "Create production-grade frontend interfaces"
+                 │
                  ├──> /jaan-to:backend-task-breakdown
                  │    "Backend task breakdown from PRD"
                  │     │
-                 │     └──> /jaan-to:backend-data-model (Future)
-                 │          "Data model specification"
+                 │     ├──> /jaan-to:backend-data-model
+                 │     │    "Data model specification"
+                 │     │
+                 │     └──> /jaan-to:backend-api-contract
+                 │          "OpenAPI 3.1 contract from entities"
                  │
                  ├──> /jaan-to:qa-test-cases
                  │    "Generate BDD test cases from PRD"
@@ -66,11 +75,9 @@ Documentation Management:
 │  /jaan-to:docs-create                                   │
 │  "Create new documentation"                             │
 └─────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────┐
-│  /jaan-to:docs-update                                   │
-│  "Audit and update stale docs"                          │
-└─────────────────────────────────────────────────────────┘
+                 │
+                 └──> /jaan-to:docs-update (Suggested)
+                      "Audit and update stale docs"
 ```
 
 ### UX Research Flow
@@ -85,17 +92,53 @@ UX Research & Design:
                  ├──> /jaan-to:ux-microcopy-write
                  │    "Multi-language UI copy from insights"
                  │
-                 └──> /jaan-to:ux-heatmap-analyze
-                      "Analyze interaction patterns from heatmaps"
+                 ├──> /jaan-to:ux-heatmap-analyze
+                 │    "Analyze interaction patterns from heatmaps"
+                 │
+                 └──> /jaan-to:ux-flowchart-generate
+                      "Generate Mermaid flowcharts from findings"
 ```
 
-### Spec-to-Ship Flow (New)
+### Detection / Audit Flow
+
+```
+Detection & Audit:
+┌─────────────────────────────────────────────────────────┐
+│  Run any combination of detect skills:                  │
+│                                                         │
+│  /jaan-to:detect-dev        "Engineering audit"         │
+│  /jaan-to:detect-design     "Design system detection"   │
+│  /jaan-to:detect-ux         "UX audit"                  │
+│  /jaan-to:detect-product    "Product reality extraction" │
+│  /jaan-to:detect-writing    "Writing system extraction"  │
+└────────────────┬────────────────────────────────────────┘
+                 │
+                 └──> /jaan-to:detect-pack
+                      "Consolidate into unified index with risk heatmap"
+```
+
+### Code Review Flow
+
+```
+Code Review:
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:backend-pr-review                             │
+│  "Review backend PRs for security and quality"          │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:wp-pr-review                                  │
+│  "Review WordPress plugin PRs"                          │
+└─────────────────────────────────────────────────────────┘
+```
+
+### Spec-to-Ship Flow
 
 ```
 Code Generation & Deployment:
 ┌─────────────────────────────────────────────────────────┐
-│  /jaan-to:backend-scaffold + /jaan-to:frontend-scaffold  │
-│  "Generate code stubs from specs"                        │
+│  /jaan-to:backend-scaffold + /jaan-to:frontend-scaffold │
+│  "Generate code stubs from specs"                       │
 └────────────────┬────────────────────────────────────────┘
                  │
                  ├──> /jaan-to:backend-service-implement
@@ -116,20 +159,33 @@ Code Generation & Deployment:
                  │     └──> /jaan-to:sec-audit-remediate
                  │          "Fix security findings with patches"
                  │
-                 └──> /jaan-to:devops-infra-scaffold
-                      "Generate CI/CD, Docker, deployment configs"
+                 ├──> /jaan-to:backend-pr-review
+                 │    "Review backend PRs for security and quality"
+                 │
+                 ├──> /jaan-to:devops-infra-scaffold
+                 │    "Generate CI/CD, Docker, deployment configs"
                  │
                  ├──> /jaan-to:dev-output-integrate
                  │    "Copy outputs into project locations"
-                 │    │
-                 │    └──> (suggested) /jaan-to:detect-dev --incremental
-                 │         "Re-audit integrated files for security and quality"
+                 │     │
+                 │     └──> (suggested) /jaan-to:detect-dev --incremental
+                 │          "Re-audit integrated files for security and quality"
                  │
                  ├──> /jaan-to:dev-verify
                  │    "Validate build pipeline and running services"
                  │
                  └──> /jaan-to:devops-deploy-activate
                       "Activate deployment pipeline"
+```
+
+### Release Flow
+
+```
+Release Management:
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:release-iterate-changelog                     │
+│  "Generate changelog from git history"                  │
+└─────────────────────────────────────────────────────────┘
 ```
 
 ### Skill Development Flow
@@ -174,13 +230,16 @@ These skills are suggested by multiple other skills:
 /jaan-to:pm-research-about "authentication best practices"
 /jaan-to:pm-prd-write "OAuth2 authentication"
 
-# Step 2: User Stories
+# Step 2: User Stories & Flowcharts
 /jaan-to:pm-story-write from prd
+/jaan-to:ux-flowchart-generate from prd
 
 # Step 3: Tech Planning
 /jaan-to:detect-dev
 /jaan-to:frontend-task-breakdown from prd
 /jaan-to:backend-task-breakdown from prd
+/jaan-to:backend-data-model from task breakdown
+/jaan-to:backend-api-contract from entities
 
 # Step 4: QA & Tracking
 /jaan-to:qa-test-cases from prd
@@ -213,6 +272,30 @@ These skills are suggested by multiple other skills:
 /jaan-to:docs-create guide "API integration"
 ```
 
+### 4. Detection & Audit
+
+```bash
+# Step 1: Run detect skills
+/jaan-to:detect-dev
+/jaan-to:detect-design
+/jaan-to:detect-ux
+/jaan-to:detect-product
+/jaan-to:detect-writing
+
+# Step 2: Consolidate findings
+/jaan-to:detect-pack
+```
+
+### 5. Code Review
+
+```bash
+# Backend PRs (any stack)
+/jaan-to:backend-pr-review
+
+# WordPress plugin PRs
+/jaan-to:wp-pr-review
+```
+
 ---
 
 ## Standalone Skills
@@ -222,9 +305,13 @@ These skills don't typically call others:
 | Skill | Purpose | Usage Pattern |
 |-------|---------|---------------|
 | `/jaan-to:pm-story-write` | Generate user stories | Standalone or from PRD |
-| `/jaan-to:detect-dev` | Auto-detect tech stack | Run once per project |
 | `/jaan-to:ux-microcopy-write` | Multi-language UI copy | Standalone |
 | `/jaan-to:ux-heatmap-analyze` | Heatmap analysis | Standalone (requires CSV/screenshot) |
+| `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts | Standalone or from PRD |
+| `/jaan-to:frontend-design` | Create frontend interfaces | Standalone or from PRD |
+| `/jaan-to:release-iterate-changelog` | Generate changelog | Standalone (from git history) |
+| `/jaan-to:jaan-init` | Initialize jaan-to for project | Run once per project |
+| `/jaan-to:jaan-issue-report` | Report bugs/issues | Standalone |
 | `/jaan-to:roadmap-add` | Add roadmap task | Standalone |
 | `/jaan-to:roadmap-update` | Sync roadmap | Standalone (maintenance) |
 
@@ -237,23 +324,58 @@ These skills are referenced but not yet implemented:
 | Skill | Referenced By | Purpose |
 |-------|---------------|---------|
 | `/jaan-to:frontend-state-machine` | frontend-task-breakdown | Component state machine definitions |
-| `/jaan-to:backend-data-model` | be-task-breakdown | Detailed data model specification |
 
-## Recently Added Skills
+---
 
-| Skill | Role | Purpose |
-|-------|------|---------|
-| `/jaan-to:dev-project-assemble` | dev | Wire scaffold outputs into runnable project |
-| `/jaan-to:backend-service-implement` | backend | Generate service implementations from stubs |
-| `/jaan-to:qa-test-generate` | qa | Generate runnable tests from BDD cases |
-| `/jaan-to:sec-audit-remediate` | sec | Fix security findings with patches + tests |
-| `/jaan-to:devops-infra-scaffold` | devops | Generate CI/CD, Docker, deployment configs |
-| `/jaan-to:dev-output-integrate` | dev | Copy outputs into project with entry point wiring |
-| `/jaan-to:dev-verify` | dev | Validate build pipeline and running services with health checks |
-| `/jaan-to:devops-deploy-activate` | devops | Activate deployment pipeline with secrets and platforms |
-| `/jaan-to:qa-test-run` | qa | Execute tests, diagnose failures, report coverage |
+## Complete Skill Inventory
 
-See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.
+All 43 skills grouped by role.
+
+| Role | Skill | Purpose |
+|------|-------|---------|
+| **pm** | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
+| | `/jaan-to:pm-story-write` | Generate user stories with acceptance criteria |
+| | `/jaan-to:pm-research-about` | Deep research on any topic |
+| **backend** | `/jaan-to:backend-task-breakdown` | Convert PRD into backend tasks |
+| | `/jaan-to:backend-data-model` | Generate data model docs from entities |
+| | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts |
+| | `/jaan-to:backend-scaffold` | Generate backend code stubs |
+| | `/jaan-to:backend-service-implement` | Generate service implementations |
+| | `/jaan-to:backend-pr-review` | Review backend PRs for security and quality |
+| **frontend** | `/jaan-to:frontend-task-breakdown` | Frontend task breakdown from PRD |
+| | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js components |
+| | `/jaan-to:frontend-design` | Create production-grade frontend interfaces |
+| **ux** | `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |
+| | `/jaan-to:ux-microcopy-write` | Generate multi-language UI microcopy |
+| | `/jaan-to:ux-heatmap-analyze` | Analyze heatmap data |
+| | `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts |
+| **qa** | `/jaan-to:qa-test-cases` | Generate BDD test cases |
+| | `/jaan-to:qa-test-generate` | Generate runnable test files |
+| | `/jaan-to:qa-test-run` | Execute tests, diagnose failures |
+| **detect** | `/jaan-to:detect-dev` | Engineering audit with SARIF evidence |
+| | `/jaan-to:detect-design` | Design system detection |
+| | `/jaan-to:detect-ux` | Repo-driven UX audit |
+| | `/jaan-to:detect-product` | Product reality extraction |
+| | `/jaan-to:detect-writing` | Writing system extraction |
+| | `/jaan-to:detect-pack` | Consolidate detect outputs |
+| **dev** | `/jaan-to:dev-project-assemble` | Wire scaffolds into runnable project |
+| | `/jaan-to:dev-output-integrate` | Copy outputs into project locations |
+| | `/jaan-to:dev-verify` | Validate build pipeline and services |
+| **sec** | `/jaan-to:sec-audit-remediate` | Fix security findings with patches |
+| **devops** | `/jaan-to:devops-infra-scaffold` | Generate CI/CD, Docker, deployment configs |
+| | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline |
+| **data** | `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
+| **wp** | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs |
+| **release** | `/jaan-to:release-iterate-changelog` | Generate changelog from git history |
+| **core** | `/jaan-to:docs-create` | Create new documentation |
+| | `/jaan-to:docs-update` | Audit and update stale docs |
+| | `/jaan-to:skill-create` | Create new skills |
+| | `/jaan-to:skill-update` | Update existing skills |
+| | `/jaan-to:learn-add` | Capture lessons learned |
+| | `/jaan-to:roadmap-add` | Add roadmap task |
+| | `/jaan-to:roadmap-update` | Maintain and sync roadmap |
+| | `/jaan-to:jaan-init` | Initialize jaan-to for project |
+| | `/jaan-to:jaan-issue-report` | Report bugs/issues |
 
 ---
 
@@ -277,4 +399,4 @@ Skills may invoke agents automatically:
 
 ---
 
-**Last Updated:** 2026-02-14
+**Last Updated:** 2026-02-15
