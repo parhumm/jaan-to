@@ -46,9 +46,12 @@ Files at `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{id}-{slug}/`:
 |------|---------|
 | `{id}-{slug}.md` | Infrastructure guide with architecture decisions |
 | `.github/workflows/ci.yml` or `.gitlab-ci.yml` | CI/CD pipeline |
+| `ci/health-check.yml` | Health monitoring workflow (15-min cron, GitHub Actions only) |
+| `ci/secret-rotation-reminder.yml` | Quarterly secret rotation reminder (GitHub Actions only) |
 | `Dockerfile` + `Dockerfile.frontend` | Multi-stage Docker builds |
 | `docker-compose.yml` | Local development stack |
 | `.env.example` | Environment variable template |
+| `config/next.config.standalone.ts` | Next.js standalone config (if Next.js detected) |
 | `deploy/` | Platform-specific deployment configs |
 | `{id}-{slug}-readme.md` | Setup + deployment instructions |
 
@@ -112,6 +115,9 @@ jaan-to/outputs/devops/infra-scaffold/01-my-app-infra/
 - Run after `/jaan-to:dev-project-assemble` to match the project structure
 - Include `/jaan-to:detect-dev` output for security scanning in CI
 - Review generated secrets and environment variables before deploying
+- Configure endpoint repository variables (`API_URL`, `WEB_URL`) after copying health-check workflow
+- Review secret rotation checklist against actual project secrets
+- Verify Next.js `output: 'standalone'` matches Dockerfile expectations
 
 ---
 
