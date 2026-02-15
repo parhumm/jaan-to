@@ -6,7 +6,7 @@
 
 ## Skill Template
 
-Use for: `jaan-to/docs/skills/{role}/{name}.md`
+Use for: `$JAAN_DOCS_DIR/skills/{role}/{name}.md`
 
 ```markdown
 ---
@@ -81,7 +81,7 @@ related: []
 
 ## Hook Template
 
-Use for: `jaan-to/docs/hooks/{name}.md`
+Use for: `$JAAN_DOCS_DIR/hooks/{name}.md`
 
 ```markdown
 ---
@@ -141,7 +141,7 @@ related: []
 
 ## Config Template
 
-Use for: `jaan-to/docs/config/{name}.md`
+Use for: `$JAAN_DOCS_DIR/config/{name}.md`
 
 ```markdown
 ---
@@ -203,7 +203,7 @@ related: []
 
 ## Guide Template
 
-Use for: `jaan-to/docs/extending/{name}.md`
+Use for: `$JAAN_DOCS_DIR/extending/{name}.md`
 
 ```markdown
 ---
@@ -277,7 +277,7 @@ Solution: {solution}
 
 ## Concept Template
 
-Use for: `jaan-to/docs/{name}.md`
+Use for: `$JAAN_DOCS_DIR/{name}.md`
 
 ```markdown
 ---
@@ -331,7 +331,7 @@ related: []
 
 ## Index Template
 
-Use for: `jaan-to/docs/{section}/README.md`
+Use for: `$JAAN_DOCS_DIR/{section}/README.md`
 
 ```markdown
 ---

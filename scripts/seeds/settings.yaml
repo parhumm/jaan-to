@@ -11,6 +11,7 @@ version: "3.0"
 # paths_learning: "jaan-to/learn"
 # paths_context: "jaan-to/context"
 # paths_outputs: "jaan-to/outputs"
+# paths_docs: "jaan-to/docs"
 
 # Template Customization
 # Uncomment to use custom template files

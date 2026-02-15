@@ -28,7 +28,7 @@ Projects without a `jaan-to/` directory are not affected by the plugin.
 | Component | Location | Format | Customizable |
 |-----------|----------|--------|--------------|
 | Skills | `skills/<name>/SKILL.md` | YAML frontmatter + markdown | No |
-| Skill Spec | `jaan-to/docs/create-skill.md` (project) | Specification for creating skills | No |
+| Skill Spec | `${CLAUDE_PLUGIN_ROOT}/docs/extending/create-skill.md` | Specification for creating skills | No |
 | Config | `jaan-to/config/settings.yaml` (project) | YAML | Yes |
 | Context | `jaan-to/context/` (project) | Markdown templates | Yes |
 | Boundaries | `jaan-to/context/boundaries.md` (project) | Markdown | Yes |

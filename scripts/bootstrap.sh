@@ -31,6 +31,7 @@ TEMPLATES_DIR=$(resolve_path "$(get_config 'paths_templates' 'jaan-to/templates'
 LEARN_DIR=$(resolve_path "$(get_config 'paths_learning' 'jaan-to/learn')")
 CONTEXT_DIR=$(resolve_path "$(get_config 'paths_context' 'jaan-to/context')")
 OUTPUTS_DIR=$(resolve_path "$(get_config 'paths_outputs' 'jaan-to/outputs')")
+DOCS_DIR=$(resolve_path "$(get_config 'paths_docs' 'jaan-to/docs')")
 CONFIG_DIR="jaan-to/config"
 
 # Counters for reporting
@@ -46,7 +47,7 @@ mkdir -p "$PROJECT_DIR/$LEARN_DIR"
 mkdir -p "$PROJECT_DIR/$CONTEXT_DIR"
 mkdir -p "$PROJECT_DIR/$TEMPLATES_DIR"
 mkdir -p "$PROJECT_DIR/$CONFIG_DIR"
-mkdir -p "$PROJECT_DIR/jaan-to/docs"
+mkdir -p "$PROJECT_DIR/$DOCS_DIR"
 
 # 2. Add to .gitignore if not present
 if [ -f "$PROJECT_DIR/.gitignore" ]; then
@@ -132,6 +133,7 @@ cat <<RESULT
   "learn_dir": "${LEARN_DIR}",
   "context_dir": "${CONTEXT_DIR}",
   "templates_dir": "${TEMPLATES_DIR}",
+  "docs_dir": "${DOCS_DIR}",
   "config_dir": "${CONFIG_DIR}",
   "paths_customized": $([ "$TEMPLATES_DIR" != "jaan-to/templates" ] && echo "true" || echo "false"),
   "files_copied": {

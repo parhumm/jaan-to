@@ -45,6 +45,7 @@ Edit `jaan-to/config/settings.yaml` to override defaults for your repo.
 | `paths_templates` | `jaan-to/templates` | Where templates live |
 | `paths_learning` | `jaan-to/learn` | Where lessons accumulate |
 | `paths_context` | `jaan-to/context` | Where context files live |
+| `paths_docs` | `jaan-to/docs` | Where documentation files go |
 | `learning_strategy` | `merge` | How lessons combine |
 | `language` | `ask` | Conversation and report language |
 | `language_{skill}` | _(global)_ | Per-skill language override |
@@ -105,6 +106,7 @@ Override paths per-machine using environment variables in `.claude/settings.json
 | `JAAN_TEMPLATES_DIR` | `paths_templates` |
 | `JAAN_LEARN_DIR` | `paths_learning` |
 | `JAAN_CONTEXT_DIR` | `paths_context` |
+| `JAAN_DOCS_DIR` | `paths_docs` |
 
 **When to use**: Environment variables override settings.yaml. Use settings.yaml for team-wide config (committed to repo). Use env vars for machine-specific overrides (not committed).
 

@@ -1,7 +1,7 @@
 ---
 name: docs-update
 description: Audit and maintain documentation quality using smart staleness checks.
-allowed-tools: Read, Glob, Grep, Write(jaan-to/docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
+allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 disable-model-invocation: true
 ---
@@ -37,12 +37,12 @@ Override field for this skill: `language_docs-update`
 
 | Code Path | Related Doc |
 |-----------|-------------|
-| `skills/{name}/SKILL.md` | `jaan-to/docs/skills/{role}/{slug}.md` |
+| `skills/{name}/SKILL.md` | `$JAAN_DOCS_DIR/skills/{role}/{slug}.md` |
 | `$JAAN_LEARN_DIR/{name}.learn.md` | (referenced in skill doc) |
-| `$JAAN_CONTEXT_DIR/hooks/{name}.sh` | `jaan-to/docs/hooks/{name}.md` |
-| `$JAAN_CONTEXT_DIR/config.md` | `jaan-to/docs/config/README.md` |
-| `$JAAN_CONTEXT_DIR/*.md` | `jaan-to/docs/config/context.md` |
-| `$JAAN_CONTEXT_DIR/boundaries.md` | `jaan-to/docs/config/boundaries.md` |
+| `$JAAN_CONTEXT_DIR/hooks/{name}.sh` | `$JAAN_DOCS_DIR/hooks/{name}.md` |
+| `$JAAN_CONTEXT_DIR/config.md` | `$JAAN_DOCS_DIR/config/README.md` |
+| `$JAAN_CONTEXT_DIR/*.md` | `$JAAN_DOCS_DIR/config/context.md` |
+| `$JAAN_CONTEXT_DIR/boundaries.md` | `$JAAN_DOCS_DIR/config/boundaries.md` |
 
 **Slug extraction:** `pm-prd-write` → `prd-write` (remove role prefix)
 
@@ -83,7 +83,7 @@ For each changed code file, find related doc:
 
 **Skills:**
 ```
-skills/{name}/SKILL.md → jaan-to/docs/skills/{role}/{slug}.md
+skills/{name}/SKILL.md → $JAAN_DOCS_DIR/skills/{role}/{slug}.md
 
 # Extract slug: remove brand prefix and role
 # pm-prd-write → prd-write
@@ -92,14 +92,14 @@ skills/{name}/SKILL.md → jaan-to/docs/skills/{role}/{slug}.md
 
 **Hooks:**
 ```
-$JAAN_CONTEXT_DIR/hooks/{name}.sh → jaan-to/docs/hooks/{name}.md
+$JAAN_CONTEXT_DIR/hooks/{name}.sh → $JAAN_DOCS_DIR/hooks/{name}.md
 ```
 
 **Config:**
 ```
-$JAAN_CONTEXT_DIR/config.md → jaan-to/docs/config/README.md
-$JAAN_CONTEXT_DIR/*.md → jaan-to/docs/config/context.md
-$JAAN_CONTEXT_DIR/boundaries.md → jaan-to/docs/config/boundaries.md
+$JAAN_CONTEXT_DIR/config.md → $JAAN_DOCS_DIR/config/README.md
+$JAAN_CONTEXT_DIR/*.md → $JAAN_DOCS_DIR/config/context.md
+$JAAN_CONTEXT_DIR/boundaries.md → $JAAN_DOCS_DIR/config/boundaries.md
 ```
 
 ## Step 0.4: Compare Timestamps
@@ -135,13 +135,13 @@ If code exists but doc doesn't → Flag as MISSING
 
 | Doc | Related Code | Code Changed | Doc Updated | Delta |
 |-----|--------------|--------------|-------------|-------|
-| jaan-to/docs/skills/pm/prd-write.md | skills/pm-prd-write/SKILL.md | 2026-01-25 | 2026-01-10 | 15d stale |
+| $JAAN_DOCS_DIR/skills/pm/prd-write.md | skills/pm-prd-write/SKILL.md | 2026-01-25 | 2026-01-10 | 15d stale |
 
 ## Missing Documentation
 
 | Code File | Expected Doc | Action |
 |-----------|--------------|--------|
-| skills/new-skill/SKILL.md | jaan-to/docs/skills/?/new-skill.md | Create |
+| skills/new-skill/SKILL.md | $JAAN_DOCS_DIR/skills/?/new-skill.md | Create |
 
 ## Up to Date
 
@@ -175,7 +175,7 @@ What would you like to do?
 
 Use Glob to count docs (don't read all):
 ```
-Glob: jaan-to/docs/**/*.md
+Glob: $JAAN_DOCS_DIR/**/*.md
 ```
 
 Exclude: `node_modules/`
@@ -183,7 +183,7 @@ Exclude: `node_modules/`
 ## Step 1.2: Check Recent Doc Changes
 
 ```bash
-git log --since="30 days ago" --oneline --name-only -- jaan-to/docs/ | head -30
+git log --since="30 days ago" --oneline --name-only -- $JAAN_DOCS_DIR/ | head -30
 ```
 
 ## Step 1.3: Quick Scan for Issues
@@ -192,12 +192,12 @@ Use Grep to detect problems without reading files:
 
 **Missing frontmatter:**
 ```
-Grep: "^---$" in jaan-to/docs/**/*.md (check first line)
+Grep: "^---$" in $JAAN_DOCS_DIR/**/*.md (check first line)
 ```
 
 **Missing tagline:**
 ```
-Grep: "^>" in jaan-to/docs/**/*.md
+Grep: "^>" in $JAAN_DOCS_DIR/**/*.md
 ```
 
 ## Step 1.4: Generate Audit Proposal
@@ -258,7 +258,7 @@ Check all internal links:
 
 ### README Index Consistency
 
-For each `jaan-to/docs/skills/{role}/README.md`:
+For each `$JAAN_DOCS_DIR/skills/{role}/README.md`:
 
 1. **List all `.md` files** in the same directory (excluding README.md itself)
 2. **Parse the "## Available Skills" table** rows in the README
@@ -267,8 +267,8 @@ For each `jaan-to/docs/skills/{role}/README.md`:
    - **PHANTOM**: Listed in table but `.md` file doesn't exist in directory
    - **STALE DESCRIPTION**: Description in table differs significantly from the skill's SKILL.md `description:` field
 
-4. **Also check `jaan-to/docs/skills/README.md` root Available Roles table:**
-   - Compare against actual `jaan-to/docs/skills/*/` subdirectories that contain files
+4. **Also check `$JAAN_DOCS_DIR/skills/README.md` root Available Roles table:**
+   - Compare against actual `$JAAN_DOCS_DIR/skills/*/` subdirectories that contain files
    - Flag roles with directories but missing from table as MISSING ROLE
    - Flag roles listed as "Planned" that have active skill docs as STALE STATUS
 
@@ -297,10 +297,10 @@ Verify docs are in correct folders:
 
 | Content Type | Correct Location |
 |--------------|------------------|
-| Skill docs | `jaan-to/docs/skills/{role}/` |
-| Hook docs | `jaan-to/docs/hooks/` |
-| Config docs | `jaan-to/docs/config/` |
-| Guides | `jaan-to/docs/extending/` |
+| Skill docs | `$JAAN_DOCS_DIR/skills/{role}/` |
+| Hook docs | `$JAAN_DOCS_DIR/hooks/` |
+| Config docs | `$JAAN_DOCS_DIR/config/` |
+| Guides | `$JAAN_DOCS_DIR/extending/` |
 
 ## Step 2.2: Compile Issues
 
@@ -359,8 +359,8 @@ Apply fixes? [yes/no/selective]
 ## Step 3.1: Archive Deprecated Docs
 
 ```bash
-mkdir -p jaan-to/docs/archive
-git mv jaan-to/docs/deprecated-file.md jaan-to/docs/archive/
+mkdir -p $JAAN_DOCS_DIR/archive
+git mv $JAAN_DOCS_DIR/deprecated-file.md $JAAN_DOCS_DIR/archive/
 ```
 
 Add note at top: "ARCHIVED: See [new-doc.md] for current information."
@@ -406,7 +406,7 @@ updated_date: {today}
 ## Step 3.7: Move Misplaced Files
 
 ```bash
-git mv jaan-to/docs/wrong-location/file.md jaan-to/docs/correct-location/
+git mv $JAAN_DOCS_DIR/wrong-location/file.md $JAAN_DOCS_DIR/correct-location/
 ```
 
 Update any references to moved file.
@@ -421,7 +421,7 @@ Ask: "Commit documentation updates? [y/n]"
 
 If yes:
 ```bash
-git add jaan-to/docs/
+git add $JAAN_DOCS_DIR/
 git commit -m "docs: Audit and update documentation
 
 - Fixed: X files

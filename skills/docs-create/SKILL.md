@@ -1,7 +1,7 @@
 ---
 name: docs-create
 description: Create new documentation with templates following STYLE.md.
-allowed-tools: Read, Glob, Grep, Write(jaan-to/docs/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "{type} {name}"
 disable-model-invocation: true
 ---
@@ -99,12 +99,12 @@ After determining type, ask for name if not provided:
 
 | Type | Path Pattern |
 |------|--------------|
-| skill | `jaan-to/docs/skills/{role}/{name}.md` |
-| hook | `jaan-to/docs/hooks/{name}.md` |
-| config | `jaan-to/docs/config/{name}.md` |
-| guide | `jaan-to/docs/extending/{name}.md` |
-| concept | `jaan-to/docs/{name}.md` |
-| index | `jaan-to/docs/{section}/README.md` |
+| skill | `$JAAN_DOCS_DIR/skills/{role}/{name}.md` |
+| hook | `$JAAN_DOCS_DIR/hooks/{name}.md` |
+| config | `$JAAN_DOCS_DIR/config/{name}.md` |
+| guide | `$JAAN_DOCS_DIR/extending/{name}.md` |
+| concept | `$JAAN_DOCS_DIR/{name}.md` |
+| index | `$JAAN_DOCS_DIR/{section}/README.md` |
 
 For skill type, ask: "Which role? [pm/dev/qa/ux/data/core]"
 
@@ -112,8 +112,8 @@ For skill type, ask: "Which role? [pm/dev/qa/ux/data/core]"
 
 Search for similar docs:
 ```
-Glob: jaan-to/docs/**/*{name}*.md
-Grep: "{name}" in jaan-to/docs/
+Glob: $JAAN_DOCS_DIR/**/*{name}*.md
+Grep: "{name}" in $JAAN_DOCS_DIR/
 ```
 
 If potential duplicate found:
@@ -225,8 +225,8 @@ If approved, write file.
 After writing the new doc file, update the parent folder's README.md to keep indexes in sync:
 
 1. **Determine parent README path:**
-   - For `jaan-to/docs/skills/{role}/{name}.md` → `jaan-to/docs/skills/{role}/README.md`
-   - For `jaan-to/docs/hooks/{name}.md` → `jaan-to/docs/hooks/README.md`
+   - For `$JAAN_DOCS_DIR/skills/{role}/{name}.md` → `$JAAN_DOCS_DIR/skills/{role}/README.md`
+   - For `$JAAN_DOCS_DIR/hooks/{name}.md` → `$JAAN_DOCS_DIR/hooks/README.md`
    - For other types → skip this step
 
 2. **Read the parent README.md** (if it doesn't exist, create one using the index template with frontmatter, H1, tagline, empty Available Skills table, and back-link)
@@ -242,7 +242,7 @@ After writing the new doc file, update the parent folder's README.md to keep ind
    | [/jaan-to:{skill-name}]({filename}.md) | {description from SKILL.md} |
    ```
 
-6. **Also check `jaan-to/docs/skills/README.md` (root) Available Roles table:**
+6. **Also check `$JAAN_DOCS_DIR/skills/README.md` (root) Available Roles table:**
    - If the role folder is new → add a row for the new role with "Active" status and link to its README
    - If the role is listed as "Planned" → update to "Active" and add link
 
