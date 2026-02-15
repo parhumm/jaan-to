@@ -1,6 +1,6 @@
 # Lessons: wp-pr-review
 
-> Last updated: 2026-02-09
+> Last updated: 2026-02-15
 
 > Plugin-side lessons. Project-specific lessons go in:
 > `$JAAN_LEARN_DIR/jaan-to:wp-pr-review.learn.md`
@@ -28,6 +28,8 @@ Special cases to check and handle:
 - REST routes registered without `permission_callback` — triggers `_doing_it_wrong` since WP 5.5, security vulnerability
 - `add_option()` vs `update_option()` autoload behavior — `add_option` defaults autoload to 'yes', large data must use 'no'
 - Named arguments used on WordPress core functions — WP explicitly does not support named params, param names may change
+- `gh pr diff` returns HTTP 406 for PRs with 300+ changed files — fall back to `gh api repos/{owner}/{repo}/pulls/{number}/files --paginate` to get file list, then fetch patches individually
+- ECONNRESET during large PR analysis — caused by network intermediaries dropping long-lived connections. Mitigate by batching file processing (30 files per batch) to reduce per-call context size
 
 ## Workflow
 
@@ -37,6 +39,8 @@ Process improvements:
 - Focus review ONLY on changed files in the PR diff — never flag legacy code outside the diff
 - Read `phpcs.xml.dist` early — it reveals the project's text domain and prefix, avoiding false positives on naming
 - Check for `vendor/` and `node_modules/` in changed files — skip these entirely
+- For PRs with 50+ PHP files, process in batches of 30 — prevents ECONNRESET from network intermediaries and keeps grep output manageable
+- Fetch `gh pr view` metadata BEFORE `gh pr diff` — knowing file count early allows proactive batching instead of reactive fallback
 
 ## Common Mistakes
 
