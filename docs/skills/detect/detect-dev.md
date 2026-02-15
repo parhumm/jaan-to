@@ -128,7 +128,7 @@ This helps prioritize findings: issues in integrated (generated) code may indica
 - Frontmatter includes `target.platform`, `findings_summary` buckets + `overall_score` (0-10, OpenSSF-style) + `lifecycle_phase` (CycloneDX)
 - CI/CD security checks: secrets boundaries, runner trust (`self-hosted`), permissions (`write-all`), action pinning (SHA vs `@main`), SLSA provenance
 - Overall score formula: `10 - (critical*2.0 + high*1.0 + medium*0.4 + low*0.1) / max(total_findings, 1)`
-- Uses git tools for history analysis (`git log`, `git remote`, `git show`)
+- Uses git tools for history analysis (`git log`, `git remote`, `git show`, `git diff`)
 
 ---
 
