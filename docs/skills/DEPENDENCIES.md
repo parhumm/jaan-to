@@ -116,6 +116,9 @@ Code Generation & Deployment:
                  │     └──> /jaan-to:sec-audit-remediate
                  │          "Fix security findings with patches"
                  │
+                 ├──> /jaan-to:backend-pr-review
+                 │    "Review backend PRs for security and quality"
+                 │
                  └──> /jaan-to:devops-infra-scaffold
                       "Generate CI/CD, Docker, deployment configs"
                  │
@@ -252,6 +255,7 @@ These skills are referenced but not yet implemented:
 | `/jaan-to:dev-verify` | dev | Validate build pipeline and running services with health checks |
 | `/jaan-to:devops-deploy-activate` | devops | Activate deployment pipeline with secrets and platforms |
 | `/jaan-to:qa-test-run` | qa | Execute tests, diagnose failures, report coverage |
+| `/jaan-to:backend-pr-review` | backend | Review backend PRs for security, performance, and quality |
 
 See [roadmap.md](https://github.com/parhumm/jaan-to/blob/main/docs/roadmap/roadmap.md) for implementation timeline.
 
