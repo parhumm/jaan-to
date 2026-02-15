@@ -7,13 +7,15 @@ sidebar_position: 6
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
 
-**Chains**: Matrix → Cases → Data → E2E → Bug → Triage | Perf → Bottleneck | Automation → Smoke → Regression → Signoff
+**Chains**: Matrix → Cases → Generate → Run | Data → E2E → Bug → Triage | Perf → Bottleneck | Automation → Smoke → Regression → Signoff
 
 ## Userflow Schema
 
 ```mermaid
 flowchart TD
     jaan-to-qa-test-matrix["qa-test-matrix<br>Test Matrix<br>P0/P1 flows × states × devices"] --> qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"]
+    qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"] --> jaan-to-qa-test-generate["qa-test-generate<br>Test Generate<br>Runnable tests from BDD cases"]
+    jaan-to-qa-test-generate["qa-test-generate<br>Test Generate<br>Runnable tests from BDD cases"] --> jaan-to-qa-test-run["qa-test-run<br>Test Run<br>Execute tests + diagnose + coverage"]
     qa-test-cases["qa-test-cases<br>Test Cases<br>Cases + edge cases + preconditions"] --> jaan-to-qa-test-data["qa-test-data<br>Test Data<br>Accounts + permissions + seed data"]
     jaan-to-qa-test-data["qa-test-data<br>Test Data<br>Accounts + permissions + seed data"] --> jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"]
     jaan-to-qa-e2e-checklist["qa-e2e-checklist<br>E2E Checklist<br>Checklist + state coverage"] --> jaan-to-qa-bug-report["qa-bug-report<br>Bug Report<br>Severity + repro steps + expected"]
@@ -220,7 +222,21 @@ flowchart TD
   - BDD-to-code: jest-cucumber for unit, playwright-bdd for E2E
   - Tag-based routing (@unit, @integration, @e2e, @api)
   - Generates test data factories, MSW handlers, page objects
-- **→ Next**: —
+- **→ Next**: qa-test-run
 - **MCP Required**: None
 - **Input**: [qa-test-cases] [backend-scaffold | frontend-scaffold]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/test-generate/{id}-{slug}/`
+
+### ✅ /jaan-to:qa-test-run
+
+- **Logical**: `qa-test-run`
+- **Description**: Execute tests across stacks (Node/PHP/Go), diagnose failures, auto-fix simple issues, generate coverage reports
+- **Quick Win**: Yes - automated test execution and reporting
+- **Key Points**:
+  - Multi-stack: Vitest/Jest, PHPUnit/Pest, go test
+  - 7 failure categories with auto-fix for infrastructure issues
+  - Coverage parsing: Istanbul/v8, PHPUnit XML, go tool cover
+- **→ Next**: —
+- **MCP Required**: None
+- **Input**: [qa-test-generate-output | test-directory] [--unit | --integration | --e2e | --all]
+- **Output**: `$JAAN_OUTPUTS_DIR/qa/test-run/{id}-{slug}/`

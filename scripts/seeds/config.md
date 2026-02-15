@@ -59,6 +59,7 @@
 | backend-api-contract | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 | qa-test-generate | `/jaan-to:qa-test-generate` | Generate runnable Vitest and Playwright tests from BDD test cases |
+| qa-test-run | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, generate coverage reports |
 | backend-scaffold | `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
 | backend-service-implement | `/jaan-to:backend-service-implement` | Generate service implementations with business logic from specs and stubs |
 | frontend-scaffold | `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
