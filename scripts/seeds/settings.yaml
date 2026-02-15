@@ -50,6 +50,13 @@ language: "ask"
 # Default: true (non-blocking hint only)
 # integration_drift_check: true
 
+# Attribution Configuration
+# Controls git commit and PR attribution in .claude/settings.json
+# Set to false to skip attribution setup during /jaan-init
+# attribution_enabled: true
+# attribution_commit: "Generated with Jaan.to\n\nCo-Authored-By: Jaan.to <noreply@jaan.to>"
+# attribution_pr: "Generated with Jaan.to"
+
 # Notes:
 # - Paths are relative to project root
 # - Use forward slashes (/) even on Windows

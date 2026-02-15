@@ -62,7 +62,9 @@ jaan-to/
   docs/                    — Reference docs (STYLE.md, create-skill.md)
 ```
 
-Also mention: `jaan-to/` will be added to `.gitignore`.
+Also mention:
+- `jaan-to/` will be added to `.gitignore`
+- `.claude/settings.json` will be configured with Co-Authored-By attribution for git commits and PRs
 
 ---
 
@@ -99,6 +101,7 @@ Note: The bootstrap script creates the `jaan-to/` directory and all subdirectori
 3. Copying reference docs
 4. Initializing settings.yaml
 5. Adding `jaan-to/` to `.gitignore`
+6. Configuring `.claude/settings.json` with Co-Authored-By attribution (if not already set)
 
 Templates and learn files are loaded from the plugin at runtime (lazy loading).
 Customize templates by copying them to `jaan-to/templates/`.
@@ -106,10 +109,24 @@ Add project lessons via `/jaan-to:learn-add`.
 
 ## Step 4: Report Result
 
-Show the user the bootstrap output and summarize:
+Parse the bootstrap JSON output and summarize.
 
+If `attribution_configured` is `1`, include:
+```
+Co-Authored-By attribution configured in .claude/settings.json
+```
+
+If `attribution_configured` is `0` and `attribution_skip_reason` is set, include:
+```
+Attribution config skipped: {reason}
+To configure manually, add "attribution" to .claude/settings.json
+```
+
+Example success output:
 ```
 jaan-to initialized successfully.
+
+Co-Authored-By attribution configured in .claude/settings.json
 
 Next steps:
 - Edit jaan-to/context/tech.md with your project's tech stack
@@ -133,6 +150,7 @@ Use: /jaan-to:learn-add "jaan-init" "lesson"
 - [ ] `jaan-to/config/settings.yaml` exists
 - [ ] Context seed files copied to `jaan-to/context/`
 - [ ] `.gitignore` contains `jaan-to/` entry
+- [ ] `.claude/settings.json` configured with attribution (or skip reason reported)
 - [ ] User informed of next steps
 - [ ] User has approved final result
 
