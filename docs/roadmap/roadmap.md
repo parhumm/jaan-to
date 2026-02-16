@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.0.0 (43 skills) — Aggressive token optimization, bootstrap compact mode
+**Latest:** v7.1.0 (43 skills) — Asset embedding for document-generating skills
 
 ---
 

@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [7.1.0] - 2026-02-16
+
 ### Added
 - **Asset embedding for document-generating skills** ([#119](https://github.com/parhumm/jaan-to/issues/119)) — Skills that accept image/screenshot inputs now embed them as renderable markdown image links (`![alt](path)`) in generated output. Smart asset resolution: files inside `$JAAN_*` directories are referenced in-place (no copy), external files are copied to `$OUTPUT_FOLDER/assets/` after user consent. New `scripts/lib/asset-handler.sh` utility provides `is_jaan_path`, `resolve_asset_path`, `copy_external_assets`, and `url_encode_path` functions. Shared reference at `docs/extending/asset-embedding-reference.md` keeps skill footprint minimal (~3-5 line pointer per skill). Updated 6 skills: `pm-prd-write`, `ux-heatmap-analyze`, `frontend-task-breakdown`, `ux-flowchart-generate`, `pm-story-write`, `ux-microcopy-write`. Added "Asset Embedding" section to `docs/extending/create-skill.md`. All skills stay within 600-line cap; description budget unchanged at 8,409/15,000 chars. Closes [#119](https://github.com/parhumm/jaan-to/issues/119)
 
