@@ -25,7 +25,7 @@ The `/jaan-to:pm-story-write` skill generates production-ready user stories in C
 
 ## Input Formats
 
-The skill accepts three input formats:
+The skill accepts four input formats:
 
 ### 1. Structured Format
 ```bash
@@ -54,6 +54,9 @@ Provide a Jira epic or story ID:
 ```
 
 The skill will attempt to read context from Jira via MCP and use it to inform the story.
+
+### 4. Screenshot Path
+Provide design screenshots showing the UI element the story refers to. Images are embedded as rendered markdown links in the Context section.
 
 ---
 

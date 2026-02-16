@@ -17,7 +17,7 @@ Takes your feature idea and creates a structured PRD with:
 - Scope (in/out)
 - User stories
 
-The skill reads your tech stack and team context to generate relevant content.
+The skill reads your tech stack and team context to generate relevant content. Optionally accepts design screenshots, embedding them as rendered markdown image links in the PRD.
 
 ---
 

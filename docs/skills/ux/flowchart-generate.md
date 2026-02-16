@@ -17,7 +17,7 @@ Generates Mermaid flowcharts that render directly on GitHub, with:
 - **Unknowns lists** identifying gaps and mismatches between PRD and code
 - **Quality gates** (17 machine-checkable + 5 human-review flags)
 
-Supports four source types (`prd`, `doc`, `repo`, `mixed`) and four diagram goals (`userflow`, `systemflow`, `architecture`, `stateflow`).
+Supports four source types (`prd`, `doc`, `repo`, `mixed`) and four diagram goals (`userflow`, `systemflow`, `architecture`, `stateflow`). Optionally accepts UI screenshots for visual traceability alongside generated diagrams.
 
 ---
 
