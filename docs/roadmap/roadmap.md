@@ -28,15 +28,16 @@ sidebar_position: 1
 For complete release history, see [CHANGELOG.md](/changelog).
 
 **Latest:** v6.3.0 (42 skills) — qa-test-run, dev-verify, incremental audit, drift detection, $JAAN_DOCS_DIR
+**Next:** v6.4.0 (43 skills) — backend-pr-review, wp-pr-review large PR fix
 
 ---
 
 ## Unreleased
 
-- [ ] `/jaan-to:backend-pr-review` — Multi-stack backend PR review skill with two-pass LLM analysis, risk-based file prioritization, and GitHub + GitLab support ([#110](https://github.com/parhumm/jaan-to/issues/110))
+- [x] `/jaan-to:backend-pr-review` — Multi-stack backend PR review skill with two-pass LLM analysis, risk-based file prioritization, and GitHub + GitLab support ([#110](https://github.com/parhumm/jaan-to/issues/110))
 - [ ] `jaan-init` Co-Authored-By attribution for git commits and PRs ([#109](https://github.com/parhumm/jaan-to/issues/109))
-- [ ] `wp-pr-review` paginated REST API fallback for large PRs ([#107](https://github.com/parhumm/jaan-to/issues/107))
-- [ ] Update skill count 42 → 43
+- [x] `wp-pr-review` paginated REST API fallback for large PRs ([#107](https://github.com/parhumm/jaan-to/issues/107))
+- [x] Update skill count 42 → 43
 
 ---
 
@@ -82,7 +83,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
-**Completed work**: 42 skills shipped across v4.0.0–v6.3.0 — see [CHANGELOG.md](/changelog) for details.
+**Completed work**: 43 skills shipped across v4.0.0–v6.4.0 — see [CHANGELOG.md](/changelog) for details.
 
 ---
 

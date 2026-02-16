@@ -1042,16 +1042,13 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
-## [Unreleased]
-
-### Planned
-- Additional quick-win skills (qa-test-cases, data-sql-query)
-- Enhanced MCP integrations (GA4, GitLab, Jira, Figma)
-- JSON export alongside markdown outputs
-- External notifications (Slack)
-
----
-
+[6.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.3.0
+[6.2.3]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.3
+[6.2.2]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.2
+[6.2.1]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.1
+[6.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.0
+[6.1.1]: https://github.com/parhumm/jaan-to/releases/tag/v6.1.1
+[6.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.1.0
 [6.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.0.0
 [5.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.1.0
 [5.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.0.0
