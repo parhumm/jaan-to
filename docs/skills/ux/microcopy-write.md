@@ -31,6 +31,7 @@ The `/jaan-to:ux-microcopy-write` skill generates production-ready microcopy for
 - ✅ Text expansion warnings (German +35%, Turkish +33%)
 - ✅ Dual output: markdown + JSON for i18n frameworks
 - ✅ Native speaker review warnings
+- ✅ Optional UI screenshot embedding to show where copy appears
 
 ---
 
@@ -442,4 +443,4 @@ Multi-language microcopy pack for login-form covering 3 categories (Labels, Erro
 **Tags**: ux, microcopy, multi-language, i18n, localization, rtl, cultural-adaptation
 
 **Created**: 2026-02-03
-**Updated**: 2026-02-03
+**Updated**: 2026-02-16

@@ -16,7 +16,7 @@ Analyzes heatmap data by combining:
 - **Screenshots**: Heatmap images for visual pattern analysis (Claude Vision)
 - **HTML** (optional): Page source for resolving CSS selectors to human-readable element names
 
-Produces a prioritized research report with cross-validated findings, confidence scores, and ICE-scored recommendations.
+Produces a prioritized research report with cross-validated findings, confidence scores, and ICE-scored recommendations. Heatmap screenshots are embedded as rendered markdown image links in the report.
 
 ---
 
