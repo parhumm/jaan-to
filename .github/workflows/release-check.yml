@@ -73,6 +73,34 @@ jobs:
         run: |
           bash scripts/validate-skills.sh
 
+      - name: Check hook stdout cap
+        run: |
+          MAX_CHARS=1200
+          export CLAUDE_PROJECT_DIR="$(mktemp -d)"
+          export CLAUDE_PLUGIN_ROOT="$(pwd)"
+
+          # Create minimal initialized project
+          mkdir -p "$CLAUDE_PROJECT_DIR/jaan-to/config"
+          mkdir -p "$CLAUDE_PROJECT_DIR/jaan-to/context"
+          mkdir -p "$CLAUDE_PROJECT_DIR/jaan-to/templates"
+          mkdir -p "$CLAUDE_PROJECT_DIR/jaan-to/outputs"
+          mkdir -p "$CLAUDE_PROJECT_DIR/jaan-to/learn"
+          mkdir -p "$CLAUDE_PROJECT_DIR/jaan-to/docs"
+          cp scripts/seeds/settings.yaml "$CLAUDE_PROJECT_DIR/jaan-to/config/" 2>/dev/null || true
+          cp scripts/seeds/*.md "$CLAUDE_PROJECT_DIR/jaan-to/context/" 2>/dev/null || true
+
+          OUTPUT=$(bash scripts/bootstrap.sh 2>/dev/null)
+          SIZE=${#OUTPUT}
+
+          echo "bootstrap.sh stdout: $SIZE chars (cap: $MAX_CHARS)"
+          rm -rf "$CLAUDE_PROJECT_DIR"
+
+          if [ "$SIZE" -gt "$MAX_CHARS" ]; then
+            echo "::error::Hook stdout exceeds ${MAX_CHARS} char cap ($SIZE chars)"
+            exit 1
+          fi
+          echo "✓ Hook stdout within ${MAX_CHARS} char cap"
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
