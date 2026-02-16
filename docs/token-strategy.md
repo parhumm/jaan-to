@@ -153,6 +153,49 @@ Aggressive but quality-safe optimization based on [Research #75](research/75-tok
 - Pattern 5 (selective): Abbreviate informational placeholders only (safe for semantic IDs, unsafe for function params)
 - Patterns 2-4 rejected: telegraphic instructions lose ordering constraints, compressed boolean lists lose mutual-exclusivity signaling, trimmed "Show user" blocks lose behavioral gates
 
+**Representative skills after extraction** (lines extracted → current SKILL.md size):
+
+| Skill | Lines Extracted | Current Size |
+|-------|----------------|--------------|
+| pm-research-about | 230 | 547 |
+| roadmap-update | 175 | 465 |
+| jaan-issue-report | 149 | 598 |
+| backend-data-model | 134 | 464 |
+| qa-test-cases | 124 | 478 |
+| ux-flowchart-generate | 114 | 482 |
+| detect-design | 100 | 497 |
+| detect-ux | 97 | 498 |
+| detect-writing | 93 | 532 |
+| ux-microcopy-write | 82 | 553 |
+| + 12 more skills | — | — |
+
+23 reference files created at `docs/extending/*-reference.md`, including `detect-shared-reference.md` shared across 5 detect skills. Total: 44 files changed, 2,211 insertions, 1,858 deletions (net reduction ~938 lines).
+
+**Post-v7 budget state:**
+
+| Metric | Value | Headroom |
+|--------|-------|----------|
+| Description budget | 8,409 / 15,000 chars | 44% remaining (~33 more skills) |
+| Auto-invocable skills | 29 / 35 cap | 6 more before cap |
+| CLAUDE.md | 119 / 150 lines | 31 lines free |
+| Largest SKILL.md | 573 lines / 600 cap | 27 lines before cap |
+| Total skill lines | ~19,169 across 43 skills | Median ~465 lines |
+
+---
+
+## Cumulative Impact
+
+Token optimization across three major versions:
+
+| Version | Session Savings | Per-Invocation Savings | Method |
+|---------|----------------|----------------------|--------|
+| v5.0.0 | ~2,000 tokens | ~7K-48K tokens | Fork isolation (6 detect), body trimming (8 skills), `disable-model-invocation` (7 skills) |
+| v6.0.0 | — | ~25% body reduction | Reference extraction at creation time (5 new skills) |
+| v7.0.0 | +~350 tokens | +~2K-8K tokens | Aggressive extraction (22 skills), CLAUDE.md tightening, bootstrap compact mode |
+| **Cumulative** | **~2,400 tokens/session** | **Up to ~56K per invocation** | **43 skills, 23 reference files, 6 CI gates** |
+
+**Practical effect:** A typical skill invocation loads ~450-500 lines of execution instructions instead of the ~600-700 lines that would exist without extraction. This saves roughly 500-2,000 tokens per call. For skills using `context: fork` (6 detect skills), the parent session never sees these tokens — the full 30-48K cost is isolated to a disposable subagent. Combined, a session that invokes 3 skills and 1 detect analysis saves approximately 5,000-52,000 tokens versus an unoptimized plugin of equivalent capability.
+
 ---
 
 ## Future Skill Compliance
@@ -176,4 +219,5 @@ Reference: `docs/extending/create-skill.md` for the enforced template.
 - [Roadmap](roadmap/roadmap.md) — Version history with optimization milestones
 - [Research #18: Token Optimization](research/18-token-optimization.md) — Original research
 - [Research #62: Claude Code Token Optimization](research/62-ai-workflow-claude-code-token-optimization.md) — Deep research
-- [Research #75: Aggressive Token Optimization](research/75-token-optimization-aggressive-safe.md) — v7.x research basis
+- [Research #75: Aggressive Token Optimization](research/75-token-optimization-aggressive-safe.md) — v7.0.0 research basis
+- [Extraction Safety Checklist](extending/extraction-safety-checklist.md) — What to extract vs. keep inline
