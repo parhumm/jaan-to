@@ -3,6 +3,7 @@ name: dev-output-integrate
 description: Copy generated jaan-to outputs into project locations with entry point wiring and validation.
 allowed-tools: Read, Glob, Grep, Write(src/**), Write(apps/**), Write(prisma/**), Write(test/**), Write(tests/**), Write(.github/**), Write(docker/**), Write(deploy/**), Write(package.json), Write(tsconfig.json), Write(vitest.config.*), Write(playwright.config.*), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.env.test), Write(.gitignore), Write(.dockerignore), Write(Dockerfile*), Write(docker-compose*), Write(turbo.json), Write($JAAN_OUTPUTS_DIR/dev/output-integrate/**), Write($JAAN_OUTPUTS_DIR/.last-integration-manifest), Bash(pnpm:*), Bash(npm:*), Bash(npx tsc:*), Bash(ls:*), Bash(mkdir:*), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(next.config.*), Edit(turbo.json)
 argument-hint: [output-path...] or (interactive scan)
+disable-model-invocation: true
 ---
 
 # dev-output-integrate

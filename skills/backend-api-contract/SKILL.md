@@ -90,10 +90,10 @@ Build initial understanding:
 ```
 INPUT SUMMARY
 ─────────────
-Type:        {entity-list/prd/schema/existing-spec}
-Resources:   {list of identified resources}
+Type:        {input-type}
+Resources:   {resources}
 Relationships: {implied relationships}
-Unknown:     {areas needing clarification}
+Unknown:     {unclear areas}
 ```
 
 ## Step 2: Clarify API Design
@@ -228,8 +228,6 @@ Total components: {total}
 
 # HARD STOP — Review Contract Plan
 
-Present the complete analysis summary:
-
 ```
 API CONTRACT PLAN
 ═════════════════
@@ -342,8 +340,6 @@ Generate the OpenAPI 3.1 YAML in this order (minimizes broken `$ref`):
 
 ## Step 6: Generate Companion Markdown
 
-Generate a quick-start guide with:
-
 **Executive Summary** — 1-2 sentences describing what this API does
 
 **Authentication** — How to authenticate, security schemes, scopes (if OAuth2)
@@ -429,8 +425,6 @@ If any check fails, fix before preview.
 
 ## Step 8: Preview & Approval
 
-Show the complete OpenAPI YAML and companion markdown.
-
 Use AskUserQuestion:
 - Question: "Write the contract files to output?"
 - Header: "Write"
@@ -490,7 +484,7 @@ add_to_index \
   "$NEXT_ID" \
   "${NEXT_ID}-${slug}" \
   "{API Title}" \
-  "{1-2 sentence executive summary}"
+  "{executive-summary}"
 ```
 
 5. Confirm completion:

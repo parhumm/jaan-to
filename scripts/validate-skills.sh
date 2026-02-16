@@ -121,3 +121,64 @@ if [ -n "$COLON_ISSUES" ]; then
 fi
 
 echo "✓ No YAML-unsafe colons in descriptions"
+echo ""
+
+# Check SKILL.md body line limits
+BODY_HARD_CAP=600
+BODY_SOFT_CAP=500
+OVER_HARD=""
+OVER_SOFT=""
+DOCS_DIR="$PLUGIN_ROOT/docs/extending"
+
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_file="$skill_dir/SKILL.md"
+  [ -f "$skill_file" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  lines=$(wc -l < "$skill_file" | tr -d ' ')
+
+  if [ "$lines" -gt "$BODY_HARD_CAP" ]; then
+    OVER_HARD+="  $skill_name: $lines lines (hard cap: $BODY_HARD_CAP)"$'\n'
+  elif [ "$lines" -gt "$BODY_SOFT_CAP" ]; then
+    # Check if reference file exists
+    has_ref=false
+    for ref in "$DOCS_DIR/${skill_name}-reference.md" "$DOCS_DIR/detect-shared-reference.md"; do
+      [ -f "$ref" ] && has_ref=true && break
+    done
+    if ! $has_ref; then
+      OVER_SOFT+="  $skill_name: $lines lines (no reference file found)"$'\n'
+    fi
+  fi
+done
+
+if [ -n "$OVER_HARD" ]; then
+  echo "::error::SKILL.md files exceeding $BODY_HARD_CAP line hard cap:"
+  echo "$OVER_HARD"
+  echo "Fix: Extract lookup tables, templates, and rubrics to docs/extending/{name}-reference.md"
+  exit 1
+fi
+echo "✓ All SKILL.md files under $BODY_HARD_CAP line hard cap"
+
+if [ -n "$OVER_SOFT" ]; then
+  echo "::warning::SKILL.md files over $BODY_SOFT_CAP lines without reference files:"
+  echo "$OVER_SOFT"
+  echo "Consider extracting content to docs/extending/{name}-reference.md"
+fi
+echo ""
+
+# Check auto-invocable skill count
+AUTO_INVOKE_CAP=35
+AUTO_COUNT=0
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_file="$skill_dir/SKILL.md"
+  [ -f "$skill_file" ] || continue
+  if ! grep -q 'disable-model-invocation: true' "$skill_file"; then
+    AUTO_COUNT=$((AUTO_COUNT + 1))
+  fi
+done
+
+if [ "$AUTO_COUNT" -gt "$AUTO_INVOKE_CAP" ]; then
+  echo "::warning::Auto-invocable skill count ($AUTO_COUNT) exceeds $AUTO_INVOKE_CAP"
+  echo "Consider setting disable-model-invocation: true on narrow-domain skills"
+else
+  echo "✓ Auto-invocable skills: $AUTO_COUNT / $AUTO_INVOKE_CAP cap"
+fi

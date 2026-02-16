@@ -57,6 +57,18 @@ jobs:
           echo ""
           echo "✓ No component paths declared (auto-discovery will work)"
 
+      - name: Check CLAUDE.md size
+        run: |
+          MAX_LINES=150
+          LINES=$(wc -l < CLAUDE.md | tr -d ' ')
+          echo "CLAUDE.md: $LINES lines (cap: $MAX_LINES)"
+          if [ "$LINES" -gt "$MAX_LINES" ]; then
+            echo "::error::CLAUDE.md exceeds $MAX_LINES line cap ($LINES lines)"
+            echo "CLAUDE.md loads every session. Keep it concise."
+            exit 1
+          fi
+          echo "✓ CLAUDE.md under $MAX_LINES line cap"
+
       - name: Check skill description character budget
         run: |
           bash scripts/validate-skills.sh

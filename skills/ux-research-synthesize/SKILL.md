@@ -291,38 +291,21 @@ If any theme has imbalanced coverage (>25% from single participant):
 
 ## Step 8: Prioritization & Recommendation Planning
 
-For each theme, apply **Nielsen severity framework** (0-4 scale):
+For each theme, apply the **Nielsen severity framework** (0-4 scale). Ask the user to rate severity for each theme.
 
-Ask for each theme: "Rate severity for '{theme_name}':
-[0] Not a usability problem
-[1] Cosmetic problem only (fix if time permits)
-[2] Minor usability problem (low priority)
-[3] Major usability problem (high priority)
-[4] Usability catastrophe (fix before release)"
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Nielsen Severity Framework (0-4 Scale)" for the full rating scale descriptions.
 
-Calculate **priority score**:
-- Frequency: `(Participants encountering issue / Total participants) × 100`
-- Impact: Severity rating (0-4)
-- Priority Score: `Severity × Frequency`
+Calculate **priority score** using Severity x Frequency.
 
-Apply **Impact × Effort matrix**:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Priority Score Calculation" for the formula.
 
-Ask for each theme: "Estimate effort to address '{theme_name}':
-[Low] 1-2 sprints, minimal resources
-[Medium] 1-2 months, small team
-[High] 3-6+ months, cross-functional effort"
+Apply **Impact x Effort matrix**. Ask the user to estimate effort for each theme, then classify into quadrants.
 
-Classify into quadrants:
-- **High Impact + Low Effort** = Quick Wins (do first)
-- **High Impact + High Effort** = Big Bets (plan carefully)
-- **Low Impact + Low Effort** = Fill-Ins (if time permits)
-- **Low Impact + High Effort** = Money Pits (avoid)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Impact x Effort Matrix" for effort estimation scale and quadrant definitions.
 
-Generate **draft recommendations** using template:
-`[Action Verb] + [Specific Element] + [To Achieve Outcome] + [Because Evidence]`
+Generate **draft recommendations** using the action-outcome-evidence template.
 
-Example:
-> "Redesign the settings menu with clearer labeling and top-level placement to reduce support tickets by 20% because 80% of new admins couldn't locate settings without assistance (Theme 2, P1, P4, P7, P9)."
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Draft Recommendation Template" for the format and example.
 
 ---
 

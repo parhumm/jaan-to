@@ -119,6 +119,7 @@ if [ -f "$PROJECT_DIR/$CONTEXT_DIR/tech.md" ]; then
 fi
 
 # 11. Output structured result
+# Token budget: target ≤ 300 tokens (~1,200 chars) stdout
 if [ ${#MISSING_CONTEXT[@]} -gt 0 ]; then
   MISSING_LIST=$(printf '"%s",' "${MISSING_CONTEXT[@]}" | sed 's/,$//')
 else

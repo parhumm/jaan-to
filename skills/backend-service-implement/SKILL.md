@@ -108,8 +108,6 @@ Read `$JAAN_CONTEXT_DIR/tech.md`:
 
 ## Step 3: Map TODOs to Implementation Plan
 
-Cross-reference all sources to build the implementation map:
-
 ### 3.1: TODO Inventory
 
 Parse all `// TODO: implement` stubs from scaffold. For each:
@@ -133,7 +131,6 @@ When API specs include status fields with constrained transitions:
 
 ### 3.4: Dependency Graph
 
-Order implementations by dependency:
 1. Shared helpers (error factory, pagination, cursor encoding)
 2. Auth service (JWT lifecycle — if auth endpoints exist)
 3. Independent resource services (no cross-service dependencies)
@@ -273,8 +270,6 @@ Generate helpers in dependency order (these are used by services):
 
 ## Step 7: Generate Service Implementations
 
-For each resource service, generate complete business logic:
-
 ### 7.1: Service Structure
 
 **Node.js/TypeScript (Fastify + Prisma):**
@@ -323,8 +318,6 @@ For operations spanning multiple services:
 
 ## Step 8: Generate Implementation Guide
 
-Generate `{id}-{slug}.md` with:
-
 ### 8.1: Executive Summary
 1-2 sentences: resource count, stack, key patterns implemented (pagination, auth, idempotency).
 
@@ -349,8 +342,6 @@ For each decision made during generation:
 Mermaid diagram showing service dependencies and shared helpers.
 
 ## Step 9: Generate Integration README
-
-Generate `{id}-{slug}-readme.md` with:
 
 1. **Setup** — How to integrate generated services into the scaffold project
 2. **File Placement** — Where each generated file goes relative to the project root

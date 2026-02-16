@@ -53,8 +53,6 @@ If no topic provided, ask:
 
 ## Step 0.2: Detect Category
 
-Detect category from topic keywords.
-
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Category Detection Keywords" for full keyword-to-category mapping table.
 
 ## Step 0.3: Generate Filename
@@ -180,27 +178,7 @@ Plan the **Scout Agent** (Wave 1) approach only:
 
 **Output initial plan:**
 
-```
-RESEARCH PLAN (Adaptive Waves)
-──────────────────────────────
-Topic: {refined topic}
-Size: {selected} ({N} total agents, ~{M} sources target)
-
-WAVE 1: Scout
-─────────────
-Agent: 1 Scout Agent
-Focus: Broad landscape mapping
-Queries:
-1. "{topic} overview fundamentals"
-2. "{topic} best practices {year}"
-3. "{topic} recent developments"
-4. "{topic} vs alternatives"
-5. "{topic} common challenges"
-
-Goal: Identify subtopics, gaps, and promising directions
-
-WAVE 2-5: To be determined adaptively based on each wave's results
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Research Plan Display Template" for the display format.
 
 ---
 
@@ -212,32 +190,9 @@ Launch **1 Scout Agent** to map the research landscape.
 
 **W1 Workload:** 8 searches + 3 WebFetch = 11 ops (all sizes)
 
-```
-Task prompt: "Research broad overview of {topic}:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Wave Agent Prompt Templates" for the Task prompt format. Use W1 Scout default queries.
 
-Perform 8 web searches covering multiple aspects:
-1. WebSearch: '{topic} overview fundamentals explained'
-2. WebSearch: '{topic} best practices {year}'
-3. WebSearch: '{topic} recent developments news'
-4. WebSearch: '{topic} vs alternatives comparison'
-5. WebSearch: '{topic} common challenges problems'
-6. WebSearch: '{topic} tutorial getting started'
-7. WebSearch: '{topic} expert analysis deep dive'
-8. WebSearch: '{topic} implementation examples'
-
-Then WebFetch 3 most authoritative sources for deeper content.
-
-Return in structured format:
-- Key findings with specific facts/stats
-- Sources: [{title}, {url}, {credibility note}] for EACH result
-- Subtopics discovered (list ALL you found)
-- Coverage gaps (what aspects had weak or no results)
-- Recommended search directions for Wave 2
-- Source quality assessment (which were most authoritative)"
-
-subagent_type: Explore
-run_in_background: false  # WAIT for results before Wave 2
-```
+Launch 1 Scout agent with `subagent_type: Explore`, `run_in_background: false` (wait for results before Wave 2).
 
 **Collect Scout results.**
 
@@ -260,29 +215,9 @@ Analyze Scout results to identify the **biggest gap**:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W2 Workload by Size" for agent/search/fetch counts.
 
-```
-Task prompt: "Research {primary_gap} of {topic}:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Wave Agent Prompt Templates" (W2 Gaps row).
 
-Wave 2 - Filling primary gap from Scout.
-Scout coverage: {scout_summary}
-Gap to fill: {primary_gap}
-
-Perform {W2_searches} focused searches:
-1. WebSearch: '{gap_specific_query_1}'
-2. WebSearch: '{gap_specific_query_2}'
-... (continue to {W2_searches})
-
-Then WebFetch {W2_fetches} authoritative sources.
-
-Return:
-- Key findings for {gap_area}
-- Sources with URLs
-- NEW gaps discovered (for Wave 3)
-- Recommended next direction"
-
-subagent_type: Explore
-run_in_background: false  # Wait to analyze before Wave 3
-```
+Launch agent(s) with `subagent_type: Explore`, `run_in_background: false` (wait to analyze before Wave 3).
 
 **Collect Wave 2 results.**
 
@@ -305,31 +240,9 @@ Analyze Scout + Wave 2 results:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W3 Workload by Size" for agent/search/fetch counts.
 
-```
-For each Wave 3 agent:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Wave Agent Prompt Templates" (W3 Expand row).
 
-Task prompt: "Expand research on {expansion_area} of {topic}:
-
-Wave 3 - Expanding coverage.
-Current findings: {waves_1_2_summary}
-Your expansion focus: {new_area}
-
-Perform {W3_searches} searches:
-1. WebSearch: '{expansion_query_1}'
-2. WebSearch: '{expansion_query_2}'
-... (continue to {W3_searches})
-
-Then WebFetch {W3_fetches} authoritative sources.
-
-Return:
-- Expanded findings for {area}
-- Sources with URLs
-- Conflicts or controversies found
-- Questions for Wave 4 verification"
-
-subagent_type: Explore
-run_in_background: true
-```
+Launch Wave 3 agents with `subagent_type: Explore`, `run_in_background: true`.
 
 **Launch Wave 3 agents in parallel, then collect with TaskOutput.**
 
@@ -352,32 +265,9 @@ Analyze Waves 1-3 results:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W4 Workload by Size" for agent/search/fetch counts.
 
-```
-For each Wave 4 agent:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Wave Agent Prompt Templates" (W4 Verify row).
 
-Task prompt: "Verify and cross-reference {verification_area} for {topic}:
-
-Wave 4 - Verification phase.
-Claims to verify: {claims_list}
-Conflicts to resolve: {conflicts_list}
-
-Perform {W4_searches} verification searches:
-1. WebSearch: '{claim} evidence research'
-2. WebSearch: '{claim} counter arguments'
-3. WebSearch: '{topic} expert opinion {area}'
-... (continue to {W4_searches})
-
-Then WebFetch {W4_fetches} authoritative sources.
-
-Return:
-- Verification status for each claim
-- Resolved conflicts with explanation
-- Expert opinions found
-- Remaining uncertainties"
-
-subagent_type: Explore
-run_in_background: true
-```
+Launch Wave 4 agents with `subagent_type: Explore`, `run_in_background: true`.
 
 **Launch Wave 4 agents in parallel, then collect with TaskOutput.**
 
@@ -400,32 +290,9 @@ Analyze all previous waves:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "W5 Workload by Size" for agent/search/fetch counts.
 
-```
-For each Wave 5 agent:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Wave Agent Prompt Templates" (W5 Deep row).
 
-Task prompt: "Final deep dive on {final_area} of {topic}:
-
-Wave 5 - Final research wave.
-Full coverage so far: {all_waves_summary}
-Final focus: {remaining_priority}
-
-Perform {W5_searches} deep searches:
-1. WebSearch: '{topic} {area} advanced'
-2. WebSearch: '{topic} {area} edge cases'
-3. WebSearch: '{topic} {area} future trends'
-... (continue to {W5_searches})
-
-Then WebFetch {W5_fetches} authoritative sources.
-
-Return:
-- Deep findings for {area}
-- All sources with URLs
-- Advanced insights
-- Future directions identified"
-
-subagent_type: Explore
-run_in_background: true
-```
+Launch Wave 5 agents with `subagent_type: Explore`, `run_in_background: true`.
 
 **Launch Wave 5 agents in parallel, then collect with TaskOutput.**
 
@@ -499,58 +366,11 @@ Analyze all gathered research and plan the final document:
 
 **If `{approval_mode}` = Auto or Summary:** Skip this check, proceed directly to Phase 4.
 
-**If `{approval_mode}` = Interactive:** Present research summary:
+**If `{approval_mode}` = Interactive:**
 
-```
-RESEARCH SUMMARY
-────────────────
-Topic: {refined topic}
-Category: {category}
-Filename: {filename}
-Size: {selected size} (~{M} target sources)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Research Summary Display Format" for the full HARD STOP review template.
 
-ADAPTIVE RESEARCH WAVES (5)
-───────────────────────────
-Wave 1 (Scout):  {N1} sources | Mapped landscape
-Wave 2 (Gaps):   {N2} sources | Filled {primary_gap}
-Wave 3 (Expand): {N3} sources | Expanded {areas}
-Wave 4 (Verify): {N4} sources | Verified {claims}
-Wave 5 (Deep):   {N5} sources | Deep dived {final}
-───────────────────────────────────────────────────
-Total:           {N} unique sources
-
-ADAPTATION DECISIONS
-────────────────────
-✓ W1 Scout identified: {key_subtopics}
-✓ W2 Gaps targeted: {primary_gap}
-✓ W3 Expand added: {expansion_areas}
-✓ W4 Verify confirmed: {verified_claims}
-✓ W5 Deep explored: {final_areas}
-
-SOURCES CONSULTED
-─────────────────
-{actual} unique sources from {queries} search queries
-Target: {target} | Achieved: {percentage}%
-- Primary sources: {N}
-- Supporting sources: {N}
-
-KEY INSIGHTS (Preview)
-──────────────────────
-1. {insight 1} [verified by 2+ sources]
-2. {insight 2}
-3. {insight 3}
-
-SUBTOPICS DISCOVERED
-────────────────────
-- {subtopic 1}
-- {subtopic 2}
-- {subtopic 3}
-
-WILL CREATE
-───────────
-□ $JAAN_OUTPUTS_DIR/research/{filename}
-□ Update $JAAN_OUTPUTS_DIR/research/README.md
-```
+Present the research summary using the template.
 
 > "Generate full research document? [y/n]"
 
@@ -678,23 +498,9 @@ If yes:
 
 ## HARD STOP - Approval
 
-```
-RESEARCH DOCUMENT PROPOSAL
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Add-to-Index HARD STOP Template" for the proposal display format.
 
-Source: {file-path or URL}
-Type: {local file / web URL}
-Category: {category}
-Title: {extracted title}
-Filename: {NN}-{category}-{slug}.md (if URL)
-
-Summary: {2-3 sentences}
-
-WILL MODIFY:
-□ $JAAN_OUTPUTS_DIR/research/README.md (add to index)
-□ $JAAN_OUTPUTS_DIR/research/{filename} (if URL: create new file)
-```
-
-> "Proceed with adding to index? [y/n]"
+Present the proposal. > "Proceed with adding to index? [y/n]"
 
 Do NOT proceed without approval.
 

@@ -72,25 +72,7 @@ Override field for this skill: `language_jaan-issue-report`
 
 ## Tone and Framing Guidance
 
-This skill follows jaan-to's **problem-focused, suggestive tone principles**:
-
-### When Gathering Information:
-- Ask **"what problem"** before **"what solution"**
-- Use open questions that invite thinking: "What outcome would help?" not "What feature should we build?"
-- If users provide solution-focused answers, **gently redirect**: "That's a helpful idea. First, help me understand what problem this would solve?"
-- **Smart auto-conversion**: When users describe solutions ("Add --dry-run"), extract the underlying problem ("Need confidence about changes before committing")
-
-### When Drafting Issues:
-- **Focus on describing what's broken/missing/confusing** (the problem)
-- **Solutions are optional suggestions**, not requirements
-- Frame solutions as "possible approaches" or "ideas to consider" rather than "proposed solution" or "fix"
-
-### When Reviewing with Users:
-- Non-blaming language: "experienced an issue" not "hit a bug"
-- Transparent about uncertainty: "I've inferred this from context" vs claiming certainty
-- Focus on clarity: "Does this capture the problem you're facing?" not "Is this solution correct?"
-
-**Why this matters:** Problem-focused issues give maintainers flexibility to find the best solution while ensuring the actual user need is well-understood.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Tone and Framing Guidance" for problem-focused, suggestive tone principles (gathering, drafting, reviewing).
 
 ---
 
@@ -238,14 +220,7 @@ Map type to GitHub label:
 
 ### Tone Guidance for Questions
 
-When gathering details, frame questions to:
-- **Focus on the problem experienced**, not solutions
-- **Ask "what happened" and "what impact"** rather than "what should be done"
-- **Invite description of outcomes**, not features
-- **Smart auto-conversion**: If the user proposes a solution, extract the underlying problem:
-  - User: "Add a --dry-run flag"
-  - Auto-extract problem: "Need to preview changes before committing"
-  - Follow-up: "That's a helpful idea. First, can you help me understand: what problem would this solve? What outcome would you like to achieve?"
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Tone and Framing Guidance" for problem-focused question framing and smart auto-conversion.
 
 ## Step 3: Gather Details
 
@@ -341,47 +316,7 @@ Select the matching type template (bug / feature / skill / docs) and fill all `{
 
 Merge all sources into a coherent, well-structured issue body. **All issue body content must be in English.**
 
-**Variable Mapping (Tone-Aware):**
-
-For **bug** type:
-- `{{bug_description}}`: Synthesize from Q2 (what trying to accomplish), Q3 (expected outcome), Q4 (actual outcome). Focus on what's broken.
-- `{{impact_description}}`: Extract from Q2 (goal blocked) and Q4 (what went wrong). Describe workflow impact clearly.
-- `{{expected_outcome}}`: From Q3. What the user expected to achieve.
-- `{{actual_outcome}}`: From Q4. What actually happened instead.
-- `{{steps_to_reproduce}}`: From Q6. Step-by-step instructions.
-- `{{additional_context}}`: From final "anything else?" question and any extra details.
-
-For **feature** type:
-- `{{problem_description}}`: Extract from Q1 (problem experiencing), Q3 (situation where it occurs). Focus on current limitation.
-- `{{impact_description}}`: Extract from Q4. How this problem affects workflow/results.
-- `{{use_case}}`: From Q3. Concrete situation where problem occurs.
-- `{{possible_approaches}}`: If user proposed solutions, include as suggestions with "User suggested: [idea]". Otherwise: "Not specified — open to maintainer's approach."
-- `{{related_features}}`: From Q5. Related skills/features they've tried.
-
-For **skill** type:
-- `{{skill_name}}` and `{{skill_command}}`: From Q1.
-- `{{issue_description}}`: Overview synthesized from all answers.
-- `{{current_behavior}}`: From Q3. What currently happens or what's missing.
-- `{{challenge_description}}`: From Q2. The limitation or challenge faced.
-- `{{desired_outcome}}`: From Q4. What outcome would address the challenge.
-- `{{workflow_impact}}`: From Q5. How this impacts productivity/workflow.
-- `{{example_scenario}}`: From Q6. Concrete scenario showing the problem.
-- `{{what_happens}}`: Extract from Q6 - current state in the scenario.
-- `{{what_should_happen}}`: Extract from Q6 - desired state in the scenario.
-
-For **docs** type:
-- `{{doc_location}}`: From Q1. Page or section reference.
-- `{{issue_description}}`: From Q2. What's incorrect/missing/confusing.
-- `{{user_goal}}`: From Q3. What user was trying to accomplish when they encountered this.
-- `{{what_would_help}}`: Synthesize from Q3 (user's goal) and Q4 (desired information/clarity). Focus on the knowledge gap.
-
-**Smart Auto-Conversion:** When user provides solution-focused answers:
-1. Extract the underlying problem (e.g., "Add --dry-run" → "Need confidence about changes before committing")
-2. Use problem for main description
-3. Include user's solution idea in optional "Possible Approaches" section with: "User suggested: [their idea]"
-4. Maintain problem-focused framing in body while honoring their contribution
-
-**Tone Reminder:** When synthesizing user input into template variables, maintain problem-focused language. Focus on what's broken/missing/confusing and its impact, not on prescribing solutions.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Variable Mapping (Tone-Aware)" for complete field mapping per issue type (bug, feature, skill, docs), smart auto-conversion rules, and tone reminders.
 
 ---
 
@@ -389,40 +324,9 @@ For **docs** type:
 
 **MANDATORY before HARD STOP preview.** Scan the generated issue body for private information:
 
-### 7.1 Path Sanitization
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Privacy Sanitization Rules" for path, credential, and personal info sanitization rules, safe-to-keep list, and counting requirements.
 
-Scan for patterns: `/Users/`, `/home/`, `/var/`, absolute project paths.
-
-Replace:
-- `/Users/{anything}/` → `{USER_HOME}/`
-- Full project paths → `{USER_HOME}/{PROJECT_PATH}/...` (keep only the relative portion relevant to the issue)
-- Keep relative plugin paths as-is (e.g., `skills/pm-prd-write/SKILL.md`)
-
-### 7.2 Credential Sanitization
-
-Scan for patterns: `token=`, `key=`, `password=`, `secret=`, `Bearer `, `ghp_`, `sk-`, `api_key`.
-
-Replace any detected values with `[REDACTED]`.
-
-### 7.3 Personal Info Check
-
-Scan for patterns that look like emails, IP addresses, or usernames embedded in paths.
-
-Replace with generic placeholders unless the user explicitly included them as part of the issue.
-
-### 7.4 Safe to Keep
-
-Do NOT sanitize these (they help maintainers debug):
-- jaan-to version number (e.g., `5.0.0`)
-- Skill names and commands (e.g., `/jaan-to:pm-prd-write`)
-- Hook names (e.g., `session-start`, `post-tool-use`)
-- OS type (e.g., `Darwin`, `Linux`)
-- Error message text (after stripping paths and tokens from it)
-- Plugin config keys (not secret values)
-
-### 7.5 Count and Flag
-
-Track the number of sanitized items. This count will be shown at HARD STOP.
+Apply all sanitization rules. Track the number of sanitized items for HARD STOP display.
 
 ---
 
@@ -656,48 +560,7 @@ If user selected **"No, skip"**:
 
 Show the appropriate result message in the user's conversation language.
 
-### Scenario A: GitHub Submission Succeeded (No Local File)
-
-**When**: Step 9 succeeded, Step 10 was skipped.
-
-> Issue successfully reported to GitHub:
-> - URL: {clickable GitHub issue URL}
-> - Issue #: {issue_number}
-> - Label: {label}
-
-### Scenario B: Local-Only Mode + Local File Saved
-
-**When**: Step 1 set local-only mode, Step 10.3 created file.
-
-> Issue saved locally:
-> - Path: `{full path to .md file}`
->
-> To submit manually, copy the content below the second `---` line and create a new issue at: https://github.com/parhumm/jaan-to/issues/new
-
-### Scenario C: Local-Only Mode + No Local File
-
-**When**: Step 1 set local-only mode, Step 10.2 user chose "No, skip".
-
-> No file was created. You can use the copy-paste version shown above to submit manually at: https://github.com/parhumm/jaan-to/issues/new
-
-### Scenario D: GitHub Failed + Local File Saved
-
-**When**: Step 9 failed, Step 10.3 created file.
-
-> GitHub submission failed: {error}
->
-> Issue saved locally:
-> - Path: `{full path to .md file}`
->
-> To submit manually, copy the content below the second `---` line and create a new issue at: https://github.com/parhumm/jaan-to/issues/new
-
-### Scenario E: GitHub Failed + No Local File
-
-**When**: Step 9 failed, Step 10.2 user chose "No, skip".
-
-> GitHub submission failed: {error}
->
-> No file was created. You can use the copy-paste version shown above to submit manually at: https://github.com/parhumm/jaan-to/issues/new
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Result Scenario Templates (Step 11)" for all 5 scenarios (A: GitHub success, B: Local+file, C: Local+no file, D: GitHub fail+file, E: GitHub fail+no file).
 
 ## Step 12: Capture Feedback
 
