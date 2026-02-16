@@ -1,7 +1,7 @@
 ---
 name: ux-flowchart-generate
 description: Generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence maps and confidence scoring.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Bash(cp:*), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [source_type] [paths...] [goal] [scope?]
 ---
 
@@ -33,6 +33,8 @@ Parse as: `[source_type] [paths...] [goal] [scope?]`
 - If all parameters provided → Proceed to Phase 1
 - If partial → Ask for missing parameters
 - If empty → Interactive wizard (ask source type, paths, goal)
+
+**Optional**: Screenshot paths can be provided alongside source files for visual context. UI screenshots will be embedded in the output as `![UI Reference - {screen}](resolved-path)` alongside relevant subgraphs.
 
 **Output**:
 ```
@@ -412,6 +414,14 @@ Show both outputs in conversation:
 > Write these outputs? [y/n]"
 
 **If n**: Ask "What should be changed?" and return to appropriate step
+
+## Step 11.7: Resolve & Copy Assets
+
+If screenshot paths were provided as input:
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/asset-embedding-reference.md` for the asset resolution protocol (path detection, copy rules, markdown embedding).
+
+Source `${CLAUDE_PLUGIN_ROOT}/scripts/lib/asset-handler.sh`. For each screenshot: check `is_jaan_path` — if inside `$JAAN_*`, reference in-place; if external, ask user before copying. Use `resolve_asset_path` for markdown-relative paths.
 
 ## Step 12: Write Output Files
 

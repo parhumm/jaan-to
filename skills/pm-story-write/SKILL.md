@@ -1,7 +1,7 @@
 ---
 name: pm-story-write
 description: Generate user stories with Given/When/Then acceptance criteria following INVEST principles.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(cp:*), Task, Edit(jaan-to/config/settings.yaml)
 argument-hint: [feature] [persona] [goal] OR [epic-id]
 ---
 
@@ -32,6 +32,8 @@ Three input formats supported:
 
 3. **Jira Context**: Epic or story ID
    - Example: `/jaan-to:pm-story-write PROJ-123`
+
+4. **Screenshot path** — Design screenshots showing the UI element this story refers to
 
 The skill will extract feature/persona/goal from any format.
 
@@ -118,6 +120,9 @@ Ask clarifying questions (maximum 5, only if not already answered by input or Ji
 5. "Is there an epic, related stories, or team conventions to reference?"
    - For context and consistency
    - Skip if already provided via Jira
+
+6. "Do you have design screenshots related to this story? If yes, provide file paths."
+   - If provided, read images to inform story structure and embed in Context section
 
 **From LEARN.md "Better Questions":**
 {Additional questions from past lessons, if file exists}
@@ -250,6 +255,7 @@ last_updated: {YYYY-MM-DD}
 
 **Section 2: Context** (2-4 sentences)
 Explain WHY this story exists: business drivers, user research insights, relevant metrics. Make self-contained—no tribal knowledge.
+If design screenshots were provided, embed them here using `![Design Reference - {screen}](resolved-path)`.
 
 **Section 3: Story Statement** (Connextra format)
 ```markdown
@@ -371,6 +377,9 @@ Before preview, validate against three checkpoints. All must pass.
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-story-write-reference.md` section "Definition of Ready Checklist" for the full 10-item readiness checklist.
 
+### Checkpoint 4: Image Embedding (if screenshots provided)
+- [ ] Design references embedded with `![alt](...)` syntax and URL-encoded paths
+
 ### If Any Check Fails:
 
 1. Identify specific issue
@@ -438,6 +447,14 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-story-${slug}.md"
 > - ID: {NEXT_ID}
 > - Folder: $JAAN_OUTPUTS_DIR/pm/stories/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-story-{slug}.md
+
+## Step 6.7: Resolve & Copy Assets
+
+If design screenshot paths were provided:
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/asset-embedding-reference.md` for the asset resolution protocol (path detection, copy rules, markdown embedding).
+
+Source `${CLAUDE_PLUGIN_ROOT}/scripts/lib/asset-handler.sh`. For each screenshot: check `is_jaan_path` — if inside `$JAAN_*`, reference in-place; if external, ask user before copying. Use `resolve_asset_path` for markdown-relative paths.
 
 ## Step 7: Write Output
 

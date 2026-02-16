@@ -1,7 +1,7 @@
 ---
 name: ux-heatmap-analyze
 description: Analyze heatmap data from CSV exports and screenshots to generate prioritized UX research reports.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Bash(cp:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: [csv-path] [screenshot-path] [html-path?] [problem?]
 ---
 
@@ -330,6 +330,9 @@ Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-heatmap-analyze.template.md`
 
 Fill all template sections. Report must be **insightful, practical, and actionable** — lead with why it matters and what to do. Minimize descriptive narrative.
 
+### Image Embedding
+Embed analyzed heatmap screenshots in the report header using `![Heatmap - {device}](resolved-path)`. Resolve paths using the asset embedding protocol below.
+
 1. **Header metadata**: URL, device, date range, page views, file paths — single-line format from Step 2
 2. **Action Summary**: Top 3-5 actions as bullets. Each bullet format:
    - **Action** (what to change) — expected impact — one-line evidence with source tag [V], [C], or [H]
@@ -365,6 +368,7 @@ Before preview, verify every item:
 - [ ] No hallucinated findings — every claim is traceable to a CSV row or screenshot observation
 - [ ] Click counts are normalized by page views when comparing across files
 - [ ] Test Ideas section has 3-5 suggested A/B tests or UX research methods linked to findings
+- [ ] If screenshots provided: heatmap images embedded in report with `![alt](...)` syntax
 
 If any check fails, revise the report before preview.
 
@@ -403,6 +407,14 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-heatmap-${slug}.md"
 > - ID: {NEXT_ID}
 > - Folder: $JAAN_OUTPUTS_DIR/ux/heatmap/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-heatmap-{slug}.md
+
+## Step 11.7: Resolve & Copy Assets
+
+If screenshot paths were provided as input:
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/asset-embedding-reference.md` for the asset resolution protocol (path detection, copy rules, markdown embedding).
+
+Source `${CLAUDE_PLUGIN_ROOT}/scripts/lib/asset-handler.sh`. For each screenshot path: check `is_jaan_path` — if inside `$JAAN_*`, reference in-place; if external, ask user before copying. Use `resolve_asset_path` for markdown-relative paths in the report.
 
 ## Step 12: Write Output
 

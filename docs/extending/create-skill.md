@@ -184,6 +184,21 @@ add_to_index \
 
 **Purpose**: Enables quick scanning in index files and cross-referencing.
 
+#### 7. Asset Embedding (Optional)
+
+For skills that accept image/screenshot inputs and generate markdown output:
+
+1. Add `Bash(cp:*)` to `allowed-tools` in frontmatter (skip if `Bash` already present)
+2. Add an inline reference pointer in the Write Phase step:
+   ```
+   > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/asset-embedding-reference.md`
+   > for the asset resolution protocol (path detection, copy rules, markdown embedding).
+   ```
+3. Add image embedding quality check: `If images provided: refs use ![alt](...) syntax`
+4. Source `scripts/lib/asset-handler.sh` for path detection and resolution functions
+
+See `docs/extending/asset-embedding-reference.md` for the full protocol.
+
 ### Implementation Checklist
 
 When creating a new output-generating skill:

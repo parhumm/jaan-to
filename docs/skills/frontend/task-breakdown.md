@@ -3,7 +3,7 @@ title: "frontend-task-breakdown"
 sidebar_position: 6
 doc_type: skill
 created_date: 2026-02-03
-updated_date: 2026-02-03
+updated_date: 2026-02-16
 tags: [dev, frontend, task-breakdown, ux-handoff, components, atomic-design]
 related: [stack-detect, fe-state-machine]
 ---
@@ -16,7 +16,7 @@ related: [stack-detect, fe-state-machine]
 
 ## Overview
 
-Analyzes UX handoffs (Figma links, design descriptions, screenshots, or PRDs) and produces a structured task breakdown with component inventory, state matrices, estimate bands, dependency graphs, performance budgets, and risk assessment.
+Analyzes UX handoffs (Figma links, design descriptions, screenshots, or PRDs) and produces a structured task breakdown with component inventory, state matrices, estimate bands, dependency graphs, performance budgets, and risk assessment. Screenshots are embedded as rendered markdown image links alongside relevant component groups.
 
 ---
 
