@@ -34,6 +34,7 @@
 claude
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
+/jaan-init
 ```
 
 ### Development Version (Preview)
@@ -42,6 +43,7 @@ For testing latest features before release:
 claude
 /plugin marketplace add parhumm/jaan-to#dev
 /plugin install jaan-to
+/jaan-init
 ```
 
 ### Switching Versions
@@ -51,6 +53,7 @@ To switch from dev to stable (or vice versa):
 /plugin marketplace add parhumm/jaan-to       # stable
 /plugin marketplace add parhumm/jaan-to#dev   # dev
 /plugin install jaan-to
+/jaan-init
 ```
 
 ### Check Installed Version
@@ -515,6 +518,23 @@ Goal: Keep docs in sync with code changes
                       │  Output  │
                       │  Files   │
                       └──────────┘
+```
+
+---
+
+## From Idea to Product
+
+**Go from a napkin sketch to a deployed product using jaan.to skill chains.**
+
+The [Idea to Product Guide](https://github.com/parhumm/jaanify/blob/main/docs/idea-to-product.md) walks through the full pipeline — research, PRD, design, code generation, testing, and deployment — with minimum human intervention. Each skill's output feeds the next.
+
+| Path | Skills | Time | Result |
+|------|--------|------|--------|
+| **Fast Track** | 8 skills | ~4 hours | Working MVP |
+| **Full Track** | 20 skills | ~1 day | Production-grade app |
+
+```
+Define → Design → Build → Quality → Ship
 ```
 
 ---
