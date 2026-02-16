@@ -2,7 +2,7 @@
 title: "Token Strategy"
 doc_type: concept
 created_date: 2026-02-11
-updated_date: 2026-02-14
+updated_date: 2026-02-16
 tags: [tokens, optimization, architecture, performance]
 related: [docs/extending/create-skill.md, docs/roadmap/roadmap.md, docs/research/75-token-optimization-aggressive-safe.md]
 ---
@@ -134,7 +134,7 @@ Body-trimmed 8 large skills with reference extraction. Extracted language settin
 | sec-audit-remediate | 518 | 452 | 13% |
 | devops-infra-scaffold | 641 | 489 | 24% |
 
-### v7.x Token Optimization (Research #75)
+### v7.0.0 Token Optimization (Research #75)
 
 Aggressive but quality-safe optimization based on [Research #75](research/75-token-optimization-aggressive-safe.md). Applied extraction safety checklist to distinguish safe-to-extract content (lookup tables, templates, scoring rubrics) from unsafe content (decision tables coupled to procedures, entity extraction algorithms).
 
