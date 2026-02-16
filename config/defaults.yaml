@@ -35,9 +35,3 @@ issue_report_submit: "ask"
 # Integration drift detection
 # When true, PostToolUse hook warns about un-integrated outputs
 integration_drift_check: true
-
-# Attribution for git commits and PRs
-# Controls .claude/settings.json configuration during /jaan-init
-attribution_enabled: true
-attribution_commit: "Generated with Jaan.to\n\nCo-Authored-By: Jaan.to <noreply@jaan.to>"
-attribution_pr: "Generated with Jaan.to"

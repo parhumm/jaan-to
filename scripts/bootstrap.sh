@@ -40,8 +40,6 @@ TEMPLATES_COPIED=0
 DOCS_COPIED=0
 LEARN_COPIED=0
 CONFIG_COPIED=0
-ATTRIBUTION_CONFIGURED=0
-ATTRIBUTION_SKIPPED_REASON=""
 
 # 1. Create all necessary directories (using resolved paths)
 mkdir -p "$PROJECT_DIR/$OUTPUTS_DIR"
@@ -92,86 +90,19 @@ if [ -d "$PLUGIN_DIR/scripts/seeds" ]; then
   done
 fi
 
-# 5. Configure Claude Code attribution in .claude/settings.json (if enabled)
-ATTRIBUTION_ENABLED=$(get_config 'attribution_enabled' 'true')
-if [ "$ATTRIBUTION_ENABLED" = "true" ]; then
-  ATTRIBUTION_COMMIT=$(get_config 'attribution_commit' 'Generated with Jaan.to\n\nCo-Authored-By: Jaan.to <noreply@jaan.to>')
-  ATTRIBUTION_PR=$(get_config 'attribution_pr' 'Generated with Jaan.to')
-
-  # Convert literal \n to actual newlines for proper JSON encoding
-  ATTRIBUTION_COMMIT="${ATTRIBUTION_COMMIT//\\n/$'\n'}"
-
-  CLAUDE_SETTINGS="$PROJECT_DIR/.claude/settings.json"
-
-  if [ ! -f "$CLAUDE_SETTINGS" ]; then
-    # File doesn't exist — create with attribution
-    mkdir -p "$PROJECT_DIR/.claude"
-    if command -v jq >/dev/null 2>&1; then
-      jq -n --arg commit "$ATTRIBUTION_COMMIT" --arg pr "$ATTRIBUTION_PR" \
-        '{attribution: {commit: $commit, pr: $pr}}' > "$CLAUDE_SETTINGS"
-      ATTRIBUTION_CONFIGURED=1
-    elif command -v python3 >/dev/null 2>&1; then
-      COMMIT="$ATTRIBUTION_COMMIT" PR="$ATTRIBUTION_PR" python3 -c "
-import json, os
-data = {'attribution': {'commit': os.environ['COMMIT'], 'pr': os.environ['PR']}}
-print(json.dumps(data, indent=2))
-" > "$CLAUDE_SETTINGS"
-      ATTRIBUTION_CONFIGURED=1
-    else
-      ATTRIBUTION_SKIPPED_REASON="jq and python3 not available"
-    fi
-  else
-    # File exists — check for existing attribution key
-    HAS_ATTR="false"
-    if command -v jq >/dev/null 2>&1; then
-      HAS_ATTR=$(jq 'has("attribution")' "$CLAUDE_SETTINGS" 2>/dev/null || echo "error")
-    elif command -v python3 >/dev/null 2>&1; then
-      HAS_ATTR=$(SETTINGS="$CLAUDE_SETTINGS" python3 -c "
-import json, os
-with open(os.environ['SETTINGS']) as f: data = json.load(f)
-print('true' if 'attribution' in data else 'false')
-" 2>/dev/null || echo "error")
-    fi
-
-    case "$HAS_ATTR" in
-      true)  ATTRIBUTION_SKIPPED_REASON="attribution already configured" ;;
-      error) ATTRIBUTION_SKIPPED_REASON="invalid JSON in .claude/settings.json" ;;
-      false)
-        # Merge attribution into existing file
-        if command -v jq >/dev/null 2>&1; then
-          jq --arg commit "$ATTRIBUTION_COMMIT" --arg pr "$ATTRIBUTION_PR" \
-            '. + {attribution: {commit: $commit, pr: $pr}}' \
-            "$CLAUDE_SETTINGS" > "$CLAUDE_SETTINGS.tmp" && mv "$CLAUDE_SETTINGS.tmp" "$CLAUDE_SETTINGS"
-          ATTRIBUTION_CONFIGURED=1
-        elif command -v python3 >/dev/null 2>&1; then
-          COMMIT="$ATTRIBUTION_COMMIT" PR="$ATTRIBUTION_PR" SETTINGS="$CLAUDE_SETTINGS" python3 -c "
-import json, os
-with open(os.environ['SETTINGS']) as f: data = json.load(f)
-data['attribution'] = {'commit': os.environ['COMMIT'], 'pr': os.environ['PR']}
-with open(os.environ['SETTINGS'] + '.tmp', 'w') as f: json.dump(data, f, indent=2)
-" && mv "$CLAUDE_SETTINGS.tmp" "$CLAUDE_SETTINGS"
-          ATTRIBUTION_CONFIGURED=1
-        else
-          ATTRIBUTION_SKIPPED_REASON="jq and python3 not available"
-        fi
-        ;;
-    esac
-  fi
-fi
-
-# 6. Templates — loaded from plugin at runtime (lazy loading)
+# 5. Templates — loaded from plugin at runtime (lazy loading)
 # On first use, pre-execution protocol Step C offers to seed into $TEMPLATES_DIR
 # Users can also manually copy templates for customization
 # See: docs/guides/customization.md
 
-# 7. Docs — skills read STYLE.md and create-skill.md from plugin source at runtime
+# 6. Docs — skills read STYLE.md and create-skill.md from plugin source at runtime
 # (${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md, ${CLAUDE_PLUGIN_ROOT}/docs/extending/create-skill.md)
 # No project copy needed. Research dir created on demand by pm-research-about.
 
-# 8. Learning — loaded from plugin at runtime, project files created via /jaan-to:learn-add
+# 7. Learning — loaded from plugin at runtime, project files created via /jaan-to:learn-add
 # Plugin LEARN.md files used as seed data when creating new project learn files
 
-# 9. Check context files (validation)
+# 9. Check context files
 MISSING_CONTEXT=()
 for f in tech.md team.md integrations.md config.md boundaries.md; do
   if [ ! -f "$PLUGIN_DIR/scripts/seeds/$f" ]; then
@@ -212,8 +143,6 @@ cat <<RESULT
     "docs": ${DOCS_COPIED},
     "learn": ${LEARN_COPIED}
   },
-  "attribution_configured": ${ATTRIBUTION_CONFIGURED},
-  "attribution_skip_reason": "${ATTRIBUTION_SKIPPED_REASON}",
   "missing_context": [${MISSING_LIST}],
   "suggest_detect": ${SUGGEST_DETECT}
 }
