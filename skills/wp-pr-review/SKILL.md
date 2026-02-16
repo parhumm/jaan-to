@@ -3,7 +3,7 @@ name: wp-pr-review
 description: Review WordPress plugin PRs for security vulnerabilities, performance issues,
   WPCS standards violations, and backward compatibility. Use for WordPress PR review,
   plugin code review, WP security audit, WPCS check.
-allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(glab mr diff:*), Bash(glab mr comment:*), Bash(git diff:*), Bash(git log:*), Write($JAAN_OUTPUTS_DIR/wp/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(gh api:*), Bash(glab mr diff:*), Bash(glab mr comment:*), Bash(git diff:*), Bash(git log:*), Write($JAAN_OUTPUTS_DIR/wp/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: <pr-url | owner/repo#number | local>
 ---
 
@@ -91,12 +91,14 @@ PHPStan Level: {level} (or "none detected")
 
 ## Step 2: Diff Acquisition
 
-Based on input mode, fetch the diff:
+Based on input mode, fetch the diff using a fallback chain.
+
+### 2.1: Primary — Full Diff
 
 **GitHub:**
 ```bash
-gh pr diff {number} --repo {owner}/{repo}
 gh pr view {number} --repo {owner}/{repo} --json files,additions,deletions,title,body
+gh pr diff {number} --repo {owner}/{repo}
 ```
 
 **GitLab:**
@@ -110,20 +112,47 @@ git diff main...HEAD
 git log main..HEAD --oneline
 ```
 
-Parse the diff to identify:
+If `gh pr diff` succeeds, proceed to 2.3.
+
+### 2.2: Fallback — Paginated File List (GitHub only)
+
+If `gh pr diff` fails (HTTP 406 or diff too large), use the REST API:
+
+```bash
+gh api repos/{owner}/{repo}/pulls/{number}/files --paginate --jq '.[].filename'
+```
+
+This returns filenames only. For each changed `.php` file, retrieve its patch:
+
+```bash
+gh api repos/{owner}/{repo}/pulls/{number}/files --paginate \
+  --jq '.[] | select(.filename == "{file}") | .patch'
+```
+
+If individual patches are unavailable for a file, note it as "patch unavailable — grep-only review" and rely on Step 3 grep patterns against the file content.
+
+**Large PR batching**: When a PR has more than 50 changed PHP files, process files in batches of 30 to reduce per-call context size. Complete analysis of each batch before loading the next.
+
+### 2.3: Parse and Classify
+
+Parse the diff (or file list from fallback) to identify:
 - List of changed `.php` files (primary review targets)
 - Other changed files (`.js`, `.css`, `.json` — note but don't deep-review)
-- Lines added/removed per file
+- Lines added/removed per file (mark "N/A" for fallback-acquired files)
 - Skip files in `vendor/`, `node_modules/`, `.git/`
 
 Show summary:
 > "Diff acquired: {N} PHP files changed (+{additions} / -{deletions} lines)"
+> If fallback was used: "Note: Used paginated API fallback — {N} files retrieved via REST endpoint"
+> If batching active: "Large PR detected ({N} PHP files) — processing in batches of 30"
 
 ## Step 3: Deterministic Security Scan
 
 Read `references/vulnerability-patterns.md` for the grep pattern catalog.
 
 Run grep patterns against **changed PHP files ONLY**. This is the high-signal, low-noise first pass.
+
+**Batching for large diffs**: If the PR has more than 50 changed PHP files, split the file list into batches of 30 and run each grep pattern set per batch. Complete one batch fully before moving to the next. This prevents excessively large grep output from triggering connection resets.
 
 **CRITICAL patterns** — run all of these:
 

@@ -1,7 +1,7 @@
 {
   "name": "jaan-to",
-  "version": "6.3.1",
-  "description": "Give soul to your workflow. 42 AI-powered skills across 13 roles — PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, and Core. Spec-to-ship pipeline: scaffold, implement, test, secure, deploy. Features two-phase workflow with human approval, quality-reviewer agent, token optimization, and continuous improvement via LEARN.md system.",
+  "version": "6.4.0",
+  "description": "Give soul to your workflow. 43 AI-powered skills across 13 roles — PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, and Core. Spec-to-ship pipeline: scaffold, implement, test, secure, deploy. Features two-phase workflow with human approval, quality-reviewer agent, token optimization, and continuous improvement via LEARN.md system.",
   "author": {
     "name": "Parhum Khoshbakht",
     "email": "parhum.kh@gmail.com"

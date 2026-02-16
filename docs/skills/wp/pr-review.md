@@ -3,7 +3,7 @@ title: "wp-pr-review"
 sidebar_position: 2
 doc_type: skill
 created_date: 2026-02-09
-updated_date: 2026-02-09
+updated_date: 2026-02-15
 tags: [wordpress, security, code-review, pr-review, wpcs]
 related: [detect-dev]
 ---
@@ -65,6 +65,8 @@ Reads project configuration to understand the plugin:
 ### Phase 2: Diff Analysis
 
 Fetches the PR diff via `gh pr diff` (GitHub), `glab mr diff` (GitLab), or `git diff` (local). Identifies changed PHP files and skips `vendor/`, `node_modules/`.
+
+For large GitHub PRs where `gh pr diff` fails (HTTP 406), falls back to the paginated REST API (`gh api repos/.../pulls/.../files --paginate`) to retrieve file patches individually. PRs with 50+ PHP files are processed in batches of 30 to reduce per-call context size.
 
 ### Phase 3: Deterministic Security Scan
 
@@ -192,7 +194,7 @@ Research document: `$JAAN_OUTPUTS_DIR/research/67-wp-pr-review.md`
 - **Logical Name**: wp-pr-review
 - **Command**: `/jaan-to:wp-pr-review`
 - **Role**: wp (WordPress)
-- **Allowed Tools**: Read, Glob, Grep, Bash(gh/glab/git), Write($JAAN_OUTPUTS_DIR/wp/**)
+- **Allowed Tools**: Read, Glob, Grep, Bash(gh/glab/git, gh api), Write($JAAN_OUTPUTS_DIR/wp/**)
 - **Output**: `$JAAN_OUTPUTS_DIR/wp/pr/{id}-{slug}/`
 - **ID Generation**: Sequential per subdomain (01, 02, 03...)
 - **Index**: Auto-updates `$JAAN_OUTPUTS_DIR/wp/pr/README.md`

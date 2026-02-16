@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [6.4.0] - 2026-02-16
+
+### Added
+- **`backend-pr-review`** ([#110](https://github.com/parhumm/jaan-to/issues/110)) — Multi-stack backend PR review skill supporting PHP/Laravel, Node/TypeScript, Python/Django, Go, and Rust. Detects stack via tech.md with fallback prompting. Two-pass LLM analysis with variable confidence thresholds (CRITICAL >= 90, WARNING >= 85, INFO >= 80) reduces false positives by 40-60%. Risk-based file prioritization weights criticality (40%), change size (30%), finding density (20%), and file type (10%). Deterministic grep scanning from 3 stack-specific reference files (security, performance, code quality). GitHub and GitLab support including self-hosted instances with curl API fallback. Comment deduplication via bot marker for idempotent re-runs. Max 20 findings per review. Follows wp-pr-review pattern (456 lines). Closes [#110](https://github.com/parhumm/jaan-to/issues/110)
+
+### Fixed
+- **`wp-pr-review` large PR fallback** ([#107](https://github.com/parhumm/jaan-to/issues/107)) — Added paginated REST API fallback (`gh api`) when `gh pr diff` fails with HTTP 406 on large PRs (300+ files). PRs with 50+ PHP files are now processed in batches of 30 to reduce per-call context size, mitigating ECONNRESET from network intermediaries. Closes [#107](https://github.com/parhumm/jaan-to/issues/107)
+
+---
+
 ## [6.3.0] - 2026-02-15
 
 ### Added
@@ -1036,16 +1046,14 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ---
 
-## [Unreleased]
-
-### Planned
-- Additional quick-win skills (qa-test-cases, data-sql-query)
-- Enhanced MCP integrations (GA4, GitLab, Jira, Figma)
-- JSON export alongside markdown outputs
-- External notifications (Slack)
-
----
-
+[6.4.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.4.0
+[6.3.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.3.0
+[6.2.3]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.3
+[6.2.2]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.2
+[6.2.1]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.1
+[6.2.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.2.0
+[6.1.1]: https://github.com/parhumm/jaan-to/releases/tag/v6.1.1
+[6.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.1.0
 [6.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v6.0.0
 [5.1.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.1.0
 [5.0.0]: https://github.com/parhumm/jaan-to/releases/tag/v5.0.0
