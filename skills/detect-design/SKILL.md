@@ -38,37 +38,10 @@ Override field for this skill: `language_detect-design`
 
 ## Standards Reference
 
-### Evidence Format (SARIF-compatible)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` for Evidence Format (SARIF), Evidence ID Generation, Confidence Levels, Frontmatter Schema, Platform Detection, and Document Structure.
 
-Every finding MUST include structured evidence blocks:
-
-```yaml
-evidence:
-  id: E-DSN-001                # Single-platform format
-  id: E-DSN-WEB-001            # Multi-platform format (platform prefix)
-  type: code-location
-  confidence: 0.95
-  location:
-    uri: "src/tokens/colors.json"
-    startLine: 15
-    endLine: 20
-    snippet: |
-      "primary": "#3B82F6"
-  method: pattern-match
-```
-
-**Evidence ID Format**:
-
-```python
-# Generation logic:
-if current_platform == 'all' or current_platform is None:  # Single-platform
-  evidence_id = f"E-DSN-{sequence:03d}"                     # E-DSN-001
-else:  # Multi-platform
-  platform_upper = current_platform.upper()
-  evidence_id = f"E-DSN-{platform_upper}-{sequence:03d}"    # E-DSN-WEB-001, E-DSN-MOBILE-023
-```
-
-Evidence IDs use namespace `E-DSN-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
+**This skill's namespace**: `E-DSN-*` (e.g., E-DSN-001, E-DSN-WEB-001)
+**Tool name in frontmatter**: `detect-design`
 
 ### Drift Detection — Paired Evidence
 
@@ -93,53 +66,6 @@ evidence:
     snippet: |
       color: "#2563EB"  // hardcoded, differs from token
 ```
-
-### Confidence Levels (4-level)
-
-| Level | Label | Range | Criteria |
-|-------|-------|-------|----------|
-| 4 | **Confirmed** | 0.95-1.00 | Multiple independent methods agree |
-| 3 | **Firm** | 0.80-0.94 | Single high-precision method with clear evidence |
-| 2 | **Tentative** | 0.50-0.79 | Pattern match without full analysis |
-| 1 | **Uncertain** | 0.20-0.49 | Absence-of-evidence reasoning |
-
-### Frontmatter Schema (Universal)
-
-```yaml
----
-title: "{document title}"
-id: "{AUDIT-YYYY-NNN}"
-version: "1.0.0"
-status: draft
-date: {YYYY-MM-DD}
-target:
-  name: "{repo-name}"
-  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'mobile'/etc for multi-platform
-  commit: "{git HEAD hash}"
-  branch: "{current branch}"
-tool:
-  name: "detect-design"
-  version: "1.0.0"
-  rules_version: "2024.1"
-confidence_scheme: "four-level"
-findings_summary:
-  critical: 0
-  high: 0
-  medium: 0
-  low: 0
-  informational: 0
-overall_score: 0.0
-lifecycle_phase: post-build
----
-```
-
-### Document Structure (Diataxis)
-
-1. Executive Summary
-2. Scope and Methodology
-3. Findings (ID/severity/confidence/evidence)
-4. Recommendations
-5. Appendices
 
 ---
 
@@ -479,25 +405,7 @@ Note: {-platform} suffix only if multi-platform mode (e.g., -web, -mobile). Sing
 
 Create directory `$JAAN_OUTPUTS_DIR/detect/design/` if it does not exist.
 
-**Platform-specific output path logic**:
-
-```python
-# Determine filename suffix
-if current_platform == 'all' or current_platform is None:  # Single-platform
-  suffix = ""                                               # No suffix
-else:  # Multi-platform
-  suffix = f"-{current_platform}"                          # e.g., "-web", "-mobile"
-
-# Example output paths:
-# Single-platform: $JAAN_OUTPUTS_DIR/detect/design/brand.md
-# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/design/brand-web.md
-#                  $JAAN_OUTPUTS_DIR/detect/design/brand-mobile.md
-```
-
-### Stale File Cleanup
-
-- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
-- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` sections "Output Path Logic" and "Stale File Cleanup" for platform-specific suffix convention and run_depth cleanup rules.
 
 ### If `run_depth == "light"`: Write Single Summary File
 

@@ -27,16 +27,13 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v6.4.0 (43 skills) — backend-pr-review, wp-pr-review large PR fix
+**Latest:** v7.0.0 (43 skills) — Aggressive token optimization, bootstrap compact mode
 
 ---
 
 ## Unreleased
 
-- [x] `/jaan-to:backend-pr-review` — Multi-stack backend PR review skill with two-pass LLM analysis, risk-based file prioritization, and GitHub + GitLab support ([#110](https://github.com/parhumm/jaan-to/issues/110))
 - [ ] `jaan-init` Co-Authored-By attribution for git commits and PRs ([#109](https://github.com/parhumm/jaan-to/issues/109))
-- [x] `wp-pr-review` paginated REST API fallback for large PRs ([#107](https://github.com/parhumm/jaan-to/issues/107))
-- [x] Update skill count 42 → 43
 
 ---
 

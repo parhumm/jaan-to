@@ -317,10 +317,12 @@ Check against `docs/extending/create-skill.md`:
 
 **Frontmatter**:
 - [ ] Has `name` matching directory
-- [ ] Has `description` with purpose and mapping
+- [ ] Has `description` with purpose (max 120 chars, no colons)
 - [ ] Has `allowed-tools` with valid patterns
 - [ ] Has `argument-hint`
 - [ ] Does NOT have `model:` field (causes API errors)
+- [ ] If narrow-domain or internal: consider `disable-model-invocation: true`
+- [ ] If heavy analysis (>30K tokens expected): consider `context: fork`
 
 **Body**:
 - [ ] Has H1 title matching skill name
@@ -333,9 +335,16 @@ Check against `docs/extending/create-skill.md`:
 - [ ] Has `# PHASE 2: Generation`
 - [ ] Has `## Definition of Done`
 
+**Size**:
+- [ ] SKILL.md under 500 lines (standard) or 600 lines (complex, hard cap)
+- [ ] If over 500 lines: extract reference material to `docs/extending/{name}-reference.md` per `docs/extending/extraction-safety-checklist.md`
+
 **Trust**:
 - [ ] Tool permissions are sandboxed (not `Write(*)`)
 - [ ] Has human approval checks
+
+**Budget**:
+- [ ] Run `scripts/validate-skills.sh` — description budget still under 15K chars
 
 If any check fails, fix before preview.
 
@@ -468,6 +477,7 @@ This ensures the roadmap reflects the latest skill additions.
 - [ ] Web research performed
 - [ ] All skill files created (SKILL.md, LEARN.md, template.md)
 - [ ] Passes specification validation
+- [ ] `scripts/validate-skills.sh` passes (description budget + body line cap)
 - [ ] Registered in context/config.md
 - [ ] Documentation created via /jaan-to:docs-create
 - [ ] User tested and confirmed working

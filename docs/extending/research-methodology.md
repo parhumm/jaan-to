@@ -282,3 +282,158 @@ Files modified:
 - [ ] File created (if URL)
 - [ ] README.md updated
 - [ ] Git committed
+
+---
+
+## Research Summary Display Format
+
+Use this template for the HARD STOP human review check (when `{approval_mode}` = Interactive):
+
+```
+RESEARCH SUMMARY
+────────────────
+Topic: {refined topic}
+Category: {category}
+Filename: {filename}
+Size: {selected size} (~{M} target sources)
+
+ADAPTIVE RESEARCH WAVES (5)
+───────────────────────────
+Wave 1 (Scout):  {N1} sources | Mapped landscape
+Wave 2 (Gaps):   {N2} sources | Filled {primary_gap}
+Wave 3 (Expand): {N3} sources | Expanded {areas}
+Wave 4 (Verify): {N4} sources | Verified {claims}
+Wave 5 (Deep):   {N5} sources | Deep dived {final}
+───────────────────────────────────────────────────
+Total:           {N} unique sources
+
+ADAPTATION DECISIONS
+────────────────────
+✓ W1 Scout identified: {key_subtopics}
+✓ W2 Gaps targeted: {primary_gap}
+✓ W3 Expand added: {expansion_areas}
+✓ W4 Verify confirmed: {verified_claims}
+✓ W5 Deep explored: {final_areas}
+
+SOURCES CONSULTED
+─────────────────
+{actual} unique sources from {queries} search queries
+Target: {target} | Achieved: {percentage}%
+- Primary sources: {N}
+- Supporting sources: {N}
+
+KEY INSIGHTS (Preview)
+──────────────────────
+1. {insight 1} [verified by 2+ sources]
+2. {insight 2}
+3. {insight 3}
+
+SUBTOPICS DISCOVERED
+────────────────────
+- {subtopic 1}
+- {subtopic 2}
+- {subtopic 3}
+
+WILL CREATE
+───────────
+□ $JAAN_OUTPUTS_DIR/research/{filename}
+□ Update $JAAN_OUTPUTS_DIR/research/README.md
+```
+
+---
+
+## Research Plan Display Template
+
+Use this when outputting the initial research plan (Step 2):
+
+```
+RESEARCH PLAN (Adaptive Waves)
+──────────────────────────────
+Topic: {refined topic}
+Size: {selected} ({N} total agents, ~{M} sources target)
+
+WAVE 1: Scout
+─────────────
+Agent: 1 Scout Agent
+Focus: Broad landscape mapping
+Queries:
+1. "{topic} overview fundamentals"
+2. "{topic} best practices {year}"
+3. "{topic} recent developments"
+4. "{topic} vs alternatives"
+5. "{topic} common challenges"
+
+Goal: Identify subtopics, gaps, and promising directions
+
+WAVE 2-5: To be determined adaptively based on each wave's results
+```
+
+---
+
+## Wave Agent Prompt Templates
+
+### Generic Structure
+
+Each wave agent receives a Task prompt following this pattern:
+
+```
+Task prompt: "Research {wave_focus} of {topic}:
+
+Wave {N} - {wave_description}.
+{context_from_previous_waves}
+
+Perform {search_count} searches:
+1. WebSearch: '{query_pattern}'
+... (continue to {search_count})
+
+Then WebFetch {fetch_count} authoritative sources.
+
+Return:
+{return_fields}"
+
+subagent_type: Explore
+run_in_background: {true for W3-5, false for W1-2}
+```
+
+### Per-Wave Configuration
+
+| Wave | Focus | Context Input | Sync Mode | Return Fields |
+|------|-------|--------------|-----------|---------------|
+| W1 Scout | Broad landscape mapping | None | sync (wait) | Key findings, sources, subtopics discovered, coverage gaps, recommended W2 directions, source quality assessment |
+| W2 Gaps | Fill primary gap from Scout | Scout summary + identified gap | sync (wait) | Gap findings, sources, NEW gaps for W3, recommended direction |
+| W3 Expand | Expand into new areas | W1+W2 summary + new areas | parallel | Expanded findings, sources, conflicts/controversies, questions for W4 |
+| W4 Verify | Verify claims, resolve conflicts | W1-3 claims + conflicts list | parallel | Verification status per claim, resolved conflicts, expert opinions, remaining uncertainties |
+| W5 Deep | Final deep dive on priorities | All waves summary + remaining priorities | parallel | Deep findings, sources, advanced insights, future directions |
+
+### W1 Scout Default Queries
+
+```
+1. '{topic} overview fundamentals explained'
+2. '{topic} best practices {year}'
+3. '{topic} recent developments news'
+4. '{topic} vs alternatives comparison'
+5. '{topic} common challenges problems'
+6. '{topic} tutorial getting started'
+7. '{topic} expert analysis deep dive'
+8. '{topic} implementation examples'
+```
+
+W2-5 queries are generated adaptively based on previous wave results (gaps, new areas, claims to verify, remaining priorities).
+
+### Add-to-Index HARD STOP Template
+
+```
+RESEARCH DOCUMENT PROPOSAL
+
+Source: {file-path or URL}
+Type: {local file / web URL}
+Category: {category}
+Title: {extracted title}
+Filename: {NN}-{category}-{slug}.md (if URL)
+
+Summary: {2-3 sentences}
+
+WILL MODIFY:
+□ $JAAN_OUTPUTS_DIR/research/README.md (add to index)
+□ $JAAN_OUTPUTS_DIR/research/{filename} (if URL: create new file)
+```

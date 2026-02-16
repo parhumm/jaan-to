@@ -17,11 +17,8 @@
 
 ## Plugin Architecture
 
-This is a Claude Code Plugin. All paths below are **relative to the plugin root** unless marked as `(project)`.
-
-### Per-Project Activation
-jaan-to is opt-in per project. Run `/jaan-to:jaan-init` to activate for a project.
-Projects without a `jaan-to/` directory are not affected by the plugin.
+Claude Code Plugin. Paths are **relative to plugin root** unless marked `(project)`.
+Opt-in per project: run `/jaan-to:jaan-init` to activate. Projects without `jaan-to/` are unaffected.
 
 ## File Locations
 
@@ -46,13 +43,10 @@ Projects without a `jaan-to/` directory are not affected by the plugin.
 ## Critical Principles
 
 ### Single Source of Truth
-**No duplication or overlap allowed:**
-- One command per action (use existing skills, don't duplicate)
-- One location per data type (roadmap tasks → roadmap.md)
-- One skill per capability (learning → `/jaan-to:learn-add`)
+**No duplication or overlap:**
+- One command per action, one location per data type, one skill per capability
 - Reference, don't copy (link to sources, don't inline)
-
-When adding functionality, first check if a skill/command exists.
+- Before adding functionality, check if a skill/command exists
 
 **Skill-First Decision Tree:**
 1. Is this a simple tool operation (read one file, edit one value)? → Use tools directly
@@ -75,32 +69,20 @@ When adding functionality, first check if a skill/command exists.
 
 ### Generic & Scalable
 
-**This is a generic plugin for all tech stacks and ideas.**
-
-In all decisions, prioritize:
+Generic plugin for all tech stacks. Prioritize:
 - **Generic patterns** over specific implementations
-- **Scalable approaches** that work for 1 or 1000 skills
-- **Tech-agnostic guidance** that applies to React, Laravel, Go, etc.
+- **Scalable approaches** (1 or 1000 skills)
+- **Tech-agnostic guidance** (React, Laravel, Go, etc.)
 - **Pattern recognition** over hardcoded lists
-- **Principles** over prescriptions
-
-Examples:
-- ✅ "Check for skills by category pattern (`detect-*`, `pm-*`)"
-- ❌ "Use these 40 specific skills: /jaan-to:skill1, /jaan-to:skill2..."
-- ✅ "Support any framework via tech stack config"
-- ❌ "Only works with React and Next.js"
 
 ---
 
 ## AI Behavioral Rules
 
 ### Trust
-1. Output writes to project's `jaan-to/outputs/` directory (project-relative)
-2. Learning files write to project's `jaan-to/learn/` directory (project-relative)
-3. Context files live in project's `jaan-to/context/` directory (project-relative)
-4. Templates live in project's `jaan-to/templates/` directory (project-relative)
-5. Always preview content before writing
-6. Ask for explicit approval before file operations
+1. Outputs → `jaan-to/outputs/`, Learning → `jaan-to/learn/`, Context → `jaan-to/context/`, Templates → `jaan-to/templates/` (all project-relative)
+2. Always preview content before writing
+3. Ask for explicit approval before file operations
 
 ### Two-Phase Workflow
 1. **Phase 1 (Analysis)**: Read context, gather input, plan structure

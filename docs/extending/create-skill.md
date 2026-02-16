@@ -344,6 +344,8 @@ When a SKILL.md exceeds ~500 lines, extract **reference material** (not executio
 
 #### What to Extract (reference material)
 
+> Full checklist with safety rules: `docs/extending/extraction-safety-checklist.md`
+
 - Code template blocks (TypeScript/PHP/Go examples)
 - Multi-stack pattern tables (per-language comparison tables)
 - CWE/OWASP mapping tables
@@ -367,6 +369,22 @@ When a SKILL.md exceeds ~500 lines, extract **reference material** (not executio
 |---|---|---|
 | `disable-model-invocation: true` | Removes from auto-suggestions, saves ~280 tokens/session | Internal/infrastructure skills not directly user-invoked |
 | `context: fork` | Runs in isolated subagent, saves 30-48K tokens | Heavy analysis skills (detect-*) that produce bounded output |
+
+### Output Guidance (recommended for new skills)
+
+Advisory patterns to minimize token waste in skill responses:
+- **Default response shape**: (1) Outcome (1-2 lines) (2) Decisions (bullets) (3) Next actions
+- **Escalation**: Summary first, offer expansion on request
+- **Large output**: Follow Two-Phase Workflow — preview before writing to `$JAAN_OUTPUTS_DIR/`
+- **Logs**: Top 20 + bottom 20 lines + "full log at {path}"
+- **No repetition**: Don't restate user prompt or reprint shown file excerpts
+
+### Concise Prose Rules (for new skills)
+
+All new skills MUST follow these writing rules:
+- Kill preambles: don't restate the heading in a sentence before the content
+- Abbreviate informational placeholders (NOT function params or commit templates)
+- **DO NOT shorten:** full-sentence instructions (encode ordering/hierarchy), multi-line condition lists (encode mutual exclusivity), "Show user" blocks (encode behavioral gates), decision tables, code templates, AskUserQuestion options, examples, Definition of Done
 
 ### Tool Permission Patterns (v3.0.0)
 

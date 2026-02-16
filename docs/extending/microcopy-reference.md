@@ -221,3 +221,108 @@ npm install vue-i18n
 ### How to Use Export Formats
 
 Copy the format matching your i18n framework. Import the JSON file into your i18n system or use the templates above as a starting point for each language namespace.
+
+---
+
+## Tone Profile Detection Template
+
+When analyzing sample-based tone from user-provided text, display the detected profile using this template:
+
+```
+TONE PROFILE DETECTED
+─────────────────────
+Formality: {level}
+Warmth: {level}
+Directness: {level}
+Emotion: {level}
+
+Language-specific pronouns:
+- Persian: {شما/تو}
+- Russian: {Вы/ты}
+- German: {Sie/du}
+- Turkish: {Siz/sen}
+- French: {Vous/tu}
+```
+
+---
+
+## Category Detection Rules
+
+Keyword-based rules for automatically detecting which microcopy categories are needed from an initiative/feature description:
+
+| Keywords | Detected Categories |
+|----------|-------------------|
+| "form", "validation", "input" | Error Messages, Helper Text, Labels |
+| "modal", "dialog", "confirm" | Confirmation Dialogs, CTAs |
+| "empty", "first-time", "no data" | Empty States |
+| "notification", "toast", "alert" | Toast Notifications, Success Messages |
+| "button", "action", "submit" | CTAs, Labels |
+| "loading", "progress" | Loading States |
+
+---
+
+## Microcopy Categories Catalog
+
+Complete list of available microcopy categories (11 total):
+
+1. **Labels & Buttons** — UI element labels and button text
+2. **Helper Text** — Instructional text near form fields
+3. **Error Messages** — With recovery instructions
+4. **Success Messages** — Confirmation of completed actions
+5. **Toast Notifications** — Temporary status messages
+6. **Confirmation Dialogs** — User decision prompts
+7. **Empty States** — Zero-data screens
+8. **Loading States** — Progress/wait indicators
+9. **Tooltips** — Hover/focus explanations
+10. **Placeholders** — Input field placeholder text
+11. **Call-to-Action buttons** — Conversion-focused button text
+
+---
+
+## Category Item Examples
+
+Common examples to show users when building item inventory per category.
+
+### Labels & Buttons
+
+Common examples:
+- Save, Save changes, Save draft
+- Cancel, Close, Dismiss
+- Delete, Remove, Clear
+- Confirm, Yes, No
+- Submit, Send, Share
+- Edit, Update, Modify
+
+### Error Messages
+
+Common examples:
+- Email validation (invalid format)
+- Password requirements (too short, weak)
+- Network errors (no connection, timeout)
+- Required field (empty field)
+- File upload (too large, wrong type)
+
+---
+
+## Generation Best Practices
+
+Guidelines for generating high-quality English microcopy options per category.
+
+### Error Messages
+- Structure: What happened + How to fix
+- Use verbs, be specific
+- No blame language
+- Example: "Email address is required. Please enter your email to continue."
+
+### CTAs / Labels
+- Action verb, specific
+- 1-3 words max
+- Example: "Save changes", "Delete item", "Send message"
+
+### Empty States
+- 3-part structure: Headline + Motivation + CTA
+- Example: "No projects yet" + "Create your first project to get started" + "Create project"
+
+### Success Messages
+- Celebrate (minimal) + Confirm
+- Example: "Email verified! Welcome aboard."

@@ -5,6 +5,7 @@ description: Review WordPress plugin PRs for security vulnerabilities, performan
   plugin code review, WP security audit, WPCS check.
 allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(gh api:*), Bash(glab mr diff:*), Bash(glab mr comment:*), Bash(git diff:*), Bash(git log:*), Write($JAAN_OUTPUTS_DIR/wp/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: <pr-url | owner/repo#number | local>
+disable-model-invocation: true
 ---
 
 # wp-pr-review

@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.0.0] - 2026-02-16
+
+### Changed
+- **Aggressive token optimization** ([Research #75](https://github.com/parhumm/jaan-to/issues/75)) — Extracted reference material from 22 skills into 17 dedicated `docs/extending/*-reference.md` files, reducing per-skill SKILL.md sizes by 25-60%. Skills now delegate large reference tables, checklists, and report templates to external docs loaded on demand. `validate-skills.sh` enhanced with per-skill line count checks (hard cap 600, soft cap 500) and extraction guidance. 44 files changed, 2,211 insertions, 1,858 deletions
+- **Bootstrap compact mode** — `bootstrap.sh` now outputs minimal startup text, reducing per-session token overhead from hook stdout. New CI gate in `release-check.yml` enforces 1,200 character cap on hook stdout to prevent token regression
+
+### Documentation
+- Added "Idea to Product" guide section to README showing the full spec-to-ship workflow
+- Updated website Token Strategy section with v7 metrics (2,400 tokens/session, 9.7K tokens/invocation, 60% skill body reduction) and four-layer architecture (reference extraction, context isolation, CI enforcement)
+
+---
+
 ## [6.4.0] - 2026-02-16
 
 ### Added

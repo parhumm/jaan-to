@@ -38,73 +38,10 @@ Override field for this skill: `language_detect-writing`
 
 ## Standards Reference
 
-### Evidence Format (SARIF-compatible)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` for Evidence Format (SARIF), Evidence ID Generation, Confidence Levels, Frontmatter Schema, Platform Detection, and Document Structure.
 
-```yaml
-evidence:
-  id: E-WRT-001                # Single-platform format
-  id: E-WRT-WEB-001            # Multi-platform format (platform prefix)
-  type: code-location
-  confidence: 0.85
-  location:
-    uri: "src/locales/en/common.json"
-    startLine: 42
-    snippet: |
-      "deleteConfirm": "Are you sure you want to delete this?"
-  method: pattern-match
-```
-
-**Evidence ID Format**:
-
-```python
-# Generation logic:
-if current_platform == 'all' or current_platform is None:  # Single-platform
-  evidence_id = f"E-WRT-{sequence:03d}"                     # E-WRT-001
-else:  # Multi-platform
-  platform_upper = current_platform.upper()
-  evidence_id = f"E-WRT-{platform_upper}-{sequence:03d}"    # E-WRT-WEB-001, E-WRT-BACKEND-023
-```
-
-Evidence IDs use namespace `E-WRT-*` to prevent collisions in detect-pack aggregation. Platform prefix prevents ID collisions across platforms in multi-platform analysis.
-
-### Confidence Levels (4-level)
-
-| Level | Label | Range | Criteria |
-|-------|-------|-------|----------|
-| 4 | **Confirmed** | 0.95-1.00 | Multiple independent methods agree |
-| 3 | **Firm** | 0.80-0.94 | Single high-precision method with clear evidence |
-| 2 | **Tentative** | 0.50-0.79 | Pattern match without full analysis |
-| 1 | **Uncertain** | 0.20-0.49 | Absence-of-evidence reasoning |
-
-### Frontmatter Schema (Universal)
-
-```yaml
----
-title: "{document title}"
-id: "{AUDIT-YYYY-NNN}"
-version: "1.0.0"
-status: draft
-date: {YYYY-MM-DD}
-target:
-  name: "{repo-name}"
-  platform: "{platform_name}"  # NEW: 'all' for single-platform, 'web'/'backend'/etc for multi-platform
-  commit: "{git HEAD hash}"
-  branch: "{current branch}"
-tool:
-  name: "detect-writing"
-  version: "1.0.0"
-  rules_version: "2024.1"
-confidence_scheme: "four-level"
-findings_summary:
-  critical: 0
-  high: 0
-  medium: 0
-  low: 0
-  informational: 0
-overall_score: 0.0
-lifecycle_phase: post-build
----
-```
+**This skill's namespace**: `E-WRT-*` (e.g., E-WRT-001, E-WRT-WEB-001)
+**Tool name in frontmatter**: `detect-writing`
 
 ---
 
@@ -208,8 +145,6 @@ For each platform in platforms:
 
 ## Step 1: String Inventory
 
-Extract all user-facing strings from:
-
 ### i18n / Locale Files
 Use framework-specific glob patterns:
 
@@ -257,8 +192,6 @@ Classify discovered strings into 8 categories using component-name glob patterns
 Also inspect variant/severity props (`variant="error"`, `severity="warning"`, `isLoading`, `isEmpty`, `isDestructive`) to classify ambiguous components.
 
 ## Step 3: NNg Tone Dimension Scoring
-
-For each extracted string corpus, compute tone dimensions:
 
 ### 4 Primary Dimensions (NNg)
 
@@ -484,25 +417,7 @@ Note: {-platform} suffix only if multi-platform mode (e.g., -web, -backend). Sin
 
 Create directory `$JAAN_OUTPUTS_DIR/detect/writing/` if it does not exist.
 
-**Platform-specific output path logic**:
-
-```python
-# Determine filename suffix
-if current_platform == 'all' or current_platform is None:  # Single-platform
-  suffix = ""                                               # No suffix
-else:  # Multi-platform
-  suffix = f"-{current_platform}"                          # e.g., "-web", "-backend"
-
-# Example output paths:
-# Single-platform: $JAAN_OUTPUTS_DIR/detect/writing/writing-system.md
-# Multi-platform:  $JAAN_OUTPUTS_DIR/detect/writing/writing-system-web.md
-#                  $JAAN_OUTPUTS_DIR/detect/writing/writing-system-backend.md
-```
-
-### Stale File Cleanup
-
-- **If `run_depth == "full"`:** Delete any existing `summary{suffix}.md` in the output directory (stale light-mode output).
-- **If `run_depth == "light"`:** Do NOT delete existing full-mode files.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` sections "Output Path Logic" and "Stale File Cleanup" for platform-specific suffix convention and run_depth cleanup rules.
 
 ### If `run_depth == "light"`: Write Single Summary File
 
