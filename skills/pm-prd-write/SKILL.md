@@ -1,7 +1,7 @@
 ---
 name: pm-prd-write
 description: Generate a Product Requirements Document from an initiative description.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(cp:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: [initiative-description]
 hooks:
   PreToolUse:
@@ -59,6 +59,7 @@ You already have the initiative from the Input section above. Now ask these ques
 1. "What problem does this solve for users?"
 2. "How will you measure success? (specific metrics)"
 3. "What is explicitly NOT included in this scope?"
+4. "Do you have design images, screenshots, or visual references to include? If yes, provide file/folder paths."
 
 ## Step 2: Plan PRD Structure
 After receiving answers, mentally outline:
@@ -94,6 +95,9 @@ Fill all sections:
 - **User Stories**: Derived from problem + solution (minimum 3)
 - **Open Questions**: Any unresolved items
 
+### Image Embedding
+If user provided image/screenshot paths in Step 1 Q4, embed them inline using `![description](resolved-path)` in relevant sections (Solution Overview, User Stories, Appendix). Use URL-encoded paths for spaces/special characters.
+
 ### Tech Context Integration
 
 If `$JAAN_CONTEXT_DIR/tech.md` exists:
@@ -119,6 +123,7 @@ Before showing preview, verify:
 - [ ] Has at least 2 measurable success metrics
 - [ ] Has explicit out-of-scope section
 - [ ] Has at least 3 user stories
+- [ ] If user provided images: all references use `![alt](...)` syntax with URL-encoded paths
 
 If any check fails, revise before preview.
 
@@ -155,6 +160,14 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-prd-${slug}.md"
 > - ID: {NEXT_ID}
 > - Folder: $JAAN_OUTPUTS_DIR/pm/prd/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-prd-{slug}.md
+
+## Step 5.7: Resolve & Copy Assets
+
+If user provided image paths in Step 1 Q4:
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/asset-embedding-reference.md` for the asset resolution protocol (path detection, copy rules, markdown embedding).
+
+Source `${CLAUDE_PLUGIN_ROOT}/scripts/lib/asset-handler.sh`. For each image path: check `is_jaan_path` — if inside `$JAAN_*`, reference in-place; if external, ask user "Copy these external assets into output folder? [y/n]" and call `copy_external_assets` if approved. Use `resolve_asset_path` to get markdown-relative paths for the generated PRD.
 
 ## Step 6: Write Output
 

@@ -25,6 +25,8 @@ argument-hint: [initiative-or-feature-description]
 
 IMPORTANT: The initiative/feature description above is your input. Use it directly. Do NOT ask for the initiative again.
 
+**Optional**: Screenshot paths can be provided to show UI elements where copy appears. Images will be embedded in the output as `![UI Context - {category}](resolved-path)`.
+
 ---
 
 ## Pre-Execution Protocol
@@ -174,6 +176,8 @@ For each selected category, build inventory of items needed:
 **For each category**, show common examples and ask:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Category Item Examples" for common examples per category (Labels & Buttons, Error Messages, etc.) to show users when building inventory.
+
+If screenshot paths were provided, read images to identify visible UI elements needing copy and inform category/item selection.
 
 After gathering counts, build complete inventory list:
 ```
@@ -331,6 +335,7 @@ Before writing output, validate all generated microcopy:
 - [ ] Reading level 7-8th grade (English baseline)
 - [ ] No ambiguous language
 - [ ] Error messages include recovery instructions
+- [ ] If screenshots provided: UI context images embedded with `![alt](...)` syntax and URL-encoded paths
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Quality Validation: Language-Specific Checks" for per-language and cultural adaptation checklists.
 
@@ -429,6 +434,14 @@ Use AskUserQuestion:
   - "Cancel" — Don't write
 
 If "Revise": Loop back to Step 5 for specific items
+
+## Step 7.7: Resolve & Copy Assets
+
+If screenshot paths were provided:
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/asset-embedding-reference.md` for the asset resolution protocol (path detection, copy rules, markdown embedding).
+
+Source `${CLAUDE_PLUGIN_ROOT}/scripts/lib/asset-handler.sh`. For each screenshot: check `is_jaan_path` — if inside `$JAAN_*`, reference in-place; if external, ask user before copying. Use `resolve_asset_path` for markdown-relative paths.
 
 ## Step 8: Write Output Files
 

@@ -1,7 +1,7 @@
 ---
 name: frontend-task-breakdown
 description: Generate frontend task breakdowns from UX handoffs with component inventory, state matrices, and estimates.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/task-breakdown/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/task-breakdown/**), Bash(cp:*), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [ux-handoff-description-or-figma-link]
 ---
 
@@ -323,6 +323,7 @@ Use AskUserQuestion:
 - Feature name, epic (if provided), scope level, date
 
 **Component Inventory section:**
+- If screenshots were provided as input, embed them in the Component Inventory using `![{Component Area}](resolved-path)` alongside relevant component groups
 - For each component: name, atomic level, estimate band, risk level
 - States table (6 states per component)
 - Tasks table with: task description, size, complexity, dependencies, acceptance criteria
@@ -387,6 +388,7 @@ Before preview, verify:
 - [ ] No hardcoded paths (all use `$JAAN_*` variables)
 - [ ] State machine stubs present for complex components
 - [ ] Definition of Ready and Done sections populated
+- [ ] If screenshots provided: images embedded with `![alt](...)` syntax and URL-encoded paths
 
 If any check fails, fix before preview.
 
@@ -430,6 +432,14 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 > - ID: {NEXT_ID}
 > - Folder: $JAAN_OUTPUTS_DIR/frontend/task-breakdown/{NEXT_ID}-{slug}/
 > - Main file: {NEXT_ID}-{slug}.md
+
+## Step 10.7: Resolve & Copy Assets
+
+If screenshot paths were provided as input:
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/asset-embedding-reference.md` for the asset resolution protocol (path detection, copy rules, markdown embedding).
+
+Source `${CLAUDE_PLUGIN_ROOT}/scripts/lib/asset-handler.sh`. For each screenshot: check `is_jaan_path` — if inside `$JAAN_*`, reference in-place; if external, ask user before copying. Use `resolve_asset_path` for markdown-relative paths.
 
 ## Step 11: Write Output
 
