@@ -27,8 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v6.3.0 (42 skills) — qa-test-run, dev-verify, incremental audit, drift detection, $JAAN_DOCS_DIR
-**Next:** v6.4.0 (43 skills) — backend-pr-review, wp-pr-review large PR fix
+**Latest:** v6.4.0 (43 skills) — backend-pr-review, wp-pr-review large PR fix
 
 ---
 
