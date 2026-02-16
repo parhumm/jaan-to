@@ -119,21 +119,8 @@ If "Sample-based" selected:
   - Directness (specific/general)
   - Emotion (empathetic/neutral/celebratory)
 - Show extracted tone profile:
-  ```
-  TONE PROFILE DETECTED
-  ─────────────────────
-  Formality: {level}
-  Warmth: {level}
-  Directness: {level}
-  Emotion: {level}
 
-  Language-specific pronouns:
-  - Persian: {شما/تو}
-  - Russian: {Вы/ты}
-  - German: {Sie/du}
-  - Turkish: {Siz/sen}
-  - French: {Vous/tu}
-  ```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Tone Profile Detection Template" for the display template with formality, warmth, directness, emotion levels and language-specific pronouns.
 - Ask: "Use this tone profile? [y/n]"
 - If no, ask again for refinement
 
@@ -146,13 +133,7 @@ If "Sample-based" selected:
 
 Analyze initiative/feature description for microcopy needs using keyword detection:
 
-**Smart detection rules**:
-- Keywords: "form", "validation", "input" → **Error Messages**, **Helper Text**, **Labels**
-- Keywords: "modal", "dialog", "confirm" → **Confirmation Dialogs**, **CTAs**
-- Keywords: "empty", "first-time", "no data" → **Empty States**
-- Keywords: "notification", "toast", "alert" → **Toast Notifications**, **Success Messages**
-- Keywords: "button", "action", "submit" → **CTAs**, **Labels**
-- Keywords: "loading", "progress" → **Loading States**
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Category Detection Rules" for keyword-to-category mapping rules.
 
 Show detected categories + additional common ones:
 ```
@@ -169,17 +150,8 @@ Additional common categories:
 ```
 
 **Available microcopy categories** (11 total):
-1. Labels & Buttons
-2. Helper Text
-3. Error Messages (with recovery instructions)
-4. Success Messages
-5. Toast Notifications
-6. Confirmation Dialogs
-7. Empty States
-8. Loading States
-9. Tooltips
-10. Placeholders
-11. Call-to-Action buttons
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Microcopy Categories Catalog" for the full list of 11 categories with descriptions.
 
 Use AskUserQuestion:
 - Question: "Which categories do you need?"
@@ -201,30 +173,7 @@ For each selected category, build inventory of items needed:
 
 **For each category**, show common examples and ask:
 
-**Example for Labels & Buttons**:
-> "How many button labels do you need?
->
-> Common examples:
-> - Save, Save changes, Save draft
-> - Cancel, Close, Dismiss
-> - Delete, Remove, Clear
-> - Confirm, Yes, No
-> - Submit, Send, Share
-> - Edit, Update, Modify
->
-> Enter number of items (or 'skip' for none):"
-
-**Example for Error Messages**:
-> "How many error messages do you need?
->
-> Common examples:
-> - Email validation (invalid format)
-> - Password requirements (too short, weak)
-> - Network errors (no connection, timeout)
-> - Required field (empty field)
-> - File upload (too large, wrong type)
->
-> Enter number of items (or 'skip' for none):"
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Category Item Examples" for common examples per category (Labels & Buttons, Error Messages, etc.) to show users when building inventory.
 
 After gathering counts, build complete inventory list:
 ```
@@ -300,24 +249,7 @@ Tone: {tone_profile}
 
 Generate 3 options in English following best practices:
 
-**For Error Messages**:
-- Structure: What happened + How to fix
-- Use verbs, be specific
-- No blame language
-- Example: "Email address is required. Please enter your email to continue."
-
-**For CTAs/Labels**:
-- Action verb, specific
-- 1-3 words max
-- Example: "Save changes", "Delete item", "Send message"
-
-**For Empty States**:
-- 3-part structure: Headline + Motivation + CTA
-- Example: "No projects yet" + "Create your first project to get started" + "Create project"
-
-**For Success Messages**:
-- Celebrate (minimal) + Confirm
-- Example: "Email verified! Welcome aboard."
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Generation Best Practices" for per-category guidelines (Error Messages, CTAs/Labels, Empty States, Success Messages) with structure patterns and examples.
 
 Show 3 options to user:
 ```

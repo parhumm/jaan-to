@@ -119,6 +119,16 @@ if [ -f "$PROJECT_DIR/$CONTEXT_DIR/tech.md" ]; then
 fi
 
 # 11. Output structured result
+# Token budget: target ≤ 300 tokens (~1,200 chars) stdout
+
+# Compact mode: if nothing was copied and no context missing, emit minimal payload
+if [ "$CONFIG_COPIED" -eq 0 ] && [ "$CONTEXT_COPIED" -eq 0 ] && [ ${#MISSING_CONTEXT[@]} -eq 0 ]; then
+  cat <<RESULT
+{"status":"complete","config_loaded":true,"output_dir":"${OUTPUTS_DIR}","learn_dir":"${LEARN_DIR}","context_dir":"${CONTEXT_DIR}","templates_dir":"${TEMPLATES_DIR}","suggest_detect":${SUGGEST_DETECT}}
+RESULT
+  exit 0
+fi
+
 if [ ${#MISSING_CONTEXT[@]} -gt 0 ]; then
   MISSING_LIST=$(printf '"%s",' "${MISSING_CONTEXT[@]}" | sed 's/,$//')
 else

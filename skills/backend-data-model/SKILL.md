@@ -165,33 +165,9 @@ For each entity, apply constraint extraction heuristics:
 
 ### Constraint Extraction Rules
 
-**Uniqueness detection:**
-| NL Pattern | Constraint | Confidence |
-|---|---|---|
-| "unique email" / "distinct slug" | `UNIQUE(column)` | Explicit |
-| "each user has an email" | `UNIQUE(email)` per scope | Implicit |
-| "no two orders share the same number" | `UNIQUE(order_number)` | Explicit |
-| "one license per driver" | `UNIQUE(driver_id, license_number)` | Composite |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-data-model-reference.md` section "Constraint Extraction Patterns" for uniqueness detection, relationship mapping, CHECK constraint patterns, and NOT NULL defaults.
 
 **Critical multi-tenant rule**: When multi-tenancy is enabled, every uniqueness constraint must include `tenant_id` — `UNIQUE(tenant_id, email)`, never `UNIQUE(email)`. This is the most common AI failure in schema generation.
-
-**Relationship mapping:**
-| NL Pattern | Cardinality | Implementation |
-|---|---|---|
-| "belongs to" / "owned by" | N:1 | FK on child table |
-| "has many" / "contains" | 1:N | FK on child table |
-| "has one" / "has a single" | 1:1 | FK with UNIQUE constraint |
-| "can have many...and...can have many" | M:N | Junction table |
-| "is a" / "is a type of" | Inheritance | Single-table or table-per-type |
-
-**Ambiguity defaults**: Plural nouns on both sides → M:N. Doubt between 1:N and M:N → default 1:N (simpler, upgradeable). Junction tables when relationship has attributes ("enrolled *with a grade*").
-
-**CHECK constraints from domain language:**
-- "must be active/inactive" → `CHECK (status IN ('active','inactive'))`
-- "price > 0" → `CHECK (price > 0)`
-- "between 0 and 150" → `CHECK (age BETWEEN 0 AND 150)`
-
-**NOT NULL defaults**: Fields default to NOT NULL unless explicitly optional ("optionally", "can have", "if available" → nullable).
 
 ### Per-Entity Analysis
 
@@ -240,44 +216,7 @@ Entity: Post
 
 Plan cross-cutting patterns based on Step 2 decisions:
 
-### Timestamps
-All tables include:
-- `created_at` — TIMESTAMPTZ (PostgreSQL) / TIMESTAMP (MySQL) / TEXT ISO8601 (SQLite), NOT NULL, DEFAULT now()
-- `updated_at` — Same type, NOT NULL, DEFAULT now(), updated by application or trigger
-
-### Soft Deletes (if enabled)
-- Add `deleted_at` column (same timestamp type, nullable, DEFAULT NULL)
-- Create partial unique indexes: `UNIQUE(email) WHERE deleted_at IS NULL`
-- Every query filter must include `WHERE deleted_at IS NULL` (note for application layer)
-- Partial index for active records: `CREATE INDEX ON {table}(id) WHERE deleted_at IS NULL`
-
-### Multi-Tenancy (if enabled)
-- Add `tenant_id` (uuid/bigint, NOT NULL, FK to tenants.id) to every business table
-- ALL unique constraints become composite: `UNIQUE(tenant_id, email)`
-- ALL composite indexes start with `tenant_id`: `(tenant_id, status, created_at)`
-- FK constraints include tenant_id where possible for cross-tenant protection
-- For PostgreSQL: note RLS policy template:
-  ```sql
-  ALTER TABLE {table} ENABLE ROW LEVEL SECURITY;
-  CREATE POLICY tenant_isolation ON {table}
-      USING (tenant_id = current_setting('app.current_tenant_id')::UUID);
-  ```
-
-### Enum Strategy
-- Use `CHECK` constraints on `VARCHAR` columns — NOT native ENUM types
-- Rationale: Cannot remove ENUM values without aggressive locking; CHECK is operationally flexible
-- Pattern: `status VARCHAR(20) NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'active', 'inactive'))`
-
-### PK Strategy
-- PostgreSQL: `id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY`
-- MySQL/InnoDB: `id BIGINT AUTO_INCREMENT PRIMARY KEY` (short PKs critical — PKs stored in every secondary index)
-- SQLite: `id INTEGER PRIMARY KEY` (implicit rowid)
-- If public-facing IDs needed: separate `uuid` column with unique index
-
-### Naming Conventions
-- Tables: plural snake_case (`users`, `order_items`)
-- Columns: singular snake_case (`user_id`, `created_at`)
-- Constraints: `pk_{table}`, `fk_{table}_{column}_{ref_table}`, `check_{table}_{column}_{type}`, `idx_{table}_on_{columns}`
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-data-model-reference.md` section "Cross-Cutting Concern Patterns" for timestamps, soft deletes, multi-tenancy (incl. RLS template), enum strategy, PK strategy, and naming conventions.
 
 ---
 
@@ -365,10 +304,7 @@ For each entity, generate:
 | created_at | TIMESTAMPTZ | NO | now() | — |
 | updated_at | TIMESTAMPTZ | NO | now() | — |
 
-**Engine-specific type rules:**
-- PostgreSQL: `BIGINT GENERATED ALWAYS AS IDENTITY`, `TIMESTAMPTZ`, `JSONB`, `BOOLEAN`
-- MySQL: `BIGINT AUTO_INCREMENT`, `TIMESTAMP`/`DATETIME`, `JSON`, `TINYINT(1)`
-- SQLite: `INTEGER PRIMARY KEY`, `TEXT` (ISO8601), `TEXT` (JSON), `INTEGER` (0/1)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-data-model-reference.md` section "Engine-Specific Type Rules" for PK, timestamp, JSON, and boolean type mappings per engine.
 
 **Indexes table:**
 | Name | Columns | Type | Rationale |
@@ -392,20 +328,14 @@ For each entity, generate:
 Document the patterns chosen in Step 4 with concrete implementation details.
 
 ### 5.5: Index Strategy
-For each composite index, show ESR rationale. Include:
-- Engine-specific index types (GIN for JSONB, BRIN for time-series, partial indexes)
-- Multi-tenant indexes: tenant_id always first
-- Soft delete partial indexes: `WHERE deleted_at IS NULL`
-- Covering indexes for high-frequency queries: `INCLUDE` clause
+For each composite index, show ESR rationale.
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-data-model-reference.md` section "Index Strategy Patterns" for engine-specific index types, multi-tenant indexing, partial indexes, and covering index patterns.
 
 ### 5.6: Migration Playbook
-Per-table migration classification:
-| Table | Operation | Safety | Method | Notes |
-|-------|-----------|--------|--------|-------|
-| users | CREATE TABLE | Safe | Instant | New table, no locks |
-| orders | ADD COLUMN amount | Safe | Instant | PG 11+ constant default |
-| users | ADD NOT NULL | Caution | NOT VALID + VALIDATE | Two-step: add CHECK NOT VALID, then VALIDATE |
-| orders | RENAME status | Breaking | Expand-Contract | Three-phase: add new, dual-write, drop old |
+Per-table migration classification.
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-data-model-reference.md` section "Migration Safety Classification" for operation safety levels, methods, and brownfield zero-downtime patterns.
 
 ### 5.7: Retention & Compliance
 If GDPR: document deletion strategy (hard delete + anonymized audit, crypto-shredding, or separate PII tables).
@@ -413,51 +343,15 @@ If TTL: document cleanup approach (pg_cron + batched DELETE, partition-based ret
 If legal holds: note legal_holds table pattern.
 
 ### 5.8: Quality Scorecard
-Apply 5-dimension scoring rubric:
+Apply 5-dimension scoring rubric. Score each dimension and compute weighted overall score.
 
-| Dimension | Weight | Checks |
-|-----------|--------|--------|
-| Referential Integrity | 25% | FKs defined; ON DELETE specified; FK indexes present |
-| Constraint Completeness | 25% | CHECK for enums/ranges; NOT NULL where appropriate; UNIQUE for business rules |
-| Index Coverage | 20% | FK columns indexed; query patterns covered; composite ordering correct (ESR) |
-| Convention Consistency | 15% | snake_case naming; plural tables; consistent constraint naming |
-| Operational Readiness | 15% | Timestamps present; soft-delete support; migration notes included |
-
-Score each dimension and compute weighted overall score.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-data-model-reference.md` section "Quality Scorecard Rubric" for dimensions, weights, and check criteria.
 
 ## Step 6: Quality Check
 
-Before preview, verify every item:
+Before preview, verify every item in the quality checklist. If any check fails, fix before preview.
 
-**Structure:**
-- [ ] Every table has PK (bigint or uuid per strategy)
-- [ ] Every table has `created_at` and `updated_at` timestamps
-- [ ] Naming: plural snake_case tables, singular snake_case columns
-
-**Constraints:**
-- [ ] All FKs specify ON DELETE behavior (CASCADE/RESTRICT/SET NULL)
-- [ ] No bare VARCHAR without length constraint
-- [ ] No native ENUM types — all use CHECK on VARCHAR
-- [ ] Booleans have DEFAULT values
-- [ ] Multi-tenant: all unique constraints include tenant_id
-
-**Indexes:**
-- [ ] All FK columns have matching indexes (PostgreSQL doesn't auto-create)
-- [ ] Composite indexes follow ESR rule (Equality → Sort → Range)
-- [ ] Soft delete tables have partial index `WHERE deleted_at IS NULL`
-
-**Anti-patterns:**
-- [ ] No polymorphic type+id columns (use separate tables per GitLab pattern)
-- [ ] No god tables (50+ columns → decompose)
-- [ ] No orphan tables (tables with no FK relationships)
-
-**Completeness:**
-- [ ] Executive Summary present
-- [ ] Mermaid ER diagram present and matches table definitions
-- [ ] Migration notes included for all tables
-- [ ] Quality scorecard computed
-
-If any check fails, fix before preview.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-data-model-reference.md` section "Quality Check Checklist" for structure, constraints, indexes, anti-patterns, and completeness checks.
 
 ## Step 7: Preview & Approval
 

@@ -326,112 +326,9 @@ Group cross-platform findings by canonical group ID and deduplicate. Store conso
 
 ## Step 7: Present Consolidation Summary
 
-**If `run_depth == "light"`:**
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-pack-reference.md` section "Consolidation Summary Templates" for light mode, full single-platform, and full multi-platform display formats.
 
-```
-KNOWLEDGE PACK CONSOLIDATION (Light Mode)
---------------------------------------------
-
-MODE: {Single-Platform / Multi-Platform}
-{if multi: "PLATFORMS DETECTED: {list} ({n} platforms)"}
-
-DOMAINS ANALYZED: {n}/5 {list}
-INPUT MODES: {domain: mode for each domain}
-{if partial: "WARNING: Partial analysis — missing: {list}"}
-
-REPO-WIDE FINDINGS
-  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
-
-OVERALL SCORE: {score}/10 {(partial) if applicable}
-
-RISK HEATMAP:
-  {inline domain x severity table}
-
-OUTPUT FILE (1):
-  $JAAN_OUTPUTS_DIR/detect/summary.md
-
-Note: Run with --full for evidence index (source map), unknowns backlog,
-cross-platform deduplication, and per-platform detail packs.
-```
-
-> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/? [y/n]"
-
-**If `run_depth == "full"`:**
-
-**Single-Platform Mode:**
-
-```
-KNOWLEDGE PACK CONSOLIDATION
-------------------------------
-
-MODE: Single-Platform
-PLATFORM: all
-
-DOMAINS ANALYZED: {n}/5 {list}
-{if partial: "WARNING: Partial analysis — missing: {list}"}
-
-REPO-WIDE FINDINGS
-  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
-
-OVERALL SCORE: {score}/10 {(partial) if applicable}
-
-CONFIDENCE DISTRIBUTION
-  Confirmed: {n}  |  Firm: {n}  |  Tentative: {n}  |  Uncertain: {n}
-
-EVIDENCE INDEX: {n} evidence IDs indexed
-UNKNOWNS BACKLOG: {n} items requiring investigation
-
-VALIDATION ISSUES: {n} frontmatter validation failures
-
-OUTPUT FILES (4):
-  $JAAN_OUTPUTS_DIR/detect/README.md              - Knowledge index with overall score
-  $JAAN_OUTPUTS_DIR/detect/risk-heatmap.md        - Domain x severity risk heatmap
-  $JAAN_OUTPUTS_DIR/detect/unknowns-backlog.md    - Prioritized unknowns with confirmation steps
-  $JAAN_OUTPUTS_DIR/detect/source-map.md          - Evidence ID resolution index
-```
-
-**Multi-Platform Mode:**
-
-```
-KNOWLEDGE PACK CONSOLIDATION
-------------------------------
-
-MODE: Multi-Platform
-PLATFORMS DETECTED: {list} ({n} platforms)
-
-DOMAINS ANALYZED: {n}/5 {list}
-{if partial: "WARNING: Partial analysis — missing: {list}"}
-
-PER-PLATFORM SCORES
-  web:     {score}/10  |  Findings: C:{n} H:{n} M:{n} L:{n} I:{n}
-  backend: {score}/10  |  Findings: C:{n} H:{n} M:{n} L:{n} I:{n}
-  mobile:  {score}/10  |  Findings: C:{n} H:{n} M:{n} L:{n} I:{n}
-
-REPO-WIDE AGGREGATE (All Platforms)
-  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
-
-OVERALL SCORE: {weighted_avg_score}/10
-
-CROSS-PLATFORM FINDINGS: {n} findings linked across multiple platforms
-
-CONFIDENCE DISTRIBUTION
-  Confirmed: {n}  |  Firm: {n}  |  Tentative: {n}  |  Uncertain: {n}
-
-EVIDENCE INDEX: {n} evidence IDs indexed ({n} with platform prefixes)
-UNKNOWNS BACKLOG: {n} items requiring investigation
-
-VALIDATION ISSUES: {n} frontmatter validation failures
-
-OUTPUT FILES (4 + {n} per-platform):
-  $JAAN_OUTPUTS_DIR/detect/pack/README.md              - Merged pack (all platforms)
-  $JAAN_OUTPUTS_DIR/detect/pack/risk-heatmap.md        - Cross-platform risk heatmap
-  $JAAN_OUTPUTS_DIR/detect/pack/unknowns-backlog.md    - All platforms combined
-  $JAAN_OUTPUTS_DIR/detect/pack/source-map.md          - All evidence IDs
-
-  Per-platform packs:
-  $JAAN_OUTPUTS_DIR/detect/pack/README-{platform}.md   - Per-platform index
-  (one per detected platform)
-```
+Present the consolidation summary using the appropriate template for current `run_depth` and platform mode.
 
 > "Proceed with writing consolidation files to $JAAN_OUTPUTS_DIR/detect/? [y/n]"
 
@@ -465,14 +362,7 @@ os.makedirs(output_dir, exist_ok=True)
 
 Write one file: `$JAAN_OUTPUTS_DIR/detect/summary.md`
 
-Contents:
-1. Universal YAML frontmatter with `findings_summary` and `overall_score`
-2. **Overview** — domains analyzed, input modes, overall score
-3. **Risk Heatmap** — domain x severity table (from Step 4)
-4. **Per-Domain Executive Summary** — 1-2 sentences per domain
-5. If multi-platform: **Platform Scores Table** — scores per platform (no cross-platform dedup)
-6. **Input Mode Table** — which domains provided full vs summary data
-7. "Run with `--full` for evidence index (source map), unknowns backlog with confirmation steps, cross-platform finding deduplication, and per-platform detail packs."
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-pack-reference.md` section "Light Mode Summary File Structure" for required contents.
 
 ### If `run_depth == "full"`: Write Full Output Files
 
