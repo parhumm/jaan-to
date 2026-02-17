@@ -108,38 +108,38 @@ Complete spec-to-ship workflow across 13 roles: Research → Specification → D
 ## Phase 6: Priority Skills & Infrastructure
 
 ### New Skills
-- [ ] `skill-create /ux-flowchart-png` — Convert `/ux-flowchart-generate` Mermaid outputs to PNG (Python script) and auto-embed in documents ([#124](https://github.com/parhumm/jaan-to/issues/124))
-- [ ] `skill-create /frontend-pr-review` — Frontend-focused PR review for React/Next.js (performance, accessibility, hooks, bundle impact) ([#125](https://github.com/parhumm/jaan-to/issues/125))
-- [ ] `skill-create /detect-security` — Dedicated security/vulnerability detection; extract security scope from `detect-dev`, `detect-pack`, and other `detect-*` skills ([#126](https://github.com/parhumm/jaan-to/issues/126))
-- [ ] `skill-create /pm-jira-export` — Convert markdown outputs to Jira-ready copy-paste format + Jira MCP support ([#127](https://github.com/parhumm/jaan-to/issues/127))
-- [ ] `skill-create /pm-okr-controller` — Objective and OKR tracking for PM role ([#128](https://github.com/parhumm/jaan-to/issues/128))
+- [ ] `skill-create /ux-flowchart-png` — Convert `/ux-flowchart-generate` Mermaid outputs to PNG (Python script) and auto-embed in documents ([#124](https://github.com/parhumm/jaan-to/issues/124)) → [details](tasks/ux-flowchart-png.md)
+- [ ] `skill-create /frontend-pr-review` — Frontend-focused PR review for React/Next.js (performance, accessibility, hooks, bundle impact) ([#125](https://github.com/parhumm/jaan-to/issues/125)) → [details](tasks/frontend-pr-review.md)
+- [ ] `skill-create /detect-security` — Dedicated security/vulnerability detection; extract security scope from `detect-dev`, `detect-pack`, and other `detect-*` skills ([#126](https://github.com/parhumm/jaan-to/issues/126)) → [details](tasks/detect-security.md)
+- [ ] `skill-create /pm-jira-export` — Convert markdown outputs to Jira-ready copy-paste format + Jira MCP support ([#127](https://github.com/parhumm/jaan-to/issues/127)) → [details](tasks/pm-jira-export.md)
+- [ ] `skill-create /pm-okr-controller` — Objective and OKR tracking for PM role ([#128](https://github.com/parhumm/jaan-to/issues/128)) → [details](tasks/pm-okr-controller.md)
 
 ### Skill Updates
-- [ ] `skill-update /frontend-design` — Review and update UX/frontend skills for current best practices ([#129](https://github.com/parhumm/jaan-to/issues/129))
-- [ ] `skill-update /frontend-task-breakdown` — Shadcn MCP integration + React component-aware breakdowns ([#130](https://github.com/parhumm/jaan-to/issues/130))
+- [ ] `skill-update /frontend-design` — Review and update UX/frontend skills for current best practices ([#129](https://github.com/parhumm/jaan-to/issues/129)) → [details](tasks/frontend-design-update.md)
+- [ ] `skill-update /frontend-task-breakdown` — Shadcn MCP integration + React component-aware breakdowns ([#130](https://github.com/parhumm/jaan-to/issues/130)) → [details](tasks/frontend-task-breakdown-update.md)
 
 ### Architecture
 - [ ] Security output proxy — Separate security docs/outputs into `jaan-to-sec-output/` gitsubmodule (mirrors `jaan-to/outputs/` structure, tech-lead-only access) ([#131](https://github.com/parhumm/jaan-to/issues/131)) → [details](tasks/security-output-proxy.md)
-- [ ] GitLab support — First-class GitLab MCP + `glab` CLI + GitLab App across all relevant skills ([#132](https://github.com/parhumm/jaan-to/issues/132))
+- [ ] GitLab support — First-class GitLab MCP + `glab` CLI + GitLab App across all relevant skills ([#132](https://github.com/parhumm/jaan-to/issues/132)) → [details](tasks/gitlab-support.md)
 
 ### WP Consolidation
 - [ ] Consolidate WP skills: 25 → max 7 — Full WP plugin lifecycle (Plan → Build → Secure → Test → Release → Support → Maintain) ([#133](https://github.com/parhumm/jaan-to/issues/133)) → [details](tasks/roles-wp-skills.md)
 
 ### PM & Batch Skills
-- [ ] PM role gap completion — Ship remaining PM skills from 21-skill catalog + batch workflow ([#134](https://github.com/parhumm/jaan-to/issues/134))
+- [ ] PM role gap completion — Ship remaining PM skills from 21-skill catalog + batch workflow ([#134](https://github.com/parhumm/jaan-to/issues/134)) → [details](tasks/pm-role-gap.md)
 - [ ] Batch/combination skills per role — Role-level pipeline skills (WP, PM, Dev, UX, QA) for shipping ideas with minimum human actions ([#135](https://github.com/parhumm/jaan-to/issues/135)) → [details](tasks/batch-skills.md)
 
 ### Distribution
-- [ ] Jaanify → starter template — Convert `parhumm/jaanify` into smart starter template for one-command idea-to-ship ([#136](https://github.com/parhumm/jaan-to/issues/136))
-- [ ] Branding + website with skill demos — Landing page, skill output demos, flow-of-use walkthroughs (priority: next week) ([#137](https://github.com/parhumm/jaan-to/issues/137))
+- [ ] Jaanify → starter template — Convert `parhumm/jaanify` into smart starter template for one-command idea-to-ship ([#136](https://github.com/parhumm/jaan-to/issues/136)) → [details](tasks/jaanify-template.md)
+- [ ] Branding + website with skill demos — Landing page, skill output demos, flow-of-use walkthroughs (priority: next week) ([#137](https://github.com/parhumm/jaan-to/issues/137)) → [details](tasks/branding-website.md)
 
 ### Development Workflow
 
 > Details: [tasks/development-workflow.md](tasks/development-workflow.md) | [tasks/lsp-support.md](tasks/lsp-support.md)
 
-- [ ] Project constitution document (`context/constitution.md`) — 9 immutable development principles ([#138](https://github.com/parhumm/jaan-to/issues/138))
-- [ ] Complexity tracking in outputs — `[NEEDS CLARIFICATION]`, `[COMPLEXITY]`, `[EXCEPTION]`, `[TRADEOFF]` markers ([#139](https://github.com/parhumm/jaan-to/issues/139))
-- [ ] LSP support — Bundle TypeScript + Python language server configs, make skills LSP-aware ([#140](https://github.com/parhumm/jaan-to/issues/140))
+- [ ] Project constitution document (`context/constitution.md`) — 9 immutable development principles ([#138](https://github.com/parhumm/jaan-to/issues/138)) → [details](tasks/development-workflow.md)
+- [ ] Complexity tracking in outputs — `[NEEDS CLARIFICATION]`, `[COMPLEXITY]`, `[EXCEPTION]`, `[TRADEOFF]` markers ([#139](https://github.com/parhumm/jaan-to/issues/139)) → [details](tasks/development-workflow.md)
+- [ ] LSP support — Bundle TypeScript + Python language server configs, make skills LSP-aware ([#140](https://github.com/parhumm/jaan-to/issues/140)) → [details](tasks/lsp-support.md)
 
 ---
 
