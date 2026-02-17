@@ -18,7 +18,7 @@ sidebar_position: 1
 | 3     | Customization & config system                    | **Done**                              |
 | 4     | Detect & Knowledge Pack (6 skills)               | **Done**                              |
 | 5     | Idea to Product pipeline (43 skills)             | **Done**                              |
-| 6     | Development workflow & DX                        | Planned                               |
+| 6     | Priority skills & infrastructure                 | Planned                               |
 | 7     | MCP connectors (24 documented)                   | Planned                               |
 | 8     | Extended role skills (remaining from 142 catalog) | Planned                               |
 | 9     | Testing and polish                               | Planned                               |
@@ -105,8 +105,33 @@ Complete spec-to-ship workflow across 13 roles: Research → Specification → D
 
 ---
 
-## Phase 6: 
+## Phase 6: Priority Skills & Infrastructure
 
+### New Skills
+- [ ] `skill-create /ux-flowchart-png` — Convert `/ux-flowchart-generate` Mermaid outputs to PNG (Python script) and auto-embed in documents
+- [ ] `skill-create /frontend-pr-review` — Frontend-focused PR review for React/Next.js (performance, accessibility, hooks, bundle impact)
+- [ ] `skill-create /detect-security` — Dedicated security/vulnerability detection; extract security scope from `detect-dev`, `detect-pack`, and other `detect-*` skills
+- [ ] `skill-create /pm-jira-export` — Convert markdown outputs to Jira-ready copy-paste format + Jira MCP support
+- [ ] `skill-create /pm-okr-controller` — Objective and OKR tracking for PM role
+
+### Skill Updates
+- [ ] `skill-update /frontend-design` — Review and update UX/frontend skills for current best practices
+- [ ] `skill-update /frontend-task-breakdown` — Shadcn MCP integration + React component-aware breakdowns
+
+### Architecture
+- [ ] Security output proxy — Separate security docs/outputs into `jaan-to-sec-output/` gitsubmodule (mirrors `jaan-to/outputs/` structure, tech-lead-only access) → [details](tasks/security-output-proxy.md)
+- [ ] GitLab support — First-class GitLab MCP + `glab` CLI + GitLab App across all relevant skills
+
+### WP Consolidation
+- [ ] Consolidate WP skills: 25 → max 7 — Full WP plugin lifecycle (Plan → Build → Secure → Test → Release → Support → Maintain) → [details](tasks/roles-wp-skills.md)
+
+### PM & Batch Skills
+- [ ] PM role gap completion — Ship remaining PM skills from 21-skill catalog + batch workflow
+- [ ] Batch/combination skills per role — Role-level pipeline skills (WP, PM, Dev, UX, QA) for shipping ideas with minimum human actions → [details](tasks/batch-skills.md)
+
+### Distribution
+- [ ] Jaanify → starter template — Convert `parhumm/jaanify` into smart starter template for one-command idea-to-ship
+- [ ] Branding + website with skill demos — Landing page, skill output demos, flow-of-use walkthroughs (priority: next week)
 
 ---
 
