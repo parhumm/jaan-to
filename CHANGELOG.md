@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- **Roadmap-update now enforces 6 structural consistency rules** — Every run validates overview-to-section matching, sequential numbering, done-phase blockquotes, catalog accuracy, version accuracy, and future-focus compliance. Violations are reported before mode-specific work begins
+- **Release-iterate-changelog now triggers roadmap sync** — After writing changelog updates, the skill calls `/jaan-to:roadmap-update` to keep the roadmap in sync automatically
+
 ---
 
 ## [7.1.0] - 2026-02-16
