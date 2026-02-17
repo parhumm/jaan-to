@@ -133,9 +133,7 @@ Complete spec-to-ship workflow across 13 roles: Research → Specification → D
 - [ ] Jaanify → starter template — Convert `parhumm/jaanify` into smart starter template for one-command idea-to-ship
 - [ ] Branding + website with skill demos — Landing page, skill output demos, flow-of-use walkthroughs (priority: next week)
 
----
-
-## Phase 7: Development Workflow & DX
+### Development Workflow
 
 > Details: [tasks/development-workflow.md](tasks/development-workflow.md) | [tasks/lsp-support.md](tasks/lsp-support.md)
 
