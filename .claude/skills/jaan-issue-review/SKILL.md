@@ -317,7 +317,7 @@ git commit -m "$(cat <<'EOF'
 
 Closes #{ID}
 
-Co-Authored-By: Claude <noreply@anthropic.com>
+Co-Authored-By: Jaan.to <noreply@jaan.to>
 EOF
 )"
 ```
@@ -359,7 +359,7 @@ git add docs/ CHANGELOG.md
 git commit -m "$(cat <<'EOF'
 docs: update documentation for #{ID}
 
-Co-Authored-By: Claude <noreply@anthropic.com>
+Co-Authored-By: Jaan.to <noreply@jaan.to>
 EOF
 )"
 ```
@@ -394,7 +394,7 @@ Closes #{ID}
 - [ ] Documentation updated
 - [ ] Docusaurus formatting verified
 
-Co-Authored-By: Claude <noreply@anthropic.com>
+Co-Authored-By: Jaan.to <noreply@jaan.to>
 EOF
 )"
 ```
