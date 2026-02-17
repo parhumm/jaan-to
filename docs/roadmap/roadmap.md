@@ -13,7 +13,9 @@ sidebar_position: 1
 
 | Phase | Focus                                            | Status                                |
 | ----- | ------------------------------------------------ | ------------------------------------- |
-| 1-3   | Foundation, migration, customization             | Done (see [CHANGELOG.md](/changelog)) |
+| 1     | Plugin architecture (10 skills)                  | **Done**                              |
+| 2     | Migration & standards                            | **Done**                              |
+| 3     | Customization & config system                    | **Done**                              |
 | 4     | Detect & Knowledge Pack (6 skills)               | **Done**                              |
 | 5     | Idea to Product pipeline (43 skills)             | **Done**                              |
 | 6     | Development workflow & DX                        | Planned                               |
@@ -60,7 +62,55 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ---
 
-## Phase 6: Development Workflow & DX
+## Phase 1: Plugin Architecture — Done
+
+> v1.0.0 — see [CHANGELOG.md](/changelog)
+
+Skills/agents/hooks architecture, 10 initial skills (PM, Data, Core), learning system, context templates, two-phase workflow with human approval, bootstrap setup.
+
+---
+
+## Phase 2: Migration & Standards — Done
+
+> v2.0.0–v2.2.0 — see [CHANGELOG.md](/changelog)
+
+Directory rename `.jaan-to/` → `jaan-to/`, research skills merge, pm-story-write with INVEST validation and Given/When/Then acceptance criteria.
+
+---
+
+## Phase 3: Customization & Config — Done
+
+> v3.0.0–v3.22.0 — see [CHANGELOG.md](/changelog)
+
+Multi-layer YAML config, `$JAAN_*` path variables, template variables, language preference system, ID-based output structure, marketplace distribution, Docusaurus documentation site.
+
+---
+
+## Phase 4: Detect & Knowledge Pack — Done
+
+> v3.23.0–v4.1.0 — see [CHANGELOG.md](/changelog)
+
+6 detect skills (dev, design, writing, product, ux, pack) with SARIF-like evidence, 4-level confidence scoring, multi-platform monorepo support, light/full detection modes.
+
+---
+
+## Phase 5: Idea to Product Pipeline — Done
+
+> v3.3.0–v7.1.0 — see [CHANGELOG.md](/changelog)
+
+The [Idea to Product Guide](https://github.com/parhumm/jaanify/blob/main/docs/idea-to-product.md) walks through the full pipeline — research, PRD, design, code generation, testing, and deployment — with minimum human intervention. Each skill's output feeds the next.
+
+Complete spec-to-ship workflow across 13 roles: Research → Specification → Design → Planning → Scaffolding → Quality → Infrastructure → Integration → Release. Token optimization (v7.0.0) reduced skill sizes 25-60%. Asset embedding (v7.1.0) for document-generating skills.
+
+
+---
+
+## Phase 6: 
+
+
+---
+
+## Phase 7: Development Workflow & DX
 
 > Details: [tasks/development-workflow.md](tasks/development-workflow.md) | [tasks/lsp-support.md](tasks/lsp-support.md)
 
