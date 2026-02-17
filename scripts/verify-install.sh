@@ -79,15 +79,10 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/docs" ]; then
   check "$([ -f "$PLUGIN_DIR/docs/extending/create-skill.md" ] && echo true || echo false)" "Plugin has create-skill.md"
 fi
 
-# 6. .gitignore
-echo ""
-echo "6. .gitignore:"
-check "$(grep -q 'jaan-to/' "$PROJECT_DIR/.gitignore" 2>/dev/null && echo true || echo false)" "jaan-to in .gitignore"
-
-# 7. Plugin manifest validation (if plugin dir available)
+# 6. Plugin manifest validation (if plugin dir available)
 if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   echo ""
-  echo "7. Plugin manifest:"
+  echo "6. Plugin manifest:"
   check "$([ -f "$PLUGIN_DIR/.claude-plugin/plugin.json" ] && echo true || echo false)" "plugin.json exists"
   check "$([ -f "$PLUGIN_DIR/.claude-plugin/marketplace.json" ] && echo true || echo false)" "marketplace.json exists"
 
@@ -104,10 +99,10 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   fi
 fi
 
-# 8. Hooks validation (if plugin dir available)
+# 7. Hooks validation (if plugin dir available)
 if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   echo ""
-  echo "8. Hooks:"
+  echo "7. Hooks:"
   check "$([ -f "$PLUGIN_DIR/hooks/hooks.json" ] && echo true || echo false)" "hooks/hooks.json exists"
 
   if command -v jq >/dev/null 2>&1 && [ -f "$PLUGIN_DIR/hooks/hooks.json" ]; then
@@ -120,10 +115,10 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR" ]; then
   fi
 fi
 
-# 9. Skills validation (if plugin dir available)
+# 8. Skills validation (if plugin dir available)
 if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/skills" ]; then
   echo ""
-  echo "9. Skills (plugin directory):"
+  echo "8. Skills (plugin directory):"
 
   skill_count=0
   skill_with_frontmatter=0
@@ -144,9 +139,9 @@ if [ -n "$PLUGIN_DIR" ] && [ -d "$PLUGIN_DIR/skills" ]; then
   fi
 fi
 
-# 10. Configuration loading test
+# 9. Configuration loading test
 echo ""
-echo "10. Configuration files (markdown syntax):"
+echo "9. Configuration files (markdown syntax):"
 
 config_files=(
   "jaan-to/context/config.md"
@@ -163,9 +158,9 @@ for config_file in "${config_files[@]}"; do
   fi
 done
 
-# 11. Installation report
+# 10. Installation report
 echo ""
-echo "11. Installation Summary:"
+echo "10. Installation Summary:"
 
 # Count files created
 total_files=$(find "$PROJECT_DIR/jaan-to" -type f 2>/dev/null | wc -l | tr -d ' ')

@@ -53,7 +53,7 @@ jaan-to/
   docs/                    — Reference docs (STYLE.md, create-skill.md)
 ```
 
-Also adds `jaan-to/` to `.gitignore` (creates the file if missing).
+Optionally adds `jaan-to/` to `.gitignore` if the user chooses during init (recommended: no).
 
 ---
 

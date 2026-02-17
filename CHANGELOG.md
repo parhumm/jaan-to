@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Changed
+- **Removed automatic `.gitignore` policy from bootstrap** — Bootstrap no longer auto-adds `jaan-to/` to the project's `.gitignore` on every session start. Instead, `/jaan-to:jaan-init` now asks users during initialization whether to add `jaan-to/` to `.gitignore`, with the recommendation being **no** (commit `jaan-to/` to version control). Updated `bootstrap.sh`, `verify-install.sh`, `jaan-init` SKILL.md, and all related documentation
 - **Roadmap-update now enforces 6 structural consistency rules** — Every run validates overview-to-section matching, sequential numbering, done-phase blockquotes, catalog accuracy, version accuracy, and future-focus compliance. Violations are reported before mode-specific work begins
 - **Release-iterate-changelog now triggers roadmap sync** — After writing changelog updates, the skill calls `/jaan-to:roadmap-update` to keep the roadmap in sync automatically
 
