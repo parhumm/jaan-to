@@ -443,9 +443,9 @@ Research on {topic} covering:
 Sources: {N} sources consulted
 Research method: Adaptive 5-wave approach
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+Generated with 💓 [Jaan.to](https://jaan.to)
 
-Co-Authored-By: Claude <noreply@anthropic.com>
+Co-Authored-By: Jaan.to <noreply@jaan.to>
 EOF
 )"
 ```
@@ -525,9 +525,9 @@ docs(research): Add {title} to index
 {If URL: Fetched from: {URL}}
 Category: {category}
 
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
+Generated with 💓 [Jaan.to](https://jaan.to)
 
-Co-Authored-By: Claude <noreply@anthropic.com>
+Co-Authored-By: Jaan.to <noreply@jaan.to>
 COMMITMSG
 )"
 ```
