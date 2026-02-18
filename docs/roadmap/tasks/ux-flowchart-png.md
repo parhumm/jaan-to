@@ -46,7 +46,8 @@ The official Mermaid CLI (`@mermaid-js/mermaid-cli`) is the most reliable conver
    - Fallback: `mermaid-py` (Python pip package)
 5. Use asset-handler pattern from `${CLAUDE_PLUGIN_ROOT}/scripts/lib/asset-handler.sh`
 6. Output PNGs at `$JAAN_OUTPUTS_DIR/ux/diagrams/{id}-{slug}/{id}-flowchart-{slug}.png`
-7. Update source markdown to include `![{diagram-name}]({png-path})` below each Mermaid block
+7. Define a hook always `$JAAN_OUTPUTS_DIR/ux/diagrams/{id}-{slug}/**/*` Mermaid blocks created/updated automatically create/update PNG file
+8. Update source markdown to include `![{diagram-name}]({png-path})` below each Mermaid block
 
 ## Skills Affected
 
