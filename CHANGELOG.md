@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **`pm-prd-write` output readability and RTL support** ([#141](https://github.com/parhumm/jaan-to/issues/141)) — PRD generation now enforces bullet-point formatting for prose sections (Problem Statement, Executive Summary, Solution Overview), 4-column max table width, and per-entity status matrices instead of aggregate lists. Gap-analysis PRDs use a requirements-first document flow (Requirements Overview → Methodology → Current State Matrix → Gap Prioritization). RTL language support adds `<div dir="rtl">` wrapper, native vocabulary preference, and orthography rules. Template updated with optional sections for audit-based PRDs. Quality checks extended to verify formatting compliance. Closes [#141](https://github.com/parhumm/jaan-to/issues/141)
+
 ### Changed
 - **Removed automatic `.gitignore` policy from bootstrap** — Bootstrap no longer auto-adds `jaan-to/` to the project's `.gitignore` on every session start. Instead, `/jaan-to:jaan-init` now asks users during initialization whether to add `jaan-to/` to `.gitignore`, with the recommendation being **no** (commit `jaan-to/` to version control). Updated `bootstrap.sh`, `verify-install.sh`, `jaan-init` SKILL.md, and all related documentation
 - **Roadmap-update now enforces 6 structural consistency rules** — Every run validates overview-to-section matching, sequential numbering, done-phase blockquotes, catalog accuracy, version accuracy, and future-focus compliance. Violations are reported before mode-specific work begins
