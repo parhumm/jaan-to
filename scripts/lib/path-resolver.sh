@@ -19,7 +19,19 @@ resolve_template_path() {
   # Check project custom template first (explicit override in config)
   local project_config=$(get_config "templates_${skill_name//-/_}_path" "")
   if [ -n "$project_config" ]; then
+    # Security: validate custom path before resolution
+    validate_path "$project_config" || {
+      echo "SECURITY: Rejected template path override for ${skill_name}: ${project_config}" >&2
+      return 1
+    }
     local resolved=$(resolve_path "$project_config")
+    # Security: canonical check — ensure resolved path stays within project
+    local _canonical=$(_canonical_path "${PROJECT_DIR:-.}/$resolved")
+    local _project_canonical=$(_canonical_path "${PROJECT_DIR:-.}")
+    if [[ "$_canonical" != "$_project_canonical"* ]]; then
+      echo "SECURITY: Template path escapes project: $resolved" >&2
+      return 1
+    fi
     if [ -f "${PROJECT_DIR:-.}/$resolved" ]; then
       echo "$resolved"
       return 0

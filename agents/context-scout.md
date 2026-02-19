@@ -29,7 +29,7 @@ User explicitly asked about project structure, so invoke context-scout to explor
 </commentary>
 </example>
 
-tools: Read, Glob, Grep, Bash
+tools: Read, Glob, Grep, Bash(git log:*), Bash(git show:*), Bash(git ls-files:*)
 model: haiku
 ---
 

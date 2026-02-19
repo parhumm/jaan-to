@@ -1,7 +1,7 @@
 ---
 name: docs-update
 description: Audit and maintain documentation quality using smart staleness checks.
-allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
+allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_DOCS_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 disable-model-invocation: true
 ---

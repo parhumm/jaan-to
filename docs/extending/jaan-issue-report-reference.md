@@ -88,6 +88,16 @@ Scan for patterns: `/Users/`, `/home/`, `/var/`, absolute project paths.
 Scan for patterns: `token=`, `key=`, `password=`, `secret=`, `Bearer `, `ghp_`, `sk-`, `api_key`.
 Replace any detected values with `[REDACTED]`.
 
+### Connection String Sanitization
+Scan for database and service connection strings:
+- `postgresql://`, `postgres://` → `[DB_CONNECTION_REDACTED]`
+- `mysql://`, `mariadb://` → `[DB_CONNECTION_REDACTED]`
+- `mongodb://`, `mongodb+srv://` → `[DB_CONNECTION_REDACTED]`
+- `redis://`, `rediss://` → `[DB_CONNECTION_REDACTED]`
+- `amqp://`, `amqps://` → `[MQ_CONNECTION_REDACTED]`
+- `jdbc:` prefixed URLs → `[DB_CONNECTION_REDACTED]`
+- Generic URL auth pattern `://user:pass@` → `://[AUTH_REDACTED]@`
+
 ### Personal Info Check
 Scan for patterns that look like emails, IP addresses, or usernames embedded in paths.
 Replace with generic placeholders unless the user explicitly included them.

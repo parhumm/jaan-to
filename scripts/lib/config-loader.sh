@@ -4,7 +4,7 @@
 # Compatible with bash 3.2+ (macOS default)
 
 # Use simple variables instead of associative arrays for bash 3 compatibility
-CONFIG_CACHE_FILE="/tmp/jaan-to-config-$$"
+CONFIG_CACHE_FILE=$(mktemp /tmp/jaan-to-config-XXXXXX)
 
 load_yaml() {
   local file=$1
@@ -40,7 +40,7 @@ load_config() {
 
   # Re-initialize CONFIG_CACHE_FILE if unset (for test scenarios)
   if [ -z "${CONFIG_CACHE_FILE:-}" ]; then
-    CONFIG_CACHE_FILE="/tmp/jaan-to-config-$$"
+    CONFIG_CACHE_FILE=$(mktemp /tmp/jaan-to-config-XXXXXX)
   fi
 
   # Initialize cache file
@@ -110,13 +110,62 @@ validate_path() {
     return 1
   }
 
-  # Reject path traversal
+  # Reject path traversal (CVE-2025-54794 mitigation)
   [[ "$path" =~ \.\. ]] && {
     echo "ERROR: Path traversal not allowed: $path" >&2
     return 1
   }
 
   return 0
+}
+
+# Canonical path resolution helper (portable macOS/Linux)
+# Returns the canonical absolute path, resolving symlinks
+_canonical_path() {
+  local path=$1
+  # Try realpath first (Linux, macOS with coreutils)
+  if command -v realpath >/dev/null 2>&1; then
+    realpath -m "$path" 2>/dev/null && return 0
+  fi
+  # Fallback: python3 (available on macOS by default)
+  python3 -c "import os; print(os.path.realpath('$path'))" 2>/dev/null && return 0
+  # Last resort: echo the path as-is
+  echo "$path"
+}
+
+# Get a config path value with full security validation
+# Validates raw value (rejects .. and absolute), then verifies
+# the resolved canonical path stays within PROJECT_DIR
+get_validated_path() {
+  local key=$1
+  local default=$2
+  local project_dir="${PROJECT_DIR:-.}"
+
+  local raw_value
+  raw_value=$(get_config "$key" "$default")
+
+  # Step 1: Validate raw config value before resolution
+  validate_path "$raw_value" || {
+    echo "SECURITY: Rejected config path '$key' = '$raw_value'" >&2
+    return 1
+  }
+
+  # Step 2: Resolve environment variables
+  local resolved
+  resolved=$(resolve_path "$raw_value")
+
+  # Step 3: Canonical path check — verify resolved path stays within project
+  local canonical
+  canonical=$(_canonical_path "$project_dir/$resolved")
+  local project_canonical
+  project_canonical=$(_canonical_path "$project_dir")
+
+  if [[ "$canonical" != "$project_canonical"* ]]; then
+    echo "SECURITY: Path escapes project boundary: $resolved -> $canonical" >&2
+    return 1
+  fi
+
+  echo "$resolved"
 }
 
 # Cleanup temp file on exit
@@ -132,3 +181,5 @@ export -f load_config
 export -f get_config
 export -f resolve_path
 export -f validate_path
+export -f _canonical_path
+export -f get_validated_path
