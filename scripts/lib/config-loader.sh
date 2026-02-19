@@ -4,6 +4,8 @@
 # Compatible with bash 3.2+ (macOS default)
 
 # Use simple variables instead of associative arrays for bash 3 compatibility
+set -euo pipefail
+
 CONFIG_CACHE_FILE=$(mktemp /tmp/jaan-to-config-XXXXXX)
 
 load_yaml() {

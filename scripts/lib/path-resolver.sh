@@ -4,6 +4,8 @@
 # Supports customization via project config
 
 # Load configuration system
+set -euo pipefail
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/config-loader.sh"
 

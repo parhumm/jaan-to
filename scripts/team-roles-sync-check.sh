@@ -5,6 +5,8 @@
 # Exit codes: 0 = proceed (always non-blocking)
 # Stdout cap: ≤1,200 chars (~300 tokens)
 
+set -euo pipefail
+
 INPUT=$(cat)
 
 # Extract file path from hook input

@@ -200,7 +200,7 @@ fi
 echo ""
 
 # ─────────────────────────────────────────────────────────────
-# Check 16: Permission Safety
+# Check 16: Permission Safety (Basic — see scripts/validate-security.sh for full check)
 # ─────────────────────────────────────────────────────────────
 
 echo "Check 16: Permission Safety"

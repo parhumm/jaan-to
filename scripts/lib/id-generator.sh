@@ -5,6 +5,8 @@
 # Generate next sequential ID in a subdomain directory
 # Args: $1 = subdomain directory path
 # Returns: Two-digit ID (e.g., "01", "16", "99")
+set -euo pipefail
+
 generate_next_id() {
   local subdomain_dir="$1"
 

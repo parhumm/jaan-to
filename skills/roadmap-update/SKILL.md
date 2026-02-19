@@ -1,7 +1,7 @@
 ---
 name: roadmap-update
 description: "[Internal] Maintain and sync the jaan.to development roadmap."
-allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(docs/roadmap/**)
+allowed-tools: Read, Glob, Grep, Edit(docs/roadmap/**), Edit(CHANGELOG.md), Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(docs/roadmap/**)
 argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sync] [validate] [(no args)]"
 disable-model-invocation: true
 ---

@@ -5,6 +5,8 @@
 # Exit code 0 = allow completion.
 # Stdout cap: ≤1,200 chars (~300 tokens)
 
+set -euo pipefail
+
 INPUT=$(cat)
 
 # Extract task description from hook input

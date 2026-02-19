@@ -243,7 +243,7 @@ fi
 echo ""
 
 # ─────────────────────────────────────────────────────────────
-# Check 10: Security Review (No Dangerous Patterns)
+# Check 10: Security Review (Basic — see scripts/validate-security.sh for full check)
 # ─────────────────────────────────────────────────────────────
 
 echo "Check 10: Security Review"

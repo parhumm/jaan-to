@@ -4,6 +4,8 @@
 # Compatible with bash 3.2+ (macOS default)
 
 # Load configuration system
+set -euo pipefail
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/config-loader.sh"
 source "${SCRIPT_DIR}/path-resolver.sh"

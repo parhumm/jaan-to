@@ -200,6 +200,35 @@ Things already done correctly (maintain these):
 
 ---
 
+## Automated Enforcement
+
+Security standards are automatically enforced at three levels:
+
+| Enforcement Point | Script | Mode | Effect |
+|-------------------|--------|------|--------|
+| CI (PRs to main) | `scripts/validate-security.sh` | Normal (errors block) | PR cannot merge with blocking violations |
+| `/jaan-release` | `scripts/validate-security.sh` | Normal (errors block) | Release blocked if security check fails |
+| `/jaan-issue-review` | `scripts/validate-security.sh` | Normal (errors block) | PR verification includes security gate |
+
+### Security Check Categories
+
+| Section | What It Checks | Level |
+|---------|---------------|-------|
+| A: Skill Permissions | Bare Write/Bash/Edit, credential access, hardcoded secrets | BLOCKING (distributed), ADVISORY (local) |
+| B: Shell Scripts | `set -euo pipefail`, eval, curl\|sh, chmod 777, $IFS | BLOCKING |
+| C: Hook Safety | Static paths, no user input in commands | BLOCKING |
+| D: Dangerous Patterns | `exec()`, `rm -rf /` in skill bodies | BLOCKING |
+
+### Adding New Security Rules
+
+1. Add the check to `scripts/validate-security.sh` under the appropriate section
+2. Choose level: BLOCKING (must fix) or ADVISORY (review recommended)
+3. Use `::error::` prefix for GitHub Actions annotations
+4. Update the check count in this document
+5. Run `bash scripts/validate-security.sh` to verify the new check works
+
+---
+
 ## Related
 
 - [Security (User Guide)](config/security.md) — End-user security documentation

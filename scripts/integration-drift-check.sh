@@ -4,6 +4,8 @@
 # Detects outputs created after dev-output-integrate has run
 # Exit codes: 0 = proceed (always non-blocking)
 
+set -euo pipefail
+
 INPUT=$(cat)
 
 # Extract file path from JSON
