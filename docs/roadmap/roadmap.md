@@ -30,7 +30,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.1.1 (43 skills)
+**Latest:** v7.1.1 (44 skills)
 
 ---
 
@@ -41,7 +41,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ---
 
-## Shipped Skills (43)
+## Shipped Skills (44)
 
 > Added across v1.0.0–v7.1.0. See [CHANGELOG.md](/changelog) for per-version details.
 
@@ -59,7 +59,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 | Security | 1 | audit-remediate |
 | Release | 1 | iterate-changelog |
 | WordPress | 1 | pr-review |
-| Core | 9 | jaan-init, jaan-issue-report, skill-create, skill-update, docs-create, docs-update, learn-add, roadmap-add, roadmap-update |
+| Core | 10 | jaan-init, jaan-issue-report, skill-create, skill-update, docs-create, docs-update, learn-add, roadmap-add, roadmap-update, team-ship |
 
 ---
 
@@ -131,13 +131,13 @@ Complete spec-to-ship workflow across 13 roles: Research → Specification → D
 - [ ] Batch/combination skills per role — Role-level pipeline skills (WP, PM, Dev, UX, QA) for shipping ideas with minimum human actions ([#135](https://github.com/parhumm/jaan-to/issues/135)) → [details](tasks/batch-skills.md)
 
 ### Agent Teams Integration
-- [ ] `team-ship` orchestration skill — Role-based agent teams to ship ideas from concept to production → [research](../research/77-agent-teams-integration.md)
-  - [ ] `skills/team-ship/roles.md` — Role definitions with model selection and dependency graph
-  - [ ] `skills/team-ship/SKILL.md` — Orchestration logic (≤500 lines, fork-isolated)
-  - [ ] `docs/extending/team-ship-reference.md` — Spawn prompts, dependency algo, checkpoint schema
-  - [ ] Agent team hooks: TaskCompleted quality gate, TeammateIdle redirect, roles-sync drift detection
-  - [ ] `skill-create` Step 14.5 + `skill-update` Step 11.5 — Auto-sync roles.md
-  - [ ] Configuration: `agent_teams_*` settings in defaults.yaml
+- [x] `team-ship` orchestration skill — Role-based agent teams to ship ideas from concept to production → [research](../research/77-agent-teams-integration.md)
+  - [x] `skills/team-ship/roles.md` — Role definitions with model selection and dependency graph
+  - [x] `skills/team-ship/SKILL.md` — Orchestration logic (≤500 lines, fork-isolated)
+  - [x] `docs/extending/team-ship-reference.md` — Spawn prompts, dependency algo, checkpoint schema
+  - [x] Agent team hooks: TaskCompleted quality gate, TeammateIdle redirect, roles-sync drift detection
+  - [x] `skill-create` Step 14.5 + `skill-update` Step 11.5 — Auto-sync roles.md
+  - [x] Configuration: `agent_teams_*` settings in defaults.yaml
 
 ### Distribution
 - [ ] Jaanify → starter template — Convert `parhumm/jaanify` into smart starter template for one-command idea-to-ship ([#136](https://github.com/parhumm/jaan-to/issues/136)) → [details](tasks/jaanify-template.md)
