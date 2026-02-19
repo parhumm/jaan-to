@@ -5,16 +5,17 @@
 [![Version](https://img.shields.io/badge/version-3.16.2-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-19-orange.svg)](docs/skills/README.md)
+[![Skills](https://img.shields.io/badge/skills-44-orange.svg)](skills/)
+[![Agent Skills](https://img.shields.io/badge/npx%20skills-compatible-brightgreen.svg)](https://skills.sh)
 [![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
 
 ### Plugin Contents
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Skills** | 18 | PM, Dev (FE/BE), UX, QA, Data, Documentation |
+| **Skills** | 44 | PM, Dev (FE/BE), UX, QA, Data, DevOps, Security, Documentation |
 | **Agents** | 2 | quality-reviewer, context-scout |
-| **Hooks** | 4 | Setup, SessionStart, PostToolUse, Stop |
+| **Hooks** | 7 | Setup, SessionStart, PreToolUse, PostToolUse, Stop, TaskCompleted, TeammateIdle |
 | **Output Styles** | 2 | enterprise-doc, concise-summary |
 
 ---
@@ -72,6 +73,23 @@ claude --plugin-dir /path/to/jaan-to
 ./scripts/build-dist.sh
 claude --plugin-dir ./dist/jaan-to
 ```
+
+### Agent Skills (Cross-Platform)
+
+Install skills via the [Agent Skills](https://skills.sh) ecosystem — works across Claude Code, Cursor, VS Code, GitHub Copilot, and 18+ agents:
+
+```bash
+# Install all 44 skills
+npx skills add parhumm/jaan-to
+
+# Install a specific skill
+npx skills add parhumm/jaan-to --skill pm-prd-write
+
+# Browse available skills
+npx skills find "product requirements"
+```
+
+> **Note:** This installs skill definitions only. For the full jaan.to experience (hooks, agents, config system, learning), use the [plugin installation](#stable-version-recommended) instead.
 
 ### First run
 The bootstrap hook automatically creates `jaan-to/` in your project with:
