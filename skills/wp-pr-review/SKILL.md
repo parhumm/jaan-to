@@ -305,7 +305,7 @@ OUTPUT WILL CREATE
 ## Step 5: Generate ID and Folder Structure
 
 ```bash
-source "/Users/parhumm/.claude/plugins/cache/jaan-to/jaan-to/4.2.1/scripts/lib/id-generator.sh"
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/wp/pr"
 mkdir -p "$SUBDOMAIN_DIR"
 NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
@@ -372,7 +372,7 @@ If approved:
 
 3. Update subdomain index:
    ```bash
-   source "/Users/parhumm/.claude/plugins/cache/jaan-to/jaan-to/4.2.1/scripts/lib/index-updater.sh"
+   source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
    add_to_index \
      "$SUBDOMAIN_DIR/README.md" \
      "$NEXT_ID" \
@@ -419,6 +419,13 @@ Confirm:
 If yes, invoke `/jaan-to:learn-add wp-pr-review "{feedback}"` to capture the lesson.
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- WordPress ecosystem-specific patterns
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

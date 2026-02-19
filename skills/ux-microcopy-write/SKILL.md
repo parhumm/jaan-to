@@ -481,6 +481,13 @@ Use AskUserQuestion:
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across platforms and design systems
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Definition of Done" for the complete 14-item checklist (language prefs, tone, categories, languages, validation, ID, files, index, review warning, exports, approval).

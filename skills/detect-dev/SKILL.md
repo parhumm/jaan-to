@@ -461,3 +461,18 @@ This file enables `--incremental` mode on subsequent runs.
 
 If yes:
 - Run `/jaan-to:learn-add detect-dev "{feedback}"`
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Evidence-based findings with confidence scoring
+- Tech-stack agnostic (works with any codebase)
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
+## Definition of Done
+
+- [ ] Repository scanned with all applicable checkers
+- [ ] Findings reported with SARIF-compatible evidence and 4-level confidence
+- [ ] OpenSSF-style score calculated
+- [ ] Output written to `$JAAN_OUTPUTS_DIR/detect/dev/`
+- [ ] User approved final report

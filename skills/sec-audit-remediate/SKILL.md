@@ -431,6 +431,13 @@ If yes:
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
 ## Definition of Done
 
 - [ ] Detect-dev output parsed and findings extracted

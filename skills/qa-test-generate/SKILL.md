@@ -491,6 +491,13 @@ If "Learn from this": Run `/jaan-to:learn-add qa-test-generate "{feedback}"`
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-generate-reference.md` section "Definition of Done Checklist" for the complete checklist.

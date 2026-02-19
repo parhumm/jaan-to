@@ -439,6 +439,13 @@ devops-deploy-activate
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] Build verification passes (type check + full build) OR errors are categorized and reported

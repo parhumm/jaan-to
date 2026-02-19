@@ -434,6 +434,13 @@ If yes:
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Evidence-based findings with confidence scoring
+- Tech-stack agnostic (works with any codebase)
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 **If `run_depth == "light"`:**

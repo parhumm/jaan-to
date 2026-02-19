@@ -470,6 +470,13 @@ Checking if release is warranted...
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/roadmap-update-reference.md` section "Trust Rules" for the 6 trust invariants.
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
 ## Definition of Done
 
 - [ ] Current roadmap and git state analyzed

@@ -460,6 +460,13 @@ If "Learn from this":
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Framework-agnostic with `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] Valid, working code generated

@@ -488,6 +488,13 @@ If **Yes, I have feedback**: ask for details, then run `/jaan-to:learn-add jaan-
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
 ## Definition of Done
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Definition of Done" for the full checklist.

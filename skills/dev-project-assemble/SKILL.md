@@ -481,6 +481,13 @@ If "Learn from this": Run `/jaan-to:learn-add dev-project-assemble "{feedback}"`
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] All bundled scaffold files split into individual project files

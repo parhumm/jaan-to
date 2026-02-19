@@ -399,6 +399,13 @@ If yes:
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across industries and domains
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` section "Definition of Done (Research)" for the full checklist.
@@ -464,6 +471,13 @@ Output the completion message using the template in `${CLAUDE_PLUGIN_ROOT}/docs/
 If yes: Run `/jaan-to:learn-add pm-research-about "{feedback}"`
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across industries and domains
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done (Add to Index)
 

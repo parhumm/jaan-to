@@ -297,3 +297,17 @@ If yes, suggest running `/jaan-to:docs-update --quick` for related docs.
 3. **VALIDATE** against STYLE.md
 4. **CHECK** for duplicates first
 5. **COMMIT** with descriptive message
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
+## Definition of Done
+
+- [ ] Documentation scope and target confirmed
+- [ ] Content drafted following STYLE.md standards
+- [ ] Document written to appropriate docs path
+- [ ] User approved final document

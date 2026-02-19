@@ -284,6 +284,13 @@ After PRD is written, ask:
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across industries and domains
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 - [ ] PRD file exists at correct path
 - [ ] All quality checks pass

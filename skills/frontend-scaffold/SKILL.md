@@ -327,6 +327,13 @@ If "Learn from this": Run `/jaan-to:learn-add frontend-scaffold "{feedback}"`
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Framework-agnostic with `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] All components from frontend-task-breakdown inventory generated

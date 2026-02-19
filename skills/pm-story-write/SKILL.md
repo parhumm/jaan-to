@@ -472,6 +472,13 @@ After story is written, ask:
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across industries and domains
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-story-write-reference.md` section "Skill Definition of Done Checklist" for the full 13-item completion checklist covering Steps 0-8.

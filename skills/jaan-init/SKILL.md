@@ -144,6 +144,13 @@ Use: /jaan-to:learn-add "jaan-init" "lesson"
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
 ## Definition of Done
 
 - [ ] `jaan-to/` directory exists with subdirectories: outputs/, learn/, context/, templates/, config/, docs/

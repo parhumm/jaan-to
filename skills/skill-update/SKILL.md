@@ -426,6 +426,13 @@ This ensures the roadmap reflects the latest skill changes.
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
 ## Definition of Done
 
 - [ ] Existing skill files read and analyzed

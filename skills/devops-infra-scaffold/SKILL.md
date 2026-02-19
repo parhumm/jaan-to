@@ -477,6 +477,13 @@ devops-infra-scaffold
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-platform support (GitHub Actions, GitLab CI, etc.)
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/devops-infra-scaffold-reference.md` section "Definition of Done" for the full checklist.

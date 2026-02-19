@@ -384,6 +384,13 @@ This ensures the roadmap's Version History and phase status reflect the latest r
 5. **PREVIEW** all changes before writing
 6. **HUMAN-FRIENDLY** entries only — never dump raw commit logs
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
 ## Definition of Done
 
 - [ ] Changes collected and classified

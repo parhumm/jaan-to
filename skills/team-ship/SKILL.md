@@ -283,6 +283,13 @@ If yes: run `/jaan-to:learn-add team-ship "{feedback}"`
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Role-based orchestration with configurable teammates
+- Token-optimized via reference extraction
+- Maintains human control at gate checkpoints
+
 ## Definition of Done
 
 - [ ] Environment checks passed (agent teams enabled, env var set)

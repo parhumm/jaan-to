@@ -152,3 +152,17 @@ Push to remote? [y/n]
 2. **ALWAYS** check for duplicates first
 3. **PRESERVE** existing formatting
 4. **ASK** when phase is ambiguous
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
+## Definition of Done
+
+- [ ] Task scope and placement confirmed with user
+- [ ] Roadmap entry added with correct phase and formatting
+- [ ] Structure rules validated (6 rules pass)
+- [ ] User approved roadmap update

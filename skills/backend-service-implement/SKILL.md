@@ -460,6 +460,13 @@ If "Learn from this": Run `/jaan-to:learn-add backend-service-implement "{feedba
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] All TODO stubs from scaffold have corresponding implementations

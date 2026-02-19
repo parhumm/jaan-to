@@ -445,6 +445,13 @@ If yes, invoke `/jaan-to:learn-add backend-pr-review "{feedback}"` to capture th
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Evidence-based findings with confidence scoring
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] Input parsed and mode detected

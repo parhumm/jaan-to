@@ -412,6 +412,13 @@ If "Learn from this": Run `/jaan-to:learn-add qa-test-run "{feedback}"`
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] Tech stack detected from tech.md or fallback

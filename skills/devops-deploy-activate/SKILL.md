@@ -404,6 +404,13 @@ devops-deploy-activate
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-platform support (GitHub Actions, GitLab CI, etc.)
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
 - [ ] All required GitHub secrets configured
