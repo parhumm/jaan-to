@@ -46,14 +46,9 @@ Uses Claude Code's Agent Teams feature. Each teammate gets its own context, runs
 
 ## Prerequisites
 
-Before using team-ship:
-
-1. **Enable agent teams** in `jaan-to/config/settings.yaml`:
-   ```yaml
-   agent_teams_enabled: true
-   ```
-2. **Set environment variable**: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
-3. **Initialize project**: Run `/jaan-to:jaan-init` if not already done
+1. Add `agent_teams_enabled: true` to `jaan-to/config/settings.yaml`
+2. Set environment variable: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
+3. Run `/jaan-to:jaan-init` if not already done
 
 ---
 
@@ -97,7 +92,7 @@ Each teammate shuts down after its phase completes to free context.
 | DevOps | DevOps Engineer | infra-scaffold, deploy-activate |
 | Security | Security Engineer | audit-remediate |
 
-Role definitions live in `skills/team-ship/roles.md`. New roles are added automatically via `/jaan-to:skill-create`.
+Role definitions live in `skills/team-ship/roles.md`. New roles added automatically via `/jaan-to:skill-create`.
 
 ---
 
@@ -108,30 +103,20 @@ Role definitions live in `skills/team-ship/roles.md`. New roles are added automa
 | File | Content |
 |------|---------|
 | `log.md` | Orchestration log with timeline and results |
-| `checkpoint.yaml` | Resume state for interrupted runs |
-| `plan.md` | Team plan (--dry-run only) |
+| `checkpoint.yaml` | Resume state for `--resume` |
+| `plan.md` | Team plan (`--dry-run` only) |
 
-Each role writes to its own output directory (`jaan-to/outputs/pm/`, `jaan-to/outputs/backend/`, etc.) — no file conflicts.
+Each role writes to its own output directory — no file conflicts between teammates.
 
 ---
 
 ## Example
 
-**Input**:
 ```
 /jaan-to:team-ship --track fast "user authentication with OAuth"
 ```
 
-**What happens**:
-```
-1. Lead reads roles.md, builds fast-track roster (4 teammates)
-2. User approves team composition
-3. PM teammate drafts PRD → user approves
-4. Backend + Frontend + QA work in parallel
-5. Lead integrates scaffolds, DevOps sets up CI/CD
-6. QA runs tests, lead verifies build
-7. Changelog generated, team cleaned up
-```
+Lead builds roster → user approves → PM drafts PRD → user approves → Backend + Frontend + QA work in parallel → lead integrates → DevOps sets up CI/CD → QA runs tests → lead verifies → changelog generated.
 
 ---
 
@@ -155,5 +140,4 @@ Available in `jaan-to/config/settings.yaml`:
 - Start with `--dry-run` to preview the team plan before committing
 - Use `--track fast` for prototyping, `--track full` for production
 - The `--resume` flag picks up from the last checkpoint after interruptions
-- Each role uses the optimal model (haiku for detect, sonnet for code gen)
 - Provide a detailed initiative description for better PRD quality

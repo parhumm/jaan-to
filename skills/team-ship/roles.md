@@ -121,6 +121,7 @@ Each role section defines:
 - **Phase**: 1
 - **Depends on**: repo
 - **Outputs to share**: detect_dev_path
+- **Messages**: Lead (scan complete)
 - **Shutdown after**: Phase 1
 
 ## detect-design
@@ -132,6 +133,7 @@ Each role section defines:
 - **Phase**: 1
 - **Depends on**: repo
 - **Outputs to share**: detect_design_path
+- **Messages**: Lead (scan complete)
 - **Shutdown after**: Phase 1
 
 ## detect-ux
@@ -143,6 +145,7 @@ Each role section defines:
 - **Phase**: 1
 - **Depends on**: repo
 - **Outputs to share**: detect_ux_path
+- **Messages**: Lead (scan complete)
 - **Shutdown after**: Phase 1
 
 ## detect-writing
@@ -154,6 +157,7 @@ Each role section defines:
 - **Phase**: 1
 - **Depends on**: repo
 - **Outputs to share**: detect_writing_path
+- **Messages**: Lead (scan complete)
 - **Shutdown after**: Phase 1
 
 ## detect-product
@@ -165,6 +169,7 @@ Each role section defines:
 - **Phase**: 1
 - **Depends on**: repo
 - **Outputs to share**: detect_product_path
+- **Messages**: Lead (scan complete)
 - **Shutdown after**: Phase 1
 
 ---
