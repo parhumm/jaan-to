@@ -40,6 +40,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 - [x] Automated security enforcement — `scripts/validate-security.sh`, CI gate, `/jaan-release` + `/jaan-issue-review` integration
 - [ ] `jaan-init` Co-Authored-By attribution for git commits and PRs ([#109](https://github.com/parhumm/jaan-to/issues/109))
 - [ ] `pm-prd-write` output readability, document flow, RTL support ([#141](https://github.com/parhumm/jaan-to/issues/141))
+- [x] Agent Skills open standard compatibility — All 44 skills compliant with agentskills.io spec (license, compatibility, trigger phrases, marketplace discovery, naming spec, E2E tests, CI enforcement)
 
 ---
 
@@ -188,6 +189,7 @@ Remaining skills from the original 142-skill catalog require MCP connectors or a
 
 > Details: [tasks/distribution.md](tasks/distribution.md)
 
+- [x] Agent Skills open standard compatibility (agentskills.io) — marketplace.json discovery, all 44 skills compliant
 - [ ] Multi-agent compatibility research (Cursor, Copilot, Windsurf, Gemini)
 - [ ] CLI installer (`jaan-to-cli`) for one-command setup
 - [ ] Public documentation site and branding guidelines

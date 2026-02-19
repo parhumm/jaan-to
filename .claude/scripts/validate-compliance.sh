@@ -95,9 +95,9 @@ for skill in "$PLUGIN_ROOT"/skills/{backend,frontend,qa,devops}*/SKILL.md; do
   [ -f "$skill" ] || continue
   skill_name=$(basename "$(dirname "$skill")")
 
-  HAS_NODE=$(grep -c "Node\.js\|TypeScript\|npm\|pnpm" "$skill" || echo 0)
-  HAS_PHP=$(grep -c "PHP\|Laravel\|Symfony\|Composer" "$skill" || echo 0)
-  HAS_GO=$(grep -c "\bGo\b\|Golang" "$skill" || echo 0)
+  HAS_NODE=$(grep -c "Node\.js\|TypeScript\|npm\|pnpm" "$skill" || true)
+  HAS_PHP=$(grep -c "PHP\|Laravel\|Symfony\|Composer" "$skill" || true)
+  HAS_GO=$(grep -c "\bGo\b\|Golang" "$skill" || true)
 
   if [ "$HAS_NODE" -eq 0 ] || [ "$HAS_PHP" -eq 0 ] || [ "$HAS_GO" -eq 0 ]; then
     echo "  ⚠ Incomplete stack coverage: $skill_name (Node:$HAS_NODE PHP:$HAS_PHP Go:$HAS_GO)"
