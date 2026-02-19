@@ -42,7 +42,20 @@ if [ -z "$ROLE" ]; then
   exit 0
 fi
 
-# Check for pending messages this teammate should relay
-# This is a lightweight check — the lead handles complex coordination
+# Check checkpoint for pending work before blocking
+JAAN_OUTPUTS_DIR=$(get_config "paths_outputs" "jaan-to/outputs")
+CHECKPOINT=$(ls -t "$PROJECT_DIR"/$JAAN_OUTPUTS_DIR/team/*/checkpoint.yaml 2>/dev/null | head -1)
+
+if [ -z "$CHECKPOINT" ]; then
+  # No active team-ship run — allow idle
+  exit 0
+fi
+
+# If role is marked done in checkpoint, allow idle
+if grep -A1 "^  $ROLE:" "$CHECKPOINT" 2>/dev/null | grep -q "status: done"; then
+  exit 0
+fi
+
+# Role has pending/in-progress work — redirect teammate
 echo "Teammate '$TEAMMATE_NAME' ($ROLE) is idle. Check if there are unclaimed tasks for this role, or shut down to free context."
 exit 2
