@@ -178,7 +178,7 @@ Aggressive but quality-safe optimization based on [Research #75](research/75-tok
 | Description budget | 10,282 / 15,000 chars | 31% remaining (~19 more skills) |
 | Auto-invocable skills | 30 / 35 cap | 5 more before cap |
 | CLAUDE.md | 119 / 150 lines | 31 lines free |
-| Largest SKILL.md | ~498 lines / 600 cap | 102 lines before cap |
+| Largest SKILL.md | ~507 lines / 600 cap | 93 lines before cap |
 | Total skill lines | ~18,500 across 44 skills | Median ~440 lines |
 
 > **Note:** Description budget increased from 8,409 to 10,282 chars due to Agent Skills enrichment (adding "Use when" trigger phrases to all 44 descriptions). 13 overlong SKILL.md files were refactored below 500 lines via reference extraction.

@@ -441,7 +441,7 @@ If yes:
 
 - Two-phase workflow with HARD STOP for human approval
 - Evidence-based findings with confidence scoring
-- Tech-stack agnostic (works with any codebase)
+- Fork-isolated execution (`context: fork`)
 - Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
