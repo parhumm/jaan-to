@@ -1,7 +1,7 @@
 ---
 name: jaan-release
 description: Automated jaan-to release preparation with validation, docs sync, version bump, and PR creation
-allowed-tools: Read, Glob, Grep, Bash(git *), Bash(gh *), Bash(jq *), Bash(npm *), Bash(bash .claude/scripts/*), Skill(jaan-to:roadmap-update), Skill(jaan-to:release-iterate-changelog), Skill(jaan-to:docs-update)
+allowed-tools: Read, Glob, Grep, Bash(git *), Bash(gh *), Bash(jq *), Bash(npm *), Bash(bash .claude/scripts/*), Bash(bash scripts/validate-security.sh*), Skill(jaan-to:roadmap-update), Skill(jaan-to:release-iterate-changelog), Skill(jaan-to:docs-update)
 argument-hint: "[vX.Y.Z] [\"release summary\"]"
 ---
 
@@ -42,7 +42,7 @@ Orchestrates the complete release preparation workflow:
 
 ## Step 1.1: Run Validation Scripts
 
-Invoke all 3 validation scripts in sequence:
+Invoke all 4 validation scripts in sequence:
 
 ```bash
 # Check 1-10: Advisory compliance (warnings OK)
@@ -51,6 +51,9 @@ bash .claude/scripts/validate-compliance.sh
 # Check 11-16: Critical plugin standards (must pass)
 bash .claude/scripts/validate-plugin-standards.sh
 
+# Security standards (must pass — no blocking errors)
+bash scripts/validate-security.sh
+
 # Check git state, docs sync, version detection
 bash .claude/scripts/validate-release-readiness.sh
 ```
@@ -58,6 +61,7 @@ bash .claude/scripts/validate-release-readiness.sh
 **Expected output:**
 - Compliance: 10 checks (warnings are advisory)
 - Plugin Standards: 6 checks (must pass)
+- Security Standards: 4 sections (must pass — no blocking errors)
 - Release Readiness: Git clean, docs synced, suggested version
 
 **Capture:**
@@ -86,6 +90,12 @@ Pre-Release Validation Report
   ✓ Check 14: Context Files (all have headers)
   ✓ Check 15: Output Structure (0 errors)
   ✓ Check 16: Permission Safety (no dangerous patterns)
+
+## Security Standards (4/4)
+  ✓ Section A: Skill Permission Safety (no bare Write/Bash/Edit)
+  ✓ Section B: Shell Script Safety (set -euo pipefail, no eval/curl|sh)
+  ✓ Section C: Hook Safety (static paths, no user input)
+  ✓ Section D: Dangerous Patterns (no exec(), no rm -rf /)
 
 ## Git State (3/3)
   ✓ Working tree clean (0 uncommitted changes)
@@ -304,6 +314,10 @@ fi
 # Validate skill description budget
 bash scripts/validate-skills.sh || exit 1
 
+# Security standards validation
+bash scripts/validate-security.sh || exit 1
+echo "✓ Security standards passed"
+
 # Build docs site (verify no build errors)
 cd website/docs && npm ci && npm run build && cd ../..
 echo "✓ Docs site builds successfully"
@@ -392,6 +406,7 @@ Add jaan-release skill for automated release preparation.
 
 ## Pre-Merge Checklist
 - [x] All 24 validation checks passed locally
+- [x] Security standards validation passed
 - [x] Documentation synced and up to date
 - [x] CHANGELOG entry complete
 - [x] Version bumped in all 3 locations

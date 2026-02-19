@@ -4,6 +4,8 @@
 # Exit codes: 0 = proceed, 1 = warning, 2 = block
 
 # Get the content being written (passed via stdin as JSON)
+set -euo pipefail
+
 INPUT=$(cat)
 
 # Extract the content from JSON (tool_input.content)

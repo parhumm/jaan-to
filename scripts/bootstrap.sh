@@ -26,12 +26,12 @@ else
   echo "WARNING: config-loader.sh not found, using defaults" >&2
 fi
 
-# Resolve paths from config (with fallback defaults)
-TEMPLATES_DIR=$(resolve_path "$(get_config 'paths_templates' 'jaan-to/templates')")
-LEARN_DIR=$(resolve_path "$(get_config 'paths_learning' 'jaan-to/learn')")
-CONTEXT_DIR=$(resolve_path "$(get_config 'paths_context' 'jaan-to/context')")
-OUTPUTS_DIR=$(resolve_path "$(get_config 'paths_outputs' 'jaan-to/outputs')")
-DOCS_DIR=$(resolve_path "$(get_config 'paths_docs' 'jaan-to/docs')")
+# Resolve paths from config (with validation against path traversal)
+TEMPLATES_DIR=$(get_validated_path 'paths_templates' 'jaan-to/templates') || { echo "SECURITY: Invalid templates path in settings.yaml" >&2; exit 1; }
+LEARN_DIR=$(get_validated_path 'paths_learning' 'jaan-to/learn') || { echo "SECURITY: Invalid learning path in settings.yaml" >&2; exit 1; }
+CONTEXT_DIR=$(get_validated_path 'paths_context' 'jaan-to/context') || { echo "SECURITY: Invalid context path in settings.yaml" >&2; exit 1; }
+OUTPUTS_DIR=$(get_validated_path 'paths_outputs' 'jaan-to/outputs') || { echo "SECURITY: Invalid outputs path in settings.yaml" >&2; exit 1; }
+DOCS_DIR=$(get_validated_path 'paths_docs' 'jaan-to/docs') || { echo "SECURITY: Invalid docs path in settings.yaml" >&2; exit 1; }
 CONFIG_DIR="jaan-to/config"
 
 # Counters for reporting

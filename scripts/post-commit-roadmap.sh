@@ -4,6 +4,8 @@
 # Suggests roadmap sync after significant git commits
 # Exit codes: 0 = proceed (never blocks)
 
+set -euo pipefail
+
 INPUT=$(cat)
 
 # Extract command from JSON

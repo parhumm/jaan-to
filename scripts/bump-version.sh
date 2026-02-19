@@ -3,7 +3,7 @@
 # Usage: ./scripts/bump-version.sh 3.15.0
 # Updates version in all 3 required locations
 
-set -e
+set -euo pipefail
 
 VERSION="$1"
 

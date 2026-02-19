@@ -101,6 +101,10 @@ jobs:
           fi
           echo "✓ Hook stdout within ${MAX_CHARS} char cap"
 
+      - name: Security standards validation
+        run: |
+          bash scripts/validate-security.sh
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -117,4 +121,6 @@ jobs:
           echo "  Release Check Passed: v$VERSION"
           echo "═══════════════════════════════════════"
           echo ""
+          echo "All checks passed: versions, changelog,"
+          echo "security standards, and docs build."
           echo "Ready to merge to main and tag."

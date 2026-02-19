@@ -1,7 +1,7 @@
 ---
 name: pm-research-about
 description: Deep research on any topic, or add existing file/URL to research index.
-allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/research/**), Edit, Bash(git add:*), Bash(git commit:*)
+allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/research/**), Edit($JAAN_OUTPUTS_DIR/research/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: <topic-or-file-path-or-URL>
 ---
 

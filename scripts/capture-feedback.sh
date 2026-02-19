@@ -3,6 +3,8 @@
 # Called by PostToolUse hook after Write operations
 # Exit codes: 0 = proceed
 
+set -euo pipefail
+
 INPUT=$(cat)
 
 # Extract file path from JSON

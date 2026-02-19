@@ -4,6 +4,8 @@
 # Compatible with bash 3.2+ (macOS default)
 
 # Load configuration system
+set -euo pipefail
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source "${SCRIPT_DIR}/config-loader.sh"
 source "${SCRIPT_DIR}/path-resolver.sh"
@@ -56,9 +58,26 @@ substitute_template_vars() {
     done <<< "$context"
   fi
 
-  # Substitute {{env:VAR}} variables
+  # Substitute {{env:VAR}} variables (allowlisted vars only)
+  local _ENV_ALLOWLIST="HOME USER SHELL LANG TERM CLAUDE_PROJECT_DIR CLAUDE_PLUGIN_ROOT PROJECT_DIR PLUGIN_DIR"
   while [[ "$content" =~ \{\{env:([A-Z_]+)\}\} ]]; do
     local var_name="${BASH_REMATCH[1]}"
+
+    # Security: only resolve allowlisted environment variables
+    local _allowed=false
+    for _safe_var in $_ENV_ALLOWLIST; do
+      if [ "$var_name" = "$_safe_var" ]; then
+        _allowed=true
+        break
+      fi
+    done
+
+    if [ "$_allowed" = "false" ]; then
+      echo "SECURITY: Blocked {{env:${var_name}}} — not in allowlist" >&2
+      content=$(echo "$content" | sed "s/{{env:${var_name}}}//")
+      continue
+    fi
+
     local var_value="${!var_name:-}"
 
     # Escape special characters
@@ -96,6 +115,24 @@ substitute_template_vars() {
     # Read section from file
     local project_dir="${PROJECT_DIR:-.}"
     local imported=""
+
+    # Security: validate import path (reject traversal and absolute paths)
+    if [[ "$file_path" =~ \.\. ]] || [[ "$file_path" =~ ^/ ]]; then
+      echo "SECURITY: Blocked {{import:${import_spec}}} — path traversal or absolute path" >&2
+      content=$(echo "$content" | sed "s/{{import:${import_spec}}}//")
+      continue
+    fi
+
+    # Security: canonical path check — ensure resolved path stays within project
+    local _import_canonical
+    _import_canonical=$(_canonical_path "${project_dir}/${file_path}")
+    local _project_canonical
+    _project_canonical=$(_canonical_path "$project_dir")
+    if [[ "$_import_canonical" != "$_project_canonical"* ]]; then
+      echo "SECURITY: Blocked {{import:${import_spec}}} — escapes project boundary" >&2
+      content=$(echo "$content" | sed "s/{{import:${import_spec}}}//")
+      continue
+    fi
 
     if [ -f "${project_dir}/${file_path}" ]; then
       imported=$(extract_section "${project_dir}/${file_path}" "$section")
