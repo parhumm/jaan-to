@@ -1,9 +1,11 @@
 ---
 name: skill-update
-description: Update an existing jaan.to skill following standards.
+description: Update an existing jaan-to skill following standards. Use when modifying or improving existing skills.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit(skills/**), Edit(docs/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [skill-name]
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # skill-update

@@ -1,8 +1,10 @@
 ---
 name: frontend-task-breakdown
-description: Generate frontend task breakdowns from UX handoffs with component inventory, state matrices, and estimates.
+description: Generate frontend task breakdowns from UX handoffs with component inventory and state matrices. Use when planning frontend work.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/task-breakdown/**), Bash(cp:*), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [ux-handoff-description-or-figma-link]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # frontend-task-breakdown
@@ -335,36 +337,18 @@ Use AskUserQuestion:
 - Configure/Setup → infrastructure
 
 **Estimate bands** (T-shirt sizes, not hours):
-| Size | Meaning | Typical Work |
-|------|---------|-------------|
-| XS | Trivial | Single variant, config change |
-| S | Small | Atom component with tests |
-| M | Medium | Molecule/organism with states |
-| L | Large | Template/page with integration |
-| XL | Extra large | Full feature slice with all states |
+
+> **Reference**: Full estimate bands table (XS–XL with meanings and typical work) in [`docs/extending/frontend-task-breakdown-reference.md` → Estimate Bands](${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-task-breakdown-reference.md).
 
 **State Machine stubs** (for organisms and above):
-```
-Component: {name}
-States: idle | loading | success | error | empty
-Events: FETCH | RETRY | RESET | REFRESH
 
-Transitions:
-- idle --FETCH--> loading
-- loading --SUCCESS--> success | error | empty
-- error --RETRY--> loading
-- success --REFRESH--> loading (keep stale data visible)
-```
+> **Reference**: State machine stub template (states, events, transitions format) in [`docs/extending/frontend-task-breakdown-reference.md` → State Machine Stubs](${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-task-breakdown-reference.md).
 
 **Dependency Graph** — Mermaid diagram from Step 6
 
 **Performance Budget** (if scope = Production or In between):
-| Metric | Target | Optimization Tasks |
-|--------|--------|--------------------|
-| LCP | ≤2.5s | next/image priority, font preload, critical CSS |
-| INP | ≤200ms | useTransition for non-urgent, debounce handlers |
-| CLS | ≤0.1 | explicit dimensions, aspect-ratio, font swap |
-| Bundle | <{budget}kb | code splitting, tree shaking, dynamic imports |
+
+> **Reference**: Performance budget table (LCP, INP, CLS, Bundle targets and optimization tasks) in [`docs/extending/frontend-task-breakdown-reference.md` → Performance Budget](${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-task-breakdown-reference.md).
 
 **Risk Register** — table from Step 7
 

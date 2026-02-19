@@ -220,3 +220,124 @@ After auto-detection, always show: "Detected platforms: {list}. Correct? [y/n/se
 Calculate overall_score (OpenSSF-style 0-10):
 `overall_score = 10 - (critical * 2.0 + high * 1.0 + medium * 0.4 + low * 0.1) / max(total_findings, 1)`
 Clamp result to 0-10 range.
+
+---
+
+## Confidence Levels (4-level)
+
+| Level | Label | Range | Criteria |
+|-------|-------|-------|----------|
+| 4 | **Confirmed** | 0.95-1.00 | Multiple independent methods agree; reproducible |
+| 3 | **Firm** | 0.80-0.94 | Single high-precision method with clear evidence |
+| 2 | **Tentative** | 0.50-0.79 | Pattern match without full analysis; needs investigation |
+| 1 | **Uncertain** | 0.20-0.49 | Absence-of-evidence reasoning; expert judgment only |
+
+**Downgrade one level** if: evidence from outdated code, finding in dead code, tool has high false-positive rate.
+**Upgrade one level** if: multiple tools agree, maintainer confirmed, systematic pattern detected.
+
+---
+
+## Detection Summary Format (Light Mode)
+
+Display this format when `run_depth == "light"`:
+
+```
+DETECTION COMPLETE (Light Mode)
+--------------------------------
+
+PLATFORM: {platform_name or 'all'}
+
+STACK FINDINGS
+  Backend:        {lang} {ver} + {framework} {ver}    [Confidence: {level}]
+  Frontend:       {lang} {ver} + {framework} {ver}    [Confidence: {level}]
+  Database:       {database} {ver}                      [Confidence: {level}]
+  Container:      {docker images}                       [Confidence: {level}]
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10 (OpenSSF-style, config + container layers only)
+
+OUTPUT FILE (1):
+  $JAAN_OUTPUTS_DIR/detect/dev/summary{-platform}.md
+
+Note: Score based on Layers 1-2 only. Run with --full for complete analysis
+including CI/CD, security, infrastructure, observability, and risk assessment.
+
+{If incremental == true:}
+INCREMENTAL SCOPE: {n} files changed since {last_audit.timestamp} (branch: {last_audit.branch})
+```
+
+Prompt: "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
+
+---
+
+## Detection Summary Format (Full Mode)
+
+Display this format when `run_depth == "full"`:
+
+```
+DETECTION COMPLETE
+------------------
+
+PLATFORM: {platform_name or 'all'}
+
+STACK FINDINGS
+  Backend:        {lang} {ver} + {framework} {ver}    [Confidence: {level}]
+  Frontend:       {lang} {ver} + {framework} {ver}    [Confidence: {level}]
+  Database:       {database} {ver}                      [Confidence: {level}]
+  Infrastructure: {container} + {ci/cd}                 [Confidence: {level}]
+
+SEVERITY SUMMARY
+  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
+
+OVERALL SCORE: {score}/10 (OpenSSF-style)
+
+OUTPUT FILES (9):
+  $JAAN_OUTPUTS_DIR/detect/dev/stack{-platform}.md           - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/architecture{-platform}.md    - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/standards{-platform}.md       - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/testing{-platform}.md         - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/cicd{-platform}.md            - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/deployment{-platform}.md      - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/security{-platform}.md        - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/observability{-platform}.md   - {n} findings
+  $JAAN_OUTPUTS_DIR/detect/dev/risks{-platform}.md           - {n} findings
+
+Note: {-platform} suffix only if multi-platform mode (e.g., -web, -backend). Single-platform mode has no suffix.
+
+{If incremental == true:}
+INCREMENTAL SCOPE: {n} files changed since {last_audit.timestamp} (branch: {last_audit.branch})
+```
+
+Prompt: "Proceed with writing 9 output files to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
+
+---
+
+## Quality Check & Definition of Done
+
+### Light Mode (`run_depth == "light"`)
+
+- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/dev/summary{suffix}.md`
+- [ ] Valid YAML frontmatter with `platform` field and `overall_score`
+- [ ] Every finding has evidence block with correct ID format (E-DEV-NNN)
+- [ ] Confidence levels assigned to all findings
+- [ ] No speculation presented as evidence
+- [ ] Score disclaimer included (partial analysis note)
+- [ ] Output filename matches platform suffix convention
+- [ ] Audit state written to `.audit-state.yaml`
+- [ ] Detection summary shown to user; user approved output
+
+### Full Mode (`run_depth == "full"`)
+
+- [ ] All 9 output files written to `$JAAN_OUTPUTS_DIR/detect/dev/`
+- [ ] Valid YAML frontmatter in every file with `platform` field
+- [ ] Every finding has evidence block with correct ID format (E-DEV-NNN or E-DEV-{PLATFORM}-NNN)
+- [ ] Confidence levels assigned to all findings
+- [ ] No speculation presented as evidence; no scope-exceeding claims
+- [ ] CI/CD security explicitly checked (secrets, runner trust, permissions, pinning, provenance)
+- [ ] Overall score calculated (OpenSSF 0-10)
+- [ ] Output filenames match platform suffix convention
+- [ ] Audit state written to `.audit-state.yaml`
+- [ ] Detection summary shown to user; user approved output
+- [ ] Seed reconciliation check performed (discrepancies reported or alignment confirmed)

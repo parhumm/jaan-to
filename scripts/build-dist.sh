@@ -20,10 +20,15 @@ done
 # Essential root files
 cp "$PLUGIN_ROOT/CLAUDE.md" "$DIST/CLAUDE.md"
 
-# Docs needed by bootstrap (copied to jaan-to/ on install)
+# Docs needed by bootstrap and skill references (copied to jaan-to/ on install)
 mkdir -p "$DIST/docs/extending"
 cp "$PLUGIN_ROOT/docs/STYLE.md" "$DIST/docs/STYLE.md"
 cp "$PLUGIN_ROOT/docs/extending/create-skill.md" "$DIST/docs/extending/create-skill.md"
+
+# Reference files used by skills via ${CLAUDE_PLUGIN_ROOT}/docs/extending/*-reference.md
+for ref in "$PLUGIN_ROOT"/docs/extending/*-reference.md; do
+  [ -f "$ref" ] && cp "$ref" "$DIST/docs/extending/$(basename "$ref")"
+done
 
 # Count what was shipped
 FILE_COUNT=$(find "$DIST" -type f | wc -l | tr -d ' ')

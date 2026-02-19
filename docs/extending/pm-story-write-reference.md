@@ -99,3 +99,106 @@ Example: Evaluate payment processors (spike), then implement chosen one
 
 **Pattern 6: Cross-Cutting Concerns** - Defer performance/security/scale
 Example: Search works correctly now, fast search later, concurrent search later
+
+---
+
+## Story Template — Sections 5-9 Format Specifications
+
+### Section 5: Scope
+```markdown
+## Scope
+
+### In-Scope
+- {explicit_item_1}
+- {explicit_item_2}
+- {explicit_item_3}
+
+### Out-of-Scope
+- {deferred_item_1} → See [US-YYY](#reference) or Future epic
+- {deferred_item_2} → v2 enhancement
+- {deferred_item_3} → Separate story needed
+```
+
+### Section 6: Dependencies
+```markdown
+## Dependencies
+
+| Dependency | Type | Status | Owner |
+|------------|------|--------|-------|
+| {dependency_name} | {Story/Technical/Design} | {Done/In Progress/Pending} | {@owner} |
+
+Or: "None"
+```
+
+### Section 7: Technical Notes (brief)
+```markdown
+## Technical Notes
+
+{implementation_hints}
+
+[Brief API contracts, database changes, performance requirements. Keep brief—details belong in task breakdown.]
+```
+
+### Section 8: Open Questions
+```markdown
+## Open Questions
+
+- [ ] {Unresolved question needing decision} — @decider by YYYY-MM-DD
+- [x] ~~{Resolved question}~~ — **Decision**: {outcome} (YYYY-MM-DD)
+
+Or: "None"
+```
+
+### Section 9: Definition of Done
+```markdown
+## Definition of Done
+
+- [ ] Acceptance criteria verified by QA
+- [ ] Code reviewed and approved
+- [ ] Unit tests written (≥80% coverage)
+- [ ] Documentation updated
+- [ ] PO acceptance received
+```
+
+---
+
+## Export Formats
+
+Tool export formats for importing stories into project management tools (from research Section 7):
+
+**Jira CSV Import:**
+```csv
+Summary,Description,Issue Type,Priority,Story Points,Epic Link,Labels
+"{title}","{story_body_first_paragraph}","Story","{priority}",TBD,"{epic}","{labels}"
+```
+
+**Linear GraphQL Mutation:**
+```json
+{
+  "input": {
+    "title": "{title}",
+    "description": "{story_body_markdown}",
+    "priority": {priority_number},
+    "estimate": null,
+    "labelIds": ["{label_ids}"]
+  }
+}
+```
+
+---
+
+## Skill Definition of Done Checklist
+
+- [ ] Input parsed and validated (Step 0)
+- [ ] All clarifying questions answered (Step 1)
+- [ ] Edge cases mapped to 10 categories (Step 2)
+- [ ] Story structure planned (Step 3)
+- [ ] User approved plan at HARD STOP
+- [ ] Story content generated from template (Step 4)
+- [ ] INVEST quality check passed—all 6 criteria (Step 5)
+- [ ] AC testability verified—all observable outcomes (Step 5)
+- [ ] Definition of Ready validated—all 10 items (Step 5)
+- [ ] Story previewed and approved (Step 6)
+- [ ] File written to correct path (Step 7)
+- [ ] Export formats provided—Jira CSV, Linear JSON (Step 7)
+- [ ] User feedback captured if provided (Step 8)

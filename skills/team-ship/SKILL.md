@@ -1,9 +1,11 @@
 ---
 name: team-ship
-description: Assemble role-based AI teammates to ship ideas from concept to production via agent teams.
+description: Assemble role-based AI teammates to ship ideas from concept to production via agent teams. Use when orchestrating multi-role delivery.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[initiative] [--track fast|full] [--detect] [--roles role1,role2] [--dry-run] [--resume]"
 context: fork
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # team-ship

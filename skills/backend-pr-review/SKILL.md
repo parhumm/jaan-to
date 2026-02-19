@@ -1,8 +1,10 @@
 ---
 name: backend-pr-review
-description: Review backend PRs for security, performance, code quality, and testing gaps across any stack via tech.md.
+description: Review backend PRs for security, performance, code quality, and testing gaps across any stack. Use when reviewing backend pull requests.
 allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(gh api:*), Bash(glab mr diff:*), Bash(glab mr view:*), Bash(glab mr comment:*), Bash(curl:*), Bash(git diff:*), Bash(git log:*), Bash(git fetch:*), Write($JAAN_OUTPUTS_DIR/backend/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: <pr-url | owner/repo#number | local>
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # backend-pr-review

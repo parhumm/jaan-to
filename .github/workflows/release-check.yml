@@ -105,6 +105,40 @@ jobs:
         run: |
           bash scripts/validate-security.sh
 
+      - name: Agent Skills standard compliance
+        run: |
+          ERRORS=0
+          # license field
+          for skill in skills/*/SKILL.md; do
+            if ! grep -q '^license:' "$skill"; then
+              echo "::error::Missing 'license:' in $(basename $(dirname $skill))"
+              ERRORS=$((ERRORS+1))
+            fi
+          done
+          # compatibility field
+          for skill in skills/*/SKILL.md; do
+            if ! grep -q '^compatibility:' "$skill"; then
+              echo "::error::Missing 'compatibility:' in $(basename $(dirname $skill))"
+              ERRORS=$((ERRORS+1))
+            fi
+          done
+          # "Use when" trigger phrases
+          for skill in skills/*/SKILL.md; do
+            desc=$(awk '/^---$/{n++; next} n==1 && /^description:/{sub(/^description: */, ""); print; exit}' "$skill")
+            if ! echo "$desc" | grep -qi "Use when\|Use to\|Use for"; then
+              echo "::error::Description missing trigger phrase in $(basename $(dirname $skill))"
+              ERRORS=$((ERRORS+1))
+            fi
+          done
+          # marketplace.json skills[] sync
+          SKILLS_COUNT=$(jq '.plugins[0].skills | length' .claude-plugin/marketplace.json 2>/dev/null || echo 0)
+          ACTUAL_COUNT=$(ls -d skills/*/SKILL.md 2>/dev/null | wc -l | tr -d ' ')
+          if [ "$SKILLS_COUNT" -ne "$ACTUAL_COUNT" ]; then
+            echo "::error::marketplace.json skills[] ($SKILLS_COUNT) != actual ($ACTUAL_COUNT)"
+            ERRORS=$((ERRORS+1))
+          fi
+          [ $ERRORS -eq 0 ] && echo "✓ Agent Skills compliance passed" || exit 1
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'

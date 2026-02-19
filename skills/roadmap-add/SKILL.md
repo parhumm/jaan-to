@@ -1,9 +1,11 @@
 ---
 name: roadmap-add
-description: "[Internal] Add a task to the jaan.to development roadmap."
+description: Add a task to the jaan-to development roadmap. Use when adding new tasks or features to the plugin roadmap.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [task-description]
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # roadmap-add

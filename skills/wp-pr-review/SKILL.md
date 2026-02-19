@@ -1,11 +1,13 @@
 ---
 name: wp-pr-review
-description: Review WordPress plugin PRs for security vulnerabilities, performance issues,
+description: Review WordPress plugin PRs for security, performance, WPCS standards, and backward compatibility. Use when reviewing WordPress PRs.
   WPCS standards violations, and backward compatibility. Use for WordPress PR review,
   plugin code review, WP security audit, WPCS check.
 allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(gh api:*), Bash(glab mr diff:*), Bash(glab mr comment:*), Bash(git diff:*), Bash(git log:*), Write($JAAN_OUTPUTS_DIR/wp/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: <pr-url | owner/repo#number | local>
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # wp-pr-review

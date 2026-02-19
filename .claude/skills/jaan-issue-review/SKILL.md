@@ -421,6 +421,10 @@ Thorough standards compliance check before merge.
 - [ ] All cross-skill references use correct `/jaan-to:{name}` format
 - [ ] Modified files don't break existing skill invocation chains (check `docs/skills/DEPENDENCIES.md`)
 - [ ] Template variables use `{{double-brace}}` syntax if templates were modified
+- [ ] Modified SKILL.md files have `license` field in frontmatter
+- [ ] Modified SKILL.md descriptions include "Use when" or "Use to" trigger phrase
+- [ ] Modified SKILL.md files have `compatibility` field in frontmatter
+- [ ] If new skill created, verify `.claude-plugin/marketplace.json` `skills[]` array updated
 
 ## Step 5.3: Documentation Checks
 

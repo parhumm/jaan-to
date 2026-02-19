@@ -42,14 +42,15 @@ run_test "Phase 2 E2E" "$SCRIPT_DIR/phase2-e2e.sh" || true
 run_test "Phases 3-5 E2E" "$SCRIPT_DIR/phase3-5-e2e.sh" || true
 run_test "Phase 6 E2E" "$SCRIPT_DIR/phase6-e2e.sh" || true
 run_test "Unified Integration" "$SCRIPT_DIR/integration-all-phases.sh" || true
+run_test "Agent Skills Compliance" "$SCRIPT_DIR/agent-skills-compliance-e2e.sh" || true
 
 # Summary
 echo ""
 echo "=============================================="
 echo "  TEST SUITE SUMMARY"
 echo "=============================================="
-echo "  Passed:   $PASSED/5"
-echo "  Failed:   $FAILED/5"
+echo "  Passed:   $PASSED/6"
+echo "  Failed:   $FAILED/6"
 echo "  Warnings: $WARNINGS"
 echo "=============================================="
 
