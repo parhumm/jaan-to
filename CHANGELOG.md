@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [7.2.0] - 2026-02-19
+
 ### Added
 - **Agent Skills open standard compatibility** ([agentskills.io](https://agentskills.io)) — Full compliance with the Agent Skills ecosystem for cross-platform skill discovery. `marketplace.json` now includes `skills[]` discovery array (44 entries) and `metadata.pluginRoot` for CLI resolution. All 44 SKILL.md files updated with `license: MIT`, `compatibility` field, and enriched descriptions with "Use when" trigger phrases (no colons). 13 overlong skills refactored below 500 lines via reference extraction (5 new + 8 expanded reference files in `docs/extending/`). CI enforcement via `release-check.yml` Agent Skills compliance step, `validate-skills.sh` Agent Skills section, `validate-compliance.sh` Check 11 (naming spec + manifest sync). New `scripts/marketplace-sync-check.sh` PostToolUse hook detects skill/manifest drift. `skill-create` template updated with `license` + `compatibility` fields. `create-skill.md` spec updated with Agent Skills Standard section. E2E test suite: 20 tests (12 success + 8 failure scenarios) in `scripts/test/agent-skills-compliance-e2e.sh`. Description budget: 10,282/15,000 chars (31% headroom)
 - **Automated security enforcement** — New `scripts/validate-security.sh` as single source of truth for security validation across CI, `/jaan-release`, and `/jaan-issue-review`. 4 check sections: (A) Skill permission safety — detects bare Write/Bash/Edit, credential access patterns, hardcoded secrets; (B) Shell script safety — enforces `set -euo pipefail`, blocks eval/curl|sh/chmod 777/$IFS; (C) Hook safety — validates static paths, no user input in commands; (D) Dangerous patterns — blocks `rm -rf /`, `exec()` in skill bodies. CI workflow updated with security gate step. Distributed skills are BLOCKING, local skills are ADVISORY. GitHub Actions annotations via `::error::` / `::warning::`

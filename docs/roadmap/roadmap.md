@@ -30,17 +30,23 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.1.1 (44 skills)
+**Latest:** v7.2.0 (44 skills)
 
 ---
 
 ## Unreleased
+
+---
+
+## v7.2.0 — 2026-02-19
 
 - [x] Security audit remediation — 13 findings fixed, `set -euo pipefail` enforced, skill permissions narrowed
 - [x] Automated security enforcement — `scripts/validate-security.sh`, CI gate, `/jaan-release` + `/jaan-issue-review` integration
 - [x] `jaan-init` Co-Authored-By attribution for git commits and PRs ([#109](https://github.com/parhumm/jaan-to/issues/109))
 - [x] `pm-prd-write` output readability, document flow, RTL support ([#141](https://github.com/parhumm/jaan-to/issues/141))
 - [x] Agent Skills open standard compatibility — All 44 skills compliant with agentskills.io spec (license, compatibility, trigger phrases, marketplace discovery, naming spec, E2E tests, CI enforcement)
+- [x] `team-ship` agent teams orchestration skill — Role-based AI teammates for spec-to-ship pipeline
+- [x] Compliance hardening — Skill Alignment sections (44 skills), Definition of Done (5 skills), hardcoded path sanitization
 
 ---
 
