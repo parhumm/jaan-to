@@ -322,6 +322,21 @@ If approved:
 
 Confirm: "Skill files updated in `skills/{name}/`"
 
+## Step 11.5: Sync Team Roles Registry
+
+If the updated skill belongs to a role in `${CLAUDE_PLUGIN_ROOT}/skills/team-ship/roles.md`:
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/skills/team-ship/roles.md`
+2. Check if changes affect the role definition:
+   - Skill name changed → update Skills list
+   - Output paths changed → update Outputs to share
+   - New cross-role dependency → update Messages / Depends on
+   - Skill removed → remove from Skills list
+3. If changes detected: preview diff and apply with user approval
+4. If no changes needed: skip silently
+
+If `roles.md` does not exist (team-ship not yet created), skip silently.
+
 ## Step 12: Auto-Invoke Documentation Sync
 
 Run `/jaan-to:docs-update {name}` to sync:

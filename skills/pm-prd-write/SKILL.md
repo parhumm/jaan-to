@@ -69,6 +69,13 @@ After receiving answers, mentally outline:
 - Scope boundaries (from Q3)
 - User Stories (derive 3+ from context)
 
+### Gap Analysis / Audit-Based PRDs
+If the initiative involves auditing current state vs. desired state (e.g., coverage audits, compliance checks, migration assessments):
+- Add "Requirements Overview" table before current state analysis — lists all required items/scenarios derived from the input spec
+- Add "Methodology" section explaining data sources and audit approach used to determine what exists vs. what's missing
+- Use per-entity status matrices (checkmark/cross) instead of aggregate "existing"/"missing" lists — show status per entity (e.g., per-gateway, per-region, per-module)
+- Document flow: Requirements Overview → Methodology → Current State Matrix → Gap Prioritization
+
 ---
 
 # HARD STOP - Human Review Check
@@ -94,6 +101,17 @@ Fill all sections:
 - **Scope**: In-scope from input, out-of-scope from question 3
 - **User Stories**: Derived from problem + solution (minimum 3)
 - **Open Questions**: Any unresolved items
+
+### Formatting Rules
+- **Bullet points over prose**: Use bullet lists for Problem Statement, Executive Summary, Solution Overview, and Scope sections. Avoid dense paragraphs — stakeholders scan, not read
+- **Table width**: Limit all tables to 4 columns max. If more columns are needed, split into multiple tables or restructure as nested lists
+- **Status matrices**: When input data has per-entity breakdowns (e.g., per-gateway, per-region, per-module), use checkmark/cross matrix tables showing status per entity — never aggregate partial implementations as "existing"
+
+### RTL Language Support
+When the resolved language (from language protocol) is RTL (Persian, Arabic, Hebrew):
+- Wrap the entire PRD output in `<div dir="rtl">` ... `</div>`
+- Prefer native vocabulary over English loanwords for non-technical terms
+- Apply correct orthography rules (e.g., hamze placement, kasre-ye ezafe connectors in Persian)
 
 ### Image Embedding
 If user provided image/screenshot paths in Step 1 Q4, embed them inline using `![description](resolved-path)` in relevant sections (Solution Overview, User Stories, Appendix). Use URL-encoded paths for spaces/special characters.
@@ -124,6 +142,11 @@ Before showing preview, verify:
 - [ ] Has explicit out-of-scope section
 - [ ] Has at least 3 user stories
 - [ ] If user provided images: all references use `![alt](...)` syntax with URL-encoded paths
+- [ ] Prose sections (Problem Statement, Executive Summary, Solution Overview) use bullet points, not dense paragraphs
+- [ ] All tables have 4 columns or fewer
+- [ ] If gap-analysis PRD: has Requirements Overview and Methodology sections
+- [ ] If gap-analysis PRD: uses per-entity status matrices, not aggregate lists
+- [ ] If RTL language: output wrapped in `<div dir="rtl">` with native vocabulary
 
 If any check fails, revise before preview.
 
