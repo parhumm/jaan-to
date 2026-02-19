@@ -394,6 +394,22 @@ Edit `scripts/seeds/config.md` to add skill to Available Skills table:
 | {role}-{domain}-{action} | `/{name}` | {short_description} |
 ```
 
+## Step 14.5: Update Team Roles Registry
+
+If skill name matches a role prefix (pm-, ux-, backend-, frontend-, qa-, devops-, sec-, data-, growth-, delivery-, sre-, support-, release-, detect-):
+
+1. Read `${CLAUDE_PLUGIN_ROOT}/skills/team-ship/roles.md`
+2. Find the role section (`## {role_prefix}`) matching the skill's prefix
+3. If role section exists:
+   - Add skill name to the **Skills** list (maintain workflow chain order)
+   - If skill produces cross-role outputs (e.g., api-contract → frontend), add to **Messages**
+4. If role section does NOT exist (new role):
+   - Create new section with: Title, Track (full), Model (sonnet), Skills ([new-skill]), Phase, Depends on, Outputs, Messages, Shutdown after
+   - Ask user: "Which phase? [1-define / 2-build / 3-ship]" and "What inputs needed?"
+5. Preview roles.md change → confirm with user before writing
+
+If `roles.md` does not exist (team-ship not yet created), skip silently.
+
 ## Step 15: Auto-Invoke Documentation
 
 Run `/jaan-to:docs-create` to create:

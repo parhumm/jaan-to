@@ -35,3 +35,14 @@ issue_report_submit: "ask"
 # Integration drift detection
 # When true, PostToolUse hook warns about un-integrated outputs
 integration_drift_check: true
+
+# Agent Teams (experimental)
+# Requires CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 in environment
+# Enable via project settings.yaml: agent_teams_enabled: true
+agent_teams_enabled: false
+agent_teams_default_track: "full"
+agent_teams_display_mode: "auto"
+agent_teams_plan_approval: true
+agent_teams_quality_gate: true
+agent_teams_teammate_model: ""
+agent_teams_detect_model: "haiku"

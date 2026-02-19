@@ -23,6 +23,7 @@ slug: /skills/core
 | [/jaan-to:skill-update](skill-update.md) | Update existing skill |
 | [/jaan-to:jaan-init](jaan-init.md) | Activate jaan-to for the current project |
 | [/jaan-to:jaan-issue-report](jaan-issue-report.md) | Report issues to jaan-to GitHub repo |
+| [/jaan-to:team-ship](team-ship.md) | Assemble role-based AI teammates to ship ideas via agent teams |
 
 ---
 

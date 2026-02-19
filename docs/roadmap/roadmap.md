@@ -130,6 +130,15 @@ Complete spec-to-ship workflow across 13 roles: Research → Specification → D
 - [ ] PM role gap completion — Ship remaining PM skills from 21-skill catalog + batch workflow ([#134](https://github.com/parhumm/jaan-to/issues/134)) → [details](tasks/pm-role-gap.md)
 - [ ] Batch/combination skills per role — Role-level pipeline skills (WP, PM, Dev, UX, QA) for shipping ideas with minimum human actions ([#135](https://github.com/parhumm/jaan-to/issues/135)) → [details](tasks/batch-skills.md)
 
+### Agent Teams Integration
+- [ ] `team-ship` orchestration skill — Role-based agent teams to ship ideas from concept to production → [research](../research/77-agent-teams-integration.md)
+  - [ ] `skills/team-ship/roles.md` — Role definitions with model selection and dependency graph
+  - [ ] `skills/team-ship/SKILL.md` — Orchestration logic (≤500 lines, fork-isolated)
+  - [ ] `docs/extending/team-ship-reference.md` — Spawn prompts, dependency algo, checkpoint schema
+  - [ ] Agent team hooks: TaskCompleted quality gate, TeammateIdle redirect, roles-sync drift detection
+  - [ ] `skill-create` Step 14.5 + `skill-update` Step 11.5 — Auto-sync roles.md
+  - [ ] Configuration: `agent_teams_*` settings in defaults.yaml
+
 ### Distribution
 - [ ] Jaanify → starter template — Convert `parhumm/jaanify` into smart starter template for one-command idea-to-ship ([#136](https://github.com/parhumm/jaan-to/issues/136)) → [details](tasks/jaanify-template.md)
 - [ ] Branding + website with skill demos — Landing page, skill output demos, flow-of-use walkthroughs (priority: next week) ([#137](https://github.com/parhumm/jaan-to/issues/137)) → [details](tasks/branding-website.md)
