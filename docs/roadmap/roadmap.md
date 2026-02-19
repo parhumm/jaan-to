@@ -38,8 +38,8 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 - [x] Security audit remediation — 13 findings fixed, `set -euo pipefail` enforced, skill permissions narrowed
 - [x] Automated security enforcement — `scripts/validate-security.sh`, CI gate, `/jaan-release` + `/jaan-issue-review` integration
-- [ ] `jaan-init` Co-Authored-By attribution for git commits and PRs ([#109](https://github.com/parhumm/jaan-to/issues/109))
-- [ ] `pm-prd-write` output readability, document flow, RTL support ([#141](https://github.com/parhumm/jaan-to/issues/141))
+- [x] `jaan-init` Co-Authored-By attribution for git commits and PRs ([#109](https://github.com/parhumm/jaan-to/issues/109))
+- [x] `pm-prd-write` output readability, document flow, RTL support ([#141](https://github.com/parhumm/jaan-to/issues/141))
 - [x] Agent Skills open standard compatibility — All 44 skills compliant with agentskills.io spec (license, compatibility, trigger phrases, marketplace discovery, naming spec, E2E tests, CI enforcement)
 
 ---
