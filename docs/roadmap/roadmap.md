@@ -37,6 +37,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 ## Unreleased
 
 - [ ] `jaan-init` Co-Authored-By attribution for git commits and PRs ([#109](https://github.com/parhumm/jaan-to/issues/109))
+- [ ] `pm-prd-write` output readability, document flow, RTL support ([#141](https://github.com/parhumm/jaan-to/issues/141))
 
 ---
 
