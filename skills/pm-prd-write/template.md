@@ -6,59 +6,28 @@
 
 ## Executive Summary
 
-<!-- Use bullet points, not dense paragraphs -->
-{1-2 bullet points summarizing the problem and proposed solution}
+{1-2 sentence high-level summary of the problem and proposed solution}
 
 ---
 
 ## Problem Statement
 
-<!-- Use bullet points, not dense paragraphs -->
-{problem_bullets}
+{problem}
 
 ---
 
 ## Solution Overview
 
-<!-- Use bullet points, not dense paragraphs -->
-{solution_bullets}
+{solution}
 
 ---
 
 ## Success Metrics
 
-<!-- Max 4 columns per table -->
 | Metric | Current | Target | How to Measure |
 |--------|---------|--------|----------------|
 | {metric_1} | {current_1} | {target_1} | {measurement_1} |
 | {metric_2} | {current_2} | {target_2} | {measurement_2} |
-
----
-
-<!-- OPTIONAL: Include for gap-analysis / audit-based PRDs -->
-## Requirements Overview
-
-<!-- Summary table of all required items/scenarios derived from the input spec -->
-| # | Requirement | Source |
-|---|-------------|--------|
-| {req_rows} | | |
-
----
-
-<!-- OPTIONAL: Include for gap-analysis / audit-based PRDs -->
-## Methodology
-
-{methodology — explain data sources, audit approach, how existing vs. missing was determined}
-
----
-
-<!-- OPTIONAL: Include for gap-analysis / audit-based PRDs -->
-## Current State Matrix
-
-<!-- Use per-entity status matrices with checkmark/cross instead of aggregate lists -->
-| Scenario | {Entity A} | {Entity B} | {Entity C} |
-|----------|:----------:|:----------:|:----------:|
-| {scenario_rows with checkmarks} | | | |
 
 ---
 

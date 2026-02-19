@@ -1,7 +1,7 @@
 ---
 name: jaan-init
 description: Initialize jaan-to for the current project with directory setup and seed files.
-allowed-tools: Read, Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bootstrap.sh), Edit(.gitignore)
+allowed-tools: Read, Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bootstrap.sh)
 argument-hint: (no arguments)
 disable-model-invocation: true
 ---
@@ -62,7 +62,7 @@ jaan-to/
   docs/                    — Reference docs (STYLE.md, create-skill.md)
 ```
 
-You'll be asked whether to add `jaan-to/` to `.gitignore` (recommended: no — commit `jaan-to/` to version control).
+Also mention: `jaan-to/` will be added to `.gitignore`.
 
 ---
 
@@ -81,14 +81,6 @@ Proceed? [y/n]
 
 **Do NOT proceed without explicit approval.**
 
-Then ask:
-
-```
-Add `jaan-to/` to .gitignore? (Recommended: No — commit jaan-to/ to version control) [y/n]
-```
-
-Record the user's answer for Step 3.5.
-
 ---
 
 # PHASE 2: Generation (Write Phase)
@@ -106,18 +98,11 @@ Note: The bootstrap script creates the `jaan-to/` directory and all subdirectori
 2. Copying seed context files (tech.md, team.md, integrations.md, etc.)
 3. Copying reference docs
 4. Initializing settings.yaml
+5. Adding `jaan-to/` to `.gitignore`
 
 Templates and learn files are loaded from the plugin at runtime (lazy loading).
 Customize templates by copying them to `jaan-to/templates/`.
 Add project lessons via `/jaan-to:learn-add`.
-
-## Step 3.5: Conditional .gitignore
-
-If the user chose **yes** to adding `jaan-to/` to `.gitignore` during the HARD STOP:
-- If `.gitignore` exists, append `jaan-to/` (skip if already present)
-- If `.gitignore` does not exist, create it with `jaan-to/`
-
-If the user chose **no**, skip this step entirely.
 
 ## Step 4: Report Result
 
@@ -147,7 +132,7 @@ Use: /jaan-to:learn-add "jaan-init" "lesson"
 - [ ] `jaan-to/` directory exists with subdirectories: outputs/, learn/, context/, templates/, config/, docs/
 - [ ] `jaan-to/config/settings.yaml` exists
 - [ ] Context seed files copied to `jaan-to/context/`
-- [ ] User was asked about `.gitignore` preference
+- [ ] `.gitignore` contains `jaan-to/` entry
 - [ ] User informed of next steps
 - [ ] User has approved final result
 
