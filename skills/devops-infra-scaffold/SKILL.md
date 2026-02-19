@@ -1,8 +1,10 @@
 ---
 name: devops-infra-scaffold
-description: Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack.
+description: Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack. Use when scaffolding infrastructure.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/devops/infra-scaffold/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[tech.md | (interactive)]"
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # devops-infra-scaffold
@@ -327,45 +329,9 @@ Full-stack development environment with:
 
 ## Step 11: Generate Environment Config Files
 
-### .env.example
-All variables with safe defaults and descriptions:
-```bash
-# Database
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/myapp
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/devops-infra-scaffold-reference.md` section "Environment Config File Templates" for `.env.example`, `.env.test`, and `.env.production.example` templates.
 
-# Redis
-REDIS_URL=redis://localhost:6379
-
-# App
-NODE_ENV=development
-PORT=4000
-HOST=0.0.0.0
-
-# Auth
-JWT_SECRET=change-me-in-production
-
-# Frontend
-NEXT_PUBLIC_API_URL=http://localhost:4000
-```
-
-### .env.test
-Test-specific overrides:
-```bash
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/myapp_test
-NODE_ENV=test
-LOG_LEVEL=silent
-```
-
-### .env.production.example
-Production template (NO actual secrets):
-```bash
-# Secrets: Set via CI/CD environment variables or secrets manager
-# DATABASE_URL=<set via secrets>
-# JWT_SECRET=<set via secrets>
-
-NODE_ENV=production
-PORT=4000
-```
+Generate three env config files based on the templates in the reference, customized to the detected tech stack and services from tech.md.
 
 ## Step 12: Generate Deployment Config
 
@@ -375,30 +341,9 @@ Based on selected deployment target:
 
 ## Step 13: Quality Check
 
-Validate generated output against checklist:
-- [ ] CI workflow covers lint, type-check, test, build stages
-- [ ] CD workflow deploys to all configured environments
-- [ ] Dockerfiles use multi-stage builds with non-root users
-- [ ] docker-compose.yml has healthchecks for all services
-- [ ] .env.example documents all required variables
-- [ ] .env.production.example contains NO actual secrets
-- [ ] Deployment config matches selected platform
-- [ ] migration.sh handles the correct ORM/migration tool
-- [ ] All files have inline comments explaining each section
-- [ ] No hardcoded secrets or credentials in any file
-- [ ] Health check workflow has deduplication logic (no duplicate incidents)
-- [ ] Secret rotation reminder classifies env vars correctly (rotate vs static)
-- [ ] pnpm version handling respects `packageManager` field in `package.json`
-- [ ] Next.js standalone config snippet generated when Dockerfile expects standalone output
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/devops-infra-scaffold-reference.md` section "Quality Checklist" for the full validation checklist.
 
-**Output Structure**:
-- [ ] ID generated using scripts/lib/id-generator.sh
-- [ ] Folder created: infra-scaffold/{id}-{slug}/
-- [ ] Main file named: {id}-{slug}.md
-- [ ] Index updated
-- [ ] Executive Summary included
-
-If any check fails, fix before preview.
+Validate generated output against the quality checklist and output structure checklist in the reference. If any check fails, fix before preview.
 
 ## Step 14: Preview & Approval
 
@@ -534,19 +479,4 @@ devops-infra-scaffold
 
 ## Definition of Done
 
-- [ ] CI workflow covers lint, type-check, test, build, security scan stages
-- [ ] CD workflow deploys to configured environments with migration step
-- [ ] Dockerfiles use multi-stage builds with non-root runtime users
-- [ ] docker-compose.yml has healthchecks and proper service dependencies
-- [ ] .env files document all required variables without exposing secrets
-- [ ] Deployment config matches selected platform
-- [ ] Migration script handles the correct ORM/migration tool
-- [ ] All generated files have inline comments
-- [ ] Output follows v3.0.0 structure (ID, folder, index)
-- [ ] Index updated with executive summary
-- [ ] README with setup + deployment instructions is complete
-- [ ] Health check workflow monitors endpoints with incident deduplication
-- [ ] Secret rotation reminder generates quarterly issues with correct classification
-- [ ] pnpm workflows respect `packageManager` field when present
-- [ ] Next.js Dockerfile and config are consistent (standalone output)
-- [ ] User approved final result
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/devops-infra-scaffold-reference.md` section "Definition of Done" for the full checklist.

@@ -192,7 +192,7 @@ Things already done correctly (maintain these):
 - No hardcoded secrets or credentials
 - Proper sed escaping (`s/[&/\]/\\&/g`) in template-processor.sh
 - JSON parsing via Python `json.load()` — safe, no `eval`
-- `set -euo pipefail` in all scripts
+- `set -euo pipefail` in all scripts (exception: `validate-compliance.sh` uses `set -u` due to `grep | wc` patterns requiring non-zero exits)
 - Cleanup traps for temp files
 - Human approval gates (HARD STOP) in all write-heavy skills
 - Hook commands are static paths — no user input in command strings

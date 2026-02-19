@@ -1,9 +1,11 @@
 ---
 name: docs-create
-description: Create new documentation with templates following STYLE.md.
+description: Create new documentation with templates following STYLE.md. Use when adding new documentation pages.
 allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "{type} {name}"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # docs-create

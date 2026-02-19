@@ -7,7 +7,7 @@
 # Usage: bash .claude/scripts/validate-compliance.sh
 # Exit 0 if pass (warnings OK), exit 1 if critical errors found
 
-set -euo pipefail
+set -u
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -95,9 +95,9 @@ for skill in "$PLUGIN_ROOT"/skills/{backend,frontend,qa,devops}*/SKILL.md; do
   [ -f "$skill" ] || continue
   skill_name=$(basename "$(dirname "$skill")")
 
-  HAS_NODE=$(grep -c "Node\.js\|TypeScript\|npm\|pnpm" "$skill" || echo 0)
-  HAS_PHP=$(grep -c "PHP\|Laravel\|Symfony\|Composer" "$skill" || echo 0)
-  HAS_GO=$(grep -c "\bGo\b\|Golang" "$skill" || echo 0)
+  HAS_NODE=$(grep -c "Node\.js\|TypeScript\|npm\|pnpm" "$skill" || true)
+  HAS_PHP=$(grep -c "PHP\|Laravel\|Symfony\|Composer" "$skill" || true)
+  HAS_GO=$(grep -c "\bGo\b\|Golang" "$skill" || true)
 
   if [ "$HAS_NODE" -eq 0 ] || [ "$HAS_PHP" -eq 0 ] || [ "$HAS_GO" -eq 0 ]; then
     echo "  ⚠ Incomplete stack coverage: $skill_name (Node:$HAS_NODE PHP:$HAS_PHP Go:$HAS_GO)"
@@ -261,6 +261,58 @@ fi
 echo ""
 
 # ─────────────────────────────────────────────────────────────
+# Check 11: Agent Skills Standard Compliance
+# ─────────────────────────────────────────────────────────────
+
+echo "Check 11: Agent Skills Standard Compliance"
+echo "────────────────────────────────────────────────────────"
+
+INVALID_NAMES=0
+for skill_dir in "$PLUGIN_ROOT"/skills/*/; do
+  [ -d "$skill_dir" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  if [[ ! "$skill_name" =~ ^[a-z0-9]([a-z0-9-]*[a-z0-9])?$ ]] || [[ "$skill_name" =~ -- ]] || [ ${#skill_name} -gt 64 ]; then
+    echo "  ⚠ Invalid Agent Skills name: $skill_name"
+    ((INVALID_NAMES++))
+  fi
+done
+if [ $INVALID_NAMES -eq 0 ]; then
+  echo "  ✓ All skill names comply with Agent Skills naming spec"
+else
+  echo "  ⚠ $INVALID_NAMES names violate naming spec (advisory)"
+  ((WARNINGS++))
+fi
+
+MARKETPLACE="$PLUGIN_ROOT/.claude-plugin/marketplace.json"
+if [ -f "$MARKETPLACE" ]; then
+  MANIFEST_COUNT=$(jq '.plugins[0].skills | length' "$MARKETPLACE" 2>/dev/null || echo 0)
+  ACTUAL_COUNT=$(find "$PLUGIN_ROOT/skills" -maxdepth 2 -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+  if [ "$MANIFEST_COUNT" -eq "$ACTUAL_COUNT" ]; then
+    echo "  ✓ marketplace.json skills[] synced ($ACTUAL_COUNT skills)"
+  else
+    echo "  ⚠ marketplace.json skills[] ($MANIFEST_COUNT) != actual ($ACTUAL_COUNT)"
+    ((WARNINGS++))
+  fi
+else
+  echo "  ⚠ No marketplace.json found"
+  ((WARNINGS++))
+fi
+
+MISSING_FIELDS=0
+for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
+  [ -f "$skill" ] || continue
+  grep -q '^license:' "$skill" || MISSING_FIELDS=$((MISSING_FIELDS + 1))
+  grep -q '^compatibility:' "$skill" || MISSING_FIELDS=$((MISSING_FIELDS + 1))
+done
+if [ $MISSING_FIELDS -eq 0 ]; then
+  echo "  ✓ All skills have license and compatibility fields"
+else
+  echo "  ⚠ $MISSING_FIELDS missing Agent Skills fields (advisory)"
+  ((WARNINGS++))
+fi
+echo ""
+
+# ─────────────────────────────────────────────────────────────
 # SUMMARY
 # ─────────────────────────────────────────────────────────────
 
@@ -284,7 +336,7 @@ if [ $WARNINGS -gt 0 ]; then
   echo ""
   echo "Consider addressing warnings to improve quality."
 else
-  echo "✓ PASS: All 10 compliance checks passed"
+  echo "✓ PASS: All 11 compliance checks passed"
   echo ""
 fi
 

@@ -1,8 +1,10 @@
 ---
 name: ux-microcopy-write
-description: Generate multi-language microcopy packs for UI components with cultural adaptation and RTL/LTR handling.
+description: Generate multi-language microcopy packs for UI components with cultural adaptation. Use when writing UI text and translations.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Write($JAAN_CONTEXT_DIR/localization.md), Write($JAAN_CONTEXT_DIR/tone-of-voice.md), WebSearch, Task, AskUserQuestion, Bash(source:*), Bash(mkdir:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: [initiative-or-feature-description]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # ux-microcopy-write
@@ -17,7 +19,7 @@ argument-hint: [initiative-or-feature-description]
 - `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md` - Output template
 - `$JAAN_LEARN_DIR/jaan-to:ux-microcopy-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
-- `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` - Per-language rules, export templates, JSON schema
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` - Per-language rules, export templates, JSON schema, output format, definition of done
 
 ## Input
 
@@ -122,7 +124,7 @@ If "Sample-based" selected:
   - Emotion (empathetic/neutral/celebratory)
 - Show extracted tone profile:
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Tone Profile Detection Template" for the display template with formality, warmth, directness, emotion levels and language-specific pronouns.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Tone Profile Detection Template" for the display template with formality, warmth, directness, emotion levels and language-specific pronouns.
 - Ask: "Use this tone profile? [y/n]"
 - If no, ask again for refinement
 
@@ -135,7 +137,7 @@ If "Sample-based" selected:
 
 Analyze initiative/feature description for microcopy needs using keyword detection:
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Category Detection Rules" for keyword-to-category mapping rules.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Category Detection Rules" for keyword-to-category mapping rules.
 
 Show detected categories + additional common ones:
 ```
@@ -153,7 +155,7 @@ Additional common categories:
 
 **Available microcopy categories** (11 total):
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Microcopy Categories Catalog" for the full list of 11 categories with descriptions.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Microcopy Categories Catalog" for the full list of 11 categories with descriptions.
 
 Use AskUserQuestion:
 - Question: "Which categories do you need?"
@@ -175,7 +177,7 @@ For each selected category, build inventory of items needed:
 
 **For each category**, show common examples and ask:
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Category Item Examples" for common examples per category (Labels & Buttons, Error Messages, etc.) to show users when building inventory.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Category Item Examples" for common examples per category (Labels & Buttons, Error Messages, etc.) to show users when building inventory.
 
 If screenshot paths were provided, read images to identify visible UI elements needing copy and inform category/item selection.
 
@@ -253,7 +255,7 @@ Tone: {tone_profile}
 
 Generate 3 options in English following best practices:
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Generation Best Practices" for per-category guidelines (Error Messages, CTAs/Labels, Empty States, Success Messages) with structure patterns and examples.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Generation Best Practices" for per-category guidelines (Error Messages, CTAs/Labels, Empty States, Success Messages) with structure patterns and examples.
 
 Show 3 options to user:
 ```
@@ -308,7 +310,7 @@ Use AskUserQuestion:
 
 For each selected language, translate approved English text with cultural adaptation:
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Per-Language Translation Rules" for full per-language rules (pronouns, punctuation, text expansion, script/direction).
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Per-Language Translation Rules" for full per-language rules (pronouns, punctuation, text expansion, script/direction).
 
 Apply the language-specific rules from the reference to each translation. Store translations in memory for output generation.
 
@@ -337,7 +339,7 @@ Before writing output, validate all generated microcopy:
 - [ ] Error messages include recovery instructions
 - [ ] If screenshots provided: UI context images embedded with `![alt](...)` syntax and URL-encoded paths
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Quality Validation: Language-Specific Checks" for per-language and cultural adaptation checklists.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Quality Validation: Language-Specific Checks" for per-language and cultural adaptation checklists.
 
 If any check fails:
 - Fix issues
@@ -365,65 +367,7 @@ Generate executive summary:
 Multi-language microcopy pack for {feature_name} covering {n} categories ({category_list}) in {n} languages ({language_list}). Includes culturally-adapted copy with RTL support for Persian/Farsi and tone-of-voice consistency across all languages.
 ```
 
-Show complete output preview:
-
-```markdown
-OUTPUT PREVIEW
-──────────────
-ID: {NEXT_ID}
-Folder: $JAAN_OUTPUTS_DIR/ux/content/{NEXT_ID}-{slug}/
-Main File: {NEXT_ID}-microcopy-{slug}.md
-JSON File: {NEXT_ID}-microcopy-{slug}.json
-
-# Microcopy Pack: {Feature Name}
-
-## Executive Summary
-
-{executive_summary}
-
----
-
-## Metadata
-- Languages: {EN, FA, TR, ...}
-- Tone Profile: {tone_summary}
-- Categories: {category_list}
-- Generated: {YYYY-MM-DD}
-
-⚠️ **Native Speaker Review Required**
-AI achieves ~88-92% accuracy on culturally-nuanced microcopy.
-Please have native speakers review all non-English content before production use.
-
----
-
-## Category: {Category 1}
-
-### {Item 1 Name}
-
-- **EN** (LTR): {text}
-- **FA** (RTL): {text}
-- **TR** (LTR): {text}
-- **DE** (LTR): {text}
-- **FR** (LTR): {text}
-- **RU** (LTR): {text}
-- **TG** (LTR): {text}
-
-**Context**: {usage_notes}
-
-**Character Counts**:
-- EN: {n} chars
-- FA: {n} chars
-- TR: {n} chars
-- DE: {n} chars
-- FR: {n} chars
-- RU: {n} chars
-- TG: {n} chars
-
----
-
-[Show first 3 items from each category as preview]
-
-Full output will contain {total_items} items across {category_count} categories.
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Output Preview Format" for the complete preview template with metadata, category items, character counts, and native speaker warning.
 
 Use AskUserQuestion:
 - Question: "Write these output files?"
@@ -460,24 +404,13 @@ Write to: `$OUTPUT_FOLDER/${NEXT_ID}-microcopy-${slug}.md`
 
 Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md`
 
-Fill all sections:
-- Title: Feature name
-- Executive Summary: Generated summary from Step 7
-- Metadata: Languages, tone, categories, date
-- Native Speaker Warning
-- Localization Settings: RTL languages list
-- Tone-of-Voice: Import from `$JAAN_CONTEXT_DIR/tone-of-voice.md`
-- Usage instructions
-- All categories with all items
-- Character counts per language
-- Export formats (React i18next, Vue i18n, ICU MessageFormat)
-- Quality validation confirmation
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Main File Sections" for the complete list of sections to fill (title, summary, metadata, warnings, localization, tone, items, exports, validation).
 
 ### 8.3: Write JSON File
 
 Write to: `$OUTPUT_FOLDER/${NEXT_ID}-microcopy-${slug}.json`
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "JSON Output Structure" for the complete JSON schema with metadata, translations, direction, and script fields.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "JSON Output Structure" for the complete JSON schema with metadata, translations, direction, and script fields.
 
 ### 8.4: Update Subdomain Index
 
@@ -513,7 +446,7 @@ Total Items: {n} items across {n} categories in {n} languages
 
 ## Step 9: Export Formats (Optional)
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/microcopy-reference.md` section "Export Format Templates" for React i18next, Vue i18n, and ICU MessageFormat examples with installation and usage code.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Export Format Templates" for React i18next, Vue i18n, and ICU MessageFormat examples with installation and usage code.
 
 Show export format examples from the reference to the user, tailored to their generated microcopy data.
 
@@ -550,17 +483,4 @@ Use AskUserQuestion:
 
 ## Definition of Done
 
-- [ ] Language preferences saved to `$JAAN_CONTEXT_DIR/localization.md`
-- [ ] Tone-of-voice saved to `$JAAN_CONTEXT_DIR/tone-of-voice.md`
-- [ ] All selected categories covered
-- [ ] All items have all selected languages
-- [ ] Quality validation checklist completed
-- [ ] Executive Summary included in output
-- [ ] Sequential ID generated and used
-- [ ] Folder structure created: `{id}-{slug}/`
-- [ ] Main file written: `{id}-microcopy-{slug}.md`
-- [ ] JSON file written: `{id}-microcopy-{slug}.json`
-- [ ] Index updated with `add_to_index()`
-- [ ] Native speaker review warning included
-- [ ] Export formats shown to user
-- [ ] User has approved final result
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Definition of Done" for the complete 14-item checklist (language prefs, tone, categories, languages, validation, ID, files, index, review warning, exports, approval).

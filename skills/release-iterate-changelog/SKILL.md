@@ -1,9 +1,11 @@
 ---
 name: release-iterate-changelog
-description: "Generate changelog with user impact notes and support guidance from git history or changes."
+description: Generate changelog with user impact notes and support guidance from git history. Use when preparing release notes.
 allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git describe:*), Bash(git status:*), Bash(git rev-list:*), Bash(git remote:*), Write($JAAN_OUTPUTS_DIR/CHANGELOG.md), Edit($JAAN_OUTPUTS_DIR/CHANGELOG.md), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[(no args) | create | release vX.Y.Z | add \"<description>\"]"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # release-iterate-changelog

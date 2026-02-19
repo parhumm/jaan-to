@@ -1,8 +1,10 @@
 ---
 name: sec-audit-remediate
-description: Generate security fixes from detect-dev findings with regression tests.
+description: Generate security fixes from detect-dev findings with regression tests. Use when remediating security vulnerabilities.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/sec/remediate/**), Task, WebSearch, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[detect-dev-output] [backend-scaffold | frontend-scaffold]"
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # sec-audit-remediate

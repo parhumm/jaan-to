@@ -1,9 +1,11 @@
 ---
 name: jaan-init
-description: Initialize jaan-to for the current project with directory setup and seed files.
+description: Initialize jaan-to for the current project with directory setup and seed files. Use when setting up jaan-to in a new project.
 allowed-tools: Read, Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bootstrap.sh), Edit(.gitignore)
 argument-hint: (no arguments)
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # jaan-init

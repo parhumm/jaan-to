@@ -1,8 +1,10 @@
 ---
 name: qa-test-cases
-description: Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB techniques.
+description: Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB techniques. Use when writing test specifications.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch, Edit(jaan-to/config/settings.yaml)
 argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # qa-test-cases
