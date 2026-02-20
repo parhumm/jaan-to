@@ -70,10 +70,10 @@ check_skill_permissions() {
     if echo "$tools" | grep -qE 'Write\(\*\*\)'; then
       if [ "$level" = "BLOCKING" ]; then
         echo "  ::error::A1 [$skill_name] Write(**) — unrestricted file writes"
-        ((ERRORS++))
+        ERRORS=$((ERRORS + 1))
       else
         echo "  ::warning::A1 [$skill_name] Write(**) — unrestricted file writes (local skill)"
-        ((WARNINGS++))
+        WARNINGS=$((WARNINGS + 1))
       fi
     fi
 
@@ -82,10 +82,10 @@ check_skill_permissions() {
     if echo ",$tools," | grep -qE ',\s*Bash\s*[,]'; then
       if [ "$level" = "BLOCKING" ]; then
         echo "  ::error::A2 [$skill_name] Bare Bash — unrestricted shell access"
-        ((ERRORS++))
+        ERRORS=$((ERRORS + 1))
       else
         echo "  ::warning::A2 [$skill_name] Bare Bash — unrestricted shell access (local skill)"
-        ((WARNINGS++))
+        WARNINGS=$((WARNINGS + 1))
       fi
     fi
 
@@ -93,10 +93,10 @@ check_skill_permissions() {
     if echo ",$tools," | grep -qE ',\s*Edit\s*[,]'; then
       if [ "$level" = "BLOCKING" ]; then
         echo "  ::error::A3 [$skill_name] Bare Edit — unrestricted file editing"
-        ((ERRORS++))
+        ERRORS=$((ERRORS + 1))
       else
         echo "  ::warning::A3 [$skill_name] Bare Edit — unrestricted file editing (local skill)"
-        ((WARNINGS++))
+        WARNINGS=$((WARNINGS + 1))
       fi
     fi
 
@@ -104,17 +104,17 @@ check_skill_permissions() {
     if echo "$tools" | grep -qE 'Read\(\.env|Read\(\*\*/secrets'; then
       if [ "$level" = "BLOCKING" ]; then
         echo "  ::error::A4 [$skill_name] Read(.env*/secrets) — credential file access"
-        ((ERRORS++))
+        ERRORS=$((ERRORS + 1))
       else
         echo "  ::warning::A4 [$skill_name] Read(.env*/secrets) — credential file access (local skill)"
-        ((WARNINGS++))
+        WARNINGS=$((WARNINGS + 1))
       fi
     fi
 
     # A5: Bash(node:*), Bash(npx:*), Bash(npm install:*) — broad but may be justified
     if echo "$tools" | grep -qE 'Bash\(node:\*\)|Bash\(npx:\*\)|Bash\(npm install:\*\)'; then
       echo "  ::warning::A5 [$skill_name] Broad Bash scope (node/npx/npm install) — verify justified"
-      ((WARNINGS++))
+      WARNINGS=$((WARNINGS + 1))
     fi
   done
 
@@ -126,7 +126,7 @@ check_skill_permissions() {
 
     if grep -qE 'ghp_[a-zA-Z0-9]{36}|sk-[a-zA-Z0-9]{48}|AKIA[0-9A-Z]{16}|BEGIN.*PRIVATE KEY' "$skill" 2>/dev/null; then
       echo "  ::error::A6 [$skill_name] Hardcoded credentials detected in skill body"
-      ((ERRORS++))
+      ERRORS=$((ERRORS + 1))
     fi
   done
 }
@@ -165,19 +165,19 @@ for script in "$PLUGIN_ROOT"/scripts/*.sh "$PLUGIN_ROOT"/scripts/lib/*.sh; do
   # B1: Missing set -euo pipefail
   if ! head -n 15 "$script" | grep -q 'set -euo pipefail'; then
     echo "  ::error::B1 [$local_name] Missing 'set -euo pipefail'"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # B2: eval usage (excluding comments)
   if grep -nE '^\s*eval\s|[;&|]\s*eval\s' "$script" 2>/dev/null | grep -vE '^\s*#' | grep -q 'eval'; then
     echo "  ::error::B2 [$local_name] 'eval' usage detected — command injection risk"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # B3: curl|sh or wget|sh patterns
   if grep -qE '(curl|wget)\s.*\|\s*(bash|sh|zsh)' "$script" 2>/dev/null; then
     echo "  ::error::B3 [$local_name] curl/wget piped to shell — remote code execution"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # B4: source of non-plugin files
@@ -187,26 +187,26 @@ for script in "$PLUGIN_ROOT"/scripts/*.sh "$PLUGIN_ROOT"/scripts/lib/*.sh; do
     SOURCE_LINES=$(grep -nE '^\s*(source|\.)\ ' "$script" 2>/dev/null | grep -vE '#|SCRIPT_DIR|PLUGIN_DIR|PLUGIN_ROOT|dirname' | wc -l | tr -d ' ')
     if [ "$SOURCE_LINES" -gt 0 ]; then
       echo "  ::error::B4 [$local_name] 'source' of potentially non-plugin files"
-      ((ERRORS++))
+      ERRORS=$((ERRORS + 1))
     fi
   fi
 
   # B5: chmod 777 (exclude comments, grep patterns, and echo/print lines)
   if grep -E 'chmod.*777' "$script" 2>/dev/null | grep -vE '^\s*#|grep|echo|BLOCKED' | grep -q 'chmod'; then
     echo "  ::error::B5 [$local_name] chmod 777 — overly permissive"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # B6: $IFS manipulation (exclude comments, grep patterns, and echo/print lines)
   if grep -E '\$IFS|\$\{IFS\}' "$script" 2>/dev/null | grep -vE '^\s*#|grep|echo|BLOCKED' | grep -q 'IFS'; then
     echo "  ::error::B6 [$local_name] \$IFS manipulation — injection vector"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # B7: PID-based temp files (advisory)
   if grep -qE '/tmp/.*\$\$' "$script" 2>/dev/null; then
     echo "  ::warning::B7 [$local_name] PID-based temp file — use mktemp instead"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 done
 
@@ -253,7 +253,7 @@ for issue in issues:
   if [ -n "$HOOK_ISSUES" ]; then
     while IFS= read -r issue; do
       echo "  ::error::$issue"
-      ((ERRORS++))
+      ERRORS=$((ERRORS + 1))
     done <<< "$HOOK_ISSUES"
   fi
 
@@ -262,7 +262,7 @@ for issue in issues:
   fi
 else
   echo "  ::warning::hooks/hooks.json not found"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -283,19 +283,19 @@ for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
   # D1: rm -rf / or rm -rf ~
   if grep -qE 'rm\s+-[a-zA-Z]*r[a-zA-Z]*f\s+/' "$skill" 2>/dev/null; then
     echo "  ::error::D1 [$local_name] 'rm -rf /' pattern in skill body"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # D2: exec( — process execution (skip detection lists with multiple dangerous functions)
   if grep -E 'exec\(' "$skill" 2>/dev/null | grep -vE '(eval|assert|system|passthru|unserialize|shell_exec)' | grep -q 'exec('; then
     echo "  ::error::D2 [$local_name] 'exec()' in skill body"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # D3: General rm -rf (advisory — may be legitimate)
   if grep -qE 'rm\s+-rf\s' "$skill" 2>/dev/null && ! grep -qE 'rm\s+-[a-zA-Z]*r[a-zA-Z]*f\s+/' "$skill" 2>/dev/null; then
     echo "  ::warning::D3 [$local_name] 'rm -rf' usage — verify it's safe"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 done
 

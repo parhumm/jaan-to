@@ -233,7 +233,7 @@ if [ -n "$NEW_ROLES" ]; then
 EOF
     echo ""
   done
-  ((SUGGESTIONS++))
+  SUGGESTIONS=$((SUGGESTIONS + 1))
 fi
 
 # Suggestion 8: Efficiency Metrics
@@ -242,7 +242,7 @@ if echo "$UNRELEASED_SECTION" | grep -qi "token\|optimization\|efficiency\|reduc
   echo "    Consider updating efficiency metrics (lines 1643-1653)"
   echo "    Location: website/index.html - Token Intelligence section"
   echo ""
-  ((SUGGESTIONS++))
+  SUGGESTIONS=$((SUGGESTIONS + 1))
 fi
 
 # Suggestion 9: Vision Horizon Updates
@@ -251,7 +251,7 @@ if echo "$UNRELEASED_SECTION" | grep -qi "milestone\|roadmap\|vision\|horizon"; 
   echo "    Consider updating vision horizons (lines 1692-1704)"
   echo "    Location: website/index.html - Vision section"
   echo ""
-  ((SUGGESTIONS++))
+  SUGGESTIONS=$((SUGGESTIONS + 1))
 fi
 
 # Check if backup file was created

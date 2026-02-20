@@ -44,7 +44,7 @@ TOTAL_LESSONS=0
 
 # Scan all .learn.md files
 while IFS= read -r -d '' file; do
-  ((TOTAL_FILES++))
+  TOTAL_FILES=$((TOTAL_FILES + 1))
 
   # Extract skill name from filename (e.g., pm-prd-write.learn.md -> pm-prd-write)
   filename=$(basename "$file")

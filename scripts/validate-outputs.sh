@@ -33,13 +33,13 @@ for subdomain in $(find "$OUTPUTS_DIR" -mindepth 2 -maxdepth 2 -type d 2>/dev/nu
   SUBDOMAIN_COUNT=$((SUBDOMAIN_COUNT + 1))
   if [[ ! -f "$subdomain/README.md" ]]; then
     echo "  ✗ Missing index: $subdomain/README.md"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 done
 
 if [[ $SUBDOMAIN_COUNT -eq 0 ]]; then
   echo "  ⚠ No subdomains found (this is OK if no outputs generated yet)"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 else
   echo "  ✓ Checked $SUBDOMAIN_COUNT subdomains"
 fi
@@ -57,13 +57,13 @@ for folder in $(find "$OUTPUTS_DIR" -mindepth 3 -maxdepth 3 -type d 2>/dev/null)
     echo "  ✗ Invalid folder name: $folder"
     echo "    Expected: NN-slug (e.g., 01-user-auth)"
     echo "    Found: $folder_name"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 done
 
 if [[ $FOLDER_COUNT -eq 0 ]]; then
   echo "  ⚠ No output folders found (this is OK if no outputs generated yet)"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 else
   echo "  ✓ Checked $FOLDER_COUNT output folders"
 fi
@@ -86,7 +86,7 @@ for file in $(find "$OUTPUTS_DIR" -mindepth 4 -maxdepth 4 -type f -name "*.md" 2
     echo "  ✗ ID mismatch in $file"
     echo "    Folder ID: $folder_id (from $folder_name)"
     echo "    File ID: $file_id (from $file_name)"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 
   # Check file naming pattern: NN-type-slug.md
@@ -94,13 +94,13 @@ for file in $(find "$OUTPUTS_DIR" -mindepth 4 -maxdepth 4 -type f -name "*.md" 2
     echo "  ✗ Invalid file name: $file"
     echo "    Expected: NN-type-slug.md (e.g., 01-prd-user-auth.md)"
     echo "    Found: $file_name"
-    ((ERRORS++))
+    ERRORS=$((ERRORS + 1))
   fi
 done
 
 if [[ $FILE_COUNT -eq 0 ]]; then
   echo "  ⚠ No output files found (this is OK if no outputs generated yet)"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 else
   echo "  ✓ Checked $FILE_COUNT output files"
 fi
@@ -121,7 +121,7 @@ if [[ -d "$RESEARCH_DIR" ]]; then
       echo "  ✗ Invalid research file name: $file"
       echo "    Expected: NN-category-slug.md (e.g., 01-ai-workflow-research.md)"
       echo "    Found: $file_name"
-      ((ERRORS++))
+      ERRORS=$((ERRORS + 1))
     fi
   done
 
@@ -129,11 +129,11 @@ if [[ -d "$RESEARCH_DIR" ]]; then
     echo "  ✓ Checked $RESEARCH_COUNT research files"
   else
     echo "  ⚠ No research files found"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 else
   echo "  ⚠ Research directory not found: $RESEARCH_DIR"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
