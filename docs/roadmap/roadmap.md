@@ -19,7 +19,7 @@ sidebar_position: 1
 | 6 | Role skills (142 across 11 roles) | In Progress |
 | 7 | MCP connectors | Planned |
 | 8 | Testing and polish | Planned |
-| 9 | Distribution | Partial |
+| 9 | Distribution & CLI transformation | Partial |
 
 ---
 
@@ -114,14 +114,28 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 
 ---
 
-## Phase 9: Distribution
+## Phase 9: Distribution & CLI Transformation
 
-> Details: [tasks/distribution.md](tasks/distribution.md)
+> Details: [tasks/distribution.md](tasks/distribution.md) | [tasks/cli-transformation.md](tasks/cli-transformation.md)
+
+### Standalone CLI (`jaan-to` npm package)
+
+Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript). Dual distribution: plugin stays for Claude Code users, CLI reaches everyone else. Skills, templates, learning, and context files are shared between both runtimes.
+
+- [ ] Phase A: MVP CLI — SKILL.md parser, config loader, env var resolver, `jaan-to init`, `jaan-to run <skill>` → [details](tasks/cli-transformation.md)
+- [ ] Phase B: Feature parity — Learning merge, template variables, subagents, hooks, shell script ports
+- [ ] Phase C: CLI-native features — CI/CD mode (`--ci`), batch mode, progress UI, session management
+- [ ] Phase D: Multi-model — Provider abstraction layer, OpenAI/Gemini/Ollama support
+
+### Cross-Agent Compatibility
 
 - [x] Agent Skills open standard compatibility (agentskills.io) — marketplace.json discovery, all 44 skills compliant
 - [ ] Multi-agent compatibility research (Cursor, Copilot, Windsurf, Gemini)
-- [ ] CLI installer (`jaan-to-cli`) for one-command setup
+
+### Public Presence
+
 - [ ] Public documentation site and branding guidelines
+- [ ] npm package publication (`jaan-to`)
 
 ---
 
