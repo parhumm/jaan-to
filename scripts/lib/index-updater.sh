@@ -4,6 +4,8 @@
 
 # Add entry to subdomain index
 # Args: $1 = README path, $2 = id, $3 = folder_name, $4 = title, $5 = summary
+set -euo pipefail
+
 add_to_index() {
   local readme_path="$1"
   local id="$2"

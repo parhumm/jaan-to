@@ -1,8 +1,10 @@
 ---
 name: frontend-design
-description: Create distinctive, production-grade frontend interfaces with bold design choices and working code.
+description: Create distinctive, production-grade frontend interfaces with bold design choices and working code. Use when designing UI components.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [component-description-or-requirements]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # frontend-design
@@ -457,6 +459,13 @@ If "Learn from this":
 - Run `/jaan-to:learn-add frontend-design "{feedback}"`
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Framework-agnostic with `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

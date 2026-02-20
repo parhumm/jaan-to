@@ -1,8 +1,11 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
-  "version": "7.1.0",
-  "description": "Give soul to your workflow — 43 AI-powered skills across 13 roles with spec-to-ship pipeline",
+  "version": "7.2.0",
+  "description": "Give soul to your workflow — 44 AI-powered skills across 13 roles with spec-to-ship pipeline",
+  "metadata": {
+    "pluginRoot": "./"
+  },
   "owner": {
     "name": "Parhum Khoshbakht",
     "email": "parhum.kh@gmail.com",
@@ -11,8 +14,8 @@
   "plugins": [
     {
       "name": "jaan-to",
-      "description": "AI-powered plugin with 43 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
-      "version": "7.1.0",
+      "description": "AI-powered plugin with 44 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
+      "version": "7.2.0",
       "author": {
         "name": "Parhum Khoshbakht",
         "email": "parhum.kh@gmail.com"
@@ -61,7 +64,53 @@
       ],
       "homepage": "https://github.com/parhumm/jaan-to",
       "repository": "https://github.com/parhumm/jaan-to",
-      "license": "MIT"
+      "license": "MIT",
+      "skills": [
+        "./skills/backend-api-contract",
+        "./skills/backend-data-model",
+        "./skills/backend-pr-review",
+        "./skills/backend-scaffold",
+        "./skills/backend-service-implement",
+        "./skills/backend-task-breakdown",
+        "./skills/data-gtm-datalayer",
+        "./skills/detect-design",
+        "./skills/detect-dev",
+        "./skills/detect-pack",
+        "./skills/detect-product",
+        "./skills/detect-ux",
+        "./skills/detect-writing",
+        "./skills/dev-output-integrate",
+        "./skills/dev-project-assemble",
+        "./skills/dev-verify",
+        "./skills/devops-deploy-activate",
+        "./skills/devops-infra-scaffold",
+        "./skills/docs-create",
+        "./skills/docs-update",
+        "./skills/frontend-design",
+        "./skills/frontend-scaffold",
+        "./skills/frontend-task-breakdown",
+        "./skills/jaan-init",
+        "./skills/jaan-issue-report",
+        "./skills/learn-add",
+        "./skills/pm-prd-write",
+        "./skills/pm-research-about",
+        "./skills/pm-story-write",
+        "./skills/qa-test-cases",
+        "./skills/qa-test-generate",
+        "./skills/qa-test-run",
+        "./skills/release-iterate-changelog",
+        "./skills/roadmap-add",
+        "./skills/roadmap-update",
+        "./skills/sec-audit-remediate",
+        "./skills/skill-create",
+        "./skills/skill-update",
+        "./skills/team-ship",
+        "./skills/ux-flowchart-generate",
+        "./skills/ux-heatmap-analyze",
+        "./skills/ux-microcopy-write",
+        "./skills/ux-research-synthesize",
+        "./skills/wp-pr-review"
+      ]
     }
   ]
 }

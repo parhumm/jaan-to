@@ -1,8 +1,10 @@
 ---
 name: backend-scaffold
-description: Generate production-ready backend code with routes, data models, service layers, and validation.
+description: Generate production-ready backend code with routes, data models, service layers, and validation. Use when scaffolding backend from specs.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/scaffold/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [backend-api-contract, backend-task-breakdown, backend-data-model]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # backend-scaffold
@@ -331,6 +333,13 @@ The skill reads tech.md `#current-stack` to determine which stack to generate:
 **PHP (Symfony):** `api-platform/core` ^4, `lexik/jwt-authentication-bundle` ^3.2, `gesdinet/jwt-refresh-token-bundle`
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

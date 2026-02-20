@@ -5,6 +5,8 @@
 # Check if a path is inside any $JAAN_* directory
 # Args: $1 = absolute path to check
 # Returns: 0 (true) if inside $JAAN_*, 1 (false) if external
+set -euo pipefail
+
 is_jaan_path() {
   local path="$1"
 

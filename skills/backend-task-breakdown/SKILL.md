@@ -1,8 +1,10 @@
 ---
 name: backend-task-breakdown
-description: Convert a PRD into structured backend development tasks with data model notes, reliability patterns, and error taxonomy.
+description: Convert a PRD into structured backend development tasks with reliability patterns. Use when planning backend work from requirements.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/task-breakdown/**), Task, Edit(jaan-to/config/settings.yaml)
 argument-hint: [prd-path] OR [feature-description]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # backend-task-breakdown
@@ -428,6 +430,13 @@ add_to_index \
 - **Option 3 - Both**: Do both
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

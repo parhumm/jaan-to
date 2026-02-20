@@ -1,9 +1,11 @@
 ---
 name: detect-design
-description: Design system detection with drift findings and evidence blocks.
+description: Design system detection with drift findings and evidence blocks. Use when auditing design system consistency.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone support for analysis mode.
 ---
 
 # detect-design
@@ -470,6 +472,13 @@ If yes:
 - Run `/jaan-to:learn-add detect-design "{feedback}"`
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Evidence-based findings with confidence scoring
+- Fork-isolated execution (`context: fork`)
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

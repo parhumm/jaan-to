@@ -1,7 +1,7 @@
 # jaan-issue-report — Reference Material
 
 > Extracted from `skills/jaan-issue-report/SKILL.md` for token optimization.
-> Contains tone guidance, variable mappings, privacy rules, and result scenario templates.
+> Contains tone guidance, variable mappings, privacy rules, result scenario templates, keyword/label tables, title format, output path spec, local file template, and definition of done.
 
 ---
 
@@ -88,6 +88,16 @@ Scan for patterns: `/Users/`, `/home/`, `/var/`, absolute project paths.
 Scan for patterns: `token=`, `key=`, `password=`, `secret=`, `Bearer `, `ghp_`, `sk-`, `api_key`.
 Replace any detected values with `[REDACTED]`.
 
+### Connection String Sanitization
+Scan for database and service connection strings:
+- `postgresql://`, `postgres://` → `[DB_CONNECTION_REDACTED]`
+- `mysql://`, `mariadb://` → `[DB_CONNECTION_REDACTED]`
+- `mongodb://`, `mongodb+srv://` → `[DB_CONNECTION_REDACTED]`
+- `redis://`, `rediss://` → `[DB_CONNECTION_REDACTED]`
+- `amqp://`, `amqps://` → `[MQ_CONNECTION_REDACTED]`
+- `jdbc:` prefixed URLs → `[DB_CONNECTION_REDACTED]`
+- Generic URL auth pattern `://user:pass@` → `://[AUTH_REDACTED]@`
+
 ### Personal Info Check
 Scan for patterns that look like emails, IP addresses, or usernames embedded in paths.
 Replace with generic placeholders unless the user explicitly included them.
@@ -136,3 +146,142 @@ Track the number of sanitized items. This count will be shown at HARD STOP.
 **When**: Step 9 failed, Step 10.2 user chose "No, skip".
 > GitHub submission failed: {error}
 > No file was created. You can use the copy-paste version shown above to submit manually at: https://github.com/parhumm/jaan-to/issues/new
+
+---
+
+## Keyword Detection Table (Step 2)
+
+Use these keyword patterns to auto-detect issue type from the user's description:
+
+| Keywords | Type |
+|----------|------|
+| broken, error, crash, fails, wrong, bug, doesn't work | `bug` |
+| add, new, would be nice, request, missing feature, wish | `feature` |
+| skill, `/jaan-to:`, command, workflow, generate | `skill` |
+| docs, documentation, readme, guide, typo, unclear | `docs` |
+
+### Type-to-Label Mapping
+
+| Type | Label |
+|------|-------|
+| `bug` | `bug` |
+| `feature` | `enhancement` |
+| `skill` | `skill-request` |
+| `docs` | `documentation` |
+
+---
+
+## Issue Title Format (Step 5)
+
+Craft a clear, descriptive title. **Always in English.**
+
+**Rules:**
+- Under 80 characters
+- Start with type prefix in brackets: `[Bug]`, `[Feature]`, `[Skill]`, `[Docs]`
+- Be specific about what is affected
+- If session draft was accepted, refine its title rather than starting fresh
+
+**Pattern**: `[{Type}] {concise description of the issue}`
+
+**Examples:**
+- `[Bug] learn-add crashes when target skill has no LEARN.md`
+- `[Feature] Support --dry-run flag for all generation skills`
+- `[Skill] Need a skill for competitive analysis reports`
+- `[Docs] Missing migration guide for v3.0.0 template variables`
+
+---
+
+## Output Path Generation (Step 8)
+
+```bash
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/jaan-issues"
+mkdir -p "$SUBDOMAIN_DIR"
+
+NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
+SLUG={kebab-case from title, max 50 chars, strip type prefix bracket}
+OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${SLUG}"
+MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${SLUG}.md"
+```
+
+Store variables for potential local save:
+- `NEXT_ID`: {NEXT_ID}
+- `SLUG`: {kebab-case from title}
+- `OUTPUT_FOLDER`: `$JAAN_OUTPUTS_DIR/jaan-issues/{NEXT_ID}-{SLUG}/`
+- `MAIN_FILE`: `{NEXT_ID}-{SLUG}.md`
+
+(These will be used only if local file creation is requested in Step 10.)
+
+---
+
+## Copy-Paste Ready Template (Step 10.1)
+
+Present the issue content in the user's conversation language:
+
+```
+──────────────────────────────────────────
+COPY-PASTE READY ISSUE
+──────────────────────────────────────────
+
+Title: {title}
+
+{full issue body without YAML frontmatter}
+
+──────────────────────────────────────────
+```
+
+**Contextual message:**
+
+If GitHub submission failed (came from Step 9.5):
+> "GitHub submission failed: {error}. You can copy the content above and submit manually at: https://github.com/parhumm/jaan-to/issues/new"
+
+If local-only mode (never attempted GitHub):
+> "You can copy the content above and submit manually at: https://github.com/parhumm/jaan-to/issues/new"
+
+---
+
+## Local Issue File Template (Step 10.3.2)
+
+Write to `$MAIN_FILE` (the path generated in Step 8):
+
+```markdown
+---
+title: "{issue_title}"
+type: "{bug|feature|skill|docs}"
+label: "{github_label}"
+repo: "parhumm/jaan-to"
+issue_url: ""
+issue_number: null
+date: "{YYYY-MM-DD}"
+jaan_to_version: "{version}"
+os: "{uname output}"
+related_skill: "{skill_name or N/A}"
+generated_by: "jaan-issue-report"
+session_context: {true|false}
+---
+
+{full issue body}
+```
+
+**Note**: `issue_url` and `issue_number` remain empty for local-only issues.
+
+---
+
+## Definition of Done
+
+- [ ] Session context scanned (if mid-session invocation)
+- [ ] Issue type classified (bug/feature/skill/docs)
+- [ ] All relevant details gathered via clarifying questions
+- [ ] Environment info auto-collected (version, OS)
+- [ ] Issue title is clear, English, under 80 chars
+- [ ] Issue body follows template structure for the given type
+- [ ] Issue body is in English regardless of conversation language
+- [ ] Privacy sanitization completed (paths, tokens, personal info)
+- [ ] HARD STOP approved by user (full preview shown)
+- [ ] If submit mode active: GitHub issue creation attempted in Step 9
+- [ ] If GitHub submission succeeded: Issue URL and number captured, Step 10 skipped
+- [ ] If GitHub submission failed OR local-only mode: Copy-paste ready version shown in Step 10
+- [ ] If copy-paste version shown: User asked whether to save local file
+- [ ] If local file requested: File saved to `$JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/` and index updated
+- [ ] User informed of result via appropriate scenario in Step 11

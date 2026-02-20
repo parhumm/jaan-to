@@ -1,8 +1,10 @@
 ---
 name: ux-research-synthesize
-description: Synthesize UX research findings into themed insights, executive summaries, and prioritized recommendations.
+description: Synthesize UX research findings into themed insights and prioritized recommendations. Use when analyzing research data.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/research/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [study-name] [data-sources?]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # ux-research-synthesize
@@ -59,46 +61,19 @@ For each data source:
 - **If URL**: Note for later retrieval
 - **If empty**: Ask: "Please provide file paths, directory path, or paste transcript text"
 
-Build data summary:
-```
-DATA SOURCES IDENTIFIED
-════════════════════════════════════════
-Study: {study_name}
-Total files: {N}
-  Transcripts: {n} files
-  Notes: {n} files
-  Surveys: {n} files
-  Other: {n} files
-════════════════════════════════════════
-```
+Build and display data summary.
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Data Source Summary Format" for the display format.
 
 If any file is missing or unparseable, report error and ask for correction.
 
 ## Step 2: Synthesis Mode Selection
 
-Present three synthesis modes:
+Present three synthesis modes: **[1] Speed**, **[2] Standard** (recommended), **[3] Cross-Study**.
 
-> "Which synthesis mode?
->
-> **[1] Speed (1-2 hours)**
->   - Top findings from 3-5 sessions
->   - Critical issues only
->   - Bullet-format output
->   - Best for: Quick usability tests with clear tasks
->
-> **[2] Standard (1-2 days)** ← Recommended
->   - Full 6-phase thematic analysis
->   - 3-8 themes with evidence
->   - Audience-tailored report
->   - Best for: Interview studies, exploratory research
->
-> **[3] Cross-Study (meta-analysis)**
->   - Aggregate themes across multiple studies
->   - Longitudinal tracking
->   - Strategic recommendations
->   - Best for: Research repositories, quarterly synthesis
->
-> Choose mode: [1/2/3]"
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Synthesis Mode Descriptions" for full mode details to present to the user.
+
+Ask: "Choose mode: [1/2/3]"
 
 Store selection as `{synthesis_mode}`.
 
@@ -111,13 +86,9 @@ Show expected deliverables:
 
 Ask: "What are your research questions? (1-3 max)"
 
-If unclear, provide common templates:
-> "Select or customize:
-> [1] What usability issues exist in [feature]?
-> [2] How do users perceive [concept]?
-> [3] What are user needs around [topic]?
-> [4] What motivates users to [action]?
-> [5] Custom - Let me write my own"
+If unclear, provide common templates from reference material.
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Research Question Templates" for the template list.
 
 Confirm 1-3 research questions maximum.
 
@@ -260,34 +231,9 @@ For each approved theme, compile supporting evidence:
    - Count quotes per participant per theme
    - Flag if any participant contributes >25% of quotes for a theme
 
-Display participant coverage matrix:
+Display participant coverage matrix per theme and flag imbalanced coverage (>25% from single participant).
 
-```
-PARTICIPANT COVERAGE
-────────────────────────────────────────
-Theme 1: {theme_name}
-  Participants: {n} total (P1, P3, P4, P7, P9)
-  Quotes: {n} quotes ({quotes_per_participant breakdown})
-
-Theme 2: {theme_name}
-  Participants: {n} total (P2, P5, P8, P10)
-  Quotes: {n} quotes
-  ⚠️ P5 contributed 40% of quotes - validate representativeness
-
-Theme 3: {theme_name}
-  Participants: {n} total (P1, P2, P4, P6, P8, P9)
-  Quotes: {n} quotes
-────────────────────────────────────────
-
-Coverage quality: {Balanced | ⚠️ Imbalanced}
-```
-
-If any theme has imbalanced coverage (>25% from single participant):
-> "Theme {N} quotes are dominated by P{X}. Options:
-> [1] Find more evidence from other participants
-> [2] Reframe as edge case instead of theme
-> [3] Discard this theme
-> Choose: [1/2/3]"
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` sections "Participant Coverage Matrix Format" and "Imbalanced Coverage Handling" for display format and remediation options.
 
 ## Step 8: Prioritization & Recommendation Planning
 
@@ -432,23 +378,9 @@ For each theme with actionable recommendation:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-templates.md` section "Recommendation Format (Problem-Solution)" for the full INSIGHT/SO WHAT/NOW WHAT template.
 
-### Methodology Note
-Brief overview (5-7 sentences):
-- Research type (interviews, usability tests, surveys)
-- Participant count and recruitment method
-- Analysis approach (Braun & Clarke 6-phase, Atomic Research, hybrid)
-- Synthesis mode used (Speed/Standard/Cross-Study)
-- **Limitations** (one-line list):
-  - Sample size constraints
-  - What was NOT analyzable and why
-  - Confidence caveats
-  - Scope limitations
+### Methodology Note & Appendix
 
-### Appendix (Standard+ mode only)
-Optional sections:
-- **Participant Profiles**: Demographics, segments represented
-- **Codebook Summary**: Top 20 codes with definitions
-- **Methodology Details**: Full Braun & Clarke 6-phase process walkthrough
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` sections "Methodology Note Structure" and "Appendix Sections" for detailed content requirements.
 
 ## Step 11: Generate Executive Brief
 
@@ -554,20 +486,13 @@ add_to_index \
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across platforms and design systems
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
-- [ ] Study name and data sources collected
-- [ ] Synthesis mode selected (Speed/Standard/Cross-Study)
-- [ ] Research questions clarified (1-3 max)
-- [ ] All data sources read and validated
-- [ ] Initial coding completed (30-40 codes max)
-- [ ] Themes developed (3-8 themes optimal)
-- [ ] Evidence linked to themes (2-3+ quotes per theme)
-- [ ] Participant coverage validated (balanced across participants)
-- [ ] Prioritization completed (Nielsen severity × frequency)
-- [ ] Recommendations generated (INSIGHT/SO WHAT/NOW WHAT)
-- [ ] Quality checks passed (14-point checklist)
-- [ ] Main synthesis report written with Executive Summary
-- [ ] Executive brief written (1-page standalone)
-- [ ] Index updated with add_to_index()
-- [ ] User approved final result
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-synthesize-reference.md` section "Definition of Done Checklist" for the full 15-point checklist.

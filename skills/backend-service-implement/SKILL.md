@@ -1,8 +1,10 @@
 ---
 name: backend-service-implement
-description: Generate service implementations with business logic from specs and scaffold stubs.
+description: Generate service implementations with business logic from specs and scaffold stubs. Use when implementing backend services.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/service-implement/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [backend-scaffold, backend-api-contract, backend-data-model, backend-task-breakdown]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # backend-service-implement
@@ -354,37 +356,9 @@ Mermaid diagram showing service dependencies and shared helpers.
 
 ## Step 10: Quality Check
 
-Before preview, verify every item:
+Before preview, verify every item in the checklist (coverage, error handling, patterns, security, code quality).
 
-**Coverage:**
-- [ ] Every TODO stub from scaffold has a corresponding implementation
-- [ ] Every API contract endpoint has service method coverage
-- [ ] Every data model relationship is correctly queried
-
-**Error Handling:**
-- [ ] All services use RFC 9457 ProblemDetail format
-- [ ] Prisma errors mapped (P2002 → 409, P2025 → 404)
-- [ ] Business errors use error type registry
-- [ ] `Content-Type: application/problem+json` set on all error responses
-
-**Patterns:**
-- [ ] No business logic in route handlers (only in service layer)
-- [ ] No direct Prisma calls in route handlers
-- [ ] Service methods do not reference `request`/`reply` objects
-- [ ] Transactions keep side effects outside transaction boundary
-- [ ] State machines validate transitions before applying
-
-**Security:**
-- [ ] Auth tokens validated on protected routes
-- [ ] Authorization checks (ownership, org-level) in service methods
-- [ ] No hardcoded secrets
-- [ ] Refresh token rotation with family revocation (if auth generated)
-
-**Code Quality:**
-- [ ] TypeScript strict mode compatible (no `any` types)
-- [ ] ESM imports with `.js` extensions (if Node.js + NodeNext)
-- [ ] Reusable select objects for Prisma queries
-- [ ] Type-safe query fragments via `Prisma.validator<>()`
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-service-implement-reference.md` section "Quality Check Checklist" for the full verification checklist.
 
 If any check fails, fix before preview.
 
@@ -474,16 +448,7 @@ If "Learn from this": Run `/jaan-to:learn-add backend-service-implement "{feedba
 
 ## Key Generation Rules — Node.js/TypeScript (Research-Informed)
 
-- **Service Layer**: Plain exported functions importing the Prisma singleton — module caching acts as built-in singleton, making DI containers (tsyringe, inversify) unnecessary; testable via `vi.mock()`; callable from CRON jobs or queue consumers outside HTTP context
-- **Prisma Queries**: Use `select` over `include` when possible; define reusable select objects per use-case; use `Prisma.validator<>()` for composable, type-safe query fragments; leverage `$transaction` for multi-step operations
-- **Error Handler**: Use Fastify's `setErrorHandler` (NOT Express-style middleware) — use `hasZodFastifySchemaValidationErrors(error)` for 400 (NOT `instanceof ZodError`), use `isResponseSerializationError(error)` for 500; map PrismaClientKnownRequestError P2002 → 409, P2003 → 409, P2025 → 404; always set `Content-Type: application/problem+json`
-- **RFC 9457 Fields**: `type` (URI), `title`, `status`, `detail`, `instance`; extension `errors[]` for validation details
-- **JWT with jose**: HS256, 15min access / 7d refresh, jti claims, refresh token rotation with family revocation, 30s clock skew tolerance, issuer + audience validation
-- **Cursor Pagination**: Prisma cursor API with `take: limit + 1` pattern; base64url cursor encoding; default limit 20, max 100
-- **Idempotency**: `Idempotency-Key` header, DB-backed storage, same-request validation, in-flight 409, 24h TTL, onSend response caching
-- **Transactions**: Interactive `$transaction` with `maxWait: 5000`, `timeout: 10000`; side effects outside transaction; optimistic concurrency via `where: { id, version }` + catch P2025
-- **Import Extensions**: With `"type": "module"` and `moduleResolution: "NodeNext"`, all imports MUST include `.js` extensions
-- **DTO Mapping**: Always map internal models to API response format in service methods; never expose raw ORM models
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-service-implement-reference.md` section "Key Generation Rules — Node.js/TypeScript (Research-Informed)" for the full rules list covering Service Layer, Prisma Queries, Error Handler, RFC 9457, JWT, Cursor Pagination, Idempotency, Transactions, Import Extensions, and DTO Mapping.
 
 ## Multi-Stack Support (Research-Informed)
 
@@ -494,6 +459,13 @@ If "Learn from this": Run `/jaan-to:learn-add backend-service-implement "{feedba
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/backend-service-implement-reference.md` section "Anti-Patterns" for per-stack anti-pattern lists (All Stacks, Node.js, PHP, Go).
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

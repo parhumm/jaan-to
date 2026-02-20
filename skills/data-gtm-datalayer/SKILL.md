@@ -1,9 +1,11 @@
 ---
 name: data-gtm-datalayer
-description: Generate production-ready GTM tracking code (dataLayer pushes and HTML attributes).
+description: Generate production-ready GTM tracking code with dataLayer pushes and HTML attributes. Use when adding analytics tracking.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [prd-path | tracking-description | (interactive)]
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # data-gtm-datalayer
@@ -398,6 +400,13 @@ If yes:
 - **Option 3**: Do both
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic and tech-stack agnostic
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

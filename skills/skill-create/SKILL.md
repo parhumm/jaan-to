@@ -1,9 +1,11 @@
 ---
 name: skill-create
-description: Guide users through creating new jaan.to skills step-by-step.
+description: Guide users through creating new jaan-to skills step-by-step. Use when building a new plugin skill.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # skill-create
@@ -286,9 +288,11 @@ Use template from `$JAAN_TEMPLATES_DIR/jaan-to:skill-create.template.md`:
 
 1. Fill YAML frontmatter:
    - name: {name}
-   - description: from Step 3
+   - description: from Step 3 (must include "Use when" trigger phrase, no colons)
    - allowed-tools: based on needs from Step 5
    - argument-hint: from Step 4
+   - license: MIT
+   - compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
    - **DO NOT add `model:` field** (use inherited default)
 
 2. Fill markdown body:
@@ -313,40 +317,9 @@ Based on output format from Step 4:
 
 ## Step 10: Validate Against Specification
 
-Check against `docs/extending/create-skill.md`:
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/skill-create-reference.md` section "Specification Validation Checklist" for the full frontmatter, body, size, trust, and budget checks.
 
-**Frontmatter**:
-- [ ] Has `name` matching directory
-- [ ] Has `description` with purpose (max 120 chars, no colons)
-- [ ] Has `allowed-tools` with valid patterns
-- [ ] Has `argument-hint`
-- [ ] Does NOT have `model:` field (causes API errors)
-- [ ] If narrow-domain or internal: consider `disable-model-invocation: true`
-- [ ] If heavy analysis (>30K tokens expected): consider `context: fork`
-
-**Body**:
-- [ ] Has H1 title matching skill name
-- [ ] Has tagline blockquote
-- [ ] Has `## Context Files`
-- [ ] Has `## Input`
-- [ ] Has `# PHASE 1: Analysis`
-- [ ] Has `## Step 0: Apply Past Lessons`
-- [ ] Has `# HARD STOP`
-- [ ] Has `# PHASE 2: Generation`
-- [ ] Has `## Definition of Done`
-
-**Size**:
-- [ ] SKILL.md under 500 lines (standard) or 600 lines (complex, hard cap)
-- [ ] If over 500 lines: extract reference material to `docs/extending/{name}-reference.md` per `docs/extending/extraction-safety-checklist.md`
-
-**Trust**:
-- [ ] Tool permissions are sandboxed (not `Write(*)`)
-- [ ] Has human approval checks
-
-**Budget**:
-- [ ] Run `scripts/validate-skills.sh` — description budget still under 15K chars
-
-If any check fails, fix before preview.
+Validate against `docs/extending/create-skill.md`. If any check fails, fix before preview.
 
 ## Step 11: Preview All Files
 
@@ -393,6 +366,12 @@ Edit `scripts/seeds/config.md` to add skill to Available Skills table:
 ```markdown
 | {role}-{domain}-{action} | `/{name}` | {short_description} |
 ```
+
+## Step 14.5: Update Team Roles Registry
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/skill-create-reference.md` section "Team Roles Registry Update Procedure" for the full role-matching and registry update steps.
+
+If skill name matches a known role prefix, update `skills/team-ship/roles.md` accordingly. If `roles.md` does not exist, skip silently.
 
 ## Step 15: Auto-Invoke Documentation
 
@@ -470,6 +449,13 @@ Run `/jaan-to:roadmap-update` to sync the new skill with the roadmap.
 This ensures the roadmap reflects the latest skill additions.
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
 
 ## Definition of Done
 

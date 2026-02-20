@@ -1,8 +1,10 @@
 ---
 name: qa-test-generate
-description: Generate runnable Vitest and Playwright test files from BDD test cases and scaffold code.
+description: Generate runnable Vitest and Playwright test files from BDD test cases and scaffold code. Use when generating test implementations.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/test-generate/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [qa-test-cases, backend-scaffold | frontend-scaffold]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # qa-test-generate
@@ -149,31 +151,9 @@ If tech.md missing or incomplete, use AskUserQuestion:
 
 ## Step 3: Map Tags to Test Tiers (Research Section 6)
 
-Route BDD scenarios to test tiers based on tag taxonomy:
+Route BDD scenarios to test tiers based on tag taxonomy.
 
-```
-TAG ROUTING MAP
--------------------------------------------------------------
-@unit          -> Vitest (unit workspace)
-                  Target: service functions, utility functions, hooks
-@smoke         -> Vitest (fast subset) + Playwright (critical path)
-                  Target: core happy path validation
-@integration   -> Vitest (integration workspace, with MSW)
-                  Target: API route handlers, service + DB interactions
-@e2e           -> Playwright (full browser tests)
-                  Target: complete user journeys
-@mobile        -> Playwright (mobile projects only)
-                  Target: responsive/mobile-specific flows
-@api           -> Vitest (API integration) or Playwright API testing
-                  Target: HTTP endpoint contract validation
-@boundary      -> Vitest (unit workspace)
-                  Target: min/max value validation
-@edge-case     -> Vitest (unit) + Playwright (E2E for UI edge cases)
-                  Target: empty states, concurrent ops, error conditions
-@negative      -> Vitest (unit + integration)
-                  Target: error handling, validation failures
-@positive      -> Split across all tiers based on co-occurring tags
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-generate-reference.md` section "Detailed Tag Routing Map" for the full tag-to-tier routing table with target descriptions.
 
 ## Step 4: Plan Test Generation Inventory
 
@@ -315,35 +295,9 @@ Generate step definitions using playwright-bdd's `createBdd` pattern with Given/
 
 ## Step 10: Quality Check
 
-Before preview, validate generated tests:
+Before preview, validate generated tests against all quality criteria.
 
-**Completeness:**
-- [ ] Every BDD scenario has a corresponding test file
-- [ ] Every @unit scenario maps to a Vitest test
-- [ ] Every @e2e scenario maps to a Playwright spec
-- [ ] Every @integration scenario maps to an integration test
-- [ ] All Given steps have setup code (no empty stubs)
-- [ ] All When steps have action code (no TODOs)
-- [ ] All Then steps have assertion code (no `expect(true).toBe(true)`)
-
-**Test Data:**
-- [ ] Factories exist for all entities referenced in BDD scenarios
-- [ ] MSW handlers cover all API endpoints referenced in tests
-- [ ] Concrete test data values match BDD scenario data (not generic placeholders)
-- [ ] DB seed scenarios match BDD Background steps
-
-**Configuration:**
-- [ ] Vitest config has correct workspace separation
-- [ ] Playwright config has correct project/tag filtering
-- [ ] Setup files wire MSW server correctly
-- [ ] Coverage thresholds configured
-
-**Code Quality:**
-- [ ] No placeholder comments ("TODO: implement", "FIXME")
-- [ ] Import paths are correct relative to output structure
-- [ ] TypeScript types are properly referenced
-- [ ] Test names match BDD scenario names for traceability
-- [ ] @tags from BDD preserved as test.describe or grep annotations
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-generate-reference.md` section "Quality Check Checklist" for the full validation checklist (completeness, test data, configuration, code quality).
 
 If any check fails, fix before proceeding.
 
@@ -537,21 +491,13 @@ If "Learn from this": Run `/jaan-to:learn-add qa-test-generate "{feedback}"`
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
-- [ ] All BDD scenarios parsed and routed to correct test tier
-- [ ] Vitest workspace config generated with unit + integration separation
-- [ ] Playwright config generated with playwright-bdd + project filtering
-- [ ] MSW handlers generated (from API contract or scaffold routes)
-- [ ] Test data factories generated for all entities
-- [ ] Unit tests generated for all @unit/@smoke/@boundary scenarios
-- [ ] Integration tests generated for all @integration/@api scenarios
-- [ ] E2E Playwright specs generated for all @e2e/@mobile scenarios
-- [ ] All Given/When/Then steps have concrete implementation (no stubs)
-- [ ] Concrete test data values from BDD preserved in generated tests
-- [ ] Quality check passed (completeness, data, config, code quality)
-- [ ] Sequential ID generated
-- [ ] Folder created: `{id}-{slug}/`
-- [ ] Main document written with test strategy and coverage map
-- [ ] Index updated
-- [ ] User approved final result
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-generate-reference.md` section "Definition of Done Checklist" for the complete checklist.

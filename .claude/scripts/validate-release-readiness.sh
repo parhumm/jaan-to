@@ -35,7 +35,7 @@ UNTRACKED=$(git status --porcelain 2>/dev/null || echo "ERROR")
 
 if [ "$UNTRACKED" == "ERROR" ]; then
   echo "  ::error::Not a git repository"
-  ((ERRORS++))
+  ERRORS=$((ERRORS + 1))
 elif [ -z "$UNTRACKED" ]; then
   echo "  ✓ Working tree clean (0 uncommitted changes)"
 else
@@ -49,7 +49,7 @@ else
   echo "       git add . && git commit -m \"...\""
   echo "       # OR"
   echo "       git stash push -m \"WIP before release\""
-  ((ERRORS++))
+  ERRORS=$((ERRORS + 1))
 fi
 
 # Check current branch
@@ -59,7 +59,7 @@ echo "  Current branch: $CURRENT_BRANCH"
 if [ "$CURRENT_BRANCH" != "dev" ] && [ "$CURRENT_BRANCH" != "main" ]; then
   echo "  ::warning::Not on dev or main branch"
   echo "           Releases typically prepare from 'dev' branch"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 
 # Check remotes up to date
@@ -71,7 +71,7 @@ AHEAD=$(git rev-list origin/"$CURRENT_BRANCH"..HEAD --count 2>/dev/null || echo 
 if [ "$BEHIND" -gt 0 ]; then
   echo "  ::warning::Branch is $BEHIND commits behind origin/$CURRENT_BRANCH"
   echo "           Run: git pull origin $CURRENT_BRANCH"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 
 if [ "$AHEAD" -gt 0 ]; then
@@ -89,12 +89,12 @@ echo "────────────────────────�
 
 # Check if docs-sync-check.sh exists and run it
 if [ -f "$PLUGIN_ROOT/scripts/docs-sync-check.sh" ]; then
-  if bash "$PLUGIN_ROOT/scripts/docs-sync-check.sh" > /dev/null 2>&1; then
+  if bash "$PLUGIN_ROOT/scripts/docs-sync-check.sh" < /dev/null > /dev/null 2>&1; then
     echo "  ✓ Documentation in sync (0 stale files)"
   else
     echo "  ::warning::Documentation may be stale"
     echo "           Run: /jaan-to:docs-update --fix"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 else
   echo "  ℹ No docs-sync-check.sh (skipping doc validation)"
@@ -116,15 +116,15 @@ echo "  Current version: $CURRENT_VERSION"
 # Check if CHANGELOG.md exists
 if [ ! -f "$PLUGIN_ROOT/CHANGELOG.md" ]; then
   echo "  ::error::CHANGELOG.md not found"
-  ((ERRORS++))
+  ERRORS=$((ERRORS + 1))
 else
   # Count [Unreleased] entries
-  UNRELEASED_COUNT=$(sed -n '/^## \[Unreleased\]/,/^## \[/p' "$PLUGIN_ROOT/CHANGELOG.md" | grep -c '^- ' || echo "0")
+  UNRELEASED_COUNT=$(sed -n '/^## \[Unreleased\]/,/^## \[/p' "$PLUGIN_ROOT/CHANGELOG.md" | grep -c '^- ' || true)
 
   if [ "$UNRELEASED_COUNT" -eq 0 ]; then
     echo "  ::warning::[Unreleased] section is empty"
     echo "           Add changelog entries or run: /jaan-to:release-iterate-changelog auto-generate"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   else
     echo "  ✓ [Unreleased] section: $UNRELEASED_COUNT entries"
   fi
@@ -134,7 +134,7 @@ else
     echo "  ✓ Keep a Changelog format"
   else
     echo "  ::warning::CHANGELOG.md doesn't follow Keep a Changelog format"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 fi
 
@@ -182,7 +182,7 @@ echo "  → Suggested next version: $SUGGESTED_VERSION ($SUGGESTED_BUMP bump)"
 if git tag -l "v$SUGGESTED_VERSION" | grep -q "v$SUGGESTED_VERSION"; then
   echo "  ::error::Tag v$SUGGESTED_VERSION already exists"
   echo "           Use a different version or delete tag: git tag -d v$SUGGESTED_VERSION"
-  ((ERRORS++))
+  ERRORS=$((ERRORS + 1))
 fi
 
 echo ""

@@ -171,15 +171,17 @@ Aggressive but quality-safe optimization based on [Research #75](research/75-tok
 
 23 reference files created at `docs/extending/*-reference.md`, including `detect-shared-reference.md` shared across 5 detect skills. Total: 44 files changed, 2,211 insertions, 1,858 deletions (net reduction ~938 lines).
 
-**Post-v7 budget state:**
+**Post-v7 budget state** (updated after Agent Skills compatibility, v8):
 
 | Metric | Value | Headroom |
 |--------|-------|----------|
-| Description budget | 8,409 / 15,000 chars | 44% remaining (~33 more skills) |
-| Auto-invocable skills | 29 / 35 cap | 6 more before cap |
+| Description budget | 10,282 / 15,000 chars | 31% remaining (~19 more skills) |
+| Auto-invocable skills | 30 / 35 cap | 5 more before cap |
 | CLAUDE.md | 119 / 150 lines | 31 lines free |
-| Largest SKILL.md | 573 lines / 600 cap | 27 lines before cap |
-| Total skill lines | ~19,169 across 43 skills | Median ~465 lines |
+| Largest SKILL.md | ~507 lines / 600 cap | 93 lines before cap |
+| Total skill lines | ~18,500 across 44 skills | Median ~440 lines |
+
+> **Note:** Description budget increased from 8,409 to 10,282 chars due to Agent Skills enrichment (adding "Use when" trigger phrases to all 44 descriptions). 13 overlong SKILL.md files were refactored below 500 lines via reference extraction.
 
 ---
 
@@ -192,7 +194,7 @@ Token optimization across three major versions:
 | v5.0.0 | ~2,000 tokens | ~7K-48K tokens | Fork isolation (6 detect), body trimming (8 skills), `disable-model-invocation` (7 skills) |
 | v6.0.0 | — | ~25% body reduction | Reference extraction at creation time (5 new skills) |
 | v7.0.0 | +~350 tokens | +~2K-8K tokens | Aggressive extraction (22 skills), CLAUDE.md tightening, bootstrap compact mode |
-| **Cumulative** | **~2,400 tokens/session** | **Up to ~56K per invocation** | **43 skills, 23 reference files, 6 CI gates** |
+| **Cumulative** | **~2,400 tokens/session** | **Up to ~56K per invocation** | **44 skills, 23 reference files, 6 CI gates** |
 
 **Practical effect:** A typical skill invocation loads ~450-500 lines of execution instructions instead of the ~600-700 lines that would exist without extraction. This saves roughly 500-2,000 tokens per call. For skills using `context: fork` (6 detect skills), the parent session never sees these tokens — the full 30-48K cost is isolated to a disposable subagent. Combined, a session that invokes 3 skills and 1 detect analysis saves approximately 5,000-52,000 tokens versus an unoptimized plugin of equivalent capability.
 

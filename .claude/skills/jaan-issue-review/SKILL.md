@@ -389,6 +389,7 @@ Closes #{ID}
 
 ## Verification
 - [ ] Plugin standards compliance verified
+- [ ] Security standards passed (`scripts/validate-security.sh`)
 - [ ] Skill description budget checked
 - [ ] CHANGELOG.md updated
 - [ ] Documentation updated
@@ -420,6 +421,10 @@ Thorough standards compliance check before merge.
 - [ ] All cross-skill references use correct `/jaan-to:{name}` format
 - [ ] Modified files don't break existing skill invocation chains (check `docs/skills/DEPENDENCIES.md`)
 - [ ] Template variables use `{{double-brace}}` syntax if templates were modified
+- [ ] Modified SKILL.md files have `license` field in frontmatter
+- [ ] Modified SKILL.md descriptions include "Use when" or "Use to" trigger phrase
+- [ ] Modified SKILL.md files have `compatibility` field in frontmatter
+- [ ] If new skill created, verify `.claude-plugin/marketplace.json` `skills[]` array updated
 
 ## Step 5.3: Documentation Checks
 
@@ -438,7 +443,20 @@ Thorough standards compliance check before merge.
 - [ ] PR body includes `Closes #{ID}`
 - [ ] No secrets, credentials, or `.env` files in diff
 
-## Step 5.5: Present Verification Report
+## Step 5.5: Security Standards Check
+
+Run the automated security validation:
+
+```bash
+bash scripts/validate-security.sh
+```
+
+- [ ] No blocking errors (exit code 0)
+- [ ] If advisory warnings exist, verify they are justified and document in PR description
+
+**If blocking errors found:** Fix the security violations before proceeding. Do NOT merge with security errors.
+
+## Step 5.6: Present Verification Report
 
 ```
 VERIFICATION REPORT — Issue #{ID}
@@ -449,6 +467,7 @@ STRUCTURAL    {pass_count}/{total} ✓
 FUNCTIONAL    {pass_count}/{total} ✓
 DOCUMENTATION {pass_count}/{total} ✓
 GIT           {pass_count}/{total} ✓
+SECURITY      {pass_count}/{total} ✓
 DOCUSAURUS    {pass_count}/{total} ✓
 
 {any_failures_detailed}

@@ -1,11 +1,13 @@
 ---
 name: wp-pr-review
-description: Review WordPress plugin PRs for security vulnerabilities, performance issues,
+description: Review WordPress plugin PRs for security, performance, WPCS standards, and backward compatibility. Use when reviewing WordPress PRs.
   WPCS standards violations, and backward compatibility. Use for WordPress PR review,
   plugin code review, WP security audit, WPCS check.
 allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(gh api:*), Bash(glab mr diff:*), Bash(glab mr comment:*), Bash(git diff:*), Bash(git log:*), Write($JAAN_OUTPUTS_DIR/wp/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: <pr-url | owner/repo#number | local>
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # wp-pr-review
@@ -303,7 +305,7 @@ OUTPUT WILL CREATE
 ## Step 5: Generate ID and Folder Structure
 
 ```bash
-source "/Users/parhumm/.claude/plugins/cache/jaan-to/jaan-to/4.2.1/scripts/lib/id-generator.sh"
+source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/wp/pr"
 mkdir -p "$SUBDOMAIN_DIR"
 NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
@@ -370,7 +372,7 @@ If approved:
 
 3. Update subdomain index:
    ```bash
-   source "/Users/parhumm/.claude/plugins/cache/jaan-to/jaan-to/4.2.1/scripts/lib/index-updater.sh"
+   source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
    add_to_index \
      "$SUBDOMAIN_DIR/README.md" \
      "$NEXT_ID" \
@@ -417,6 +419,13 @@ Confirm:
 If yes, invoke `/jaan-to:learn-add wp-pr-review "{feedback}"` to capture the lesson.
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- WordPress ecosystem-specific patterns
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

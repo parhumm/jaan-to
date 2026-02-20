@@ -1,8 +1,10 @@
 ---
 name: frontend-scaffold
-description: Convert designs to React/Next.js components with TailwindCSS, TypeScript, and typed API client hooks.
+description: Convert designs to React/Next.js components with TailwindCSS, TypeScript, and typed API hooks. Use when scaffolding frontend from designs.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [frontend-design, frontend-task-breakdown, backend-api-contract]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # frontend-scaffold
@@ -324,6 +326,13 @@ If "Learn from this": Run `/jaan-to:learn-add frontend-scaffold "{feedback}"`
 **Dev**: `typescript` ^5.7, `@types/react` ^19, `@types/node` ^22, `@tailwindcss/postcss` ^4, `tailwindcss` ^4, `eslint` ^9, `prettier` ^3.4, `orval` ^7, `vitest` ^2, `@testing-library/react` ^16, `eslint-plugin-jsx-a11y`, `babel-plugin-react-compiler` (when `reactCompiler: true`)
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Framework-agnostic with `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

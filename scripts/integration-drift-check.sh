@@ -4,6 +4,8 @@
 # Detects outputs created after dev-output-integrate has run
 # Exit codes: 0 = proceed (always non-blocking)
 
+set -euo pipefail
+
 INPUT=$(cat)
 
 # Extract file path from JSON
@@ -55,7 +57,8 @@ fi
 
 # Guard 7: Debounce — skip if warned within last 30 seconds
 DEBOUNCE_KEY=$(echo "$PROJECT_DIR" | tr '/' '_')
-DEBOUNCE_FILE="/tmp/jaan-to-drift-warned-${DEBOUNCE_KEY}"
+# Use $TMPDIR (per-user secure dir on macOS) with predictable-but-safe name
+DEBOUNCE_FILE="${TMPDIR:-/tmp}/jaan-to-drift-warned-${DEBOUNCE_KEY}"
 if [ -f "$DEBOUNCE_FILE" ]; then
   LAST_WARN=$(stat -f %m "$DEBOUNCE_FILE" 2>/dev/null || stat -c %Y "$DEBOUNCE_FILE" 2>/dev/null || echo 0)
   NOW=$(date +%s)

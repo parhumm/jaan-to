@@ -1,8 +1,10 @@
 ---
 name: qa-test-run
-description: Execute tests, diagnose failures, auto-fix simple issues, generate coverage reports
-allowed-tools: Read, Glob, Grep, Bash(npm:*), Bash(npx:*), Bash(pnpm:*), Bash(yarn:*), Bash(composer:*), Bash(go:*), Bash(php:*), Bash(node:*), Write($JAAN_OUTPUTS_DIR/qa/test-run/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
+description: Execute tests, diagnose failures, auto-fix simple issues, generate coverage reports. Use when running and debugging test suites.
+allowed-tools: Read, Glob, Grep, Bash(npm test:*), Bash(npm run test:*), Bash(npm run lint:*), Bash(npx vitest:*), Bash(npx jest:*), Bash(npx playwright:*), Bash(npx tsc:*), Bash(npx prisma generate:*), Bash(pnpm test:*), Bash(pnpm run test:*), Bash(pnpm run lint:*), Bash(pnpm exec:*), Bash(yarn test:*), Bash(yarn run test:*), Bash(composer test:*), Bash(composer dump-autoload:*), Bash(go test:*), Bash(go generate:*), Bash(go mod tidy:*), Bash(go tool cover:*), Bash(php artisan test:*), Bash(php artisan migrate:*), Bash(vendor/bin/phpunit:*), Bash(vendor/bin/pest:*), Write($JAAN_OUTPUTS_DIR/qa/test-run/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [qa-test-generate-output | test-directory] [--unit | --integration | --e2e | --all]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # qa-test-run
@@ -409,6 +411,13 @@ If "Learn from this": Run `/jaan-to:learn-add qa-test-run "{feedback}"`
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-run-reference.md` section "Key Execution Rules" for test execution best practices, tier ordering rationale, and anti-patterns to avoid.
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

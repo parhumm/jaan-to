@@ -1,7 +1,7 @@
 # frontend-task-breakdown — Reference Material
 
 > Extracted from `skills/frontend-task-breakdown/SKILL.md` for token optimization.
-> Contains component taxonomy, coverage checklists, and validation criteria.
+> Contains component taxonomy, coverage checklists, validation criteria, estimate bands, state machine stubs, and performance budgets.
 
 ---
 
@@ -120,3 +120,48 @@ Deferred:       {n} items (list reasons)
 - [ ] Responsive verified (375px, 768px, 1440px)
 - [ ] No console errors or warnings
 - [ ] Storybook stories created for shared components
+
+---
+
+## Estimate Bands
+
+T-shirt sizes (not hours) used for task estimation:
+
+| Size | Meaning | Typical Work |
+|------|---------|-------------|
+| XS | Trivial | Single variant, config change |
+| S | Small | Atom component with tests |
+| M | Medium | Molecule/organism with states |
+| L | Large | Template/page with integration |
+| XL | Extra large | Full feature slice with all states |
+
+---
+
+## State Machine Stubs
+
+Template for organisms and above — define states, events, and transitions:
+
+```
+Component: {name}
+States: idle | loading | success | error | empty
+Events: FETCH | RETRY | RESET | REFRESH
+
+Transitions:
+- idle --FETCH--> loading
+- loading --SUCCESS--> success | error | empty
+- error --RETRY--> loading
+- success --REFRESH--> loading (keep stale data visible)
+```
+
+---
+
+## Performance Budget
+
+Targets and optimization tasks (applicable when scope = Production or In between):
+
+| Metric | Target | Optimization Tasks |
+|--------|--------|--------------------|
+| LCP | ≤2.5s | next/image priority, font preload, critical CSS |
+| INP | ≤200ms | useTransition for non-urgent, debounce handlers |
+| CLS | ≤0.1 | explicit dimensions, aspect-ratio, font swap |
+| Bundle | <{budget}kb | code splitting, tree shaking, dynamic imports |

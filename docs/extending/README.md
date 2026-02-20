@@ -64,7 +64,7 @@ Extracted reference material loaded on demand by skills (see [Token Strategy](..
 | [detect-dev-reference.md](detect-dev-reference.md) | detect-dev |
 | [detect-pack-reference.md](detect-pack-reference.md) | detect-pack |
 | [backend-export-formats.md](backend-export-formats.md) | backend-task-breakdown |
-| [microcopy-reference.md](microcopy-reference.md) | ux-microcopy-write |
+| [ux-microcopy-write-reference.md](ux-microcopy-write-reference.md) | ux-microcopy-write |
 | [ux-research-templates.md](ux-research-templates.md) | ux-research-synthesize |
 | [research-methodology.md](research-methodology.md) | pm-research-about |
 | [v3-compliance-reference.md](v3-compliance-reference.md) | skill-create |

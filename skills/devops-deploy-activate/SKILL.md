@@ -1,8 +1,10 @@
 ---
 name: devops-deploy-activate
-description: Activate deployment pipeline with secrets, platform provisioning, and supply chain hardening.
-allowed-tools: Read, Glob, Grep, Bash(gh:*), Bash(railway:*), Bash(vercel:*), Bash(fly:*), Bash(turbo:*), Bash(npx:*), Bash(pnpm:*), Bash(npm:*), Write(.github/**), Write($JAAN_OUTPUTS_DIR/devops/deploy-activate/**), Task, WebSearch, AskUserQuestion, Edit(.github/**)
+description: Activate deployment pipeline with secrets, platform provisioning, and supply chain hardening. Use when deploying to production.
+allowed-tools: Read, Glob, Grep, Bash(gh secret:*), Bash(gh variable:*), Bash(gh workflow:*), Bash(gh api:*), Bash(gh run:*), Bash(gh auth:*), Bash(railway init:*), Bash(railway link:*), Bash(railway status:*), Bash(railway variables:*), Bash(vercel deploy:*), Bash(vercel env:*), Bash(vercel link:*), Bash(vercel inspect:*), Bash(fly launch:*), Bash(fly deploy:*), Bash(fly secrets:*), Bash(fly status:*), Bash(turbo run:*), Write(.github/**), Write($JAAN_OUTPUTS_DIR/devops/deploy-activate/**), Task, WebSearch, AskUserQuestion, Edit(.github/**)
 argument-hint: [infra-scaffold-output] or (interactive)
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # devops-deploy-activate
@@ -401,6 +403,13 @@ devops-deploy-activate
 ```
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-platform support (GitHub Actions, GitLab CI, etc.)
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

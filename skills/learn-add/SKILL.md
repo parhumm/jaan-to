@@ -1,9 +1,11 @@
 ---
 name: learn-add
-description: Add a lesson to a skill's LEARN.md file, routing feedback to skill, template, or context learning.
+description: Add a lesson to a skill LEARN.md file, routing feedback to skill, template, or context learning. Use when capturing workflow lessons.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[target] [lesson]"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # learn-add
@@ -32,7 +34,7 @@ If no input provided, ask for target and lesson.
 
 ---
 
-## Pre-Execution
+## Pre-Execution Protocol
 
 ### Language Settings
 Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
@@ -193,3 +195,18 @@ Commit this lesson? [y/n]
 2. **ALWAYS** show preview before writing
 3. **PRESERVE** existing lessons
 4. **ASK** when category is unclear
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
+## Definition of Done
+
+- [ ] Target skill/context identified and validated
+- [ ] Lesson categorized (questions/edge-cases/workflow/mistakes)
+- [ ] Preview shown and user approved
+- [ ] LEARN.md file updated with new lesson
+- [ ] Commit offered to user

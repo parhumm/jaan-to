@@ -3,7 +3,7 @@
 # Usage: ./scripts/setup-branch-protection.sh
 # Requires: gh CLI authenticated with repo admin access
 
-set -e
+set -euo pipefail
 
 REPO="parhumm/jaan-to"
 

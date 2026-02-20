@@ -1,8 +1,10 @@
 ---
 name: backend-data-model
-description: Generate data model docs with tables, constraints, indexes, retention, and migration notes from entities.
+description: Generate data model docs with tables, constraints, indexes, retention, and migration notes. Use when designing database schemas from entities.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/data-model/**), Write($JAAN_OUTPUTS_DIR/frontend/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [entities-or-prd-path]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # backend-data-model
@@ -449,6 +451,13 @@ Use AskUserQuestion:
 - **Both**: Do both
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

@@ -1,9 +1,11 @@
 ---
 name: release-iterate-changelog
-description: "Generate changelog with user impact notes and support guidance from git history or changes."
+description: Generate changelog with user impact notes and support guidance from git history. Use when preparing release notes.
 allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git describe:*), Bash(git status:*), Bash(git rev-list:*), Bash(git remote:*), Write($JAAN_OUTPUTS_DIR/CHANGELOG.md), Edit($JAAN_OUTPUTS_DIR/CHANGELOG.md), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[(no args) | create | release vX.Y.Z | add \"<description>\"]"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # release-iterate-changelog
@@ -373,6 +375,13 @@ After changelog is written, ask:
 4. **VALIDATE** all version numbers and dates
 5. **PREVIEW** all changes before writing
 6. **HUMAN-FRIENDLY** entries only — never dump raw commit logs
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
 
 ## Definition of Done
 

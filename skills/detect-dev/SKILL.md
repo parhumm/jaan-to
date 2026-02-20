@@ -1,9 +1,11 @@
 ---
 name: detect-dev
-description: Engineering audit with SARIF evidence, 4-level confidence, and OpenSSF scoring.
+description: Engineering audit with SARIF evidence, 4-level confidence, and OpenSSF scoring. Use when evaluating repository health or code quality.
 allowed-tools: Read, Glob, Grep, Bash(git log:*), Bash(git remote:*), Bash(git show:*), Bash(git diff:*), Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full] [--incremental]"
 context: fork
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone support for analysis mode.
 ---
 
 # detect-dev
@@ -44,21 +46,10 @@ Override field for this skill: `language_detect-dev`
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Evidence Format" for YAML template, ID generation logic, and namespace rules.
 
-### Confidence Levels (4-level)
-
-| Level | Label | Range | Criteria |
-|-------|-------|-------|----------|
-| 4 | **Confirmed** | 0.95-1.00 | Multiple independent methods agree; reproducible |
-| 3 | **Firm** | 0.80-0.94 | Single high-precision method with clear evidence |
-| 2 | **Tentative** | 0.50-0.79 | Pattern match without full analysis; needs investigation |
-| 1 | **Uncertain** | 0.20-0.49 | Absence-of-evidence reasoning; expert judgment only |
-
-**Downgrade one level** if: evidence from outdated code, finding in dead code, tool has high false-positive rate.
-**Upgrade one level** if: multiple tools agree, maintainer confirmed, systematic pattern detected.
-
-### Frontmatter Schema, Document Structure & Anti-patterns
+### Confidence Levels, Frontmatter Schema, Document Structure & Anti-patterns
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` for:
+> - "Confidence Levels (4-level)" -- 4-level scale (Confirmed/Firm/Tentative/Uncertain), upgrade/downgrade rules
 > - "Frontmatter Schema (Universal)" -- required YAML frontmatter for every output file
 > - "Document Structure (Diataxis)" -- 5-section output structure (Executive Summary through Appendices)
 > - "Prohibited Anti-patterns" -- constraints on speculation, confidence, severity, and scope
@@ -347,72 +338,15 @@ For each detection, assign a confidence score using the 4-level system:
 
 **If `run_depth == "light"`:**
 
-```
-DETECTION COMPLETE (Light Mode)
---------------------------------
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Detection Summary Format (Light Mode)" for the display template.
 
-PLATFORM: {platform_name or 'all'}
-
-STACK FINDINGS
-  Backend:        {lang} {ver} + {framework} {ver}    [Confidence: {level}]
-  Frontend:       {lang} {ver} + {framework} {ver}    [Confidence: {level}]
-  Database:       {database} {ver}                      [Confidence: {level}]
-  Container:      {docker images}                       [Confidence: {level}]
-
-SEVERITY SUMMARY
-  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
-
-OVERALL SCORE: {score}/10 (OpenSSF-style, config + container layers only)
-
-OUTPUT FILE (1):
-  $JAAN_OUTPUTS_DIR/detect/dev/summary{-platform}.md
-
-Note: Score based on Layers 1-2 only. Run with --full for complete analysis
-including CI/CD, security, infrastructure, observability, and risk assessment.
-
-{If incremental == true:}
-INCREMENTAL SCOPE: {n} files changed since {last_audit.timestamp} (branch: {last_audit.branch})
-```
-
-> "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
+Prompt user: "Proceed with writing summary to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
 
 **If `run_depth == "full"`:**
 
-```
-DETECTION COMPLETE
-------------------
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Detection Summary Format (Full Mode)" for the display template.
 
-PLATFORM: {platform_name or 'all'}
-
-STACK FINDINGS
-  Backend:        {lang} {ver} + {framework} {ver}    [Confidence: {level}]
-  Frontend:       {lang} {ver} + {framework} {ver}    [Confidence: {level}]
-  Database:       {database} {ver}                      [Confidence: {level}]
-  Infrastructure: {container} + {ci/cd}                 [Confidence: {level}]
-
-SEVERITY SUMMARY
-  Critical: {n}  |  High: {n}  |  Medium: {n}  |  Low: {n}  |  Info: {n}
-
-OVERALL SCORE: {score}/10 (OpenSSF-style)
-
-OUTPUT FILES (9):
-  $JAAN_OUTPUTS_DIR/detect/dev/stack{-platform}.md           - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/architecture{-platform}.md    - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/standards{-platform}.md       - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/testing{-platform}.md         - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/cicd{-platform}.md            - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/deployment{-platform}.md      - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/security{-platform}.md        - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/observability{-platform}.md   - {n} findings
-  $JAAN_OUTPUTS_DIR/detect/dev/risks{-platform}.md           - {n} findings
-
-Note: {-platform} suffix only if multi-platform mode (e.g., -web, -backend). Single-platform mode has no suffix.
-
-{If incremental == true:}
-INCREMENTAL SCOPE: {n} files changed since {last_audit.timestamp} (branch: {last_audit.branch})
-```
-
-> "Proceed with writing 9 output files to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
+Prompt user: "Proceed with writing 9 output files to $JAAN_OUTPUTS_DIR/detect/dev/? [y/n]"
 
 **Do NOT proceed to Phase 2 without explicit approval.**
 
@@ -517,31 +451,7 @@ This file enables `--incremental` mode on subsequent runs.
 
 ## Step 11: Quality Check & Definition of Done
 
-**If `run_depth == "light"`:**
-
-- [ ] Single summary file written to `$JAAN_OUTPUTS_DIR/detect/dev/summary{suffix}.md`
-- [ ] Valid YAML frontmatter with `platform` field and `overall_score`
-- [ ] Every finding has evidence block with correct ID format (E-DEV-NNN)
-- [ ] Confidence levels assigned to all findings
-- [ ] No speculation presented as evidence
-- [ ] Score disclaimer included (partial analysis note)
-- [ ] Output filename matches platform suffix convention
-- [ ] Audit state written to `.audit-state.yaml`
-- [ ] Detection summary shown to user; user approved output
-
-**If `run_depth == "full"`:**
-
-- [ ] All 9 output files written to `$JAAN_OUTPUTS_DIR/detect/dev/`
-- [ ] Valid YAML frontmatter in every file with `platform` field
-- [ ] Every finding has evidence block with correct ID format (E-DEV-NNN or E-DEV-{PLATFORM}-NNN)
-- [ ] Confidence levels assigned to all findings
-- [ ] No speculation presented as evidence; no scope-exceeding claims
-- [ ] CI/CD security explicitly checked (secrets, runner trust, permissions, pinning, provenance)
-- [ ] Overall score calculated (OpenSSF 0-10)
-- [ ] Output filenames match platform suffix convention
-- [ ] Audit state written to `.audit-state.yaml`
-- [ ] Detection summary shown to user; user approved output
-- [ ] Seed reconciliation check performed (discrepancies reported or alignment confirmed)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` section "Quality Check & Definition of Done" for the complete checklists (light mode and full mode).
 
 ---
 
@@ -551,3 +461,18 @@ This file enables `--incremental` mode on subsequent runs.
 
 If yes:
 - Run `/jaan-to:learn-add detect-dev "{feedback}"`
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Evidence-based findings with confidence scoring
+- Fork-isolated execution (`context: fork`)
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
+## Definition of Done
+
+- [ ] Repository scanned with all applicable checkers
+- [ ] Findings reported with SARIF-compatible evidence and 4-level confidence
+- [ ] OpenSSF-style score calculated
+- [ ] Output written to `$JAAN_OUTPUTS_DIR/detect/dev/`
+- [ ] User approved final report

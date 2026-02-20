@@ -1,6 +1,6 @@
 ---
 name: pm-prd-write
-description: Generate a Product Requirements Document from an initiative description.
+description: Generate a Product Requirements Document from an initiative description. Use when defining product scope or feature requirements.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(cp:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: [initiative-description]
 hooks:
@@ -10,6 +10,8 @@ hooks:
         - type: command
           command: "${CLAUDE_PLUGIN_ROOT}/scripts/validate-prd.sh"
           timeout: 5000
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # pm-prd-write
@@ -258,6 +260,13 @@ After PRD is written, ask:
 - PRD workflow complete
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across industries and domains
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 - [ ] PRD file exists at correct path

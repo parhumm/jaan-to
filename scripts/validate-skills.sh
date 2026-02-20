@@ -182,3 +182,123 @@ if [ "$AUTO_COUNT" -gt "$AUTO_INVOKE_CAP" ]; then
 else
   echo "✓ Auto-invocable skills: $AUTO_COUNT / $AUTO_INVOKE_CAP cap"
 fi
+echo ""
+
+# ─────────────────────────────────────────────────────
+# Agent Skills Standard Compliance
+# ─────────────────────────────────────────────────────
+
+echo "═══════════════════════════════════════"
+echo "  Agent Skills Standard Compliance"
+echo "═══════════════════════════════════════"
+echo ""
+
+AS_ERRORS=0
+
+# Check license field in all SKILL.md
+MISSING_LICENSE=0
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_file="$skill_dir/SKILL.md"
+  [ -f "$skill_file" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  if ! grep -q '^license:' "$skill_file"; then
+    echo "  ⚠ Missing 'license:' field in $skill_name"
+    MISSING_LICENSE=$((MISSING_LICENSE + 1))
+  fi
+done
+if [ "$MISSING_LICENSE" -eq 0 ]; then
+  echo "✓ All skills have license field"
+else
+  echo "::warning::$MISSING_LICENSE skills missing license field"
+fi
+
+# Check compatibility field in all SKILL.md
+MISSING_COMPAT=0
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_file="$skill_dir/SKILL.md"
+  [ -f "$skill_file" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  if ! grep -q '^compatibility:' "$skill_file"; then
+    echo "  ⚠ Missing 'compatibility:' field in $skill_name"
+    MISSING_COMPAT=$((MISSING_COMPAT + 1))
+  fi
+done
+if [ "$MISSING_COMPAT" -eq 0 ]; then
+  echo "✓ All skills have compatibility field"
+else
+  echo "::warning::$MISSING_COMPAT skills missing compatibility field"
+fi
+
+# Check "Use when" or "Use to" trigger phrases in descriptions
+MISSING_TRIGGER=0
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_file="$skill_dir/SKILL.md"
+  [ -f "$skill_file" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  desc=$(awk '/^---$/{n++; next} n==1 && /^description:/{sub(/^description: */, ""); print; exit}' "$skill_file")
+  if ! echo "$desc" | grep -qi "Use when\|Use to\|Use for"; then
+    echo "  ⚠ Description missing trigger phrase in $skill_name"
+    MISSING_TRIGGER=$((MISSING_TRIGGER + 1))
+  fi
+done
+if [ "$MISSING_TRIGGER" -eq 0 ]; then
+  echo "✓ All descriptions have trigger phrases"
+else
+  echo "::warning::$MISSING_TRIGGER descriptions missing 'Use when/to/for' trigger phrase"
+fi
+
+# Check no [Internal] prefix in descriptions
+INTERNAL_PREFIX=0
+for skill_dir in "$SKILLS_DIR"/*/; do
+  skill_file="$skill_dir/SKILL.md"
+  [ -f "$skill_file" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  desc=$(awk '/^---$/{n++; next} n==1 && /^description:/{sub(/^description: */, ""); print; exit}' "$skill_file")
+  if echo "$desc" | grep -q '\[Internal\]'; then
+    echo "  ⚠ [Internal] prefix in description of $skill_name"
+    INTERNAL_PREFIX=$((INTERNAL_PREFIX + 1))
+  fi
+done
+if [ "$INTERNAL_PREFIX" -eq 0 ]; then
+  echo "✓ No [Internal] prefixes in descriptions"
+else
+  echo "::warning::$INTERNAL_PREFIX descriptions have [Internal] prefix"
+fi
+
+# Check skill name compliance (lowercase, hyphens only, no consecutive hyphens, 1-64 chars)
+INVALID_NAMES=0
+for skill_dir in "$SKILLS_DIR"/*/; do
+  [ -d "$skill_dir" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  if [[ ! "$skill_name" =~ ^[a-z0-9]([a-z0-9-]*[a-z0-9])?$ ]] || [[ "$skill_name" =~ -- ]] || [ ${#skill_name} -gt 64 ]; then
+    echo "  ✗ Invalid skill name: $skill_name"
+    INVALID_NAMES=$((INVALID_NAMES + 1))
+  fi
+done
+if [ "$INVALID_NAMES" -eq 0 ]; then
+  echo "✓ All skill names are spec-compliant"
+else
+  echo "::error::$INVALID_NAMES skill names violate Agent Skills naming spec"
+  AS_ERRORS=$((AS_ERRORS + INVALID_NAMES))
+fi
+
+# Check marketplace.json skills[] sync
+MARKETPLACE="$PLUGIN_ROOT/.claude-plugin/marketplace.json"
+if [ -f "$MARKETPLACE" ]; then
+  MANIFEST_COUNT=$(jq '.plugins[0].skills | length' "$MARKETPLACE" 2>/dev/null || echo 0)
+  ACTUAL_COUNT=$(ls -d "$SKILLS_DIR"/*/SKILL.md 2>/dev/null | wc -l | tr -d ' ')
+  if [ "$MANIFEST_COUNT" -eq "$ACTUAL_COUNT" ]; then
+    echo "✓ marketplace.json skills[] synced ($ACTUAL_COUNT skills)"
+  else
+    echo "::warning::marketplace.json skills[] ($MANIFEST_COUNT) != actual ($ACTUAL_COUNT)"
+    echo "  Update .claude-plugin/marketplace.json skills[] array"
+  fi
+else
+  echo "  ⚠ No marketplace.json found"
+fi
+
+echo ""
+if [ "$AS_ERRORS" -gt 0 ]; then
+  echo "::error::$AS_ERRORS Agent Skills standard errors (blocking)"
+  exit 1
+fi

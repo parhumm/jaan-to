@@ -1,9 +1,11 @@
 ---
 name: docs-create
-description: Create new documentation with templates following STYLE.md.
+description: Create new documentation with templates following STYLE.md. Use when adding new documentation pages.
 allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "{type} {name}"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # docs-create
@@ -295,3 +297,17 @@ If yes, suggest running `/jaan-to:docs-update --quick` for related docs.
 3. **VALIDATE** against STYLE.md
 4. **CHECK** for duplicates first
 5. **COMMIT** with descriptive message
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
+## Definition of Done
+
+- [ ] Documentation scope and target confirmed
+- [ ] Content drafted following STYLE.md standards
+- [ ] Document written to appropriate docs path
+- [ ] User approved final document

@@ -2,19 +2,20 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-3.16.2-blue.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-7.2.0-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-19-orange.svg)](docs/skills/README.md)
+[![Skills](https://img.shields.io/badge/skills-44-orange.svg)](skills/)
+[![Agent Skills](https://img.shields.io/badge/npx%20skills-compatible-brightgreen.svg)](https://skills.sh)
 [![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
 
 ### Plugin Contents
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Skills** | 18 | PM, Dev (FE/BE), UX, QA, Data, Documentation |
+| **Skills** | 44 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
 | **Agents** | 2 | quality-reviewer, context-scout |
-| **Hooks** | 4 | Setup, SessionStart, PostToolUse, Stop |
+| **Hooks** | 7 | Setup, SessionStart, PreToolUse, PostToolUse, Stop, TaskCompleted, TeammateIdle |
 | **Output Styles** | 2 | enterprise-doc, concise-summary |
 
 ---
@@ -72,6 +73,23 @@ claude --plugin-dir /path/to/jaan-to
 ./scripts/build-dist.sh
 claude --plugin-dir ./dist/jaan-to
 ```
+
+### Agent Skills (Cross-Platform)
+
+Install skills via the [Agent Skills](https://skills.sh) ecosystem — works across Claude Code, Cursor, VS Code, GitHub Copilot, and 18+ agents:
+
+```bash
+# Install all 44 skills
+npx skills add parhumm/jaan-to
+
+# Install a specific skill
+npx skills add parhumm/jaan-to --skill pm-prd-write
+
+# Browse available skills
+npx skills find "product requirements"
+```
+
+> **Note:** This installs skill definitions only. For the full jaan.to experience (hooks, agents, config system, learning), use the [plugin installation](#stable-version-recommended) instead.
 
 ### First run
 The bootstrap hook automatically creates `jaan-to/` in your project with:
@@ -522,6 +540,50 @@ Goal: Keep docs in sync with code changes
 
 ---
 
+## Your Data Stays Safe
+
+jaan.to runs entirely on your machine. No telemetry, no analytics, no servers to trust.
+
+### What It Accesses
+
+| | What | Details |
+|---|------|---------|
+| **Reads** | Project context | `jaan-to/context/`, `jaan-to/config/` — your tech stack, team, boundaries |
+| **Writes** | Generated outputs only | `jaan-to/outputs/`, `jaan-to/learn/`, `jaan-to/templates/` |
+| **Never touches** | Secrets & credentials | `.env`, SSH keys, API tokens, hidden directories |
+| **Network** | None by default | Only `pm-research-about` (web search) and `jaan-issue-report` (GitHub) — both require explicit approval |
+
+### How Skills Stay Contained
+
+Every skill declares exactly which tools it can use. No skill has unrestricted shell access, unrestricted file editing, or access to secret files. Every write-heavy skill follows a **HARD STOP** pattern — you see a complete preview and approve before anything is written.
+
+Path validation prevents directory traversal: a malicious `settings.yaml` with `paths_outputs: "../../.ssh"` is rejected using canonical (`realpath`) checks. Scripts use `set -euo pipefail`, temp files use `mktemp` with cleanup traps, and a PreToolUse security gate blocks dangerous commands (`sudo`, `eval`, `curl | sh`, `rm -rf /`).
+
+### Automated Security Checks
+
+Security standards are enforced automatically. A central validation script (`scripts/validate-security.sh`) checks skill permissions, shell script safety, hook integrity, and dangerous patterns. It runs on every PR to `main`, every release preparation, and every issue review — violations block the merge.
+
+See [Security Guide](docs/config/security.md) for full details on what jaan.to accesses and how privacy sanitization works.
+
+---
+
+## Token Efficiency
+
+jaan.to actively manages its context window footprint so your AI assistant stays fast and responsive, even with 44+ skills installed.
+
+| Layer | What | Effect |
+|-------|------|--------|
+| **Description budget** | All skill descriptions share a 15,000-char budget | Skills beyond budget are silently dropped — jaan.to stays well under |
+| **Reference extraction** | Large skills split into compact execution + on-demand reference | 25-60% reduction in per-invocation token cost |
+| **Fork isolation** | Heavy analysis skills run in isolated subagents | Parent session never sees the 30-48K token analysis cost |
+| **CI enforcement** | 6 automated gates prevent regression | SKILL.md cap, description budget, CLAUDE.md size, hook stdout cap |
+
+**Result:** A typical session with 3 skill invocations saves 5,000-52,000 tokens versus an unoptimized plugin of equivalent capability.
+
+See [Token Strategy](docs/token-strategy.md) for the full architecture.
+
+---
+
 ## From Idea to Product
 
 **Go from a napkin sketch to a deployed product using jaan.to skill chains.**
@@ -548,6 +610,8 @@ Define → Design → Build → Quality → Ship
 | [Skills Reference](docs/skills/README.md) | All available commands |
 | [Creating Skills](docs/extending/create-skill.md) | Build your own skills |
 | [Configuration](docs/config/README.md) | Settings and context |
+| [Security](docs/config/security.md) | What jaan.to accesses and why your data stays safe |
+| [Token Strategy](docs/token-strategy.md) | How jaan.to manages context window efficiency |
 | [Vision](docs/roadmap/vision.md) | Philosophy and architecture |
 | [Roadmap](docs/roadmap/roadmap.md) | What's coming |
 

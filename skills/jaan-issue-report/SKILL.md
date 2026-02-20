@@ -1,9 +1,11 @@
 ---
 name: jaan-issue-report
-description: Report bugs, feature requests, or skill issues to the jaan-to GitHub repo or save locally
+description: Report bugs, feature requests, or skill issues to the jaan-to GitHub repo or save locally. Use when reporting plugin issues.
 allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(uname *), Bash(awk *), Bash(rm -f /tmp/jaan-issue-body-*), Bash(mkdir -p $JAAN_OUTPUTS_DIR/jaan-issues/*), Write($JAAN_OUTPUTS_DIR/jaan-issues/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "<issue-description> [--type bug|feature|skill|docs] [--submit | --no-submit]"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # jaan-issue-report
@@ -184,37 +186,9 @@ Determine issue type using this priority order:
 2. **From session draft** (if accepted in Step 0): use the auto-classified type
 3. **From keyword detection** in the description:
 
-| Keywords | Type |
-|----------|------|
-| broken, error, crash, fails, wrong, bug, doesn't work | `bug` |
-| add, new, would be nice, request, missing feature, wish | `feature` |
-| skill, `/jaan-to:`, command, workflow, generate | `skill` |
-| docs, documentation, readme, guide, typo, unclear | `docs` |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Keyword Detection Table (Step 2)" for keyword-to-type mapping and type-to-label mapping.
 
-4. **If uncertain**, ask using AskUserQuestion:
-   ```
-   AskUserQuestion:
-     question: "What type of issue is this?"
-     header: "Issue type"
-     options:
-       - label: "Bug"
-         description: "Something is broken or not working as expected"
-       - label: "Feature"
-         description: "A new capability or enhancement"
-       - label: "Skill"
-         description: "Issue with a specific jaan-to skill"
-       - label: "Docs"
-         description: "Documentation is incorrect, missing, or unclear"
-   ```
-
-Map type to GitHub label:
-
-| Type | Label |
-|------|-------|
-| `bug` | `bug` |
-| `feature` | `enhancement` |
-| `skill` | `skill-request` |
-| `docs` | `documentation` |
+4. **If uncertain**, ask using AskUserQuestion with options: Bug, Feature, Skill, Docs.
 
 ---
 
@@ -287,21 +261,9 @@ Store as environment data for the issue body.
 
 ## Step 5: Generate Issue Title
 
-Craft a clear, descriptive title. **Always in English.**
+Craft a clear, descriptive title. **Always in English.** Pattern: `[{Type}] {concise description}` (under 80 chars).
 
-**Rules:**
-- Under 80 characters
-- Start with type prefix in brackets: `[Bug]`, `[Feature]`, `[Skill]`, `[Docs]`
-- Be specific about what is affected
-- If session draft was accepted, refine its title rather than starting fresh
-
-**Pattern**: `[{Type}] {concise description of the issue}`
-
-**Examples:**
-- `[Bug] learn-add crashes when target skill has no LEARN.md`
-- `[Feature] Support --dry-run flag for all generation skills`
-- `[Skill] Need a skill for competitive analysis reports`
-- `[Docs] Missing migration guide for v3.0.0 template variables`
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Issue Title Format (Step 5)" for full rules and examples.
 
 ---
 
@@ -378,25 +340,9 @@ AskUserQuestion:
 
 ## Step 8: Generate Output Path
 
-```bash
-source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
+Generate `NEXT_ID`, `SLUG`, `OUTPUT_FOLDER`, and `MAIN_FILE` for potential local save.
 
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/jaan-issues"
-mkdir -p "$SUBDOMAIN_DIR"
-
-NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
-SLUG={kebab-case from title, max 50 chars, strip type prefix bracket}
-OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${SLUG}"
-MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${SLUG}.md"
-```
-
-Store variables for potential local save:
-- `NEXT_ID`: {NEXT_ID}
-- `SLUG`: {kebab-case from title}
-- `OUTPUT_FOLDER`: `$JAAN_OUTPUTS_DIR/jaan-issues/{NEXT_ID}-{SLUG}/`
-- `MAIN_FILE`: `{NEXT_ID}-{SLUG}.md`
-
-(These will be used only if local file creation is requested in Step 10.)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Output Path Generation (Step 8)" for the full bash script and variable definitions.
 
 ## Step 9: Submit to GitHub (if submit mode is active)
 
@@ -460,27 +406,9 @@ rm -f /tmp/jaan-issue-body-clean.md
 
 ### 10.1 Show Copy-Paste Ready Version
 
-Present the issue content in the user's conversation language:
+Present the issue title and body in a copy-paste ready format with contextual message (different for GitHub failure vs. local-only mode).
 
-```
-──────────────────────────────────────────
-COPY-PASTE READY ISSUE
-──────────────────────────────────────────
-
-Title: {title}
-
-{full issue body without YAML frontmatter}
-
-──────────────────────────────────────────
-```
-
-**Contextual message:**
-
-If GitHub submission failed (came from Step 9.5):
-> "GitHub submission failed: {error}. You can copy the content above and submit manually at: https://github.com/parhumm/jaan-to/issues/new"
-
-If local-only mode (never attempted GitHub):
-> "You can copy the content above and submit manually at: https://github.com/parhumm/jaan-to/issues/new"
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Copy-Paste Ready Template (Step 10.1)" for the exact format and contextual messages.
 
 ### 10.2 Ask About Local File
 
@@ -509,28 +437,9 @@ mkdir -p "$OUTPUT_FOLDER"
 
 #### 10.3.2 Write Issue File
 
-Write to `$MAIN_FILE` (the path generated in Step 8):
+Write to `$MAIN_FILE` (the path generated in Step 8) with YAML frontmatter (metadata) followed by the full issue body.
 
-```markdown
----
-title: "{issue_title}"
-type: "{bug|feature|skill|docs}"
-label: "{github_label}"
-repo: "parhumm/jaan-to"
-issue_url: ""
-issue_number: null
-date: "{YYYY-MM-DD}"
-jaan_to_version: "{version}"
-os: "{uname output}"
-related_skill: "{skill_name or N/A}"
-generated_by: "jaan-issue-report"
-session_context: {true|false}
----
-
-{full issue body}
-```
-
-**Note**: `issue_url` and `issue_number` remain empty for local-only issues.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Local Issue File Template (Step 10.3.2)" for the complete file format and frontmatter fields.
 
 #### 10.3.3 Update Index
 
@@ -579,20 +488,13 @@ If **Yes, I have feedback**: ask for details, then run `/jaan-to:learn-add jaan-
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
 ## Definition of Done
 
-- [ ] Session context scanned (if mid-session invocation)
-- [ ] Issue type classified (bug/feature/skill/docs)
-- [ ] All relevant details gathered via clarifying questions
-- [ ] Environment info auto-collected (version, OS)
-- [ ] Issue title is clear, English, under 80 chars
-- [ ] Issue body follows template structure for the given type
-- [ ] Issue body is in English regardless of conversation language
-- [ ] Privacy sanitization completed (paths, tokens, personal info)
-- [ ] HARD STOP approved by user (full preview shown)
-- [ ] If submit mode active: GitHub issue creation attempted in Step 9
-- [ ] If GitHub submission succeeded: Issue URL and number captured, Step 10 skipped
-- [ ] If GitHub submission failed OR local-only mode: Copy-paste ready version shown in Step 10
-- [ ] If copy-paste version shown: User asked whether to save local file
-- [ ] If local file requested: File saved to `$JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/` and index updated
-- [ ] User informed of result via appropriate scenario in Step 11
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/jaan-issue-report-reference.md` section "Definition of Done" for the full checklist.

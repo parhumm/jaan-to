@@ -1,9 +1,11 @@
 ---
 name: docs-update
-description: Audit and maintain documentation quality using smart staleness checks.
-allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Edit, Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
+description: Audit and maintain documentation quality using smart staleness checks. Use when reviewing or fixing documentation.
+allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_DOCS_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # docs-update
@@ -473,3 +475,17 @@ Commit: {hash}
 4. **SKIP** generated files (jaan-to/)
 5. **BACKUP** before bulk operations
 6. **PREVIEW** all changes before applying
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
+
+## Definition of Done
+
+- [ ] Staleness check completed across all doc paths
+- [ ] Stale or missing docs identified and reported
+- [ ] Fixes applied (if --fix mode) or report generated (if --check-only)
+- [ ] User approved changes

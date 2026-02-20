@@ -1,8 +1,10 @@
 ---
 name: pm-research-about
-description: Deep research on any topic, or add existing file/URL to research index.
-allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/research/**), Edit, Bash(git add:*), Bash(git commit:*)
+description: Deep research on any topic, or add existing file/URL to research index. Use when researching topics or building knowledge bases.
+allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/research/**), Edit($JAAN_OUTPUTS_DIR/research/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: <topic-or-file-path-or-URL>
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # pm-research-about
@@ -16,6 +18,7 @@ argument-hint: <topic-or-file-path-or-URL>
 - `$JAAN_OUTPUTS_DIR/research/README.md` - Current index structure
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` - Reference tables, templates, scoring rubrics
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-research-about-reference.md` - Clarifying questions, size/mode options, format specs
 
 ## Input
 
@@ -83,32 +86,7 @@ If no topic provided, ask:
 
 **If topic is unclear or broad, ask 3-5 clarifying questions.**
 
-Each question offers **3 options + 1 recommendation**:
-
-> **Q1: What's your primary goal?**
-> - [A] Learning fundamentals ← *Recommended for beginners*
-> - [B] Implementation guide
-> - [C] Comparison with alternatives
->
-> **Q2: What depth level?**
-> - [A] Overview (high-level concepts)
-> - [B] Intermediate (patterns & practices) ← *Recommended*
-> - [C] Advanced (internals & edge cases)
->
-> **Q3: What's the context?**
-> - [A] New project
-> - [B] Existing codebase ← *Recommended if migration mentioned*
-> - [C] General knowledge
->
-> **Q4: Which aspect matters most?**
-> - [A] Performance
-> - [B] Developer experience ← *Recommended*
-> - [C] Ecosystem & community
->
-> **Q5: Include comparisons?**
-> - [A] Yes, with {X} and {Y} ← *Recommended*
-> - [B] Brief mentions only
-> - [C] No comparisons needed
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-research-about-reference.md` section "Clarifying Questions Template" for the full Q1-Q5 question format with options and recommendations.
 
 **Skip questions if:**
 - Topic is already specific (e.g., "Claude Code hooks for pre-commit validation")
@@ -121,15 +99,7 @@ Each question offers **3 options + 1 recommendation**:
 
 ## Step 1.5: Choose Research Size
 
-> **How comprehensive should the research be?**
->
-> | Size | Sources | Agents | Best For |
-> |------|---------|--------|----------|
-> | [A] Quick (20) | ~20 sources | 3 agents | Quick overview ← *Recommended for simple topics* |
-> | [B] Standard (60) | ~60 sources | 7 agents | Solid research ← *Recommended* |
-> | [C] Deep (100) | ~100 sources | 10 agents | Comprehensive coverage |
-> | [D] Extensive (200) | ~200 sources | 14 agents | In-depth analysis |
-> | [E] Exhaustive (500) | ~500 sources | 29 agents | Maximum coverage |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-research-about-reference.md` section "Research Size Options" for the size selection table (Quick/Standard/Deep/Extensive/Exhaustive) with source counts and agent allocations.
 
 **Default**: Standard (60) if user doesn't specify or just presses enter.
 
@@ -140,13 +110,7 @@ Each question offers **3 options + 1 recommendation**:
 
 ## Step 1.6: Choose Approval Mode
 
-> **How much oversight do you want?**
->
-> | Mode | Description |
-> |------|-------------|
-> | [A] Auto | Run all waves automatically, show final document only ← *Faster* |
-> | [B] Summary | Show brief progress after each wave, no approval needed |
-> | [C] Interactive | Ask for approval at each major step ← *Default* |
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-research-about-reference.md` section "Approval Mode Options" for the mode selection table (Auto/Summary/Interactive).
 
 **Default**: Interactive (C) if user doesn't specify.
 
@@ -416,39 +380,11 @@ If approved (or auto-mode):
 
 Edit `$JAAN_OUTPUTS_DIR/research/README.md`:
 
-1. **Add to Summary Index table:**
-   Find the table under `## Summary Index` and add new row:
-   ```markdown
-   | [{NN}]({filename}) | {Title} | {Brief one-line description} |
-   ```
-
-2. **Add to Quick Topic Finder:**
-   Find the most relevant section and add link:
-   ```markdown
-   - [{filename}]({filename})
-   ```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-research-about-reference.md` section "README Index Update Format" for the exact table row and link formats.
 
 ## Step 12: Git Commit
 
-```bash
-git add $JAAN_OUTPUTS_DIR/research/{filename} $JAAN_OUTPUTS_DIR/research/README.md
-git commit -m "$(cat <<'EOF'
-docs(research): Add {title}
-
-Research on {topic} covering:
-- {key point 1}
-- {key point 2}
-- {key point 3}
-
-Sources: {N} sources consulted
-Research method: Adaptive 5-wave approach
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-EOF
-)"
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-research-about-reference.md` section "Git Commit Template (Research)" for the commit command and message format.
 
 ## Step 13: Completion Report
 
@@ -462,6 +398,13 @@ If yes:
 - Run `/jaan-to:learn-add pm-research-about "{feedback}"`
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across industries and domains
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 
@@ -517,20 +460,7 @@ Do NOT proceed without approval.
 
 ## Git Commit
 
-```bash
-git add $JAAN_OUTPUTS_DIR/research/README.md $JAAN_OUTPUTS_DIR/research/{filename}
-git commit -m "$(cat <<'COMMITMSG'
-docs(research): Add {title} to index
-
-{If URL: Fetched from: {URL}}
-Category: {category}
-
-🤖 Generated with [Claude Code](https://claude.com/claude-code)
-
-Co-Authored-By: Claude <noreply@anthropic.com>
-COMMITMSG
-)"
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-research-about-reference.md` section "Git Commit Template (Add to Index)" for the commit command and message format.
 
 ## Completion
 

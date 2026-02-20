@@ -1,9 +1,11 @@
 ---
 name: detect-pack
-description: Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
+description: Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog. Use when combining audit results.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone support for analysis mode.
 ---
 
 # detect-pack
@@ -431,6 +433,13 @@ If yes:
 - Run `/jaan-to:learn-add detect-pack "{feedback}"`
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Evidence-based findings with confidence scoring
+- Fork-isolated execution (`context: fork`)
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

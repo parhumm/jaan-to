@@ -1,8 +1,10 @@
 ---
 name: pm-story-write
-description: Generate user stories with Given/When/Then acceptance criteria following INVEST principles.
+description: Generate user stories with Given/When/Then acceptance criteria following INVEST principles. Use when writing user stories from PRDs.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(cp:*), Task, Edit(jaan-to/config/settings.yaml)
 argument-hint: [feature] [persona] [goal] OR [epic-id]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # pm-story-write
@@ -305,61 +307,9 @@ Then {user_sees_error_message}
 [Include 3-7 scenarios covering happy path + key edge cases from Step 2]
 ```
 
-**Section 5: Scope**
-```markdown
-## Scope
+**Sections 5-9: Scope, Dependencies, Technical Notes, Open Questions, Definition of Done**
 
-### In-Scope
-- {explicit_item_1}
-- {explicit_item_2}
-- {explicit_item_3}
-
-### Out-of-Scope
-- {deferred_item_1} → See [US-YYY](#reference) or Future epic
-- {deferred_item_2} → v2 enhancement
-- {deferred_item_3} → Separate story needed
-```
-
-**Section 6: Dependencies**
-```markdown
-## Dependencies
-
-| Dependency | Type | Status | Owner |
-|------------|------|--------|-------|
-| {dependency_name} | {Story/Technical/Design} | {Done/In Progress/Pending} | {@owner} |
-
-Or: "None"
-```
-
-**Section 7: Technical Notes** (brief)
-```markdown
-## Technical Notes
-
-{implementation_hints}
-
-[Brief API contracts, database changes, performance requirements. Keep brief—details belong in task breakdown.]
-```
-
-**Section 8: Open Questions**
-```markdown
-## Open Questions
-
-- [ ] {Unresolved question needing decision} — @decider by YYYY-MM-DD
-- [x] ~~{Resolved question}~~ — **Decision**: {outcome} (YYYY-MM-DD)
-
-Or: "None"
-```
-
-**Section 9: Definition of Done**
-```markdown
-## Definition of Done
-
-- [ ] Acceptance criteria verified by QA
-- [ ] Code reviewed and approved
-- [ ] Unit tests written (≥80% coverage)
-- [ ] Documentation updated
-- [ ] PO acceptance received
-```
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-story-write-reference.md` section "Story Template — Sections 5-9 Format Specifications" for the detailed markdown format of each section.
 
 ## Step 5: Quality Check
 
@@ -487,30 +437,9 @@ add_to_index \
 
 ### Export Formats
 
-Also provide tool export formats (from research Section 7):
+After writing the story, provide Jira CSV and Linear JSON export options.
 
-> "📤 **Export options for tool import:**
->
-> **Jira CSV Import:**
-> ```csv
-> Summary,Description,Issue Type,Priority,Story Points,Epic Link,Labels
-> "{title}","{story_body_first_paragraph}","Story","{priority}",TBD,"{epic}","{labels}"
-> ```
->
-> **Linear GraphQL Mutation:**
-> ```json
-> {
->   "input": {
->     "title": "{title}",
->     "description": "{story_body_markdown}",
->     "priority": {priority_number},
->     "estimate": null,
->     "labelIds": ["{label_ids}"]
->   }
-> }
-> ```
->
-> Copy the relevant format to import into your tool."
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-story-write-reference.md` section "Export Formats" for the Jira CSV and Linear GraphQL mutation templates.
 
 ## Step 8: Capture Feedback
 
@@ -543,18 +472,13 @@ After story is written, ask:
 
 ---
 
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across industries and domains
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
+
 ## Definition of Done
 
-- [ ] Input parsed and validated (Step 0)
-- [ ] All clarifying questions answered (Step 1)
-- [ ] Edge cases mapped to 10 categories (Step 2)
-- [ ] Story structure planned (Step 3)
-- [ ] User approved plan at HARD STOP
-- [ ] Story content generated from template (Step 4)
-- [ ] INVEST quality check passed—all 6 criteria (Step 5)
-- [ ] AC testability verified—all observable outcomes (Step 5)
-- [ ] Definition of Ready validated—all 10 items (Step 5)
-- [ ] Story previewed and approved (Step 6)
-- [ ] File written to correct path (Step 7)
-- [ ] Export formats provided—Jira CSV, Linear JSON (Step 7)
-- [ ] User feedback captured if provided (Step 8)
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/pm-story-write-reference.md` section "Skill Definition of Done Checklist" for the full 13-item completion checklist covering Steps 0-8.

@@ -34,27 +34,27 @@ for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
 
   if ! grep -q "# PHASE 1:" "$skill"; then
     echo "  ⚠ Missing 'PHASE 1:' in $skill_name"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 
   if ! grep -q "# HARD STOP" "$skill"; then
     echo "  ⚠ Missing 'HARD STOP' in $skill_name"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 
   if ! grep -q "# PHASE 2:" "$skill"; then
     echo "  ⚠ Missing 'PHASE 2:' in $skill_name"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 
   if ! grep -q "Pre-Execution Protocol" "$skill"; then
     echo "  ⚠ Missing 'Pre-Execution Protocol' in $skill_name"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 
   if ! grep -q "## Definition of Done" "$skill"; then
     echo "  ⚠ Missing 'Definition of Done' in $skill_name"
-    ((WARNINGS++))
+    WARNINGS=$((WARNINGS + 1))
   fi
 done
 
@@ -72,14 +72,14 @@ echo ""
 echo "Check 2: Generic Applicability"
 echo "────────────────────────────────────────────────────────"
 
-PROJECT_REFS=$(grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | wc -l | tr -d ' ')
+PROJECT_REFS=$(grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | wc -l | tr -d ' ' || true)
 
 if [ "$PROJECT_REFS" -eq 0 ]; then
   echo "  ✓ No user-specific project references found"
 else
   echo "  ⚠ Found $PROJECT_REFS potential user-specific references (check manually)"
-  grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | head -5
-  ((WARNINGS++))
+  grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | head -5 || true
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -95,13 +95,13 @@ for skill in "$PLUGIN_ROOT"/skills/{backend,frontend,qa,devops}*/SKILL.md; do
   [ -f "$skill" ] || continue
   skill_name=$(basename "$(dirname "$skill")")
 
-  HAS_NODE=$(grep -c "Node\.js\|TypeScript\|npm\|pnpm" "$skill" || echo 0)
-  HAS_PHP=$(grep -c "PHP\|Laravel\|Symfony\|Composer" "$skill" || echo 0)
-  HAS_GO=$(grep -c "\bGo\b\|Golang" "$skill" || echo 0)
+  HAS_NODE=$(grep -c "Node\.js\|TypeScript\|npm\|pnpm" "$skill" || true)
+  HAS_PHP=$(grep -c "PHP\|Laravel\|Symfony\|Composer" "$skill" || true)
+  HAS_GO=$(grep -c "\bGo\b\|Golang" "$skill" || true)
 
   if [ "$HAS_NODE" -eq 0 ] || [ "$HAS_PHP" -eq 0 ] || [ "$HAS_GO" -eq 0 ]; then
     echo "  ⚠ Incomplete stack coverage: $skill_name (Node:$HAS_NODE PHP:$HAS_PHP Go:$HAS_GO)"
-    ((INCOMPLETE_COVERAGE++))
+    INCOMPLETE_COVERAGE=$((INCOMPLETE_COVERAGE + 1))
   fi
 done
 
@@ -109,7 +109,7 @@ if [ $INCOMPLETE_COVERAGE -eq 0 ]; then
   echo "  ✓ All code-gen skills mention all 3 stacks"
 else
   echo "  ⚠ $INCOMPLETE_COVERAGE skills have incomplete stack coverage (advisory)"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -120,14 +120,14 @@ echo ""
 echo "Check 4: No User-Specific References (paths/emails)"
 echo "────────────────────────────────────────────────────────"
 
-USER_PATHS=$(grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | wc -l | tr -d ' ')
+USER_PATHS=$(grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$USER_PATHS" -eq 0 ]; then
   echo "  ✓ No hardcoded user paths found"
 else
   echo "  ⚠ Found $USER_PATHS hardcoded paths (sanitize examples)"
-  grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | head -3
-  ((WARNINGS++))
+  grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | head -3 || true
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -145,7 +145,7 @@ for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
 
   if ! grep -q "## Skill Alignment\|# Skill Alignment" "$skill"; then
     echo "  ⚠ Missing 'Skill Alignment' section in $skill_name"
-    ((MISSING_ALIGNMENT++))
+    MISSING_ALIGNMENT=$((MISSING_ALIGNMENT + 1))
   fi
 done
 
@@ -153,7 +153,7 @@ if [ $MISSING_ALIGNMENT -eq 0 ]; then
   echo "  ✓ All skills have Skill Alignment section"
 else
   echo "  ⚠ $MISSING_ALIGNMENT skills missing alignment section (advisory)"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -169,17 +169,17 @@ if [ -f "$PLUGIN_ROOT/docs/extending/language-protocol.md" ]; then
   echo "  ✓ Language protocol documentation exists"
 else
   echo "  ⚠ Missing docs/extending/language-protocol.md"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 
 # Check for hardcoded language-specific greetings/phrases
-LANG_SPECIFIC=$(grep -rn "Bonjour\|Hola\|Namaste\|こんにちは" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+LANG_SPECIFIC=$(grep -rn "Bonjour\|Hola\|Namaste\|こんにちは" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$LANG_SPECIFIC" -eq 0 ]; then
   echo "  ✓ No hardcoded language-specific greetings"
 else
   echo "  ⚠ Found $LANG_SPECIFIC language-specific phrases (should use i18n)"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -191,14 +191,14 @@ echo "Check 7: Generic Error Categories"
 echo "────────────────────────────────────────────────────────"
 
 # Check for vague error messages
-VAGUE_ERRORS=$(grep -rn "Error occurred\|Something went wrong\|Failed\." "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+VAGUE_ERRORS=$(grep -rn "Error occurred\|Something went wrong\|Failed\." "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$VAGUE_ERRORS" -eq 0 ]; then
   echo "  ✓ No vague error messages detected"
 else
   echo "  ⚠ Found $VAGUE_ERRORS potentially vague error messages"
   echo "    Prefer: 'Missing required field: name' over 'Validation failed'"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -214,7 +214,7 @@ for skill in "$PLUGIN_ROOT"/skills/{backend,frontend,devops}*/SKILL.md; do
   [ -f "$skill" ] || continue
 
   if grep -q "tech\.md\|context/tech\|Current Stack" "$skill"; then
-    ((TECH_MD_REFS++))
+    TECH_MD_REFS=$((TECH_MD_REFS + 1))
   fi
 done
 
@@ -222,7 +222,7 @@ if [ $TECH_MD_REFS -gt 0 ]; then
   echo "  ✓ Code-gen skills reference tech.md for stack detection"
 else
   echo "  ⚠ No skills reference tech.md (should detect stack before generation)"
-  ((WARNINGS++))
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -238,25 +238,77 @@ if bash "$PLUGIN_ROOT/scripts/validate-skills.sh" > /dev/null 2>&1; then
 else
   echo "  ✗ Skill description budget exceeded"
   echo "    Run: bash scripts/validate-skills.sh"
-  ((ERRORS++))
+  ERRORS=$((ERRORS + 1))
 fi
 echo ""
 
 # ─────────────────────────────────────────────────────────────
-# Check 10: Security Review (No Dangerous Patterns)
+# Check 10: Security Review (Basic — see scripts/validate-security.sh for full check)
 # ─────────────────────────────────────────────────────────────
 
 echo "Check 10: Security Review"
 echo "────────────────────────────────────────────────────────"
 
-DANGEROUS_PATTERNS=$(grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+DANGEROUS_PATTERNS=$(grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$DANGEROUS_PATTERNS" -eq 0 ]; then
   echo "  ✓ No dangerous bash patterns found in skills"
 else
   echo "  ⚠ Found $DANGEROUS_PATTERNS potentially dangerous patterns"
-  grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3
-  ((WARNINGS++))
+  grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3 || true
+  WARNINGS=$((WARNINGS + 1))
+fi
+echo ""
+
+# ─────────────────────────────────────────────────────────────
+# Check 11: Agent Skills Standard Compliance
+# ─────────────────────────────────────────────────────────────
+
+echo "Check 11: Agent Skills Standard Compliance"
+echo "────────────────────────────────────────────────────────"
+
+INVALID_NAMES=0
+for skill_dir in "$PLUGIN_ROOT"/skills/*/; do
+  [ -d "$skill_dir" ] || continue
+  skill_name="$(basename "$skill_dir")"
+  if [[ ! "$skill_name" =~ ^[a-z0-9]([a-z0-9-]*[a-z0-9])?$ ]] || [[ "$skill_name" =~ -- ]] || [ ${#skill_name} -gt 64 ]; then
+    echo "  ⚠ Invalid Agent Skills name: $skill_name"
+    INVALID_NAMES=$((INVALID_NAMES + 1))
+  fi
+done
+if [ $INVALID_NAMES -eq 0 ]; then
+  echo "  ✓ All skill names comply with Agent Skills naming spec"
+else
+  echo "  ⚠ $INVALID_NAMES names violate naming spec (advisory)"
+  WARNINGS=$((WARNINGS + 1))
+fi
+
+MARKETPLACE="$PLUGIN_ROOT/.claude-plugin/marketplace.json"
+if [ -f "$MARKETPLACE" ]; then
+  MANIFEST_COUNT=$(jq '.plugins[0].skills | length' "$MARKETPLACE" 2>/dev/null || echo 0)
+  ACTUAL_COUNT=$(find "$PLUGIN_ROOT/skills" -maxdepth 2 -name "SKILL.md" 2>/dev/null | wc -l | tr -d ' ')
+  if [ "$MANIFEST_COUNT" -eq "$ACTUAL_COUNT" ]; then
+    echo "  ✓ marketplace.json skills[] synced ($ACTUAL_COUNT skills)"
+  else
+    echo "  ⚠ marketplace.json skills[] ($MANIFEST_COUNT) != actual ($ACTUAL_COUNT)"
+    WARNINGS=$((WARNINGS + 1))
+  fi
+else
+  echo "  ⚠ No marketplace.json found"
+  WARNINGS=$((WARNINGS + 1))
+fi
+
+MISSING_FIELDS=0
+for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
+  [ -f "$skill" ] || continue
+  grep -q '^license:' "$skill" || MISSING_FIELDS=$((MISSING_FIELDS + 1))
+  grep -q '^compatibility:' "$skill" || MISSING_FIELDS=$((MISSING_FIELDS + 1))
+done
+if [ $MISSING_FIELDS -eq 0 ]; then
+  echo "  ✓ All skills have license and compatibility fields"
+else
+  echo "  ⚠ $MISSING_FIELDS missing Agent Skills fields (advisory)"
+  WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
 
@@ -284,7 +336,7 @@ if [ $WARNINGS -gt 0 ]; then
   echo ""
   echo "Consider addressing warnings to improve quality."
 else
-  echo "✓ PASS: All 10 compliance checks passed"
+  echo "✓ PASS: All 11 compliance checks passed"
   echo ""
 fi
 

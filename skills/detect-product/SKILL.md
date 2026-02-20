@@ -1,9 +1,11 @@
 ---
 name: detect-product
-description: Product reality extraction with evidence-backed features, monetization, and metrics.
+description: Product reality extraction with evidence-backed features, monetization, and metrics. Use when analyzing product capabilities.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone support for analysis mode.
 ---
 
 # detect-product
@@ -434,6 +436,13 @@ If yes:
 - Run `/jaan-to:learn-add detect-product "{feedback}"`
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Evidence-based findings with confidence scoring
+- Fork-isolated execution (`context: fork`)
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

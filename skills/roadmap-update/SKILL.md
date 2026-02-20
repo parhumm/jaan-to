@@ -1,9 +1,11 @@
 ---
 name: roadmap-update
-description: "[Internal] Maintain and sync the jaan.to development roadmap."
-allowed-tools: Read, Glob, Grep, Edit, Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(docs/roadmap/**)
+description: Maintain and sync the jaan-to development roadmap. Use when marking tasks done, syncing history, or managing releases.
+allowed-tools: Read, Glob, Grep, Edit(docs/roadmap/**), Edit(CHANGELOG.md), Bash(git log:*), Bash(git tag:*), Bash(git diff:*), Bash(git status:*), Bash(git add:*), Bash(git commit:*), Bash(git describe:*), Bash(git branch:*), Bash(git push:*), Bash(git checkout:*), Bash(git merge:*), Write(docs/roadmap/**)
 argument-hint: "[mark \"<task>\" done <hash>] [release vX.Y.Z \"<summary>\"] [sync] [validate] [(no args)]"
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # roadmap-update
@@ -451,6 +453,13 @@ Checking if release is warranted...
 ## Trust Rules
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/roadmap-update-reference.md` section "Trust Rules" for the 6 trust invariants.
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Single source of truth (no duplication)
+- Plugin-internal automation
+- Maintains human control over changes
 
 ## Definition of Done
 

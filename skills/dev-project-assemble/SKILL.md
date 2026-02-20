@@ -1,9 +1,11 @@
 ---
 name: dev-project-assemble
-description: Wire scaffold outputs into runnable project structure with configs and entry points.
+description: Wire scaffold outputs into runnable project structure with configs and entry points. Use when assembling project from scaffolds.
 allowed-tools: Read, Glob, Grep, Write(src/**), Write(prisma/**), Write(package.json), Write(tsconfig.json), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.gitignore), Write($JAAN_OUTPUTS_DIR/dev/project-assemble/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [backend-scaffold, frontend-scaffold] [target-dir]
 disable-model-invocation: true
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # dev-project-assemble
@@ -478,6 +480,13 @@ If "Learn from this": Run `/jaan-to:learn-add dev-project-assemble "{feedback}"`
 - **Entry points**: Business logic in entry points (keep thin)
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Multi-stack support via `tech.md` detection
+- Template-driven output structure
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 

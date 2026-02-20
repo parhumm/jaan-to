@@ -46,23 +46,9 @@ Package jaan.to for public distribution, including multi-agent support, CLI inst
 | Windsurf | ? | ? | ? | Test needed |
 | Gemini | ? | ? | ? | Test needed |
 
-### 5.2 CLI Installer (jaan-to-cli)
+### 5.2 Standalone CLI (Superseded)
 
-**Goal:** One-command setup like spec-kit's `uv tool install specify-cli`
-
-```
-claude
-/plugin marketplace add parhumm/jaan-to
-/plugin install jaan-to
-```
-
-- [ ] Create Python package structure (`src/jaan_to_cli/`)
-- [ ] Implement `jaan-to init` command
-- [ ] Implement `jaan-to add-skill <name>` command
-- [ ] Implement `jaan-to doctor` (check configuration)
-- [ ] Create pyproject.toml for uv packaging
-- [ ] Test installation via `uv tool install`
-- [ ] Document installation in README
+> **Note:** The original Python CLI installer plan has been superseded by the full CLI Transformation strategy. See [cli-transformation.md](cli-transformation.md) for the TypeScript-based standalone CLI using the Claude Agent SDK, with 4 implementation phases (MVP → Feature Parity → CLI-Native → Multi-Model).
 
 ### 5.3 Public Documentation Site
 
@@ -91,7 +77,7 @@ claude
 ## Acceptance Criteria
 
 - [ ] Multi-agent compatibility report created
-- [ ] CLI installer functional (`uv tool install jaan-to-cli`)
+- [ ] Standalone CLI functional (see [cli-transformation.md](cli-transformation.md))
 - [ ] `jaan-to init` creates valid project structure
 - [ ] Public docs site deployed and accessible
 - [ ] Branding guidelines documented with assets
@@ -111,7 +97,7 @@ claude
 - [ ] Branding is consistent across materials
 
 ### Distribution
-- [ ] Package published to PyPI (or similar)
+- [ ] Package published to npm (`jaan-to`) — see [cli-transformation.md](cli-transformation.md)
 - [ ] Installation instructions in README
 - [ ] GitHub releases with changelog
 
@@ -125,5 +111,7 @@ claude
 
 ## References
 
+- [cli-transformation.md](cli-transformation.md) - Full CLI transformation strategy (supersedes 5.2)
 - [spec-kit](https://github.com/github/spec-kit) - Distribution reference
 - [spec-kit AGENTS.md](https://github.com/github/spec-kit/blob/main/AGENTS.md) - Multi-agent example
+- [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) - Runtime for standalone CLI

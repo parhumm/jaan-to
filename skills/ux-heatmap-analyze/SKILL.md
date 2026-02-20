@@ -1,8 +1,10 @@
 ---
 name: ux-heatmap-analyze
-description: Analyze heatmap data from CSV exports and screenshots to generate prioritized UX research reports.
+description: Analyze heatmap data from CSV exports and screenshots to generate prioritized UX reports. Use when interpreting heatmap data.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Bash(cp:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: [csv-path] [screenshot-path] [html-path?] [problem?]
+license: MIT
+compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
 # ux-heatmap-analyze
@@ -462,6 +464,13 @@ add_to_index \
 - **Option 3 - Both**: Do both
 
 ---
+
+## Skill Alignment
+
+- Two-phase workflow with HARD STOP for human approval
+- Template-driven output structure
+- Generic across platforms and design systems
+- Output to standardized `$JAAN_OUTPUTS_DIR` path
 
 ## Definition of Done
 
