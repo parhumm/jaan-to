@@ -119,7 +119,7 @@ if [ ! -f "$PLUGIN_ROOT/CHANGELOG.md" ]; then
   ERRORS=$((ERRORS + 1))
 else
   # Count [Unreleased] entries
-  UNRELEASED_COUNT=$(sed -n '/^## \[Unreleased\]/,/^## \[/p' "$PLUGIN_ROOT/CHANGELOG.md" | grep -c '^- ' || echo "0")
+  UNRELEASED_COUNT=$(sed -n '/^## \[Unreleased\]/,/^## \[/p' "$PLUGIN_ROOT/CHANGELOG.md" | grep -c '^- ' || true)
 
   if [ "$UNRELEASED_COUNT" -eq 0 ]; then
     echo "  ::warning::[Unreleased] section is empty"

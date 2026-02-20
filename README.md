@@ -2,7 +2,7 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-3.16.2-blue.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-7.2.0-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
 [![Skills](https://img.shields.io/badge/skills-44-orange.svg)](skills/)
@@ -13,7 +13,7 @@
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Skills** | 44 | PM, Dev (FE/BE), UX, QA, Data, DevOps, Security, Documentation |
+| **Skills** | 44 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
 | **Agents** | 2 | quality-reviewer, context-scout |
 | **Hooks** | 7 | Setup, SessionStart, PreToolUse, PostToolUse, Stop, TaskCompleted, TeammateIdle |
 | **Output Styles** | 2 | enterprise-doc, concise-summary |

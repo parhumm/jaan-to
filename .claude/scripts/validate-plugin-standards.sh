@@ -207,24 +207,24 @@ echo "Check 16: Permission Safety"
 echo "────────────────────────────────────────────────────────"
 
 # Search for dangerous patterns in skills
-DANGEROUS=$(grep -rn 'rm -rf\|curl.*| *sh\|eval \|exec(' "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+DANGEROUS=$(grep -rn 'rm -rf\|curl.*| *sh\|eval \|exec(' "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 if [ "$DANGEROUS" -gt 0 ]; then
   echo "  ::warning::Found $DANGEROUS dangerous bash patterns in skills"
-  grep -rn 'rm -rf\|curl.*| *sh\|eval \|exec(' "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3
+  grep -rn 'rm -rf\|curl.*| *sh\|eval \|exec(' "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3 || true
 fi
 
 # Check for overly broad permissions in allowed-tools
-BROAD=$(grep -rn 'Write(\*\*)\|Bash(\*:\*)' "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+BROAD=$(grep -rn 'Write(\*\*)\|Bash(\*:\*)' "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 if [ "$BROAD" -gt 0 ]; then
   echo "  ::warning::Found $BROAD overly broad permissions (Write(**) or Bash(*:*))"
-  grep -rn 'Write(\*\*)\|Bash(\*:\*)' "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3
+  grep -rn 'Write(\*\*)\|Bash(\*:\*)' "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3 || true
 fi
 
 # Check for secret access patterns
-SECRETS=$(grep -rn '\.env\|credentials\|secrets/\|\.pem\|\.key' "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+SECRETS=$(grep -rn '\.env\|credentials\|secrets/\|\.pem\|\.key' "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 if [ "$SECRETS" -gt 0 ]; then
   echo "  ::warning::Found $SECRETS potential secret file access patterns"
-  grep -rn '\.env\|credentials\|secrets/\|\.pem\|\.key' "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3
+  grep -rn '\.env\|credentials\|secrets/\|\.pem\|\.key' "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3 || true
 fi
 
 if [ "$DANGEROUS" -eq 0 ] && [ "$BROAD" -eq 0 ] && [ "$SECRETS" -eq 0 ]; then

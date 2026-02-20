@@ -7,7 +7,7 @@
 # Usage: bash .claude/scripts/validate-compliance.sh
 # Exit 0 if pass (warnings OK), exit 1 if critical errors found
 
-set -u
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
@@ -72,13 +72,13 @@ echo ""
 echo "Check 2: Generic Applicability"
 echo "────────────────────────────────────────────────────────"
 
-PROJECT_REFS=$(grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | wc -l | tr -d ' ')
+PROJECT_REFS=$(grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | wc -l | tr -d ' ' || true)
 
 if [ "$PROJECT_REFS" -eq 0 ]; then
   echo "  ✓ No user-specific project references found"
 else
   echo "  ⚠ Found $PROJECT_REFS potential user-specific references (check manually)"
-  grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | head -5
+  grep -rn "Jaanify\|MyApp\|Acme\|Example Corp" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | grep -v "Example:" | head -5 || true
   WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
@@ -120,13 +120,13 @@ echo ""
 echo "Check 4: No User-Specific References (paths/emails)"
 echo "────────────────────────────────────────────────────────"
 
-USER_PATHS=$(grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | wc -l | tr -d ' ')
+USER_PATHS=$(grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$USER_PATHS" -eq 0 ]; then
   echo "  ✓ No hardcoded user paths found"
 else
   echo "  ⚠ Found $USER_PATHS hardcoded paths (sanitize examples)"
-  grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | head -3
+  grep -rn "/Users/[a-z]\|/home/[a-z]\|C:\\\\Users\\\\" "$PLUGIN_ROOT/skills/" "$PLUGIN_ROOT/docs/" 2>/dev/null | head -3 || true
   WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
@@ -173,7 +173,7 @@ else
 fi
 
 # Check for hardcoded language-specific greetings/phrases
-LANG_SPECIFIC=$(grep -rn "Bonjour\|Hola\|Namaste\|こんにちは" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+LANG_SPECIFIC=$(grep -rn "Bonjour\|Hola\|Namaste\|こんにちは" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$LANG_SPECIFIC" -eq 0 ]; then
   echo "  ✓ No hardcoded language-specific greetings"
@@ -191,7 +191,7 @@ echo "Check 7: Generic Error Categories"
 echo "────────────────────────────────────────────────────────"
 
 # Check for vague error messages
-VAGUE_ERRORS=$(grep -rn "Error occurred\|Something went wrong\|Failed\." "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+VAGUE_ERRORS=$(grep -rn "Error occurred\|Something went wrong\|Failed\." "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$VAGUE_ERRORS" -eq 0 ]; then
   echo "  ✓ No vague error messages detected"
@@ -249,13 +249,13 @@ echo ""
 echo "Check 10: Security Review"
 echo "────────────────────────────────────────────────────────"
 
-DANGEROUS_PATTERNS=$(grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ')
+DANGEROUS_PATTERNS=$(grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | wc -l | tr -d ' ' || true)
 
 if [ "$DANGEROUS_PATTERNS" -eq 0 ]; then
   echo "  ✓ No dangerous bash patterns found in skills"
 else
   echo "  ⚠ Found $DANGEROUS_PATTERNS potentially dangerous patterns"
-  grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3
+  grep -rn "rm -rf \|curl.*| sh\|eval \|exec(" "$PLUGIN_ROOT/skills/" 2>/dev/null | head -3 || true
   WARNINGS=$((WARNINGS + 1))
 fi
 echo ""
