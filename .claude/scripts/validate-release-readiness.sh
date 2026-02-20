@@ -89,7 +89,7 @@ echo "────────────────────────�
 
 # Check if docs-sync-check.sh exists and run it
 if [ -f "$PLUGIN_ROOT/scripts/docs-sync-check.sh" ]; then
-  if bash "$PLUGIN_ROOT/scripts/docs-sync-check.sh" > /dev/null 2>&1; then
+  if bash "$PLUGIN_ROOT/scripts/docs-sync-check.sh" < /dev/null > /dev/null 2>&1; then
     echo "  ✓ Documentation in sync (0 stale files)"
   else
     echo "  ::warning::Documentation may be stale"
