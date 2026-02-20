@@ -208,6 +208,7 @@ jaan.to runs a bootstrap script automatically on your first session. This create
 
 - `jaan-to/outputs/` directory for generated files
 - `jaan-to/learn/` directory for accumulated knowledge
+- `jaan-to/.gitignore` to exclude temporary files
 
 ### Optional: Customize Context
 
@@ -326,7 +327,16 @@ jaan-to/
 │   └── research/{slug}/report.md
 ├── learn/
 │   └── LEARN.md
+└── .gitignore
 ```
+
+**Recommended `.gitignore` entry:**
+```
+jaan-to/outputs/
+jaan-to/temp/
+```
+
+jaan.to automatically creates `jaan-to/.gitignore` with sensible defaults on first run.
 
 ---
 

@@ -27,9 +27,6 @@ You don't call hooks. They run automatically when triggered.
 | [capture-feedback](capture-feedback.md) | PostToolUse | After writing artifact |
 | [post-commit-roadmap](post-commit-roadmap.md) | PostToolUse | After git commit |
 | [bootstrap](bootstrap.md) | PreToolUse | Before skill execution |
-| [team-quality-gate](team-quality-gate.md) | TaskCompleted | After task completion in agent teams |
-| [team-idle-redirect](team-idle-redirect.md) | TeammateIdle | When agent teammate goes idle |
-| [team-roles-sync-check](team-roles-sync-check.md) | PostToolUse | After writing SKILL.md files |
 
 ---
 
@@ -44,14 +41,6 @@ You don't call hooks. They run automatically when triggered.
 - Display messages
 - Prompt for input
 - Never block
-
-**TaskCompleted hooks** (Agent Teams):
-- Allow completion (exit 0)
-- Block completion with feedback (exit 2)
-
-**TeammateIdle hooks** (Agent Teams):
-- Allow idle (exit 0)
-- Send feedback to keep working (exit 2)
 
 ---
 

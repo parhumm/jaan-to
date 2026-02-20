@@ -18,18 +18,6 @@ Automates roadmap maintenance with 5 modes:
 - Validates links and cross-references
 - Full atomic release (version bump + tag + CHANGELOG)
 
-### Structure Enforcement
-
-On every run, the skill validates 6 roadmap structure rules:
-1. Overview table rows match section headings (no orphans)
-2. Sequential phase numbering (no gaps/duplicates)
-3. Done phases have version range blockquotes
-4. Catalog accuracy — shipped totals match actual components
-5. Latest version matches canonical version source
-6. Past phases summarize; future phases have actionable tasks
-
-Violations are reported before mode-specific work begins.
-
 ---
 
 ## Usage

@@ -49,7 +49,16 @@ mkdir -p "$PROJECT_DIR/$TEMPLATES_DIR"
 mkdir -p "$PROJECT_DIR/$CONFIG_DIR"
 mkdir -p "$PROJECT_DIR/$DOCS_DIR"
 
-# 2. Initialize project config if not exists
+# 2. Add to .gitignore if not present
+if [ -f "$PROJECT_DIR/.gitignore" ]; then
+  if ! grep -q "jaan-to/" "$PROJECT_DIR/.gitignore" 2>/dev/null; then
+    echo "jaan-to/" >> "$PROJECT_DIR/.gitignore"
+  fi
+else
+  echo "jaan-to/" > "$PROJECT_DIR/.gitignore"
+fi
+
+# 3. Initialize project config if not exists
 if [ ! -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ]; then
   if [ -f "$PLUGIN_DIR/scripts/seeds/settings.yaml" ]; then
     cp "$PLUGIN_DIR/scripts/seeds/settings.yaml" "$PROJECT_DIR/$CONFIG_DIR/settings.yaml"

@@ -355,14 +355,6 @@ After changelog is written, ask:
 
 ---
 
-## Step 9: Sync Roadmap
-
-Run `/jaan-to:roadmap-update` to sync the roadmap with the changelog changes.
-
-This ensures the roadmap's Version History and phase status reflect the latest release.
-
----
-
 ## Error Handling
 
 | Error | Message |
@@ -398,4 +390,3 @@ This ensures the roadmap's Version History and phase status reflect the latest r
 - [ ] `$JAAN_OUTPUTS_DIR/CHANGELOG.md` written/updated
 - [ ] Quality checks pass
 - [ ] User approved final result
-- [ ] Roadmap synced via /jaan-to:roadmap-update

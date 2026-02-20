@@ -21,17 +21,6 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_LEARN_DIR/jaan-to:roadmap-update.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
-## Roadmap Structure Rules
-
-Validate on every run. Report violations before any mode-specific work:
-
-1. **Overview↔Sections match** — Every overview table row must have a `## Phase N:` heading, and vice versa. No orphan sections, no missing rows
-2. **Sequential numbering** — Phase numbers 1, 2, 3, ... with no gaps or duplicates
-3. **Done phases** — Must have version range blockquote (e.g., `> v3.0.0–v3.22.0 — see [CHANGELOG.md](/changelog)`)
-4. **Catalog accuracy** — If a shipped summary table exists, its total must match the actual count of delivered components
-5. **Version accuracy** — `Latest:` line must match the project's canonical version source
-6. **Future focus** — Past phases are concise summaries referencing changelog; future phases have actionable tasks
-
 ## Input
 
 **Command**: $ARGUMENTS
@@ -84,7 +73,6 @@ Extract:
 - All version section headings with their commit hashes
 - All CHANGELOG entries with dates
 - Current plugin version
-- Validate Roadmap Structure Rules (1-6 above); collect violations
 
 ## Step 2: Read Git State
 
@@ -112,7 +100,6 @@ Extract:
    - **Orphan commits**: significant work (feat/fix/refactor) not in any roadmap task
    - **Stale tasks**: tasks marked done without commit hashes
 4. Check overview table accuracy
-5. Report any roadmap structure violations found in Step 1
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/roadmap-update-reference.md` section "Smart-Default Report Template" for the sync report format.
 
@@ -192,9 +179,6 @@ Present the sync report.
 3. Check overview table consistency (phase status vs actual task completion)
 4. Check version section completeness (commit hash, bullet points, chronological order)
 5. Check for orphan task files (in `tasks/` but not referenced from roadmap)
-6. Check overview↔sections match (Rule 1)
-7. Check sequential numbering, no duplicates (Rule 2)
-8. Check catalog accuracy — shipped totals vs actual components (Rule 4)
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/roadmap-update-reference.md` section "Validate Report Template" for the validation report format.
 

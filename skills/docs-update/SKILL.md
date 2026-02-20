@@ -430,9 +430,9 @@ git commit -m "docs: Audit and update documentation
 - Archived: X files
 - Moved: X files
 
-Generated with 💓 [Jaan.to](https://jaan.to)
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
-Co-Authored-By: Jaan.to <noreply@jaan.to>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
 ## Step 4.2: Final Report

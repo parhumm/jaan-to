@@ -159,10 +159,10 @@ Skipped: 2 commits (docs-only, chore)
 This skill sits in the release iteration chain:
 
 ```
-release-iterate-top-fixes → release-iterate-changelog → roadmap-update → support-help-article
+release-iterate-top-fixes → release-iterate-changelog → support-help-article
 ```
 
-After writing the changelog, the skill triggers `/jaan-to:roadmap-update` to sync the roadmap. The changelog output also feeds support documentation downstream.
+The changelog output feeds support documentation downstream.
 
 ---
 

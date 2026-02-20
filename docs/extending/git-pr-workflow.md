@@ -30,9 +30,9 @@ git commit -m "fix(skill): Update {name} skill
 - {change_summary}
 - Specification compliance: ✓
 
-Generated with 💓 [Jaan.to](https://jaan.to)
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
-Co-Authored-By: Jaan.to <noreply@jaan.to>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
 ### Step 14: User Testing
@@ -82,7 +82,7 @@ Updated `{name}` skill with:
 
 ✅ User confirmed skill works correctly
 
-Generated with 💓 [Jaan.to](https://jaan.to)
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
 EOF
 )"
 ```
@@ -106,9 +106,9 @@ git commit -m "feat(skill): Add {name} skill
 - Research-informed: {source_count} sources consulted
 - Auto-generated with /jaan-to:skill-create
 
-Generated with 💓 Jaan.to
+Generated with Claude Code
 
-Co-Authored-By: Jaan.to <noreply@jaan.to>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
 ---
@@ -144,7 +144,7 @@ Consulted {source_count} sources for best practices:
 
 User confirmed skill works correctly
 
-Generated with 💓 Jaan.to
+Generated with Claude Code
 EOF
 )"
 ```

@@ -422,7 +422,7 @@ After merging this PR:
 4. **Bump dev**: \`./scripts/bump-version.sh 6.4.0 && git commit -am "chore: bump to 6.4.0" && git push\`
 5. **Acknowledge issues**: For each closed issue in this release, run \`/jaan-issue-solve #{issue_number}\`
 
-Generated with 💓 [Jaan.to](https://jaan.to)
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
 EOF
 )"
 ```

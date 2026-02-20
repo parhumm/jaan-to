@@ -256,9 +256,9 @@ After writing the new doc file, update the parent folder's README.md to keep ind
 git add {path}
 git commit -m "docs({type}): Add {name} documentation
 
-Generated with 💓 [Jaan.to](https://jaan.to)
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
-Co-Authored-By: Jaan.to <noreply@jaan.to>"
+Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
 
 ## Step 12: Follow-up
