@@ -27,11 +27,19 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.2.0 (44 skills)
+**Latest:** v7.3.0 (44 skills)
 
 ---
 
 ## Unreleased
+
+---
+
+## v7.3.0 — 2026-02-21
+
+- [x] Multi-runtime Codex support — dual-runtime governance, single-source build targets, codex runner, installer-first skillpack, CI dual-runtime enforcement
+- [x] Codex runner fixes — zero-argument handling, `.agents/` native discovery path
+- [x] Website hero install UX redesign — clipboard buttons, local logos, improved layout
 
 ---
 

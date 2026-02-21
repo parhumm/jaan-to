@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.3.0] - 2026-02-21
+
+### Added
+- **Multi-runtime Codex support** — Full dual-runtime governance enabling jaan-to skills to run on both Claude Code and OpenAI Codex. Single-source build targets generate Claude (`dist/claude/`) and Codex (`dist/codex/`) distributions from shared skill sources. Codex runner translates SKILL.md frontmatter into Codex-native `.agents/` format with zero-argument handling. Installer-first global skillpack flow for Codex discovery. Auto-sync skillpack in skill creation and update PR workflows. CI enforcement: dual-runtime builds on dev PRs, integrated e2e smoke tests and full monitors for both runtimes
+
+---
+
 ## [7.2.0] - 2026-02-19
 
 ### Added
