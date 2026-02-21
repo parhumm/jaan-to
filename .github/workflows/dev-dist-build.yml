@@ -1,0 +1,35 @@
+name: Dev Dist Build
+
+on:
+  pull_request:
+    branches: [dev]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  dual-runtime-gate:
+    uses: ./.github/workflows/_dual-runtime-gate.yml
+
+  upload-artifacts:
+    needs: dual-runtime-gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build runtime distributions
+        run: bash scripts/build-all-targets.sh
+
+      - name: Upload Claude dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jaan-to-claude-pr-${{ github.event.pull_request.number }}
+          path: dist/jaan-to-claude
+          retention-days: 7
+          if-no-files-found: error
+
+      - name: Upload Codex dist artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jaan-to-codex-pr-${{ github.event.pull_request.number }}
+          path: dist/jaan-to-codex
+          retention-days: 7
+          if-no-files-found: error

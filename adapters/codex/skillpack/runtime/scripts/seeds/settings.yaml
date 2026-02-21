@@ -1,0 +1,56 @@
+# jaan.to Project Configuration
+# Version: 3.0.0
+# This file is copied to jaan-to/config/settings.yaml in your project
+# Edit it to customize paths, templates, and learning behavior
+
+version: "3.0"
+
+# Path Customization
+# These are the defaults — uncomment and modify to change locations
+# paths_templates: "jaan-to/templates"
+# paths_learning: "jaan-to/learn"
+# paths_context: "jaan-to/context"
+# paths_outputs: "jaan-to/outputs"
+# paths_docs: "jaan-to/docs"
+
+# Template Customization
+# Uncomment to use custom template files
+# templates_pm-prd-write_path: "./custom-templates/enterprise-prd.md"
+# templates_pm-prd-write_enabled: true
+
+# Learning Strategy
+# Options: merge (combine plugin + project), override (project only)
+learning_strategy: "merge"
+
+# Language Preference
+# Controls the language for plugin conversation and report .md files
+# Default: "ask" (prompts on first skill run, saves your choice)
+# Options: en (English), fa (فارسی), or any language name/code
+# Does NOT affect: generated code, product localization, or ux-microcopy-write output
+language: "ask"
+
+# Per-Skill Language Override (optional)
+# Uncomment to use a different language for a specific skill
+# language_pm-prd-write: "en"
+# language_ux-microcopy-write: "en"
+
+# Issue Report Submission
+# Controls whether jaan-issue-report submits directly to GitHub
+# Default: "ask" (prompts on first run if gh CLI is available, saves your choice)
+# Options: true (always submit), false (always save locally)
+# Override per-invocation with --submit or --no-submit flags
+# issue_report_submit: true
+
+# Tech Stack Configuration
+# Edit jaan-to/context/tech.md to define your project's tech stack
+# Skills will automatically reference it in generated outputs
+
+# Integration Drift Detection
+# When true, you'll see a reminder when new outputs appear after dev-output-integrate has run
+# Default: true (non-blocking hint only)
+# integration_drift_check: true
+
+# Notes:
+# - Paths are relative to project root
+# - Use forward slashes (/) even on Windows
+# - Restart Claude session after changes for them to take effect

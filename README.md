@@ -2,7 +2,7 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-7.2.0-blue.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-7.3.0-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
 [![Skills](https://img.shields.io/badge/skills-44-orange.svg)](skills/)
@@ -30,26 +30,57 @@
 
 ## Installation
 
-### Stable Version (Recommended)
-```
+### Claude Code Quick Install
+
+```text
 claude
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
 /jaan-init
 ```
 
-### Development Version (Preview)
-For testing latest features before release:
+### Codex Quick Install
+
+```bash
+# One-command installer (recommended for end users)
+bash <(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
+
+# Fallback if you're in this repo locally
+bash ./scripts/install-codex-skillpack.sh
 ```
+
+Then:
+
+1. Restart Codex.
+2. Open your project in Codex.
+3. Run `/jaan-init` once.
+4. Use `/skills`, `/jaan-to:*`, `/jaan-init`, or native `$skill` mentions.
+
+Examples:
+
+```text
+/skills
+/jaan-init
+/jaan-to:pm-prd-write
+$pm-prd-write
+```
+
+In Codex, `/jaan-to:*` and `/jaan-init` are intentionally preserved as aliases for native `$skill`.
+
+### Claude Code Version Management
+
+Development version:
+
+```text
 claude
 /plugin marketplace add parhumm/jaan-to#dev
 /plugin install jaan-to
 /jaan-init
 ```
 
-### Switching Versions
-To switch from dev to stable (or vice versa):
-```
+Switch stable/dev:
+
+```text
 /plugin uninstall jaan-to
 /plugin marketplace add parhumm/jaan-to       # stable
 /plugin marketplace add parhumm/jaan-to#dev   # dev
@@ -57,22 +88,57 @@ To switch from dev to stable (or vice versa):
 /jaan-init
 ```
 
-### Check Installed Version
-```
+Check installed version:
+
+```text
 /plugin list
 ```
-- All versions use the same format: `3.15.0`, `3.16.0`, etc.
 
-### Local Development
+### Local Development + Build Commands
+
 ```bash
+# Claude local dev
 claude --plugin-dir /path/to/jaan-to
+
+# Build both runtime targets
+./scripts/build-all-targets.sh
+
+# Build Codex skillpack source
+bash ./scripts/build-codex-skillpack.sh
+
+# Skillpack drift guard
+bash ./scripts/validate-codex-skillpack.sh
+
+# Skill PR prep (regenerate + validate + stage skillpack)
+bash ./scripts/prepare-skill-pr.sh
+
+# Integrated dual-runtime smoke
+bash scripts/test/e2e-dual-runtime-smoke.sh
 ```
 
-### Clean Distribution
+### Codex Local Mode (Legacy/Debug Only)
+
 ```bash
-./scripts/build-dist.sh
-claude --plugin-dir ./dist/jaan-to
+./scripts/build-target.sh codex
+cd ./dist/jaan-to-codex
+./jaan-to setup /path/to/your-project --mode local
 ```
+
+`setup --mode auto` resolves to global if `~/.agents/skills/jaan-to-codex-pack` exists, otherwise local.
+
+### Codex Troubleshooting
+
+- Installer `auto` method SSL failure:
+  - Wrapper retries automatically with `--method git`.
+- `$skill` ambiguity from duplicate names:
+  - Remove duplicate project `.agents/skills/<jaan-to-skill>` entries and use global mode.
+- Skills not appearing:
+  - Restart Codex after install/reinstall.
+
+### Claude Compatibility Guarantee
+
+Claude Code installation, command namespace (`/jaan-to:*`), and plugin behavior remain unchanged.
+Codex support is added as a thin adapter and runner layer without changing Claude runtime contracts.
 
 ### Agent Skills (Cross-Platform)
 
@@ -89,7 +155,7 @@ npx skills add parhumm/jaan-to --skill pm-prd-write
 npx skills find "product requirements"
 ```
 
-> **Note:** This installs skill definitions only. For the full jaan.to experience (hooks, agents, config system, learning), use the [plugin installation](#stable-version-recommended) instead.
+> **Note:** This installs skill definitions only. For the full jaan.to experience (hooks, agents, config system, learning), use the [Claude Code installation flow](#claude-code-quick-install) instead.
 
 ### First run
 The bootstrap hook automatically creates `jaan-to/` in your project with:
@@ -656,7 +722,7 @@ Ensure the plugin is properly installed:
 /plugin list
 ```
 
-You should see `jaan-to` with version `3.x.x`. If not, reinstall:
+You should see `jaan-to` with version `7.x.x`. If not, reinstall:
 ```
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
