@@ -2,7 +2,7 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-7.2.0-blue.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-7.3.0-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
 [![Skills](https://img.shields.io/badge/skills-44-orange.svg)](skills/)
@@ -722,7 +722,7 @@ Ensure the plugin is properly installed:
 /plugin list
 ```
 
-You should see `jaan-to` with version `3.x.x`. If not, reinstall:
+You should see `jaan-to` with version `7.x.x`. If not, reinstall:
 ```
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
