@@ -293,6 +293,17 @@ PLUGIN_DIR="${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}"
 exit 0
 ```
 
+### Dual-Platform Rule (Claude + Codex)
+
+Feature changes must keep shared logic platform-neutral and compatible with both runtimes.
+
+- Put feature behavior in shared core paths:
+  - `skills/`, `scripts/`, `agents/`, `config/`, `docs/extending/`
+- Limit runtime-specific behavior to adapter files:
+  - Claude: `.claude-plugin/`, `hooks/`, `CLAUDE.md`
+  - Codex: `adapters/codex/AGENTS.md`
+- Avoid adding platform-specific instructions directly inside `skills/*/SKILL.md`
+
 ### Markdown
 
 - Use ATX headers (`#`, `##`, not underlines)
@@ -354,6 +365,18 @@ Verify:
 - [ ] Tasks reference PRD and Stories correctly
 - [ ] No broken file paths
 - [ ] Cross-skill suggestions work
+
+### Multi-Runtime Validation (Required for Feature Changes)
+
+Before opening a PR, run:
+
+```bash
+bash scripts/validate-multi-runtime.sh
+```
+
+This validates that both distribution targets build and stay in sync:
+- `dist/jaan-to-claude`
+- `dist/jaan-to-codex`
 
 ---
 
@@ -435,6 +458,10 @@ Then create a PR on GitHub with:
   - How was it tested?
 - **Screenshots:** If UI/output changes
 - **Related Issues:** Link to issues this PR addresses
+
+For PRs targeting `dev`, CI automatically builds and uploads both dist artifacts:
+- `jaan-to-claude-pr-<number>`
+- `jaan-to-codex-pr-<number>`
 
 ---
 

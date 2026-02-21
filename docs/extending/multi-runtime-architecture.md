@@ -58,7 +58,7 @@ Use a single build entry point with runtime targets:
 ```
 
 Outputs:
-- `dist/jaan-to` (Claude package)
+- `dist/jaan-to-claude` (Claude package)
 - `dist/jaan-to-codex` (Codex package)
 
 `scripts/build-dist.sh` is preserved as a backward-compatible Claude wrapper.
@@ -80,3 +80,19 @@ This keeps behavior parity while allowing runtime-specific packaging.
 - Put execution rules in `SKILL.md`, not in adapters.
 - Keep runtime bootstrap wrappers focused on environment mapping.
 - If a runtime needs special behavior, implement it as a thin wrapper script that calls shared logic.
+
+## Shared Core vs Adapters
+
+To keep features naturally compatible across Claude and Codex:
+
+- **Shared core** (default location for new feature logic):
+  - `skills/`
+  - `scripts/`
+  - `agents/`
+  - `config/`
+  - `docs/extending/`
+- **Runtime adapters only** (small wrappers, no core behavior):
+  - `.claude-plugin/`, `hooks/`, `CLAUDE.md`
+  - `adapters/codex/AGENTS.md`
+
+Rule of thumb: avoid platform-specific behavior inside `skills/*/SKILL.md`.

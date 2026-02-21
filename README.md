@@ -70,9 +70,9 @@ claude --plugin-dir /path/to/jaan-to
 
 ### Distribution Builds
 ```bash
-# Claude plugin package (backward compatible)
+# Claude plugin package
 ./scripts/build-dist.sh
-claude --plugin-dir ./dist/jaan-to
+claude --plugin-dir ./dist/jaan-to-claude
 
 # Codex package
 ./scripts/build-target.sh codex

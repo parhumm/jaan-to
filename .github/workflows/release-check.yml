@@ -105,6 +105,10 @@ jobs:
         run: |
           bash scripts/validate-security.sh
 
+      - name: Validate multi-runtime distributions
+        run: |
+          bash scripts/validate-multi-runtime.sh
+
       - name: Agent Skills standard compliance
         run: |
           ERRORS=0

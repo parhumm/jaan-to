@@ -8,6 +8,35 @@
 
 ## Active Workflows
 
+### `.github/workflows/dev-dist-build.yml`
+
+**Trigger:** Pull requests to `dev` branch (`opened`, `synchronize`, `reopened`)
+**Purpose:** Enforce dual-platform packaging and publish PR-ready dist artifacts
+**Duration:** ~2-4 minutes
+
+**What it validates/builds:**
+
+1. **Plugin Standards** → `bash .claude/scripts/validate-plugin-standards.sh`
+2. **Skill Budget** → `bash scripts/validate-skills.sh`
+3. **Security Standards** → `bash scripts/validate-security.sh`
+4. **Multi-Runtime Dist Validation** → `bash scripts/validate-multi-runtime.sh`
+   - Builds both targets
+   - Verifies `dist/jaan-to-claude` and `dist/jaan-to-codex`
+   - Checks required runtime files and skill parity
+5. **Artifact Upload**
+   - `jaan-to-claude-pr-<number>` from `dist/jaan-to-claude`
+   - `jaan-to-codex-pr-<number>` from `dist/jaan-to-codex`
+   - Retention: 7 days
+
+**Artifact download flow (PR):**
+
+1. Open the PR to `dev`
+2. Wait for `Dev Dist Build` workflow to complete
+3. Open workflow run → **Artifacts**
+4. Download the Claude and Codex dist zip files
+
+---
+
 ### `.github/workflows/release-check.yml`
 
 **Trigger:** Pull requests to `main` branch
@@ -34,6 +63,8 @@
 
 4. **Docs Site Build** → `cd website/docs && npm ci && npm run build`
    - Verifies documentation builds without errors
+5. **Multi-Runtime Dist Validation** → `bash scripts/validate-multi-runtime.sh`
+   - Ensures both Claude and Codex dist targets build successfully on release PRs
 
 **Exit behavior:**
 - ✅ All steps pass → PR can be merged
@@ -44,6 +75,7 @@
 # Locally simulate CI checks
 bash .claude/scripts/validate-plugin-standards.sh
 bash scripts/validate-skills.sh
+bash scripts/validate-multi-runtime.sh
 cd website/docs && npm ci && npm run build
 ```
 
@@ -153,6 +185,7 @@ echo ""
 |-------|--------|----------|-------|
 | Plugin Standards | `validate-plugin-standards.sh` | ✅ Yes | JSON, hooks, skills structure |
 | Skill Budget | `validate-skills.sh` | ✅ Yes | 15K char limit |
+| Multi-Runtime Dist | `validate-multi-runtime.sh` | ✅ Yes | Builds and verifies Claude + Codex packages |
 | Version Consistency | Part of plugin standards | ✅ Yes | 3 locations match |
 | CHANGELOG Entry | Inline YAML | ✅ Yes | Should extract to script |
 | Docs Build | `npm run build` | ✅ Yes | Ensures docs valid |
@@ -192,6 +225,7 @@ gh run view <run-id> --log-failed
 # Run all validation scripts
 bash .claude/scripts/validate-plugin-standards.sh
 bash scripts/validate-skills.sh
+bash scripts/validate-multi-runtime.sh
 
 # Check CHANGELOG (manual for now, should be scripted)
 grep -q "## \[6.3.0\]" CHANGELOG.md || echo "Missing CHANGELOG entry"
@@ -349,6 +383,9 @@ gh workflow run release-check.yml
 **release-check.yml:**
 - Every PR to `main`
 - Every push to PR branch targeting `main`
+
+**dev-dist-build.yml:**
+- Every PR to `dev` on `opened`, `synchronize`, `reopened`
 
 **deploy-docs.yml:**
 - Every push to `main` (after merge)

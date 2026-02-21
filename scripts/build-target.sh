@@ -13,7 +13,7 @@ usage() {
 Usage: ./scripts/build-target.sh [claude|codex]
 
 Targets:
-  claude   Build Claude Code plugin package at dist/jaan-to
+  claude   Build Claude Code plugin package at dist/jaan-to-claude
   codex    Build Codex package at dist/jaan-to-codex
 EOF
 }
@@ -65,7 +65,9 @@ print_summary() {
 }
 
 build_claude_target() {
-  local out_dir="$DIST_ROOT/jaan-to"
+  local out_dir="$DIST_ROOT/jaan-to-claude"
+  # Enforce strict rename: remove legacy Claude dist directory name if present.
+  find "$DIST_ROOT" -mindepth 1 -maxdepth 1 -type d -name "jaan-to" -exec rm -rf {} + 2>/dev/null || true
   rm -rf "$out_dir"
   mkdir -p "$out_dir"
 
