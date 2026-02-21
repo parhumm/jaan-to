@@ -492,6 +492,60 @@
             word-break: break-word;
         }
 
+        .hero-install-code {
+            position: relative;
+        }
+
+        .hero-install-code.copy-enabled pre {
+            padding-top: 36px;
+        }
+
+        .hero-copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            color: #E9E9E9;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+        }
+
+        .hero-copy-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .hero-copy-btn:active {
+            transform: translateY(1px);
+        }
+
+        .hero-copy-btn:focus-visible {
+            outline: 2px solid #FFFFFF;
+            outline-offset: 1px;
+        }
+
+        .hero-copy-btn.copied {
+            background: rgba(58, 168, 116, 0.22);
+            border-color: rgba(58, 168, 116, 0.7);
+        }
+
+        .hero-copy-btn svg {
+            width: 13px;
+            height: 13px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
         .hero-install-card p {
             margin: 0;
             font-size: 0.83rem;
@@ -1408,11 +1462,19 @@
                             </span>
                             <!-- <span class="hero-install-step" aria-hidden="true">Option A</span> -->
                         </h3>
-                        <pre><code>claude
+                        <div class="hero-install-code copy-enabled">
+                            <button type="button" class="hero-copy-btn" data-copy-pre aria-label="Copy Claude install commands">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="9" y="9" width="10" height="10" rx="2"></rect>
+                                    <path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <pre><code>claude
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
 /jaan-init
 /team-ship YOUR IDEA: Develop a SaaS platform for ...</code></pre>
+                        </div>
                         <p>Then run <code>/jaan-to:pm-prd-write</code> or any <code>/jaan-to:*</code> skill.</p>
                     </article>
                     <article class="hero-install-card">
@@ -1422,10 +1484,18 @@
                             </span>
                             <!-- <span class="hero-install-step" aria-hidden="true">Option B</span> -->
                         </h3>
-                        <pre><code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
+                        <div class="hero-install-code copy-enabled">
+                            <button type="button" class="hero-copy-btn" data-copy-pre aria-label="Copy Codex install commands">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="9" y="9" width="10" height="10" rx="2"></rect>
+                                    <path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <pre><code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
 # restart Codex
 /jaan-init
 /pm-prd-write New feature for Google Auth login</code></pre>
+                        </div>
                         <p>Use <code>/skills</code>, <code>/jaan-to:*</code>, <code>/jaan-init</code>, or native <code>$skill</code> mentions.</p>
                     </article>
                     <article class="hero-install-card hero-install-card-lite">
@@ -2165,6 +2235,43 @@
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
+            });
+        });
+
+        // Copy install commands for the first two hero command blocks
+        document.querySelectorAll('.hero-install-code.copy-enabled [data-copy-pre]').forEach((button) => {
+            button.addEventListener('click', async () => {
+                const container = button.closest('.hero-install-code');
+                const code = container ? container.querySelector('pre code') : null;
+                if (!code) return;
+
+                const text = code.textContent || '';
+
+                try {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        await navigator.clipboard.writeText(text);
+                    } else {
+                        const temp = document.createElement('textarea');
+                        temp.value = text;
+                        temp.setAttribute('readonly', '');
+                        temp.style.position = 'absolute';
+                        temp.style.left = '-9999px';
+                        document.body.appendChild(temp);
+                        temp.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(temp);
+                    }
+                } catch (_) {
+                    return;
+                }
+
+                button.classList.add('copied');
+                const previousLabel = button.getAttribute('aria-label');
+                button.setAttribute('aria-label', 'Copied');
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    if (previousLabel) button.setAttribute('aria-label', previousLabel);
+                }, 1200);
             });
         });
 
