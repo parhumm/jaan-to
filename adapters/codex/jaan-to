@@ -161,7 +161,11 @@ run_cmd() {
   runtime_context_init "$project_dir" "$PLUGIN_ROOT"
 
   local joined_args
-  joined_args="$(join_arguments "${skill_args[@]}")"
+  if [ "${#skill_args[@]}" -gt 0 ]; then
+    joined_args="$(join_arguments "${skill_args[@]}")"
+  else
+    joined_args=""
+  fi
 
   local prompt
   prompt=$(cat <<EOL
