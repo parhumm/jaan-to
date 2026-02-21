@@ -1,0 +1,37 @@
+# jaan.to Plugin - Default Configuration
+# Version: 3.0.0
+# DO NOT EDIT - These are plugin defaults
+# Customize via jaan-to/config/settings.yaml in your project
+
+version: "3.0"
+
+# Paths (flattened for bash parsing)
+paths_templates: "jaan-to/templates"
+paths_learning: "jaan-to/learn"
+paths_context: "jaan-to/context"
+paths_outputs: "jaan-to/outputs"
+paths_docs: "jaan-to/docs"
+
+# Template settings
+templates_inheritance_enabled: true
+
+# Learning settings
+learning_strategy: "merge"
+learning_merge_order: "plugin,project"
+
+# Customization features
+customization_path_variables: true
+customization_template_variables: true
+customization_context_variables: true
+
+# Language preference for conversation and output
+# "ask" = prompt on first skill run, then save choice
+language: "ask"
+
+# Issue report submission preference
+# "ask" = prompt on first run if gh CLI is available, then save choice
+issue_report_submit: "ask"
+
+# Integration drift detection
+# When true, PostToolUse hook warns about un-integrated outputs
+integration_drift_check: true

@@ -74,10 +74,12 @@ claude --plugin-dir /path/to/jaan-to
 ./scripts/build-dist.sh
 claude --plugin-dir ./dist/jaan-to-claude
 
-# Codex package
-./scripts/build-target.sh codex
-cd ./dist/jaan-to-codex
-./jaan-to setup /path/to/your-project
+# Codex skillpack source (global installer path)
+bash ./scripts/build-codex-skillpack.sh
+
+# Install global Codex skillpack (uses Codex Skill Installer)
+bash ./scripts/install-codex-skillpack.sh
+# Restart Codex after install
 
 # Build both targets
 ./scripts/build-all-targets.sh
@@ -93,11 +95,37 @@ Then open `/path/to/your-project` in Codex and invoke skills with:
 
 ```text
 /skills
+$jaan-init
+/jaan-init
 $pm-prd-write
 $detect-dev
 ```
 
-`/jaan-to:*` is a Claude plugin namespace. In Codex, setup installs skills into `.agents/skills` for native discovery and execution.
+In Codex, `/jaan-to:*` and `/jaan-init` are maintained as aliases for native `$skill` invocation.
+Global skillpack installation is the default path.
+
+### Codex Local Mode (Legacy/Debug)
+
+Use local mode only when explicitly testing project-local symlinks:
+
+```bash
+./scripts/build-target.sh codex
+cd ./dist/jaan-to-codex
+./jaan-to setup /path/to/your-project --mode local
+```
+
+`setup --mode auto` resolves to:
+- `global` when `~/.agents/skills/jaan-to-codex-pack` exists
+- `local` otherwise
+
+### Codex Troubleshooting
+
+- SSL certificate failure in Skill Installer `auto` mode:
+  - The wrapper retries with `--method git` automatically.
+- Duplicate name ambiguity (`$skill` not resolving):
+  - Remove duplicate project `.agents/skills/<jaan-to-skill>` entries and use global mode.
+- Skills not showing after install:
+  - Restart Codex to reload installed skills.
 
 Integrated smoke E2E validates end-to-end Claude + Codex packaging and setup flow in one command.
 
