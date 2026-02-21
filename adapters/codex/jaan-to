@@ -1,0 +1,359 @@
+#!/bin/bash
+# jaan-to Codex runner wrapper.
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+PLUGIN_ROOT="$SCRIPT_DIR"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/jaan-to-codex"
+STATE_FILE="$STATE_DIR/last-project"
+
+resolve_skills_root() {
+  local plugin_root="$1"
+
+  if [ -d "$plugin_root/skills" ]; then
+    echo "$plugin_root/skills"
+    return 0
+  fi
+
+  local sibling_skills
+  sibling_skills="$(cd "$plugin_root/.." && pwd)/skills"
+  if [ -d "$sibling_skills" ]; then
+    echo "$sibling_skills"
+    return 0
+  fi
+
+  return 1
+}
+
+resolve_default_pack_root() {
+  local plugin_root="$1"
+  local candidate
+  candidate="$(cd "$plugin_root/.." && pwd)"
+
+  if [ -f "$candidate/SKILL.md" ] && [ -d "$candidate/skills" ]; then
+    echo "$candidate"
+    return 0
+  fi
+
+  echo ""
+}
+
+if ! SKILLS_ROOT="$(resolve_skills_root "$PLUGIN_ROOT")"; then
+  echo "ERROR: Could not find skills directory for Codex runner." >&2
+  echo "Expected one of:" >&2
+  echo "  - $PLUGIN_ROOT/skills" >&2
+  echo "  - $(cd "$PLUGIN_ROOT/.." && pwd)/skills" >&2
+  exit 1
+fi
+
+DEFAULT_PACK_ROOT="$(resolve_default_pack_root "$PLUGIN_ROOT")"
+
+export JAAN_SKILLS_ROOT="$SKILLS_ROOT"
+
+# shellcheck source=scripts/lib/skill-registry.sh
+source "$PLUGIN_ROOT/scripts/lib/skill-registry.sh"
+# shellcheck source=scripts/lib/runtime-context.sh
+source "$PLUGIN_ROOT/scripts/lib/runtime-context.sh"
+
+usage() {
+  cat <<'EOL'
+jaan-to Codex runner
+
+Usage:
+  ./jaan-to setup [project_dir] [--mode auto|global|local] [--pack-root /path/to/jaan-to-codex-pack]
+  ./jaan-to list [--plain|--count]
+  ./jaan-to run /jaan-to:<skill> [args...] [--dry-run]
+  ./jaan-to /jaan-to:<skill> [args...] [--dry-run]
+
+Examples:
+  ./jaan-to setup /path/to/project --mode auto
+  ./jaan-to setup /path/to/project --mode local
+  ./jaan-to setup /path/to/project --mode global --pack-root ~/.agents/skills/jaan-to-codex-pack
+  ./jaan-to list
+  ./jaan-to run /jaan-to:pm-prd-write "user authentication"
+  ./jaan-to /jaan-to:detect-dev --full
+EOL
+}
+
+resolve_project_dir() {
+  local explicit="${1:-}"
+
+  if [ -n "$explicit" ]; then
+    echo "$explicit"
+    return 0
+  fi
+
+  if [ -n "${CODEX_PROJECT_DIR:-}" ]; then
+    echo "$CODEX_PROJECT_DIR"
+    return 0
+  fi
+
+  if [ -n "${CODEX_WORKSPACE_ROOT:-}" ]; then
+    echo "$CODEX_WORKSPACE_ROOT"
+    return 0
+  fi
+
+  if [ -f "$STATE_FILE" ]; then
+    local remembered
+    remembered="$(cat "$STATE_FILE")"
+    if [ -n "$remembered" ] && [ -d "$remembered" ]; then
+      echo "$remembered"
+      return 0
+    fi
+  fi
+
+  echo "$PWD"
+}
+
+join_arguments() {
+  if [ "$#" -eq 0 ]; then
+    echo ""
+    return 0
+  fi
+
+  local first=true
+  local joined=""
+  local arg
+  for arg in "$@"; do
+    if [ "$first" = true ]; then
+      joined="$arg"
+      first=false
+    else
+      joined="$joined $arg"
+    fi
+  done
+
+  echo "$joined"
+}
+
+setup_cmd() {
+  local explicit_project=""
+  local mode="${JAAN_CODEX_SKILL_MODE:-auto}"
+  local pack_root="${JAAN_CODEX_PACK_ROOT:-$DEFAULT_PACK_ROOT}"
+
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      --mode)
+        if [ -z "${2:-}" ]; then
+          echo "ERROR: --mode requires a value (auto|global|local)" >&2
+          return 1
+        fi
+        mode="$2"
+        shift 2
+        ;;
+      --pack-root)
+        if [ -z "${2:-}" ]; then
+          echo "ERROR: --pack-root requires a path" >&2
+          return 1
+        fi
+        pack_root="$2"
+        shift 2
+        ;;
+      --help|-h)
+        usage
+        return 0
+        ;;
+      --*)
+        echo "ERROR: Unknown setup option: $1" >&2
+        return 1
+        ;;
+      *)
+        if [ -n "$explicit_project" ]; then
+          echo "ERROR: Multiple project directories provided: $explicit_project and $1" >&2
+          return 1
+        fi
+        explicit_project="$1"
+        shift
+        ;;
+    esac
+  done
+
+  local project_dir
+  project_dir="$(resolve_project_dir "$explicit_project")"
+  local bootstrap_args=("$project_dir" "--mode" "$mode")
+  if [ -n "$pack_root" ]; then
+    bootstrap_args+=("--pack-root" "$pack_root")
+  fi
+  bash "$PLUGIN_ROOT/scripts/codex-bootstrap.sh" "${bootstrap_args[@]}"
+  mkdir -p "$STATE_DIR"
+  echo "$project_dir" > "$STATE_FILE"
+  echo "Setup complete. Default project: $project_dir"
+  echo "Setup mode: $mode"
+  if [ -n "$pack_root" ]; then
+    echo "Pack root: $pack_root"
+  fi
+  echo "Open this project in Codex and use /skills or \$<skill-name> (example: \$pm-prd-write)."
+}
+
+list_cmd() {
+  local mode="${1:-default}"
+
+  case "$mode" in
+    --count)
+      skill_registry_count
+      ;;
+    --plain)
+      skill_registry_print_commands
+      ;;
+    default|"")
+      echo "Available jaan.to commands:"
+      skill_registry_print_commands
+      ;;
+    *)
+      echo "ERROR: Unknown list option: $mode" >&2
+      return 1
+      ;;
+  esac
+}
+
+run_cmd() {
+  local dry_run=false
+  local positional=()
+  local arg
+
+  for arg in "$@"; do
+    if [ "$arg" = "--dry-run" ]; then
+      dry_run=true
+    else
+      positional+=("$arg")
+    fi
+  done
+
+  if [ "${#positional[@]}" -lt 1 ]; then
+    echo "ERROR: Missing command. Example: ./jaan-to run /jaan-to:pm-prd-write \"text\"" >&2
+    return 1
+  fi
+
+  local raw_command="${positional[0]}"
+  local skill_name
+
+  if ! skill_name="$(skill_registry_normalize_skill_name "$raw_command")"; then
+    echo "ERROR: Unknown skill command: $raw_command" >&2
+    echo "Did you mean:" >&2
+    skill_registry_suggest "$raw_command" | while IFS= read -r suggestion; do
+      [ -n "$suggestion" ] || continue
+      echo "  - $(skill_registry_to_slash "$suggestion")" >&2
+    done
+    return 1
+  fi
+
+  local skill_file="$SKILLS_ROOT/$skill_name/SKILL.md"
+  local skill_args=()
+  if [ "${#positional[@]}" -gt 1 ]; then
+    skill_args=("${positional[@]:1}")
+  fi
+
+  local project_dir
+  project_dir="$(resolve_project_dir)"
+
+  if ! runtime_context_is_project_initialized "$project_dir"; then
+    echo "ERROR: Project is not initialized: $project_dir/jaan-to" >&2
+    echo "Run: ./jaan-to setup $project_dir" >&2
+    return 1
+  fi
+
+  runtime_context_init "$project_dir" "$PLUGIN_ROOT"
+
+  local joined_args
+  if [ "${#skill_args[@]}" -gt 0 ]; then
+    joined_args="$(join_arguments "${skill_args[@]}")"
+  else
+    joined_args=""
+  fi
+
+  local prompt
+  prompt=$(cat <<EOL
+Run jaan.to skill \"$skill_name\" using the local skill definition.
+
+Skill file:
+$skill_file
+
+Command form:
+$(skill_registry_to_slash "$skill_name")
+
+Arguments:
+$joined_args
+
+Required runtime contract:
+- Follow instructions from the skill file exactly.
+- Follow the two-phase workflow and all human approval gates.
+- Apply pre-execution protocol from $CLAUDE_PLUGIN_ROOT/docs/extending/pre-execution-protocol.md.
+- Use these runtime env vars:
+  - CLAUDE_PLUGIN_ROOT=$CLAUDE_PLUGIN_ROOT
+  - CLAUDE_PROJECT_DIR=$CLAUDE_PROJECT_DIR
+  - JAAN_CONTEXT_DIR=$JAAN_CONTEXT_DIR
+  - JAAN_TEMPLATES_DIR=$JAAN_TEMPLATES_DIR
+  - JAAN_LEARN_DIR=$JAAN_LEARN_DIR
+  - JAAN_OUTPUTS_DIR=$JAAN_OUTPUTS_DIR
+  - JAAN_DOCS_DIR=$JAAN_DOCS_DIR
+EOL
+)
+
+  if [ "$dry_run" = true ]; then
+    echo "=== jaan-to dry run ==="
+    echo "Skill: $skill_name"
+    echo "Skill file: $skill_file"
+    echo "Arguments: $joined_args"
+    runtime_context_print
+    echo "--- prompt preview ---"
+    echo "$prompt"
+    return 0
+  fi
+
+  if ! command -v codex >/dev/null 2>&1; then
+    echo "ERROR: codex CLI is not installed or not in PATH" >&2
+    return 1
+  fi
+
+  CLAUDE_PLUGIN_ROOT="$CLAUDE_PLUGIN_ROOT" \
+  CLAUDE_PROJECT_DIR="$CLAUDE_PROJECT_DIR" \
+  JAAN_CONTEXT_DIR="$JAAN_CONTEXT_DIR" \
+  JAAN_TEMPLATES_DIR="$JAAN_TEMPLATES_DIR" \
+  JAAN_LEARN_DIR="$JAAN_LEARN_DIR" \
+  JAAN_OUTPUTS_DIR="$JAAN_OUTPUTS_DIR" \
+  JAAN_DOCS_DIR="$JAAN_DOCS_DIR" \
+    codex exec --cd "$CLAUDE_PROJECT_DIR" "$prompt"
+}
+
+main() {
+  if [ "$#" -eq 0 ]; then
+    usage
+    exit 1
+  fi
+
+  case "$1" in
+    setup)
+      shift
+      setup_cmd "$@"
+      ;;
+    list)
+      shift
+      list_cmd "$@"
+      ;;
+    run)
+      shift
+      run_cmd "$@"
+      ;;
+    /jaan-to:list|jaan-to:list)
+      shift
+      list_cmd "$@"
+      ;;
+    /jaan-to:help|jaan-to:help)
+      usage
+      ;;
+    /jaan-to:*|jaan-to:*|/jaan-init|jaan-init)
+      run_cmd "$@"
+      ;;
+    -h|--help|help)
+      usage
+      ;;
+    *)
+      echo "ERROR: Unknown command: $1" >&2
+      usage
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

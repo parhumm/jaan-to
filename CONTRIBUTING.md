@@ -293,6 +293,17 @@ PLUGIN_DIR="${CLAUDE_PLUGIN_ROOT:-$(dirname "$0")/..}"
 exit 0
 ```
 
+### Dual-Platform Rule (Claude + Codex)
+
+Feature changes must keep shared logic platform-neutral and compatible with both runtimes.
+
+- Put feature behavior in shared core paths:
+  - `skills/`, `scripts/`, `agents/`, `config/`, `docs/extending/`
+- Limit runtime-specific behavior to adapter files:
+  - Claude: `.claude-plugin/`, `hooks/`, `CLAUDE.md`
+  - Codex: `adapters/codex/AGENTS.md`, `adapters/codex/jaan-to`
+- Avoid adding platform-specific instructions directly inside `skills/*/SKILL.md`
+
 ### Markdown
 
 - Use ATX headers (`#`, `##`, not underlines)
@@ -321,7 +332,14 @@ description: Brief description
 
 ### Automated Tests
 
-Currently, jaan.to uses manual testing. Automated tests coming in Phase 6 (see [roadmap](docs/roadmap/roadmap.md)).
+jaan.to uses script-driven automated validation and E2E checks for both Claude and Codex runtimes.
+
+Core E2E entrypoints:
+
+```bash
+bash scripts/test/e2e-dual-runtime-smoke.sh
+bash scripts/test/e2e-dual-runtime-full.sh
+```
 
 ### Manual Testing Checklist
 
@@ -354,6 +372,28 @@ Verify:
 - [ ] Tasks reference PRD and Stories correctly
 - [ ] No broken file paths
 - [ ] Cross-skill suggestions work
+
+### Multi-Runtime Validation (Required for Feature Changes)
+
+Before opening a PR, run:
+
+```bash
+bash scripts/test/e2e-dual-runtime-smoke.sh
+bash scripts/validate-multi-runtime.sh
+bash scripts/validate-claude-compat.sh
+bash scripts/validate-codex-runner.sh
+```
+
+This validates that both distribution targets build and stay in sync:
+- `dist/jaan-to-claude`
+- `dist/jaan-to-codex`
+
+For pull requests, dual-runtime checks are required by CI:
+- Reusable gate workflow: `.github/workflows/_dual-runtime-gate.yml`
+- PR to `dev`: `.github/workflows/dev-dist-build.yml`
+- PR to `main`: `.github/workflows/release-check.yml`
+- Push monitor (non-blocking): `.github/workflows/dev-push-monitor.yml`
+- Nightly full-suite monitor (non-blocking): `.github/workflows/nightly-e2e.yml`
 
 ---
 
@@ -435,6 +475,12 @@ Then create a PR on GitHub with:
   - How was it tested?
 - **Screenshots:** If UI/output changes
 - **Related Issues:** Link to issues this PR addresses
+
+For PRs targeting `dev`, CI automatically builds and uploads both dist artifacts:
+- `jaan-to-claude-pr-<number>`
+- `jaan-to-codex-pr-<number>`
+
+Use `.github/pull_request_template.md` and complete the dual-runtime checklist before requesting review.
 
 ---
 

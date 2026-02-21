@@ -1,0 +1,27 @@
+name: Nightly E2E Monitor
+
+on:
+  schedule:
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  full-e2e:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run full dual-runtime E2E suite
+        id: run_full_e2e
+        run: bash scripts/test/e2e-dual-runtime-full.sh
+
+      - name: Nightly summary
+        if: always()
+        run: |
+          if [ "${{ steps.run_full_e2e.outcome }}" = "success" ]; then
+            echo "✓ Nightly full E2E passed"
+          else
+            echo "::warning::Nightly full E2E failed"
+            echo "Investigate logs from this run. This workflow is non-blocking but signals runtime drift."
+          fi
