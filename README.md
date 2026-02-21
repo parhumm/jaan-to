@@ -68,10 +68,17 @@ To switch from dev to stable (or vice versa):
 claude --plugin-dir /path/to/jaan-to
 ```
 
-### Clean Distribution
+### Distribution Builds
 ```bash
+# Claude plugin package (backward compatible)
 ./scripts/build-dist.sh
 claude --plugin-dir ./dist/jaan-to
+
+# Codex package
+./scripts/build-target.sh codex
+
+# Build both targets
+./scripts/build-all-targets.sh
 ```
 
 ### Agent Skills (Cross-Platform)

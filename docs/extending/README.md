@@ -45,6 +45,7 @@ sidebar_position: 1
 | [naming-conventions.md](naming-conventions.md) | Naming standards |
 | [output-structure.md](output-structure.md) | Output directory structure |
 | [pre-execution-protocol.md](pre-execution-protocol.md) | Skill pre-execution steps |
+| [multi-runtime-architecture.md](multi-runtime-architecture.md) | Single-source multi-runtime packaging |
 | [dev-workflow.md](dev-workflow.md) | Development workflow |
 | [git-pr-workflow.md](git-pr-workflow.md) | Git/PR workflow |
 
