@@ -76,10 +76,19 @@ claude --plugin-dir ./dist/jaan-to-claude
 
 # Codex package
 ./scripts/build-target.sh codex
+cd ./dist/jaan-to-codex
+./jaan-to setup /path/to/your-project
+./jaan-to list
+./jaan-to run /jaan-to:pm-prd-write "user authentication"
 
 # Build both targets
 ./scripts/build-all-targets.sh
 ```
+
+### Claude Compatibility Guarantee
+
+Claude Code installation, command namespace (`/jaan-to:*`), and plugin behavior remain unchanged.
+Codex support is added as a thin adapter and runner layer without changing Claude runtime contracts.
 
 ### Agent Skills (Cross-Platform)
 

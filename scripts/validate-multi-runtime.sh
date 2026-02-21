@@ -5,9 +5,12 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-DIST_ROOT="$PLUGIN_ROOT/dist"
-CLAUDE_DIST="$DIST_ROOT/jaan-to-claude"
-CODEX_DIST="$DIST_ROOT/jaan-to-codex"
+# shellcheck source=scripts/lib/runtime-contract.sh
+source "$PLUGIN_ROOT/scripts/lib/runtime-contract.sh"
+
+DIST_ROOT="$RUNTIME_DIST_ROOT"
+CLAUDE_DIST="$(runtime_dist_dir claude)"
+CODEX_DIST="$(runtime_dist_dir codex)"
 ERRORS=0
 
 assert_exists() {
@@ -29,7 +32,7 @@ echo ""
 echo "1) Dist directories"
 assert_exists "$CLAUDE_DIST" "Claude dist directory exists"
 assert_exists "$CODEX_DIST" "Codex dist directory exists"
-if find "$DIST_ROOT" -mindepth 1 -maxdepth 1 -type d -name "jaan-to" | grep -q .; then
+if find "$DIST_ROOT" -mindepth 1 -maxdepth 1 -type d -name "$(basename "$(runtime_legacy_claude_dist_path)")" | grep -q .; then
   echo "  ✗ Legacy Claude dist directory name detected"
   ERRORS=$((ERRORS + 1))
 else
@@ -72,6 +75,22 @@ if [ "$CODEX_SKILL_COUNT" -ne "$SOURCE_SKILL_COUNT" ]; then
   ERRORS=$((ERRORS + 1))
 else
   echo "  ✓ Codex skill count matches source"
+fi
+
+echo ""
+echo "5) Runtime-specific compatibility checks"
+if SKIP_BUILD=1 bash "$PLUGIN_ROOT/scripts/validate-claude-compat.sh"; then
+  echo "  ✓ Claude compatibility checks passed"
+else
+  echo "  ✗ Claude compatibility checks failed"
+  ERRORS=$((ERRORS + 1))
+fi
+
+if SKIP_BUILD=1 bash "$PLUGIN_ROOT/scripts/validate-codex-runner.sh"; then
+  echo "  ✓ Codex runner checks passed"
+else
+  echo "  ✗ Codex runner checks failed"
+  ERRORS=$((ERRORS + 1))
 fi
 
 echo ""

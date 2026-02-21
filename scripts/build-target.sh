@@ -7,6 +7,8 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 DIST_ROOT="$PLUGIN_ROOT/dist"
+# shellcheck source=scripts/lib/runtime-contract.sh
+source "$PLUGIN_ROOT/scripts/lib/runtime-contract.sh"
 
 usage() {
   cat <<'EOF'
@@ -65,9 +67,10 @@ print_summary() {
 }
 
 build_claude_target() {
-  local out_dir="$DIST_ROOT/jaan-to-claude"
+  local out_dir
+  out_dir="$(runtime_dist_dir claude)"
   # Enforce strict rename: remove legacy Claude dist directory name if present.
-  find "$DIST_ROOT" -mindepth 1 -maxdepth 1 -type d -name "jaan-to" -exec rm -rf {} + 2>/dev/null || true
+  find "$DIST_ROOT" -mindepth 1 -maxdepth 1 -type d -name "$(basename "$(runtime_legacy_claude_dist_path)")" -exec rm -rf {} + 2>/dev/null || true
   rm -rf "$out_dir"
   mkdir -p "$out_dir"
 
@@ -82,18 +85,23 @@ build_claude_target() {
 }
 
 build_codex_target() {
-  local out_dir="$DIST_ROOT/jaan-to-codex"
+  local out_dir
+  out_dir="$(runtime_dist_dir codex)"
   rm -rf "$out_dir"
   mkdir -p "$out_dir"
 
   copy_shared_assets "$out_dir"
   copy_file "$PLUGIN_ROOT/adapters/codex/AGENTS.md" "$out_dir/AGENTS.md"
   copy_file "$PLUGIN_ROOT/adapters/codex/README.md" "$out_dir/README-CODEX.md"
+  copy_file "$PLUGIN_ROOT/adapters/codex/jaan-to" "$out_dir/jaan-to"
+  chmod +x "$out_dir/jaan-to"
 
   print_summary "Codex" "$out_dir"
   echo "Use in Codex by opening the package root as your workspace."
   echo "Then run:"
-  echo "  bash scripts/codex-bootstrap.sh /path/to/your-project"
+  echo "  ./jaan-to setup /path/to/your-project"
+  echo "  ./jaan-to list"
+  echo "  ./jaan-to run /jaan-to:pm-prd-write \"feature\""
 }
 
 TARGET="${1:-}"

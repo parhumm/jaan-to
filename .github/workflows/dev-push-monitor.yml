@@ -1,0 +1,25 @@
+name: Dev Push Monitor
+
+on:
+  push:
+    branches: [dev]
+
+jobs:
+  dual-runtime-monitor:
+    continue-on-error: true
+    uses: ./.github/workflows/_dual-runtime-gate.yml
+
+  report:
+    if: always()
+    needs: dual-runtime-monitor
+    runs-on: ubuntu-latest
+    steps:
+      - name: Monitor summary
+        run: |
+          echo "Dev push monitor result: ${{ needs.dual-runtime-monitor.result }}"
+          if [ "${{ needs.dual-runtime-monitor.result }}" = "success" ]; then
+            echo "✓ Dual-runtime checks passed on push to dev"
+          else
+            echo "::warning::Dual-runtime checks failed on push to dev"
+            echo "This workflow is non-blocking for push policy, but failures should be fixed before merge to main."
+          fi

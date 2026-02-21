@@ -1,0 +1,28 @@
+name: Dual Runtime Gate
+
+on:
+  workflow_call:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate plugin standards
+        run: bash .claude/scripts/validate-plugin-standards.sh
+
+      - name: Validate skills budget
+        run: bash scripts/validate-skills.sh
+
+      - name: Validate security standards
+        run: bash scripts/validate-security.sh
+
+      - name: Validate multi-runtime distributions
+        run: bash scripts/validate-multi-runtime.sh
+
+      - name: Validate Claude compatibility
+        run: bash scripts/validate-claude-compat.sh
+
+      - name: Validate Codex runner
+        run: bash scripts/validate-codex-runner.sh

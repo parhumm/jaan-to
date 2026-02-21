@@ -5,7 +5,7 @@ This directory contains Codex-specific adapter files.
 ## Purpose
 
 jaan.to development stays centralized in shared sources (`skills/`, `scripts/`, `agents/`, `config/`, `docs/extending/`).
-This adapter adds only Codex runtime instructions.
+This adapter adds only Codex runtime instructions and a thin `./jaan-to` runner.
 
 ## Build
 
@@ -15,13 +15,29 @@ This adapter adds only Codex runtime instructions.
 
 Output package:
 - `dist/jaan-to-codex/AGENTS.md`
+- `dist/jaan-to-codex/jaan-to`
 - `dist/jaan-to-codex/skills/`
 - `dist/jaan-to-codex/scripts/`
 - `dist/jaan-to-codex/agents/`
 - `dist/jaan-to-codex/config/`
 
-## Project Initialization in Codex
+## Quickstart in Codex
 
 ```bash
-bash scripts/codex-bootstrap.sh /path/to/your-project
+cd dist/jaan-to-codex
+./jaan-to setup /path/to/your-project
+./jaan-to list
+./jaan-to run /jaan-to:pm-prd-write "user authentication"
+```
+
+Alias form:
+
+```bash
+./jaan-to /jaan-to:detect-dev --full
+```
+
+## Validation
+
+```bash
+bash scripts/validate-codex-runner.sh
 ```
