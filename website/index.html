@@ -537,244 +537,134 @@
             font-size: 0.95rem;
         }
 
-        /* ---- Efficiency ---- */
-        .efficiency {
+        /* ---- Team Ship ---- */
+        .team-ship {
             padding: clamp(80px, 12vw, 160px) 24px;
             background: var(--color-bg-dark);
             color: white;
         }
 
-        .efficiency .section-label {
+        .team-ship .section-label {
             color: var(--color-accent);
         }
 
-        .efficiency .section-heading {
+        .team-ship .section-heading {
             color: white;
         }
 
-        .efficiency .section-heading .dim {
+        .team-ship .section-heading .dim {
             color: #666;
         }
 
-        .efficiency-metrics {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 48px;
-            max-width: 600px;
-            margin: 56px auto 64px;
+        .team-ship-intro {
+            max-width: 540px;
+            margin: 0 auto 48px;
             text-align: center;
+            font-size: 1.05rem;
+            color: #A0A0A0;
+            line-height: 1.8;
         }
 
-        .efficiency-metric-value {
-            font-family: var(--font-serif);
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 300;
-            color: var(--color-accent);
-            line-height: 1;
-            margin-bottom: 12px;
+        .team-ship-roster {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            max-width: 500px;
+            margin: 0 auto 64px;
         }
 
-        .efficiency-metric-label {
-            font-size: 0.85rem;
-            color: #666;
-            line-height: 1.5;
-            letter-spacing: 0.02em;
+        .team-ship-tag {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            background: rgba(221, 46, 68, 0.12);
+            border: 1px solid rgba(221, 46, 68, 0.2);
+            padding: 8px 20px;
+            border-radius: 100px;
+            letter-spacing: 0.04em;
         }
 
-        /* Token Layer Stack */
-        .token-layers {
+        .team-ship-flow {
             max-width: 600px;
-            margin: 64px auto 0;
+            margin: 0 auto 48px;
+        }
+
+        .team-ship-step {
             display: flex;
-            flex-direction: column;
+            align-items: baseline;
+            gap: 16px;
+            padding: 14px 0 14px 24px;
+            border-left: 2px solid rgba(255, 255, 255, 0.08);
         }
 
-        .token-layer {
-            display: flex;
-            gap: 20px;
-            align-items: flex-start;
-            padding: 24px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .token-layer:first-child {
-            padding-top: 0;
-        }
-
-        .token-layer:last-child {
-            border-bottom: none;
-        }
-
-        .token-layer-num {
+        .team-ship-step-num {
             font-family: var(--font-mono);
             font-size: 0.75rem;
             font-weight: 700;
-            letter-spacing: 0.06em;
             color: var(--color-accent);
-            min-width: 32px;
-            padding-top: 3px;
+            min-width: 16px;
         }
 
-        .token-layer-body {
-            flex: 1;
+        .team-ship-step-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: white;
+            min-width: 80px;
         }
 
-        .token-layer-name {
+        .team-ship-step-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .team-ship-gate {
+            padding: 6px 0 6px 24px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+        }
+
+        .team-ship-tracks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            max-width: 600px;
+            margin: 48px auto 0;
+        }
+
+        .team-ship-track {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .team-ship-track-name {
+            display: block;
             font-family: var(--font-serif);
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             font-weight: 500;
             color: white;
-            margin-bottom: 4px;
+            margin-bottom: 8px;
         }
 
-        .token-layer-desc {
-            font-size: 0.9rem;
-            color: #888;
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
-
-        /* Progress Bars */
-        .token-bar {
-            position: relative;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 3px;
-            overflow: visible;
-            margin-top: 8px;
-        }
-
-        .token-bar-fill {
-            height: 100%;
-            width: 0;
-            max-width: var(--bar-pct);
-            background: var(--color-accent);
-            border-radius: 3px;
-            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-
-        .token-layer.visible .token-bar-fill,
-        .token-budget.visible .token-budget-bar-fill {
-            width: var(--bar-pct);
-        }
-
-        .token-bar-fill--complete {
-            background: rgba(221, 46, 68, 0.5);
-        }
-
-        .token-bar-label {
+        .team-ship-track-meta {
             display: block;
-            margin-top: 6px;
-            font-family: var(--font-mono);
-            font-size: 0.7rem;
-            color: #555;
-            letter-spacing: 0.02em;
-        }
-
-        /* Budget State Card */
-        .token-budget {
-            max-width: 600px;
-            margin: 64px auto 0;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            padding: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-
-        .token-budget-heading {
-            font-family: var(--font-serif);
-            font-size: 1rem;
-            font-weight: 500;
-            color: #999;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 24px;
-            text-align: center;
-        }
-
-        .token-budget-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .token-budget-row {
-            display: grid;
-            grid-template-columns: 140px 1fr 72px;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .token-budget-key {
-            font-size: 0.8rem;
-            color: #888;
-            white-space: nowrap;
-        }
-
-        .token-budget-bar {
-            height: 4px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .token-budget-bar-fill {
-            height: 100%;
-            width: 0;
-            max-width: var(--bar-pct);
-            background: var(--color-accent);
-            border-radius: 2px;
-            transition: width 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s;
-        }
-
-        .token-budget-val {
             font-family: var(--font-mono);
             font-size: 0.75rem;
-            color: #666;
-            text-align: right;
-        }
-
-        .token-budget-footnote {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #555;
-            font-style: italic;
-        }
-
-        .efficiency-quote {
-            margin-top: 64px;
-            text-align: center;
-            font-family: var(--font-serif);
-            font-style: italic;
-            font-size: clamp(1.1rem, 2vw, 1.35rem);
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .efficiency-article {
-            max-width: 600px;
-            margin: 24px auto 0;
-            padding: 20px 24px;
-            border-left: 2px solid var(--color-accent);
-        }
-
-        .efficiency-article a {
             color: var(--color-accent);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1rem;
+            margin-bottom: 8px;
         }
 
-        .efficiency-article a:hover {
-            text-decoration: underline;
-        }
-
-        .efficiency-article span {
+        .team-ship-track-desc {
             display: block;
-            color: #666;
             font-size: 0.85rem;
-            margin-top: 4px;
+            color: #666;
         }
 
         /* ---- Skills Catalog ---- */
@@ -1182,31 +1072,13 @@
                 padding-bottom: 60px;
             }
 
-            .efficiency-metrics {
-                gap: 24px;
-            }
-
-            .token-layer {
-                flex-direction: column;
-                gap: 8px;
-            }
-
-            .token-layer-num {
-                min-width: auto;
-            }
-
-            .token-budget-row {
+            .team-ship-tracks {
                 grid-template-columns: 1fr;
-                gap: 4px;
             }
 
-            .token-budget-val {
-                text-align: left;
-                font-size: 0.7rem;
-            }
-
-            .token-budget-bar {
-                margin-top: 2px;
+            .team-ship-step {
+                flex-wrap: wrap;
+                gap: 4px 12px;
             }
         }
 
@@ -1380,7 +1252,7 @@
                 <div class="system-card reveal">
                     <div class="system-card-label">Skills</div>
                     <h3>What to do</h3>
-                    <p>44 structured commands across 13 roles &mdash; PM, Dev, Backend, Frontend, UX, Core, QA, Data, Detect, Release, WP, Sec, and DevOps. Each skill knows its questions, its template, and its output format.</p>
+                    <p>44 structured commands across 11 roles &mdash; PM, Data, Dev, UX, Core, QA, Detect, Release, WP, Sec, and DevOps &mdash; with Growth planned. Each skill knows its questions, its template, and its output format.</p>
                 </div>
                 <div class="system-card reveal">
                     <div class="system-card-label">Stacks</div>
@@ -1399,7 +1271,7 @@
                 </div>
             </div>
 
-            <p class="system-stats reveal">44 skills available now. 13 active roles.</p>
+            <p class="system-stats reveal">44 skills available now. 11 active roles. 1 more role planned.</p>
         </div>
     </section>
 
@@ -1637,6 +1509,12 @@
                             <span class="catalog-skill-sep">&mdash;</span>
                             <span class="catalog-skill-desc">Report bugs, feature requests, or issues to GitHub</span>
                         </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/team-ship</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Assemble role-based AI teammates to ship ideas from concept to production</span>
+                        </li>
                     </ul>
                 </div>
 
@@ -1797,122 +1675,81 @@
         </div>
     </section>
 
-    <!-- Token Intelligence -->
-    <section class="efficiency" id="efficiency">
+    <!-- Team Ship -->
+    <section class="team-ship" id="team-ship">
         <div class="container">
             <div style="text-align: center;">
-                <span class="section-label reveal">Token Intelligence</span>
+                <span class="section-label reveal">Team Ship</span>
                 <h2 class="section-heading reveal">
-                    <span class="dim">Every token has a cost.</span><br>
-                    Four layers make sure none are wasted.
+                    <span class="dim">One command.</span><br>
+                    A full team ships your idea.
                 </h2>
             </div>
 
-            <!-- Beat 1: Hero Metrics -->
-            <div class="efficiency-metrics reveal-group">
-                <div class="efficiency-metric reveal">
-                    <div class="efficiency-metric-value" data-count="2400">2,400</div>
-                    <div class="efficiency-metric-label">tokens saved<br>per session</div>
+            <p class="team-ship-intro reveal">
+                Spawn AI teammates &mdash; each a real role with real skills &mdash; that work through phased execution to take your initiative from concept to working product. Human approval at every gate.
+            </p>
+
+            <div class="team-ship-roster reveal">
+                <span class="team-ship-tag">PM</span>
+                <span class="team-ship-tag">UX</span>
+                <span class="team-ship-tag">Backend</span>
+                <span class="team-ship-tag">Frontend</span>
+                <span class="team-ship-tag">QA</span>
+                <span class="team-ship-tag">DevOps</span>
+                <span class="team-ship-tag">Security</span>
+            </div>
+
+            <div class="team-ship-flow reveal-group">
+                <div class="team-ship-step reveal">
+                    <span class="team-ship-step-num">0</span>
+                    <span class="team-ship-step-name">Setup</span>
+                    <span class="team-ship-step-desc">Build team roster</span>
                 </div>
-                <div class="efficiency-metric reveal">
-                    <div class="efficiency-metric-value" data-count="56" data-suffix="K">56K</div>
-                    <div class="efficiency-metric-label">tokens saved<br>per invocation</div>
+                <div class="team-ship-gate reveal">approval required</div>
+                <div class="team-ship-step reveal">
+                    <span class="team-ship-step-num">1</span>
+                    <span class="team-ship-step-name">Define</span>
+                    <span class="team-ship-step-desc">PRD + user stories</span>
                 </div>
-                <div class="efficiency-metric reveal">
-                    <div class="efficiency-metric-value" data-count="60" data-suffix="%">60%</div>
-                    <div class="efficiency-metric-label">skill body<br>reduction</div>
+                <div class="team-ship-gate reveal">approval required</div>
+                <div class="team-ship-step reveal">
+                    <span class="team-ship-step-num">2</span>
+                    <span class="team-ship-step-name">Build</span>
+                    <span class="team-ship-step-desc">Backend, Frontend, QA, UX in parallel</span>
+                </div>
+                <div class="team-ship-step reveal">
+                    <span class="team-ship-step-num">3</span>
+                    <span class="team-ship-step-name">Integrate</span>
+                    <span class="team-ship-step-desc">DevOps + Security</span>
+                </div>
+                <div class="team-ship-step reveal">
+                    <span class="team-ship-step-num">4</span>
+                    <span class="team-ship-step-name">Verify</span>
+                    <span class="team-ship-step-desc">Tests, changelog, cleanup</span>
                 </div>
             </div>
 
-            <!-- Beat 2: Layer Stack -->
-            <div class="token-layers reveal-group">
-                <div class="token-layer reveal">
-                    <div class="token-layer-num">L0</div>
-                    <div class="token-layer-body">
-                        <h3 class="token-layer-name">CLAUDE.md</h3>
-                        <p class="token-layer-desc">Always loaded. Global rules, routing table, conventions.</p>
-                        <div class="token-bar" role="progressbar" aria-valuenow="79" aria-valuemin="0" aria-valuemax="100" aria-label="CLAUDE.md: 119 of 150 lines used">
-                            <div class="token-bar-fill" style="--bar-pct: 79%;"></div>
-                            <span class="token-bar-label">119 / 150 lines</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="token-layer reveal">
-                    <div class="token-layer-num">L1</div>
-                    <div class="token-layer-body">
-                        <h3 class="token-layer-name">Session Descriptions</h3>
-                        <p class="token-layer-desc">15K-char budget shared across 44 skills. 44% headroom remains.</p>
-                        <div class="token-bar" role="progressbar" aria-valuenow="56" aria-valuemin="0" aria-valuemax="100" aria-label="Description budget: 8,409 of 15,000 chars used">
-                            <div class="token-bar-fill" style="--bar-pct: 56%;"></div>
-                            <span class="token-bar-label">8,409 / 15,000 chars</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="token-layer reveal">
-                    <div class="token-layer-num">L2</div>
-                    <div class="token-layer-body">
-                        <h3 class="token-layer-name">Invocation Isolation</h3>
-                        <p class="token-layer-desc">Fork-based execution. 23 reference files extracted from skill bodies.</p>
-                        <div class="token-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Reference files: 23 extracted">
-                            <div class="token-bar-fill token-bar-fill--complete" style="--bar-pct: 100%;"></div>
-                            <span class="token-bar-label">23 reference files</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="token-layer reveal">
-                    <div class="token-layer-num">L3</div>
-                    <div class="token-layer-body">
-                        <h3 class="token-layer-name">Skill Complexity Tiers</h3>
-                        <p class="token-layer-desc">Simple / standard / complex. Strict 600-line cap, median 465.</p>
-                        <div class="token-bar" role="progressbar" aria-valuenow="96" aria-valuemin="0" aria-valuemax="100" aria-label="Largest skill: 573 of 600 lines">
-                            <div class="token-bar-fill" style="--bar-pct: 96%;"></div>
-                            <span class="token-bar-label">573 / 600 line cap</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="terminal reveal">
+                <span class="prompt">$</span> <span class="command">/jaan-to:team-ship "user auth with OAuth"</span><br><br>
+                <span class="dim">&gt; Team roster: PM, Backend, Frontend, QA, DevOps</span><br>
+                <span class="dim">&gt; [Awaiting your approval...]</span><br><br>
+                <span class="dim">&gt; PM drafting PRD...</span><br>
+                <span class="dim">&gt; Backend + Frontend + QA building in parallel...</span><br>
+                <span class="dim">&gt; All tests passing. Changelog generated.</span>
             </div>
 
-            <!-- Beat 3: Budget State -->
-            <div class="token-budget reveal">
-                <h3 class="token-budget-heading">Post-v7 Budget State</h3>
-                <div class="token-budget-grid">
-                    <div class="token-budget-row">
-                        <span class="token-budget-key">Description budget</span>
-                        <div class="token-budget-bar">
-                            <div class="token-budget-bar-fill" style="--bar-pct: 56%;"></div>
-                        </div>
-                        <span class="token-budget-val">44% free</span>
-                    </div>
-                    <div class="token-budget-row">
-                        <span class="token-budget-key">Auto-invocable</span>
-                        <div class="token-budget-bar">
-                            <div class="token-budget-bar-fill" style="--bar-pct: 83%;"></div>
-                        </div>
-                        <span class="token-budget-val">29 / 35</span>
-                    </div>
-                    <div class="token-budget-row">
-                        <span class="token-budget-key">CLAUDE.md</span>
-                        <div class="token-budget-bar">
-                            <div class="token-budget-bar-fill" style="--bar-pct: 79%;"></div>
-                        </div>
-                        <span class="token-budget-val">119 / 150</span>
-                    </div>
-                    <div class="token-budget-row">
-                        <span class="token-budget-key">Largest skill</span>
-                        <div class="token-budget-bar">
-                            <div class="token-budget-bar-fill" style="--bar-pct: 96%;"></div>
-                        </div>
-                        <span class="token-budget-val">573 / 600</span>
-                    </div>
+            <div class="team-ship-tracks reveal-group">
+                <div class="team-ship-track reveal">
+                    <span class="team-ship-track-name">Fast Track</span>
+                    <span class="team-ship-track-meta">4&ndash;5 teammates &middot; 8 skills</span>
+                    <span class="team-ship-track-desc">Rapid prototyping</span>
                 </div>
-                <p class="token-budget-footnote">Room for ~33 more skills before the description budget is full.</p>
-            </div>
-
-            <p class="efficiency-quote reveal">&ldquo;Four layers deep. Not a single token wasted.&rdquo;</p>
-
-            <div class="efficiency-article reveal">
-                <a href="https://docs.jaan.to/docs/token-strategy">Read the Token Strategy &rarr;</a>
-                <span>The full architecture behind four optimization layers and CI enforcement.</span>
+                <div class="team-ship-track reveal">
+                    <span class="team-ship-track-name">Full Track</span>
+                    <span class="team-ship-track-meta">7 teammates &middot; 20 skills</span>
+                    <span class="team-ship-track-desc">Production-ready</span>
+                </div>
             </div>
         </div>
     </section>
@@ -2054,36 +1891,6 @@
             });
         });
 
-        // Animated counters for efficiency metrics
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!prefersReducedMotion) {
-            const counterObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const el = entry.target;
-                        const target = parseInt(el.dataset.count, 10);
-                        const suffix = el.dataset.suffix || '';
-                        const useComma = target >= 1000;
-                        const duration = 1200;
-                        const start = performance.now();
-
-                        function tick(now) {
-                            const elapsed = now - start;
-                            const progress = Math.min(elapsed / duration, 1);
-                            const eased = 1 - Math.pow(1 - progress, 3);
-                            const current = Math.round(eased * target);
-                            el.textContent = (useComma ? current.toLocaleString() : current) + suffix;
-                            if (progress < 1) requestAnimationFrame(tick);
-                        }
-
-                        requestAnimationFrame(tick);
-                        counterObserver.unobserve(el);
-                    }
-                });
-            }, { threshold: 0.5 });
-
-            document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
-        }
     </script>
 </body>
 </html>
