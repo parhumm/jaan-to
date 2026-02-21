@@ -278,8 +278,8 @@
             font-weight: 400;
             line-height: 1.15;
             color: var(--color-text);
-            margin-bottom: 32px;
             max-width: 700px;
+            margin: 0 auto 32px;
         }
 
         .hero-definition em {
@@ -351,69 +351,122 @@
         }
 
         .hero-install-shell {
-            margin: 28px auto 0;
-            max-width: 960px;
+            margin: 32px auto 0;
+            max-width: min(960px, 100%);
             text-align: left;
-            border: 1px solid var(--color-border);
-            border-radius: 16px;
-            background: white;
-            padding: 24px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 18px;
+            background: linear-gradient(180deg, #FFFFFF 0%, #FCFCFA 100%);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+            padding: clamp(16px, 2.8vw, 28px);
+        }
+
+        .hero-install-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 10px;
         }
 
         .hero-install-title {
-            text-align: center;
-            font-size: 0.85rem;
+            font-size: clamp(1.2rem, 2.4vw, 1.55rem);
             font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            margin-bottom: 16px;
+            color: var(--color-text);
+            line-height: 1.3;
+            margin-bottom: 8px;
+        }
+
+        .hero-install-lead {
+            font-size: 0.92rem;
+            color: var(--color-text-secondary);
+            max-width: 60ch;
+            line-height: 1.6;
         }
 
         .hero-install-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 16px;
+            margin-top: 18px;
         }
 
         .hero-install-card {
-            border: 1px solid var(--color-border);
-            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 14px;
             padding: 16px;
-            background: var(--color-bg-subtle);
+            background: #FFFFFF;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
 
         .hero-install-card h3 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .hero-install-brand {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            margin-bottom: 10px;
         }
 
         .hero-install-card h3 img {
             width: 15px;
             height: 15px;
+            flex: none;
+        }
+
+        .hero-install-step {
+            font-size: 0.68rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--color-text-secondary);
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            padding: 6px 8px;
+            letter-spacing: 0.02em;
         }
 
         .hero-install-card pre {
             margin: 0;
-            padding: 12px;
-            border-radius: 8px;
+            padding: 12px 14px;
+            border-radius: 10px;
             background: #121212;
             color: #E9E9E9;
             font-family: var(--font-mono);
-            font-size: 0.78rem;
-            line-height: 1.65;
+            font-size: 0.8rem;
+            line-height: 1.55;
             overflow-x: auto;
-            white-space: pre;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         .hero-install-card p {
-            margin-top: 10px;
-            font-size: 0.82rem;
+            margin: 0;
+            font-size: 0.83rem;
             color: var(--color-text-secondary);
+            line-height: 1.55;
+        }
+
+        .hero-install-card p code,
+        .hero-install-lead code {
+            font-family: var(--font-mono);
+            font-size: 0.86em;
+            background: rgba(0, 0, 0, 0.05);
+            padding: 1px 5px;
+            border-radius: 5px;
+            color: var(--color-text);
         }
 
         /* ---- Problem ---- */
@@ -1175,6 +1228,15 @@
 
             .hero-install-shell {
                 padding: 16px;
+                margin-top: 24px;
+            }
+
+            .hero-install-title {
+                font-size: 1.22rem;
+            }
+
+            .hero-install-lead {
+                font-size: 0.88rem;
             }
 
             .hero-install-grid {
@@ -1202,7 +1264,8 @@
             }
 
             .hero-install-card pre {
-                font-size: 0.74rem;
+                font-size: 0.76rem;
+                line-height: 1.5;
             }
 
             .nav-links .btn-nav {
@@ -1257,11 +1320,11 @@
             </p>
             <div class="hero-platforms">
                 <span class="hero-platform-badge">
-                    <img src="https://cdn.simpleicons.org/anthropic/1A1A1A" alt="Claude Code logo">
+                    <img src="assets/logos/anthropic.svg" alt="Anthropic logo">
                     Claude Code
                 </span>
                 <span class="hero-platform-badge">
-                    <img src="https://cdn.simpleicons.org/openai/1A1A1A" alt="Codex logo">
+                    <img src="assets/logos/openai.svg" alt="OpenAI logo">
                     Codex
                 </span>
             </div>
@@ -1275,29 +1338,39 @@
             <p class="hero-note">
                 Open source. Built for Claude Code + Codex. Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a>
             </p>
-            <div class="hero-install-shell">
-                <div class="hero-install-title">Install in 60 seconds</div>
+            <div class="hero-install-shell" aria-label="Jaan.to installation quick start">
+                <p class="hero-install-kicker">Quick Start</p>
+                <h2 class="hero-install-title">Install in under 60 seconds</h2>
+                <p class="hero-install-lead">Choose your coding runtime, run the setup steps, then call <code>/jaan-init</code>. Both paths unlock the same <code>/jaan-to:*</code> workflow skills.</p>
                 <div class="hero-install-grid">
                     <article class="hero-install-card">
                         <h3>
-                            <img src="https://cdn.simpleicons.org/anthropic/1A1A1A" alt="Claude Code logo">
-                            Claude Code
+                            <span class="hero-install-brand">
+                                <img src="assets/logos/anthropic.svg" alt="Anthropic logo">
+                                Claude Code
+                            </span>
+                            <!-- <span class="hero-install-step" aria-hidden="true">Option A</span> -->
                         </h3>
-                        <pre>claude
+                        <pre><code>claude
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
-/jaan-init</pre>
-                        <p>Then run `/jaan-to:pm-prd-write` or any `/jaan-to:*` skill.</p>
+/jaan-init
+/team-ship YOUR IDEA: Develop a SaaS platform for ...</code></pre>
+                        <p>Then run <code>/jaan-to:pm-prd-write</code> or any <code>/jaan-to:*</code> skill.</p>
                     </article>
                     <article class="hero-install-card">
                         <h3>
-                            <img src="https://cdn.simpleicons.org/openai/1A1A1A" alt="Codex logo">
-                            Codex
+                            <span class="hero-install-brand">
+                                <img src="assets/logos/openai.svg" alt="OpenAI logo for Codex">
+                                Codex
+                            </span>
+                            <!-- <span class="hero-install-step" aria-hidden="true">Option B</span> -->
                         </h3>
-                        <pre>bash &lt;(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
+                        <pre><code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
 # restart Codex
-/jaan-init</pre>
-                        <p>Use `/skills`, `/jaan-to:*`, `/jaan-init`, or native `$skill` mentions.</p>
+/jaan-init
+/pm-prd-write New feature for Google Auth login</code></pre>
+                        <p>Use <code>/skills</code>, <code>/jaan-to:*</code>, <code>/jaan-init</code>, or native <code>$skill</code> mentions.</p>
                     </article>
                 </div>
             </div>
