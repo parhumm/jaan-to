@@ -346,8 +346,14 @@
         }
 
         .hero-platform-badge img {
-            width: 14px;
-            height: 14px;
+            width: auto;
+            height: 21px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .hero-platform-badge img.codex-logo {
+            height: 32px;
         }
 
         .hero-install-shell {
@@ -422,9 +428,18 @@
         }
 
         .hero-install-card h3 img {
-            width: 15px;
-            height: 15px;
+            object-fit: contain;
+            display: block;
             flex: none;
+            margin-bottom: 5px;
+        }
+
+        .hero-install-card h3 img.codex-logo {
+            height: 32px;
+        }
+
+        .hero-install-card h3 img.claude-logo {
+            height: 24px;
         }
 
         .hero-install-step {
@@ -1318,16 +1333,14 @@
             <p class="hero-subtitle">
                 A workflow layer for Claude Code + Codex that handles repetitive work so your team can focus on what matters.
             </p>
-            <div class="hero-platforms">
+            <!-- <div class="hero-platforms">
                 <span class="hero-platform-badge">
-                    <img src="assets/logos/anthropic.svg" alt="Anthropic logo">
-                    Claude Code
+                    <img src="assets/claude-code.svg" class="claude-logo" alt="Claude Code logo">
                 </span>
                 <span class="hero-platform-badge">
-                    <img src="assets/logos/openai.svg" alt="OpenAI logo">
-                    Codex
+                    <img src="assets/codex.png" class="codex-logo" alt="Codex logo">
                 </span>
-            </div>
+            </div> -->
             <div class="hero-actions">
                 <a href="https://github.com/parhumm/jaan-to" class="btn btn-primary">Get Started</a>
                 <div class="hero-actions-secondary">
@@ -1346,8 +1359,7 @@
                     <article class="hero-install-card">
                         <h3>
                             <span class="hero-install-brand">
-                                <img src="assets/logos/anthropic.svg" alt="Anthropic logo">
-                                Claude Code
+                                <img src="assets/claude-code.svg" class="claude-logo" alt="Claude Code logo">
                             </span>
                             <!-- <span class="hero-install-step" aria-hidden="true">Option A</span> -->
                         </h3>
@@ -1361,8 +1373,7 @@
                     <article class="hero-install-card">
                         <h3>
                             <span class="hero-install-brand">
-                                <img src="assets/logos/openai.svg" alt="OpenAI logo for Codex">
-                                Codex
+                                <img src="assets/codex.png" class="codex-logo" alt="Codex logo">
                             </span>
                             <!-- <span class="hero-install-step" aria-hidden="true">Option B</span> -->
                         </h3>
