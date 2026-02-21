@@ -89,6 +89,7 @@ setup_cmd() {
   mkdir -p "$STATE_DIR"
   echo "$project_dir" > "$STATE_FILE"
   echo "Setup complete. Default project: $project_dir"
+  echo "Open this project in Codex and use /skills or \$<skill-name> (example: \$pm-prd-write)."
 }
 
 list_cmd() {

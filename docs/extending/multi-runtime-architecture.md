@@ -41,7 +41,7 @@ Only runtime-specific wrappers live outside shared core:
 | Runtime | Adapter Files |
 |---------|---------------|
 | Claude | `.claude-plugin/`, `hooks/`, `CLAUDE.md` |
-| Codex | `adapters/codex/AGENTS.md`, `adapters/codex/jaan-to`, `scripts/codex-bootstrap.sh` |
+| Codex | `adapters/codex/AGENTS.md`, `adapters/codex/jaan-to`, `scripts/codex-bootstrap.sh`, `scripts/install-codex-skills.sh` |
 
 Adapter rule: keep adapters small and avoid duplicating skill logic.
 
@@ -91,6 +91,8 @@ This enforces:
 - Claude non-regression
 - Codex runner/router contract
 - Shared skill parity across both outputs
+
+Codex setup also installs skill links into project `.agents/skills` so Codex can discover them natively (`/skills`, `$skill`).
 
 ---
 

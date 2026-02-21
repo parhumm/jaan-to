@@ -78,12 +78,20 @@ claude --plugin-dir ./dist/jaan-to-claude
 ./scripts/build-target.sh codex
 cd ./dist/jaan-to-codex
 ./jaan-to setup /path/to/your-project
-./jaan-to list
-./jaan-to run /jaan-to:pm-prd-write "user authentication"
 
 # Build both targets
 ./scripts/build-all-targets.sh
 ```
+
+Then open `/path/to/your-project` in Codex and invoke skills with:
+
+```text
+/skills
+$pm-prd-write
+$detect-dev
+```
+
+`/jaan-to:*` is a Claude plugin namespace. In Codex, setup installs skills into `.agents/skills` for native discovery and execution.
 
 ### Claude Compatibility Guarantee
 

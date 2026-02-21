@@ -26,15 +26,26 @@ Output package:
 ```bash
 cd dist/jaan-to-codex
 ./jaan-to setup /path/to/your-project
-./jaan-to list
-./jaan-to run /jaan-to:pm-prd-write "user authentication"
 ```
 
-Alias form:
+Then open `/path/to/your-project` in Codex app and use:
 
 ```bash
+/skills
+# or mention skills with $
+$pm-prd-write
+```
+
+Terminal wrapper is still available:
+
+```bash
+./jaan-to list
+./jaan-to run /jaan-to:pm-prd-write "user authentication"
 ./jaan-to /jaan-to:detect-dev --full
 ```
+
+Important: Codex does not natively autocomplete `/jaan-to:*` plugin-style commands.
+Setup installs skills into `.agents/skills` so they are discoverable via `/skills` and `$skill` invocation.
 
 ## Validation
 

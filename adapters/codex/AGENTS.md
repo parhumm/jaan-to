@@ -29,25 +29,24 @@ Only thin runtime adapters differ by target:
 
 5. Preserve each skill's two-phase workflow and human approval gates before write operations.
 
-## Slash Router Contract
+## Codex Invocation Contract
 
-Recognize and route these commands deterministically:
-- `/jaan-init` -> `jaan-init` skill
-- `/jaan-to:list` -> list available commands
-- `/jaan-to:help` -> show quick usage
-- `/jaan-to:{skill-name}` -> run matching skill if it exists
+Codex does not use Claude plugin-style slash namespace discovery (`/jaan-to:*`).
+For Codex-native usage:
 
-### Routing Rules
+1. Run setup once:
+```bash
+./jaan-to setup /path/to/your-project
+```
+This installs skill links to the project's `.agents/skills/` path.
 
-1. Parse command and arguments.
-2. Resolve skill name via `scripts/lib/skill-registry.sh`.
-3. If unknown skill, return suggestions from the registry and do not continue.
-4. Resolve runtime context via `scripts/lib/runtime-context.sh`.
-5. Apply pre-execution protocol from `docs/extending/pre-execution-protocol.md`.
-6. Execute the target `skills/{name}/SKILL.md` exactly as written.
-7. Enforce all skill-level hard stops and user approvals before write operations.
+2. In Codex app (opened at your project root), invoke skills via:
+- `/skills` (discover installed skills)
+- `$<skill-name>` mentions in the composer (example: `$pm-prd-write`)
 
-## CLI Router (Terminal)
+3. If users type `/jaan-to:{skill}`, treat it as intent for `$<skill>` (remove `jaan-to:` prefix).
+
+## CLI Router (Terminal Wrapper)
 
 Use the package runner for terminal invocations:
 

@@ -57,7 +57,14 @@ else
 fi
 
 echo ""
-echo "4) Invalid skill handling"
+echo "4) Codex native skills installation"
+INSTALLED_COUNT="$(find -L "$TMP_PROJECT/.agents/skills" -type f -name 'SKILL.md' | wc -l | tr -d ' ')"
+echo "  Installed SKILL.md count: $INSTALLED_COUNT"
+assert_true "$([ "$INSTALLED_COUNT" -eq "$SOURCE_COUNT" ] && echo true || echo false)" "Installed .agents/skills count matches source"
+assert_true "$([ -f "$TMP_PROJECT/AGENTS.md" ] && echo true || echo false)" "Project AGENTS.md exists after setup"
+
+echo ""
+echo "5) Invalid skill handling"
 if cd "$CODEX_DIST" && ./jaan-to run /jaan-to:not-real "smoke" --dry-run >/tmp/jaan-to-invalid-skill.log 2>&1; then
   echo "  ✗ Invalid skill unexpectedly succeeded"
   ERRORS=$((ERRORS + 1))

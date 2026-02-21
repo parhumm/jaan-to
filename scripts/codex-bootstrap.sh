@@ -19,3 +19,5 @@ mkdir -p "$PROJECT_DIR/jaan-to"
 CLAUDE_PLUGIN_ROOT="$PLUGIN_ROOT" \
 CLAUDE_PROJECT_DIR="$PROJECT_DIR" \
   bash "$PLUGIN_ROOT/scripts/bootstrap.sh"
+
+bash "$PLUGIN_ROOT/scripts/install-codex-skills.sh" "$PROJECT_DIR" "$PLUGIN_ROOT"
