@@ -18,8 +18,9 @@
 2. `bash scripts/validate-skills.sh`
 3. `bash scripts/validate-security.sh`
 4. `bash scripts/validate-multi-runtime.sh`
-5. `bash scripts/validate-claude-compat.sh`
-6. `bash scripts/validate-codex-runner.sh`
+5. `bash scripts/test/e2e-dual-runtime-smoke.sh` (blocking integrated E2E)
+6. `bash scripts/validate-claude-compat.sh`
+7. `bash scripts/validate-codex-runner.sh`
 
 Use this workflow from other workflows instead of duplicating validation logic.
 
@@ -67,13 +68,27 @@ Use this workflow from other workflows instead of duplicating validation logic.
 ### `.github/workflows/dev-push-monitor.yml`
 
 **Trigger:** Push to `dev`
-**Purpose:** Non-blocking visibility for direct push parity regressions
+**Purpose:** Non-blocking visibility for direct push parity regressions and deeper E2E drift
 
 **Flow:**
 1. Call `_dual-runtime-gate.yml` with `continue-on-error`
-2. Emit summary with success/warning status
+2. Run `bash scripts/test/e2e-dual-runtime-full.sh` with `continue-on-error`
+3. Emit summary with success/warning status for both jobs
 
 This preserves current direct-push policy while surfacing runtime regressions quickly.
+
+---
+
+### `.github/workflows/nightly-e2e.yml`
+
+**Trigger:** Scheduled nightly run + `workflow_dispatch`
+**Purpose:** Non-blocking full-suite E2E signal for regressions outside PR windows
+
+**Flow:**
+1. Run `bash scripts/test/e2e-dual-runtime-full.sh` with `continue-on-error`
+2. Emit warning annotation if suite fails
+
+Use this as an early warning monitor, not as a branch protection gate.
 
 ---
 
@@ -94,9 +109,16 @@ Run the same checks locally before opening PRs:
 bash .claude/scripts/validate-plugin-standards.sh
 bash scripts/validate-skills.sh
 bash scripts/validate-security.sh
+bash scripts/test/e2e-dual-runtime-smoke.sh
 bash scripts/validate-multi-runtime.sh
 bash scripts/validate-claude-compat.sh
 bash scripts/validate-codex-runner.sh
+```
+
+For deeper local coverage:
+
+```bash
+bash scripts/test/e2e-dual-runtime-full.sh
 ```
 
 For release validation:

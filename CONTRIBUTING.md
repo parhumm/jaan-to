@@ -332,7 +332,14 @@ description: Brief description
 
 ### Automated Tests
 
-Currently, jaan.to uses manual testing. Automated tests coming in Phase 6 (see [roadmap](docs/roadmap/roadmap.md)).
+jaan.to uses script-driven automated validation and E2E checks for both Claude and Codex runtimes.
+
+Core E2E entrypoints:
+
+```bash
+bash scripts/test/e2e-dual-runtime-smoke.sh
+bash scripts/test/e2e-dual-runtime-full.sh
+```
 
 ### Manual Testing Checklist
 
@@ -371,6 +378,7 @@ Verify:
 Before opening a PR, run:
 
 ```bash
+bash scripts/test/e2e-dual-runtime-smoke.sh
 bash scripts/validate-multi-runtime.sh
 bash scripts/validate-claude-compat.sh
 bash scripts/validate-codex-runner.sh
@@ -385,6 +393,7 @@ For pull requests, dual-runtime checks are required by CI:
 - PR to `dev`: `.github/workflows/dev-dist-build.yml`
 - PR to `main`: `.github/workflows/release-check.yml`
 - Push monitor (non-blocking): `.github/workflows/dev-push-monitor.yml`
+- Nightly full-suite monitor (non-blocking): `.github/workflows/nightly-e2e.yml`
 
 ---
 

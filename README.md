@@ -81,6 +81,12 @@ cd ./dist/jaan-to-codex
 
 # Build both targets
 ./scripts/build-all-targets.sh
+
+# Integrated dual-runtime smoke E2E (blocking gate equivalent)
+bash scripts/test/e2e-dual-runtime-smoke.sh
+
+# Full E2E suite (smoke + legacy integration tests)
+bash scripts/test/e2e-dual-runtime-full.sh
 ```
 
 Then open `/path/to/your-project` in Codex and invoke skills with:
@@ -92,6 +98,8 @@ $detect-dev
 ```
 
 `/jaan-to:*` is a Claude plugin namespace. In Codex, setup installs skills into `.agents/skills` for native discovery and execution.
+
+Integrated smoke E2E validates end-to-end Claude + Codex packaging and setup flow in one command.
 
 ### Claude Compatibility Guarantee
 

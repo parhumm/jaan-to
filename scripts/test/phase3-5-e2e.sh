@@ -11,6 +11,7 @@ export PROJECT_DIR="$TEST_DIR"
 export CLAUDE_PLUGIN_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 # Bootstrap
+mkdir -p "$TEST_DIR/jaan-to"
 bash "$CLAUDE_PLUGIN_ROOT/scripts/bootstrap.sh" > /dev/null 2>&1
 
 # Load libraries
@@ -25,17 +26,16 @@ echo "Test directory: $TEST_DIR"
 echo -e "\n[Test 1] Template with variable substitution"
 test_template="# {{title}}
 
-Stack: {{env:JAAN_CONTEXT_DIR}}
+Project: {{env:CLAUDE_PROJECT_DIR}}
 
 Config: {{config:paths_templates}}"
 
 context="title=Enterprise PRD"
-export JAAN_CONTEXT_DIR="jaan-to/context"
 
 result=$(test_substitute "$test_template" "$context")
 
-if [[ "$result" == *"Enterprise PRD"* ]] && [[ "$result" == *"jaan-to/context"* ]] && [[ "$result" == *"jaan-to/templates"* ]]; then
-  echo "✓ Variables work ({{field}}, {{env:VAR}}, {{config:key}})"
+if [[ "$result" == *"Enterprise PRD"* ]] && [[ "$result" == *"$TEST_DIR"* ]] && [[ "$result" == *"jaan-to/templates"* ]]; then
+  echo "✓ Variables work ({{field}}, allowlisted {{env:VAR}}, {{config:key}})"
 else
   echo "✗ FAIL: Variable substitution failed"
   echo "Result: $result"
@@ -61,20 +61,8 @@ fi
 # Test 3: Learning merge functionality
 echo -e "\n[Test 3] Learning merge with multiple sources"
 
-# Create plugin learning file (simulate)
-mkdir -p "$CLAUDE_PLUGIN_ROOT/skills/test-skill"
-cat > "$CLAUDE_PLUGIN_ROOT/skills/test-skill/LEARN.md" <<EOF
-# Lessons
-
-## Better Questions
-- Plugin question 1
-
-## Workflow
-- Plugin workflow 1
-EOF
-
-# Create project learning file
-cat > "$TEST_DIR/jaan-to/learn/test-skill.learn.md" <<EOF
+# Create project learning file for an existing skill (no repo-path writes)
+cat > "$TEST_DIR/jaan-to/learn/pm-prd-write.learn.md" <<EOF
 # Lessons
 
 ## Better Questions
@@ -86,10 +74,10 @@ EOF
 
 # Merge learning files
 merged_output="$TEST_DIR/merged-test.md"
-merge_learning_files "test-skill" "$merged_output"
+merge_learning_files "pm-prd-write" "$merged_output"
 
 if [ -f "$merged_output" ]; then
-  if grep -q "Plugin question 1" "$merged_output" && grep -q "Project question 1" "$merged_output"; then
+  if grep -q "Project question 1" "$merged_output" && grep -q "source: plugin" "$merged_output"; then
     echo "✓ Learning merge works (plugin + project)"
   else
     echo "✗ FAIL: Learning merge incomplete"
@@ -102,8 +90,6 @@ else
   exit 1
 fi
 
-# Cleanup test skill
-rm -rf "$CLAUDE_PLUGIN_ROOT/skills/test-skill"
 rm -rf "$TEST_DIR"
 
 echo -e "\n=== Phases 3-5 E2E Test: ✓ PASSED ==="

@@ -30,6 +30,7 @@ paths_templates=$(get_config 'paths_templates' 'FAIL')
 [ "$paths_templates" = "jaan-to/templates" ] && echo "✓ Plugin defaults loaded" || (echo "✗ FAIL"; exit 1)
 
 # Run bootstrap
+mkdir -p "$TEST_DIR/jaan-to"
 bash "$CLAUDE_PLUGIN_ROOT/scripts/bootstrap.sh" > /dev/null 2>&1
 [ -f "$TEST_DIR/jaan-to/config/settings.yaml" ] && echo "✓ Bootstrap created settings.yaml" || (echo "✗ FAIL"; exit 1)
 [ -d "$TEST_DIR/jaan-to/templates" ] && echo "✓ Directories created" || (echo "✗ FAIL"; exit 1)
@@ -97,19 +98,8 @@ echo -e "\n========== PHASE 4: Learning System =========="
 
 source "$CLAUDE_PLUGIN_ROOT/scripts/lib/learning-merger.sh"
 
-# Create plugin and project learning files
-mkdir -p "$CLAUDE_PLUGIN_ROOT/skills/integration-test-skill"
-cat > "$CLAUDE_PLUGIN_ROOT/skills/integration-test-skill/LEARN.md" <<EOF
-# Lessons
-
-## Better Questions
-- Plugin question 1
-
-## Workflow
-- Plugin workflow 1
-EOF
-
-cat > "$TEST_DIR/jaan-to/learn/integration-test-skill.learn.md" <<EOF
+# Create project learning file for an existing skill (no repo-path writes)
+cat > "$TEST_DIR/jaan-to/learn/pm-prd-write.learn.md" <<EOF
 # Lessons
 
 ## Better Questions
@@ -129,9 +119,9 @@ unset CONFIG_CACHE_FILE
 load_config
 
 output_file="$TEST_DIR/merged-lessons.md"
-merge_learning_files "integration-test-skill" "$output_file"
+merge_learning_files "pm-prd-write" "$output_file"
 
-grep -q "Plugin question 1" "$output_file" && grep -q "Project question 1" "$output_file" && echo "✓ Learning merge works" || (echo "✗ FAIL"; exit 1)
+grep -q "source: plugin" "$output_file" && grep -q "Project question 1" "$output_file" && echo "✓ Learning merge works" || (echo "✗ FAIL"; exit 1)
 
 # ========================================
 # Phase 5: Tech Stack Integration
@@ -194,7 +184,6 @@ Test problem
 $(extract_section "$TEST_DIR/jaan-to/context/tech.md" "Current Stack" | head -5)
 
 ## Lessons Applied
-$(grep "Plugin question 1" "$output_file")
 $(grep "Project question 1" "$output_file")
 EOF
 
@@ -224,7 +213,6 @@ bash "$CLAUDE_PLUGIN_ROOT/scripts/bootstrap.sh" > /dev/null 2>&1
 # ========================================
 # Cleanup
 # ========================================
-rm -rf "$CLAUDE_PLUGIN_ROOT/skills/integration-test-skill"
 rm -rf "$TEST_DIR"
 
 echo -e "\n=============================================="

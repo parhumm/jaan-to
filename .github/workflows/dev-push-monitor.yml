@@ -9,17 +9,35 @@ jobs:
     continue-on-error: true
     uses: ./.github/workflows/_dual-runtime-gate.yml
 
+  full-e2e-monitor:
+    continue-on-error: true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Full dual-runtime E2E suite (non-blocking)
+        run: bash scripts/test/e2e-dual-runtime-full.sh
+
   report:
     if: always()
-    needs: dual-runtime-monitor
+    needs:
+      - dual-runtime-monitor
+      - full-e2e-monitor
     runs-on: ubuntu-latest
     steps:
       - name: Monitor summary
         run: |
           echo "Dev push monitor result: ${{ needs.dual-runtime-monitor.result }}"
+          echo "Full E2E monitor result: ${{ needs.full-e2e-monitor.result }}"
           if [ "${{ needs.dual-runtime-monitor.result }}" = "success" ]; then
             echo "✓ Dual-runtime checks passed on push to dev"
           else
             echo "::warning::Dual-runtime checks failed on push to dev"
             echo "This workflow is non-blocking for push policy, but failures should be fixed before merge to main."
+          fi
+          if [ "${{ needs.full-e2e-monitor.result }}" = "success" ]; then
+            echo "✓ Full E2E suite passed on push to dev"
+          else
+            echo "::warning::Full E2E suite failed on push to dev"
+            echo "This workflow is non-blocking for push policy, but regressions should be fixed quickly."
           fi

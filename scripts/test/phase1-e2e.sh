@@ -12,6 +12,9 @@ export CLAUDE_PLUGIN_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 
 echo "Test directory: $TEST_DIR"
 
+# bootstrap.sh is opt-in and requires jaan-to/ to exist.
+mkdir -p "$TEST_DIR/jaan-to"
+
 # Test 1: Config loader loads defaults
 echo -e "\n[Test 1] Config loader loads plugin defaults"
 source "$CLAUDE_PLUGIN_ROOT/scripts/lib/config-loader.sh"

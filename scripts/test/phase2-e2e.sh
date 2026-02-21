@@ -17,6 +17,7 @@ export JAAN_OUTPUTS_DIR="jaan-to/outputs"
 echo "Test directory: $TEST_DIR"
 
 # Run Phase 1 bootstrap first
+mkdir -p "$TEST_DIR/jaan-to"
 bash "$CLAUDE_PLUGIN_ROOT/scripts/bootstrap.sh" > /dev/null 2>&1
 
 # Test 1: Path resolver finds templates
@@ -35,7 +36,7 @@ echo "# Custom Template" > "$TEST_DIR/custom-templates/test-template.md"
 
 cat > "$TEST_DIR/jaan-to/config/settings.yaml" <<EOF
 version: "3.0"
-templates_jaan_to_pm_prd_write_path: "./custom-templates/test-template.md"
+templates_pm_prd_write_path: "./custom-templates/test-template.md"
 EOF
 
 unset CONFIG_CACHE_FILE

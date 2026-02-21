@@ -21,6 +21,9 @@ jobs:
       - name: Validate multi-runtime distributions
         run: bash scripts/validate-multi-runtime.sh
 
+      - name: Integrated dual-runtime smoke E2E
+        run: SKIP_BUILD=1 bash scripts/test/e2e-dual-runtime-smoke.sh
+
       - name: Validate Claude compatibility
         run: bash scripts/validate-claude-compat.sh
 

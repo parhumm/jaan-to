@@ -94,6 +94,15 @@ else
 fi
 
 echo ""
+echo "6) Integrated dual-runtime smoke E2E"
+if SKIP_BUILD=1 bash "$PLUGIN_ROOT/scripts/test/e2e-dual-runtime-smoke.sh"; then
+  echo "  ✓ Integrated dual-runtime smoke passed"
+else
+  echo "  ✗ Integrated dual-runtime smoke failed"
+  ERRORS=$((ERRORS + 1))
+fi
+
+echo ""
 if [ "$ERRORS" -gt 0 ]; then
   echo "✗ Multi-runtime validation failed ($ERRORS issues)"
   exit 1
