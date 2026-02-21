@@ -9,6 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Validate Codex skillpack drift
+        run: bash scripts/validate-codex-skillpack.sh
+
       - name: Validate plugin standards
         run: bash .claude/scripts/validate-plugin-standards.sh
 

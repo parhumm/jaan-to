@@ -30,26 +30,57 @@
 
 ## Installation
 
-### Stable Version (Recommended)
-```
+### Claude Code Quick Install
+
+```text
 claude
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
 /jaan-init
 ```
 
-### Development Version (Preview)
-For testing latest features before release:
+### Codex Quick Install
+
+```bash
+# One-command installer (recommended for end users)
+bash <(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
+
+# Fallback if you're in this repo locally
+bash ./scripts/install-codex-skillpack.sh
 ```
+
+Then:
+
+1. Restart Codex.
+2. Open your project in Codex.
+3. Run `/jaan-init` once.
+4. Use `/skills`, `/jaan-to:*`, `/jaan-init`, or native `$skill` mentions.
+
+Examples:
+
+```text
+/skills
+/jaan-init
+/jaan-to:pm-prd-write
+$pm-prd-write
+```
+
+In Codex, `/jaan-to:*` and `/jaan-init` are intentionally preserved as aliases for native `$skill`.
+
+### Claude Code Version Management
+
+Development version:
+
+```text
 claude
 /plugin marketplace add parhumm/jaan-to#dev
 /plugin install jaan-to
 /jaan-init
 ```
 
-### Switching Versions
-To switch from dev to stable (or vice versa):
-```
+Switch stable/dev:
+
+```text
 /plugin uninstall jaan-to
 /plugin marketplace add parhumm/jaan-to       # stable
 /plugin marketplace add parhumm/jaan-to#dev   # dev
@@ -57,56 +88,35 @@ To switch from dev to stable (or vice versa):
 /jaan-init
 ```
 
-### Check Installed Version
-```
-/plugin list
-```
-- All versions use the same format: `3.15.0`, `3.16.0`, etc.
-
-### Local Development
-```bash
-claude --plugin-dir /path/to/jaan-to
-```
-
-### Distribution Builds
-```bash
-# Claude plugin package
-./scripts/build-dist.sh
-claude --plugin-dir ./dist/jaan-to-claude
-
-# Codex skillpack source (global installer path)
-bash ./scripts/build-codex-skillpack.sh
-
-# Install global Codex skillpack (uses Codex Skill Installer)
-bash ./scripts/install-codex-skillpack.sh
-# Restart Codex after install
-
-# Build both targets
-./scripts/build-all-targets.sh
-
-# Integrated dual-runtime smoke E2E (blocking gate equivalent)
-bash scripts/test/e2e-dual-runtime-smoke.sh
-
-# Full E2E suite (smoke + legacy integration tests)
-bash scripts/test/e2e-dual-runtime-full.sh
-```
-
-Then open `/path/to/your-project` in Codex and invoke skills with:
+Check installed version:
 
 ```text
-/skills
-$jaan-init
-/jaan-init
-$pm-prd-write
-$detect-dev
+/plugin list
 ```
 
-In Codex, `/jaan-to:*` and `/jaan-init` are maintained as aliases for native `$skill` invocation.
-Global skillpack installation is the default path.
+### Local Development + Build Commands
 
-### Codex Local Mode (Legacy/Debug)
+```bash
+# Claude local dev
+claude --plugin-dir /path/to/jaan-to
 
-Use local mode only when explicitly testing project-local symlinks:
+# Build both runtime targets
+./scripts/build-all-targets.sh
+
+# Build Codex skillpack source
+bash ./scripts/build-codex-skillpack.sh
+
+# Skillpack drift guard
+bash ./scripts/validate-codex-skillpack.sh
+
+# Skill PR prep (regenerate + validate + stage skillpack)
+bash ./scripts/prepare-skill-pr.sh
+
+# Integrated dual-runtime smoke
+bash scripts/test/e2e-dual-runtime-smoke.sh
+```
+
+### Codex Local Mode (Legacy/Debug Only)
 
 ```bash
 ./scripts/build-target.sh codex
@@ -114,20 +124,16 @@ cd ./dist/jaan-to-codex
 ./jaan-to setup /path/to/your-project --mode local
 ```
 
-`setup --mode auto` resolves to:
-- `global` when `~/.agents/skills/jaan-to-codex-pack` exists
-- `local` otherwise
+`setup --mode auto` resolves to global if `~/.agents/skills/jaan-to-codex-pack` exists, otherwise local.
 
 ### Codex Troubleshooting
 
-- SSL certificate failure in Skill Installer `auto` mode:
-  - The wrapper retries with `--method git` automatically.
-- Duplicate name ambiguity (`$skill` not resolving):
+- Installer `auto` method SSL failure:
+  - Wrapper retries automatically with `--method git`.
+- `$skill` ambiguity from duplicate names:
   - Remove duplicate project `.agents/skills/<jaan-to-skill>` entries and use global mode.
-- Skills not showing after install:
-  - Restart Codex to reload installed skills.
-
-Integrated smoke E2E validates end-to-end Claude + Codex packaging and setup flow in one command.
+- Skills not appearing:
+  - Restart Codex after install/reinstall.
 
 ### Claude Compatibility Guarantee
 
@@ -149,7 +155,7 @@ npx skills add parhumm/jaan-to --skill pm-prd-write
 npx skills find "product requirements"
 ```
 
-> **Note:** This installs skill definitions only. For the full jaan.to experience (hooks, agents, config system, learning), use the [plugin installation](#stable-version-recommended) instead.
+> **Note:** This installs skill definitions only. For the full jaan.to experience (hooks, agents, config system, learning), use the [Claude Code installation flow](#claude-code-quick-install) instead.
 
 ### First run
 The bootstrap hook automatically creates `jaan-to/` in your project with:

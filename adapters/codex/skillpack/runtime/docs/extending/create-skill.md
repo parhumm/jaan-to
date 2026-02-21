@@ -1744,6 +1744,7 @@ After migration, test the skill:
 - [ ] Template exists (if skill has structured output)
 - [ ] Skill registered in `context/config.md`
 - [ ] Documentation added to `docs/skills/{role}/`
+- [ ] Run `bash scripts/prepare-skill-pr.sh` before commit so `adapters/codex/skillpack/` stays in sync
 
 ---
 
@@ -1753,6 +1754,7 @@ After migration, test the skill:
 - Match output format to team expectations
 - Read stack context instead of asking redundant questions
 - Test with real scenarios before committing
+- Always run `bash scripts/prepare-skill-pr.sh` before opening a skill PR
 - Keep SKILL.md focused on execution, not explanation
 
 ---

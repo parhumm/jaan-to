@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>/Jaan-to: Give soul to your ideas</title>
-    <meta name="description" content="Jaan.to is a workflow layer for Claude Code. AI handles the repetitive work. Humans keep the decisions. Open source.">
-    <meta name="keywords" content="Jaan.to, Claude Code, workflow automation, human-AI collaboration, product teams, open source">
+    <meta name="description" content="Jaan.to is a workflow layer for Claude Code and Codex. AI handles repetitive work. Humans keep the decisions. Open source.">
+    <meta name="keywords" content="Jaan.to, Claude Code, Codex, workflow automation, human-AI collaboration, product teams, open source">
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
@@ -321,6 +321,99 @@
         .hero-note {
             font-size: 0.85rem;
             color: var(--color-text-tertiary);
+        }
+
+        .hero-platforms {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 0 auto 24px;
+        }
+
+        .hero-platform-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border: 1px solid var(--color-border);
+            border-radius: 999px;
+            background: white;
+            color: var(--color-text-secondary);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-platform-badge img {
+            width: 14px;
+            height: 14px;
+        }
+
+        .hero-install-shell {
+            margin: 28px auto 0;
+            max-width: 960px;
+            text-align: left;
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            background: white;
+            padding: 24px;
+        }
+
+        .hero-install-title {
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+        }
+
+        .hero-install-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .hero-install-card {
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 16px;
+            background: var(--color-bg-subtle);
+        }
+
+        .hero-install-card h3 {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .hero-install-card h3 img {
+            width: 15px;
+            height: 15px;
+        }
+
+        .hero-install-card pre {
+            margin: 0;
+            padding: 12px;
+            border-radius: 8px;
+            background: #121212;
+            color: #E9E9E9;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            line-height: 1.65;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .hero-install-card p {
+            margin-top: 10px;
+            font-size: 0.82rem;
+            color: var(--color-text-secondary);
         }
 
         /* ---- Problem ---- */
@@ -1020,6 +1113,14 @@
             animation: fadeUp 0.8s ease-out 0.85s both;
         }
 
+        .hero-platforms {
+            animation: fadeUp 0.8s ease-out 1s both;
+        }
+
+        .hero-install-shell {
+            animation: fadeUp 0.8s ease-out 1.15s both;
+        }
+
         .hero-note a {
             color: var(--color-text-secondary);
         }
@@ -1036,7 +1137,7 @@
         /* ---- Reduced Motion ---- */
         @media (prefers-reduced-motion: reduce) {
             .reveal { opacity: 1; transform: none; transition: none; }
-            .hero-definition, .hero-subtitle, .hero-actions, .hero-note { animation: none; }
+            .hero-definition, .hero-subtitle, .hero-actions, .hero-note, .hero-platforms, .hero-install-shell { animation: none; }
             .hard-stop-line { transform: scaleX(1); transition: none; }
             html { scroll-behavior: auto; }
         }
@@ -1072,6 +1173,14 @@
                 padding-bottom: 60px;
             }
 
+            .hero-install-shell {
+                padding: 16px;
+            }
+
+            .hero-install-grid {
+                grid-template-columns: 1fr;
+            }
+
             .team-ship-tracks {
                 grid-template-columns: 1fr;
             }
@@ -1090,6 +1199,10 @@
             .hero-actions-secondary {
                 flex-direction: column;
                 width: 100%;
+            }
+
+            .hero-install-card pre {
+                font-size: 0.74rem;
             }
 
             .nav-links .btn-nav {
@@ -1140,8 +1253,18 @@
                 To give soul to something.
             </h1> -->
             <p class="hero-subtitle">
-                A workflow layer for Claude Code that handles the repetitive work, so your team can focus on the work that matters.
+                A workflow layer for Claude Code + Codex that handles repetitive work so your team can focus on what matters.
             </p>
+            <div class="hero-platforms">
+                <span class="hero-platform-badge">
+                    <img src="https://cdn.simpleicons.org/anthropic/1A1A1A" alt="Claude Code logo">
+                    Claude Code
+                </span>
+                <span class="hero-platform-badge">
+                    <img src="https://cdn.simpleicons.org/openai/1A1A1A" alt="Codex logo">
+                    Codex
+                </span>
+            </div>
             <div class="hero-actions">
                 <a href="https://github.com/parhumm/jaan-to" class="btn btn-primary">Get Started</a>
                 <div class="hero-actions-secondary">
@@ -1150,8 +1273,34 @@
                 </div>
             </div>
             <p class="hero-note">
-                Open source. For Claude Code. Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a>
+                Open source. Built for Claude Code + Codex. Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a>
             </p>
+            <div class="hero-install-shell">
+                <div class="hero-install-title">Install in 60 seconds</div>
+                <div class="hero-install-grid">
+                    <article class="hero-install-card">
+                        <h3>
+                            <img src="https://cdn.simpleicons.org/anthropic/1A1A1A" alt="Claude Code logo">
+                            Claude Code
+                        </h3>
+                        <pre>claude
+/plugin marketplace add parhumm/jaan-to
+/plugin install jaan-to
+/jaan-init</pre>
+                        <p>Then run `/jaan-to:pm-prd-write` or any `/jaan-to:*` skill.</p>
+                    </article>
+                    <article class="hero-install-card">
+                        <h3>
+                            <img src="https://cdn.simpleicons.org/openai/1A1A1A" alt="Codex logo">
+                            Codex
+                        </h3>
+                        <pre>bash &lt;(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
+# restart Codex
+/jaan-init</pre>
+                        <p>Use `/skills`, `/jaan-to:*`, `/jaan-init`, or native `$skill` mentions.</p>
+                    </article>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1791,15 +1940,7 @@
     <section class="cta" id="get-started">
         <div class="container">
             <h2 class="section-heading reveal">Give your product work a soul.</h2>
-            <p class="cta-subtitle reveal">Open source. One-command setup. Install the plugin and run your first skill.</p>
-
-            <div class="terminal reveal" style="margin-bottom: 40px;">
-                <span class="prompt">$</span> <span class="command">claude</span><br>
-                <span class="prompt">$</span> <span class="command">/plugin marketplace add parhumm/jaan-to</span><br>
-                <span class="prompt">$</span> <span class="command">/plugin install jaan-to/jaan-to</span><br>
-                <span class="prompt">$</span> <span class="command">/jaan-init</span><br>
-                <span class="prompt">$</span> <span class="command">/frontend-design "A landingpage for Personal Branding"</span>
-            </div>
+            <p class="cta-subtitle reveal">Install from Section 1, then use docs + source to customize workflows for your team.</p>
 
             <div class="cta-actions reveal">
                 <a href="https://github.com/parhumm/jaan-to" class="btn btn-primary">Get Started on GitHub</a>

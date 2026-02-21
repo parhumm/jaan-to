@@ -1,7 +1,7 @@
 ---
 name: skill-create
 description: Guide users through creating new jaan-to skills step-by-step. Use when building a new plugin skill.
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(bash scripts/prepare-skill-pr.sh*), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 disable-model-invocation: true
 license: MIT
@@ -384,7 +384,15 @@ This ensures documentation is always created with the skill.
 
 > **Reference**: See `docs/extending/git-pr-workflow.md` section "skill-create: Commit to Branch" for the full commit template.
 
-Stage `skills/{name}/`, `jaan-to/`, and `docs/skills/{role}/{name}.md`. Commit with feat(skill) message including description and research source count.
+Before staging, run:
+
+```bash
+bash scripts/prepare-skill-pr.sh
+```
+
+This regenerates + validates Codex skillpack artifacts and stages `adapters/codex/skillpack/`.
+
+Then stage `skills/{name}/`, `jaan-to/`, and `docs/skills/{role}/{name}.md`. Commit with feat(skill) message including description and research source count.
 
 ---
 
@@ -426,7 +434,11 @@ When user confirms working:
 
 > **Reference**: See `docs/extending/git-pr-workflow.md` section "skill-create: Create Pull Request" for the full `gh pr create` template.
 
-Push branch, create PR with skill summary, research used, and files created. Show PR URL to user.
+Push branch, create PR with skill summary, research used, files created, and an explicit line:
+
+`Codex skillpack sync: ✅ generated via scripts/prepare-skill-pr.sh`
+
+Show PR URL to user.
 
 If no:
 > "Branch `skill/{name}` is ready. Merge manually when ready."

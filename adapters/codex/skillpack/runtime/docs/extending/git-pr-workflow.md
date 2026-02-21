@@ -21,10 +21,20 @@ git checkout -b update/{skill-name}
 
 Confirm: "Created branch `update/{name}` from `dev`. All updates on this branch."
 
+### Step 12.5: Sync Codex Skillpack (Mandatory)
+
+Before every commit for skill changes:
+
+```bash
+bash scripts/prepare-skill-pr.sh
+```
+
+This regenerates and validates `adapters/codex/skillpack/` and stages it automatically.
+
 ### Step 13: Commit to Branch
 
 ```bash
-git add skills/{name}/ jaan-to/ docs/skills/{role}/{name}.md
+git add skills/{name}/ jaan-to/ docs/skills/{role}/{name}.md adapters/codex/skillpack/
 git commit -m "fix(skill): Update {name} skill
 
 - {change_summary}
@@ -78,6 +88,10 @@ Updated `{name}` skill with:
 
 ✅ All checks pass after update
 
+## Codex Skillpack Sync
+
+✅ Generated via `bash scripts/prepare-skill-pr.sh`
+
 ## Testing
 
 ✅ User confirmed skill works correctly
@@ -99,7 +113,8 @@ If no:
 After all skill files are written and validated:
 
 ```bash
-git add skills/{name}/ jaan-to/ docs/skills/{role}/{name}.md
+bash scripts/prepare-skill-pr.sh
+git add skills/{name}/ jaan-to/ docs/skills/{role}/{name}.md adapters/codex/skillpack/
 git commit -m "feat(skill): Add {name} skill
 
 - {description}
@@ -110,6 +125,8 @@ Generated with Claude Code
 
 Co-Authored-By: Claude <noreply@anthropic.com>"
 ```
+
+`prepare-skill-pr.sh` is required for skill PRs so Codex skillpack artifacts always stay in sync.
 
 ---
 
@@ -139,6 +156,10 @@ Consulted {source_count} sources for best practices:
 - `$JAAN_LEARN_DIR/{name}.learn.md`
 - `$JAAN_TEMPLATES_DIR/{name}.template.md` (if applicable)
 - `docs/skills/{role}/{name}.md`
+
+## Codex Skillpack Sync
+
+✅ Generated via `bash scripts/prepare-skill-pr.sh`
 
 ## Testing
 

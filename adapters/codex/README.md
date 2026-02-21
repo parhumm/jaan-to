@@ -2,6 +2,35 @@
 
 This directory contains Codex-specific adapter files.
 
+## Quick Install (Global-First)
+
+```bash
+# End-user one-command install
+bash <(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
+```
+
+Local fallback (inside this repo):
+
+```bash
+bash ./scripts/install-codex-skillpack.sh
+```
+
+After install:
+
+1. Restart Codex.
+2. Open your project in Codex.
+3. Run `/jaan-init` once.
+4. Use `/skills`, `/jaan-to:*`, `/jaan-init`, or native `$skill`.
+
+Quick verify:
+
+```text
+/skills
+/jaan-init
+/jaan-to:pm-prd-write
+$pm-prd-write
+```
+
 ## Purpose
 
 jaan.to development stays centralized in shared sources (`skills/`, `scripts/`, `agents/`, `config/`, `docs/extending/`).
@@ -23,25 +52,7 @@ Output package:
 - `dist/jaan-to-codex/config/`
 - `adapters/codex/skillpack/` (installable skillpack source for Codex Skill Installer)
 
-## Quickstart in Codex
-
-```bash
-# Build skillpack source
-bash ./scripts/build-codex-skillpack.sh
-
-# Install global skillpack via Codex Skill Installer wrapper
-bash ./scripts/install-codex-skillpack.sh
-# Restart Codex
-```
-
-Then open `/path/to/your-project` in Codex app and use:
-
-```bash
-/skills
-# or mention skills with $
-$jaan-init
-$pm-prd-write
-```
+## Invocation Contract
 
 Aliases are intentionally preserved:
 
@@ -51,7 +62,7 @@ Aliases are intentionally preserved:
 $pm-prd-write
 ```
 
-Terminal wrapper is still available:
+Terminal wrapper remains available:
 
 ```bash
 # Global/default mode
@@ -64,7 +75,7 @@ Terminal wrapper is still available:
 `auto` mode resolves to global when `~/.agents/skills/jaan-to-codex-pack` exists, otherwise local.
 When global pack is present, local mode is blocked by default to prevent duplicate-name ambiguity.
 
-### Troubleshooting
+## Troubleshooting
 
 - SSL certificate failure in installer auto mode:
   - Wrapper retries install with `--method git`.
@@ -76,6 +87,7 @@ When global pack is present, local mode is blocked by default to prevent duplica
 ## Validation
 
 ```bash
+bash scripts/prepare-skill-pr.sh --check
 bash scripts/validate-codex-skillpack.sh
 bash scripts/validate-codex-runner.sh
 ```

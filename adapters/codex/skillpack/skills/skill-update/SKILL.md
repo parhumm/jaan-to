@@ -1,7 +1,7 @@
 ---
 name: skill-update
 description: Update an existing jaan-to skill following standards. Use when modifying or improving existing skills.
-allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit(skills/**), Edit(docs/**), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
+allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit(skills/**), Edit(docs/**), Bash(bash scripts/prepare-skill-pr.sh*), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [skill-name]
 disable-model-invocation: true
 license: MIT
@@ -336,8 +336,11 @@ This ensures documentation stays in sync with skill changes.
 Stage and commit updated files:
 
 ```bash
+bash scripts/prepare-skill-pr.sh
 git add skills/{name}/ jaan-to/ docs/skills/{role}/{name}.md
 ```
+
+`prepare-skill-pr.sh` regenerates + validates Codex skillpack artifacts and stages `adapters/codex/skillpack/`.
 
 For full commit message template, read: `${CLAUDE_PLUGIN_ROOT}/docs/extending/git-pr-workflow.md` (section: "Step 13: Commit to Branch")
 Commit message prefix: `fix(skill): Update {name} skill`
@@ -373,6 +376,10 @@ If yes, push and create PR. For full PR body template, read: `${CLAUDE_PLUGIN_RO
 git push -u origin update/{name}
 gh pr create --base dev --title "fix(skill): Update {name} skill" --body "..."
 ```
+
+PR summary must include:
+
+`Codex skillpack sync: ✅ generated via scripts/prepare-skill-pr.sh`
 
 Show PR URL to user.
 
