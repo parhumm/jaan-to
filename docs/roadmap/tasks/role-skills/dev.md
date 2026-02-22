@@ -233,3 +233,17 @@ flowchart TD
 - **MCP Required**: GitLab (pipelines), Sentry (health)
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/release/{id}-{slug}/{id}-{slug}.md`
+
+### /jaan-to:dev-docs-fetch
+
+- **Logical**: `dev-docs-fetch`
+- **Description**: Fetch and cache library docs via Context7 MCP with smart caching and auto-detect
+- **Quick Win**: No — requires Context7 MCP
+- **Key Points**:
+  - Tech-agnostic: reads tech.md for stack detection
+  - 7-day TTL smart caching
+  - Standalone or callable from other skills' Phase 1
+- **→ Next**: Any dev/backend/frontend skill needing library context
+- **MCP Required**: Context7 (resolve-library-id, get-library-docs)
+- **Input**: [library-names...] or auto-detect from tech.md
+- **Output**: `$JAAN_OUTPUTS_DIR/dev/docs/context7/{library-name}.md`

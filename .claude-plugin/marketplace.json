@@ -60,7 +60,9 @@
         "vitest",
         "playwright",
         "sarif",
-        "security-remediation"
+        "security-remediation",
+        "context7",
+        "mcp"
       ],
       "homepage": "https://github.com/parhumm/jaan-to",
       "repository": "https://github.com/parhumm/jaan-to",
@@ -79,6 +81,7 @@
         "./skills/detect-product",
         "./skills/detect-ux",
         "./skills/detect-writing",
+        "./skills/dev-docs-fetch",
         "./skills/dev-output-integrate",
         "./skills/dev-project-assemble",
         "./skills/dev-verify",
