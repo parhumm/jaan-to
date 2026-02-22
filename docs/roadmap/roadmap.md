@@ -110,6 +110,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 - **Core MCPs (11)**: GA4, GitLab, Jira, Figma, GSC, Clarity, Sentry, BigQuery, Playwright, OpenAPI, dbt Cloud
 - **Extended MCPs (13)**: Notion, Slack, GitHub, Linear, Mixpanel, Confluence, Snowflake, PostgreSQL, Ahrefs, Semrush, LambdaTest, Google Drive, Memory
 - **Infrastructure**: Deferred loading for token savings, Context7 integration, model routing per skill type
+- [ ] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
 
 ---
 
@@ -186,6 +187,7 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
 | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, auto-fix, generate coverage reports |
 | `/jaan-to:dev-verify` | Validate build pipeline and running services with health checks |
+| `/jaan-to:dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
 | `/jaan-to:jaan-init` | Initialize jaan-to for a project |
 | `/jaan-to:jaan-issue-report` | Report issues to jaan-to GitHub repo |
