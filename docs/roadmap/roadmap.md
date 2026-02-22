@@ -38,6 +38,8 @@ For complete release history, see [CHANGELOG.md](/changelog).
 ## v7.4.0 — 2026-02-22
 
 - [x] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
+- [x] Dual-runtime MCP support — Codex config.toml auto-configuration, `validate-mcp-servers.sh` parity checks, CI dual-runtime MCP gate
+- [x] MCP infrastructure hardening — config update safety, `.mcp.json` build distribution, stale count fixes
 
 ---
 
