@@ -24,7 +24,7 @@ This is the first MCP-powered skill in jaan-to (Phase 7).
 
 ## Prerequisites
 
-- Context7 MCP server configured in `.mcp.json` (included with jaan-to v7.4.0+)
+- Context7 MCP server configured (`.mcp.json` for Claude Code, `~/.codex/config.toml` for Codex — both auto-configured during install)
 - Project initialized with `/jaan-to:jaan-init`
 - `npx` available in PATH (for MCP server installation)
 

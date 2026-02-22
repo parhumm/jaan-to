@@ -290,7 +290,7 @@ If "Learn from this": Run `/jaan-to:learn-add dev-docs-fetch "{feedback}"`
 - Does NOT modify project source files
 - Does NOT start services or run builds
 - Only writes to `$JAAN_OUTPUTS_DIR/dev/docs/context7/`
-- Requires Context7 MCP server configured in `.mcp.json`
+- Requires Context7 MCP server configured (`.mcp.json` for Claude Code, `~/.codex/config.toml` for Codex)
 
 ---
 

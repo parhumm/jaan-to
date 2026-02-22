@@ -22,6 +22,9 @@ After install:
 3. Run `/jaan-init` once.
 4. Use `/skills`, `/jaan-to:*`, `/jaan-init`, or native `$skill`.
 
+The installer automatically configures Context7 MCP in `~/.codex/config.toml` for the `dev-docs-fetch` skill.
+To skip MCP configuration, use `--no-mcp`. See [MCP & Context7 Integration](../../docs/mcp/context7.md).
+
 Quick verify:
 
 ```text

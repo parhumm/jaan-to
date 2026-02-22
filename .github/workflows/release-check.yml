@@ -134,6 +134,17 @@ jobs:
 
           [ $ERRORS -eq 0 ] && echo "✓ Agent Skills compliance passed" || exit 1
 
+      - name: Check MCP dual-runtime parity
+        run: |
+          ERRORS=0
+          for server in $(jq -r '.mcpServers | keys[]' .mcp.json); do
+            if ! grep -q "\\[mcp_servers\\.$server\\]" scripts/install-codex-skillpack.sh; then
+              echo "::error::MCP server '$server' in .mcp.json but missing from Codex installer"
+              ERRORS=$((ERRORS+1))
+            fi
+          done
+          [ $ERRORS -eq 0 ] && echo "✓ MCP dual-runtime parity confirmed" || exit 1
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
