@@ -21,6 +21,9 @@ jobs:
       - name: Validate security standards
         run: bash scripts/validate-security.sh
 
+      - name: Validate MCP server configuration
+        run: bash scripts/validate-mcp-servers.sh
+
       - name: Validate multi-runtime distributions
         run: bash scripts/validate-multi-runtime.sh
 

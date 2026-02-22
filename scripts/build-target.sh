@@ -78,6 +78,7 @@ build_claude_target() {
   copy_dir "$PLUGIN_ROOT/.claude-plugin" "$out_dir/.claude-plugin"
   copy_dir "$PLUGIN_ROOT/hooks" "$out_dir/hooks"
   copy_file "$PLUGIN_ROOT/CLAUDE.md" "$out_dir/CLAUDE.md"
+  copy_file "$PLUGIN_ROOT/.mcp.json" "$out_dir/.mcp.json"
 
   print_summary "Claude" "$out_dir"
   echo "Install with:"

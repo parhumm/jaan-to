@@ -14,8 +14,12 @@ SKILLPACK_PATH="adapters/codex/skillpack"
 METHOD="auto"
 FORCE=0
 UPDATE_AGENTS=1
+UPDATE_MCP=1
+MCP_CONFIG_UPDATED=0
 BLOCK_START="# >>> JAAN-TO CODEX RUNTIME >>>"
 BLOCK_END="# <<< JAAN-TO CODEX RUNTIME <<<"
+MCP_BLOCK_START="# >>> JAAN-TO MCP SERVERS >>>"
+MCP_BLOCK_END="# <<< JAAN-TO MCP SERVERS <<<"
 
 usage() {
   cat <<'EOF'
@@ -30,6 +34,7 @@ Options:
   --method <m>            Installer method: auto|download|git (default: auto)
   --force                 Replace existing installation directory
   --no-agents             Do not update ~/.codex/AGENTS.md managed block
+  --no-mcp                Do not update ~/.codex/config.toml MCP servers
   -h, --help              Show this help
 EOF
 }
@@ -142,6 +147,62 @@ EOF
   rm -f "$stripped_file" "$block_file"
 }
 
+strip_mcp_block() {
+  local file="$1"
+  local tmp="$2"
+
+  if [ ! -f "$file" ]; then
+    : > "$tmp"
+    return 0
+  fi
+
+  awk -v start="$MCP_BLOCK_START" -v end="$MCP_BLOCK_END" '
+    $0 == start { skip = 1; next }
+    $0 == end { skip = 0; next }
+    !skip { print }
+  ' "$file" > "$tmp"
+}
+
+update_codex_mcp_config() {
+  local config_file="$CODEX_HOME_DIR/config.toml"
+  local stripped_file
+  stripped_file="$(mktemp)"
+  strip_mcp_block "$config_file" "$stripped_file"
+
+  # Skip if user already configured context7 outside managed block (e.g., via codex mcp add)
+  if grep -q '^\[mcp_servers\.context7\]' "$stripped_file" 2>/dev/null; then
+    # Persist stripped content so stale managed blocks are removed.
+    mkdir -p "$(dirname "$config_file")"
+    cat "$stripped_file" > "$config_file"
+    echo "Context7 MCP already configured in $config_file (user-managed). Removed managed block and skipped."
+    MCP_CONFIG_UPDATED=0
+    rm -f "$stripped_file"
+    return 0
+  fi
+
+  local block_file
+  block_file="$(mktemp)"
+  cat > "$block_file" <<EOF
+$MCP_BLOCK_START
+[mcp_servers.context7]
+command = "npx"
+args = ["-y", "@upstash/context7-mcp@latest"]
+$MCP_BLOCK_END
+EOF
+
+  mkdir -p "$(dirname "$config_file")"
+  if [ -s "$stripped_file" ]; then
+    cat "$stripped_file" > "$config_file"
+    printf '\n' >> "$config_file"
+    cat "$block_file" >> "$config_file"
+  else
+    cat "$block_file" > "$config_file"
+  fi
+
+  MCP_CONFIG_UPDATED=1
+  rm -f "$stripped_file" "$block_file"
+}
+
 REPO_SLUG="$(detect_repo_slug)"
 REF_NAME="$(detect_ref)"
 
@@ -201,6 +262,10 @@ while [ "$#" -gt 0 ]; do
       ;;
     --no-agents)
       UPDATE_AGENTS=0
+      shift
+      ;;
+    --no-mcp)
+      UPDATE_MCP=0
       shift
       ;;
     --help|-h)
@@ -285,6 +350,15 @@ fi
 if [ "$UPDATE_AGENTS" -eq 1 ]; then
   update_codex_agents "$RUNTIME_ROOT"
   echo "Updated managed jaan.to runtime block in $CODEX_HOME_DIR/AGENTS.md"
+fi
+
+if [ "$UPDATE_MCP" -eq 1 ]; then
+  update_codex_mcp_config
+  if [ "$MCP_CONFIG_UPDATED" -eq 1 ]; then
+    echo "Updated managed Context7 MCP config in $CODEX_HOME_DIR/config.toml"
+  else
+    echo "Skipped managed Context7 MCP config update in $CODEX_HOME_DIR/config.toml"
+  fi
 fi
 
 echo ""

@@ -40,29 +40,29 @@ Integrate Context7 MCP to fetch, cache, and manage library documentation for dev
 
 ## Subtasks
 
-- [ ] Add Context7 MCP server to Claude settings (`.mcp.json`)
-- [ ] Create `/jaan-to:dev-docs-fetch` skill (`skills/dev-docs-fetch/SKILL.md`)
+- [x] Add Context7 MCP server to Claude settings (`.mcp.json`)
+- [x] Create `/jaan-to:dev-docs-fetch` skill (`skills/dev-docs-fetch/SKILL.md`)
   - YAML frontmatter with `allowed-tools`: Bash, Context7 MCP tools, Write, Read
   - `argument-hint: [library-names...]`
   - Pre-execution protocol integration
   - Two-phase workflow with HARD STOP
-- [ ] Implement tech-agnostic library detection
+- [x] Implement tech-agnostic library detection
   - Read `$JAAN_CONTEXT_DIR/tech.md` for current stack (no hardcoded library tiers)
   - Parse arguments when provided directly
   - Auto-detect from conversation context as fallback
-- [ ] Implement cache freshness check (Bash-based)
+- [x] Implement cache freshness check (Bash-based)
   - Cache directory: `$JAAN_OUTPUTS_DIR/dev/docs/context7/`
   - 7-day TTL using file modification time
   - Cross-platform (macOS `stat -f %m` / Linux `stat -c %Y`)
-- [ ] Add graceful error handling
+- [x] Add graceful error handling
   - Library not found → suggest alternatives, offer retry/skip
   - API failure → fallback to stale cache
   - Network timeout → retry up to 3 times with backoff
   - Invalid response → skip and continue
-- [ ] YAML frontmatter for cached files
+- [x] YAML frontmatter for cached files
   - Fields: title, library_id, type, created, updated, context7_mode, topic, tags, source, cache_ttl
   - Preserve `created` date on re-fetch
-- [ ] Learning integration (`$JAAN_LEARN_DIR/dev-docs-fetch.learn.md`)
+- [x] Learning integration (`$JAAN_LEARN_DIR/dev-docs-fetch.learn.md`)
 
 ---
 

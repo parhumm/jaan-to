@@ -85,6 +85,7 @@ copy_file "$PLUGIN_ROOT/adapters/codex/jaan-to" "$RUNTIME_DIR/jaan-to"
 chmod +x "$RUNTIME_DIR/jaan-to"
 copy_file "$PLUGIN_ROOT/adapters/codex/AGENTS.md" "$RUNTIME_DIR/AGENTS.md"
 copy_file "$PLUGIN_ROOT/adapters/codex/README.md" "$OUT_DIR/README.md"
+copy_file "$PLUGIN_ROOT/.mcp.json" "$RUNTIME_DIR/.mcp.json.reference"
 
 SKILL_COUNT="$(find "$OUT_DIR/skills" -type f -name 'SKILL.md' | wc -l | tr -d ' ')"
 RUNTIME_SCRIPT_COUNT="$(find "$RUNTIME_DIR/scripts" -type f | wc -l | tr -d ' ')"
