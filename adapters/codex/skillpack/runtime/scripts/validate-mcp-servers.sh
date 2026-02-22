@@ -80,7 +80,13 @@ for skill_file in "$SKILLS_DIR"/*/SKILL.md; do
   [ -z "$mcp_tools" ] && continue
 
   # Extract unique server names from mcp__<server>__<tool> patterns
-  mcp_servers="$(echo "$mcp_tools" | sed -E 's/^mcp__([^_]+)__.*/\1/' | sort -u)"
+  mcp_servers="$(
+    echo "$mcp_tools" | while IFS= read -r tool; do
+      [ -n "$tool" ] || continue
+      tool="${tool#mcp__}"
+      echo "${tool%%__*}"
+    done | sort -u
+  )"
 
   for srv in $mcp_servers; do
     found=0

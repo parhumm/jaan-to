@@ -15,6 +15,7 @@ METHOD="auto"
 FORCE=0
 UPDATE_AGENTS=1
 UPDATE_MCP=1
+MCP_CONFIG_UPDATED=0
 BLOCK_START="# >>> JAAN-TO CODEX RUNTIME >>>"
 BLOCK_END="# <<< JAAN-TO CODEX RUNTIME <<<"
 MCP_BLOCK_START="# >>> JAAN-TO MCP SERVERS >>>"
@@ -170,7 +171,11 @@ update_codex_mcp_config() {
 
   # Skip if user already configured context7 outside managed block (e.g., via codex mcp add)
   if grep -q '^\[mcp_servers\.context7\]' "$stripped_file" 2>/dev/null; then
-    echo "Context7 MCP already configured in $config_file (user-managed). Skipping."
+    # Persist stripped content so stale managed blocks are removed.
+    mkdir -p "$(dirname "$config_file")"
+    cat "$stripped_file" > "$config_file"
+    echo "Context7 MCP already configured in $config_file (user-managed). Removed managed block and skipped."
+    MCP_CONFIG_UPDATED=0
     rm -f "$stripped_file"
     return 0
   fi
@@ -194,6 +199,7 @@ EOF
     cat "$block_file" > "$config_file"
   fi
 
+  MCP_CONFIG_UPDATED=1
   rm -f "$stripped_file" "$block_file"
 }
 
@@ -348,7 +354,11 @@ fi
 
 if [ "$UPDATE_MCP" -eq 1 ]; then
   update_codex_mcp_config
-  echo "Updated managed Context7 MCP config in $CODEX_HOME_DIR/config.toml"
+  if [ "$MCP_CONFIG_UPDATED" -eq 1 ]; then
+    echo "Updated managed Context7 MCP config in $CODEX_HOME_DIR/config.toml"
+  else
+    echo "Skipped managed Context7 MCP config update in $CODEX_HOME_DIR/config.toml"
+  fi
 fi
 
 echo ""
