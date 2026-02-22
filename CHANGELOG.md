@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.4.0] - 2026-02-22
+
+### Added
+- **Context7 MCP integration** (Phase 7) — First MCP connector providing on-demand library documentation via the Context7 protocol. `.mcp.json` configures the `@upstash/context7-mcp` server with two tools: `resolve-library-id` (convert library names to Context7-compatible IDs) and `get-library-docs` (fetch documentation with code/info mode selection). Skills can now access real, up-to-date library documentation instead of relying on training data. Marketplace keywords updated with `context7` and `mcp` tags for ecosystem discovery. ([Task: mcp-context7](docs/roadmap/tasks/mcp-context7.md))
+- **`dev-docs-fetch` skill** (`/jaan-to:dev-docs-fetch`) — Fetch and cache library documentation via Context7 MCP with smart caching and auto-detect. Tech-agnostic library detection via `$JAAN_CONTEXT_DIR/tech.md` (`#current-stack` and `#frameworks` sections) with explicit argument override and fallback prompting. Two-phase workflow: cache freshness check (7-day TTL with Bash-based cross-platform `stat` detection for macOS/Linux) → HARD STOP confirmation → resolve library IDs via `mcp__context7__resolve-library-id` → fetch documentation via `mcp__context7__get-library-docs` (code mode for API references, info mode for architecture/concepts, optional topic extraction) → store with YAML frontmatter (`title`, `library_id`, `type`, `created`, `updated`, `context7_mode`, `topic`, `tags`, `source`, `cache_ttl`). Cache path: `$JAAN_OUTPUTS_DIR/dev/docs/context7/`. Graceful error handling: library not found suggestions with retry/skip, API failure fallback to stale cache with user consent, network timeout retry (3x with backoff). Token-optimized: target <10,000 tokens per execution, max 3-5 libraries per run. Callable standalone or from other skills' Phase 1 for context enrichment. Codex runtime adapter included. ([Task: mcp-context7](docs/roadmap/tasks/mcp-context7.md))
+- **Dual-runtime MCP support** — Full MCP infrastructure for Codex runtime alongside Claude Code. Codex installer auto-configures Context7 in `~/.codex/config.toml` with idempotent managed blocks and `--no-mcp` opt-out. New `validate-mcp-servers.sh` enforces dual-runtime MCP consistency. CI pipelines include MCP parity checks in dual-runtime gate and `release-check.yml`. New `docs/mcp/` documentation section with Context7 connector page. Website MCP Connectors card added to Skills Catalog
+
+### Fixed
+- **MCP config hardening** — Hardened Codex MCP config update logic and server parsing in `install-codex-skillpack.sh` and `validate-mcp-servers.sh` for safer TOML block management
+- **`.mcp.json` build distribution** — Fixed missing `copy_file` call in `build_claude_target()` for `.mcp.json`, which caused `validate-multi-runtime.sh` CI failures
+- **Stale skill count refs in website** — Updated 2 missed references in `website/index.html` from 44 → 45 skills and corrected role count to 13
+
+---
+
 ## [7.3.0] - 2026-02-21
 
 ### Added

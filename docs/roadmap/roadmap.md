@@ -17,7 +17,7 @@ sidebar_position: 1
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
 | 6 | Role skills (142 across 11 roles) | In Progress |
-| 7 | MCP connectors | Planned |
+| 7 | MCP connectors | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation | Partial |
 
@@ -27,11 +27,19 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.3.0 (44 skills)
+**Latest:** v7.4.0 (45 skills)
 
 ---
 
 ## Unreleased
+
+---
+
+## v7.4.0 — 2026-02-22
+
+- [x] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
+- [x] Dual-runtime MCP support — Codex config.toml auto-configuration, `validate-mcp-servers.sh` parity checks, CI dual-runtime MCP gate
+- [x] MCP infrastructure hardening — config update safety, `.mcp.json` build distribution, stale count fixes
 
 ---
 
@@ -110,6 +118,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 - **Core MCPs (11)**: GA4, GitLab, Jira, Figma, GSC, Clarity, Sentry, BigQuery, Playwright, OpenAPI, dbt Cloud
 - **Extended MCPs (13)**: Notion, Slack, GitHub, Linear, Mixpanel, Confluence, Snowflake, PostgreSQL, Ahrefs, Semrush, LambdaTest, Google Drive, Memory
 - **Infrastructure**: Deferred loading for token savings, Context7 integration, model routing per skill type
+- [x] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
 
 ---
 
@@ -186,6 +195,7 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
 | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, auto-fix, generate coverage reports |
 | `/jaan-to:dev-verify` | Validate build pipeline and running services with health checks |
+| `/jaan-to:dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
 | `/jaan-to:jaan-init` | Initialize jaan-to for a project |
 | `/jaan-to:jaan-issue-report` | Report issues to jaan-to GitHub repo |

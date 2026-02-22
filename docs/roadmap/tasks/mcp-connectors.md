@@ -5,7 +5,7 @@ sidebar_position: 7
 
 # MCP Connectors
 
-> Phase 5 | Status: pending | 24 MCPs (11 core + 13 extended)
+> Phase 7 | Status: in progress | 24 MCPs (11 core + 13 extended) | Context7 shipped
 
 ## Overview
 

@@ -34,6 +34,7 @@ runtime_required_paths() {
 $dist_dir/.claude-plugin/plugin.json
 $dist_dir/hooks/hooks.json
 $dist_dir/CLAUDE.md
+$dist_dir/.mcp.json
 EOL
       ;;
     codex)
@@ -69,6 +70,7 @@ runtime_adapter_paths() {
 .claude-plugin
 hooks
 CLAUDE.md
+.mcp.json
 EOL
       ;;
     codex)

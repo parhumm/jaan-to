@@ -59,7 +59,7 @@ See [Getting Started](getting-started.md) for full walkthrough.
 
 ## Available Commands
 
-38 skills across 13 roles. See [Skills by Role](skills/README.md) for the complete list.
+45 skills across 13 roles. See [Skills by Role](skills/README.md) for the complete list.
 
 | Command | Description | Output |
 |---------|-------------|--------|
