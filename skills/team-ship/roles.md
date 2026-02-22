@@ -48,8 +48,8 @@ Each role section defines:
 - **Track**: fast, full
 - **Model**: sonnet
 - **Skills**:
-  - fast: [backend-task-breakdown, backend-scaffold]
-  - full: [backend-task-breakdown, backend-data-model, backend-api-contract, backend-scaffold, backend-service-implement]
+  - fast: [dev-docs-fetch, backend-task-breakdown, backend-scaffold]
+  - full: [dev-docs-fetch, backend-task-breakdown, backend-data-model, backend-api-contract, backend-scaffold, backend-service-implement]
 - **Phase**: 2 (design+build)
 - **Depends on**: prd_path
 - **Outputs to share**: api_contract_path, scaffold_path
@@ -62,8 +62,8 @@ Each role section defines:
 - **Track**: fast, full
 - **Model**: sonnet
 - **Skills**:
-  - fast: [frontend-scaffold]
-  - full: [frontend-task-breakdown, frontend-scaffold, frontend-design]
+  - fast: [dev-docs-fetch, frontend-scaffold]
+  - full: [dev-docs-fetch, frontend-task-breakdown, frontend-scaffold, frontend-design]
 - **Phase**: 2 (design+build)
 - **Depends on**: prd_path, api_contract_path (from backend)
 - **Outputs to share**: scaffold_path

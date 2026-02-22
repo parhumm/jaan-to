@@ -92,7 +92,7 @@ function SkillCategories() {
       <div className="container">
         <div style={{textAlign: 'center', marginBottom: '2rem'}}>
           <Heading as="h2">Skills by Role</Heading>
-          <p style={{color: '#6b6b6b'}}>38 skills across 13 roles. Run any skill with <code>/jaan-to:skill-name</code></p>
+          <p style={{color: '#6b6b6b'}}>45 skills across 13 roles. Run any skill with <code>/jaan-to:skill-name</code></p>
         </div>
         <div className="row">
           {roles.map(({name, skills}) => (
@@ -136,7 +136,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="Documentation"
-      description="jaan.to documentation — a workflow layer for Claude Code. 38 skills across 13 roles.">
+      description="jaan.to documentation — a workflow layer for Claude Code. 45 skills across 13 roles.">
       <HomepageHeader />
       <main>
         <Features />

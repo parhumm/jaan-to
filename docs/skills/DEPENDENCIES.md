@@ -178,6 +178,25 @@ Code Generation & Deployment:
                       "Activate deployment pipeline"
 ```
 
+### Library Context Flow
+
+```
+Library Documentation:
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:dev-docs-fetch                                │
+│  "Fetch library docs via Context7 MCP"                  │
+└────────────────┬────────────────────────────────────────┘
+                 │
+                 ├──> /jaan-to:backend-scaffold
+                 │    "Generated code uses current API patterns"
+                 │
+                 ├──> /jaan-to:frontend-scaffold
+                 │    "Generated components use current framework patterns"
+                 │
+                 └──> /jaan-to:dev-project-assemble
+                      "Project config follows current best practices"
+```
+
 ### Release Flow
 
 ```
@@ -329,7 +348,7 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 43 skills grouped by role.
+All 45 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
@@ -358,7 +377,8 @@ All 43 skills grouped by role.
 | | `/jaan-to:detect-product` | Product reality extraction |
 | | `/jaan-to:detect-writing` | Writing system extraction |
 | | `/jaan-to:detect-pack` | Consolidate detect outputs |
-| **dev** | `/jaan-to:dev-project-assemble` | Wire scaffolds into runnable project |
+| **dev** | `/jaan-to:dev-docs-fetch` | Fetch library docs via Context7 MCP |
+| | `/jaan-to:dev-project-assemble` | Wire scaffolds into runnable project |
 | | `/jaan-to:dev-output-integrate` | Copy outputs into project locations |
 | | `/jaan-to:dev-verify` | Validate build pipeline and services |
 | **sec** | `/jaan-to:sec-audit-remediate` | Fix security findings with patches |
@@ -399,4 +419,4 @@ Skills may invoke agents automatically:
 
 ---
 
-**Last Updated:** 2026-02-15
+**Last Updated:** 2026-02-22

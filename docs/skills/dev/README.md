@@ -35,6 +35,10 @@ See [Frontend Skills](../frontend/README.md) for complete documentation:
 - [/jaan-to:dev-project-assemble](project-assemble.md) - Wire scaffold outputs into runnable project with configs and entry points
 - [/jaan-to:dev-output-integrate](output-integrate.md) - Copy generated jaan-to outputs into project locations with entry point wiring and validation
 
+### MCP Skills
+
+- [/jaan-to:dev-docs-fetch](docs-fetch.md) - Fetch and cache library docs via Context7 MCP with auto-detect and smart caching
+
 ### Verification Skills
 
 - [/jaan-to:dev-verify](verify.md) - Validate integrated build pipeline and running services with health checks and smoke tests

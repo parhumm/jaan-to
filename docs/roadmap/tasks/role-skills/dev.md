@@ -1,9 +1,9 @@
 ---
-title: "DEV Skills (12)"
+title: "DEV Skills (13)"
 sidebar_position: 3
 ---
 
-# DEV Skills (12)
+# DEV Skills (13)
 
 > Part of [Role Skills Catalog](../role-skills.md) | Phase 4 + Phase 6
 

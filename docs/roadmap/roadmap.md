@@ -17,7 +17,7 @@ sidebar_position: 1
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
 | 6 | Role skills (142 across 11 roles) | In Progress |
-| 7 | MCP connectors | Planned |
+| 7 | MCP connectors | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation | Partial |
 
@@ -27,11 +27,17 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.3.0 (44 skills)
+**Latest:** v7.4.0 (45 skills)
 
 ---
 
 ## Unreleased
+
+---
+
+## v7.4.0 — 2026-02-22
+
+- [x] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
 
 ---
 
@@ -110,7 +116,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 - **Core MCPs (11)**: GA4, GitLab, Jira, Figma, GSC, Clarity, Sentry, BigQuery, Playwright, OpenAPI, dbt Cloud
 - **Extended MCPs (13)**: Notion, Slack, GitHub, Linear, Mixpanel, Confluence, Snowflake, PostgreSQL, Ahrefs, Semrush, LambdaTest, Google Drive, Memory
 - **Infrastructure**: Deferred loading for token savings, Context7 integration, model routing per skill type
-- [ ] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
+- [x] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
 
 ---
 
