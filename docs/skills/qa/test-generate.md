@@ -3,7 +3,7 @@ title: "qa-test-generate"
 sidebar_position: 3
 doc_type: skill
 created_date: 2026-02-11
-updated_date: 2026-02-11
+updated_date: 2026-02-23
 tags: [qa, test, generate, vitest, playwright, bdd, gherkin, e2e, unit]
 related: [qa-test-cases, backend-scaffold, frontend-scaffold, backend-service-implement]
 ---
@@ -33,6 +33,7 @@ Transforms BDD/Gherkin test cases (from `/jaan-to:qa-test-cases`) into runnable 
 | backend-scaffold or frontend-scaffold | Yes | Path to scaffold output |
 | backend-api-contract | No | OpenAPI YAML for MSW handler generation |
 | backend-service-implement | No | Service files for deeper unit tests |
+| `--from-mutants` | No | Path to survivors JSON from `/jaan-to:qa-test-mutate` |
 
 When run without arguments, launches an interactive wizard.
 
@@ -111,6 +112,29 @@ jaan-to/outputs/qa/test-generate/01-user-auth/
 
 ---
 
+## Mutation-Guided Mode
+
+Generate targeted tests for surviving mutants identified by `/jaan-to:qa-test-mutate`:
+
+```
+/jaan-to:qa-test-generate --from-mutants path/to/survivors.json
+```
+
+The `--from-mutants` flag reads a survivors JSON file (schema v1.0) produced by `/jaan-to:qa-test-mutate`. For each surviving mutant, the skill generates a targeted test that specifically kills that mutant, improving overall mutation score without redundant test bloat.
+
+---
+
+## Pyramid Validation
+
+Test generation includes **testing pyramid validation** to ensure the generated test distribution follows best practices:
+
+- **More unit tests** than integration tests
+- **More integration tests** than E2E tests
+
+If the generated output violates pyramid proportions, the skill emits a warning and suggests rebalancing before finalizing.
+
+---
+
 ## Tips
 
 - Run `/jaan-to:qa-test-cases` first to generate BDD scenarios
@@ -123,6 +147,7 @@ jaan-to/outputs/qa/test-generate/01-user-auth/
 ## Related Skills
 
 - [/jaan-to:qa-test-cases](test-cases.md) - Generate BDD/Gherkin test cases
+- [/jaan-to:qa-test-mutate](test-mutate.md) - Mutation testing to find surviving mutants (input for `--from-mutants` mode)
 - [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code stubs
 - [/jaan-to:backend-service-implement](../backend/service-implement.md) - Generate service implementations
 

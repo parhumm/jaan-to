@@ -3,7 +3,7 @@ title: "dev-verify"
 sidebar_position: 5
 doc_type: skill
 created_date: 2026-02-14
-updated_date: 2026-02-14
+updated_date: 2026-02-23
 tags: [dev, verify, build, health-check, smoke-test, type-check, runtime, multi-stack]
 related: [dev-output-integrate, dev-project-assemble, devops-deploy-activate, backend-scaffold, frontend-scaffold]
 ---
@@ -98,7 +98,7 @@ Files at `$JAAN_OUTPUTS_DIR/dev/verify/{id}-{slug}/`:
 1. Checks port availability for each service
 2. Runs HTTP health checks against detected endpoints
 3. Runs database/cache health commands (pg_isready, redis-cli PING, etc.)
-4. Validates API responses against OpenAPI contract (if spec found)
+4. Validates API responses against OpenAPI contract (if spec found). When Spectral and/or Prism are available locally, enhanced contract validation runs automatically: Spectral lints the spec for style conformance and Prism validates response payloads against schema definitions
 5. Runs smoke tests on GET endpoints (write endpoints require approval)
 6. Cross-validates build and runtime results
 

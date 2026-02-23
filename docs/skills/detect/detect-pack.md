@@ -4,7 +4,7 @@ sidebar_position: 6
 doc_type: skill
 tags: [detect, knowledge, consolidation, risk, unknowns, evidence]
 related: [detect-dev, detect-design, detect-writing, detect-product, detect-ux]
-updated_date: 2026-02-09
+updated_date: 2026-02-23
 ---
 
 # /jaan-to:detect-pack
@@ -105,6 +105,30 @@ After writing output files, detect-pack compares consolidated detection results 
 - **Writes report**: `$JAAN_OUTPUTS_DIR/detect/seed-reconciliation.md`
 
 See [seed-reconciliation-reference.md](../../extending/seed-reconciliation-reference.md) for mapping rules and preservation conventions.
+
+---
+
+## ISO 25010 Compliance
+
+detect-pack aggregates ISO/IEC 25010 quality characteristic mappings from all detect domains. The consolidated output includes:
+
+- **ISO 25010 coverage matrix** — which characteristics are addressed by findings across domains
+- **Characteristic-level scores** — aggregated score per ISO 25010 characteristic (Functional Suitability, Performance Efficiency, Compatibility, Usability, Reliability, Security, Maintainability, Portability)
+- **Gap analysis** — identifies ISO 25010 characteristics with no coverage from any detect domain
+
+### Quality Gate Readiness
+
+The pack output includes a **Quality Gate Readiness** section that evaluates whether the project meets configurable thresholds for shipping:
+
+| Gate | Default Threshold | Source |
+|------|-------------------|--------|
+| Overall score | >= 6.0 | All domains |
+| Critical findings | 0 | All domains |
+| High findings | <= 3 | All domains |
+| ISO 25010 coverage | >= 6/8 characteristics | Mapped findings |
+| Mutation score | >= 60% (if detected) | detect-dev testing.md |
+
+Gate thresholds are configurable via `quality_gate` in `jaan-to/config/settings.yaml`. The readiness verdict is `PASS`, `WARN`, or `FAIL`.
 
 ---
 

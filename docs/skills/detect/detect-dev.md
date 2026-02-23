@@ -4,7 +4,7 @@ sidebar_position: 1
 doc_type: skill
 tags: [detect, dev, engineering, audit, security, cicd]
 related: [detect-design, detect-writing, detect-product, detect-ux, detect-pack]
-updated_date: 2026-02-09
+updated_date: 2026-02-23
 ---
 
 # /jaan-to:detect-dev
@@ -118,6 +118,29 @@ When integration logs exist (from `/jaan-to:dev-output-integrate`), detect-dev t
 - `origin: hand-written` — file was not part of any integration
 
 This helps prioritize findings: issues in integrated (generated) code may indicate upstream generation problems, while issues in hand-written code are direct developer concerns. The `origin` field is optional and omitted when no integration logs are available.
+
+---
+
+## Enhanced Detection Capabilities
+
+### DORA Metrics
+
+Full-mode analysis includes DORA (DevOps Research and Assessment) metrics derived from git history and CI/CD pipeline data:
+
+- **Deployment Frequency** — estimated from release tags and merge-to-main cadence
+- **Lead Time for Changes** — average time from first commit to production deploy
+- **Change Failure Rate** — ratio of hotfix/revert commits to total deploys
+- **Mean Time to Recovery** — average time between failure introduction and fix
+
+DORA metrics appear in the `cicd.md` output file with confidence levels based on available data.
+
+### ISO 25010 Mapping
+
+Findings are mapped to ISO/IEC 25010 quality characteristics (Functional Suitability, Performance Efficiency, Compatibility, Usability, Reliability, Security, Maintainability, Portability). Each finding's frontmatter includes an `iso_25010` field with the applicable characteristic, enabling standards-based reporting.
+
+### Mutation Testing Detection
+
+Scans for mutation testing configuration files (StrykerJS `stryker.config.*`, Infection `infection.json5`, go-mutesting configs) and mutation score thresholds. Reports presence/absence as a finding in `testing.md` with severity based on test suite maturity.
 
 ---
 

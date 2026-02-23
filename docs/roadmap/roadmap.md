@@ -27,11 +27,29 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.4.0 (45 skills)
+**Latest:** v7.4.0 (45 skills) | **Unreleased:** 49 skills
 
 ---
 
 ## Unreleased
+
+- [x] TDD/BDD/AI orchestration quality skills — 4 new skills + 15 enhanced, from research doc 76
+  - New: `qa-test-mutate` (mutation testing with multi-stack support, feedback loop)
+  - New: `qa-tdd-orchestrate` (RED/GREEN/REFACTOR with context-isolated agents, Claude Code only)
+  - New: `qa-contract-validate` (Spectral + oasdiff + Prism + Schemathesis pipeline)
+  - New: `qa-quality-gate` (composite quality score from upstream outputs)
+  - Enhanced: `qa-test-cases` (declarative Gherkin enforcement, scenario limits, step templates)
+  - Enhanced: `qa-test-generate` (--from-mutants mode, survivor JSON handoff, pyramid validation)
+  - Enhanced: `qa-test-run` (--mutation tier, mutation score parsing, iteration tracking)
+  - Enhanced: `devops-infra-scaffold` (Spectral lint, oasdiff breaking changes, mutation CI, Schemathesis fuzz stages)
+  - Enhanced: `team-ship` (--track tdd, tdd-writer/tdd-implementer roles, fan-out cap, DAG validation)
+  - Enhanced: `backend-api-contract` (Spectral config companion, validation commands section)
+  - Enhanced: `detect-dev` (DORA metrics, ISO 25010 mapping, mutation testing detection)
+  - Enhanced: `detect-pack` (ISO 25010 compliance, quality gate readiness section)
+  - Enhanced: `dev-verify` (enhanced contract validation with Spectral/Prism when available)
+  - Enhanced: `backend-scaffold` (test framework + mutation tool recommendation table)
+  - Survivor JSON handoff contract (schema v1.0) for qa-test-mutate <-> qa-test-generate
+  - 49 skills total (was 45)
 
 ---
 
@@ -194,6 +212,10 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:devops-infra-scaffold` | Generate CI/CD, Dockerfiles, deployment configs |
 | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
 | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, auto-fix, generate coverage reports |
+| `/jaan-to:qa-test-mutate` | Run mutation testing and generate survivor reports |
+| `/jaan-to:qa-tdd-orchestrate` | Orchestrate RED/GREEN/REFACTOR TDD cycle with isolated agents |
+| `/jaan-to:qa-contract-validate` | Validate API contracts with Spectral, oasdiff, Prism, Schemathesis |
+| `/jaan-to:qa-quality-gate` | Compute composite quality score from upstream skill outputs |
 | `/jaan-to:dev-verify` | Validate build pipeline and running services with health checks |
 | `/jaan-to:dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |

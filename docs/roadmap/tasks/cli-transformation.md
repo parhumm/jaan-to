@@ -189,7 +189,7 @@ packages/cli/
 
 ### Shared Files (Unchanged)
 
-- `skills/*/SKILL.md` — all 45 skills
+- `skills/*/SKILL.md` — all 49 skills
 - `skills/*/template.md` — output templates
 - `skills/*/LEARN.md` — seed lessons
 - `agents/*.md` — subagent definitions
@@ -216,7 +216,7 @@ packages/cli/
 - [ ] Config system loads and merges correctly
 
 ### Phase B (Parity)
-- [ ] All 45 skills run via CLI
+- [ ] All 49 skills run via CLI
 - [ ] Learning, templates, hooks all functional
 - [ ] No regression in plugin behavior
 

@@ -365,15 +365,54 @@ add_to_index \
 > ✓ Guide written to: `$JAAN_OUTPUTS_DIR/backend/api-contract/{NEXT_ID}-{slug}/{NEXT_ID}-{slug}.md`
 > ✓ Index updated: `$JAAN_OUTPUTS_DIR/backend/api-contract/README.md`
 
+## Step 9a: Generate Spectral Config Companion
+
+Generate a `.spectral.yaml` companion file alongside the contract:
+
+```yaml
+extends:
+  - "spectral:oas"
+  - "spectral:asyncapi"
+rules:
+  operation-operationId: error
+  operation-description: warn
+  oas3-api-servers: error
+  no-$ref-siblings: error
+```
+
+If OWASP ruleset is relevant (auth endpoints detected), add:
+```yaml
+extends:
+  - "spectral:oas"
+  - "@stoplight/spectral-owasp-ruleset"
+```
+
+Write to: `$OUTPUT_FOLDER/.spectral.yaml`
+
+Add "Validation Commands" section to companion markdown guide:
+```
+## Validation Commands
+
+Lint this contract:
+  npx @stoplight/spectral-cli lint api.yaml --ruleset .spectral.yaml
+
+Mock server:
+  npx @stoplight/prism-cli mock api.yaml
+
+Contract validation (full pipeline):
+  /jaan-to:qa-contract-validate api.yaml
+```
+
 ## Step 10: Suggest Next Steps
 
 > "Contract generated. Suggested next steps:"
 >
-> 1. **Mock server**: `npx @stoplight/prism-cli mock api.yaml`
-> 2. **Generate client SDK**: `npx orval --input api.yaml --output ./src/api/`
-> 3. **Contract tests**: `schemathesis run api.yaml`
-> 4. **Versioning plan**: `/jaan-to:backend-api-versioning`
-> 5. **API documentation**: `/jaan-to:dev-docs-generate`
+> 1. **Lint contract**: `npx @stoplight/spectral-cli lint api.yaml --ruleset .spectral.yaml`
+> 2. **Mock server**: `npx @stoplight/prism-cli mock api.yaml`
+> 3. **Full validation**: `/jaan-to:qa-contract-validate {output-path}/api.yaml`
+> 4. **Generate client SDK**: `npx orval --input api.yaml --output ./src/api/`
+> 5. **Contract tests**: `schemathesis run api.yaml`
+> 6. **API documentation**: `/jaan-to:dev-docs-generate`
 
 ## Step 11: Capture Feedback
 
