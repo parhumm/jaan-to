@@ -3,7 +3,7 @@ title: "backend-api-contract"
 sidebar_position: 2
 doc_type: skill
 created_date: 2026-02-08
-updated_date: 2026-02-08
+updated_date: 2026-02-23
 tags: [dev, api, openapi, contract, rest, schema, backend]
 related: [be-task-breakdown, fe-task-breakdown]
 ---
@@ -106,6 +106,23 @@ After generating the contract, the skill suggests:
 - Client SDK generation with Orval
 - Contract testing with Schemathesis
 - Versioning plan with `/jaan-to:dev-api-versioning`
+
+---
+
+## Spectral Config Companion
+
+When generating a contract, the skill also produces a `.spectral.yaml` companion file configured with recommended rulesets for the generated spec. This ensures consistent linting from day one.
+
+### Validation Commands
+
+After generating the contract, use these commands to validate:
+
+| Command | Purpose |
+|---------|---------|
+| `spectral lint api.yaml` | Lint the spec against style rules |
+| `prism mock api.yaml` | Start a mock server from the contract |
+| `oasdiff breaking base.yaml api.yaml` | Detect breaking changes against a baseline |
+| `schemathesis run --url http://localhost:4010 api.yaml` | Fuzz-test endpoints against the contract |
 
 ---
 

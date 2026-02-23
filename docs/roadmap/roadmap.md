@@ -212,6 +212,10 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:devops-infra-scaffold` | Generate CI/CD, Dockerfiles, deployment configs |
 | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
 | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, auto-fix, generate coverage reports |
+| `/jaan-to:qa-test-mutate` | Run mutation testing and generate survivor reports |
+| `/jaan-to:qa-tdd-orchestrate` | Orchestrate RED/GREEN/REFACTOR TDD cycle with isolated agents |
+| `/jaan-to:qa-contract-validate` | Validate API contracts with Spectral, oasdiff, Prism, Schemathesis |
+| `/jaan-to:qa-quality-gate` | Compute composite quality score from upstream skill outputs |
 | `/jaan-to:dev-verify` | Validate build pipeline and running services with health checks |
 | `/jaan-to:dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |

@@ -3,7 +3,7 @@ title: "backend-scaffold"
 sidebar_position: 5
 doc_type: skill
 created_date: 2026-02-09
-updated_date: 2026-02-09
+updated_date: 2026-02-23
 tags: [dev, backend, scaffold, routes, services, validation, prisma, fastify]
 related: [backend-api-contract, backend-task-breakdown, backend-data-model]
 ---
@@ -87,6 +87,20 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect the stack:
 - **Services**: Plain exported functions, module caching as built-in singleton
 - **Errors**: RFC 9457 Problem Details with `application/problem+json`
 - **Structure**: Collocated routes + schemas + services per resource
+
+---
+
+## Test Framework & Mutation Tool Recommendations
+
+The scaffold guide includes a recommended test framework and mutation testing tool per stack:
+
+| Stack | Test Framework | Mutation Tool | Config File |
+|-------|---------------|---------------|-------------|
+| Node.js / TypeScript | Vitest | StrykerJS | `stryker.config.mjs` |
+| PHP | PHPUnit / Pest | Infection | `infection.json5` |
+| Go | `go test` | go-mutesting | `Makefile` target |
+
+When the scaffold detects an existing test framework, it adapts its recommendations accordingly. Mutation testing config stubs are included in the scaffold output when applicable.
 
 ---
 

@@ -5,7 +5,7 @@
 [![Version](https://img.shields.io/badge/version-7.4.0-blue.svg)](.claude-plugin/plugin.json)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-45-orange.svg)](skills/)
+[![Skills](https://img.shields.io/badge/skills-49-orange.svg)](skills/)
 [![Agent Skills](https://img.shields.io/badge/npx%20skills-compatible-brightgreen.svg)](https://skills.sh)
 [![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
 
@@ -13,7 +13,7 @@
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Skills** | 45 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
+| **Skills** | 49 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
 | **Agents** | 2 | quality-reviewer, context-scout |
 | **Hooks** | 7 | Setup, SessionStart, PreToolUse, PostToolUse, Stop, TaskCompleted, TeammateIdle |
 | **Output Styles** | 2 | enterprise-doc, concise-summary |
@@ -145,7 +145,7 @@ Codex support is added as a thin adapter and runner layer without changing Claud
 Install skills via the [Agent Skills](https://skills.sh) ecosystem — works across Claude Code, Cursor, VS Code, GitHub Copilot, and 18+ agents:
 
 ```bash
-# Install all 45 skills
+# Install all 49 skills
 npx skills add parhumm/jaan-to
 
 # Install a specific skill
