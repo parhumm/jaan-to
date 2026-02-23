@@ -1417,8 +1417,8 @@ argument-hint: [feature-name-or-prd-path]
 Read these before execution:
 - `$JAAN_CONTEXT_DIR/config.md` - Configuration
 - `$JAAN_CONTEXT_DIR/boundaries.md` - Safety rules
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-matrix.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:qa-test-matrix.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-matrix.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-qa-test-matrix.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Test frameworks and tools (if exists)
 - `$JAAN_CONTEXT_DIR/team.md` - QA capacity and norms (if exists)
 
@@ -1496,7 +1496,7 @@ Show planned structure:
 
 ## Step 3: Generate Test Matrix
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-matrix.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-matrix.template.md`
 
 Fill variables:
 - `{{title}}` - Feature name

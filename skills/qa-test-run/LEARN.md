@@ -1,7 +1,7 @@
 # Lessons: qa-test-run
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:qa-test-run.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-qa-test-run.learn.md`
 
 ## Better Questions
 

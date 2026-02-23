@@ -29,7 +29,7 @@ Every seed follows a **skip-if-exists** rule: your edits are never overwritten. 
 | Settings | `scripts/seeds/settings.yaml` | `jaan-to/config/settings.yaml` | Path overrides, learning strategy, language preference, template paths |
 | Context | `scripts/seeds/*.md` | `jaan-to/context/` | 5 required: tech.md, team.md, integrations.md, config.md, boundaries.md + 2 optional: localization.md, tone-of-voice.md |
 | Docs | _(loaded from plugin at runtime)_ | — | STYLE.md and create-skill.md read from plugin source; not copied to project |
-| Templates | `skills/*/template.md` | `jaan-to/templates/jaan-to:{skill}.template.md` | Output structure for each skill — seeded on first use (with approval) via [pre-execution protocol Step C](../extending/pre-execution-protocol.md#step-c-offer-template-seeding) |
+| Templates | `skills/*/template.md` | `jaan-to/templates/jaan-to-{skill}.template.md` | Output structure for each skill — seeded on first use (with approval) via [pre-execution protocol Step C](../extending/pre-execution-protocol.md#step-c-offer-template-seeding) |
 | Learn files | `skills/*/LEARN.md` | _(loaded from plugin at runtime)_ | Better questions, edge cases, workflow tips — project files created via `/jaan-to:learn-add` |
 
 ---
@@ -41,7 +41,7 @@ After bootstrap runs, customize files in this order:
 1. **Edit `jaan-to/context/tech.md`** — Replace the placeholder stack with yours. Or run `/jaan-to:detect-dev` to audit your codebase and produce evidence-backed findings.
 2. **Fill `jaan-to/context/team.md`** — Team size, ceremonies, sprint settings, approval workflows.
 3. **Add tools to `jaan-to/context/integrations.md`** — Jira project keys, GitHub repos, Slack channels, analytics IDs.
-4. **Customize a template** (optional) — When you first run a skill, you'll be offered to seed its template into `jaan-to/templates/jaan-to:{skill}.template.md`. Accept to get a local copy you can edit. You can also manually copy any template from the plugin (`skills/{skill}/template.md`).
+4. **Customize a template** (optional) — When you first run a skill, you'll be offered to seed its template into `jaan-to/templates/jaan-to-{skill}.template.md`. Accept to get a local copy you can edit. You can also manually copy any template from the plugin (`skills/{skill}/template.md`).
 5. **Override paths** (advanced) — Uncomment settings in `jaan-to/config/settings.yaml` to redirect where outputs, templates, or learn files live. See [Customization Guide](../guides/customization.md).
 
 ---

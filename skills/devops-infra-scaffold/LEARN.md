@@ -3,7 +3,7 @@
 > Last updated: 2026-02-10
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:devops-infra-scaffold.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-devops-infra-scaffold.learn.md`
 
 Seeded from research: $JAAN_OUTPUTS_DIR/research/74-dev-cicd-infra-scaffold-generation.md
 

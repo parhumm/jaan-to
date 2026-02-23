@@ -170,7 +170,7 @@ The changelog output feeds support documentation downstream.
 
 This skill reads from:
 ```
-$JAAN_LEARN_DIR/jaan-to:release-iterate-changelog.learn.md
+$JAAN_LEARN_DIR/jaan-to-release-iterate-changelog.learn.md
 ```
 
 Add feedback:

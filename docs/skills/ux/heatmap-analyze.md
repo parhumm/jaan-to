@@ -136,7 +136,7 @@ All of the above, plus rage click detection, scroll analysis, hesitation zones, 
 
 This skill reads from:
 ```
-jaan-to/learn/jaan-to:ux-heatmap-analyze.learn.md
+jaan-to/learn/jaan-to-ux-heatmap-analyze.learn.md
 ```
 
 Add feedback:

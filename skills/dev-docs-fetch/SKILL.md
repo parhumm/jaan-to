@@ -15,7 +15,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 - `$JAAN_CONTEXT_DIR/tech.md` — Tech stack for library auto-detection
   - Uses sections: `#current-stack`, `#frameworks`
-- `$JAAN_LEARN_DIR/jaan-to:dev-docs-fetch.learn.md` — Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-dev-docs-fetch.learn.md` — Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` — Language resolution protocol
 
 ## Input

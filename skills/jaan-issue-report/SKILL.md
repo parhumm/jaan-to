@@ -16,7 +16,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 Read these before execution:
 - `${CLAUDE_PLUGIN_ROOT}/skills/jaan-issue-report/LEARN.md` - Plugin-side seed lessons
-- `$JAAN_LEARN_DIR/jaan-to:jaan-issue-report.learn.md` - Project-side learned lessons
+- `$JAAN_LEARN_DIR/jaan-to-jaan-issue-report.learn.md` - Project-side learned lessons
 - `${CLAUDE_PLUGIN_ROOT}/skills/jaan-issue-report/template.md` - Issue body templates per type
 - `${CLAUDE_PLUGIN_ROOT}/.claude-plugin/plugin.json` - Plugin version
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution
@@ -46,7 +46,7 @@ Skill name: `jaan-issue-report`
 Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to:jaan-issue-report.learn.md`
+`$JAAN_LEARN_DIR/jaan-to-jaan-issue-report.learn.md`
 
 If the file exists, apply its lessons throughout this execution:
 - Add questions from "Better Questions" to Step 3

@@ -14,9 +14,9 @@ compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:detect-writing.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-detect-writing.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (for framework-aware i18n scanning)
-- `$JAAN_TEMPLATES_DIR/jaan-to:detect-writing.template.md` - Output template
+- `$JAAN_TEMPLATES_DIR/jaan-to-detect-writing.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/writing/` — flat files, overwritten each run (no IDs).

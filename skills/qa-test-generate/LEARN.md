@@ -1,7 +1,7 @@
 # Lessons: qa-test-generate
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:qa-test-generate.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-qa-test-generate.learn.md`
 
 ## Better Questions
 

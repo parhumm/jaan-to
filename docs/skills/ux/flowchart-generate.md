@@ -170,7 +170,7 @@ Split produces an overview diagram with subprocess nodes linking to detail diagr
 
 This skill reads from:
 ```
-jaan-to/learn/jaan-to:ux-flowchart-generate.learn.md
+jaan-to/learn/jaan-to-ux-flowchart-generate.learn.md
 ```
 
 Add feedback:

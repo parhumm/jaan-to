@@ -99,7 +99,7 @@ Lessons are categorized by keywords:
 Read the LEARN.md file directly:
 
 ```
-jaan-to/learn/jaan-to:pm-prd-write.learn.md
+jaan-to/learn/jaan-to-pm-prd-write.learn.md
 ```
 
 ---

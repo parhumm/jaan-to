@@ -17,8 +17,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/design.md` - Design system guidelines (optional)
 - `$JAAN_CONTEXT_DIR/brand.md` - Brand guidelines (optional)
-- `$JAAN_TEMPLATES_DIR/jaan-to:frontend-design.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:frontend-design.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-frontend-design.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-frontend-design.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
@@ -320,7 +320,7 @@ Create standalone HTML preview showing the component in action:
 
 ## Step 8: Generate Documentation
 
-Read template: `$JAAN_TEMPLATES_DIR/jaan-to:frontend-design.template.md`
+Read template: `$JAAN_TEMPLATES_DIR/jaan-to-frontend-design.template.md`
 
 Fill all sections:
 - **Executive Summary**: 1-2 sentence overview (component type, framework, key design characteristic)

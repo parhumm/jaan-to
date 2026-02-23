@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` — Tech stack (determines build commands, ports, health endpoints)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/config.md` — Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-verify.template.md` — Report template
-- `$JAAN_LEARN_DIR/jaan-to:dev-verify.learn.md` — Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-dev-verify.template.md` — Report template
+- `$JAAN_LEARN_DIR/jaan-to-dev-verify.learn.md` — Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` — Language resolution protocol
 
 ## Input
@@ -359,7 +359,7 @@ Preview:
 
 ## Step 17: Write Verification Report
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:dev-verify.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-dev-verify.template.md`
 
 Write `{NEXT_ID}-{slug}.md` with:
 - Executive Summary (BLUF: build pass/fail, runtime pass/fail, errors found/fixed/remaining)

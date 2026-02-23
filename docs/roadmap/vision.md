@@ -75,7 +75,7 @@ That's it. Every command follows this pattern.
 YOU USE:     /jaan-to:pm-prd-write "user import feature"
                     │
 SKILL READS: ├── skills/jaan-to:pm-prd-write/SKILL.md   (what to do)
-             ├── jaan-to/learn/jaan-to:pm-prd-write.learn.md  (past lessons)
+             ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md  (past lessons)
              ├── context/tech.md                (your tech context)
              ├── skills/jaan-to:pm-prd-write/template.md (output format)
              └── MCP: Figma, Jira, GitLab       (real system data)
@@ -562,7 +562,7 @@ USER: /jaan-to:pm-prd-write "user import feature"
 
 1. LOAD
    ├── skills/jaan-to:pm-prd-write/SKILL.md
-   ├── jaan-to/learn/jaan-to:pm-prd-write.learn.md (3 lessons)
+   ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md (3 lessons)
    ├── skills/jaan-to:pm-prd-write/template.md
    ├── jaan-to/learn/template-prd.learn.md (2 lessons)
    ├── context/tech.md (Python, FastAPI, PostgreSQL)
@@ -729,7 +729,7 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ```
 Loading:
   ✓ skills/jaan-to:dev-plan-tech-approach/SKILL.md
-  ✓ jaan-to/learn/jaan-to:dev-plan-tech-approach.learn.md (3 lessons)
+  ✓ jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md (3 lessons)
   ✓ skills/jaan-to:dev-plan-tech-approach/template.md
   ✓ context/tech.md (Python, FastAPI, PostgreSQL)
   ✓ context/team.md (2 BE, 2 FE, 2-week sprints)
@@ -778,7 +778,7 @@ jaan-to/outputs/dev/plan/payment-service/
 
 ```
 User: "Good, but add performance testing section"
-→ Added to jaan-to/learn/jaan-to:dev-plan-tech-approach.learn.md
+→ Added to jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md
 ```
 
 ---

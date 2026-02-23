@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL -- determines framework, services, deployment target)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#versioning`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:devops-infra-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:devops-infra-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-devops-infra-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-devops-infra-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/research/74-dev-cicd-infra-scaffold-generation.md` - Research reference
 

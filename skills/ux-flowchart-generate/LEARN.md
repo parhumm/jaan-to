@@ -3,7 +3,7 @@
 > Last updated: 2026-02-09
 >
 > Plugin-side seed lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:ux-flowchart-generate.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-ux-flowchart-generate.learn.md`
 
 Accumulated lessons from flowchart generation executions, seeded from comprehensive Mermaid + UX flowchart research (40+ sources).
 

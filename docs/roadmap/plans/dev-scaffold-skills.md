@@ -73,8 +73,8 @@ argument-hint: [backend-api-contract, backend-task-breakdown, backend-data-model
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL — determines framework, DB, patterns)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:backend-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-backend-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-backend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 ```
 
 ### Pre-Execution Protocol
@@ -169,7 +169,7 @@ All files in `$JAAN_OUTPUTS_DIR/dev/backend/{id}-{slug}/`:
 ### Phase 2 Steps
 
 #### Step 6: Generate Content
-Read `$JAAN_TEMPLATES_DIR/jaan-to:backend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
+Read `$JAAN_TEMPLATES_DIR/jaan-to-backend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
 
 #### Step 7: Quality Check
 Validate generated output against checklist:
@@ -341,8 +341,8 @@ argument-hint: [frontend-design, frontend-task-breakdown, backend-api-contract]
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/design.md` - Design system guidelines (optional)
 - `$JAAN_CONTEXT_DIR/brand.md` - Brand guidelines (optional)
-- `$JAAN_TEMPLATES_DIR/jaan-to:frontend-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-frontend-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 ```
 
 ### Pre-Execution Protocol
@@ -426,7 +426,7 @@ All files in `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`:
 ### Phase 2 Steps
 
 #### Step 7: Generate Content
-Read `$JAAN_TEMPLATES_DIR/jaan-to:frontend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
+Read `$JAAN_TEMPLATES_DIR/jaan-to-frontend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
 
 #### Step 8: Quality Check
 Validate generated output against checklist:

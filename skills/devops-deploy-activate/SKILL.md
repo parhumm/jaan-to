@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` — Tech stack (determines deployment targets, package manager)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/config.md` — Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:devops-deploy-activate.template.md` — Activation report template
-- `$JAAN_LEARN_DIR/jaan-to:devops-deploy-activate.learn.md` — Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-devops-deploy-activate.template.md` — Activation report template
+- `$JAAN_LEARN_DIR/jaan-to-devops-deploy-activate.learn.md` — Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` — Language resolution protocol
 
 ## Input
@@ -328,7 +328,7 @@ Preview:
 
 ## Step 13: Write Activation Report
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:devops-deploy-activate.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-devops-deploy-activate.template.md`
 
 Write `{NEXT_ID}-{slug}.md` with:
 - Executive Summary
