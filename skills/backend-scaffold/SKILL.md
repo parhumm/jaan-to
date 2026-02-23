@@ -310,6 +310,19 @@ The skill reads tech.md `#current-stack` to determine which stack to generate:
 - Auth: ephemeral single-use token via query parameter (`ws://host/ws?ticket=abc123`); 30-second TTL, consumed on first use to prevent log-exposure attacks
 - SSE handles 95% of real-time use cases — suggest SSE first; SSE works over standard HTTP, supports auto-reconnection, multiplexed over HTTP/2
 
+## Test Framework & Mutation Tool Recommendations
+
+When generating scaffold, include test framework and mutation tool recommendations based on detected stack:
+
+| Stack | Test Framework | Mutation Tool | Config File |
+|-------|---------------|---------------|-------------|
+| Node.js/TS | Vitest | StrykerJS | `stryker.config.mjs` |
+| PHP/Laravel | Pest | Infection | `infection.json5` |
+| Go | testing + testify | go-mutesting | CLI flags |
+| Python | pytest | mutmut | `setup.cfg` |
+
+Add to generated README: "Run `/jaan-to:qa-test-mutate` to validate test suite effectiveness."
+
 ## Anti-Patterns to NEVER Generate
 
 **All Stacks:** Business logic in route handlers, hardcoded secrets, missing `.gitignore`, no error handling

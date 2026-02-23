@@ -434,6 +434,25 @@ If yes:
 
 ---
 
+## ISO 25010 Quality Compliance
+
+When aggregating detect outputs, map findings to ISO 25010 quality characteristics:
+
+| ISO 25010 Characteristic | Detect Sources | Signal |
+|--------------------------|---------------|--------|
+| Functional Suitability | detect-dev (test coverage) | Test pass rate, coverage % |
+| Performance Efficiency | detect-dev (architecture) | N+1 queries, connection pools |
+| Compatibility | detect-dev (CI/CD) | Multi-platform support |
+| Usability | detect-ux (UX audit) | Heuristic scores |
+| Reliability | detect-dev (error handling) | Error handler coverage |
+| Security | detect-dev (security scan) | Vulnerability counts |
+| Maintainability | detect-dev (code quality) | Complexity, duplication |
+| Portability | detect-dev (infrastructure) | Container, cloud-agnostic |
+
+Add "Quality Gate Readiness" section to consolidated output:
+- Map aggregate scores to 4-tier gating model (auto-approve / lightweight / full / block)
+- Reference `/jaan-to:qa-quality-gate` for detailed composite scoring
+
 ## Skill Alignment
 
 - Two-phase workflow with HARD STOP for human approval

@@ -348,7 +348,7 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 45 skills grouped by role.
+All 49 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
@@ -371,6 +371,10 @@ All 45 skills grouped by role.
 | **qa** | `/jaan-to:qa-test-cases` | Generate BDD test cases |
 | | `/jaan-to:qa-test-generate` | Generate runnable test files |
 | | `/jaan-to:qa-test-run` | Execute tests, diagnose failures |
+| | `/jaan-to:qa-test-mutate` | Run mutation testing with multi-stack support |
+| | `/jaan-to:qa-tdd-orchestrate` | Orchestrate TDD cycle with isolated agents |
+| | `/jaan-to:qa-contract-validate` | Validate API contracts with multi-tool pipeline |
+| | `/jaan-to:qa-quality-gate` | Compute composite quality score |
 | **detect** | `/jaan-to:detect-dev` | Engineering audit with SARIF evidence |
 | | `/jaan-to:detect-design` | Design system detection |
 | | `/jaan-to:detect-ux` | Repo-driven UX audit |

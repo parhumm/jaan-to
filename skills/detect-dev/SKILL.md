@@ -474,5 +474,8 @@ If yes:
 - [ ] Repository scanned with all applicable checkers
 - [ ] Findings reported with SARIF-compatible evidence and 4-level confidence
 - [ ] OpenSSF-style score calculated
+- [ ] DORA metrics extracted from git log (deployment frequency, lead time) if git history available
+- [ ] ISO 25010 quality characteristics mapped to OpenSSF scoring dimensions
+- [ ] Mutation testing presence detected (stryker.config.*, infection.json5, mutmut, go-mutesting)
 - [ ] Output written to `$JAAN_OUTPUTS_DIR/detect/dev/`
 - [ ] User approved final report

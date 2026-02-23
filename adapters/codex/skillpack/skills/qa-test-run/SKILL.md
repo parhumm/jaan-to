@@ -27,7 +27,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 Accepts 1-2 arguments:
 - **qa-test-generate output** (preferred) -- Path to qa-test-generate output directory (from `/jaan-to:qa-test-generate`)
 - **test directory** -- Path to existing test directory in the project
-- **Tier filter** (optional) -- `--unit`, `--integration`, `--e2e`, or `--all` (default: `--all`)
+- **Tier filter** (optional) -- `--unit`, `--integration`, `--e2e`, `--mutation`, or `--all` (default: `--all`)
 - **Empty** -- Interactive wizard prompting for test location and tier
 
 IMPORTANT: The input above is your starting point. Determine mode and proceed accordingly.
@@ -273,6 +273,30 @@ Extract:
 - Coverage delta from previous run (if baseline exists)
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-run-reference.md` section "Coverage Parsing Rules" for per-stack parsing patterns and output formats.
+
+## Step 10a: Parse Mutation Score (if --mutation or --all with mutation config detected)
+
+If `--mutation` tier selected OR mutation tool config detected (stryker.config.*, infection.json5, etc.):
+
+Parse mutation score from **mutation tool outputs only** (never conflate with code coverage):
+- **StrykerJS**: `reports/mutation/mutation.json` -> `mutationScore`
+- **Infection**: `infection-log.json` -> `stats.msi`
+- **go-mutesting**: parse stdout `killed/total` ratio (NOT `go test -cover`)
+- **mutmut**: `mutmut results` CLI output -> parse survived/killed/total counts (NOT `.mutmut-cache` SQLite)
+
+If mutation tool not available for stack: report `mutation_score: null` (JSON null, NOT `"N/A"`) and exclude from quality-gate weighting. Parsers treat `null` as "not measured", `0` as "measured zero".
+
+Add mutation results to output report:
+- Mutation score percentage
+- Surviving mutants count
+- Top 5 survivor locations (file:line with mutator type)
+
+### Iteration Tracking
+
+Track RED-GREEN cycle count during test execution:
+- Cap at configurable limit (default 10 cycles)
+- If same test fails 3 times with same error pattern: escalate via AskUserQuestion with error context
+- Include cycle count in final report
 
 ## Step 11: Generate Report
 

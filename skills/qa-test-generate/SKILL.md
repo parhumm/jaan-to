@@ -26,10 +26,11 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 **Upstream Artifacts**: $ARGUMENTS
 
 Accepts 1-3 file paths or descriptions:
-- **qa-test-cases** (REQUIRED) -- Path to BDD/Gherkin test cases output (from `/jaan-to:qa-test-cases`)
-- **backend-scaffold** OR **frontend-scaffold** (REQUIRED) -- Path to scaffold output (from `/jaan-to:backend-scaffold` or `/jaan-to:frontend-scaffold`)
+- **qa-test-cases** (REQUIRED in standard mode) -- Path to BDD/Gherkin test cases output (from `/jaan-to:qa-test-cases`)
+- **backend-scaffold** OR **frontend-scaffold** (REQUIRED in standard mode) -- Path to scaffold output (from `/jaan-to:backend-scaffold` or `/jaan-to:frontend-scaffold`)
 - **backend-api-contract** (optional) -- Path to OpenAPI YAML (from `/jaan-to:backend-api-contract`) for MSW handler generation and API assertion data
 - **backend-service-implement** (optional) -- Path to filled service files for deeper unit test generation
+- **--from-mutants {survivors-json-path}** -- Mutation-guided mode: reads survivors JSON from `/jaan-to:qa-test-mutate` and generates targeted tests to kill surviving mutants
 - **Empty** -- Interactive wizard prompting for each artifact
 
 IMPORTANT: The input above is your starting point. Determine mode and proceed accordingly.
@@ -82,11 +83,66 @@ Use extended reasoning for:
 - Designing MSW handler strategy from API contract
 - Mapping Given/When/Then to Vitest assertions and Playwright actions
 
+## Step 0: Detect Input Mode
+
+Check if $ARGUMENTS contains `--from-mutants`:
+- If yes: enter **Mutation-Guided Mode** (Step 0.1)
+- If no: enter **Standard Mode** (Step 1)
+
+### Step 0.1: Mutation-Guided Mode
+
+Read the survivors JSON file from the provided path. Validate against handoff contract:
+
+```json
+{
+  "schema_version": "1.0",
+  "tool": "{framework}",
+  "mutation_score": {number or null},
+  "survivors": [
+    {
+      "file": "src/services/auth.ts",
+      "line": 42,
+      "original": "return balance > 0;",
+      "mutated": "return balance >= 0;",
+      "mutator": "ConditionalBoundary"
+    }
+  ]
+}
+```
+
+For each survivor entry:
+1. Read the source file at `survivor.file`, locate `survivor.line`
+2. Understand the **original** code behavior and the **mutated** variant
+3. Generate a targeted test that:
+   - Exercises the code path at `survivor.line`
+   - Asserts behavior that the `original` version produces correctly
+   - Would FAIL if the `mutated` version were substituted
+4. Name tests descriptively: `test("{mutator} at {file}:{line} -- {behavior description}")`
+
+**Testing pyramid check**: After generating mutation-targeted tests, validate ratio:
+- 60-70% unit tests (function-level assertions)
+- 20-25% integration tests (cross-module flows)
+- 5-10% E2E tests (user-visible behavior)
+- If mutation-targeted tests skew heavily toward one tier, emit a warning
+
+**Output**: Same folder structure as standard mode, but test files are prefixed with `mutation-` (e.g., `mutation-auth-service.test.ts`).
+
+After generating mutation-targeted tests, skip to Step 10 (Quality Check).
+
+### Step 0.2: Optional Companion Config Generation
+
+For JS/TS projects: generate optional `stryker.config.mjs` companion if not already present in project root.
+For PHP projects: generate optional `infection.json5` companion if not already present in project root.
+
+These configs are placed in the output `config/` subfolder as suggestions, not auto-applied.
+
+---
+
 ## Step 1: Validate & Parse Inputs
 
 For each provided path:
 
-**qa-test-cases** (REQUIRED):
+**qa-test-cases** (REQUIRED in standard mode):
 1. Read the BDD/Gherkin test cases markdown
 2. Extract all `Feature:` blocks with `@tags`
 3. Parse each `Scenario:` extracting Given/When/Then steps

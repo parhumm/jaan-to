@@ -1,6 +1,7 @@
 ---
 title: "team-ship"
 sidebar_position: 10
+updated_date: 2026-02-23
 ---
 
 # /jaan-to:team-ship
@@ -26,6 +27,7 @@ Uses Claude Code's Agent Teams feature. Each teammate gets its own context, runs
 /jaan-to:team-ship --roles pm,backend "payment flow"
 /jaan-to:team-ship --dry-run "social feed"
 /jaan-to:team-ship --resume
+/jaan-to:team-ship --track tdd "payment service"
 ```
 
 ---
@@ -40,6 +42,7 @@ Uses Claude Code's Agent Teams feature. Each teammate gets its own context, runs
 | `--detect` | Run 5 detect auditors in parallel, then consolidate |
 | `--roles role1,role2` | Select specific roles only |
 | `--dry-run` | Preview team plan without spawning |
+| `--track tdd` | TDD track: tdd-writer writes failing tests first, tdd-implementer makes them pass |
 | `--resume` | Continue from last checkpoint |
 
 ---
@@ -80,6 +83,7 @@ Each teammate shuts down after its phase completes to free context.
 |-------|-----------|--------|----------|
 | `--track full` | 7 | 20 | Full product with design + security |
 | `--track fast` | 4-5 | 8 | Rapid prototype, skip design steps |
+| `--track tdd` | 3-4 | 6 | Test-first development with tdd-writer + tdd-implementer roles |
 | `--detect` | 5 | 5+1 | Audit existing codebase |
 | `--roles X,Y` | Custom | Varies | Targeted work on specific areas |
 
@@ -96,6 +100,8 @@ Each teammate shuts down after its phase completes to free context.
 | QA | QA Engineer | test-cases, test-generate, test-run |
 | DevOps | DevOps Engineer | infra-scaffold, deploy-activate |
 | Security | Security Engineer | audit-remediate |
+| TDD Writer | Test Author (tdd track) | test-cases, test-generate (writes failing tests first) |
+| TDD Implementer | Implementer (tdd track) | scaffold, implement (makes tests pass) |
 
 Role definitions live in `skills/team-ship/roles.md`. New roles are added automatically via `/jaan-to:skill-create`.
 
@@ -147,6 +153,13 @@ Available in `jaan-to/config/settings.yaml`:
 | `agent_teams_quality_gate` | `true` | Quality checks on outputs |
 | `agent_teams_teammate_model` | (inherit) | Override teammate model |
 | `agent_teams_detect_model` | `haiku` | Model for detect skills |
+
+---
+
+## Orchestration Guardrails
+
+- **Fan-out cap**: Maximum number of concurrent teammates is capped (default: 5) to prevent resource exhaustion. Configurable via `agent_teams_fan_out_cap` in settings.yaml.
+- **DAG validation**: Before spawning, the lead validates the task dependency graph is a valid DAG (no cycles). If cycles are detected, the plan is rejected and the user is asked to resolve the dependency conflict.
 
 ---
 

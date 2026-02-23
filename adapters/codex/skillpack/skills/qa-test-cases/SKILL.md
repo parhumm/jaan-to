@@ -185,7 +185,60 @@ Process:
 
 ## Step 4: Generate BDD/Gherkin Test Cases
 
-Following research Section 2 patterns and Section 4 worked examples:
+Following research Section 2 patterns and Section 4 worked examples.
+
+### 4.0 Declarative Gherkin Enforcement Rule
+
+**CRITICAL**: All scenarios MUST use declarative style (describe BEHAVIOR, not UI actions).
+
+**BAD (Imperative -- NEVER use):**
+```gherkin
+When I click the "Login" button
+When I enter "test@example.com" in the email field
+When I scroll down to the footer
+When I select "Option A" from the dropdown
+```
+
+**GOOD (Declarative -- ALWAYS use):**
+```gherkin
+When the user submits valid credentials
+When the user requests password reset
+When the user selects their preferred plan
+When the user completes the checkout process
+```
+
+**Rule**: NEVER use imperative UI interaction steps. Describe BEHAVIOR, not UI actions. Steps should be understandable by non-technical stakeholders.
+
+### 4.0.1 Scenario Structure Limits
+
+- **Steps per scenario**: 3-5 (Given/When/Then combined). If exceeding 5, split into multiple scenarios.
+- **Scenarios per feature**: 5-10. If exceeding 10, split into sub-features.
+- **Scenario Outline promotion**: Use `Scenario Outline` with `Examples` tables when 3+ input combinations exist for the same behavior pattern.
+
+Example Scenario Outline:
+```gherkin
+Scenario Outline: User login with various credential types
+  Given a registered user with <credential_type>
+  When the user submits valid credentials
+  Then the user should be authenticated within 3 seconds
+
+  Examples:
+    | credential_type     |
+    | email and password  |
+    | social login        |
+    | SSO token           |
+```
+
+### 4.0.2 Standardized Step Templates
+
+Use these declarative patterns as starting points:
+- `Given a {entity} exists with {attribute} "{value}"`
+- `Given the user is authenticated as {role}`
+- `When the user {action} the {entity}`
+- `When the user submits {valid/invalid} {data_type}`
+- `Then the {entity} should have {attribute} "{value}"`
+- `Then the user should see {feedback_type}`
+- `Then the system should {expected_behavior}`
 
 ### 4.1 Feature Header
 

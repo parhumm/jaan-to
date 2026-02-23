@@ -3,7 +3,7 @@ title: "devops-infra-scaffold"
 sidebar_position: 2
 doc_type: skill
 created_date: 2026-02-11
-updated_date: 2026-02-11
+updated_date: 2026-02-23
 tags: [devops, infra, scaffold, cicd, docker, deployment, github-actions, gitlab-ci]
 related: [backend-scaffold, frontend-scaffold, detect-dev, sec-audit-remediate]
 ---
@@ -48,6 +48,7 @@ Files at `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{id}-{slug}/`:
 | `.github/workflows/ci.yml` or `.gitlab-ci.yml` | CI/CD pipeline |
 | `ci/health-check.yml` | Health monitoring workflow (15-min cron, GitHub Actions only) |
 | `ci/secret-rotation-reminder.yml` | Quarterly secret rotation reminder (GitHub Actions only) |
+| `ci/quality-pipeline.yml` | Quality pipeline with Spectral lint, oasdiff breaking changes, mutation testing, and Schemathesis fuzz stages |
 | `Dockerfile` + `Dockerfile.frontend` | Multi-stage Docker builds |
 | `docker-compose.yml` | Local development stack |
 | `.env.example` | Environment variable template |
@@ -106,6 +107,21 @@ jaan-to/outputs/devops/infra-scaffold/01-my-app-infra/
 │   └── fly.toml
 └── 01-my-app-infra-readme.md
 ```
+
+---
+
+## CI Quality Pipeline Stages
+
+When an OpenAPI contract is detected (from `backend-api-contract` output or project files), the generated CI pipeline includes four additional quality stages:
+
+| Stage | Tool | Purpose |
+|-------|------|---------|
+| Spectral Lint | Spectral | Validates OpenAPI spec against style rules and best practices |
+| Breaking Changes | oasdiff | Detects breaking API changes between branches |
+| Mutation Testing | StrykerJS / Infection / go-mutesting | Verifies test suite effectiveness via code mutation |
+| Fuzz Testing | Schemathesis | Property-based fuzz testing of API endpoints against the contract |
+
+These stages run in parallel after the standard build/test stages. Each stage is opt-in via `ci_quality_stages` in `jaan-to/config/settings.yaml`.
 
 ---
 
