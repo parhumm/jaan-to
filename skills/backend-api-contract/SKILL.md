@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (optional, auto-imported if exists)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#versioning`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:backend-api-contract.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:backend-api-contract.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-backend-api-contract.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-backend-api-contract.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
@@ -260,7 +260,7 @@ Use AskUserQuestion:
 
 ## Step 5: Generate OpenAPI YAML
 
-Read template: `$JAAN_TEMPLATES_DIR/jaan-to:backend-api-contract.template.md`
+Read template: `$JAAN_TEMPLATES_DIR/jaan-to-backend-api-contract.template.md`
 
 If tech stack needed, extract sections from tech.md:
 - Current Stack: `#current-stack`

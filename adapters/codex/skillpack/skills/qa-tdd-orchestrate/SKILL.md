@@ -18,8 +18,8 @@ codex-support: false
 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL -- determines test framework and runner)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
-- `$JAAN_LEARN_DIR/jaan-to:qa-tdd-orchestrate.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-tdd-orchestrate.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-qa-tdd-orchestrate.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-tdd-orchestrate.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - Research: `${CLAUDE_PLUGIN_ROOT}/docs/research/76-tdd-bdd-ai-orchestration.md` (Sections 1, 3)
 

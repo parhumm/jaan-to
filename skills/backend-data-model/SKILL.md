@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL: determines database engine and patterns)
   - Uses sections: `#current-stack`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:backend-data-model.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:backend-data-model.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-backend-data-model.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-backend-data-model.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
@@ -278,7 +278,7 @@ Use AskUserQuestion:
 
 ## Step 5: Generate Data Model Document
 
-Read template: `$JAAN_TEMPLATES_DIR/jaan-to:backend-data-model.template.md`
+Read template: `$JAAN_TEMPLATES_DIR/jaan-to-backend-data-model.template.md`
 
 If tech stack needed, extract sections from tech.md:
 - Current Stack: `#current-stack`

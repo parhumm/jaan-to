@@ -114,7 +114,7 @@ Override paths per-machine using environment variables in `.claude/settings.json
 
 ## Step 4: Custom Templates
 
-When you first run a skill, the [pre-execution protocol](../extending/pre-execution-protocol.md) offers to seed the plugin's default template into `jaan-to/templates/jaan-to:{skill}.template.md`. Accept the offer to get a local copy you can edit. For more control, override any skill's template by pointing to your own file:
+When you first run a skill, the [pre-execution protocol](../extending/pre-execution-protocol.md) offers to seed the plugin's default template into `jaan-to/templates/jaan-to-{skill}.template.md`. Accept the offer to get a local copy you can edit. For more control, override any skill's template by pointing to your own file:
 
 ```yaml
 # jaan-to/config/settings.yaml

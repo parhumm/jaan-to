@@ -110,7 +110,7 @@ Users forget passwords and cannot access their accounts...
 
 This skill reads from:
 ```
-jaan-to/learn/jaan-to:pm-prd-write.learn.md
+jaan-to/learn/jaan-to-pm-prd-write.learn.md
 ```
 
 Add feedback:

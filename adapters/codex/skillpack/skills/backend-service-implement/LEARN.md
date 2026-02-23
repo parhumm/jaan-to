@@ -1,7 +1,7 @@
 # Lessons: backend-service-implement
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:backend-service-implement.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-backend-service-implement.learn.md`
 
 ## Better Questions
 

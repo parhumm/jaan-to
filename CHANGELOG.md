@@ -27,6 +27,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`backend-scaffold` test recommendations** — Added test framework + mutation tool recommendation table per stack (Node.js/Vitest/StrykerJS, PHP/Pest/Infection, Go/testify/go-mutesting, Python/pytest/mutmut)
 - **Plugin marketplace updated** — 45 → 49 skills, added keywords: mutation-testing, tdd, contract-validation, quality-gates
 
+### Fixed
+- **Windows NTFS compatibility** — Replaced `jaan-to:` colon prefix with `jaan-to-` dash prefix in all learn/template filenames. Colons in filenames are forbidden on Windows NTFS, preventing cloning of any repo with seeded jaan-to files. Auto-migration in `bootstrap.sh` renames existing colon-prefixed files on session start with three-branch collision handling (rename, dedup, or preserve with `.legacy-colon.md` suffix). Three-tier path resolution (`jaan-to-` → `jaan-to:` legacy → unprefixed) maintains backward compatibility. Updated across 68+ SKILL.md files, 20+ LEARN.md files, 17+ doc files, and all scripts. Closes #157
+
 ---
 
 ## [7.4.0] - 2026-02-22

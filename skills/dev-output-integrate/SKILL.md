@@ -17,8 +17,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` — Tech stack (determines package manager, monorepo tool)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/config.md` — Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-output-integrate.template.md` — Integration log template
-- `$JAAN_LEARN_DIR/jaan-to:dev-output-integrate.learn.md` — Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-dev-output-integrate.template.md` — Integration log template
+- `$JAAN_LEARN_DIR/jaan-to-dev-output-integrate.learn.md` — Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` — Language resolution protocol
 
 ## Input
@@ -277,7 +277,7 @@ Preview:
 
 ## Step 12: Write Integration Log
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:dev-output-integrate.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-dev-output-integrate.template.md`
 
 Write `{NEXT_ID}-{slug}.md` with:
 - Executive Summary

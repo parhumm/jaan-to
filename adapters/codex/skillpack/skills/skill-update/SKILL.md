@@ -15,7 +15,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 ## Context Files
 
 - `docs/extending/create-skill.md` - Skill specification (REQUIRED)
-- `$JAAN_LEARN_DIR/jaan-to:skill-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-skill-update.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/config.md` - Current skill catalog
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 

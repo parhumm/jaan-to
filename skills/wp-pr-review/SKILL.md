@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:wp-pr-review.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:wp-pr-review.template.md` - Report output template
+- `$JAAN_LEARN_DIR/jaan-to-wp-pr-review.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-wp-pr-review.template.md` - Report output template
 - Research: `$JAAN_OUTPUTS_DIR/research/67-wp-pr-review.md` - Full research document
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
@@ -326,7 +326,7 @@ Preview:
 
 ## Step 6: Generate Review Report
 
-Read template from `$JAAN_TEMPLATES_DIR/jaan-to:wp-pr-review.template.md` (if exists) or use the skill's built-in `template.md`.
+Read template from `$JAAN_TEMPLATES_DIR/jaan-to-wp-pr-review.template.md` (if exists) or use the skill's built-in `template.md`.
 
 Fill all sections:
 

@@ -14,8 +14,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:detect-pack.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:detect-pack.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-detect-pack.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-detect-pack.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-pack-reference.md` - Evidence formats, consolidation logic, output templates
 

@@ -18,8 +18,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/team-ship-reference.md` - Spawn prompts, dependency algo, schemas
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:team-ship.template.md` - Orchestration log template
-- `$JAAN_LEARN_DIR/jaan-to:team-ship.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-team-ship.template.md` - Orchestration log template
+- `$JAAN_LEARN_DIR/jaan-to-team-ship.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input

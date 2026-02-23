@@ -17,8 +17,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/design.md` - Design system guidelines (optional)
 - `$JAAN_CONTEXT_DIR/brand.md` - Brand guidelines (optional)
-- `$JAAN_TEMPLATES_DIR/jaan-to:frontend-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-frontend-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
@@ -167,7 +167,7 @@ All files in `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`:
 
 ## Step 7: Generate Content
 
-Read `$JAAN_TEMPLATES_DIR/jaan-to:frontend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
+Read `$JAAN_TEMPLATES_DIR/jaan-to-frontend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
 
 If tech stack needed, extract sections from tech.md:
 - Current Stack: `#current-stack`

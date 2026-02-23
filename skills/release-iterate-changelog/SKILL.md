@@ -14,7 +14,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:release-iterate-changelog.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-release-iterate-changelog.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_OUTPUTS_DIR/CHANGELOG.md` - Existing changelog (if present)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech context (if exists)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol

@@ -1,7 +1,7 @@
 # Lessons: sec-audit-remediate
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:sec-audit-remediate.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-sec-audit-remediate.learn.md`
 
 ## Better Questions
 <!-- Questions that improve input quality -->

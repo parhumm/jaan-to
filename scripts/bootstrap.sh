@@ -77,6 +77,51 @@ if [ -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" ] && grep -q 'artifacts/jaan-to
     "$PROJECT_DIR/$CONFIG_DIR/settings.yaml" && rm -f "$PROJECT_DIR/$CONFIG_DIR/settings.yaml.bak"
 fi
 
+# 3.6. Migration: rename jaan-to: prefix to jaan-to- in filenames (issue #157)
+# Colons in filenames break Windows NTFS. This migrates existing files silently.
+_migrate_colon_prefix() {
+  local dir="$1"
+  [ -d "$PROJECT_DIR/$dir" ] || return 0
+  for legacy_file in "$PROJECT_DIR/$dir"/jaan-to:*; do
+    [ -f "$legacy_file" ] || continue
+    local basename_legacy
+    basename_legacy="$(basename "$legacy_file")"
+    local basename_new="${basename_legacy/jaan-to:/jaan-to-}"
+    local new_file="$PROJECT_DIR/$dir/$basename_new"
+
+    if [ ! -f "$new_file" ]; then
+      # Case 1: only legacy exists → simple rename
+      mv "$legacy_file" "$new_file"
+    elif diff -q "$legacy_file" "$new_file" >/dev/null 2>&1; then
+      # Case 2: both exist and are identical → deduplicate
+      rm "$legacy_file"
+    else
+      # Case 3: both exist and differ → preserve legacy with colon-free name
+      local conflict_name="${basename_new%.md}.legacy-colon.md"
+      mv "$legacy_file" "$PROJECT_DIR/$dir/$conflict_name"
+      echo "WARNING: conflicting files found for ${basename_new}. Kept canonical ${basename_new} and preserved legacy copy as ${conflict_name} — please merge manually." >&2
+    fi
+  done
+}
+_migrate_colon_prefix "$LEARN_DIR"
+_migrate_colon_prefix "$TEMPLATES_DIR"
+
+# Post-migration assert: no colon filenames should remain
+_colon_remain=$(find "$PROJECT_DIR/$LEARN_DIR" "$PROJECT_DIR/$TEMPLATES_DIR" -name '*:*' 2>/dev/null || true)
+if [ -n "$_colon_remain" ]; then
+  echo "ERROR: colon filenames still found after migration:" >&2
+  echo "$_colon_remain" >&2
+fi
+
+# Git warning: if colon files are tracked, warn user (non-fatal)
+if git -C "$PROJECT_DIR" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  _git_colon=$(git -C "$PROJECT_DIR" ls-files -- '*:*' 2>/dev/null || true)
+  if [ -n "$_git_colon" ]; then
+    echo "WARNING: git-tracked files with colons in names (may break Windows cloning):" >&2
+    echo "$_git_colon" >&2
+  fi
+fi
+
 # 4. Copy context files (skip if exists)
 if [ -d "$PLUGIN_DIR/scripts/seeds" ]; then
   for context_file in "$PLUGIN_DIR/scripts/seeds"/*.md; do

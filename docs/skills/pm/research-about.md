@@ -136,7 +136,7 @@ Uses **5 adaptive waves** where each wave's focus is determined by findings from
 
 This skill reads from:
 ```
-jaan-to/learn/jaan-to:pm-research-about.learn.md
+jaan-to/learn/jaan-to-pm-research-about.learn.md
 ```
 
 Add feedback:

@@ -16,8 +16,8 @@ disable-model-invocation: true
 ## Context Files
 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context
-- `$JAAN_LEARN_DIR/jaan-to:qa-contract-validate.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-contract-validate.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-qa-contract-validate.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-contract-validate.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input

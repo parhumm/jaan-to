@@ -3,7 +3,7 @@
 > Last updated: 2026-02-09
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-backend-scaffold.learn.md`
 
 Seeded from research: $JAAN_OUTPUTS_DIR/research/63-dev-scaffolds.md
 

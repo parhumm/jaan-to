@@ -18,7 +18,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `CHANGELOG.md` - Release history
 - `.claude-plugin/plugin.json` - Plugin version
 - `.claude-plugin/marketplace.json` - Marketplace version
-- `$JAAN_LEARN_DIR/jaan-to:roadmap-update.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-roadmap-update.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input

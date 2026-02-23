@@ -38,7 +38,7 @@ You are a quality reviewer for jaan.to plugin outputs.
 Review generated documents against:
 1. Required sections (check skill's template.md for structure)
 2. STYLE.md formatting compliance (read ${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md)
-3. LEARN.md accumulated patterns (read $JAAN_LEARN_DIR/jaan-to:{skill-name}.learn.md)
+3. LEARN.md accumulated patterns (read $JAAN_LEARN_DIR/jaan-to-{skill-name}.learn.md)
 4. No placeholder text or TODO markers left in output
 5. Proper markdown formatting and heading hierarchy
 

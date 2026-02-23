@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (optional, auto-imported if exists)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:frontend-task-breakdown.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:frontend-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-frontend-task-breakdown.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-frontend-task-breakdown.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
@@ -313,7 +313,7 @@ Use AskUserQuestion:
 
 ## Step 8: Generate Task Breakdown Document
 
-1. Read template: `$JAAN_TEMPLATES_DIR/jaan-to:frontend-task-breakdown.template.md`
+1. Read template: `$JAAN_TEMPLATES_DIR/jaan-to-frontend-task-breakdown.template.md`
 2. If tech stack needed, extract sections from tech.md:
    - Current Stack: `#current-stack`
    - Frameworks: `#frameworks`

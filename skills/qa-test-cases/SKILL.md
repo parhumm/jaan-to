@@ -13,9 +13,9 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:qa-test-cases.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases.template.md` - BDD/Gherkin template
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases-quality-checklist.template.md` - Quality checklist template
+- `$JAAN_LEARN_DIR/jaan-to-qa-test-cases.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases.template.md` - BDD/Gherkin template
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases-quality-checklist.template.md` - Quality checklist template
 - Research: `$JAAN_OUTPUTS_DIR/research/50-qa-test-cases.md` - ISTQB standards, test design techniques
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
@@ -439,7 +439,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 Path: `$OUTPUT_FOLDER/${NEXT_ID}-test-cases-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases.template.md`
 
 Fill sections:
 - Title, Executive Summary
@@ -456,7 +456,7 @@ Fill sections:
 
 Path: `$OUTPUT_FOLDER/${NEXT_ID}-test-cases-quality-checklist-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases-quality-checklist.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases-quality-checklist.template.md`
 
 Fill sections:
 - 10-Point Peer Review Checklist

@@ -16,7 +16,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 - `jaan-to/roadmap.md` - Current roadmap
 - `jaan-to/tasks/` - Task standards
-- `$JAAN_LEARN_DIR/jaan-to:roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-roadmap-add.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
