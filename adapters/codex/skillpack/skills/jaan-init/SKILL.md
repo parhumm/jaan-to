@@ -15,7 +15,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 ## Context Files
 
 - `${CLAUDE_PLUGIN_ROOT}/scripts/bootstrap.sh` - Bootstrap script that creates directories and seeds files
-- `$JAAN_LEARN_DIR/jaan-to:jaan-init.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-jaan-init.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input

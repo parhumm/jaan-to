@@ -17,8 +17,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL -- determines framework, monorepo tool, package manager)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-project-assemble.template.md` - Output template (assembly log)
-- `$JAAN_LEARN_DIR/jaan-to:dev-project-assemble.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-dev-project-assemble.template.md` - Output template (assembly log)
+- `$JAAN_LEARN_DIR/jaan-to-dev-project-assemble.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/research/69-dev-scaffold-project-assembly-automation.md` - Research: monorepo patterns, entry points, provider wiring, config inheritance, .env validation
 

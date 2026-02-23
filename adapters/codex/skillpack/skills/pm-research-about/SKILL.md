@@ -13,8 +13,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:pm-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:pm-research-about.template.md` - Output format template
+- `$JAAN_LEARN_DIR/jaan-to-pm-research-about.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-pm-research-about.template.md` - Output format template
 - `$JAAN_OUTPUTS_DIR/research/README.md` - Current index structure
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/research-methodology.md` - Reference tables, templates, scoring rubrics
@@ -346,7 +346,7 @@ Present the research summary using the template.
 
 ## Step 7: Generate Document
 
-Use template from `$JAAN_TEMPLATES_DIR/jaan-to:pm-research-about.template.md`:
+Use template from `$JAAN_TEMPLATES_DIR/jaan-to-pm-research-about.template.md`:
 
 1. Fill all sections with researched content
 2. Include specific facts, statistics, and citations

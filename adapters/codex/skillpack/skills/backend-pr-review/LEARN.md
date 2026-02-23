@@ -3,7 +3,7 @@
 > Last updated: 2026-02-15
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:backend-pr-review.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-backend-pr-review.learn.md`
 
 Seeded from research: `docs/research/53-dev-pr-review.md`
 

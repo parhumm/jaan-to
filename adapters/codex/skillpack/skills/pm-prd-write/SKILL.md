@@ -22,8 +22,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 - `$JAAN_CONTEXT_DIR/config.md` - Configuration
 - `$JAAN_CONTEXT_DIR/boundaries.md` - Trust rules
-- `$JAAN_TEMPLATES_DIR/jaan-to:pm-prd-write.template.md` - PRD template
-- `$JAAN_LEARN_DIR/jaan-to:pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-pm-prd-write.template.md` - PRD template
+- `$JAAN_LEARN_DIR/jaan-to-pm-prd-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech context (if exists)
 - `$JAAN_CONTEXT_DIR/team.md` - Team context (if exists)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
@@ -86,7 +86,7 @@ Before generating the PRD, confirm with the user:
 # PHASE 2: Generation (Write Phase)
 
 ## Step 3: Generate PRD
-Use the template from: `$JAAN_TEMPLATES_DIR/jaan-to:pm-prd-write.template.md`
+Use the template from: `$JAAN_TEMPLATES_DIR/jaan-to-pm-prd-write.template.md`
 
 Fill all sections:
 - **Title**: From initiative

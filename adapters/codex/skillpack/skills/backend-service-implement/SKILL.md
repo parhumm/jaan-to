@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL — determines framework, ORM, patterns)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:backend-service-implement.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:backend-service-implement.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-backend-service-implement.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-backend-service-implement.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/research/70-dev-backend-service-implementation-generation.md` - Research: service layer architecture, ORM queries, RFC 9457 errors, pagination, transactions, idempotency, JWT lifecycle
 

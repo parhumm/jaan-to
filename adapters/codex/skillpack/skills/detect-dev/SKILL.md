@@ -14,9 +14,9 @@ compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:detect-dev.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-detect-dev.learn.md` - Past lessons (loaded in Pre-Execution)
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (if populated by dev-stack-detect, used as starting input)
-- `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` - Output template
+- `$JAAN_TEMPLATES_DIR/jaan-to-detect-dev.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-dev-reference.md` - Evidence format, scoring tables, scan patterns
 - `$JAAN_OUTPUTS_DIR/dev/output-integrate/*/*.md` - Integration logs (for origin tagging, if present)
@@ -387,7 +387,7 @@ Contents:
 
 ### If `run_depth == "full"`: Write 9 Output Files
 
-For each of the 9 output files, use the template from `$JAAN_TEMPLATES_DIR/jaan-to:detect-dev.template.md` and fill with findings:
+For each of the 9 output files, use the template from `$JAAN_TEMPLATES_DIR/jaan-to-detect-dev.template.md` and fill with findings:
 
 | File | Content |
 |------|---------|
