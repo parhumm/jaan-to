@@ -40,11 +40,16 @@ resolve_template_path() {
     fi
   fi
 
-  # Check standard project location (both naming conventions)
+  # Check standard project location (three-tier: dash → colon legacy → unprefixed)
   local templates_dir=$(get_config "paths_templates" "jaan-to/templates")
-  local prefixed_file="jaan-to:${template_file}"
-  if [ -f "${PROJECT_DIR:-.}/${templates_dir}/${prefixed_file}" ]; then
-    echo "${templates_dir}/${prefixed_file}"
+  local dash_file="jaan-to-${template_file}"
+  local colon_file="jaan-to:${template_file}"
+  if [ -f "${PROJECT_DIR:-.}/${templates_dir}/${dash_file}" ]; then
+    echo "${templates_dir}/${dash_file}"
+    return 0
+  fi
+  if [ -f "${PROJECT_DIR:-.}/${templates_dir}/${colon_file}" ]; then
+    echo "${templates_dir}/${colon_file}"
     return 0
   fi
   if [ -f "${PROJECT_DIR:-.}/${templates_dir}/${template_file}" ]; then
@@ -86,12 +91,15 @@ resolve_learning_path() {
       sources="${plugin_root}/skills/${skill_name}/LEARN.md"
     fi
 
-    # Project source (check both naming conventions)
+    # Project source (three-tier: dash → colon legacy → unprefixed)
     local learn_dir=$(get_config "paths_learning" "jaan-to/learn")
-    local prefixed_learn="jaan-to:${learn_file}"
+    local dash_learn="jaan-to-${learn_file}"
+    local colon_learn="jaan-to:${learn_file}"
     local project_learn=""
-    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}" ]; then
-      project_learn="${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}"
+    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${dash_learn}" ]; then
+      project_learn="${PROJECT_DIR:-.}/${learn_dir}/${dash_learn}"
+    elif [ -f "${PROJECT_DIR:-.}/${learn_dir}/${colon_learn}" ]; then
+      project_learn="${PROJECT_DIR:-.}/${learn_dir}/${colon_learn}"
     elif [ -f "${PROJECT_DIR:-.}/${learn_dir}/${learn_file}" ]; then
       project_learn="${PROJECT_DIR:-.}/${learn_dir}/${learn_file}"
     fi
@@ -107,10 +115,16 @@ resolve_learning_path() {
     return 0
   else
     # Override strategy: project only, or plugin if project doesn't exist
+    # Three-tier: dash → colon legacy → unprefixed
     local learn_dir=$(get_config "paths_learning" "jaan-to/learn")
-    local prefixed_learn="jaan-to:${learn_file}"
-    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}" ]; then
-      echo "${PROJECT_DIR:-.}/${learn_dir}/${prefixed_learn}"
+    local dash_learn="jaan-to-${learn_file}"
+    local colon_learn="jaan-to:${learn_file}"
+    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${dash_learn}" ]; then
+      echo "${PROJECT_DIR:-.}/${learn_dir}/${dash_learn}"
+      return 0
+    fi
+    if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${colon_learn}" ]; then
+      echo "${PROJECT_DIR:-.}/${learn_dir}/${colon_learn}"
       return 0
     fi
     if [ -f "${PROJECT_DIR:-.}/${learn_dir}/${learn_file}" ]; then
