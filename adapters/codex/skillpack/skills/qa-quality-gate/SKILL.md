@@ -14,8 +14,8 @@ disable-model-invocation: true
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:qa-quality-gate.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-quality-gate.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-qa-quality-gate.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-quality-gate.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input

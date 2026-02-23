@@ -17,8 +17,8 @@ disable-model-invocation: true
 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL -- determines mutation framework)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
-- `$JAAN_LEARN_DIR/jaan-to:qa-test-mutate.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-mutate.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-qa-test-mutate.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-mutate.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - Research: `${CLAUDE_PLUGIN_ROOT}/docs/research/76-tdd-bdd-ai-orchestration.md` (Section 5)
 
