@@ -42,6 +42,7 @@
 | pm-research-about | `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
 | pm-story-write | `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs |
 | pm-roadmap-update | `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
+| pm-skill-discover | `/jaan-to:pm-skill-discover` | Detect workflow patterns and suggest new skills |
 | detect-dev | `/jaan-to:detect-dev` | Repo engineering audit with scored findings |
 | detect-design | `/jaan-to:detect-design` | Design system detection with drift findings |
 | detect-writing | `/jaan-to:detect-writing` | Writing system extraction with tone scoring |

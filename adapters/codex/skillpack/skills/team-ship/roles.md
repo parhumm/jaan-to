@@ -23,7 +23,7 @@ Each role section defines:
 - **Title**: Product Manager
 - **Track**: fast, full
 - **Model**: inherit
-- **Skills**: [pm-research-about, pm-prd-write, pm-story-write, pm-roadmap-add]
+- **Skills**: [pm-research-about, pm-prd-write, pm-story-write, pm-roadmap-add, pm-skill-discover]
 - **Phase**: 1 (define)
 - **Depends on**: user-input
 - **Outputs to share**: prd_path, stories_path
