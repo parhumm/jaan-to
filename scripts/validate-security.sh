@@ -305,6 +305,54 @@ fi
 echo ""
 
 # ═════════════════════════════════════════════════════════════
+# SECTION E: Input Safety Compliance (advisory)
+# ═════════════════════════════════════════════════════════════
+
+echo "── Section E: Input Safety Compliance ──"
+E_START_WARNINGS=$WARNINGS
+
+# E1: Skills with WebFetch/WebSearch must have safety rules or threat scan reference
+for skill in skills/*/SKILL.md; do
+  local_name=$(basename "$(dirname "$skill")")
+  tools=$(extract_allowed_tools "$skill")
+  if echo "$tools" | grep -qE 'WebFetch|WebSearch'; then
+    if ! grep -qE 'threat-scan-reference|Safety Rules|UNTRUSTED' "$skill" 2>/dev/null; then
+      echo "  ::warning::E1 [$local_name] Uses WebFetch/WebSearch but has no safety rules or threat scan reference"
+      WARNINGS=$((WARNINGS + 1))
+    fi
+  fi
+done
+
+# E2: Known external-input skills must reference threat-scan-reference.md
+EXTERNAL_INPUT_SKILLS="qa-issue-validate qa-issue-report jaan-issue-report pm-roadmap-add pm-roadmap-update pm-research-about backend-pr-review"
+for skill_name in $EXTERNAL_INPUT_SKILLS; do
+  skill_file="skills/${skill_name}/SKILL.md"
+  if [ -f "$skill_file" ]; then
+    if ! grep -qE 'threat-scan-reference|UNTRUSTED' "$skill_file" 2>/dev/null; then
+      echo "  ::warning::E2 [$skill_name] Processes external input but missing threat-scan-reference.md or UNTRUSTED marker"
+      WARNINGS=$((WARNINGS + 1))
+    fi
+  fi
+done
+
+# E3: Skills with WebFetch/WebSearch must reference hidden char stripping
+for skill in skills/*/SKILL.md; do
+  local_name=$(basename "$(dirname "$skill")")
+  tools=$(extract_allowed_tools "$skill")
+  if echo "$tools" | grep -qE 'WebFetch|WebSearch'; then
+    if ! grep -qE 'threat-scan-reference|hidden char|Strip hidden' "$skill" 2>/dev/null; then
+      echo "  ::warning::E3 [$local_name] Uses WebFetch/WebSearch but no hidden character stripping reference"
+      WARNINGS=$((WARNINGS + 1))
+    fi
+  fi
+done
+
+if [ $WARNINGS -eq $E_START_WARNINGS ]; then
+  echo "  ✓ All external-input skills have safety references"
+fi
+echo ""
+
+# ═════════════════════════════════════════════════════════════
 # SUMMARY
 # ═════════════════════════════════════════════════════════════
 
