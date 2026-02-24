@@ -30,7 +30,7 @@
 ### Best Practices
 
 - Always run full validation (24 checks) before any writes
-- Use atomic commits (4 files in 1 commit via roadmap-update release mode)
+- Use atomic commits (4 files in 1 commit via pm-roadmap-update release mode)
 - Never push --force or skip hooks
 - Stop at PR creation - let human merge for safety
 - Provide clear rollback instructions at each HARD STOP gate
@@ -62,7 +62,7 @@
    - **Fix:** CI validation in Phase 3 catches this before merge
 
 3. **Mistake:** Version mismatch across 3 locations (plugin.json × 2, marketplace.json)
-   - **Fix:** roadmap-update release mode updates all 3 atomically
+   - **Fix:** pm-roadmap-update release mode updates all 3 atomically
 
 4. **Mistake:** Forgetting to sync dev after merge
    - **Fix:** Included in PR description "Post-Merge Steps"
@@ -115,8 +115,8 @@
 
 ### Works Best With
 
-- `/jaan-to:roadmap-update sync` - Marks tasks done before release
-- `/jaan-to:roadmap-update release` - Atomic version bump
+- `/jaan-to:pm-roadmap-update sync` - Marks tasks done before release
+- `/jaan-to:pm-roadmap-update release` - Atomic version bump
 - `/jaan-to:docs-update --fix` - Auto-fixes stale docs
 - `/jaan-to:release-iterate-changelog auto-generate` - CHANGELOG from commits
 - `/jaan-issue-solve` - Post-release issue acknowledgments (manual step)

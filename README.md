@@ -246,13 +246,13 @@ See [Recommended Permissions](#recommended-permissions) below for examples of co
 
 | Command | Description | Output |
 |---------|-------------|--------|
-| `/jaan-to:roadmap-add` | Add task to roadmap | `jaan-to/roadmap.md` |
+| `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap | `jaan-to/outputs/pm/roadmap/` |
 | `/jaan-to:skill-create` | Create new skill with wizard | `skills/{name}/` |
 | `/jaan-to:skill-update` | Update existing skill | Updates skill definition |
 
 **Example:**
 ```
-/jaan-to:roadmap-add "Implement dark mode toggle"
+/jaan-to:pm-roadmap-add "Implement dark mode toggle"
 ```
 
 ---
@@ -424,6 +424,7 @@ rm -rf .claude/skills/jaan-learn-add
 rm -rf .claude/skills/jaan-research-about
 rm -rf .claude/skills/jaan-research-add
 rm -rf .claude/skills/jaan-roadmap-add
+rm -rf .claude/skills/jaan-pm-roadmap-add
 ```
 
 ### Update Settings

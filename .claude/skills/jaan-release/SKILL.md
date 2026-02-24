@@ -1,7 +1,7 @@
 ---
 name: jaan-release
 description: Automated jaan-to release preparation with validation, docs sync, version bump, and PR creation
-allowed-tools: Read, Glob, Grep, Bash(git *), Bash(gh *), Bash(jq *), Bash(npm *), Bash(bash .claude/scripts/*), Bash(bash scripts/validate-security.sh*), Skill(jaan-to:roadmap-update), Skill(jaan-to:release-iterate-changelog), Skill(jaan-to:docs-update)
+allowed-tools: Read, Glob, Grep, Bash(git *), Bash(gh *), Bash(jq *), Bash(npm *), Bash(bash .claude/scripts/*), Bash(bash scripts/validate-security.sh*), Skill(jaan-to:pm-roadmap-update), Skill(jaan-to:release-iterate-changelog), Skill(jaan-to:docs-update)
 argument-hint: "[vX.Y.Z] [\"release summary\"]"
 ---
 
@@ -146,7 +146,7 @@ Proceed to Phase 2 (Documentation & Version Prep)? [y/n/abort]
 
 ## Step 2.1: Roadmap Sync
 
-Invoke: `/jaan-to:roadmap-update sync`
+Invoke: `/jaan-to:pm-roadmap-update sync`
 
 **This skill:**
 - Reads git history since last version tag
@@ -276,7 +276,7 @@ git restore CHANGELOG.md docs/ website/index.html
 
 ## Step 3.2: Atomic Version Bump
 
-Invoke: `/jaan-to:roadmap-update release v6.3.0 "Add jaan-release skill"`
+Invoke: `/jaan-to:pm-roadmap-update release v6.3.0 "Add jaan-release skill"`
 
 **This skill atomically:**
 1. Moves CHANGELOG `[Unreleased]` → `[6.3.0]` with date
@@ -500,7 +500,7 @@ SKILL COMPLETE - Human merge required.
 **Aligns with jaan-to principles:**
 - ✅ Two-phase workflow with HARD STOP gates (4 gates)
 - ✅ Single source of truth (validation logic in `.claude/scripts/`)
-- ✅ Reuses existing skills (roadmap-update, docs-update, release-iterate-changelog)
+- ✅ Reuses existing skills (pm-roadmap-update, docs-update, release-iterate-changelog)
 - ✅ Token-optimized (orchestrates, doesn't duplicate)
 - ✅ Maintains human control (stops at PR creation)
 - ✅ Generic and scalable (works for any version)

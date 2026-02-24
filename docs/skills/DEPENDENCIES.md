@@ -147,7 +147,7 @@ Issue Validation:
 │  "Validate issues against codebase with RCA"            │
 └────────────────┬────────────────────────────────────────┘
                  │
-                 └──> /jaan-to:roadmap-add (if VALID + user approves)
+                 └──> /jaan-to:pm-roadmap-add (if VALID + user approves)
                       "Add validated issue to roadmap"
 
 > Cross-pipeline: For VALID_BUG verdicts, the reproduction scenario can feed
@@ -263,7 +263,7 @@ These skills are suggested by multiple other skills:
 
 ### Roadmap Management
 - **Used by:** Skills that create new features
-- **Command:** `/jaan-to:roadmap-add`
+- **Command:** `/jaan-to:pm-roadmap-add`
 - **Purpose:** Track feature requests and improvements
 - **Trigger:** User identifies missing functionality
 
@@ -361,9 +361,9 @@ These skills don't typically call others:
 | `/jaan-to:jaan-init` | Initialize jaan-to for project | Run once per project |
 | `/jaan-to:jaan-issue-report` | Report bugs/issues | Standalone |
 | `/jaan-to:qa-issue-report` | Report issues to any repo | Standalone |
-| `/jaan-to:qa-issue-validate` | Validate issues against codebase | Standalone → /roadmap-add |
-| `/jaan-to:roadmap-add` | Add roadmap task | Standalone |
-| `/jaan-to:roadmap-update` | Sync roadmap | Standalone (maintenance) |
+| `/jaan-to:qa-issue-validate` | Validate issues against codebase | Standalone → /pm-roadmap-add |
+| `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap | Standalone or from PRD |
+| `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap | Standalone (maintenance) |
 
 ---
 
@@ -379,13 +379,15 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 50 skills grouped by role.
+All 51 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
 | **pm** | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
 | | `/jaan-to:pm-story-write` | Generate user stories with acceptance criteria |
 | | `/jaan-to:pm-research-about` | Deep research on any topic |
+| | `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
+| | `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
 | **backend** | `/jaan-to:backend-task-breakdown` | Convert PRD into backend tasks |
 | | `/jaan-to:backend-data-model` | Generate data model docs from entities |
 | | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts |
@@ -429,8 +431,6 @@ All 50 skills grouped by role.
 | | `/jaan-to:skill-create` | Create new skills |
 | | `/jaan-to:skill-update` | Update existing skills |
 | | `/jaan-to:learn-add` | Capture lessons learned |
-| | `/jaan-to:roadmap-add` | Add roadmap task |
-| | `/jaan-to:roadmap-update` | Maintain and sync roadmap |
 | | `/jaan-to:jaan-init` | Initialize jaan-to for project |
 | | `/jaan-to:jaan-issue-report` | Report bugs/issues |
 

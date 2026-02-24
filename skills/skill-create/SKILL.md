@@ -456,7 +456,7 @@ If yes:
 
 ## Step 21: Auto-Invoke Roadmap Update
 
-Run `/jaan-to:roadmap-update` to sync the new skill with the roadmap.
+Run `/jaan-to:pm-roadmap-update` to sync the new skill with the roadmap.
 
 This ensures the roadmap reflects the latest skill additions.
 
@@ -480,5 +480,5 @@ This ensures the roadmap reflects the latest skill additions.
 - [ ] Documentation created via /jaan-to:docs-create
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
-- [ ] Roadmap synced via /jaan-to:roadmap-update
+- [ ] Roadmap synced via /jaan-to:pm-roadmap-update
 - [ ] User approved final result

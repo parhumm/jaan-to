@@ -85,6 +85,9 @@ This directory contains structured summaries of research on Claude Code best pra
 | [75](./75-token-optimization-aggressive-safe.md)                              | Aggressive Token Optimization                                   | Reference extraction patterns for reducing per-skill SKILL.md sizes by 25-60%, extracting tables/checklists/templates to `docs/extending/*-reference.md` files, validate-skills.sh line count enforcement (hard cap 600, soft cap 500), bootstrap compact mode, and four-layer token architecture. |
 | [76](./76-tdd-bdd-ai-orchestration.md)                                        | TDD/BDD/AI Orchestration                                        | Three-agent TDD cycle, BDD/Gherkin as spec interface, double-loop TDD (outer BDD acceptance + inner component TDD), spec validation gates, mutation testing integration (StrykerJS, Infection, go-mutesting, mutmut), hierarchical-pipeline architecture, automated quality gates, and ISO 25010/DORA standards mapping. |
 | [77](./77-qa-issue-validation-best-practices.md)                              | QA Issue Validation Best Practices                              | CTQRS 17-point quality scoring, layered codebase analysis (7-layer search strategy), COCA 2-phase RCA with 5 Whys, reproduction scenario design, semantic duplicate detection, OWASP 2025 prompt injection defense, untrusted input threat scanning, roadmap sanitization, and LLM security guardrails for automated triage. ~60 sources. |
+| [78](./78-jaanto-security-guardrails-prompt-injection.md)                     | Security hardening Jaan.to against prompt injection and sandbox escape | Blocklist bypass taxonomy, MCP attack surface, TOCTOU path validation, kernel sandboxing, YAML hardening |
+| [79](./79-jaanto-security-guardrails-blueprint.md)                            | Jaan.to Security Guardrails Blueprint                           | Defense-in-depth architecture, skill guardrails standard, prompt injection playbook, 90-day MVP |
+| [80](./80-building-skill-discovery-across-ai-coding-tools.md)                 | Building skill discovery across AI coding tools                 | Claude Code/Codex/Cursor integration surfaces, hooks & session parsing, event schemas, PrefixSpan mining, scoring rubrics, local-first MVP architecture |
 
 ## Quick Topic Finder
 
@@ -132,6 +135,11 @@ This directory contains structured summaries of research on Claude Code best pra
 - [52-backend-task-breakdown.md](./52-backend-task-breakdown.md) - Backend task breakdown for Laravel/PHP with INVEST criteria
 - [53-dev-pr-review.md](./53-dev-pr-review.md) - PR review automation with risk scoring & security patterns
 - [61-detect-pack.md](./61-detect-pack.md) - Repo-analysis output schemas & writing system detection standards
+- [80-building-skill-discovery-across-ai-coding-tools.md](./80-building-skill-discovery-across-ai-coding-tools.md) - Skill discovery: Claude Code/Codex/Cursor hooks, event schemas, PrefixSpan mining, local-first MVP
+
+### Security
+- [78-jaanto-security-guardrails-prompt-injection.md](./78-jaanto-security-guardrails-prompt-injection.md) - Prompt injection defense: blocklist bypass, MCP attack surface, TOCTOU, sandboxing
+- [79-jaanto-security-guardrails-blueprint.md](./79-jaanto-security-guardrails-blueprint.md) - Security guardrails blueprint: defense-in-depth, skill guardrails standard, 90-day MVP
 
 ### PR Review Automation
 - [04-laravel-pr-agents.md](./04-laravel-pr-agents.md)
