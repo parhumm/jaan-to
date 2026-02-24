@@ -76,8 +76,8 @@ Each role section defines:
 - **Track**: fast, full
 - **Model**: sonnet
 - **Skills**:
-  - fast: [qa-test-generate, qa-test-run]
-  - full: [qa-test-cases, qa-test-generate, qa-test-run]
+  - fast: [qa-test-generate, qa-test-run, qa-issue-validate]
+  - full: [qa-test-cases, qa-test-generate, qa-test-run, qa-issue-validate]
 - **Phase**: 2 (test-cases) + 3 (test-gen/run after integration)
 - **Depends on**: prd_path, scaffold_paths (from backend + frontend)
 - **Outputs to share**: test_results_path

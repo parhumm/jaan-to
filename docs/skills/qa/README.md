@@ -20,6 +20,7 @@ sidebar_position: 5
 | [/jaan-to:qa-tdd-orchestrate](tdd-orchestrate.md) | Orchestrate RED/GREEN/REFACTOR TDD cycle with context-isolated agents |
 | [/jaan-to:qa-contract-validate](contract-validate.md) | Validate API contracts with Spectral, oasdiff, Prism, and Schemathesis pipeline |
 | [/jaan-to:qa-issue-report](issue-report.md) | Report clear issues to any GitHub/GitLab repo with code refs and media |
+| [/jaan-to:qa-issue-validate](issue-validate.md) | Validate GitHub/GitLab issues against codebase with RCA and reproduction scenarios |
 | [/jaan-to:qa-quality-gate](quality-gate.md) | Compute composite quality score from upstream skill outputs |
 
 ---

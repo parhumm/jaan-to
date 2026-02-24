@@ -132,7 +132,7 @@ Code Review:
 └─────────────────────────────────────────────────────────┘
 ```
 
-### Issue Reporting Flow
+### Issue Reporting & Validation Flow
 
 ```
 Issue Reporting:
@@ -141,6 +141,16 @@ Issue Reporting:
 │  "Report issues to any GitHub/GitLab repo"              │
 └─────────────────────────────────────────────────────────┘
 
+Issue Validation:
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:qa-issue-validate                             │
+│  "Validate issues against codebase with RCA"            │
+└────────────────┬────────────────────────────────────────┘
+                 │
+                 └──> /jaan-to:roadmap-add (if VALID + user approves)
+                      "Add validated issue to roadmap"
+
+Internal:
 ┌─────────────────────────────────────────────────────────┐
 │  /jaan-to:jaan-issue-report                             │
 │  "Report jaan-to plugin issues"                         │
@@ -347,6 +357,7 @@ These skills don't typically call others:
 | `/jaan-to:jaan-init` | Initialize jaan-to for project | Run once per project |
 | `/jaan-to:jaan-issue-report` | Report bugs/issues | Standalone |
 | `/jaan-to:qa-issue-report` | Report issues to any repo | Standalone |
+| `/jaan-to:qa-issue-validate` | Validate issues against codebase | Standalone → /roadmap-add |
 | `/jaan-to:roadmap-add` | Add roadmap task | Standalone |
 | `/jaan-to:roadmap-update` | Sync roadmap | Standalone (maintenance) |
 
@@ -392,6 +403,7 @@ All 50 skills grouped by role.
 | | `/jaan-to:qa-contract-validate` | Validate API contracts with multi-tool pipeline |
 | | `/jaan-to:qa-quality-gate` | Compute composite quality score |
 | | `/jaan-to:qa-issue-report` | Report issues to any GitHub/GitLab repo |
+| | `/jaan-to:qa-issue-validate` | Validate issues against codebase with RCA |
 | **detect** | `/jaan-to:detect-dev` | Engineering audit with SARIF evidence |
 | | `/jaan-to:detect-design` | Design system detection |
 | | `/jaan-to:detect-ux` | Repo-driven UX audit |
