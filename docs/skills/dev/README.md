@@ -39,6 +39,10 @@ See [Frontend Skills](../frontend/README.md) for complete documentation:
 
 - [/jaan-to:dev-docs-fetch](docs-fetch.md) - Fetch and cache library docs via Context7 MCP with auto-detect and smart caching
 
+### Issue Reporting Skills
+
+- [/jaan-to:repo-issue-report](repo-issue-report.md) - Report issues to any GitHub/GitLab repo with code refs and media
+
 ### Verification Skills
 
 - [/jaan-to:dev-verify](verify.md) - Validate integrated build pipeline and running services with health checks and smoke tests

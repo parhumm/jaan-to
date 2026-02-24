@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
   "version": "7.4.0",
-  "description": "Give soul to your workflow — 49 AI-powered skills across 13 roles with spec-to-ship pipeline",
+  "description": "Give soul to your workflow — 50 AI-powered skills across 13 roles with spec-to-ship pipeline",
   "metadata": {
     "pluginRoot": "./"
   },
@@ -14,7 +14,7 @@
   "plugins": [
     {
       "name": "jaan-to",
-      "description": "AI-powered plugin with 49 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, mutation testing, TDD orchestration, contract validation, quality gates, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
+      "description": "AI-powered plugin with 50 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, mutation testing, TDD orchestration, contract validation, quality gates, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
       "version": "7.4.0",
       "author": {
         "name": "Parhum Khoshbakht",
@@ -109,6 +109,7 @@
         "./skills/qa-test-generate",
         "./skills/qa-test-mutate",
         "./skills/qa-test-run",
+        "./skills/repo-issue-report",
         "./skills/release-iterate-changelog",
         "./skills/roadmap-add",
         "./skills/roadmap-update",
