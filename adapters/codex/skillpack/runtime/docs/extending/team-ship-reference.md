@@ -20,6 +20,7 @@ Run these jaan-to skills in order:
 1. /jaan-to:pm-research-about "{initiative}"
 2. /jaan-to:pm-prd-write "{initiative}"
 3. /jaan-to:pm-story-write "{prd_path}"
+4. (Optional) /jaan-to:pm-roadmap-add "{initiative}" — if roadmap requested
 
 After each skill completes its two-phase workflow (analysis → approval → generation),
 proceed to the next.

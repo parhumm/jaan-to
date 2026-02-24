@@ -32,7 +32,7 @@
 | Skill | Command | Description |
 |-------|---------|-------------|
 | pm-prd-write | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
-| roadmap-add | `/jaan-to:roadmap-add` | [Internal] Add task to roadmap |
+| pm-roadmap-add | `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
 | learn-add | `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
 | docs-create | `/jaan-to:docs-create` | [Internal] Create documentation |
 | docs-update | `/jaan-to:docs-update` | [Internal] Audit and fix documentation |
@@ -41,7 +41,7 @@
 | data-gtm-datalayer | `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
 | pm-research-about | `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
 | pm-story-write | `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs |
-| roadmap-update | `/jaan-to:roadmap-update` | [Internal] Maintain and sync roadmap |
+| pm-roadmap-update | `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
 | detect-dev | `/jaan-to:detect-dev` | Repo engineering audit with scored findings |
 | detect-design | `/jaan-to:detect-design` | Design system detection with drift findings |
 | detect-writing | `/jaan-to:detect-writing` | Writing system extraction with tone scoring |

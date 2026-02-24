@@ -10,7 +10,7 @@ import styles from './index.module.css';
 const features = [
   {
     label: 'Skills',
-    title: '38 structured commands',
+    title: '51 structured commands',
     description:
       'Across 13 roles — PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WP, Release, Security, DevOps, and Core. Each skill knows its questions, its template, and its output format.',
   },
@@ -29,7 +29,7 @@ const features = [
 ];
 
 const roles = [
-  {name: 'PM', skills: ['pm-prd-write', 'pm-story-write', 'pm-research-about']},
+  {name: 'PM', skills: ['pm-prd-write', 'pm-story-write', 'pm-research-about', 'pm-roadmap-add', 'pm-roadmap-update']},
   {name: 'Backend', skills: ['backend-api-contract', 'backend-data-model', 'backend-task-breakdown', 'backend-scaffold', 'backend-service-implement']},
   {name: 'Frontend', skills: ['frontend-design', 'frontend-task-breakdown', 'frontend-scaffold']},
   {name: 'Dev', skills: ['dev-project-assemble', 'detect-dev']},
@@ -41,7 +41,7 @@ const roles = [
   {name: 'Data', skills: ['data-gtm-datalayer']},
   {name: 'Release', skills: ['release-iterate-changelog']},
   {name: 'WP', skills: ['wp-pr-review']},
-  {name: 'Core', skills: ['docs-create', 'docs-update', 'learn-add', 'roadmap-add', 'roadmap-update', 'skill-create', 'skill-update', 'jaan-init', 'jaan-issue-report']},
+  {name: 'Core', skills: ['docs-create', 'docs-update', 'learn-add', 'skill-create', 'skill-update', 'jaan-init', 'jaan-issue-report']},
 ];
 
 function HomepageHeader() {
@@ -92,7 +92,7 @@ function SkillCategories() {
       <div className="container">
         <div style={{textAlign: 'center', marginBottom: '2rem'}}>
           <Heading as="h2">Skills by Role</Heading>
-          <p style={{color: '#6b6b6b'}}>45 skills across 13 roles + 1 MCP connector. Run any skill with <code>/jaan-to:skill-name</code></p>
+          <p style={{color: '#6b6b6b'}}>51 skills across 13 roles + 1 MCP connector. Run any skill with <code>/jaan-to:skill-name</code></p>
         </div>
         <div className="row">
           {roles.map(({name, skills}) => (
@@ -136,7 +136,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title="Documentation"
-      description="jaan.to documentation — a workflow layer for Claude Code. 45 skills across 13 roles.">
+      description="jaan.to documentation — a workflow layer for Claude Code. 51 skills across 13 roles.">
       <HomepageHeader />
       <main>
         <Features />

@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.4.0 (45 skills) | **Next:** v7.5.0 (51 skills)
+**Latest:** v7.4.0 (51 skills) | **Next:** v7.5.0 (51+ skills)
 
 ---
 
@@ -52,6 +52,8 @@ For complete release history, see [CHANGELOG.md](/changelog).
   - Survivor JSON handoff contract (schema v1.0) for qa-test-mutate <-> qa-test-generate
   - 51 skills total (was 45)
 - [x] `qa-issue-validate` skill — Validate GitHub/GitLab issues against codebase with RCA, reproduction scenarios, and mandatory threat scanning for untrusted issue content. 8 verdict categories, 7-layer code search, causal chain + 5 Whys RCA, sanitized roadmap integration. ([Research #77](../research/77-qa-issue-validation-best-practices.md))
+- [ ] Convert internal roadmap skills to generic pm-* skills — `pm-roadmap-add` (prioritized item addition with MoSCoW/Value-Effort/RICE, codebase-aware context scan, duplication check) and `pm-roadmap-update` (4-mode review/mark/reprioritize/validate with cross-reference against PRDs and stories). Replaces internal `roadmap-add` and `roadmap-update`
+- [ ] Role Orchestrator Skills — 6 per-role orchestrator skills (`/pm`, `/ux`, `/dev`, `/qa`, `/devops`, `/sec`) using Claude Code Agent Teams. Each orchestrator coordinates all sub-skills within its role via dynamic discovery (`sub-skills.md`). Update `team-ship` to delegate to orchestrators as meta-orchestrator with backward-compatible fallback. → [details](tasks/role-orchestrators.md)
 
 ---
 
@@ -229,8 +231,8 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:docs-create` | Create documentation with templates |
 | `/jaan-to:docs-update` | Audit and update stale documentation |
 | `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
-| `/jaan-to:roadmap-add` | Add task to roadmap |
-| `/jaan-to:roadmap-update` | Maintain and sync roadmap |
+| `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
+| `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
 | `/jaan-to:learn-report` | View learning system dashboard |
 
 ### Key Paths

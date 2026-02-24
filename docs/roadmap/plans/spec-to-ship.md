@@ -512,7 +512,7 @@ After each skill is created via `/jaan-to:skill-create`, run these steps:
 | 2 | Issue capture | If any issues found during creation or compliance check, fix them, then run `/jaan-to:learn-add` to record the lesson |
 | 3 | Config catalog | Edit `scripts/seeds/config.md` — add skill entry to catalog table |
 | 4 | Documentation | `/jaan-to:docs-create {skill-name}` — generate skill docs page |
-| 5 | Roadmap update | `/jaan-to:roadmap-add` to add skill to roadmap (or `/jaan-to:roadmap-update` to sync existing entries) |
+| 5 | Roadmap update | `/jaan-to:pm-roadmap-add` to add skill to roadmap (or `/jaan-to:pm-roadmap-update` to sync existing entries) |
 | 6 | Changelog | `/jaan-to:release-iterate-changelog` — add entries for new skills |
 | 7 | Commit + PR | Commit all files, create PR to `dev` |
 
@@ -529,32 +529,32 @@ Run all 6 skills sequentially. Each skill completes its full lifecycle (Phase B 
 │  SKILL 1: dev-project-assemble                              │
 │  B1. /jaan-to:skill-create dev-project-assemble (agent)     │
 │  C1. skill-update → learn-add → config → docs-create        │
-│      → roadmap-add → release-iterate-changelog → commit      │
+│      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 2: backend-scaffold improvement                      │
 │  B2. Direct edit to skills/backend-scaffold/SKILL.md        │
 │  C2. skill-update → learn-add → docs-create                 │
-│      → roadmap-update → release-iterate-changelog → commit   │
+│      → pm-roadmap-update → release-iterate-changelog → commit   │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 3: backend-service-implement                         │
 │  B3. /jaan-to:skill-create backend-service-implement (agent)│
 │  C3. skill-update → learn-add → config → docs-create        │
-│      → roadmap-add → release-iterate-changelog → commit      │
+│      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 4: qa-test-generate                                  │
 │  B4. /jaan-to:skill-create qa-test-generate (agent)         │
 │  C4. skill-update → learn-add → config → docs-create        │
-│      → roadmap-add → release-iterate-changelog → commit      │
+│      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 5: sec-audit-remediate                               │
 │  B5. /jaan-to:skill-create sec-audit-remediate (agent)      │
 │  C5. skill-update → learn-add → config → docs-create        │
-│      → roadmap-add → release-iterate-changelog → commit      │
+│      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 6: devops-infra-scaffold                             │
 │  B6. /jaan-to:skill-create devops-infra-scaffold (agent)    │
 │  C6. skill-update → learn-add → config → docs-create        │
-│      → roadmap-add → release-iterate-changelog → commit      │
+│      → pm-roadmap-add → release-iterate-changelog → commit      │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -567,7 +567,7 @@ For each skill in [1..6]:
   3. Fix issues + learn    → fix → /jaan-to:learn-add (if issues found)
   4. Config catalog        → Edit scripts/seeds/config.md (new skills only)
   5. Documentation         → /jaan-to:docs-create {name}
-  6. Roadmap               → /jaan-to:roadmap-add (or /jaan-to:roadmap-update)
+  6. Roadmap               → /jaan-to:pm-roadmap-add (or /jaan-to:pm-roadmap-update)
   7. Changelog             → /jaan-to:release-iterate-changelog
   8. Commit                → git add + commit to dev branch
   → NEXT SKILL
@@ -602,7 +602,7 @@ For each skill in [1..6]:
 
 ## Roadmap Integration
 
-Done via `/jaan-to:roadmap-add` or `/jaan-to:roadmap-update` in Phase C step 5. Expected changes:
+Done via `/jaan-to:pm-roadmap-add` or `/jaan-to:pm-roadmap-update` in Phase C step 5. Expected changes:
 
 - Add `dev-project-assemble` to `docs/roadmap/tasks/role-skills/dev.md` in the DEV skills chain
 - Add `backend-service-implement` to `docs/roadmap/tasks/role-skills/backend.md` after `backend-scaffold`

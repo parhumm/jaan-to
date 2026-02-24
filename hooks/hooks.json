@@ -87,16 +87,6 @@
           }
         ]
       },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/post-commit-roadmap.sh",
-            "timeout": 5
-          }
-        ]
-      }
     ],
     "TaskCompleted": [
       {

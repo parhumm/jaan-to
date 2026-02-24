@@ -5,7 +5,7 @@ doc_type: skill
 created_date: 2026-02-09
 updated_date: 2026-02-09
 tags: [release, changelog, semver, conventional-commits, keep-a-changelog]
-related: [roadmap-update]
+related: [pm-roadmap-update]
 ---
 
 # /jaan-to:release-iterate-changelog
@@ -182,7 +182,7 @@ Add feedback:
 
 ## Related Skills
 
-- [/jaan-to:roadmap-update](../core/roadmap-update.md) — Manages roadmap and releases with atomic version bumps
+- [/jaan-to:pm-roadmap-update](../pm/roadmap-update.md) — Review and maintain project roadmap
 
 ---
 

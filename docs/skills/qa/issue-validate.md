@@ -28,7 +28,7 @@ The skill treats all issue content as untrusted external input with mandatory th
 | RCA | No | Yes — causal chain + 5 Whys |
 | Reproduction | No | Yes — for confirmed bugs |
 | Safety | Privacy sanitization | Threat scan + privacy sanitization |
-| Roadmap | No | Optional `/roadmap-add` integration |
+| Roadmap | No | Optional `/pm-roadmap-add` integration |
 
 ---
 
@@ -106,7 +106,7 @@ Works with GitHub (`gh` CLI) and GitLab (REST API v4 or `glab` CLI). Auto-detect
 
 ### Safe Roadmap Integration
 
-When adding validated issues to the roadmap via `/roadmap-add`, all text is sanitized: commands stripped, credentials redacted, raw issue text replaced with the skill's own analysis. Roadmap text is shown to the user for approval before integration.
+When adding validated issues to the roadmap via `/pm-roadmap-add`, all text is sanitized: commands stripped, credentials redacted, raw issue text replaced with the skill's own analysis. Roadmap text is shown to the user for approval before integration.
 
 ---
 
