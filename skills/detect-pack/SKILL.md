@@ -14,8 +14,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:detect-pack.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:detect-pack.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-detect-pack.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-detect-pack.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-pack-reference.md` - Evidence formats, consolidation logic, output templates
 
@@ -433,6 +433,25 @@ If yes:
 - Run `/jaan-to:learn-add detect-pack "{feedback}"`
 
 ---
+
+## ISO 25010 Quality Compliance
+
+When aggregating detect outputs, map findings to ISO 25010 quality characteristics:
+
+| ISO 25010 Characteristic | Detect Sources | Signal |
+|--------------------------|---------------|--------|
+| Functional Suitability | detect-dev (test coverage) | Test pass rate, coverage % |
+| Performance Efficiency | detect-dev (architecture) | N+1 queries, connection pools |
+| Compatibility | detect-dev (CI/CD) | Multi-platform support |
+| Usability | detect-ux (UX audit) | Heuristic scores |
+| Reliability | detect-dev (error handling) | Error handler coverage |
+| Security | detect-dev (security scan) | Vulnerability counts |
+| Maintainability | detect-dev (code quality) | Complexity, duplication |
+| Portability | detect-dev (infrastructure) | Container, cloud-agnostic |
+
+Add "Quality Gate Readiness" section to consolidated output:
+- Map aggregate scores to 4-tier gating model (auto-approve / lightweight / full / block)
+- Reference `/jaan-to:qa-quality-gate` for detailed composite scoring
 
 ## Skill Alignment
 

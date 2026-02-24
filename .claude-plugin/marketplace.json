@@ -1,8 +1,8 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
-  "version": "7.4.0",
-  "description": "Give soul to your workflow — 45 AI-powered skills across 13 roles with spec-to-ship pipeline",
+  "version": "7.5.0",
+  "description": "Give soul to your workflow — 52 AI-powered skills across 13 roles with spec-to-ship pipeline",
   "metadata": {
     "pluginRoot": "./"
   },
@@ -14,8 +14,8 @@
   "plugins": [
     {
       "name": "jaan-to",
-      "description": "AI-powered plugin with 45 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
-      "version": "7.4.0",
+      "description": "AI-powered plugin with 52 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, mutation testing, TDD orchestration, contract validation, quality gates, issue validation, skill discovery, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
+      "version": "7.5.0",
       "author": {
         "name": "Parhum Khoshbakht",
         "email": "parhum.kh@gmail.com"
@@ -45,6 +45,7 @@
         "gherkin",
         "wordpress",
         "wp-plugin-review",
+        "roadmap",
         "security-audit",
         "changelog",
         "release-management",
@@ -61,6 +62,10 @@
         "playwright",
         "sarif",
         "security-remediation",
+        "mutation-testing",
+        "tdd",
+        "contract-validation",
+        "quality-gates",
         "context7",
         "mcp"
       ],
@@ -98,12 +103,19 @@
         "./skills/pm-prd-write",
         "./skills/pm-research-about",
         "./skills/pm-story-write",
+        "./skills/qa-contract-validate",
+        "./skills/qa-issue-report",
+        "./skills/qa-issue-validate",
+        "./skills/qa-quality-gate",
+        "./skills/qa-tdd-orchestrate",
         "./skills/qa-test-cases",
         "./skills/qa-test-generate",
+        "./skills/qa-test-mutate",
         "./skills/qa-test-run",
         "./skills/release-iterate-changelog",
-        "./skills/roadmap-add",
-        "./skills/roadmap-update",
+        "./skills/pm-roadmap-add",
+        "./skills/pm-roadmap-update",
+        "./skills/pm-skill-discover",
         "./skills/sec-audit-remediate",
         "./skills/skill-create",
         "./skills/skill-update",

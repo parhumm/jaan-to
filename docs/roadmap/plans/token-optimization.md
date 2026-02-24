@@ -11,8 +11,8 @@ The jaan.to plugin has 26 skills totaling **15,382 lines** across all SKILL.md f
 **Verdict: PASS** — All confirmed as manual-only invocations.
 
 Add `disable-model-invocation: true` to frontmatter of:
-- `skills/roadmap-add/SKILL.md`
-- `skills/roadmap-update/SKILL.md`
+- `skills/pm-roadmap-add/SKILL.md`
+- `skills/pm-roadmap-update/SKILL.md`
 - `skills/skill-create/SKILL.md`
 - `skills/skill-update/SKILL.md`
 - `skills/learn-add/SKILL.md`

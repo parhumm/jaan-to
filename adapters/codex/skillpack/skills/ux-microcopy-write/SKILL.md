@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/config.md` - Configuration
 - `$JAAN_CONTEXT_DIR/localization.md` - Language preferences (auto-created if missing)
 - `$JAAN_CONTEXT_DIR/tone-of-voice.md` - Tone guidelines (auto-created if missing)
-- `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:ux-microcopy-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-ux-microcopy-write.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-ux-microcopy-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` - Per-language rules, export templates, JSON schema, output format, definition of done
 
@@ -402,7 +402,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 Write to: `$OUTPUT_FOLDER/${NEXT_ID}-microcopy-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-ux-microcopy-write.template.md`
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-microcopy-write-reference.md` section "Main File Sections" for the complete list of sections to fill (title, summary, metadata, warnings, localization, tone, items, exports, validation).
 

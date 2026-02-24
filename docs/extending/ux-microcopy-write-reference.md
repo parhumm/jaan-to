@@ -395,7 +395,7 @@ Full output will contain {total_items} items across {category_count} categories.
 
 ## Main File Sections
 
-When writing the main output file using the template from `$JAAN_TEMPLATES_DIR/jaan-to:ux-microcopy-write.template.md`, fill all of these sections:
+When writing the main output file using the template from `$JAAN_TEMPLATES_DIR/jaan-to-ux-microcopy-write.template.md`, fill all of these sections:
 
 - Title: Feature name
 - Executive Summary: Generated summary from Step 7

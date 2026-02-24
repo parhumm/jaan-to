@@ -13,8 +13,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:ux-heatmap-analyze.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:ux-heatmap-analyze.template.md` - Report template
+- `$JAAN_LEARN_DIR/jaan-to-ux-heatmap-analyze.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-ux-heatmap-analyze.template.md` - Report template
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (helpful for CSS selector resolution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
@@ -328,7 +328,7 @@ REPORT SECTIONS:
 
 ## Step 9: Generate Report
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-heatmap-analyze.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-ux-heatmap-analyze.template.md`
 
 Fill all template sections. Report must be **insightful, practical, and actionable** — lead with why it matters and what to do. Minimize descriptive narrative.
 

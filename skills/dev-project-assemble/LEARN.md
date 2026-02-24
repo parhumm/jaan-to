@@ -1,7 +1,7 @@
 # Lessons: dev-project-assemble
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:dev-project-assemble.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-dev-project-assemble.learn.md`
 
 ## Better Questions
 

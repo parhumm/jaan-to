@@ -3,7 +3,7 @@
 > Last updated: 2026-02-03
 
 > Plugin-side lessons. Project-specific lessons go in:
-> `$JAAN_LEARN_DIR/jaan-to:frontend-task-breakdown.learn.md`
+> `$JAAN_LEARN_DIR/jaan-to-frontend-task-breakdown.learn.md`
 
 Seeded from research: $JAAN_OUTPUTS_DIR/research/51-frontend-task-breakdown.md
 

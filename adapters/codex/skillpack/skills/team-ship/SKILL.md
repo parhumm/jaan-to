@@ -18,8 +18,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/team-ship-reference.md` - Spawn prompts, dependency algo, schemas
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:team-ship.template.md` - Orchestration log template
-- `$JAAN_LEARN_DIR/jaan-to:team-ship.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-team-ship.template.md` - Orchestration log template
+- `$JAAN_LEARN_DIR/jaan-to-team-ship.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
@@ -31,6 +31,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 | `[initiative]` | Idea to build (required unless --detect or --resume) |
 | `--track fast` | 8-skill fast track: PM → Backend → Frontend → QA → DevOps |
 | `--track full` | 20-skill full track: all roles, all design steps (default) |
+| `--track tdd` | TDD track: qa-test-cases → qa-tdd-orchestrate → qa-test-mutate → qa-quality-gate |
 | `--detect` | Detect audit mode: 5 parallel auditors → detect-pack |
 | `--roles role1,role2` | Custom role selection from roles.md |
 | `--dry-run` | Display planned team structure without spawning |
@@ -221,6 +222,39 @@ Update checkpoint: phase=2, role statuses.
 ---
 
 # PHASE 3: Integration + Ship
+
+## Step 9a: TDD Track Execution (--track tdd)
+
+If `--track tdd` selected, execute this specialized pipeline instead of standard Phase 2-3:
+
+### TDD Pipeline:
+1. **qa-test-cases** -- Generate BDD test cases from initiative
+2. **qa-tdd-orchestrate** -- Run RED/GREEN/REFACTOR cycles with context isolation
+3. **qa-test-mutate** -- Validate test effectiveness via mutation testing
+4. **qa-quality-gate** (if available) -- Compute composite quality score
+
+If `qa-quality-gate` skill is not available: skip with explicit warning: "Quality gate skill not available -- skipping composite scoring. Run qa-test-run coverage report as fallback."
+
+### TDD-Specific Roles:
+
+**tdd-writer** role:
+- Spawn prompt restricts to: requirements text + test framework docs ONLY
+- Excluded: implementation plans, existing source code, scaffold output
+- Skills: qa-test-cases, qa-tdd-orchestrate (RED phase)
+
+**tdd-implementer** role:
+- Spawn prompt restricts to: failing test output + test file content ONLY
+- Excluded: requirements text, RED agent reasoning, architecture plans
+- Skills: qa-tdd-orchestrate (GREEN phase)
+
+### Execution Rules:
+- Max 5 concurrent teammates per phase (fan-out cap)
+- DAG validation: verify dependency graph is acyclic before spawning
+- After TDD pipeline completes, skip to Phase 4 (Verify + Wrap Up)
+
+Update checkpoint: track=tdd, pipeline stages.
+
+---
 
 ## Step 10: Integration (Lead Runs)
 

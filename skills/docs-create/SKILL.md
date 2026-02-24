@@ -15,8 +15,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 ## Context Files
 
 - `${CLAUDE_PLUGIN_ROOT}/docs/STYLE.md` - Documentation standards (read from plugin source)
-- `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md` - Shared docs template (shared with docs-update)
-- `$JAAN_LEARN_DIR/jaan-to:docs.learn.md` - Shared docs lessons (shared with docs-update, loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-docs.template.md` - Shared docs template (shared with docs-update)
+- `$JAAN_LEARN_DIR/jaan-to-docs.learn.md` - Shared docs lessons (shared with docs-update, loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 **Note:** Templates are read from the project's `$JAAN_TEMPLATES_DIR` directory. Pre-execution protocol Step C offers to seed from the plugin on first use.
@@ -28,8 +28,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 Skill name: `docs-create`
 Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 **Shared resource override:** Template and learn files are shared with `docs-update`. For Steps A/B/C, resolve using `docs` as the resource name:
-- Learn: `$JAAN_LEARN_DIR/jaan-to:docs.learn.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/LEARN.md`)
-- Template: `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/template.md`)
+- Learn: `$JAAN_LEARN_DIR/jaan-to-docs.learn.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/LEARN.md`)
+- Template: `$JAAN_TEMPLATES_DIR/jaan-to-docs.template.md` (fallback: `${CLAUDE_PLUGIN_ROOT}/skills/docs-create/template.md`)
 
 ### Language Settings
 Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
@@ -179,7 +179,7 @@ Proceed? [y/n/edit]
 
 ## Step 6: Load Template
 
-Read template for doc type from `$JAAN_TEMPLATES_DIR/jaan-to:docs.template.md`
+Read template for doc type from `$JAAN_TEMPLATES_DIR/jaan-to-docs.template.md`
 
 ## Step 7: Fill Template
 

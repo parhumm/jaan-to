@@ -57,7 +57,7 @@ Opt-in per project: run `/jaan-to:jaan-init` to activate. Projects without `jaan
 **Meta-Operations - ALWAYS use these skills:**
 - **Documentation**: `/jaan-to:docs-create` (create), `/jaan-to:docs-update` (audit/fix)
 - **Skills**: `/jaan-to:skill-create` (new), `/jaan-to:skill-update` (modify)
-- **Roadmap**: `/jaan-to:roadmap-add` (tasks), `/jaan-to:roadmap-update` (sync/release)
+- **Roadmap**: `/jaan-to:pm-roadmap-add` (prioritization, codebase scan), `/jaan-to:pm-roadmap-update` (review, maintain)
 - **Issues**: `/jaan-to:jaan-issue-report` (report), `/jaan-issue-review` (review), `/jaan-issue-solve` (answer warmly)
 - **Learning**: `/jaan-to:learn-add` (capture lessons)
 - **Releases**: `/jaan-to:release-iterate-changelog` (version history), `/jaan-release` (dev to main)

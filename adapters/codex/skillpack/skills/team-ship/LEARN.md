@@ -1,6 +1,6 @@
 # team-ship — Seed Lessons
 
-> Plugin-side seed. Project-specific lessons accumulate in `$JAAN_LEARN_DIR/jaan-to:team-ship.learn.md`.
+> Plugin-side seed. Project-specific lessons accumulate in `$JAAN_LEARN_DIR/jaan-to-team-ship.learn.md`.
 
 ## Better Questions
 

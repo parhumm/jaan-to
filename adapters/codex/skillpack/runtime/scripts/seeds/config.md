@@ -32,7 +32,7 @@
 | Skill | Command | Description |
 |-------|---------|-------------|
 | pm-prd-write | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
-| roadmap-add | `/jaan-to:roadmap-add` | [Internal] Add task to roadmap |
+| pm-roadmap-add | `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
 | learn-add | `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
 | docs-create | `/jaan-to:docs-create` | [Internal] Create documentation |
 | docs-update | `/jaan-to:docs-update` | [Internal] Audit and fix documentation |
@@ -41,7 +41,8 @@
 | data-gtm-datalayer | `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
 | pm-research-about | `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
 | pm-story-write | `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs |
-| roadmap-update | `/jaan-to:roadmap-update` | [Internal] Maintain and sync roadmap |
+| pm-roadmap-update | `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
+| pm-skill-discover | `/jaan-to:pm-skill-discover` | Detect workflow patterns and suggest new skills |
 | detect-dev | `/jaan-to:detect-dev` | Repo engineering audit with scored findings |
 | detect-design | `/jaan-to:detect-design` | Design system detection with drift findings |
 | detect-writing | `/jaan-to:detect-writing` | Writing system extraction with tone scoring |
@@ -57,6 +58,7 @@
 | frontend-design | `/jaan-to:frontend-design` | Create distinctive, production-grade frontend components |
 | backend-data-model | `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | backend-api-contract | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| qa-issue-validate | `/jaan-to:qa-issue-validate` | Validate GitHub/GitLab issues against codebase with RCA |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 | qa-test-generate | `/jaan-to:qa-test-generate` | Generate runnable Vitest and Playwright tests from BDD test cases |
 | qa-test-run | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, generate coverage reports |

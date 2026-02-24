@@ -330,7 +330,7 @@ Where `{type}` is `fix`, `feat`, `docs`, or `refactor` based on Step 1.2.
 
 ## Step 3.1: Sync Roadmap
 
-Run `/jaan-to:roadmap-update` to reflect the changes in the project roadmap.
+Run `/jaan-to:pm-roadmap-update` to reflect the changes in the project roadmap.
 
 Reference: `docs/hooks/post-commit-roadmap.md` for roadmap sync behavior.
 
@@ -544,7 +544,7 @@ If yes:
 - [ ] Issue validated and confirmed actionable
 - [ ] Implementation plan approved by user
 - [ ] Changes implemented following plugin standards
-- [ ] Roadmap synced via `/jaan-to:roadmap-update`
+- [ ] Roadmap synced via `/jaan-to:pm-roadmap-update`
 - [ ] Documentation created/updated as needed
 - [ ] CHANGELOG.md updated via `/jaan-to:release-iterate-changelog`
 - [ ] PR created targeting dev with `Closes #{ID}`

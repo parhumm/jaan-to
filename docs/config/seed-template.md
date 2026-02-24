@@ -31,7 +31,7 @@ A helper script called by the [pre-execution protocol Step C](../extending/pre-e
 1. The pre-execution protocol resolves a skill's template using the 3-tier fallback
 2. If the template came from the plugin source (tier 3), the protocol asks: "Copy to project? [y/n]"
 3. If you accept, the protocol runs `seed-template.sh {skill-name}`
-4. The script copies `skills/{skill}/template.md` to `$JAAN_TEMPLATES_DIR/jaan-to:{skill}.template.md`
+4. The script copies `skills/{skill}/template.md` to `$JAAN_TEMPLATES_DIR/jaan-to-{skill}.template.md`
 5. Future runs find the project copy at tier 1 and skip the offer
 
 ---
@@ -63,13 +63,13 @@ The script returns JSON to stdout:
 **First run of a skill** (no project template):
 ```
 $ scripts/seed-template.sh pm-prd-write
-{"status": "seeded", "path": "jaan-to/templates/jaan-to:pm-prd-write.template.md"}
+{"status": "seeded", "path": "jaan-to/templates/jaan-to-pm-prd-write.template.md"}
 ```
 
 **Second run** (project template exists):
 ```
 $ scripts/seed-template.sh pm-prd-write
-{"status": "skipped", "path": "jaan-to/templates/jaan-to:pm-prd-write.template.md"}
+{"status": "skipped", "path": "jaan-to/templates/jaan-to-pm-prd-write.template.md"}
 ```
 
 ---

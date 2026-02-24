@@ -13,8 +13,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:backend-pr-review.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:backend-pr-review.template.md` - Report output template
+- `$JAAN_LEARN_DIR/jaan-to-backend-pr-review.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-backend-pr-review.template.md` - Report output template
 - `$JAAN_CONTEXT_DIR/tech.md` - Backend stack detection (if exists)
 - `$JAAN_CONTEXT_DIR/review-standards.md` - Project-specific review rules (if exists)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
@@ -344,7 +344,7 @@ MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-pr-review-${slug}.md"
 
 ## Step 6: Generate Review Report
 
-Read template from `$JAAN_TEMPLATES_DIR/jaan-to:backend-pr-review.template.md` (if exists) or use the skill's built-in `template.md`.
+Read template from `$JAAN_TEMPLATES_DIR/jaan-to-backend-pr-review.template.md` (if exists) or use the skill's built-in `template.md`.
 
 Fill all sections:
 

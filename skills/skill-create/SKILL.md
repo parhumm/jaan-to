@@ -15,8 +15,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 ## Context Files
 
 - `docs/extending/create-skill.md` - Skill creation specification (v3.0.0)
-- `$JAAN_LEARN_DIR/jaan-to:skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:skill-create.template.md` - Generation templates
+- `$JAAN_LEARN_DIR/jaan-to-skill-create.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-skill-create.template.md` - Generation templates
 - `$JAAN_CONTEXT_DIR/config.md` - Current skill catalog
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
@@ -284,7 +284,7 @@ Confirm: "Created branch `skill/{name}` from `dev`. All work on this branch."
 
 ## Step 7: Generate SKILL.md
 
-Use template from `$JAAN_TEMPLATES_DIR/jaan-to:skill-create.template.md`:
+Use template from `$JAAN_TEMPLATES_DIR/jaan-to-skill-create.template.md`:
 
 1. Fill YAML frontmatter:
    - name: {name}
@@ -456,7 +456,7 @@ If yes:
 
 ## Step 21: Auto-Invoke Roadmap Update
 
-Run `/jaan-to:roadmap-update` to sync the new skill with the roadmap.
+Run `/jaan-to:pm-roadmap-update` to sync the new skill with the roadmap.
 
 This ensures the roadmap reflects the latest skill additions.
 
@@ -480,5 +480,5 @@ This ensures the roadmap reflects the latest skill additions.
 - [ ] Documentation created via /jaan-to:docs-create
 - [ ] User tested and confirmed working
 - [ ] PR created (or branch ready for manual merge)
-- [ ] Roadmap synced via /jaan-to:roadmap-update
+- [ ] Roadmap synced via /jaan-to:pm-roadmap-update
 - [ ] User approved final result

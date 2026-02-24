@@ -14,7 +14,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 ## Context Files
 
 Read before execution:
-- `$JAAN_LEARN_DIR/jaan-to:pm-story-write.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_LEARN_DIR/jaan-to-pm-story-write.learn.md` - Past lessons (loaded in Pre-Execution)
 - `skills/jaan-to:pm-story-write/template.md` - Story output template
 - `$JAAN_OUTPUTS_DIR/research/45-pm-insights-synthesis.md` - Reference research (optional)
 - Jira epic/context (if MCP available and epic ID provided)

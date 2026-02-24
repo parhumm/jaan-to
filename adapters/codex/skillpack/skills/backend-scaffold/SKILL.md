@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL — determines framework, DB, patterns)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:backend-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:backend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-backend-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-backend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
 ## Input
@@ -157,7 +157,7 @@ All files in `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/`:
 
 ## Step 6: Generate Content
 
-Read `$JAAN_TEMPLATES_DIR/jaan-to:backend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
+Read `$JAAN_TEMPLATES_DIR/jaan-to-backend-scaffold.template.md` and populate all sections based on Phase 1 analysis.
 
 If tech stack needed, extract sections from tech.md:
 - Current Stack: `#current-stack`
@@ -309,6 +309,19 @@ The skill reads tech.md `#current-stack` to determine which stack to generate:
 - **PHP**: Ratchet / Swoole
 - Auth: ephemeral single-use token via query parameter (`ws://host/ws?ticket=abc123`); 30-second TTL, consumed on first use to prevent log-exposure attacks
 - SSE handles 95% of real-time use cases — suggest SSE first; SSE works over standard HTTP, supports auto-reconnection, multiplexed over HTTP/2
+
+## Test Framework & Mutation Tool Recommendations
+
+When generating scaffold, include test framework and mutation tool recommendations based on detected stack:
+
+| Stack | Test Framework | Mutation Tool | Config File |
+|-------|---------------|---------------|-------------|
+| Node.js/TS | Vitest | StrykerJS | `stryker.config.mjs` |
+| PHP/Laravel | Pest | Infection | `infection.json5` |
+| Go | testing + testify | go-mutesting | CLI flags |
+| Python | pytest | mutmut | `setup.cfg` |
+
+Add to generated README: "Run `/jaan-to:qa-test-mutate` to validate test suite effectiveness."
 
 ## Anti-Patterns to NEVER Generate
 

@@ -58,8 +58,8 @@ Route based on target:
 
 | Target Pattern | LEARN.md Location |
 |----------------|-------------------|
-| Skill name (e.g., `pm-prd-write`) | `$JAAN_LEARN_DIR/jaan-to:{skill}.learn.md` |
-| System skill (e.g., `skill-create`) | `$JAAN_LEARN_DIR/jaan-to:{skill}.learn.md` |
+| Skill name (e.g., `pm-prd-write`) | `$JAAN_LEARN_DIR/jaan-to-{skill}.learn.md` |
+| System skill (e.g., `skill-create`) | `$JAAN_LEARN_DIR/jaan-to-{skill}.learn.md` |
 | `$JAAN_TEMPLATES_DIR/{name}` | `$JAAN_TEMPLATES_DIR/LEARN.md` |
 | `$JAAN_CONTEXT_DIR/{name}` | `$JAAN_CONTEXT_DIR/LEARN.md` |
 | `$JAAN_CONTEXT_DIR/tech` | `$JAAN_CONTEXT_DIR/tech.md` (constraints section) |
@@ -80,8 +80,9 @@ If unclear, ask: "Which category? [questions/edge-cases/workflow/mistakes]"
 
 ## Step 4: Read Current LEARN.md
 
-Read the target LEARN.md file if it exists.
-If it doesn't exist, prepare to create with template.
+Read the target LEARN.md file if it exists at `$JAAN_LEARN_DIR/jaan-to-{name}.learn.md`.
+If not found, check legacy path `$JAAN_LEARN_DIR/jaan-to:{name}.learn.md` — if legacy found, rename it to the dash-prefixed path first.
+If neither exists, prepare to create with template.
 
 ---
 
@@ -123,7 +124,7 @@ If file doesn't exist:
 2. If seed exists and has meaningful content (contains `- ` bullet points), use it as starting point
 3. If no seed exists, create from the template below
 4. Add the new lesson to the appropriate category
-5. Write file to: `$JAAN_LEARN_DIR/jaan-to:{skill-name}.learn.md`
+5. Write file to: `$JAAN_LEARN_DIR/jaan-to-{skill-name}.learn.md`
 
 ### LEARN.md Template
 

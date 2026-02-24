@@ -5,6 +5,51 @@
 
 ---
 
+## Declarative Gherkin Standards
+
+### Declarative vs Imperative Steps
+
+All BDD scenarios MUST use declarative style. Declarative steps describe business behavior; imperative steps describe UI interactions.
+
+| Style | Example | Verdict |
+|-------|---------|---------|
+| Imperative | `When I click the "Login" button` | BAD |
+| Imperative | `When I enter "test@example.com" in the email field` | BAD |
+| Imperative | `When I scroll down and select "Plan A"` | BAD |
+| Declarative | `When the user submits valid credentials` | GOOD |
+| Declarative | `When the user requests password reset` | GOOD |
+| Declarative | `When the user selects their preferred plan` | GOOD |
+
+### Standardized Step Templates
+
+Use these declarative patterns as starting points:
+
+**Given (Preconditions)**:
+- `Given a {entity} exists with {attribute} "{value}"`
+- `Given the user is authenticated as {role}`
+- `Given the system has {count} {entity} records`
+- `Given the {entity} is in {state} state`
+
+**When (Actions)**:
+- `When the user {action} the {entity}`
+- `When the user submits {valid/invalid} {data_type}`
+- `When the system processes the {entity}`
+- `When the {event} occurs`
+
+**Then (Outcomes)**:
+- `Then the {entity} should have {attribute} "{value}"`
+- `Then the user should see {feedback_type}`
+- `Then the system should {expected_behavior}`
+- `Then the {entity} count should be {count}`
+
+### Scenario Structure Limits
+
+- **Steps per scenario**: 3-5 (Given/When/Then combined). Split if exceeding 5.
+- **Scenarios per feature**: 5-10. Split into sub-features if exceeding 10.
+- **Scenario Outline**: Use with `Examples` tables when 3+ input combinations exist.
+
+---
+
 ## Test Design Techniques
 
 ### Equivalence Partitioning

@@ -16,7 +16,7 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (142 across 11 roles) | In Progress |
+| 6 | Role skills (52 shipped across 13 roles) | In Progress |
 | 7 | MCP connectors | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation | Partial |
@@ -27,11 +27,25 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.4.0 (45 skills)
+**Latest:** v7.5.0 (52 skills) | **Next:** v7.6.0 (52+ skills)
 
 ---
 
 ## Unreleased
+
+- [ ] Role Orchestrator Skills — 6 per-role orchestrator skills (`/pm`, `/ux`, `/dev`, `/qa`, `/devops`, `/sec`) using Claude Code Agent Teams. Each orchestrator coordinates all sub-skills within its role via dynamic discovery (`sub-skills.md`). Update `team-ship` to delegate to orchestrators as meta-orchestrator with backward-compatible fallback. → [details](tasks/role-orchestrators.md)
+
+---
+
+## v7.5.0 — 2026-02-24
+
+- [x] Windows NTFS compatibility fix (#157) — Replace `jaan-to:` colon prefix with `jaan-to-` dash prefix in all learn/template filenames, auto-migration in `bootstrap.sh` with three-branch collision handling
+- [x] TDD/BDD/AI orchestration quality skills — 4 new skills + 15 enhanced, from research doc 76 (qa-test-mutate, qa-tdd-orchestrate, qa-contract-validate, qa-quality-gate + 11 enhanced skills)
+- [x] `qa-issue-validate` skill — Validate GitHub/GitLab issues against codebase with RCA and threat scanning
+- [x] `qa-issue-report` skill — Report issues to any GitHub/GitLab repository with smart context analysis
+- [x] Convert internal roadmap skills to generic pm-* skills — `pm-roadmap-add` and `pm-roadmap-update` replace internal `roadmap-add`/`roadmap-update`
+- [x] `pm-skill-discover` skill — Detect repeated workflow patterns and suggest skills to automate them
+- [x] 52 skills total (was 45 in v7.1.0)
 
 ---
 
@@ -105,7 +119,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
-**Completed work**: 43 skills shipped across v4.0.0–v6.4.0 — see [CHANGELOG.md](/changelog) for details.
+**Completed work**: 52 skills shipped across v4.0.0–v7.4.0 — see [CHANGELOG.md](/changelog) for details.
 
 ---
 
@@ -194,6 +208,13 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:devops-infra-scaffold` | Generate CI/CD, Dockerfiles, deployment configs |
 | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
 | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, auto-fix, generate coverage reports |
+| `/jaan-to:qa-test-mutate` | Run mutation testing and generate survivor reports |
+| `/jaan-to:qa-tdd-orchestrate` | Orchestrate RED/GREEN/REFACTOR TDD cycle with isolated agents |
+| `/jaan-to:qa-contract-validate` | Validate API contracts with Spectral, oasdiff, Prism, Schemathesis |
+| `/jaan-to:qa-quality-gate` | Compute composite quality score from upstream skill outputs |
+| `/jaan-to:qa-issue-validate` | Validate GitHub/GitLab issues against codebase with RCA |
+| `/jaan-to:qa-issue-report` | Report issues to any GitHub/GitLab repository |
+| `/jaan-to:pm-skill-discover` | Detect repeated workflow patterns and suggest skills |
 | `/jaan-to:dev-verify` | Validate build pipeline and running services with health checks |
 | `/jaan-to:dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
@@ -204,8 +225,8 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:docs-create` | Create documentation with templates |
 | `/jaan-to:docs-update` | Audit and update stale documentation |
 | `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
-| `/jaan-to:roadmap-add` | Add task to roadmap |
-| `/jaan-to:roadmap-update` | Maintain and sync roadmap |
+| `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
+| `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
 | `/jaan-to:learn-report` | View learning system dashboard |
 
 ### Key Paths

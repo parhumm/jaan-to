@@ -1,6 +1,7 @@
 ---
 title: "qa-test-cases"
 sidebar_position: 2
+updated_date: 2026-02-23
 ---
 
 # qa-test-cases
@@ -230,6 +231,13 @@ Uses specific values for reproducibility:
 
 **100-Point Rubric** (90+ production-ready, <60 reject)
 
+### ✅ Declarative Gherkin Enforcement
+
+Scenarios are written at the **behavior level only** -- no implementation details (CSS selectors, SQL queries, internal method calls) leak into steps. This keeps tests maintainable and decoupled from code changes.
+
+- **Scenario limits**: 5-10 scenarios per feature file to keep suites focused and reviewable
+- **Step templates**: 3-5 steps per scenario (Given/When/Then) to ensure clarity without over-specification
+
 ### ✅ ISTQB Export Ready
 
 Includes conversion notes and examples for:
@@ -348,6 +356,10 @@ A: See the "ISTQB Conversion Notes" section in generated output for CSV format a
 - [/jaan-to:pm-prd-write](../pm/prd-write.md) - Generate PRDs with acceptance criteria
 - [/jaan-to:pm-story-write](../pm/story-write.md) - Generate user stories with AC
 - `/jaan-to:qa-test-data` (planned) - Generate test data specifications
+- [/jaan-to:qa-test-mutate](test-mutate.md) - Mutation testing to find surviving mutants
+- [/jaan-to:qa-tdd-orchestrate](tdd-orchestrate.md) - TDD red-green-refactor orchestration
+- [/jaan-to:qa-contract-validate](contract-validate.md) - Contract testing validation
+- [/jaan-to:qa-quality-gate](quality-gate.md) - Quality gate enforcement
 
 ---
 
@@ -363,5 +375,6 @@ A: See the "ISTQB Conversion Notes" section in generated output for CSV format a
 ---
 
 **Generated**: 2026-02-03
+**Updated**: 2026-02-23
 **Skill**: qa-test-cases
 **Version**: 1.0.0

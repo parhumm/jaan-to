@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack context (CRITICAL -- determines framework, services, deployment target)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#versioning`
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:devops-infra-scaffold.template.md` - Output template
-- `$JAAN_LEARN_DIR/jaan-to:devops-infra-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-devops-infra-scaffold.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-devops-infra-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/research/74-dev-cicd-infra-scaffold-generation.md` - Research reference
 
@@ -261,6 +261,81 @@ Environment protection:
 - Use GitHub Environments with required reviewers for production
 - Use OIDC federation for cloud credentials (no stored secrets)
 - Separate secrets per environment
+
+## Step 6a: Generate Optional Quality Pipeline Stages
+
+Generate these stages ONLY if relevant config/spec is detected in the project. Each stage checks tool availability using `npx --no-install` (npm tools) or direct `--version` (binary tools). Never use bare `npx` (auto-installs). Never use `which`.
+
+### 6a.1 Spectral Lint Stage (if OpenAPI spec detected)
+
+Glob for `*.yaml`/`*.json` matching OpenAPI patterns (`openapi:`, `swagger:`). If found:
+
+```yaml
+- name: API Spec Lint (Spectral)
+  run: npx --no-install @stoplight/spectral-cli lint api.yaml --ruleset .spectral.yaml
+```
+
+- Trigger: on every commit (CI workflow)
+- Ruleset: built-in + OWASP if `.spectral.yaml` exists
+
+### 6a.2 Breaking Changes Detection Stage (if baseline spec exists)
+
+If project has a baseline OpenAPI spec (e.g., `api.yaml` tracked in git):
+
+```yaml
+- name: API Breaking Changes (oasdiff)
+  uses: oasdiff/oasdiff-action@{pinned-sha}
+  with:
+    base: api.yaml
+    revision: api.yaml
+    fail-on: ERR
+```
+
+- oasdiff is a Go binary, NOT npm. CI uses `oasdiff/oasdiff-action` pinned to immutable commit SHA (never `@latest`).
+- Local: `oasdiff breaking --fail-on ERR base.yaml head.yaml`
+- Trigger: on PRs only
+
+### 6a.3 Mutation Testing Stage (if mutation tool config detected)
+
+Glob for mutation configs: `stryker.config.*`, `infection.json5`, `.mutmut-cache`. If found:
+
+```yaml
+# PR: incremental (changed files only)
+- name: Mutation Testing (Incremental)
+  if: github.event_name == 'pull_request'
+  run: npx stryker run --incremental
+
+# Nightly: full run
+- name: Mutation Testing (Full)
+  if: github.event_name == 'schedule'
+  run: npx stryker run
+```
+
+- Adapt command per stack (StrykerJS / Infection / go-mutesting / mutmut)
+- PR runs: incremental, changed files only
+- Nightly runs: full project scope
+
+### 6a.4 API Fuzz Testing Stage (if OpenAPI spec + running API)
+
+If OpenAPI spec detected AND deployment target configured:
+
+```yaml
+- name: API Fuzz Testing (Schemathesis)
+  run: schemathesis run --url ${{ vars.API_URL }} api.yaml --stateful=links
+```
+
+- Trigger: nightly/on-demand only (resource-intensive)
+- schemathesis is a Python pip package, NOT npm
+
+### 6a.5 Preflight Availability Gate
+
+Each stage above MUST include a preflight check before execution:
+- `npx --no-install @stoplight/spectral-cli --version` for Spectral
+- `oasdiff --version` for oasdiff (binary, not npm)
+- `npx --no-install stryker --version` for StrykerJS (adapt per stack)
+- `schemathesis --version` for Schemathesis
+
+If tool unavailable: skip stage with explicit comment in generated workflow, never silently omit.
 
 ## Step 7: Generate Health Check Workflow (health-check.yml) — GitHub Actions Only
 

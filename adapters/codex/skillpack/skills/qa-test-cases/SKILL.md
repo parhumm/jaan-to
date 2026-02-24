@@ -13,9 +13,9 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:qa-test-cases.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases.template.md` - BDD/Gherkin template
-- `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases-quality-checklist.template.md` - Quality checklist template
+- `$JAAN_LEARN_DIR/jaan-to-qa-test-cases.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases.template.md` - BDD/Gherkin template
+- `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases-quality-checklist.template.md` - Quality checklist template
 - Research: `$JAAN_OUTPUTS_DIR/research/50-qa-test-cases.md` - ISTQB standards, test design techniques
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 
@@ -185,7 +185,60 @@ Process:
 
 ## Step 4: Generate BDD/Gherkin Test Cases
 
-Following research Section 2 patterns and Section 4 worked examples:
+Following research Section 2 patterns and Section 4 worked examples.
+
+### 4.0 Declarative Gherkin Enforcement Rule
+
+**CRITICAL**: All scenarios MUST use declarative style (describe BEHAVIOR, not UI actions).
+
+**BAD (Imperative -- NEVER use):**
+```gherkin
+When I click the "Login" button
+When I enter "test@example.com" in the email field
+When I scroll down to the footer
+When I select "Option A" from the dropdown
+```
+
+**GOOD (Declarative -- ALWAYS use):**
+```gherkin
+When the user submits valid credentials
+When the user requests password reset
+When the user selects their preferred plan
+When the user completes the checkout process
+```
+
+**Rule**: NEVER use imperative UI interaction steps. Describe BEHAVIOR, not UI actions. Steps should be understandable by non-technical stakeholders.
+
+### 4.0.1 Scenario Structure Limits
+
+- **Steps per scenario**: 3-5 (Given/When/Then combined). If exceeding 5, split into multiple scenarios.
+- **Scenarios per feature**: 5-10. If exceeding 10, split into sub-features.
+- **Scenario Outline promotion**: Use `Scenario Outline` with `Examples` tables when 3+ input combinations exist for the same behavior pattern.
+
+Example Scenario Outline:
+```gherkin
+Scenario Outline: User login with various credential types
+  Given a registered user with <credential_type>
+  When the user submits valid credentials
+  Then the user should be authenticated within 3 seconds
+
+  Examples:
+    | credential_type     |
+    | email and password  |
+    | social login        |
+    | SSO token           |
+```
+
+### 4.0.2 Standardized Step Templates
+
+Use these declarative patterns as starting points:
+- `Given a {entity} exists with {attribute} "{value}"`
+- `Given the user is authenticated as {role}`
+- `When the user {action} the {entity}`
+- `When the user submits {valid/invalid} {data_type}`
+- `Then the {entity} should have {attribute} "{value}"`
+- `Then the user should see {feedback_type}`
+- `Then the system should {expected_behavior}`
 
 ### 4.1 Feature Header
 
@@ -386,7 +439,7 @@ mkdir -p "$OUTPUT_FOLDER"
 
 Path: `$OUTPUT_FOLDER/${NEXT_ID}-test-cases-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases.template.md`
 
 Fill sections:
 - Title, Executive Summary
@@ -403,7 +456,7 @@ Fill sections:
 
 Path: `$OUTPUT_FOLDER/${NEXT_ID}-test-cases-quality-checklist-${slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:qa-test-cases-quality-checklist.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-qa-test-cases-quality-checklist.template.md`
 
 Fill sections:
 - 10-Point Peer Review Checklist

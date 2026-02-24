@@ -23,7 +23,7 @@ Each role section defines:
 - **Title**: Product Manager
 - **Track**: fast, full
 - **Model**: inherit
-- **Skills**: [pm-research-about, pm-prd-write, pm-story-write]
+- **Skills**: [pm-research-about, pm-prd-write, pm-story-write, pm-roadmap-add, pm-skill-discover]
 - **Phase**: 1 (define)
 - **Depends on**: user-input
 - **Outputs to share**: prd_path, stories_path
@@ -76,8 +76,8 @@ Each role section defines:
 - **Track**: fast, full
 - **Model**: sonnet
 - **Skills**:
-  - fast: [qa-test-generate, qa-test-run]
-  - full: [qa-test-cases, qa-test-generate, qa-test-run]
+  - fast: [qa-test-generate, qa-test-run, qa-issue-validate]
+  - full: [qa-test-cases, qa-test-generate, qa-test-run, qa-issue-validate]
 - **Phase**: 2 (test-cases) + 3 (test-gen/run after integration)
 - **Depends on**: prd_path, scaffold_paths (from backend + frontend)
 - **Outputs to share**: test_results_path

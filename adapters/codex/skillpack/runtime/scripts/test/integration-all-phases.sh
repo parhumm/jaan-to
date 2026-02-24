@@ -54,7 +54,7 @@ paths_outputs: "custom/outputs"
 EOF
 
 mkdir -p "$TEST_DIR/custom/templates"
-echo "# Custom Template" > "$TEST_DIR/custom/templates/jaan-to:pm-prd-write.template.md"
+echo "# Custom Template" > "$TEST_DIR/custom/templates/jaan-to-pm-prd-write.template.md"
 
 unset CONFIG_CACHE_FILE
 load_config
@@ -170,7 +170,7 @@ echo "Simulating /jaan-to:pm-prd-write execution..."
 [ -f "$TEST_DIR/jaan-to/context/tech.md" ] && echo "✓ Skill can read tech.md" || (echo "✗ FAIL"; exit 1)
 
 # 3. Skill reads template (from custom path)
-[ -f "$TEST_DIR/custom/templates/jaan-to:pm-prd-write.template.md" ] && echo "✓ Skill can read custom template" || (echo "✗ FAIL"; exit 1)
+[ -f "$TEST_DIR/custom/templates/jaan-to-pm-prd-write.template.md" ] && echo "✓ Skill can read custom template" || (echo "✗ FAIL"; exit 1)
 
 # 4. Skill generates output to custom output path
 mkdir -p "$TEST_DIR/custom/outputs/pm/test-feature"

@@ -13,8 +13,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:sec-audit-remediate.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:sec-audit-remediate.template.md` - Output template
+- `$JAAN_LEARN_DIR/jaan-to-sec-audit-remediate.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-sec-audit-remediate.template.md` - Output template
 - `$JAAN_CONTEXT_DIR/tech.md` - Tech stack (optional, auto-imported if exists)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`, `#patterns`
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
@@ -302,7 +302,7 @@ Each test file includes:
 
 Write the main report file: `{id}-{slug}.md`
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:sec-audit-remediate.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-sec-audit-remediate.template.md`
 
 Fill template variables:
 - `{{title}}` - "Security Remediation Report" + project name

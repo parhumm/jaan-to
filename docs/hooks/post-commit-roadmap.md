@@ -1,58 +1,24 @@
 ---
-title: "post-commit-roadmap"
+title: "post-commit-roadmap (Removed)"
 sidebar_position: 4
 ---
 
-# post-commit-roadmap
+# post-commit-roadmap (Removed)
 
-> Reminds you to sync the roadmap after significant commits.
-
----
-
-## When It Runs
-
-- **Type**: PostToolUse
-- **Trigger**: Bash operations
-- **Matches**: Commands containing `git commit`
+> **This hook has been removed.** The `post-commit-roadmap.sh` script and its PostToolUse hook entry were deleted when the internal `roadmap-add` and `roadmap-update` skills were replaced by the generic `pm-roadmap-add` and `pm-roadmap-update` skills.
 
 ---
 
-## What It Does
+## Replacement
 
-After a significant git commit (feat/fix/refactor), displays a reminder:
+Roadmap maintenance is now handled explicitly via user-invoked commands:
 
-```
----
-Commit: abc1234 — feat(skill): Add new skill
-
-Consider syncing the roadmap:
-  /jaan-to:roadmap-update
-  /jaan-to:roadmap-update mark "<task>" done abc1234
----
-```
+- `/jaan-to:pm-roadmap-update review` — Cross-reference roadmap against PRDs, stories, and code changes
+- `/jaan-to:pm-roadmap-update mark "<item>" done` — Mark a specific item as complete
+- `/jaan-to:pm-roadmap-add "description"` — Add a new prioritized item
 
 ---
 
-## Behavior
+## Why It Was Removed
 
-- Always exits 0 (never blocks)
-- Only triggers for `feat:`, `fix:`, and `refactor:` commits
-- Skips `docs(roadmap):` and `docs(changelog):` commits (already roadmap work)
-- Skips `release:` commits (handled by `/jaan-to:roadmap-update release`)
-- Non-intrusive reminder via stderr
-
----
-
-## Why It Exists
-
-Creates a feedback loop between commits and roadmap tracking. When you make a significant change, you're reminded to record it in the roadmap.
-
-Works with `/jaan-to:roadmap-update` to keep the roadmap in sync with actual development.
-
----
-
-## Script Location
-
-```
-scripts/post-commit-roadmap.sh
-```
+The automatic post-commit reminder coupled with the internal `roadmap-update` skill had excessive git permissions (`git push`, `git checkout`, `git merge`) and was tightly coupled to the jaan-to plugin's own roadmap structure. The new generic skills are user-facing, security-hardened (no git operations), and work with any project's roadmap.

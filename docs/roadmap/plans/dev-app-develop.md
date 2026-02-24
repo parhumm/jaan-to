@@ -443,7 +443,7 @@ README index updated: `jaan-to/outputs/research/README.md`
 8. Commit all files
 9. Invoke `/jaan-to:docs-create` for skill documentation (use `/jaan-to:docs-update` if docs already exist)
 10. Run `/jaan-to:skill-update dev-app-develop` for v3.0.0 compliance
-11. Use `/jaan-to:roadmap-add` to add skill to roadmap (or `/jaan-to:roadmap-update` to sync)
+11. Use `/jaan-to:pm-roadmap-add` to add skill to roadmap (or `/jaan-to:pm-roadmap-update` to sync)
 12. Use `/jaan-to:release-iterate-changelog` to update changelog
 13. Create PR to `dev`
 

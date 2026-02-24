@@ -16,8 +16,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_CONTEXT_DIR/tech.md` — Tech stack (determines build commands, ports, health endpoints)
   - Uses sections: `#current-stack`, `#frameworks`, `#constraints`
 - `$JAAN_CONTEXT_DIR/config.md` — Project configuration
-- `$JAAN_TEMPLATES_DIR/jaan-to:dev-verify.template.md` — Report template
-- `$JAAN_LEARN_DIR/jaan-to:dev-verify.learn.md` — Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-dev-verify.template.md` — Report template
+- `$JAAN_LEARN_DIR/jaan-to-dev-verify.learn.md` — Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` — Language resolution protocol
 
 ## Input
@@ -281,8 +281,14 @@ For each service in approved plan:
 
 Skip if no OpenAPI spec found in Step 4.
 
+**Enhanced validation** (if tools available):
+- If Spectral installed (`npx --no-install @stoplight/spectral-cli --version`): run `npx @stoplight/spectral-cli lint {spec_path}` for standards-based linting
+- If Prism installed (`npx --no-install @stoplight/prism-cli --version`): run proxy validation against running API
+- Reference `/jaan-to:qa-contract-validate` for full validation pipeline
+
+**Fallback** (structural-only, always available):
 - GET endpoints: compare status code, Content-Type, response body structure against spec
-- Structural validation only (field presence and types) — no full JSON Schema validator
+- Structural validation only (field presence and types) -- no full JSON Schema validator
 - Flag mismatches as `contract-violation` with expected vs actual
 
 ## Step 13: Run Smoke Tests
@@ -359,7 +365,7 @@ Preview:
 
 ## Step 17: Write Verification Report
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:dev-verify.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-dev-verify.template.md`
 
 Write `{NEXT_ID}-{slug}.md` with:
 - Executive Summary (BLUF: build pass/fail, runtime pass/fail, errors found/fixed/remaining)

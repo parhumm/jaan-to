@@ -13,8 +13,8 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 
 ## Context Files
 
-- `$JAAN_LEARN_DIR/jaan-to:ux-research-synthesize.learn.md` - Past lessons (loaded in Pre-Execution)
-- `$JAAN_TEMPLATES_DIR/jaan-to:ux-research-synthesize.template.md` - Synthesis report template
+- `$JAAN_LEARN_DIR/jaan-to-ux-research-synthesize.learn.md` - Past lessons (loaded in Pre-Execution)
+- `$JAAN_TEMPLATES_DIR/jaan-to-ux-research-synthesize.template.md` - Synthesis report template
 - `$JAAN_CONTEXT_DIR/config.md` - Project configuration (if applicable)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/ux-research-templates.md` - Theme cards, recommendation format, executive brief template, quality checklist
@@ -349,7 +349,7 @@ Preview output configuration:
 
 ## Step 10: Generate Main Synthesis Report
 
-Use template from: `$JAAN_TEMPLATES_DIR/jaan-to:ux-research-synthesize.template.md`
+Use template from: `$JAAN_TEMPLATES_DIR/jaan-to-ux-research-synthesize.template.md`
 
 Fill all template sections:
 
