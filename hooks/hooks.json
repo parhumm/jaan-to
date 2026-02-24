@@ -86,7 +86,7 @@
             "timeout": 5
           }
         ]
-      },
+      }
     ],
     "TaskCompleted": [
       {
