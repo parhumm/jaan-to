@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [7.5.0] - 2026-02-24
+
 ### Added
 - **`qa-issue-report` skill** — Report clear issues to any GitHub/GitLab repository with smart session context analysis, codebase reference search, media attachments, and dual-platform support (GitHub CLI + GitLab REST API). Auto-detects target repo from git remote, collects environment info, enforces privacy sanitization, and always submits in English regardless of conversation language
 - **`qa-test-mutate` skill** (`/jaan-to:qa-test-mutate`) — Run mutation testing to validate test suite quality with multi-stack support (StrykerJS, Infection, go-mutesting, mutmut). Context-isolated feedback loop: run mutations → write survivors JSON → feed to `qa-test-generate --from-mutants` → re-run (max 2-3 iterations, delta < 5 stop). Survivor JSON handoff contract (schema v1.0) defines artifact-only interface between mutation and test generation skills. Unsupported stacks report `null` score gracefully. Codex degraded mode: single pass without iterative feedback loop
