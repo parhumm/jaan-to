@@ -1,4 +1,4 @@
-# Lessons: repo-issue-report
+# Lessons: qa-issue-report
 
 > Last updated: 2026-02-24
 

@@ -1,9 +1,9 @@
 ---
-title: "repo-issue-report"
+title: "qa-issue-report"
 sidebar_position: 9
 ---
 
-# /jaan-to:repo-issue-report
+# /jaan-to:qa-issue-report
 
 > Report clear issues to any GitHub/GitLab repo with code references, media, and smart session context.
 
@@ -19,7 +19,7 @@ When invoked mid-session, the skill scans the conversation for errors, stack tra
 
 ## How It Differs from jaan-issue-report
 
-| Aspect | [jaan-issue-report](../core/jaan-issue-report.md) | repo-issue-report |
+| Aspect | [jaan-issue-report](../core/jaan-issue-report.md) | qa-issue-report |
 |--------|---------------------|---------------------|
 | Target | jaan-to plugin repo only | Any GitHub or GitLab repo |
 | Platform | GitHub only | GitHub and GitLab (including self-hosted) |
@@ -34,11 +34,11 @@ When invoked mid-session, the skill scans the conversation for errors, stack tra
 ## Usage
 
 ```
-/jaan-to:repo-issue-report "<description>"
-/jaan-to:repo-issue-report "<description>" --repo owner/repo --type bug
-/jaan-to:repo-issue-report "<description>" --submit --label bug,high-priority
-/jaan-to:repo-issue-report "<description>" --attach screenshot.png,error.log
-/jaan-to:repo-issue-report
+/jaan-to:qa-issue-report "<description>"
+/jaan-to:qa-issue-report "<description>" --repo owner/repo --type bug
+/jaan-to:qa-issue-report "<description>" --submit --label bug,high-priority
+/jaan-to:qa-issue-report "<description>" --attach screenshot.png,error.log
+/jaan-to:qa-issue-report
 ```
 
 ---
@@ -57,7 +57,7 @@ When invoked mid-session, the skill scans the conversation for errors, stack tra
 
 **Submit mode resolution** (when neither flag is provided):
 
-1. Saved preference in `jaan-to/config/settings.yaml` (`repo_issue_report_submit`)
+1. Saved preference in `jaan-to/config/settings.yaml` (`qa_issue_report_submit`)
 2. If no preference saved: detects `gh`/`glab` CLI availability, asks once, saves your choice
 
 ---
@@ -111,7 +111,7 @@ Before preview, the skill sanitizes: private paths (`/Users/name/...` to `{USER_
 
 **Local mode**:
 ```
-$JAAN_OUTPUTS_DIR/repo-issues/{id}-{slug}/{id}-{slug}.md
+$JAAN_OUTPUTS_DIR/qa-issues/{id}-{slug}/{id}-{slug}.md
 ```
 
 Both modes show a copy-paste ready version with a manual submission URL as fallback.
@@ -122,18 +122,18 @@ Both modes show a copy-paste ready version with a manual submission URL as fallb
 
 **Report a bug from the current session**:
 ```
-/jaan-to:repo-issue-report
+/jaan-to:qa-issue-report
 ```
 The skill scans the conversation and suggests: "It looks like authentication fails after token refresh. Report this?" You approve, and it pre-fills steps to reproduce from the session timeline.
 
 **Report to a specific repo with attachments**:
 ```
-/jaan-to:repo-issue-report "Login button unresponsive on mobile" --repo myorg/frontend --type bug --attach screenshot.png
+/jaan-to:qa-issue-report "Login button unresponsive on mobile" --repo myorg/frontend --type bug --attach screenshot.png
 ```
 
 **Feature request with labels**:
 ```
-/jaan-to:repo-issue-report "Add dark mode support" --type feature --label enhancement,ui
+/jaan-to:qa-issue-report "Add dark mode support" --type feature --label enhancement,ui
 ```
 
 ---
@@ -167,4 +167,4 @@ Only detected items appear in the issue.
 
 ---
 
-[Back to Dev Skills](README.md) | [Back to All Skills](../README.md)
+[Back to QA Skills](README.md) | [Back to All Skills](../README.md)

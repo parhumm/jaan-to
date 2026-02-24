@@ -1,24 +1,24 @@
 ---
-name: repo-issue-report
+name: qa-issue-report
 description: Report clear issues to any GitHub/GitLab repo with code refs and media. Use when filing bugs or feature requests.
-allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(gh repo view *), Bash(glab auth status *), Bash(glab issue create *), Bash(glab label create *), Bash(curl *), Bash(git remote *), Bash(git branch *), Bash(git log *), Bash(uname *), Bash(node -v *), Bash(python3 --version *), Bash(go version *), Bash(rustc --version *), Bash(java -version *), Bash(php -v *), Bash(ruby -v *), Bash(dotnet --version *), Bash(rm -f /tmp/repo-issue-*), Bash(mkdir -p $JAAN_OUTPUTS_DIR/repo-issues/*), Bash(cat *), Write($JAAN_OUTPUTS_DIR/repo-issues/**), Write(/tmp/repo-issue-*), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(gh repo view *), Bash(glab auth status *), Bash(glab issue create *), Bash(glab label create *), Bash(curl *), Bash(git remote *), Bash(git branch *), Bash(git log *), Bash(uname *), Bash(node -v *), Bash(python3 --version *), Bash(go version *), Bash(rustc --version *), Bash(java -version *), Bash(php -v *), Bash(ruby -v *), Bash(dotnet --version *), Bash(rm -f /tmp/qa-issue-*), Bash(mkdir -p $JAAN_OUTPUTS_DIR/qa-issues/*), Bash(cat *), Write($JAAN_OUTPUTS_DIR/qa-issues/**), Write(/tmp/qa-issue-*), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "<issue-description> [--repo owner/repo] [--type bug|feature|improvement|question] [--submit | --no-submit] [--label l1,l2] [--attach path1,path2]"
 license: MIT
 compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
 ---
 
-# repo-issue-report
+# qa-issue-report
 
 > Report clear issues to any GitHub/GitLab repo with code references, media, and smart session context.
 
 ## Context Files
 
 Read these before execution:
-- `$JAAN_LEARN_DIR/jaan-to-repo-issue-report.learn.md` - Project-side learned lessons
-- `${CLAUDE_PLUGIN_ROOT}/skills/repo-issue-report/LEARN.md` - Plugin-side seed lessons
-- `${CLAUDE_PLUGIN_ROOT}/skills/repo-issue-report/template.md` - Issue body templates per type
+- `$JAAN_LEARN_DIR/jaan-to-qa-issue-report.learn.md` - Project-side learned lessons
+- `${CLAUDE_PLUGIN_ROOT}/skills/qa-issue-report/LEARN.md` - Plugin-side seed lessons
+- `${CLAUDE_PLUGIN_ROOT}/skills/qa-issue-report/template.md` - Issue body templates per type
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution
-- `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` - Privacy rules, env detection, API commands, result templates
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` - Privacy rules, env detection, API commands, result templates
 
 ## Input
 
@@ -42,22 +42,22 @@ If no arguments provided, proceed to session context scan (Step 0) or ask: "What
 ## Pre-Execution Protocol
 
 **MANDATORY** — Read and execute ALL steps in: `${CLAUDE_PLUGIN_ROOT}/docs/extending/pre-execution-protocol.md`
-Skill name: `repo-issue-report`
+Skill name: `qa-issue-report`
 Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C (Offer Template Seeding)
 
 **MANDATORY FIRST ACTION** — Before any other step, use the Read tool to read:
-`$JAAN_LEARN_DIR/jaan-to-repo-issue-report.learn.md`
+`$JAAN_LEARN_DIR/jaan-to-qa-issue-report.learn.md`
 
 If the file exists, apply its lessons throughout this execution.
 If the file does not exist, continue without it.
 
 Also read the plugin-side seed lessons:
-`${CLAUDE_PLUGIN_ROOT}/skills/repo-issue-report/LEARN.md`
+`${CLAUDE_PLUGIN_ROOT}/skills/qa-issue-report/LEARN.md`
 
 ### Language Settings
 
 Read and apply language protocol: `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md`
-Override field for this skill: `language_repo-issue-report`
+Override field for this skill: `language_qa-issue-report`
 
 **CRITICAL LANGUAGE RULE:**
 - **Conversation** (questions, confirmations, status messages, HARD STOP prompts): Use the resolved language preference
@@ -145,7 +145,7 @@ If parse fails: ask user "Which repository should I file this issue to? (format:
 
 ### 1.3 Detect Platform & Verify Access
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Platform Detection & Verification" for URL pattern matching, `gh`/`glab` auth checks, GitLab token discovery chain, and verification commands.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Platform Detection & Verification" for URL pattern matching, `gh`/`glab` auth checks, GitLab token discovery chain, and verification commands.
 
 Confirm to user: "Issues will be filed to: **{TARGET_REPO}** ({GitHub|GitLab})"
 
@@ -153,7 +153,7 @@ Confirm to user: "Issues will be filed to: **{TARGET_REPO}** ({GitHub|GitLab})"
 
 ## Step 2: Resolve Submit Mode
 
-Priority order: explicit flags (`--submit`/`--no-submit`) → saved preference (`repo_issue_report_submit` in settings.yaml) → smart detection (check `gh auth status` for GitHub, token availability for GitLab).
+Priority order: explicit flags (`--submit`/`--no-submit`) → saved preference (`qa_issue_report_submit` in settings.yaml) → smart detection (check `gh auth status` for GitHub, token availability for GitLab).
 
 If CLI/token not available: inform user, override to local-only (don't save preference — user may configure later).
 
@@ -167,7 +167,7 @@ Determine issue type using this priority order:
 2. **From session draft** (if accepted in Step 0): use auto-classified type
 3. **From keyword detection** in the description:
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Keyword Detection Table" for keyword-to-type mapping.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Keyword Detection Table" for keyword-to-type mapping.
 
 4. **If uncertain**, ask using AskUserQuestion with options: Bug, Feature, Improvement, Question.
 
@@ -186,7 +186,7 @@ Type-to-label mapping:
 
 Ask targeted clarifying questions to build a complete issue. **If a session draft was accepted in Step 0, only ask deepening questions.**
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Clarifying Questions per Type" for the full question sets per type (bug, feature, improvement, question).
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Clarifying Questions per Type" for the full question sets per type (bug, feature, improvement, question).
 
 **Always ask** (for all types): "Is there anything else that would help understand this?"
 
@@ -220,7 +220,7 @@ If **Yes**: ask user for file paths or URLs. Accept multiple entries.
 
 For each attachment: verify URLs are valid, verify local files exist via Glob. Accept images (png, jpg, gif, webp), video (mp4, mov), logs (txt, log). Warn and skip invalid paths.
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Media Upload Strategy" for platform-specific upload details (GitLab API upload, GitHub post-creation notice, local-only mode).
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Media Upload Strategy" for platform-specific upload details (GitLab API upload, GitHub post-creation notice, local-only mode).
 
 ---
 
@@ -282,7 +282,7 @@ Auto-collect without user interaction:
 
 ### 7.1 Project Tech Stack Detection
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Environment Detection Table" for manifest-to-stack mapping and runtime commands.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Environment Detection Table" for manifest-to-stack mapping and runtime commands.
 
 Check for manifest files and run the corresponding runtime version command.
 
@@ -301,7 +301,7 @@ Format as a table for the issue body. Only include what was detected.
 
 Craft a clear, descriptive title. **Always in English.**
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Issue Title Format" for rules and examples.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Issue Title Format" for rules and examples.
 
 Pattern: `[{Type}] {concise description}` (under 80 chars).
 
@@ -309,7 +309,7 @@ Pattern: `[{Type}] {concise description}` (under 80 chars).
 
 ## Step 9: Generate Issue Body
 
-Read the template from `${CLAUDE_PLUGIN_ROOT}/skills/repo-issue-report/template.md`.
+Read the template from `${CLAUDE_PLUGIN_ROOT}/skills/qa-issue-report/template.md`.
 
 Select the matching type template (bug / feature / improvement / question) and fill all `{{field}}` variables using:
 - User's answers from Step 4
@@ -320,7 +320,7 @@ Select the matching type template (bug / feature / improvement / question) and f
 
 Merge all sources into a coherent, well-structured issue body. **All issue body content must be in English.**
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Variable Mapping" for complete field mapping per issue type.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Variable Mapping" for complete field mapping per issue type.
 
 ---
 
@@ -328,7 +328,7 @@ Merge all sources into a coherent, well-structured issue body. **All issue body 
 
 **MANDATORY before HARD STOP preview.**
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Privacy Sanitization Rules" for path, credential, connection string, and personal info rules.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Privacy Sanitization Rules" for path, credential, connection string, and personal info rules.
 
 Apply all sanitization rules. Track the number of sanitized items for HARD STOP display.
 
@@ -388,15 +388,15 @@ AskUserQuestion:
 **GitHub local files**: Mark for post-creation notification (Step 14).
 **URLs (both)**: Already embedded as markdown in body.
 
-Write the final sanitized body to `/tmp/repo-issue-body-clean.md`.
+Write the final sanitized body to `/tmp/qa-issue-body-clean.md`.
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Media Upload Commands" for exact curl commands and response parsing.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Media Upload Commands" for exact curl commands and response parsing.
 
 ---
 
 ## Step 12: Generate Output Path
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Output Path Generation" for the bash script.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Output Path Generation" for the bash script.
 
 Store variables: `NEXT_ID`, `SLUG`, `OUTPUT_FOLDER`, `MAIN_FILE` for potential local save.
 
@@ -406,7 +406,7 @@ Store variables: `NEXT_ID`, `SLUG`, `OUTPUT_FOLDER`, `MAIN_FILE` for potential l
 
 If submit mode is **local-only**: skip to Step 15.
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Submission Commands" for exact GitHub (`gh issue create --body-file`) and GitLab (REST API `POST /projects/:id/issues`) commands, label creation, and response parsing.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Submission Commands" for exact GitHub (`gh issue create --body-file`) and GitLab (REST API `POST /projects/:id/issues`) commands, label creation, and response parsing.
 
 **If successful**: capture issue URL and number. Proceed to Step 14.
 **If failed**: capture error. Continue to Step 15 for local fallback.
@@ -428,13 +428,13 @@ If GitHub platform AND local file attachments that couldn't be uploaded:
 
 Show copy-paste ready version with platform-specific manual submit URL. Ask if user wants to save a local file. If yes: create folder, write file with YAML frontmatter + body, update index.
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` sections "Copy-Paste Ready Template", "Local Issue File Template", and "Output Path Generation" for formats and commands.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` sections "Copy-Paste Ready Template", "Local Issue File Template", and "Output Path Generation" for formats and commands.
 
 ---
 
 ## Step 16: Confirm Result
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/repo-issue-report-reference.md` section "Result Scenario Templates" for all 5 scenarios.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Result Scenario Templates" for all 5 scenarios.
 
 ---
 
@@ -451,7 +451,7 @@ AskUserQuestion:
       description: "Share feedback to improve this skill"
 ```
 
-If **Yes**: ask for details, then run `/jaan-to:learn-add repo-issue-report "{feedback}"`
+If **Yes**: ask for details, then run `/jaan-to:learn-add qa-issue-report "{feedback}"`
 
 ---
 

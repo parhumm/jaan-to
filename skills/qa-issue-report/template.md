@@ -1,4 +1,4 @@
-# Issue Body Templates — repo-issue-report
+# Issue Body Templates — qa-issue-report
 
 > Language: Always English (regardless of conversation language).
 > Template variables use `{{double-brace}}` syntax.
@@ -184,7 +184,7 @@ What I've already tried: {{already_tried}}
 ```markdown
 ---
 
-**Reported via:** `repo-issue-report` skill (jaan.to plugin)
+**Reported via:** `qa-issue-report` skill (jaan.to plugin)
 ```
 
 ---

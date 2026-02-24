@@ -1,11 +1,11 @@
 ---
-title: "repo-issue-report Reference"
+title: "qa-issue-report Reference"
 sidebar_position: 50
 ---
 
-# repo-issue-report — Reference Material
+# qa-issue-report — Reference Material
 
-> Extracted from `skills/repo-issue-report/SKILL.md` for token optimization.
+> Extracted from `skills/qa-issue-report/SKILL.md` for token optimization.
 > Contains platform detection, API commands, clarifying questions, privacy rules, media upload strategy, environment detection, result templates, and definition of done.
 
 ---
@@ -77,7 +77,7 @@ gh label create "{label}" --repo {TARGET_REPO} 2>/dev/null || true
 gh issue create --repo {TARGET_REPO} \
   --title "{title}" \
   --label "{label1},{label2}" \
-  --body-file /tmp/repo-issue-body-clean.md
+  --body-file /tmp/qa-issue-body-clean.md
 ```
 
 Capture issue URL from stdout output.
@@ -94,7 +94,7 @@ glab label create --name "{label}" -R {TARGET_REPO} 2>/dev/null || true
 
 ```bash
 # Write payload JSON
-cat > /tmp/repo-issue-payload.json <<'PAYLOAD_EOF'
+cat > /tmp/qa-issue-payload.json <<'PAYLOAD_EOF'
 {
   "title": "{title}",
   "description": "{sanitized issue body}",
@@ -106,7 +106,7 @@ PAYLOAD_EOF
 curl --request POST \
   --header "PRIVATE-TOKEN: $TOKEN" \
   --header "Content-Type: application/json" \
-  --data @/tmp/repo-issue-payload.json \
+  --data @/tmp/qa-issue-payload.json \
   "{base_url}/api/v4/projects/{url_encoded_path}/issues"
 ```
 
@@ -117,7 +117,7 @@ Parse response:
 ### Cleanup
 
 ```bash
-rm -f /tmp/repo-issue-body-clean.md /tmp/repo-issue-payload.json
+rm -f /tmp/qa-issue-body-clean.md /tmp/qa-issue-payload.json
 ```
 
 ---
@@ -369,7 +369,7 @@ For detected manifest: read key fields (name, version, relevant dependencies).
 ```bash
 source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/id-generator.sh"
 
-SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/repo-issues"
+SUBDOMAIN_DIR="$JAAN_OUTPUTS_DIR/qa-issues"
 mkdir -p "$SUBDOMAIN_DIR"
 
 NEXT_ID=$(generate_next_id "$SUBDOMAIN_DIR")
@@ -420,7 +420,7 @@ date: "{YYYY-MM-DD}"
 tech_stack: "{detected stack}"
 os: "{uname output}"
 branch: "{git branch}"
-generated_by: "repo-issue-report"
+generated_by: "qa-issue-report"
 session_context: {true|false}
 ---
 
