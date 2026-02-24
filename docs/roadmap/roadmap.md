@@ -16,7 +16,7 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (49 shipped across 13 roles) | In Progress |
+| 6 | Role skills (51 shipped across 13 roles) | In Progress |
 | 7 | MCP connectors | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation | Partial |
@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.4.0 (45 skills) | **Next:** v7.5.0 (49 skills)
+**Latest:** v7.4.0 (45 skills) | **Next:** v7.5.0 (51 skills)
 
 ---
 
@@ -50,7 +50,8 @@ For complete release history, see [CHANGELOG.md](/changelog).
   - Enhanced: `dev-verify` (enhanced contract validation with Spectral/Prism when available)
   - Enhanced: `backend-scaffold` (test framework + mutation tool recommendation table)
   - Survivor JSON handoff contract (schema v1.0) for qa-test-mutate <-> qa-test-generate
-  - 49 skills total (was 45)
+  - 51 skills total (was 45)
+- [x] `qa-issue-validate` skill — Validate GitHub/GitLab issues against codebase with RCA, reproduction scenarios, and mandatory threat scanning for untrusted issue content. 8 verdict categories, 7-layer code search, causal chain + 5 Whys RCA, sanitized roadmap integration. ([Research #77](../research/77-qa-issue-validation-best-practices.md))
 
 ---
 
@@ -124,7 +125,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
-**Completed work**: 43 skills shipped across v4.0.0–v6.4.0 — see [CHANGELOG.md](/changelog) for details.
+**Completed work**: 45 skills shipped across v4.0.0–v7.4.0 — see [CHANGELOG.md](/changelog) for details.
 
 ---
 
@@ -217,6 +218,7 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/jaan-to:qa-tdd-orchestrate` | Orchestrate RED/GREEN/REFACTOR TDD cycle with isolated agents |
 | `/jaan-to:qa-contract-validate` | Validate API contracts with Spectral, oasdiff, Prism, Schemathesis |
 | `/jaan-to:qa-quality-gate` | Compute composite quality score from upstream skill outputs |
+| `/jaan-to:qa-issue-validate` | Validate GitHub/GitLab issues against codebase with RCA |
 | `/jaan-to:dev-verify` | Validate build pipeline and running services with health checks |
 | `/jaan-to:dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
 | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |

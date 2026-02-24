@@ -57,6 +57,7 @@
 | frontend-design | `/jaan-to:frontend-design` | Create distinctive, production-grade frontend components |
 | backend-data-model | `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
 | backend-api-contract | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| qa-issue-validate | `/jaan-to:qa-issue-validate` | Validate GitHub/GitLab issues against codebase with RCA |
 | qa-test-cases | `/jaan-to:qa-test-cases` | Generate test cases from acceptance criteria |
 | qa-test-generate | `/jaan-to:qa-test-generate` | Generate runnable Vitest and Playwright tests from BDD test cases |
 | qa-test-run | `/jaan-to:qa-test-run` | Execute tests, diagnose failures, generate coverage reports |
