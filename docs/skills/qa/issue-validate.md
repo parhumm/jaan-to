@@ -140,6 +140,8 @@ The skill follows jaan-to's security principles with additional safeguards for u
 - For issues with low detail, expect NEEDS_INFO verdict — the skill doesn't guess
 - Review the threat scan results if the issue comes from an unknown contributor
 - Pair with `/qa-issue-report` for a complete issue lifecycle (report → validate → roadmap)
+- For VALID_BUG verdicts: use the reproduction scenario as input for `/qa-test-cases` to generate regression tests
+- For VALID_FEATURE verdicts: extract acceptance criteria from the RCA summary and feed to `/qa-test-cases` to define feature tests before implementation
 - The local report is saved even when comments are posted, creating an audit trail
 
 ---

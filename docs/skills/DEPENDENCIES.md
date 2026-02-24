@@ -150,6 +150,10 @@ Issue Validation:
                  └──> /jaan-to:roadmap-add (if VALID + user approves)
                       "Add validated issue to roadmap"
 
+> Cross-pipeline: For VALID_BUG verdicts, the reproduction scenario can feed
+> /qa-test-cases → /qa-test-generate for regression tests. For VALID_FEATURE
+> verdicts, the RCA summary provides acceptance criteria for the same pipeline.
+
 Internal:
 ┌─────────────────────────────────────────────────────────┐
 │  /jaan-to:jaan-issue-report                             │
