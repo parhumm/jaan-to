@@ -2,7 +2,7 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "jaan-to",
   "version": "7.4.0",
-  "description": "Give soul to your workflow — 51 AI-powered skills across 13 roles with spec-to-ship pipeline",
+  "description": "Give soul to your workflow — 52 AI-powered skills across 13 roles with spec-to-ship pipeline",
   "metadata": {
     "pluginRoot": "./"
   },
@@ -115,6 +115,7 @@
         "./skills/release-iterate-changelog",
         "./skills/pm-roadmap-add",
         "./skills/pm-roadmap-update",
+        "./skills/pm-skill-discover",
         "./skills/sec-audit-remediate",
         "./skills/skill-create",
         "./skills/skill-update",
