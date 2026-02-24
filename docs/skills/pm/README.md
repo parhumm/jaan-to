@@ -19,6 +19,7 @@ slug: /skills/pm
 | [/jaan-to:pm-story-write](story-write.md) | Generate user stories with Given/When/Then AC |
 | [/jaan-to:pm-roadmap-add](roadmap-add.md) | Add prioritized items to project roadmap |
 | [/jaan-to:pm-roadmap-update](roadmap-update.md) | Review and maintain project roadmap |
+| [/jaan-to:pm-skill-discover](skill-discover.md) | Detect workflow patterns and suggest new skills |
 
 ---
 
@@ -29,6 +30,7 @@ PM skills generate product outputs:
 - Feature specifications
 - Metrics definitions
 - Product roadmaps with prioritization
+- Workflow pattern discovery and skill suggestions
 
 ---
 
@@ -40,7 +42,8 @@ PM skills generate product outputs:
 4. Review and approve PRD
 5. Run `/jaan-to:pm-roadmap-add "your item"` to add to roadmap
 6. Run `/jaan-to:pm-roadmap-update review` to maintain roadmap
-7. Share with team
+7. Run `/jaan-to:pm-skill-discover` periodically to find automation opportunities
+8. Share with team
 
 ---
 
