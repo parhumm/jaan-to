@@ -82,6 +82,8 @@ This directory contains structured summaries of research on Claude Code best pra
 | [72](./72-dev-secure-backend-scaffold-hardening.md)                           | Secure Backend Scaffold Hardening                               | JWT verification with jose (algorithm whitelisting, constant-time comparison, JWKS rotation), httpOnly/Secure/SameSite cookies via @fastify/secure-session, rate limiting (@fastify/rate-limit), CSRF protection (@fastify/csrf-protection), CSP headers (@fastify/helmet), input sanitization beyond schema validation, OWASP Top 10 (2021) mapping to Fastify plugin defaults, and secure-by-default scaffold patterns. 100+ sources. |
 | [73](./73-dev-sarif-security-remediation-automation.md)                       | SARIF Security Remediation Automation                           | SARIF 2.1.0 schema for remediation (fix objects, artifactChange, replacements), CWE-to-fix pattern databases, tool-specific remediation (CodeQL dataflow fixes, Semgrep autofix, Snyk dependency upgrades, OWASP CVE remediation), AST-aware code transformation, regression test generation (property-based, attack-replay, negative tests), and CI security gate tuning (severity/confidence matrices, baseline diffing). 100+ sources. |
 | [74](./74-dev-cicd-infra-scaffold-generation.md)                              | CI/CD Infrastructure Scaffold Generation                        | GitHub Actions reusable workflows and composite actions, path-filtered matrix builds for monorepos, dependency caching (pnpm store, Next.js cache, Docker layers), multi-stage Docker builds (3-4 stage deps→build→runtime, Alpine/distroless), docker-compose orchestration with healthchecks and profiles, .env hierarchy with typed schemas (zod/envalid), deployment platform configs (Vercel, Railway, Fly.io), and database migration automation in CI. 100+ sources. |
+| [75](./75-token-optimization-aggressive-safe.md)                              | Aggressive Token Optimization                                   | Reference extraction patterns for reducing per-skill SKILL.md sizes by 25-60%, extracting tables/checklists/templates to `docs/extending/*-reference.md` files, validate-skills.sh line count enforcement (hard cap 600, soft cap 500), bootstrap compact mode, and four-layer token architecture. |
+| [76](./76-tdd-bdd-ai-orchestration.md)                                        | TDD/BDD/AI Orchestration                                        | Three-agent TDD cycle, BDD/Gherkin as spec interface, double-loop TDD (outer BDD acceptance + inner component TDD), spec validation gates, mutation testing integration (StrykerJS, Infection, go-mutesting, mutmut), hierarchical-pipeline architecture, automated quality gates, and ISO 25010/DORA standards mapping. |
 
 ## Quick Topic Finder
 
@@ -123,6 +125,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [45-pm-insights-synthesis.md](./45-pm-insights-synthesis.md)
 - [49-pm-acceptance-criteria.md](./49-pm-acceptance-criteria.md) - Acceptance criteria standards & AI guardrails
 - [50-qa-test-cases.md](./50-qa-test-cases.md) - Test case generation methodologies & BDD
+- [76-tdd-bdd-ai-orchestration.md](./76-tdd-bdd-ai-orchestration.md) - TDD/BDD/AI orchestration: mutation testing, quality gates, ISO 25010/DORA
 - [51-frontend-task-breakdown.md](./51-frontend-task-breakdown.md) - Frontend task breakdown framework & coverage checklist
 - [52-backend-task-breakdown.md](./52-backend-task-breakdown.md) - Backend task breakdown for Laravel/PHP with INVEST criteria
 - [53-dev-pr-review.md](./53-dev-pr-review.md) - PR review automation with risk scoring & security patterns
@@ -139,6 +142,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [08-claude-optimization.md](./08-claude-optimization.md)
 - [18-token-optimization.md](./18-token-optimization.md)
 - [62-ai-workflow-claude-code-token-optimization.md](./62-ai-workflow-claude-code-token-optimization.md)
+- [75-token-optimization-aggressive-safe.md](./75-token-optimization-aggressive-safe.md) - Aggressive reference extraction & per-skill line count enforcement
 
 ### Tech Stack Best Practices
 - [12-react-nx-monorepo.md](./12-react-nx-monorepo.md)

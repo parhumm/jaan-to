@@ -132,6 +132,21 @@ Code Review:
 └─────────────────────────────────────────────────────────┘
 ```
 
+### Issue Reporting Flow
+
+```
+Issue Reporting:
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:qa-issue-report                               │
+│  "Report issues to any GitHub/GitLab repo"              │
+└─────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────┐
+│  /jaan-to:jaan-issue-report                             │
+│  "Report jaan-to plugin issues"                         │
+└─────────────────────────────────────────────────────────┘
+```
+
 ### Spec-to-Ship Flow
 
 ```
@@ -331,6 +346,7 @@ These skills don't typically call others:
 | `/jaan-to:release-iterate-changelog` | Generate changelog | Standalone (from git history) |
 | `/jaan-to:jaan-init` | Initialize jaan-to for project | Run once per project |
 | `/jaan-to:jaan-issue-report` | Report bugs/issues | Standalone |
+| `/jaan-to:qa-issue-report` | Report issues to any repo | Standalone |
 | `/jaan-to:roadmap-add` | Add roadmap task | Standalone |
 | `/jaan-to:roadmap-update` | Sync roadmap | Standalone (maintenance) |
 
@@ -348,7 +364,7 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 49 skills grouped by role.
+All 50 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
@@ -375,6 +391,7 @@ All 49 skills grouped by role.
 | | `/jaan-to:qa-tdd-orchestrate` | Orchestrate TDD cycle with isolated agents |
 | | `/jaan-to:qa-contract-validate` | Validate API contracts with multi-tool pipeline |
 | | `/jaan-to:qa-quality-gate` | Compute composite quality score |
+| | `/jaan-to:qa-issue-report` | Report issues to any GitHub/GitLab repo |
 | **detect** | `/jaan-to:detect-dev` | Engineering audit with SARIF evidence |
 | | `/jaan-to:detect-design` | Design system detection |
 | | `/jaan-to:detect-ux` | Repo-driven UX audit |

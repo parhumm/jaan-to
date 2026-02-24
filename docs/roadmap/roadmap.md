@@ -16,7 +16,7 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (142 across 11 roles) | In Progress |
+| 6 | Role skills (49 shipped across 13 roles) | In Progress |
 | 7 | MCP connectors | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation | Partial |
@@ -27,12 +27,13 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.4.0 (45 skills) | **Unreleased:** 49 skills
+**Latest:** v7.4.0 (45 skills) | **Next:** v7.5.0 (49 skills)
 
 ---
 
 ## Unreleased
 
+- [x] Windows NTFS compatibility fix (#157) — Replace `jaan-to:` colon prefix with `jaan-to-` dash prefix in all learn/template filenames, auto-migration in `bootstrap.sh` with three-branch collision handling
 - [x] TDD/BDD/AI orchestration quality skills — 4 new skills + 15 enhanced, from research doc 76
   - New: `qa-test-mutate` (mutation testing with multi-stack support, feedback loop)
   - New: `qa-tdd-orchestrate` (RED/GREEN/REFACTOR with context-isolated agents, Claude Code only)
