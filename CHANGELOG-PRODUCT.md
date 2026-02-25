@@ -2,7 +2,7 @@
 
 What's new, improved, and fixed in jaan.to — written for humans.
 
-For technical details, see [CHANGELOG.md](CHANGELOG.md).
+For technical details, see [CHANGELOG.md](/changelog/).
 
 ---
 
