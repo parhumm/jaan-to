@@ -46,6 +46,12 @@ if echo "$COMMAND" | grep -qE '(curl|wget)\s.*\|\s*(bash|sh|zsh|dash)'; then
   exit 2
 fi
 
+# Block pipe to path-based or env-wrapped interpreter (catch-all for indirect invocation)
+if echo "$COMMAND" | grep -qE '\|\s*(/\S+/|(\S+/)?env\s+(\S+/)?)(bash|sh|zsh|dash|python|python3|perl|ruby|node|php)\b'; then
+  echo "BLOCKED: Piping to path-based or env-wrapped interpreter is not allowed."
+  exit 2
+fi
+
 # Block eval anywhere in the command
 if echo "$COMMAND" | grep -qE '(^|[;&|])\s*eval\s'; then
   echo "BLOCKED: eval is not allowed in plugin context."
@@ -105,7 +111,7 @@ fi
 
 # Block process substitution as command argument (cat <(...), bash <(...))
 # Allows redirect-from-process-sub: done < <(cmd) — used by plugin scripts
-if echo "$COMMAND" | grep -qE '\w\s*[<>]\('; then
+if echo "$COMMAND" | grep -qE "(\w|[\"')])\s*[<>]\("; then
   echo "BLOCKED: Process substitution as command argument is not allowed."
   exit 2
 fi
