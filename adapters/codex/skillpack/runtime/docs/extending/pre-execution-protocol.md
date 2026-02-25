@@ -26,7 +26,7 @@ Check if the `jaan-to/` directory exists in the project root.
 
 Read the project-specific learn file first (three-tier resolution):
 1. `$JAAN_LEARN_DIR/jaan-to-{SKILL_NAME}.learn.md` (canonical)
-2. `$JAAN_LEARN_DIR/jaan-to:{SKILL_NAME}.learn.md` (legacy — colon prefix)
+2. `$JAAN_LEARN_DIR/{SKILL_NAME}.learn.md` (legacy — colon prefix)
 3. `$JAAN_LEARN_DIR/{SKILL_NAME}.learn.md` (unprefixed)
 
 If no project file exists at any tier, read the plugin seed:
@@ -46,7 +46,7 @@ When this skill's instructions reference a template path like
 `$JAAN_TEMPLATES_DIR/jaan-to-{SKILL_NAME}.template.md`, resolve it as follows:
 
 1. Try: `$JAAN_TEMPLATES_DIR/jaan-to-{SKILL_NAME}.template.md` (project, canonical dash prefix)
-2. Try: `$JAAN_TEMPLATES_DIR/jaan-to:{SKILL_NAME}.template.md` (project, legacy colon prefix)
+2. Try: `$JAAN_TEMPLATES_DIR/{SKILL_NAME}.template.md` (project, legacy colon prefix)
 3. Try: `$JAAN_TEMPLATES_DIR/{SKILL_NAME}.template.md` (project, without prefix)
 4. Fallback: `${CLAUDE_PLUGIN_ROOT}/skills/{SKILL_NAME}/template.md` (plugin source)
 

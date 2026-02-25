@@ -149,7 +149,7 @@ Stop when reaching a cause that can be directly fixed with a code change. Most b
 
 ## Roadmap Sanitization Rules
 
-Before passing any text to `/jaan-to:pm-roadmap-add`, strip:
+Before passing any text to `/pm-roadmap-add`, strip:
 
 | Pattern | Action |
 |---------|--------|

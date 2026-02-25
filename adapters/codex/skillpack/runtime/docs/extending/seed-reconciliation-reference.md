@@ -108,9 +108,9 @@ For detection findings worth documenting as lessons:
 
 ```
 Suggested lessons from detection:
-1. /jaan-to:learn-add detect-dev "Project uses Express.js 4.18, not FastAPI — update tech.md"
-2. /jaan-to:learn-add detect-dev "No CI/CD pipeline detected — tech.md lists GitHub Actions"
-3. /jaan-to:learn-add detect-ux "Primary user flow has 7 steps — consider reducing"
+1. /learn-add detect-dev "Project uses Express.js 4.18, not FastAPI — update tech.md"
+2. /learn-add detect-dev "No CI/CD pipeline detected — tech.md lists GitHub Actions"
+3. /learn-add detect-ux "Primary user flow has 7 steps — consider reducing"
 ```
 
 Suggest `/learn-add` for:
