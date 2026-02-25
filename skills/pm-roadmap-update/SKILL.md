@@ -1,7 +1,7 @@
 ---
 name: pm-roadmap-update
 description: Review and maintain a project roadmap with codebase-aware analysis and reprioritization. Use when updating roadmap status.
-allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/pm/roadmap/**), Edit($JAAN_OUTPUTS_DIR/pm/roadmap/**), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Write(ROADMAP.md), Write($JAAN_OUTPUTS_DIR/pm/roadmap/**), Edit(ROADMAP.md), Edit($JAAN_OUTPUTS_DIR/pm/roadmap/**), Bash(git add:*), Bash(git commit:*), Bash(git remote get-url:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[review] [mark \"<item>\" done] [reprioritize] [validate]"
 hooks:
   PreToolUse:
@@ -76,9 +76,41 @@ Override field for this skill: `language_pm-roadmap-update`
 
 # PHASE 1: Analysis (Read-Only)
 
+## Step 0.5: Resolve Roadmap Location
+
+### Check Saved Preference
+
+Read `jaan-to/config/settings.yaml` for `paths_roadmap`:
+- If set and the file exists → use it as `$ROADMAP_FILE`, proceed to Step 1
+- If set but file doesn't exist → warn and proceed to file discovery
+
+### File Discovery
+
+Search for existing roadmap files:
+```
+Glob: **/ROADMAP.md, **/roadmap.md, $JAAN_OUTPUTS_DIR/pm/roadmap/**/*.md
+```
+
+**If found**: Show found files and ask:
+
+Use AskUserQuestion:
+- Question: "Found existing roadmap file(s). Which should I use?"
+- Header: "Roadmap"
+- Options:
+  - "{found_file_path}" — Use existing file
+  - "ROADMAP.md (Recommended)" — Use root-level file
+  - "Custom location" — Specify a different path
+
+Save the chosen path to `jaan-to/config/settings.yaml` as `paths_roadmap` via Edit tool.
+Set `$ROADMAP_FILE` to the resolved path.
+
+**If not found and no preference saved**:
+> "No roadmap found. Create one first with `/jaan-to:pm-roadmap-add`."
+> Stop execution.
+
 ## Step 1: Read Roadmap State
 
-Find and read the roadmap in `$JAAN_OUTPUTS_DIR/pm/roadmap/`:
+Find and read the roadmap at `$ROADMAP_FILE`:
 
 If no roadmap found:
 > "No roadmap found. Create one first with `/jaan-to:pm-roadmap-add`."
@@ -134,8 +166,14 @@ Present the review report.
 4. If no match: "Item not found. Available items: {list items with 'In Progress' or 'To Do' status}"
 5. Ask for completion evidence:
    > "What evidence of completion? (e.g., PR merged, feature deployed, test passing)"
-6. Prepare status change: `To Do` or `In Progress` → `Done`
-7. Add completion date and evidence note
+6. Ask for issue reference:
+   > "Does this relate to a GitHub issue? (e.g., 42, or skip)"
+   If provided:
+   - Detect repo URL via `git remote get-url origin`
+   - Store as `[#42](https://github.com/owner/repo/issues/42)`
+   - Add `Refs #N` to completion note
+7. Prepare status change: `To Do` or `In Progress` → `Done`
+8. Add completion date, evidence note, and issue reference
 
 ### Mode: reprioritize
 
@@ -201,6 +239,7 @@ Item:       {item text}
 Milestone:  {milestone}
 Priority:   {priority}
 Evidence:   {completion evidence}
+Issue:      {#N link or "None"}
 Date:       {today}
 
 Change: Status "To Do"/"In Progress" → "Done"
@@ -254,7 +293,7 @@ For each approved change:
 1. Find the item in the roadmap
 2. Update status to "Done"
 3. Move item from "Roadmap Items" table to "Completed Items" table
-4. Add completion date and evidence note
+4. Add completion date, evidence note, and issue reference
 5. Update metadata (status summary counts)
 
 ### For reprioritize:
@@ -278,6 +317,22 @@ After all writes:
 2. Run a quick validation check (Step 3 validate mode) on the modified file
 3. Report any issues found during verification
 
+## Step 5.5: Auto-Commit
+
+Commit the roadmap changes:
+
+```bash
+git add "$ROADMAP_FILE"
+git commit -m "roadmap({mode}): {brief description}
+
+Refs #{N}
+
+Co-Authored-By: Claude <noreply@anthropic.com>"
+```
+
+- Only include `Refs #N` line if an issue number was provided (mark mode)
+- Non-blocking: if commit fails, show warning and continue
+
 ## Step 6: Confirm
 
 ```
@@ -285,7 +340,7 @@ Roadmap Updated
 
 Mode:    {mode}
 Changes: {change_count}
-File:    {roadmap_path}
+File:    {$ROADMAP_FILE}
 
 Summary: {brief description of what changed}
 ```
@@ -308,15 +363,17 @@ After update is complete, ask:
 - Two-phase workflow with HARD STOP for human approval
 - Template-driven report structure
 - Generic across industries and domains
-- Output to standardized `$JAAN_OUTPUTS_DIR` path
+- Single living document (not ID-based folders)
 - 4 modes for different maintenance needs
 
 ## Definition of Done
 
+- [ ] Roadmap location resolved
 - [ ] Roadmap read and current state analyzed
 - [ ] Mode-specific analysis completed
 - [ ] Changes previewed at HARD STOP
 - [ ] User approved changes
 - [ ] All modifications applied correctly
 - [ ] Post-update verification passed
+- [ ] Changes committed to git
 - [ ] User approved final result
