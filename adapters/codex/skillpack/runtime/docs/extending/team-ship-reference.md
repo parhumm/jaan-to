@@ -17,10 +17,10 @@ Initiative: {initiative}
 Tech context: {tech_context_summary}
 
 Run these jaan-to skills in order:
-1. /jaan-to:pm-research-about "{initiative}"
-2. /jaan-to:pm-prd-write "{initiative}"
-3. /jaan-to:pm-story-write "{prd_path}"
-4. (Optional) /jaan-to:pm-roadmap-add "{initiative}" — if roadmap requested
+1. /pm-research-about "{initiative}"
+2. /pm-prd-write "{initiative}"
+3. /pm-story-write "{prd_path}"
+4. (Optional) /pm-roadmap-add "{initiative}" — if roadmap requested
 
 After each skill completes its two-phase workflow (analysis → approval → generation),
 proceed to the next.
@@ -43,11 +43,11 @@ Read the PRD at: {prd_path}
 Read stories at: {stories_path}
 
 Run these jaan-to skills in order:
-1. /jaan-to:backend-task-breakdown "{prd_path}"
-2. /jaan-to:backend-data-model "{entities}"
-3. /jaan-to:backend-api-contract "{entities}"
-4. /jaan-to:backend-scaffold "{task_breakdown_path}"
-5. /jaan-to:backend-service-implement "{scaffold_path}"
+1. /backend-task-breakdown "{prd_path}"
+2. /backend-data-model "{entities}"
+3. /backend-api-contract "{entities}"
+4. /backend-scaffold "{task_breakdown_path}"
+5. /backend-service-implement "{scaffold_path}"
 
 Messaging:
 - After api-contract is ready: message Frontend teammate with contract path
@@ -64,8 +64,8 @@ You are the Backend Engineer for project '{slug}'.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /jaan-to:backend-task-breakdown "{prd_path}"
-2. /jaan-to:backend-scaffold "{task_breakdown_path}"
+1. /backend-task-breakdown "{prd_path}"
+2. /backend-scaffold "{task_breakdown_path}"
 
 After scaffold is ready: message QA teammate with scaffold path.
 
@@ -81,10 +81,10 @@ Your job: design and scaffold the frontend from the PRD.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /jaan-to:frontend-task-breakdown "{prd_path}"
+1. /frontend-task-breakdown "{prd_path}"
 2. Wait for API contract from Backend teammate (they will message you)
-3. /jaan-to:frontend-scaffold "{task_breakdown_path}"
-4. /jaan-to:frontend-design "{screen_descriptions}"
+3. /frontend-scaffold "{task_breakdown_path}"
+4. /frontend-design "{screen_descriptions}"
 
 After scaffold is ready: message QA teammate with scaffold path.
 
@@ -99,7 +99,7 @@ You are the Frontend Engineer for project '{slug}'.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /jaan-to:frontend-scaffold "{prd_path}"
+1. /frontend-scaffold "{prd_path}"
 
 After scaffold is ready: message QA teammate with scaffold path.
 
@@ -115,11 +115,11 @@ Your job: ensure quality through test planning and execution.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /jaan-to:qa-test-cases "{prd_path}"
+1. /qa-test-cases "{prd_path}"
 2. Wait for scaffold code from Backend and Frontend teammates (they will message you)
-3. /jaan-to:qa-test-generate "{test_cases_path}"
+3. /qa-test-generate "{test_cases_path}"
 4. Wait for lead to confirm integration is complete
-5. /jaan-to:qa-test-run
+5. /qa-test-run
 
 Message the lead with test results (pass/fail + coverage).
 
@@ -133,9 +133,9 @@ You are the QA Engineer for project '{slug}'.
 
 Wait for scaffold code from Backend and Frontend teammates.
 Then:
-1. /jaan-to:qa-test-generate (from code)
+1. /qa-test-generate (from code)
 2. Wait for lead to confirm integration
-3. /jaan-to:qa-test-run
+3. /qa-test-run
 
 Message the lead with test results.
 
@@ -151,8 +151,8 @@ Your job: create user flows and microcopy from the PRD.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /jaan-to:ux-flowchart-generate prd "{prd_path}" userflow
-2. /jaan-to:ux-microcopy-write "{prd_path}"
+1. /ux-flowchart-generate prd "{prd_path}" userflow
+2. /ux-microcopy-write "{prd_path}"
 
 Message Frontend teammate with flowchart and microcopy paths when ready.
 
@@ -167,8 +167,8 @@ Your job: create CI/CD and deployment infrastructure.
 
 Wait for lead to confirm code integration is complete.
 Then:
-1. /jaan-to:devops-infra-scaffold
-2. /jaan-to:devops-deploy-activate
+1. /devops-infra-scaffold
+2. /devops-deploy-activate
 
 Message the lead when infrastructure is ready.
 ```
@@ -181,7 +181,7 @@ Your job: audit the integrated code for vulnerabilities.
 
 Wait for lead to confirm code integration is complete.
 Then:
-1. /jaan-to:sec-audit-remediate
+1. /sec-audit-remediate
 
 Message the lead with audit results.
 
@@ -193,7 +193,7 @@ Output directory: $JAAN_OUTPUTS_DIR/sec/
 ```
 You are the {detect_title} for this repository.
 
-Run: /jaan-to:{detect_skill}
+Run: /{detect_skill}
 
 Message the lead with the output path when complete.
 

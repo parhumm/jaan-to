@@ -35,7 +35,7 @@
 ## Before Every Commit
 1. Update [roadmap.md](docs/roadmap/roadmap.md) with completed tasks
 2. Mark tasks as `[x]` with commit hash: `- [x] Task (\`abc1234\`)`
-3. For new tasks, use `/jaan-to:pm-roadmap-add`
+3. For new tasks, use `/pm-roadmap-add`
 
 ## Releasing a Version
 Every version bump MUST be a single atomic operation:

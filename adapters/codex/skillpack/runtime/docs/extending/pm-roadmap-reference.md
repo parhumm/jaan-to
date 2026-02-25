@@ -182,9 +182,9 @@ Before writing updates, verify:
 
 | Error | Message | Resolution |
 |-------|---------|------------|
-| No roadmap found | "No roadmap found. Create one with `/jaan-to:pm-roadmap-add`" | Redirect to add skill |
+| No roadmap found | "No roadmap found. Create one with `/pm-roadmap-add`" | Redirect to add skill |
 | Item not found (mark mode) | "Item not found. Available items: {list}" | Show available items |
 | Duplicate detected | "Similar item exists: '{item}'. Proceed / Merge / Cancel" | User chooses |
-| Empty input | "No item description. Usage: `/jaan-to:pm-roadmap-add Add user auth`" | Show usage |
+| Empty input | "No item description. Usage: `/pm-roadmap-add Add user auth`" | Show usage |
 | Description too long | "Description exceeds 500 characters. Please shorten or split into multiple items" | Ask to shorten |
 | Secret detected in content | "BLOCKED: Content contains potential credentials. Remove before writing" | Block write |

@@ -5,7 +5,7 @@ sidebar_position: 20
 
 # dev-verify Reference
 
-> Multi-stack reference for `/jaan-to:dev-verify`. Loaded on demand via inline `> **Reference**:` pointers in SKILL.md.
+> Multi-stack reference for `/dev-verify`. Loaded on demand via inline `> **Reference**:` pointers in SKILL.md.
 
 ---
 
@@ -158,7 +158,7 @@ Per-stack fix commands for auto-fixable error categories. **Safety rule**: only 
 | `missing-dependency` | Yes | Package name matches `^[@a-z][a-z0-9./_-]*$` |
 | `export-import-mismatch` | Yes | Single rename, target export verified to exist |
 | `type-mismatch` | Conditional | Only simple casts (e.g., `as string`). If complex generics or union types → report only |
-| `schema-drift` | Never | Always report. Suggest `/jaan-to:backend-data-model` re-run |
+| `schema-drift` | Never | Always report. Suggest `/backend-data-model` re-run |
 | `config-mismatch` | Yes | Config key exists in target file |
 
 ---
