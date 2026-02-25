@@ -16,10 +16,10 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (52 shipped across 13 roles) | In Progress |
-| 7 | MCP connectors | In Progress |
+| 6 | Role skills (52 shipped across 17 role prefixes) | In Progress |
+| 7 | MCP connectors (1/24 shipped) | In Progress |
 | 8 | Testing and polish | Planned |
-| 9 | Distribution & CLI transformation | Partial |
+| 9 | Distribution & CLI transformation (1/7 done) | Partial |
 
 ---
 
@@ -88,7 +88,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 > Details: [tasks/development-workflow.md](tasks/development-workflow.md) | [tasks/lsp-support.md](tasks/lsp-support.md)
 
 - [ ] Project constitution document (`context/constitution.md`) — 9 immutable development principles
-- [ ] Complexity tracking in outputs — `[NEEDS CLARIFICATION]`, `[COMPLEXITY]`, `[EXCEPTION]`, `[TRADEOFF]` markers
+- [ ] ~~Complexity tracking in outputs~~ — Deferred: overlaps with existing LEARN.md feedback system
 - [ ] LSP support — Bundle TypeScript + Python language server configs, make skills LSP-aware
 
 ---
@@ -101,11 +101,11 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ---
 
-## Phase 6: Role Skills (142 across 11 roles)
+## Phase 6: Role Skills (142 across 17 role prefixes)
 
 > Details: [tasks/role-skills.md](tasks/role-skills.md)
 
-142 skills cataloged across 11 roles. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
+142 skills cataloged across 17 role prefixes. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
 
 All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/jaan-to:skill-update` validation.
 
@@ -147,7 +147,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 - [ ] E2E test framework in `tests/` with mocked MCP responses
 - [ ] JSON export alongside markdown for all skill outputs
 - [ ] External notifications (Slack integration)
-- [ ] Fix `learn-report` skill hook script for macOS compatibility (Bash 3.2 — needs 4+ for `declare -A`)
+- [ ] **[BLOCKER]** Fix `learn-report` skill hook script for macOS compatibility (Bash 3.2 — needs 4+ for `declare -A`)
 
 ---
 
