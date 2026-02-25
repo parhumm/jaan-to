@@ -34,6 +34,12 @@ For complete release history, see [CHANGELOG.md](/changelog).
 ## Unreleased
 
 - [ ] Role Orchestrator Skills — 6 per-role orchestrator skills (`/pm`, `/ux`, `/dev`, `/qa`, `/devops`, `/sec`) using Claude Code Agent Teams. Each orchestrator coordinates all sub-skills within its role via dynamic discovery (`sub-skills.md`). Update `team-ship` to delegate to orchestrators as meta-orchestrator with backward-compatible fallback. → [details](tasks/role-orchestrators.md)
+- [ ] Skill Lifecycle Automation — 5 workflow automation skills discovered via `pm-skill-discover` (est. ~333 min/week savings):
+  - [ ] `dev-adapter-sync` (Must) — Mirror skill files from skills/ to adapters/codex/ automatically
+  - [ ] `dev-skill-batch-update` (Must) — Apply uniform changes across all SKILL.md files at once
+  - [ ] `dev-docs-sync` (Should) — Auto-sync CHANGELOG, roadmap, DEPENDENCIES, READMEs, marketplace.json
+  - [ ] `qa-skill-validate` (Should) — Validate skills, diagnose failures, auto-fix
+  - [ ] `devops-adapter-rebuild` (Could) — Rebuild codex adapter after changes
 
 ---
 
