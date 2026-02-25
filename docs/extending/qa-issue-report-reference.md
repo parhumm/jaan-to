@@ -310,40 +310,7 @@ Replace `{{attachments}}` placeholder in body with all collected `MARKDOWN_EMBED
 
 **MANDATORY before HARD STOP preview.**
 
-### Path Sanitization
-Scan for patterns: `/Users/`, `/home/`, `/var/`, absolute project paths.
-- `/Users/{anything}/` → `{USER_HOME}/`
-- Full project paths → `{USER_HOME}/{PROJECT_PATH}/...` (keep only relative portion)
-- Keep relative project paths as-is (e.g., `src/auth/login.ts`)
-
-### Credential Sanitization
-Scan for: `token=`, `key=`, `password=`, `secret=`, `Bearer `, `ghp_`, `sk-`, `api_key`, `glpat-`.
-Replace any detected values with `[REDACTED]`.
-
-### Connection String Sanitization
-- `postgresql://`, `postgres://` → `[DB_CONNECTION_REDACTED]`
-- `mysql://`, `mariadb://` → `[DB_CONNECTION_REDACTED]`
-- `mongodb://`, `mongodb+srv://` → `[DB_CONNECTION_REDACTED]`
-- `redis://`, `rediss://` → `[DB_CONNECTION_REDACTED]`
-- `amqp://`, `amqps://` → `[MQ_CONNECTION_REDACTED]`
-- `jdbc:` prefixed URLs → `[DB_CONNECTION_REDACTED]`
-- Generic URL auth pattern `://user:pass@` → `://[AUTH_REDACTED]@`
-
-### Personal Info Check
-Scan for emails, IP addresses, or usernames embedded in paths.
-Replace with generic placeholders unless user explicitly included them.
-
-### Safe to Keep
-Do NOT sanitize:
-- Project version numbers
-- Skill names, command names, hook names
-- OS type (Darwin, Linux)
-- Error message text (after stripping paths and tokens)
-- Config keys (not secret values)
-- Relative file paths within the project
-
-### Count and Flag
-Track the number of sanitized items. Show count at HARD STOP.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/threat-scan-reference.md` section "Output Privacy Sanitization" for complete sanitization patterns (paths, credentials, connection strings, personal info) and safe-to-keep rules.
 
 ---
 

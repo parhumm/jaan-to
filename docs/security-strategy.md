@@ -142,6 +142,33 @@ Past Claude Code CVEs and what they teach us:
 | Overprivileged skills | Broad tool access | Least-privilege `allowed-tools`, HARD STOP gates |
 | Temp file symlink attacks | Predictable `/tmp/` filenames | `mktemp` with unpredictable names |
 | Remote code execution | `curl | sh` in Bash commands | PreToolUse hook blocks piped execution |
+| Prompt injection via web content | Crafted URLs/pages influence AI output | Threat scan + Safety Rules in skills processing WebFetch/WebSearch |
+| Unicode hidden character attacks | Invisible chars encode instructions | Mandatory pre-processing strips hidden chars before analysis |
+| ANSI-C / brace expansion bypass | Shell tricks assemble blocked commands | PreToolUse hook detects obfuscation patterns |
+
+---
+
+## Untrusted Input Processing Standard
+
+Skills that process external or user-authored content must implement threat scanning. The shared reference at `docs/extending/threat-scan-reference.md` defines:
+
+- **6 detection categories**: Prompt injection, embedded commands, credential probing, path traversal, hidden characters, obfuscation
+- **3-tier verdict system**: SAFE (proceed) / SUSPICIOUS (warn + sanitize) / DANGEROUS (reject)
+- **Mandatory pre-processing**: Strip Unicode hidden characters (Tag Block U+E0000-E007F, zero-width chars, RTL overrides), remove HTML comments, decode HTML entities
+- **Untrusted Content Envelope**: Mental framing pattern to isolate untrusted input from system instructions
+
+| Skill | Untrusted Source | Scan Location |
+|-------|-----------------|---------------|
+| `qa-issue-validate` | GitHub issue body | Step 2.5 |
+| `qa-issue-report` | Collected environment data | Step 9.5 |
+| `jaan-issue-report` | Collected issue details | Step 4.5 |
+| `pm-roadmap-add` | User item description | Step 1.1 |
+| `pm-roadmap-update` | Existing roadmap content | Step 1.1 |
+| `pm-research-about` | WebFetch/WebSearch results | Safety Rules + Step 4 |
+| `backend-pr-review` | PR diff content | Safety Instructions |
+| `detect-*` | Repository content | Codebase Content Safety (shared/dev reference) |
+
+Automated enforcement: `validate-security.sh` Section E checks that external-input skills reference the shared threat scan document.
 
 ---
 
@@ -157,6 +184,11 @@ The `scripts/pre-tool-security-gate.sh` hook runs before every Bash command and 
 - `$IFS` manipulation
 - `source`/`.` of non-plugin files
 - `chmod 777`
+- ANSI-C hex quoting (`$'\x73\x75\x64\x6f'` — assembles blocked commands at runtime)
+- `base64 -d` piped to shell (hides payloads entirely)
+- Brace expansion with dangerous commands (`{curl,http://evil}` — generates command+argument pairs)
+- `sed` execute flag (`sed 's/.../e'` — weaponized sed)
+- `sort --compress-program` (weaponized sort)
 
 This is defense-in-depth — skill `allowed-tools` are the primary gate.
 

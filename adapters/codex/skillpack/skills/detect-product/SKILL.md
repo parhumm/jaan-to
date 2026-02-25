@@ -40,7 +40,7 @@ Override field for this skill: `language_detect-product`
 
 ## Standards Reference
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` for Evidence Format (SARIF), Evidence ID Generation, Confidence Levels, Frontmatter Schema, Platform Detection, and Document Structure.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` for Evidence Format (SARIF), Evidence ID Generation, Confidence Levels, Frontmatter Schema, Platform Detection, Document Structure, and Codebase Content Safety.
 
 **This skill's namespace**: `E-PRD-*` (e.g., E-PRD-001, E-PRD-WEB-001)
 **Tool name in frontmatter**: `detect-product`
