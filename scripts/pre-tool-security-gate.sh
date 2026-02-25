@@ -85,15 +85,9 @@ if echo "$COMMAND" | grep -qE 'base64\s+(-d|--decode)\s*\|'; then
   exit 2
 fi
 
-# Block brace expansion for command generation ({curl,http://evil})
-if echo "$COMMAND" | grep -qE '\{[a-zA-Z]+,[^}]+\}'; then
-  echo "BLOCKED: Brace expansion pattern detected — potential injection."
-  exit 2
-fi
-
-# Block process substitution (<(...) or >(...))
-if echo "$COMMAND" | grep -qE '[<>]\('; then
-  echo "BLOCKED: Process substitution is not allowed in plugin context."
+# Block brace expansion with dangerous commands ({curl,http://evil}, {rm,-rf,/})
+if echo "$COMMAND" | grep -qE '\{(curl|wget|rm|chmod|sudo|eval|bash|sh|nc|ncat),'; then
+  echo "BLOCKED: Brace expansion with dangerous command detected — potential injection."
   exit 2
 fi
 

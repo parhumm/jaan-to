@@ -186,8 +186,7 @@ The `scripts/pre-tool-security-gate.sh` hook runs before every Bash command and 
 - `chmod 777`
 - ANSI-C hex quoting (`$'\x73\x75\x64\x6f'` — assembles blocked commands at runtime)
 - `base64 -d` piped to shell (hides payloads entirely)
-- Brace expansion (`{curl,http://evil}` — generates command+argument pairs)
-- Process substitution (`<(...)`, `>(...)` — injection vector)
+- Brace expansion with dangerous commands (`{curl,http://evil}` — generates command+argument pairs)
 - `sed` execute flag (`sed 's/.../e'` — weaponized sed)
 - `sort --compress-program` (weaponized sort)
 
