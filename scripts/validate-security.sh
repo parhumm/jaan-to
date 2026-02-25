@@ -312,7 +312,8 @@ echo "── Section E: Input Safety Compliance ──"
 E_START_WARNINGS=$WARNINGS
 
 # E1: Skills with WebFetch/WebSearch must have safety rules or threat scan reference
-for skill in skills/*/SKILL.md; do
+for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
+  [ -f "$skill" ] || continue
   local_name=$(basename "$(dirname "$skill")")
   tools=$(extract_allowed_tools "$skill")
   if echo "$tools" | grep -qE 'WebFetch|WebSearch'; then
@@ -326,7 +327,7 @@ done
 # E2: Known external-input skills must reference threat-scan-reference.md
 EXTERNAL_INPUT_SKILLS="qa-issue-validate qa-issue-report jaan-issue-report pm-roadmap-add pm-roadmap-update pm-research-about backend-pr-review"
 for skill_name in $EXTERNAL_INPUT_SKILLS; do
-  skill_file="skills/${skill_name}/SKILL.md"
+  skill_file="$PLUGIN_ROOT/skills/${skill_name}/SKILL.md"
   if [ -f "$skill_file" ]; then
     if ! grep -qE 'threat-scan-reference|UNTRUSTED' "$skill_file" 2>/dev/null; then
       echo "  ::warning::E2 [$skill_name] Processes external input but missing threat-scan-reference.md or UNTRUSTED marker"
@@ -336,7 +337,8 @@ for skill_name in $EXTERNAL_INPUT_SKILLS; do
 done
 
 # E3: Skills with WebFetch/WebSearch must reference hidden char stripping
-for skill in skills/*/SKILL.md; do
+for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
+  [ -f "$skill" ] || continue
   local_name=$(basename "$(dirname "$skill")")
   tools=$(extract_allowed_tools "$skill")
   if echo "$tools" | grep -qE 'WebFetch|WebSearch'; then

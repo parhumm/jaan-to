@@ -91,8 +91,8 @@ if echo "$COMMAND" | grep -qE '\{(curl|wget|rm|chmod|sudo|eval|bash|sh|nc|ncat),
   exit 2
 fi
 
-# Block sed execute flag (weaponized sed — CVE-2025-66032 family)
-if echo "$COMMAND" | grep -qE "sed\s.*['\"]s/.*/e"; then
+# Block sed execute flag (weaponized sed — CVE-2025-66032 family, any delimiter)
+if echo "$COMMAND" | grep -qE "sed\s.*['\"]s..*e['\"]"; then
   echo "BLOCKED: sed with execute flag is not allowed."
   exit 2
 fi
