@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.5.1] - 2026-02-25
+
+### Added
+- **`pm-changelog-rewrite` skill** — New skill for changelog rewrite and maintenance workflows
+- **Roadmap/changelog skill enhancements** — File discovery, auto-commit capabilities, and issue reference support added to `pm-roadmap-update` and `release-iterate-changelog` skills
+
+### Changed
+- **`pm-roadmap-update` skill** — Enhanced with file discovery and auto-commit capabilities
+- **`release-iterate-changelog` skill** — Enhanced with file discovery and issue reference linking
+
+### Fixed
+- **Security hardening (6 rounds)** — Closed multiple prompt injection bypass vectors in pre-tool security gate: brace expansion split-token bypass, path-based interpreter pipe bypasses, quoted and command-substituted interpreter pipe bypasses, cwd-relative path handling in Section E, and sed-exec regex hardening. Removed false-positive patterns from security gate
+- **Layered prompt injection defenses** — Added comprehensive prompt injection defense layers across all distributed skills
+- **Codex skillpack rebuild** — Rebuilt Codex skillpack after security hardening changes
+- **Documentation corrections** — Corrected skill count in DEPENDENCIES.md to 53
+
+---
+
 ## [7.5.0] - 2026-02-24
 
 ### Added

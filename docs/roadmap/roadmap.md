@@ -16,7 +16,7 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (52 shipped across 17 role prefixes) | In Progress |
+| 6 | Role skills (53 shipped across 17 role prefixes) | In Progress |
 | 7 | MCP connectors (1/24 shipped) | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation (1/7 done) | Partial |
@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.5.0 (52 skills) | **Next:** v7.6.0 (52+ skills)
+**Latest:** v7.5.1 (53 skills) | **Next:** v7.6.0 (53+ skills)
 
 ---
 
@@ -43,6 +43,16 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ---
 
+## v7.5.1 — 2026-02-25
+
+- [x] Security hardening (6 rounds) — Closed multiple prompt injection bypass vectors in pre-tool security gate
+- [x] Layered prompt injection defenses across all distributed skills
+- [x] `pm-changelog-rewrite` skill — New changelog rewrite and maintenance workflows
+- [x] Enhanced `pm-roadmap-update` and `release-iterate-changelog` with file discovery, auto-commit, issue refs
+- [x] 53 skills total
+
+---
+
 ## v7.5.0 — 2026-02-24
 
 - [x] Windows NTFS compatibility fix (#157) — Replace `jaan-to:` colon prefix with `jaan-to-` dash prefix in all learn/template filenames, auto-migration in `bootstrap.sh` with three-branch collision handling
@@ -51,7 +61,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 - [x] `qa-issue-report` skill — Report issues to any GitHub/GitLab repository with smart context analysis
 - [x] Convert internal roadmap skills to generic pm-* skills — `pm-roadmap-add` and `pm-roadmap-update` replace internal `roadmap-add`/`roadmap-update`
 - [x] `pm-skill-discover` skill — Detect repeated workflow patterns and suggest skills to automate them
-- [x] 52 skills total (was 45 in v7.1.0)
+- [x] 53 skills total (was 45 in v7.1.0)
 
 ---
 
@@ -125,7 +135,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
-**Completed work**: 52 skills shipped across v4.0.0–v7.4.0 — see [CHANGELOG.md](/changelog) for details.
+**Completed work**: 53 skills shipped across v4.0.0–v7.5.0 — see [CHANGELOG.md](/changelog) for details.
 
 ---
 
