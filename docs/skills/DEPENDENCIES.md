@@ -386,7 +386,7 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 52 skills grouped by role.
+All 53 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
