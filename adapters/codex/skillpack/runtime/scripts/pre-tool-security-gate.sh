@@ -85,14 +85,27 @@ if echo "$COMMAND" | grep -qE 'base64\s+(-d|--decode)\s*\|'; then
   exit 2
 fi
 
-# Block brace expansion with dangerous commands ({curl,http://evil}, {rm,-rf,/})
-if echo "$COMMAND" | grep -qE '\{(curl|wget|rm|chmod|sudo|eval|bash|sh|nc|ncat),'; then
+# Block brace expansion with dangerous commands ({curl,http://evil}, {cat,/etc/passwd})
+if echo "$COMMAND" | grep -qE '\{(curl|wget|rm|chmod|sudo|eval|bash|sh|nc|ncat|cat|python|python3|perl|ruby|node|php|env|xargs|find|dd|mkfs|kill|pkill|tee|tar),'; then
   echo "BLOCKED: Brace expansion with dangerous command detected — potential injection."
   exit 2
 fi
 
+# Block brace expansion piped to any command ({anything,...} | cmd)
+if echo "$COMMAND" | grep -qE '\{[^}]+,[^}]+\}\s*\|'; then
+  echo "BLOCKED: Brace expansion piped to command is not allowed."
+  exit 2
+fi
+
+# Block process substitution as command argument (cat <(...), bash <(...))
+# Allows redirect-from-process-sub: done < <(cmd) — used by plugin scripts
+if echo "$COMMAND" | grep -qE '\w\s*[<>]\('; then
+  echo "BLOCKED: Process substitution as command argument is not allowed."
+  exit 2
+fi
+
 # Block sed execute flag (weaponized sed — CVE-2025-66032 family, any delimiter)
-if echo "$COMMAND" | grep -qE "sed\s.*['\"]s..*e['\"]"; then
+if echo "$COMMAND" | grep -qE "sed\s.*['\"]s(.).*\1.*\1[^'\"]*e"; then
   echo "BLOCKED: sed with execute flag is not allowed."
   exit 2
 fi
