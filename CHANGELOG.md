@@ -31,15 +31,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **`qa-issue-report` skill** — Report clear issues to any GitHub/GitLab repository with smart session context analysis, codebase reference search, media attachments, and dual-platform support (GitHub CLI + GitLab REST API). Auto-detects target repo from git remote, collects environment info, enforces privacy sanitization, and always submits in English regardless of conversation language
-- **`qa-test-mutate` skill** (`/jaan-to:qa-test-mutate`) — Run mutation testing to validate test suite quality with multi-stack support (StrykerJS, Infection, go-mutesting, mutmut). Context-isolated feedback loop: run mutations → write survivors JSON → feed to `qa-test-generate --from-mutants` → re-run (max 2-3 iterations, delta < 5 stop). Survivor JSON handoff contract (schema v1.0) defines artifact-only interface between mutation and test generation skills. Unsupported stacks report `null` score gracefully. Codex degraded mode: single pass without iterative feedback loop
-- **`qa-tdd-orchestrate` skill** (`/jaan-to:qa-tdd-orchestrate`) — Orchestrate RED/GREEN/REFACTOR TDD cycle with context-isolated sub-agents via Task tool. Three-level isolation: artifact-only handoffs (no reasoning text transfer), prompt exclusion lists, and handoff manifest verification (`handoff-{phase}.json`). Double-loop coordination: outer BDD acceptance test from `qa-test-cases`, inner per-component TDD cycles. Phase gates verified via test execution. Claude Code only (`codex-support: false` — context isolation requires sub-agent fork)
-- **`qa-contract-validate` skill** (`/jaan-to:qa-contract-validate`) — Validate API contracts through a 4-tool pipeline: Spectral lint → oasdiff breaking changes → Prism conformance → Schemathesis fuzz testing. Preflight tool availability gate with `npx --no-install` for npm tools. Graceful degradation: skip unavailable tools with explicit warnings. 0 tools available = INCONCLUSIVE (not PASS). OpenAPI/Swagger specs only (v1 scope)
-- **`qa-quality-gate` skill** (`/jaan-to:qa-quality-gate`) — Compute composite quality score from upstream outputs (qa-test-run, detect-dev, sec-audit-remediate, backend-pr-review, qa-test-mutate). 6 weighted signals with null signal proportional redistribution. Routing: >0.85 auto-approve, 0.6-0.85 lightweight review, <0.6 full human review. Human decision is final — recommendation only, never auto-approve
-- **`qa-issue-validate` skill** (`/jaan-to:qa-issue-validate`) — Validate GitHub/GitLab issues against codebase with root cause analysis and reproduction scenarios. Given an issue (by ID, URL, or pasted text), extracts technical claims, validates them via 7-layer code search (file existence, function definitions, error messages, stack traces, routes, test coverage, git history), assigns verdict (VALID_BUG, VALID_FEATURE, VALID_IMPROVEMENT, INVALID_USER_ERROR, INVALID_CANNOT_REPRODUCE, INVALID_DUPLICATE, INVALID_STALE, NEEDS_INFO) with confidence level, and provides causal chain + 5 Whys RCA for valid bugs. Mandatory issue content threat scan (SAFE/SUSPICIOUS/DANGEROUS) defends against prompt injection, credential probing, path traversal, and embedded commands in untrusted issue text. Posts validation comment to issue, optionally closes invalid issues, and integrates with `/jaan-to:pm-roadmap-add` using sanitized text only (never raw issue content). Dual platform support (GitHub CLI + GitLab REST API). ([Research #77](docs/research/77-qa-issue-validation-best-practices.md))
+- **`qa-test-mutate` skill** (`/qa-test-mutate`) — Run mutation testing to validate test suite quality with multi-stack support (StrykerJS, Infection, go-mutesting, mutmut). Context-isolated feedback loop: run mutations → write survivors JSON → feed to `qa-test-generate --from-mutants` → re-run (max 2-3 iterations, delta < 5 stop). Survivor JSON handoff contract (schema v1.0) defines artifact-only interface between mutation and test generation skills. Unsupported stacks report `null` score gracefully. Codex degraded mode: single pass without iterative feedback loop
+- **`qa-tdd-orchestrate` skill** (`/qa-tdd-orchestrate`) — Orchestrate RED/GREEN/REFACTOR TDD cycle with context-isolated sub-agents via Task tool. Three-level isolation: artifact-only handoffs (no reasoning text transfer), prompt exclusion lists, and handoff manifest verification (`handoff-{phase}.json`). Double-loop coordination: outer BDD acceptance test from `qa-test-cases`, inner per-component TDD cycles. Phase gates verified via test execution. Claude Code only (`codex-support: false` — context isolation requires sub-agent fork)
+- **`qa-contract-validate` skill** (`/qa-contract-validate`) — Validate API contracts through a 4-tool pipeline: Spectral lint → oasdiff breaking changes → Prism conformance → Schemathesis fuzz testing. Preflight tool availability gate with `npx --no-install` for npm tools. Graceful degradation: skip unavailable tools with explicit warnings. 0 tools available = INCONCLUSIVE (not PASS). OpenAPI/Swagger specs only (v1 scope)
+- **`qa-quality-gate` skill** (`/qa-quality-gate`) — Compute composite quality score from upstream outputs (qa-test-run, detect-dev, sec-audit-remediate, backend-pr-review, qa-test-mutate). 6 weighted signals with null signal proportional redistribution. Routing: >0.85 auto-approve, 0.6-0.85 lightweight review, <0.6 full human review. Human decision is final — recommendation only, never auto-approve
+- **`qa-issue-validate` skill** (`/qa-issue-validate`) — Validate GitHub/GitLab issues against codebase with root cause analysis and reproduction scenarios. Given an issue (by ID, URL, or pasted text), extracts technical claims, validates them via 7-layer code search (file existence, function definitions, error messages, stack traces, routes, test coverage, git history), assigns verdict (VALID_BUG, VALID_FEATURE, VALID_IMPROVEMENT, INVALID_USER_ERROR, INVALID_CANNOT_REPRODUCE, INVALID_DUPLICATE, INVALID_STALE, NEEDS_INFO) with confidence level, and provides causal chain + 5 Whys RCA for valid bugs. Mandatory issue content threat scan (SAFE/SUSPICIOUS/DANGEROUS) defends against prompt injection, credential probing, path traversal, and embedded commands in untrusted issue text. Posts validation comment to issue, optionally closes invalid issues, and integrates with `/pm-roadmap-add` using sanitized text only (never raw issue content). Dual platform support (GitHub CLI + GitLab REST API). ([Research #77](docs/research/77-qa-issue-validation-best-practices.md))
 - **TDD/BDD/AI orchestration research** — Research document analyzing 8 areas: three-agent TDD cycle, BDD/Gherkin as spec interface, double-loop TDD, spec validation, mutation testing, hierarchical-pipeline architecture, automated quality gates, ISO 25010/DORA standards ([Research #76](docs/research/76-tdd-bdd-ai-orchestration.md))
-- **`pm-roadmap-add` skill** (`/jaan-to:pm-roadmap-add`) — Add prioritized items to any project roadmap with codebase-aware context scanning and duplication check. Supports three prioritization systems (MoSCoW, Value-Effort Matrix, RICE Scoring) with user selection on first use. Phase 1 scans existing PRDs (titles/summaries only), stories (titles/status only), and TODO/FIXME counts (file names only, never content) for accurate priority assessment. Milestone/theme detection suggests best-fit placement. PreToolUse validation hook (`validate-roadmap.sh`) enforces required sections, scans for leaked secrets, and blocks path traversal. Security-hardened: writes scoped to `$JAAN_OUTPUTS_DIR/pm/roadmap/**` only, zero git permissions, data boundary rules treat all stored roadmap text as untrusted data. Replaces internal `roadmap-add` skill
-- **`pm-roadmap-update` skill** (`/jaan-to:pm-roadmap-update`) — Review and maintain project roadmaps with 4 modes: `review` (cross-reference against PRDs, stories, code to find done/blocked/stale items), `mark` (mark specific item complete), `reprioritize` (re-evaluate all priorities based on current context), `validate` (check consistency, completeness, dependencies). Codebase-aware analysis detects completion candidates from code changes and stale items past target dates. Same security hardening as pm-roadmap-add: scoped writes/edits to `$JAAN_OUTPUTS_DIR/pm/roadmap/**`, no git operations, untrusted data treatment for all roadmap content. Replaces internal `roadmap-update` skill
-- **`pm-skill-discover` skill** (`/jaan-to:pm-skill-discover`) — Detect repeated workflow patterns from AI sessions and suggest skills to automate them. Analyzes three data sources: Claude Code session transcripts (tool usage sequences), git history (file-group patterns, commit frequency), and jaan-to learning files (skill usage frequency). Segments sessions into episodes, mines contiguous subsequences (length 3-6), and scores candidates using a 4-dimension rubric: frequency (30%), time saved (30%), parameterizability (25%), risk (15%). Matches detected patterns against 10 research-backed workflow archetypes (error diagnosis cycle, red-green-refactor loop, CI pipeline repair, feature scaffolding, etc.). Privacy-first: extracts structural metadata only (tool names, file types, timestamps), hashes file paths, never reads prompt content or code. Optional auto-invocation of `/jaan-to:skill-create` for selected candidates. ([Research #80](docs/research/80-building-skill-discovery-across-ai-coding-tools.md))
+- **`pm-roadmap-add` skill** (`/pm-roadmap-add`) — Add prioritized items to any project roadmap with codebase-aware context scanning and duplication check. Supports three prioritization systems (MoSCoW, Value-Effort Matrix, RICE Scoring) with user selection on first use. Phase 1 scans existing PRDs (titles/summaries only), stories (titles/status only), and TODO/FIXME counts (file names only, never content) for accurate priority assessment. Milestone/theme detection suggests best-fit placement. PreToolUse validation hook (`validate-roadmap.sh`) enforces required sections, scans for leaked secrets, and blocks path traversal. Security-hardened: writes scoped to `$JAAN_OUTPUTS_DIR/pm/roadmap/**` only, zero git permissions, data boundary rules treat all stored roadmap text as untrusted data. Replaces internal `roadmap-add` skill
+- **`pm-roadmap-update` skill** (`/pm-roadmap-update`) — Review and maintain project roadmaps with 4 modes: `review` (cross-reference against PRDs, stories, code to find done/blocked/stale items), `mark` (mark specific item complete), `reprioritize` (re-evaluate all priorities based on current context), `validate` (check consistency, completeness, dependencies). Codebase-aware analysis detects completion candidates from code changes and stale items past target dates. Same security hardening as pm-roadmap-add: scoped writes/edits to `$JAAN_OUTPUTS_DIR/pm/roadmap/**`, no git operations, untrusted data treatment for all roadmap content. Replaces internal `roadmap-update` skill
+- **`pm-skill-discover` skill** (`/pm-skill-discover`) — Detect repeated workflow patterns from AI sessions and suggest skills to automate them. Analyzes three data sources: Claude Code session transcripts (tool usage sequences), git history (file-group patterns, commit frequency), and jaan-to learning files (skill usage frequency). Segments sessions into episodes, mines contiguous subsequences (length 3-6), and scores candidates using a 4-dimension rubric: frequency (30%), time saved (30%), parameterizability (25%), risk (15%). Matches detected patterns against 10 research-backed workflow archetypes (error diagnosis cycle, red-green-refactor loop, CI pipeline repair, feature scaffolding, etc.). Privacy-first: extracts structural metadata only (tool names, file types, timestamps), hashes file paths, never reads prompt content or code. Optional auto-invocation of `/skill-create` for selected candidates. ([Research #80](docs/research/80-building-skill-discovery-across-ai-coding-tools.md))
 - **Skill discovery research** — Comprehensive research analyzing skill discovery across Claude Code, OpenAI Codex, and Cursor. Documents the gap: no AI coding tool detects repeated developer workflows or proactively suggests automations. Provides reference architecture with event schema, segmentation algorithm, PrefixSpan mining, 8-dimension scoring rubric, and MVP implementation blueprint (~1,200 lines of code). Includes 10 coding workflow pattern archetypes, skill specification standard, integration architecture for each tool, 5 UX patterns to prevent suggestion fatigue, and privacy/safety model. ([Research #80](docs/research/80-building-skill-discovery-across-ai-coding-tools.md))
 
 ### Changed
@@ -69,7 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **Context7 MCP integration** (Phase 7) — First MCP connector providing on-demand library documentation via the Context7 protocol. `.mcp.json` configures the `@upstash/context7-mcp` server with two tools: `resolve-library-id` (convert library names to Context7-compatible IDs) and `get-library-docs` (fetch documentation with code/info mode selection). Skills can now access real, up-to-date library documentation instead of relying on training data. Marketplace keywords updated with `context7` and `mcp` tags for ecosystem discovery. ([Task: mcp-context7](docs/roadmap/tasks/mcp-context7.md))
-- **`dev-docs-fetch` skill** (`/jaan-to:dev-docs-fetch`) — Fetch and cache library documentation via Context7 MCP with smart caching and auto-detect. Tech-agnostic library detection via `$JAAN_CONTEXT_DIR/tech.md` (`#current-stack` and `#frameworks` sections) with explicit argument override and fallback prompting. Two-phase workflow: cache freshness check (7-day TTL with Bash-based cross-platform `stat` detection for macOS/Linux) → HARD STOP confirmation → resolve library IDs via `mcp__context7__resolve-library-id` → fetch documentation via `mcp__context7__get-library-docs` (code mode for API references, info mode for architecture/concepts, optional topic extraction) → store with YAML frontmatter (`title`, `library_id`, `type`, `created`, `updated`, `context7_mode`, `topic`, `tags`, `source`, `cache_ttl`). Cache path: `$JAAN_OUTPUTS_DIR/dev/docs/context7/`. Graceful error handling: library not found suggestions with retry/skip, API failure fallback to stale cache with user consent, network timeout retry (3x with backoff). Token-optimized: target <10,000 tokens per execution, max 3-5 libraries per run. Callable standalone or from other skills' Phase 1 for context enrichment. Codex runtime adapter included. ([Task: mcp-context7](docs/roadmap/tasks/mcp-context7.md))
+- **`dev-docs-fetch` skill** (`/dev-docs-fetch`) — Fetch and cache library documentation via Context7 MCP with smart caching and auto-detect. Tech-agnostic library detection via `$JAAN_CONTEXT_DIR/tech.md` (`#current-stack` and `#frameworks` sections) with explicit argument override and fallback prompting. Two-phase workflow: cache freshness check (7-day TTL with Bash-based cross-platform `stat` detection for macOS/Linux) → HARD STOP confirmation → resolve library IDs via `mcp__context7__resolve-library-id` → fetch documentation via `mcp__context7__get-library-docs` (code mode for API references, info mode for architecture/concepts, optional topic extraction) → store with YAML frontmatter (`title`, `library_id`, `type`, `created`, `updated`, `context7_mode`, `topic`, `tags`, `source`, `cache_ttl`). Cache path: `$JAAN_OUTPUTS_DIR/dev/docs/context7/`. Graceful error handling: library not found suggestions with retry/skip, API failure fallback to stale cache with user consent, network timeout retry (3x with backoff). Token-optimized: target <10,000 tokens per execution, max 3-5 libraries per run. Callable standalone or from other skills' Phase 1 for context enrichment. Codex runtime adapter included. ([Task: mcp-context7](docs/roadmap/tasks/mcp-context7.md))
 - **Dual-runtime MCP support** — Full MCP infrastructure for Codex runtime alongside Claude Code. Codex installer auto-configures Context7 in `~/.codex/config.toml` with idempotent managed blocks and `--no-mcp` opt-out. New `validate-mcp-servers.sh` enforces dual-runtime MCP consistency. CI pipelines include MCP parity checks in dual-runtime gate and `release-check.yml`. New `docs/mcp/` documentation section with Context7 connector page. Website MCP Connectors card added to Skills Catalog
 
 ### Fixed
@@ -92,15 +92,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Agent Skills open standard compatibility** ([agentskills.io](https://agentskills.io)) — Full compliance with the Agent Skills ecosystem for cross-platform skill discovery. `marketplace.json` now includes `skills[]` discovery array (44 entries) and `metadata.pluginRoot` for CLI resolution. All 44 SKILL.md files updated with `license: MIT`, `compatibility` field, and enriched descriptions with "Use when" trigger phrases (no colons). 13 overlong skills refactored below 500 lines via reference extraction (5 new + 8 expanded reference files in `docs/extending/`). CI enforcement via `release-check.yml` Agent Skills compliance step, `validate-skills.sh` Agent Skills section, `validate-compliance.sh` Check 11 (naming spec + manifest sync). New `scripts/marketplace-sync-check.sh` PostToolUse hook detects skill/manifest drift. `skill-create` template updated with `license` + `compatibility` fields. `create-skill.md` spec updated with Agent Skills Standard section. E2E test suite: 20 tests (12 success + 8 failure scenarios) in `scripts/test/agent-skills-compliance-e2e.sh`. Description budget: 10,282/15,000 chars (31% headroom)
 - **Automated security enforcement** — New `scripts/validate-security.sh` as single source of truth for security validation across CI, `/jaan-release`, and `/jaan-issue-review`. 4 check sections: (A) Skill permission safety — detects bare Write/Bash/Edit, credential access patterns, hardcoded secrets; (B) Shell script safety — enforces `set -euo pipefail`, blocks eval/curl|sh/chmod 777/$IFS; (C) Hook safety — validates static paths, no user input in commands; (D) Dangerous patterns — blocks `rm -rf /`, `exec()` in skill bodies. CI workflow updated with security gate step. Distributed skills are BLOCKING, local skills are ADVISORY. GitHub Actions annotations via `::error::` / `::warning::`
 - **Security audit remediation (13 findings)** — Comprehensive security audit of all plugin scripts, hooks, and access patterns. Fixed: `set -euo pipefail` added to 17 scripts, 4 distributed skills narrowed from bare permissions to scoped access (`pm-research-about`, `roadmap-update`, `skill-update`, `ux-microcopy-write`), path validation patterns documented, privacy sanitization patterns for external data, PreToolUse security gate hardened, template security standards formalized. New docs: `docs/security-strategy.md` (developer security reference), `docs/config/security.md` (user-facing security guide)
-- **`team-ship` agent teams orchestration skill** — Assemble role-based AI teammates (PM, UX, Backend, Frontend, QA, DevOps, Security) to ship ideas from concept to production via Claude Code Agent Teams. One command (`/jaan-to:team-ship "idea"`) spawns a virtual company with phased execution: PM defines (PRD gate) → parallel build team (Backend, Frontend, QA, UX) → integration + DevOps + Security → verification. Features: `roles.md` as scalable data layer (add role = zero SKILL.md changes), 3 tracks (`--track fast` 8 skills / `--track full` 20 skills / `--detect` 5 auditors), `--dry-run` plan preview, `--resume` checkpoint recovery, per-role model selection (haiku for detect, sonnet for code gen), fork-isolated orchestration. Token-optimized: reference extraction (SKILL.md 296 lines), phased teammate spawning (max 4-5 concurrent), compact spawn prompts (~200 tokens each). Three-mechanism `roles.md` sync: `skill-create` Step 14.5 (proactive add), `skill-update` Step 11.5 (proactive sync), PostToolUse drift detection hook. Three new hooks: `TaskCompleted` quality gate (blocks empty outputs), `TeammateIdle` redirect (suggests unclaimed tasks), roles-sync-check (warns on drift). Requires `agent_teams_enabled: true` + `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. ([Research #77](docs/research/77-agent-teams-integration.md))
+- **`team-ship` agent teams orchestration skill** — Assemble role-based AI teammates (PM, UX, Backend, Frontend, QA, DevOps, Security) to ship ideas from concept to production via Claude Code Agent Teams. One command (`/team-ship "idea"`) spawns a virtual company with phased execution: PM defines (PRD gate) → parallel build team (Backend, Frontend, QA, UX) → integration + DevOps + Security → verification. Features: `roles.md` as scalable data layer (add role = zero SKILL.md changes), 3 tracks (`--track fast` 8 skills / `--track full` 20 skills / `--detect` 5 auditors), `--dry-run` plan preview, `--resume` checkpoint recovery, per-role model selection (haiku for detect, sonnet for code gen), fork-isolated orchestration. Token-optimized: reference extraction (SKILL.md 296 lines), phased teammate spawning (max 4-5 concurrent), compact spawn prompts (~200 tokens each). Three-mechanism `roles.md` sync: `skill-create` Step 14.5 (proactive add), `skill-update` Step 11.5 (proactive sync), PostToolUse drift detection hook. Three new hooks: `TaskCompleted` quality gate (blocks empty outputs), `TeammateIdle` redirect (suggests unclaimed tasks), roles-sync-check (warns on drift). Requires `agent_teams_enabled: true` + `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. ([Research #77](docs/research/77-agent-teams-integration.md))
 
 ### Fixed
 - **`pm-prd-write` output readability and RTL support** ([#141](https://github.com/parhumm/jaan-to/issues/141)) — PRD generation now enforces bullet-point formatting for prose sections (Problem Statement, Executive Summary, Solution Overview), 4-column max table width, and per-entity status matrices instead of aggregate lists. Gap-analysis PRDs use a requirements-first document flow (Requirements Overview → Methodology → Current State Matrix → Gap Prioritization). RTL language support adds `<div dir="rtl">` wrapper, native vocabulary preference, and orthography rules. Template updated with optional sections for audit-based PRDs. Quality checks extended to verify formatting compliance. Closes [#141](https://github.com/parhumm/jaan-to/issues/141)
 
 ### Changed
-- **Removed automatic `.gitignore` policy from bootstrap** — Bootstrap no longer auto-adds `jaan-to/` to the project's `.gitignore` on every session start. Instead, `/jaan-to:jaan-init` now asks users during initialization whether to add `jaan-to/` to `.gitignore`, with the recommendation being **no** (commit `jaan-to/` to version control). Updated `bootstrap.sh`, `verify-install.sh`, `jaan-init` SKILL.md, and all related documentation
+- **Removed automatic `.gitignore` policy from bootstrap** — Bootstrap no longer auto-adds `jaan-to/` to the project's `.gitignore` on every session start. Instead, `/jaan-init` now asks users during initialization whether to add `jaan-to/` to `.gitignore`, with the recommendation being **no** (commit `jaan-to/` to version control). Updated `bootstrap.sh`, `verify-install.sh`, `jaan-init` SKILL.md, and all related documentation
 - **Roadmap-update now enforces 6 structural consistency rules** — Every run validates overview-to-section matching, sequential numbering, done-phase blockquotes, catalog accuracy, version accuracy, and future-focus compliance. Violations are reported before mode-specific work begins
-- **Release-iterate-changelog now triggers roadmap sync** — After writing changelog updates, the skill calls `/jaan-to:pm-roadmap-update` to keep the roadmap in sync automatically
+- **Release-iterate-changelog now triggers roadmap sync** — After writing changelog updates, the skill calls `/pm-roadmap-update` to keep the roadmap in sync automatically
 
 ---
 
@@ -139,8 +139,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **detect-dev incremental audit mode** ([#81](https://github.com/parhumm/jaan-to/issues/81)) — `detect-dev` now supports `--incremental` flag to scope scans to files changed since the last audit via `git diff` and `.audit-state.yaml` state tracking. Graceful fallback to full scan on missing state, invalid commit hash, or unreachable commits. Combines with `--full` for scoped full-depth analysis. Integration-aware evidence tagging (`origin: integrated | hand-written`) from `dev-output-integrate` logs. Post-integration suggestion added to `dev-output-integrate` Step 14. Reference material in `docs/extending/detect-dev-reference.md`. Closes [#81](https://github.com/parhumm/jaan-to/issues/81)
 - **Health monitoring workflow** ([#83](https://github.com/parhumm/jaan-to/issues/83)) — `devops-infra-scaffold` now generates `ci/health-check.yml` with cron endpoint monitoring, automatic incident issue creation, deduplication, and auto-close on recovery
 - **Secret rotation reminder** ([#83](https://github.com/parhumm/jaan-to/issues/83)) — `devops-infra-scaffold` now generates `ci/secret-rotation-reminder.yml` with quarterly issue creation and env var classification (rotatable credentials vs static IDs)
-- **`qa-test-run`** (`/jaan-to:qa-test-run`) — Execute tests across stacks (Node.js/TypeScript, PHP, Go), diagnose failures into 7 categories, auto-fix infrastructure issues, and generate coverage reports. Supports Vitest/Jest/Playwright, PHPUnit/Pest, and `go test`. Multi-stack detection via tech.md with lockfile fallback. Closes [#82](https://github.com/parhumm/jaan-to/issues/82)
-- **`dev-verify`** (`/jaan-to:dev-verify`) — Combined build and runtime verification for the Spec-to-Ship pipeline. Build phase: type/compile checks across stacks (Node.js/TypeScript, PHP, Go), error categorization with auto-fix for safe issues (missing deps, export mismatches, config gaps). Runtime phase: tech.md-driven service discovery (docker-compose, package.json, .env), health endpoint checks, OpenAPI contract validation, and smoke tests. Supports `--build-only`, `--runtime-only`, `--skip-smoke`, `--skip-fix` modes. Reports pass/fail with generic error categories. Closes [#78](https://github.com/parhumm/jaan-to/issues/78) and [#85](https://github.com/parhumm/jaan-to/issues/85)
+- **`qa-test-run`** (`/qa-test-run`) — Execute tests across stacks (Node.js/TypeScript, PHP, Go), diagnose failures into 7 categories, auto-fix infrastructure issues, and generate coverage reports. Supports Vitest/Jest/Playwright, PHPUnit/Pest, and `go test`. Multi-stack detection via tech.md with lockfile fallback. Closes [#82](https://github.com/parhumm/jaan-to/issues/82)
+- **`dev-verify`** (`/dev-verify`) — Combined build and runtime verification for the Spec-to-Ship pipeline. Build phase: type/compile checks across stacks (Node.js/TypeScript, PHP, Go), error categorization with auto-fix for safe issues (missing deps, export mismatches, config gaps). Runtime phase: tech.md-driven service discovery (docker-compose, package.json, .env), health endpoint checks, OpenAPI contract validation, and smoke tests. Supports `--build-only`, `--runtime-only`, `--skip-smoke`, `--skip-fix` modes. Reports pass/fail with generic error categories. Closes [#78](https://github.com/parhumm/jaan-to/issues/78) and [#85](https://github.com/parhumm/jaan-to/issues/85)
 - **Integration drift detection** ([#75](https://github.com/parhumm/jaan-to/issues/75)) — PostToolUse hook warns when new outputs appear in `$JAAN_OUTPUTS_DIR/` after `dev-output-integrate` has run. Writes `.last-integration-manifest` at integration time and compares subsequent writes against it. Non-blocking, configurable via `integration_drift_check` setting. Works with all generation skills. Closes [#75](https://github.com/parhumm/jaan-to/issues/75)
 - **Route file wiring in `dev-output-integrate`** ([#84](https://github.com/parhumm/jaan-to/issues/84)) — Skill now distinguishes route-level outputs (pages, views, layouts) from component/library files and wires them into framework-specific route directories. Detection heuristic and per-stack wiring rules cover Next.js App Router, Laravel Inertia/Blade, and Go templates. Reference material in `docs/extending/dev-output-integrate-reference.md`
 - **Build plugin dependency detection** ([#84](https://github.com/parhumm/jaan-to/issues/84)) — `frontend-scaffold` and `dev-project-assemble` now detect that framework config can imply build dependencies (e.g., `reactCompiler: true` requires `babel-plugin-react-compiler` in devDependencies). Multi-stack detection table covers Node.js, PHP, and Go. Reference material in `docs/extending/dev-project-assemble-reference.md`
@@ -188,22 +188,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [6.1.1] - 2026-02-12
 
 ### Fixed
-- **Template seeding on plugin-source fallback** ([#73](https://github.com/parhumm/jaan-to/issues/73)) — Pre-execution protocol now offers to seed a skill's template into `jaan-to/templates/jaan-to:{skill}.template.md` when it resolves from the plugin source fallback. Users accept or decline; subsequent runs find the project copy and skip the offer. New `scripts/seed-template.sh` helper handles the copy. Affects all 36 template-using skills via the shared protocol. Closes [#73](https://github.com/parhumm/jaan-to/issues/73)
+- **Template seeding on plugin-source fallback** ([#73](https://github.com/parhumm/jaan-to/issues/73)) — Pre-execution protocol now offers to seed a skill's template into `jaan-to/templates/{skill}.template.md` when it resolves from the plugin source fallback. Users accept or decline; subsequent runs find the project copy and skip the offer. New `scripts/seed-template.sh` helper handles the copy. Affects all 36 template-using skills via the shared protocol. Closes [#73](https://github.com/parhumm/jaan-to/issues/73)
 
 ---
 
 ## [6.1.0] - 2026-02-12
 
 ### Added
-- **`dev-output-integrate`** (`/jaan-to:dev-output-integrate`) — Copy generated jaan-to outputs into operational project locations with README-based placement parsing, config file merging (package.json deep merge, tsconfig.json extends), entry point wiring (security plugin order, provider registration), dependency installation, and post-integration validation. Reference material extracted to `docs/extending/dev-output-integrate-reference.md`. Closes [#70](https://github.com/parhumm/jaan-to/issues/70)
-- **`devops-deploy-activate`** (`/jaan-to:devops-deploy-activate`) — Activate deployment pipeline from infra-scaffold output: configure GitHub secrets, pin GitHub Actions to SHA digests for supply chain security, provision backend/frontend platforms (Railway, Vercel, Fly.io), set up Turborepo remote cache, and trigger verification pipeline. Reference material extracted to `docs/extending/devops-deploy-activate-reference.md`. Closes [#70](https://github.com/parhumm/jaan-to/issues/70)
-- **Post-detect seed reconciliation** ([#63](https://github.com/parhumm/jaan-to/issues/63)) — All detect skills now check findings against project seed files after detection and report discrepancies. `detect-pack` goes further: it uses consolidated detection data as source of truth to **actively update seed files** (`context/tech.md`, `tone-of-voice.template.md`, `integrations.md`, `localization.template.md`) with a diff-style preview and user approval workflow (`[y/all/n/pick]`). Updates framework versions, adds missing tech entries, flags stale references for user decision, and suggests `/jaan-to:learn-add` commands for non-seed findings. Reconciliation report written to `detect/seed-reconciliation.md`. Shared logic in `docs/extending/seed-reconciliation-reference.md`. Closes [#63](https://github.com/parhumm/jaan-to/issues/63)
+- **`dev-output-integrate`** (`/dev-output-integrate`) — Copy generated jaan-to outputs into operational project locations with README-based placement parsing, config file merging (package.json deep merge, tsconfig.json extends), entry point wiring (security plugin order, provider registration), dependency installation, and post-integration validation. Reference material extracted to `docs/extending/dev-output-integrate-reference.md`. Closes [#70](https://github.com/parhumm/jaan-to/issues/70)
+- **`devops-deploy-activate`** (`/devops-deploy-activate`) — Activate deployment pipeline from infra-scaffold output: configure GitHub secrets, pin GitHub Actions to SHA digests for supply chain security, provision backend/frontend platforms (Railway, Vercel, Fly.io), set up Turborepo remote cache, and trigger verification pipeline. Reference material extracted to `docs/extending/devops-deploy-activate-reference.md`. Closes [#70](https://github.com/parhumm/jaan-to/issues/70)
+- **Post-detect seed reconciliation** ([#63](https://github.com/parhumm/jaan-to/issues/63)) — All detect skills now check findings against project seed files after detection and report discrepancies. `detect-pack` goes further: it uses consolidated detection data as source of truth to **actively update seed files** (`context/tech.md`, `tone-of-voice.template.md`, `integrations.md`, `localization.template.md`) with a diff-style preview and user approval workflow (`[y/all/n/pick]`). Updates framework versions, adds missing tech entries, flags stale references for user decision, and suggests `/learn-add` commands for non-seed findings. Reconciliation report written to `detect/seed-reconciliation.md`. Shared logic in `docs/extending/seed-reconciliation-reference.md`. Closes [#63](https://github.com/parhumm/jaan-to/issues/63)
 
 ### Changed
 - **`jaan-issue-report` defaults to smart GitHub submission** — Skill now detects `gh` CLI availability on first run, asks once whether to submit directly to GitHub (recommended), and saves the preference to `jaan-to/config/settings.yaml`. Added `--no-submit` flag for explicit opt-out. Submit mode resolution priority: `--submit`/`--no-submit` flags > saved `issue_report_submit` preference > smart detection with user prompt. Closes [#61](https://github.com/parhumm/jaan-to/issues/61)
 - **Lazy template/learn seeding** ([#60](https://github.com/parhumm/jaan-to/issues/60)) — Bootstrap no longer eagerly copies 34 templates and 37 learn files into the project. Templates and learn files are now loaded from the plugin at runtime using a three-tier fallback: project (prefixed) → project (unprefixed) → plugin source. New projects get clean, empty `templates/` and `learn/` directories.
 - **Pre-execution protocol extended** — Added template resolution (Step B) alongside the existing learn file loading (Step A), with backward-compatible fallback for both naming conventions
-- **learn-add seeds from plugin** — When creating a new project learn file via `/jaan-to:learn-add`, the plugin's LEARN.md is used as a starting point (preserving seed lessons) instead of an empty template
+- **learn-add seeds from plugin** — When creating a new project learn file via `/learn-add`, the plugin's LEARN.md is used as a starting point (preserving seed lessons) instead of an empty template
 
 ### Removed
 - **Legacy migration code removed from bootstrap** — Removed all v2.0→v4.5.1 migration logic from session startup (`.jaan-to/` directory rename, output path moves, old skill detection, `.gitignore` rewriting). Bootstrap is now simpler and faster for current users. Deleted `scripts/lib/v3-autofix.sh`, `docs/guides/migration-v3.md`, and `docs/guides/migration-v3.24.md` (-767 lines)
@@ -218,11 +218,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **5 spec-to-ship skills** closing the scaffold-to-deployment pipeline:
-  - **`dev-project-assemble`** (`/jaan-to:dev-project-assemble`) — Wire backend + frontend scaffold outputs into a runnable project with directory tree, configs, entry points, and provider wiring. Supports monorepo (Turborepo/Nx) and separate-project layouts, auto-detected from `tech.md`
-  - **`backend-service-implement`** (`/jaan-to:backend-service-implement`) — Generate full service implementations with business logic from TODO stubs and upstream specs (API contract, data model, task breakdown). Includes CRUD patterns, state machines, RFC 9457 error handling, pagination, and idempotency helpers
-  - **`qa-test-generate`** (`/jaan-to:qa-test-generate`) — Produce runnable Vitest unit tests and Playwright E2E specs from BDD test cases. Features tag-based routing (@unit/@integration/@e2e/@api), test data factories (Fishery + zod-mock), MSW mock handlers, and page objects
-  - **`sec-audit-remediate`** (`/jaan-to:sec-audit-remediate`) — Generate targeted security fixes from detect-dev SARIF findings with CWE-mapped fix strategies, severity triage, and regression tests for OWASP Top 10 vulnerability types
-  - **`devops-infra-scaffold`** (`/jaan-to:devops-infra-scaffold`) — Generate CI/CD workflows (GitHub Actions/GitLab CI), multi-stage Dockerfiles, docker-compose, environment configs, and deployment platform configs (Vercel/Railway/Fly.io/AWS ECS)
+  - **`dev-project-assemble`** (`/dev-project-assemble`) — Wire backend + frontend scaffold outputs into a runnable project with directory tree, configs, entry points, and provider wiring. Supports monorepo (Turborepo/Nx) and separate-project layouts, auto-detected from `tech.md`
+  - **`backend-service-implement`** (`/backend-service-implement`) — Generate full service implementations with business logic from TODO stubs and upstream specs (API contract, data model, task breakdown). Includes CRUD patterns, state machines, RFC 9457 error handling, pagination, and idempotency helpers
+  - **`qa-test-generate`** (`/qa-test-generate`) — Produce runnable Vitest unit tests and Playwright E2E specs from BDD test cases. Features tag-based routing (@unit/@integration/@e2e/@api), test data factories (Fishery + zod-mock), MSW mock handlers, and page objects
+  - **`sec-audit-remediate`** (`/sec-audit-remediate`) — Generate targeted security fixes from detect-dev SARIF findings with CWE-mapped fix strategies, severity triage, and regression tests for OWASP Top 10 vulnerability types
+  - **`devops-infra-scaffold`** (`/devops-infra-scaffold`) — Generate CI/CD workflows (GitHub Actions/GitLab CI), multi-stage Dockerfiles, docker-compose, environment configs, and deployment platform configs (Vercel/Railway/Fly.io/AWS ECS)
 - **New roles**: `sec` (Security) and `devops` (DevOps/Infrastructure) with documentation
 - **Token strategy documentation** — `docs/token-strategy.md` explaining the three-layer token optimization approach
 - **Skill documentation pages** for all 5 new skills in `docs/skills/`
@@ -239,11 +239,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [5.1.0] - 2026-02-10
 
 ### Added
-- **`jaan-issue-report` skill** (`/jaan-to:jaan-issue-report`) — Report bugs, feature requests, skill issues, or documentation problems to the jaan-to GitHub repo. Two delivery modes: `--submit` for direct GitHub issue creation via `gh` CLI, or local-only (default) saving to `$JAAN_OUTPUTS_DIR/jaan-issues/`. Features session context awareness (auto-drafts from conversation history when invoked mid-session), privacy sanitization (redacts private paths, tokens, credentials before preview), 4 issue types with auto-classification, upfront `gh auth status` check, and type-specific templates with environment info collection
+- **`jaan-issue-report` skill** (`/jaan-issue-report`) — Report bugs, feature requests, skill issues, or documentation problems to the jaan-to GitHub repo. Two delivery modes: `--submit` for direct GitHub issue creation via `gh` CLI, or local-only (default) saving to `$JAAN_OUTPUTS_DIR/jaan-issues/`. Features session context awareness (auto-drafts from conversation history when invoked mid-session), privacy sanitization (redacts private paths, tokens, credentials before preview), 4 issue types with auto-classification, upfront `gh auth status` check, and type-specific templates with environment info collection
 - **`jaan-issue-report` documentation** — `docs/skills/core/jaan-issue-report.md` and updated Core Skills README index
 
 ### Changed
-- **Bootstrap now opt-in per project** — Projects require `/jaan-to:jaan-init` to activate. Existing projects with `jaan-to/` directory continue working unchanged. New skill: `/jaan-to:jaan-init`
+- **Bootstrap now opt-in per project** — Projects require `/jaan-init` to activate. Existing projects with `jaan-to/` directory continue working unchanged. New skill: `/jaan-init`
 
 ---
 
@@ -279,7 +279,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.5.0] - 2026-02-09
 
 ### Added
-- **`ux-flowchart-generate` skill** (`/jaan-to:ux-flowchart-generate`) — Generate GitHub-renderable Mermaid flowcharts from PRDs, docs, codebases, or any combination with evidence maps tracing every node to its source, confidence scoring, and structured unknowns lists. Supports 4 source types (`prd`, `doc`, `repo`, `mixed`), 4 diagram goals (`userflow`, `systemflow`, `architecture`, `stateflow`), 17 machine-checkable quality gates, auto-split for large diagrams, update mode with manual section preservation, and GitHub Mermaid v11.4.1 constraint enforcement
+- **`ux-flowchart-generate` skill** (`/ux-flowchart-generate`) — Generate GitHub-renderable Mermaid flowcharts from PRDs, docs, codebases, or any combination with evidence maps tracing every node to its source, confidence scoring, and structured unknowns lists. Supports 4 source types (`prd`, `doc`, `repo`, `mixed`), 4 diagram goals (`userflow`, `systemflow`, `architecture`, `stateflow`), 17 machine-checkable quality gates, auto-split for large diagrams, update mode with manual section preservation, and GitHub Mermaid v11.4.1 constraint enforcement
 - **LEARN.md seed file** for ux-flowchart-generate — Pre-populated with research-validated lessons from 40+ sources (research 64/65-ux-flowchart-generate)
 
 ### Changed
@@ -291,7 +291,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.4.0] - 2026-02-09
 
 ### Added
-- **`release-iterate-changelog` skill** (`/jaan-to:release-iterate-changelog`) — Generate user-facing changelogs with impact notes and support guidance from git history. 5 input modes (auto-generate, create, release, add, from-input), Conventional Commits parsing with freeform heuristic fallback, Keep a Changelog formatting, SemVer bump suggestion, user impact analysis (high/medium/low), and support guidance for downstream help articles
+- **`release-iterate-changelog` skill** (`/release-iterate-changelog`) — Generate user-facing changelogs with impact notes and support guidance from git history. 5 input modes (auto-generate, create, release, add, from-input), Conventional Commits parsing with freeform heuristic fallback, Keep a Changelog formatting, SemVer bump suggestion, user impact analysis (high/medium/low), and support guidance for downstream help articles
 - **`release` role** — New role for release management skills (iterate chain: top-fixes → changelog → help-article)
 - **Release skills documentation** — `docs/skills/release/iterate-changelog.md` and `docs/skills/release/README.md`
 
@@ -305,7 +305,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.3.0] - 2026-02-09
 
 ### Added
-- **`wp-pr-review` skill** (`/jaan-to:wp-pr-review`) — Review WordPress plugin pull requests for security vulnerabilities, performance issues, WPCS standards violations, backward compatibility, and add-on ecosystem impact. 5-phase workflow with deterministic grep scanning, confidence-scored findings (>=80 threshold), and optional PR comment posting via GitHub/GitLab CLI
+- **`wp-pr-review` skill** (`/wp-pr-review`) — Review WordPress plugin pull requests for security vulnerabilities, performance issues, WPCS standards violations, backward compatibility, and add-on ecosystem impact. 5-phase workflow with deterministic grep scanning, confidence-scored findings (>=80 threshold), and optional PR comment posting via GitHub/GitLab CLI
 - **`wp` role** — New WordPress-specific role for plugin development skills
 - **`references/` directory pattern** — First skill to use progressive disclosure via reference files (5 checklists: security, performance, standards, vulnerability patterns, add-on ecosystem). Keeps SKILL.md under 500 lines while providing detailed knowledge on demand
 - **WordPress skills documentation** — `docs/skills/wp/pr-review.md` and `docs/skills/wp/README.md`
@@ -320,7 +320,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.2.1] - 2026-02-09
 
 ### Fixed
-- **`backend-scaffold` displaying as `/jaan-to:backend-scaffold` in command picker** — Removed YAML-unsafe colon from description (`specs: routes` → `with routes`). Claude Code's parser misinterpreted the colon-space as a key-value separator, corrupting skill metadata (`c1c5f0d`)
+- **`backend-scaffold` displaying as `/backend-scaffold` in command picker** — Removed YAML-unsafe colon from description (`specs: routes` → `with routes`). Claude Code's parser misinterpreted the colon-space as a key-value separator, corrupting skill metadata (`c1c5f0d`)
 
 ### Added
 - **Colon detection in `validate-skills.sh`** — New validation pass flags any skill description containing `: ` (colon-space), preventing future YAML parsing issues (`c1c5f0d`)
@@ -338,8 +338,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [4.2.0] - 2026-02-09
 
 ### Added
-- **`backend-scaffold` skill** (`/jaan-to:backend-scaffold`) — Generate production-ready backend code from API contracts, data models, and task breakdowns. Supports Node.js (Fastify v5 + Prisma + Zod), PHP (Laravel 12 / Symfony 7), and Go (Chi / stdlib). Includes routes, service layer, validation schemas, middleware, and RFC 9457 error handling
-- **`frontend-scaffold` skill** (`/jaan-to:frontend-scaffold`) — Convert designs to React 19 / Next.js 15 component scaffolds with TailwindCSS v4 CSS-first config, typed API client hooks (Orval v7 + TanStack Query v5), Zustand v5 state management, and nuqs URL state. Generates components, hooks, types, pages, and config files
+- **`backend-scaffold` skill** (`/backend-scaffold`) — Generate production-ready backend code from API contracts, data models, and task breakdowns. Supports Node.js (Fastify v5 + Prisma + Zod), PHP (Laravel 12 / Symfony 7), and Go (Chi / stdlib). Includes routes, service layer, validation schemas, middleware, and RFC 9457 error handling
+- **`frontend-scaffold` skill** (`/frontend-scaffold`) — Convert designs to React 19 / Next.js 15 component scaffolds with TailwindCSS v4 CSS-first config, typed API client hooks (Orval v7 + TanStack Query v5), Zustand v5 state management, and nuqs URL state. Generates components, hooks, types, pages, and config files
 - **LEARN.md seed files** for both scaffold skills — Pre-populated with research-validated lessons (Better Questions, Edge Cases, Workflow, Common Mistakes) from research output 63-dev-scaffolds
 
 ### Changed
@@ -382,11 +382,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **[Breaking]** Renamed 5 dev skills to remove `dev-` prefix for cleaner naming:
-  - `dev-be-data-model` → `backend-data-model` (`/jaan-to:backend-data-model`)
-  - `dev-be-task-breakdown` → `backend-task-breakdown` (`/jaan-to:backend-task-breakdown`)
-  - `dev-api-contract` → `backend-api-contract` (`/jaan-to:backend-api-contract`)
-  - `dev-fe-design` → `frontend-design` (`/jaan-to:frontend-design`)
-  - `dev-fe-task-breakdown` → `frontend-task-breakdown` (`/jaan-to:frontend-task-breakdown`)
+  - `dev-be-data-model` → `backend-data-model` (`/backend-data-model`)
+  - `dev-be-task-breakdown` → `backend-task-breakdown` (`/backend-task-breakdown`)
+  - `dev-api-contract` → `backend-api-contract` (`/backend-api-contract`)
+  - `dev-fe-design` → `frontend-design` (`/frontend-design`)
+  - `dev-fe-task-breakdown` → `frontend-task-breakdown` (`/frontend-task-breakdown`)
 - **Documentation reorganization** — Moved skill docs to role-based directories (`docs/skills/backend/`, `docs/skills/frontend/`)
 - **Output paths simplified** — Skills now write to `outputs/backend/` and `outputs/frontend/` instead of `outputs/dev/backend/` and `outputs/dev/frontend/`
 
@@ -416,7 +416,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Merged pack** — detect-pack creates consolidated pack combining all platforms with cross-platform risk heatmap (platform × domain table), deduplicated findings, and unified unknowns backlog
 
 ### Changed
-- **pack-detect renamed to detect-pack** — Command: `/jaan-to:detect-pack` (was `/jaan-to:pack-detect`); skill directory and 41 files renamed for naming consistency
+- **pack-detect renamed to detect-pack** — Command: `/detect-pack` (was `/pack-detect`); skill directory and 41 files renamed for naming consistency
 - **Flat file architecture formalized** — detect outputs officially documented as exception to ID-based folder structure in CLAUDE.md (alongside research); rationale: detect skills produce system state snapshots (overwritten each run), not versioned reports (archived)
 - **detect-pack orchestration enhanced** — Step 0 now asks "Is this a multi-platform project?" and displays platform-by-platform workflow guide
 - **Evidence ID parsing updated** — Regex now handles both single-platform (`E-DEV-001`) and multi-platform (`E-DEV-WEB-001`) formats
@@ -428,7 +428,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **6 templates updated** — All detect templates now include `target.platform` field and evidence ID format examples
 
 ### Breaking Changes
-- **Command rename**: `/jaan-to:pack-detect` → `/jaan-to:detect-pack` (old command removed)
+- **Command rename**: `/pack-detect` → `/detect-pack` (old command removed)
 - **Output paths** (backward compatible):
   - Single-platform: `detect/dev/stack.md` (unchanged)
   - Multi-platform: `detect/dev/stack-web.md`, `detect/dev/stack-backend.md` (new format)
@@ -443,16 +443,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - **6 Detect & Knowledge Pack skills (Phase 5)** — Evidence-based repo audits with SARIF-compatible evidence, 4-level confidence scoring, and machine-parseable markdown output
-  - `/jaan-to:detect-dev` — Engineering audit with OpenSSF-style scoring across 11+ language ecosystems, CI/CD security checks, and 9 output files (`52eb72f`)
-  - `/jaan-to:detect-design` — Design system detection with drift findings (paired evidence), token inventory, component classification, and 6 output files (`280e4f7`)
-  - `/jaan-to:detect-writing` — Writing system extraction with NNg tone dimensions (4 primary + 5 extended), 8-category UI copy classification, error message rubric, i18n maturity 0–5, and 6 output files (`eb0b4f5`)
-  - `/jaan-to:detect-product` — Product reality extraction with 3-layer evidence model (surface + copy + code path), monetization/entitlement scanning, analytics SDK detection, and 7 output files (`ef3d455`)
-  - `/jaan-to:detect-ux` — UX audit with framework-specific route extraction (React Router, Next.js, Vue Router, Angular, Express), Nielsen's 10 heuristics, Mermaid flow diagrams, and 7 output files (`6fa7cb5`)
-  - `/jaan-to:detect-pack` — Consolidate all detect outputs into scored knowledge index with risk heatmap, evidence ID validation, unknowns backlog, and Step 0 orchestration for partial runs (`50a75f5`)
+  - `/detect-dev` — Engineering audit with OpenSSF-style scoring across 11+ language ecosystems, CI/CD security checks, and 9 output files (`52eb72f`)
+  - `/detect-design` — Design system detection with drift findings (paired evidence), token inventory, component classification, and 6 output files (`280e4f7`)
+  - `/detect-writing` — Writing system extraction with NNg tone dimensions (4 primary + 5 extended), 8-category UI copy classification, error message rubric, i18n maturity 0–5, and 6 output files (`eb0b4f5`)
+  - `/detect-product` — Product reality extraction with 3-layer evidence model (surface + copy + code path), monetization/entitlement scanning, analytics SDK detection, and 7 output files (`ef3d455`)
+  - `/detect-ux` — UX audit with framework-specific route extraction (React Router, Next.js, Vue Router, Angular, Express), Nielsen's 10 heuristics, Mermaid flow diagrams, and 7 output files (`6fa7cb5`)
+  - `/detect-pack` — Consolidate all detect outputs into scored knowledge index with risk heatmap, evidence ID validation, unknowns backlog, and Step 0 orchestration for partial runs (`50a75f5`)
 
 ### Changed
 - **`dev-stack-detect` merged into `detect-dev`** — All scanning patterns absorbed; old skill removed. Detection → `detect-dev`, context population remains via bootstrap (`bb9d0a7`, `9d944de`)
-- **Bootstrap updated** — Suggests `/jaan-to:detect-pack` instead of `/jaan-to:dev-stack-detect` when context has placeholders (`9d944de`)
+- **Bootstrap updated** — Suggests `/detect-pack` instead of `/dev-stack-detect` when context has placeholders (`9d944de`)
 - **Plugin description** — Updated to reflect 27 skills (was 21)
 
 ### Documentation
@@ -540,10 +540,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - **Spec: removed outdated "Logical Name" concept** — Removed colon-format `{role}:{domain-action}` references from `docs/extending/create-skill.md`; H1 title guidance now uses `# {name}` (kebab-case)
-- **skill-create: fixed command format** — Command preview now shows `/jaan-to:{name}` instead of `/{name}`
+- **skill-create: fixed command format** — Command preview now shows `/{name}` instead of `/{name}`
 - **skill-create: fixed spec path** — Validation step referenced wrong path `jaan-to/docs/create-skill.md` → `docs/extending/create-skill.md`
 - **skill-create: template uses `{skill_name}`** — Replaced `{logical_name}` variable with `{skill_name}` in template.md
-- **skill-update: fixed stale directory refs** — Updated `skills/jaan-to:pm-prd-write/` → `skills/pm-prd-write/` (2 locations)
+- **skill-update: fixed stale directory refs** — Updated `skills/pm-prd-write/` → `skills/pm-prd-write/` (2 locations)
 - **skill-update: fixed spec path** — Same `jaan-to/docs/` → `docs/extending/` correction
 - **LEARN.md files** — Fixed stale `jaan-to:pm-prd-write` directory references in both skill LEARN.md files
 
@@ -555,15 +555,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Skill naming standardization** — Removed redundant `jaan-to-` and `to-jaan-` prefixes from all 19 skill directories
   - Domain skills: `jaan-to-pm-prd-write` → `pm-prd-write` (12 skills)
   - Internal skills: `to-jaan-docs-create` → `docs-create` (7 skills)
-  - Invocations now: `/jaan-to:pm-prd-write` instead of `/jaan-to:jaan-to-pm-prd-write`
+  - Invocations now: `/pm-prd-write` instead of `/jaan-to-pm-prd-write`
 - **Standardized colon-format names** — Replaced all `role:skill-name` shorthand with `role-skill-name` hyphen format across SKILL.md (Maps to, H1), templates, docs, and roadmaps
-- **Updated all references** — scripts, agents, docs, roadmaps, seeds updated to use clean names with `/jaan-to:` prefix
+- **Updated all references** — scripts, agents, docs, roadmaps, seeds updated to use clean names with `/` prefix
 
 ### Fixed
 - **Renamed doc file** — `docs/skills/dev/jaan-to-dev-be-task-breakdown.md` → `be-task-breakdown.md`
 - **Fixed broken link paths** — Markdown links using `jaan-to:` in file paths corrected
 - **README badge** — Updated stale version badge from 3.12.0 to 3.16.0
-- **mcp-connectors.md** — Added missing `/jaan-to:` prefix to 76+ bare skill references
+- **mcp-connectors.md** — Added missing `/` prefix to 76+ bare skill references
 
 ---
 
@@ -611,7 +611,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Validates plugin.json has required component paths (skills, agents, hooks)
 
 ### Changed
-- **Skill Workflow Alignment** — `/jaan-to:skill-create` and `/jaan-to:skill-update` now follow two-branch workflow (`ba9c061`)
+- **Skill Workflow Alignment** — `/skill-create` and `/skill-update` now follow two-branch workflow (`ba9c061`)
   - Feature branches checkout from `dev` instead of `main`
   - PRs target `dev` branch (not `main`)
   - `gh pr create` uses `--base dev` flag
@@ -638,7 +638,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.14.0] - 2026-02-03
 
 ### Added
-- **Frontend Component Design Skill** — `/jaan-to:dev-fe-design` generates distinctive, production-grade frontend component code (`48284c7`)
+- **Frontend Component Design Skill** — `/dev-fe-design` generates distinctive, production-grade frontend component code (`48284c7`)
   - Creates working components in React, Vue, or vanilla JS/HTML based on tech.md detection
   - Generates bold, distinctive designs that avoid generic "AI slop" aesthetics (no Inter/Roboto, no purple gradients, unexpected layouts)
   - Full accessibility (WCAG AA minimum) with semantic HTML, ARIA, keyboard navigation, visible focus indicators
@@ -646,7 +646,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Complete deliverables: component code + documentation with design rationale + standalone preview file
   - Output structure: `dev/components/{id}-{slug}/` with ID-based folders and index management
   - Reads settings.yaml for design direction defaults, design.md for existing patterns, brand.md for guidelines
-  - Complements `/jaan-to:dev-fe-task-breakdown`: task-breakdown plans what to build, fe-design builds the actual code
+  - Complements `/dev-fe-task-breakdown`: task-breakdown plans what to build, fe-design builds the actual code
   - 478-line SKILL.md with two-phase workflow, 137-line template with variable syntax, 47-line LEARN.md with best practices
 
 ---
@@ -656,7 +656,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - **Learning System Dashboard** — Make accumulated learning discoverable and actionable (`9f513c2`)
   - `scripts/learning-summary.sh` — Scan all LEARN.md files, count lessons per skill, extract Common Mistakes and Edge Cases sections, generate markdown/JSON report with stats
-  - `/jaan-to:learn-report` command — Display formatted learning insights with skill coverage analysis and actionable next steps
+  - `/learn-report` command — Display formatted learning insights with skill coverage analysis and actionable next steps
   - `docs/learning/LESSON-TEMPLATE.md` — Structured lesson format with Context, What Happened, Root Cause, Fix, and Prevention sections
   - Quality-reviewer agent enhancement: Check if skill outputs reference existing LEARN.md lessons, suggest creating entries for repeated patterns
 - **Distribution Package for Marketplace** — Lower barrier to adoption and enable community contributions (`3c03529`)
@@ -693,7 +693,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.12.0] - 2026-02-03
 
 ### Added
-- **`/jaan-to:ux-research-synthesize` skill** — Transform raw UX research data (interviews, usability tests, surveys) into actionable insights using validated methodologies (`550bf0f`)
+- **`/ux-research-synthesize` skill** — Transform raw UX research data (interviews, usability tests, surveys) into actionable insights using validated methodologies (`550bf0f`)
   - Three synthesis modes: Speed (1-2h quick findings), Standard (1-2d full thematic analysis), Cross-Study (meta-analysis across multiple studies)
   - AI-assisted analysis with human validation checkpoints implementing Braun & Clarke's Six-Phase Thematic Analysis and Atomic Research Framework
   - 15-step workflow with HARD STOP between analysis (read-only) and generation (write phase)
@@ -705,14 +705,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Research-informed: 877-line methodology foundation ([jaan-to/outputs/research/47-ux-research-synthesize.md](docs/research/47-ux-research-synthesize.md))
 
 ### Changed
-- **`/jaan-to:roadmap-update` enhanced** — Automatic release detection from git history when running in smart-default mode (`602d651`)
+- **`/roadmap-update` enhanced** — Automatic release detection from git history when running in smart-default mode (`602d651`)
 
 ---
 
 ## [3.11.0] - 2026-02-03
 
 ### Added
-- **`/jaan-to:qa-test-cases` skill** — Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB methodology (`3f1a8a7`)
+- **`/qa-test-cases` skill** — Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB methodology (`3f1a8a7`)
   - ISTQB test design techniques: Equivalence Partitioning, Boundary Value Analysis (3-value BVA), and edge case taxonomy
   - Minimum 10 tests per acceptance criterion (3 positive + 3 negative + 2 boundary + 2 edge case)
   - 5 priority edge case categories based on production defect frequency: Empty/Null States (32%), Boundary Values (28%), Error Conditions (22%), Concurrent Operations (12%), State Transitions (6%)
@@ -729,7 +729,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.10.0] - 2026-02-03
 
 ### Added
-- **`/jaan-to:ux-microcopy-write` skill** — Generate multi-language microcopy packs with cultural adaptation (`e4809b3`)
+- **`/ux-microcopy-write` skill** — Generate multi-language microcopy packs with cultural adaptation (`e4809b3`)
   - 7 languages: EN, FA (فارسی / Persian), TR (Türkçe), DE (Deutsch), FR (Français), RU (Русский), TG (Тоҷикӣ)
   - RTL/LTR support with ZWNJ handling for Persian, Persian punctuation (؟ ، ؛ « »)
   - Tone-of-voice management via context files (`localization.md`, `tone-of-voice.md`)
@@ -758,10 +758,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   for sequential ID generation and automatic README.md index updates (`0364b4a`)
 
 ### Changed
-- **`/jaan-to:skill-create` now generates compliant skills** — All new skills automatically
+- **`/skill-create` now generates compliant skills** — All new skills automatically
   include ID generation (Step 5.5), folder structure, index management, and Executive Summary
   sections in templates (`95d082e`)
-- **`/jaan-to:skill-update` detects legacy output patterns** — Added V3.8 compliance checks
+- **`/skill-update` detects legacy output patterns** — Added V3.8 compliance checks
   and automatic migration handler for non-compliant skills (`68993d2`)
 
 ### Documentation
@@ -784,7 +784,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **AskUserQuestion from all skills** — Reverted to simple text-based prompts for better
   compatibility and simpler skill implementation
   - Removed AskUserQuestion documentation from [docs/extending/create-skill.md](docs/extending/create-skill.md)
-  - Removed AskUserQuestion conversion option from `/jaan-to:skill-update` tool
+  - Removed AskUserQuestion conversion option from `/skill-update` tool
   - All skills now use clean text prompts instead of structured question blocks
 
 ### Changed
@@ -804,7 +804,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.7.0] - 2026-02-03
 
 ### Added
-- **`/jaan-to:dev-fe-task-breakdown` skill** — Transform UX design handoffs into production-ready
+- **`/dev-fe-task-breakdown` skill** — Transform UX design handoffs into production-ready
   frontend task breakdowns with component inventories, state matrices, estimate bands,
   dependency graphs (Mermaid), performance budgets, and risk assessment (`af90d27`)
   - Atomic Design taxonomy: Atoms (XS) → Pages (XL) with T-shirt size estimates
@@ -820,7 +820,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.6.0] - 2026-02-03
 
 ### Changed
-- **`/jaan-to:ux-heatmap-analyze` output restructured** — Report format shifted from
+- **`/ux-heatmap-analyze` output restructured** — Report format shifted from
   research paper to action brief: insightful, practical, actionable
   - "Executive Summary" (narrative) → **Action Summary** (bullets only)
   - "Findings" (by severity) + "Recommendations" (separate table) → **Findings & Actions**
@@ -834,8 +834,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.5.0] - 2026-02-03
 
 ### Added
-- **User story auto-invoke in `/jaan-to:pm-prd-write`** — After PRD is written,
-  optionally invoke `/jaan-to:pm-story-write` to expand user stories into full
+- **User story auto-invoke in `/pm-prd-write`** — After PRD is written,
+  optionally invoke `/pm-story-write` to expand user stories into full
   detailed stories with INVEST validation and Gherkin acceptance criteria (`90d67c3`)
 
 ---
@@ -843,18 +843,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.4.0] - 2026-02-03
 
 ### Added
-- **Roadmap auto-invoke** — `/jaan-to:skill-create` and `/jaan-to:skill-update` now
-  automatically call `/jaan-to:roadmap-update` at end of workflow to keep roadmap in sync
-- **`/jaan-to:dev-pr-review` documentation** added (`2750902`)
+- **Roadmap auto-invoke** — `/skill-create` and `/skill-update` now
+  automatically call `/roadmap-update` at end of workflow to keep roadmap in sync
+- **`/dev-pr-review` documentation** added (`2750902`)
 
 ### Fixed
-- **Specification compliance** for `/jaan-to:skill-update` and `/jaan-to:skill-create`:
+- **Specification compliance** for `/skill-update` and `/skill-create`:
   - H1 titles use logical name format (`skill:update`, `skill:create`)
   - Broken spec path reference fixed (`jaan-to/docs/` → `docs/extending/`)
   - Migration wizard converted to AskUserQuestion (4-option menu)
   - Duplicate Step 18 numbering fixed (→ Step 20)
   - template.md uses `{{double-brace}}` v3.0.0 syntax
-- **`/jaan-to:roadmap-update`** — Unreleased management and branch merge in release mode (`db33d88`)
+- **`/roadmap-update`** — Unreleased management and branch merge in release mode (`db33d88`)
 - Fixed stale path references (`206dcfd`)
 
 ### Changed
@@ -865,7 +865,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.3.0] - 2026-02-03
 
 ### Added
-- **`/jaan-to:ux-heatmap-analyze` skill** — First UX role skill. Analyze heatmap CSV exports
+- **`/ux-heatmap-analyze` skill** — First UX role skill. Analyze heatmap CSV exports
   and screenshots to generate prioritized UX research reports
   - Two data formats: aggregated element-click (Format A) and raw coordinates (Format B)
   - Claude Vision analysis of heatmap screenshots with cross-reference validation
@@ -873,7 +873,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Two-pass validation: corroborated findings (0.85-0.95), single-source (0.70-0.80)
   - ICE-scored recommendations (Impact x Confidence x Ease)
   - Output: `jaan-to/outputs/ux/heatmap/{slug}/report.md`
-- **`/jaan-to:dev-stack-detect` skill** — Auto-detect project tech stack and populate context
+- **`/dev-stack-detect` skill** — Auto-detect project tech stack and populate context
 - **UX role activated** — First role skill beyond PM and Data; `docs/skills/ux/` created
 
 ### Changed
@@ -894,9 +894,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **"User Interaction Patterns" section** in skill creation spec
   (`docs/extending/create-skill.md`) — documents when to use AskUserQuestion
   vs text prompts, JSON schema reference, instruction syntax
-- **V3.8 AskUserQuestion compliance check** in `/jaan-to:skill-update`
-- **Option [9] "Convert to AskUserQuestion"** in `/jaan-to:skill-update`
-- **Skill factory AskUserQuestion support** — `/jaan-to:skill-create` now
+- **V3.8 AskUserQuestion compliance check** in `/skill-update`
+- **Option [9] "Convert to AskUserQuestion"** in `/skill-update`
+- **Skill factory AskUserQuestion support** — `/skill-create` now
   generates new skills with AskUserQuestion patterns
 
 ### Changed
@@ -911,7 +911,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [3.1.0] - 2026-02-03
 
 ### Added
-- **`/jaan-to:roadmap-update` skill** — Maintain and sync roadmap with codebase
+- **`/roadmap-update` skill** — Maintain and sync roadmap with codebase
   - Detects stale tasks via git history comparison
   - Syncs task status between roadmap and task files
   - Generates progress reports and burndown summaries
@@ -979,7 +979,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 ## [2.2.0] - 2026-02-02
 
 ### Added
-- **`/jaan-to:pm-story-write` skill** — Generate user stories with Given/When/Then acceptance criteria following INVEST principles
+- **`/pm-story-write` skill** — Generate user stories with Given/When/Then acceptance criteria following INVEST principles
   - Two-phase workflow: Analysis (read-only) → HARD STOP → Generation (write phase)
   - Input formats: [feature] [persona] [goal], narrative text, or Jira ID (via MCP)
   - Quality gates: INVEST compliance (6 criteria), AC testability, Definition of Ready (10 items)
@@ -994,7 +994,7 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 ## [2.1.1] - 2026-02-02
 
 ### Fixed
-- **Research skill quality restored** — `/jaan-to:pm-research-about` restructured to match original focused workflow
+- **Research skill quality restored** — `/pm-research-about` restructured to match original focused workflow
   - Removed A- prefixes from all steps and phases (PHASE 1 instead of A-PHASE 1)
   - Removed SECTION A/B framing that buried the research workflow
   - Reduced input detection from 35 lines to 8 lines (less noise before research starts)
@@ -1023,8 +1023,8 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 - `to-jaan-research-add` skill (replaced by `pm-research-about`)
 
 ### Migration Notes
-- `/jaan-to:research-about <topic>` → `/jaan-to:pm-research-about <topic>`
-- `/jaan-to:research-add <file-or-url>` → `/jaan-to:pm-research-about <file-or-url>`
+- `/research-about <topic>` → `/pm-research-about <topic>`
+- `/research-add <file-or-url>` → `/pm-research-about <file-or-url>`
 - Both commands now map to the same skill with automatic input detection
 
 ---
@@ -1090,8 +1090,8 @@ See [Migration Guide](docs/guides/migration-v3.md) for detailed upgrade steps.
 
 ### Migration Notes
 - Old skill names (e.g., `pm-prd-write`, `jaan-docs-create`) are deprecated
-- Commands now use new format: `/jaan-to:pm-prd-write` instead of `/jaan-to:pm-prd-write`
-- Internal commands: `/jaan-to:skill-create` instead of `/jaan-to:jaan-skill-create`
+- Commands now use new format: `/pm-prd-write` instead of `/pm-prd-write`
+- Internal commands: `/skill-create` instead of `/jaan-skill-create`
 
 ---
 

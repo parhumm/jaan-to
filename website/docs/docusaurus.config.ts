@@ -107,6 +107,7 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
+        {to: '/changelog-product', label: 'What\'s New', position: 'left'},
         {to: '/changelog', label: 'Changelog', position: 'left'},
         {
           href: 'https://jaan.to',
@@ -135,6 +136,7 @@ const config: Config = {
         {
           title: 'Content',
           items: [
+            {label: 'What\'s New', to: '/changelog-product'},
             {label: 'Changelog', to: '/changelog'},
             {label: 'Contributing', to: '/contributing'},
           ],

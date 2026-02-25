@@ -14,6 +14,11 @@ if [[ -f "$REPO_ROOT/CHANGELOG.md" ]]; then
   printf -- '---\ntitle: Changelog\n---\n\n' | cat - "$REPO_ROOT/CHANGELOG.md" > "$DOCS_ROOT/src/pages/changelog.md"
 fi
 
+# Copy CHANGELOG-PRODUCT with frontmatter
+if [[ -f "$REPO_ROOT/CHANGELOG-PRODUCT.md" ]]; then
+  printf -- '---\ntitle: Product Changelog\n---\n\n' | cat - "$REPO_ROOT/CHANGELOG-PRODUCT.md" > "$DOCS_ROOT/src/pages/changelog-product.md"
+fi
+
 # Copy CONTRIBUTING with frontmatter
 if [[ -f "$REPO_ROOT/CONTRIBUTING.md" ]]; then
   printf -- '---\ntitle: Contributing\n---\n\n' | cat - "$REPO_ROOT/CONTRIBUTING.md" > "$DOCS_ROOT/src/pages/contributing.md"
