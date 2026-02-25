@@ -8,7 +8,7 @@ tags: [release, changelog, semver, conventional-commits, keep-a-changelog]
 related: [pm-roadmap-update]
 ---
 
-# /jaan-to:release-iterate-changelog
+# /release-iterate-changelog
 
 > Generate user-facing changelogs with impact notes and support guidance from git history.
 
@@ -26,19 +26,19 @@ The skill writes a single living `CHANGELOG.md` file that gets updated on each r
 
 ```bash
 # Auto-generate from git history (most common)
-/jaan-to:release-iterate-changelog
+/release-iterate-changelog
 
 # Create a new changelog from scratch
-/jaan-to:release-iterate-changelog create
+/release-iterate-changelog create
 
 # Promote Unreleased to a version
-/jaan-to:release-iterate-changelog release v1.2.0
+/release-iterate-changelog release v1.2.0
 
 # Add a single entry manually
-/jaan-to:release-iterate-changelog add "New dark mode toggle"
+/release-iterate-changelog add "New dark mode toggle"
 
 # Parse a list of changes
-/jaan-to:release-iterate-changelog "Added export feature, fixed login timeout, removed legacy API"
+/release-iterate-changelog "Added export feature, fixed login timeout, removed legacy API"
 ```
 
 ---
@@ -112,7 +112,7 @@ The output also includes:
 
 **Input**:
 ```
-/jaan-to:release-iterate-changelog
+/release-iterate-changelog
 ```
 
 **Git history analyzed** (5 commits since `v1.1.0`):
@@ -150,7 +150,7 @@ Skipped: 2 commits (docs-only, chore)
 - Use `release vX.Y.Z` after accumulating entries in [Unreleased]
 - The skill suggests a SemVer bump based on change types — review it before accepting
 - Skipped commits are tracked transparently so nothing is silently lost
-- Feed the output into `/jaan-to:support-help-article` for user documentation
+- Feed the output into `/support-help-article` for user documentation
 
 ---
 
@@ -175,21 +175,21 @@ $JAAN_LEARN_DIR/jaan-to-release-iterate-changelog.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add release-iterate-changelog "Always include migration steps for breaking changes"
+/learn-add release-iterate-changelog "Always include migration steps for breaking changes"
 ```
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:pm-roadmap-update](../pm/roadmap-update.md) — Review and maintain project roadmap
+- [/pm-roadmap-update](../pm/roadmap-update.md) — Review and maintain project roadmap
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: release-iterate-changelog
-- **Command**: `/jaan-to:release-iterate-changelog`
+- **Command**: `/release-iterate-changelog`
 - **Role**: release
 - **Output**: `$JAAN_OUTPUTS_DIR/CHANGELOG.md` (single living file)
 - **Standards**: Keep a Changelog 1.1.0, SemVer 2.0.0, Conventional Commits 1.0.0

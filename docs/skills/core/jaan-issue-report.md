@@ -3,7 +3,7 @@ title: "jaan-issue-report"
 sidebar_position: 8
 ---
 
-# /jaan-to:jaan-issue-report
+# /jaan-issue-report
 
 > Report bugs, feature requests, or skill issues to the jaan-to GitHub repo.
 
@@ -22,10 +22,10 @@ When invoked mid-session, the skill scans the conversation for errors, failed to
 ## Usage
 
 ```
-/jaan-to:jaan-issue-report "<description>"
-/jaan-to:jaan-issue-report "<description>" --type bug --submit
-/jaan-to:jaan-issue-report "<description>" --no-submit
-/jaan-to:jaan-issue-report
+/jaan-issue-report "<description>"
+/jaan-issue-report "<description>" --type bug --submit
+/jaan-issue-report "<description>" --no-submit
+/jaan-issue-report
 ```
 
 **Flags**:
@@ -75,18 +75,18 @@ $JAAN_OUTPUTS_DIR/jaan-issues/{id}-{slug}/{id}-{slug}.md
 
 **Report a bug from the current session**:
 ```
-/jaan-to:jaan-issue-report
+/jaan-issue-report
 ```
 The skill scans the conversation and suggests: "It looks like pm-prd-write skipped the Success Metrics section. Report this?"
 
 **Report a feature request**:
 ```
-/jaan-to:jaan-issue-report "Support --dry-run for all generation skills" --type feature
+/jaan-issue-report "Support --dry-run for all generation skills" --type feature
 ```
 
 **Report and submit directly**:
 ```
-/jaan-to:jaan-issue-report "learn-add crashes when LEARN.md is missing" --type bug --submit
+/jaan-issue-report "learn-add crashes when LEARN.md is missing" --type bug --submit
 ```
 
 ---

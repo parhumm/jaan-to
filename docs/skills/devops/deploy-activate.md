@@ -8,7 +8,7 @@ tags: [devops, deploy, activate, secrets, github-actions, supply-chain, platform
 related: [devops-infra-scaffold, dev-output-integrate, sec-audit-remediate]
 ---
 
-# /jaan-to:devops-deploy-activate
+# /devops-deploy-activate
 
 > Activate deployment pipeline — secrets, platforms, supply chain hardening, verification.
 
@@ -23,8 +23,8 @@ Takes infra-scaffold output and activates the deployment pipeline: configures Gi
 ## Usage
 
 ```
-/jaan-to:devops-deploy-activate
-/jaan-to:devops-deploy-activate [infra-scaffold-output]
+/devops-deploy-activate
+/devops-deploy-activate [infra-scaffold-output]
 ```
 
 | Argument | Required | Description |
@@ -72,7 +72,7 @@ Also modifies `.github/workflows/` files (SHA pinning).
 ## Workflow Chain
 
 ```
-/jaan-to:devops-infra-scaffold + /jaan-to:dev-output-integrate --> /jaan-to:devops-deploy-activate
+/devops-infra-scaffold + /dev-output-integrate --> /devops-deploy-activate
 ```
 
 ---
@@ -81,7 +81,7 @@ Also modifies `.github/workflows/` files (SHA pinning).
 
 **Input:**
 ```
-/jaan-to:devops-deploy-activate jaan-to/outputs/devops/infra-scaffold/01-my-app-infra/
+/devops-deploy-activate jaan-to/outputs/devops/infra-scaffold/01-my-app-infra/
 ```
 
 **Output:**
@@ -99,8 +99,8 @@ Activation report: jaan-to/outputs/devops/deploy-activate/01-my-app-activation/0
 
 ## Tips
 
-- Run `/jaan-to:devops-infra-scaffold` first to generate the infrastructure files
-- Run `/jaan-to:dev-output-integrate` to copy CI/CD files into `.github/workflows/` before activating
+- Run `/devops-infra-scaffold` first to generate the infrastructure files
+- Run `/dev-output-integrate` to copy CI/CD files into `.github/workflows/` before activating
 - Ensure CLI tools are installed and authenticated before starting
 - Secret values are entered interactively and never logged or stored in reports
 
@@ -108,16 +108,16 @@ Activation report: jaan-to/outputs/devops/deploy-activate/01-my-app-activation/0
 
 ## Related Skills
 
-- [/jaan-to:devops-infra-scaffold](infra-scaffold.md) - Generate CI/CD and deployment configs
-- [/jaan-to:dev-output-integrate](../dev/output-integrate.md) - Copy outputs into project
-- [/jaan-to:sec-audit-remediate](../sec/audit-remediate.md) - Security fixes and hardening
-- [/jaan-to:release-iterate-changelog](../release/iterate-changelog.md) - Generate changelog for releases
+- [/devops-infra-scaffold](infra-scaffold.md) - Generate CI/CD and deployment configs
+- [/dev-output-integrate](../dev/output-integrate.md) - Copy outputs into project
+- [/sec-audit-remediate](../sec/audit-remediate.md) - Security fixes and hardening
+- [/release-iterate-changelog](../release/iterate-changelog.md) - Generate changelog for releases
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: devops-deploy-activate
-- **Command**: `/jaan-to:devops-deploy-activate`
+- **Command**: `/devops-deploy-activate`
 - **Role**: devops
 - **Output**: `$JAAN_OUTPUTS_DIR/devops/deploy-activate/{id}-{slug}/`

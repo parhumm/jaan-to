@@ -5,7 +5,7 @@ doc_type: skill
 tags: [deprecated, detect]
 ---
 
-# /jaan-to:dev-stack-detect (Deprecated)
+# /dev-stack-detect (Deprecated)
 
 > This skill has been replaced by the detect skills suite.
 
@@ -17,12 +17,12 @@ The `dev-stack-detect` skill has been merged into **`detect-dev`** as part of th
 
 | Old Skill | New Skill | What Changed |
 |-----------|-----------|-------------|
-| `/jaan-to:dev-stack-detect` | `/jaan-to:detect-dev` | Evidence-backed engineering audit with SARIF locations, 4-level confidence, OpenSSF scoring |
+| `/dev-stack-detect` | `/detect-dev` | Evidence-backed engineering audit with SARIF locations, 4-level confidence, OpenSSF scoring |
 
 For a full repo analysis across all domains (dev, design, writing, product, UX), run:
 
 ```
-/jaan-to:detect-pack
+/detect-pack
 ```
 
 ---

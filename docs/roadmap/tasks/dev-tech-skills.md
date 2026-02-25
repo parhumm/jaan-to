@@ -15,10 +15,10 @@ Spec-driven development workflow inspired by GitHub's spec-kit. A cohesive skill
 
 | Skill | Phase | Purpose | Spec-Kit Equivalent |
 |-------|-------|---------|---------------------|
-| `/jaan-to:dev-tech-plan` | 3 | Technical planning | `/speckit.plan` |
-| `/jaan-to:dev-tech-tasks` | 3 | Task decomposition | `/speckit.tasks` |
-| `/jaan-to:dev-tech-validate` | 3 | Artifact validation | `/speckit.analyze` |
-| `/jaan-to:dev-tech-guide` | 3.5 | Implementation guidance | `/speckit.implement` |
+| `/dev-tech-plan` | 3 | Technical planning | `/speckit.plan` |
+| `/dev-tech-tasks` | 3 | Task decomposition | `/speckit.tasks` |
+| `/dev-tech-validate` | 3 | Artifact validation | `/speckit.analyze` |
+| `/dev-tech-guide` | 3.5 | Implementation guidance | `/speckit.implement` |
 
 ## Workflow
 
@@ -42,7 +42,7 @@ PRD ─────────────────────────�
 
 ## Sub-Tasks
 
-### 3.1 `/jaan-to:dev-tech-plan` Skill
+### 3.1 `/dev-tech-plan` Skill
 
 **Input:** PRD path or feature description
 **Output:** Technical planning outputs
@@ -56,7 +56,7 @@ PRD ─────────────────────────�
 - [ ] Support NEEDS CLARIFICATION markers for unknowns
 - [ ] Add LEARN.md for skill lessons
 
-### 3.2 `/jaan-to:dev-tech-tasks` Skill
+### 3.2 `/dev-tech-tasks` Skill
 
 **Input:** plan.md from /dev-tech-plan
 **Output:** Parallelizable task breakdown
@@ -73,7 +73,7 @@ PRD ─────────────────────────�
 - [ ] Add checkpoints between phases
 - [ ] Add LEARN.md for skill lessons
 
-### 3.3 `/jaan-to:dev-tech-validate` Skill
+### 3.3 `/dev-tech-validate` Skill
 
 **Input:** PRD + plan.md + tasks.md
 **Output:** Validation report
@@ -86,7 +86,7 @@ PRD ─────────────────────────�
 - [ ] Suggest fixes for common issues
 - [ ] Add LEARN.md for skill lessons
 
-### 3.4 `/jaan-to:dev-tech-guide` Skill
+### 3.4 `/dev-tech-guide` Skill
 
 **Input:** tasks.md + constitution
 **Output:** Implementation guidance
@@ -172,7 +172,7 @@ jaan-to/outputs/dev/tech/{slug}/
 ## Dependencies
 
 - Phase 2.5 complete (Documentation & Tooling)
-- `/jaan-to:pm-prd-write` skill (PRD input)
+- `/pm-prd-write` skill (PRD input)
 
 ## References
 

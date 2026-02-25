@@ -73,7 +73,7 @@ Captures:
 - [x] Update SKILL.md to read jaan-to/learn/{name}.learn.md
 - [x] Update SKILL.md to read context
 
-### 2.3 /jaan-to:learn-add Command
+### 2.3 /learn-add Command
 - [x] Create jaan-learn-add skill
 - [x] Implement routing logic (skill/template/context)
 - [x] Implement categorization logic
@@ -96,7 +96,7 @@ Captures:
 - [x] `LEARN.md` file created for `pm-prd-write` skill
 - [x] Skills read `jaan-to/learn/{name}.learn.md` before execution
 - [x] Skills read context files before execution
-- [x] `/jaan-to:learn-add` command to capture feedback
+- [x] `/learn-add` command to capture feedback
 - [x] Learning applies to subsequent executions
 - [x] PostToolUse hook prompts for feedback
 
@@ -109,8 +109,8 @@ Captures:
 - [x] pm-prd-write reads and applies jaan-to/learn/ lessons
 - [x] Context directory exists with tech.md, team.md, integrations.md
 - [x] Skills read and incorporate context
-- [x] `/jaan-to:learn-add` routes feedback to correct .learn.md
-- [x] `/jaan-to:learn-add` auto-categorizes lessons
+- [x] `/learn-add` routes feedback to correct .learn.md
+- [x] `/learn-add` auto-categorizes lessons
 - [x] PostToolUse hook prompts for feedback after artifact creation
 
 ### Quality
@@ -121,7 +121,7 @@ Captures:
 
 ### Testing
 - [x] E2E: Skill reads .learn.md and applies lessons
-- [x] E2E: /jaan-to:learn-add routes correctly
+- [x] E2E: /learn-add routes correctly
 - [x] E2E: Context incorporated into output
 - [x] E2E: Feedback prompt after execution
 
@@ -132,21 +132,21 @@ Captures:
 ### Test 1: Learning Application
 ```
 Setup: Add "Always ask about API versioning" to jaan-to/learn/jaan-to-pm-prd-write.learn.md
-Execute: /jaan-to:pm-prd-write "new API endpoint"
+Execute: /pm-prd-write "new API endpoint"
 Verify: Skill asks about API versioning
 ```
 
 ### Test 2: Feedback Routing
 ```
 Setup: Clean jaan-to/learn/jaan-to-pm-prd-write.learn.md
-Execute: /jaan-to:learn-add "pm-prd-write" "Check for i18n requirements"
+Execute: /learn-add "pm-prd-write" "Check for i18n requirements"
 Verify: Lesson appears in jaan-to/learn/jaan-to-pm-prd-write.learn.md under "Better Questions"
 ```
 
 ### Test 3: Context Integration
 ```
 Setup: Set jaan-to/context/tech.md to Python/FastAPI
-Execute: /jaan-to:pm-prd-write "backend service"
+Execute: /pm-prd-write "backend service"
 Verify: PRD mentions Python/FastAPI context
 ```
 
@@ -154,10 +154,10 @@ Verify: PRD mentions Python/FastAPI context
 ```
 Setup: Fresh state
 Execute:
-  1. Run /jaan-to:pm-prd-write "test feature"
+  1. Run /pm-prd-write "test feature"
   2. Complete PRD generation
-  3. Add lesson via /jaan-to:learn-add
-  4. Run /jaan-to:pm-prd-write "another feature"
+  3. Add lesson via /learn-add
+  4. Run /pm-prd-write "another feature"
 Verify: Second run applies the lesson from step 3
 ```
 

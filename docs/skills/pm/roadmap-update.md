@@ -3,7 +3,7 @@ title: "pm-roadmap-update"
 sidebar_position: 6
 ---
 
-# /jaan-to:pm-roadmap-update
+# /pm-roadmap-update
 
 > Review and maintain a project roadmap with codebase-aware analysis.
 
@@ -22,11 +22,11 @@ Keeps your roadmap accurate and current through four maintenance modes:
 ## Usage
 
 ```
-/jaan-to:pm-roadmap-update                    # Default: review mode
-/jaan-to:pm-roadmap-update review             # Full cross-reference review
-/jaan-to:pm-roadmap-update mark "auth" done   # Mark item as complete
-/jaan-to:pm-roadmap-update reprioritize       # Re-evaluate all priorities
-/jaan-to:pm-roadmap-update validate           # Quality/consistency check
+/pm-roadmap-update                    # Default: review mode
+/pm-roadmap-update review             # Full cross-reference review
+/pm-roadmap-update mark "auth" done   # Mark item as complete
+/pm-roadmap-update reprioritize       # Re-evaluate all priorities
+/pm-roadmap-update validate           # Quality/consistency check
 ```
 
 ---
@@ -76,7 +76,7 @@ Updates the existing roadmap file in-place. Reports are shown inline during the 
 
 **Input**:
 ```
-/jaan-to:pm-roadmap-update review
+/pm-roadmap-update review
 ```
 
 **Review findings**:
@@ -116,5 +116,5 @@ jaan-to/learn/jaan-to-pm-roadmap-update.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add pm-roadmap-update "Check external trackers too"
+/learn-add pm-roadmap-update "Check external trackers too"
 ```

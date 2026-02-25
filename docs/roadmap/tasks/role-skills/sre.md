@@ -60,7 +60,7 @@ flowchart TD
 - **Input**: [alerts]
 - **Output**: `$JAAN_OUTPUTS_DIR/sre/monitor/{slug}/alert-tuning.md`
 
-### /jaan-to:sre-pipeline-create
+### /sre-pipeline-create
 
 - **Logical**: `sre-pipeline-create`
 - **Description**: Generate CI/CD pipeline configuration: GitHub Actions workflows, Dockerfile, deployment manifests, testing stages

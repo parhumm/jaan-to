@@ -37,17 +37,17 @@ Four categories of lessons:
 Use the learn-add skill:
 
 ```
-/jaan-to:learn-add {target} "{lesson}"
+/learn-add {target} "{lesson}"
 ```
 
 **Examples**:
 
 ```
-/jaan-to:learn-add pm-prd-write "Always ask about rollback strategy"
+/learn-add pm-prd-write "Always ask about rollback strategy"
 ```
 
 ```
-/jaan-to:learn-add pm-prd-write "Check for accessibility requirements"
+/learn-add pm-prd-write "Check for accessibility requirements"
 ```
 
 ---

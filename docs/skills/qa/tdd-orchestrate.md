@@ -8,7 +8,7 @@ tags: [qa, tdd, bdd, red-green-refactor, context-isolation, agents, test-first]
 related: [qa-test-cases, qa-test-generate, qa-test-mutate, qa-test-run]
 ---
 
-# /jaan-to:qa-tdd-orchestrate
+# /qa-tdd-orchestrate
 
 > Orchestrate RED/GREEN/REFACTOR TDD cycle with context-isolated agents for test-first development.
 
@@ -16,7 +16,7 @@ related: [qa-test-cases, qa-test-generate, qa-test-mutate, qa-test-run]
 
 ## Overview
 
-Runs a full TDD cycle using three context-isolated AI agents (RED, GREEN, REFACTOR) that communicate only through artifacts -- never through shared reasoning. Supports a double-loop pattern: outer BDD acceptance tests from `/jaan-to:qa-test-cases`, inner unit TDD cycles per component. Context isolation is the core architectural principle, enforced at three levels.
+Runs a full TDD cycle using three context-isolated AI agents (RED, GREEN, REFACTOR) that communicate only through artifacts -- never through shared reasoning. Supports a double-loop pattern: outer BDD acceptance tests from `/qa-test-cases`, inner unit TDD cycles per component. Context isolation is the core architectural principle, enforced at three levels.
 
 **Claude Code only** -- requires `Task` tool for sub-agent spawning. Not available in Codex runtime.
 
@@ -25,8 +25,8 @@ Runs a full TDD cycle using three context-isolated AI agents (RED, GREEN, REFACT
 ## Usage
 
 ```
-/jaan-to:qa-tdd-orchestrate "implement user login with rate limiting"
-/jaan-to:qa-tdd-orchestrate path/to/qa-test-cases-output
+/qa-tdd-orchestrate "implement user login with rate limiting"
+/qa-tdd-orchestrate path/to/qa-test-cases-output
 ```
 
 | Argument | Required | Description |
@@ -90,7 +90,7 @@ Inner Loop (per component)
 ## Workflow Chain
 
 ```
-/jaan-to:qa-test-cases --> /jaan-to:qa-tdd-orchestrate --> /jaan-to:qa-test-mutate
+/qa-test-cases --> /qa-tdd-orchestrate --> /qa-test-mutate
 ```
 
 ---
@@ -99,7 +99,7 @@ Inner Loop (per component)
 
 **Input:**
 ```
-/jaan-to:qa-tdd-orchestrate "implement user login with rate limiting"
+/qa-tdd-orchestrate "implement user login with rate limiting"
 ```
 
 **Output:**
@@ -124,26 +124,26 @@ Acceptance Criteria: 3/3 satisfied
 
 ## Tips
 
-- Start with acceptance criteria from `/jaan-to:qa-test-cases` for the outer loop
+- Start with acceptance criteria from `/qa-test-cases` for the outer loop
 - Review the component decomposition before approving -- smaller components = better TDD
 - If a test fails 3 times with the same error, the skill escalates to you
-- Follow up with `/jaan-to:qa-test-mutate` to validate test effectiveness
+- Follow up with `/qa-test-mutate` to validate test effectiveness
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:qa-test-cases](test-cases.md) - Generate BDD/Gherkin test cases for outer loop
-- [/jaan-to:qa-test-mutate](test-mutate.md) - Validate test effectiveness after TDD
-- [/jaan-to:qa-test-generate](test-generate.md) - Generate test files from BDD cases
-- [/jaan-to:qa-test-run](test-run.md) - Execute and diagnose test failures
+- [/qa-test-cases](test-cases.md) - Generate BDD/Gherkin test cases for outer loop
+- [/qa-test-mutate](test-mutate.md) - Validate test effectiveness after TDD
+- [/qa-test-generate](test-generate.md) - Generate test files from BDD cases
+- [/qa-test-run](test-run.md) - Execute and diagnose test failures
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: qa-tdd-orchestrate
-- **Command**: `/jaan-to:qa-tdd-orchestrate`
+- **Command**: `/qa-tdd-orchestrate`
 - **Role**: qa
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/tdd-orchestrate/{id}-{slug}/`
 - **Runtime**: Claude Code only (codex-support: false)

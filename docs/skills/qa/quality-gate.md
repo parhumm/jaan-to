@@ -8,7 +8,7 @@ tags: [qa, quality-gate, composite-score, review-routing, upstream-aggregation]
 related: [qa-test-run, qa-test-mutate, detect-dev, sec-audit-remediate, backend-pr-review]
 ---
 
-# /jaan-to:qa-quality-gate
+# /qa-quality-gate
 
 > Compute composite quality score from upstream skill outputs to guide review depth.
 
@@ -23,8 +23,8 @@ Aggregates quality signals from upstream skills (test results, audit findings, s
 ## Usage
 
 ```
-/jaan-to:qa-quality-gate path/to/qa-test-run-output path/to/detect-dev-output
-/jaan-to:qa-quality-gate path/to/test-run path/to/detect-dev path/to/sec-audit path/to/qa-test-mutate
+/qa-quality-gate path/to/qa-test-run-output path/to/detect-dev-output
+/qa-quality-gate path/to/test-run path/to/detect-dev path/to/sec-audit path/to/qa-test-mutate
 ```
 
 | Argument | Required | Description |
@@ -92,7 +92,7 @@ Example: If mutation score (0.15 weight) is null, remaining weights are scaled b
 
 **Input:**
 ```
-/jaan-to:qa-quality-gate outputs/qa/test-run/01-auth/ outputs/detect/dev/01-audit/
+/qa-quality-gate outputs/qa/test-run/01-auth/ outputs/detect/dev/01-audit/
 ```
 
 **Output:**
@@ -129,17 +129,17 @@ Recommendation: Lightweight review
 
 ## Related Skills
 
-- [/jaan-to:qa-test-run](test-run.md) - Test execution results (primary input)
-- [/jaan-to:qa-test-mutate](test-mutate.md) - Mutation score signal
-- [/jaan-to:detect-dev](../detect/detect-dev.md) - Engineering audit signal
-- [/jaan-to:sec-audit-remediate](../sec/audit-remediate.md) - Security scan signal
+- [/qa-test-run](test-run.md) - Test execution results (primary input)
+- [/qa-test-mutate](test-mutate.md) - Mutation score signal
+- [/detect-dev](../detect/detect-dev.md) - Engineering audit signal
+- [/sec-audit-remediate](../sec/audit-remediate.md) - Security scan signal
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: qa-quality-gate
-- **Command**: `/jaan-to:qa-quality-gate`
+- **Command**: `/qa-quality-gate`
 - **Role**: qa
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/quality-gate/{id}-{slug}/`
 - **Note**: Reads upstream outputs only -- does NOT scan the repository directly

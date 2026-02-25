@@ -67,10 +67,10 @@ Internal skills (for plugin maintenance):
 
 | Skill Name | Command |
 |------------|---------|
-| `pm-prd-write` | `/jaan-to:pm-prd-write` |
-| `qa-plan-test-matrix` | `/jaan-to:qa-plan-test-matrix` |
-| `docs-create` | `/jaan-to:docs-create` |
-| `backend-api-contract` | `/jaan-to:backend-api-contract` |
+| `pm-prd-write` | `/pm-prd-write` |
+| `qa-plan-test-matrix` | `/qa-plan-test-matrix` |
+| `docs-create` | `/docs-create` |
+| `backend-api-contract` | `/backend-api-contract` |
 
 ---
 
@@ -535,7 +535,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/jaan-to:learn-add {skill-name} "{feedback}"`
+- **Option 2**: Run `/learn-add {skill-name} "{feedback}"`
 - **Option 3**: Do both
 
 ---
@@ -659,7 +659,7 @@ Create path: `$JAAN_OUTPUTS_DIR/pm/{slug}/`
 
 **Migration**:
 ```bash
-/jaan-to:skill-update {skill-name}
+/skill-update {skill-name}
 # → Select option [8] Migrate to v3.0.0
 ```
 
@@ -1161,7 +1161,7 @@ Things to avoid:
 
 ### Auto-Categorization Keywords
 
-When adding lessons via `/jaan-to:learn-add`, category is detected by keywords:
+When adding lessons via `/learn-add`, category is detected by keywords:
 
 | Category | Trigger Keywords |
 |----------|------------------|
@@ -1274,7 +1274,7 @@ After writing:
 > "Any feedback? [y/n]"
 
 If yes:
-- Run `/jaan-to:learn-add {skill-name} "{feedback}"`
+- Run `/learn-add {skill-name} "{feedback}"`
 ```
 
 ### Config Registration
@@ -1286,8 +1286,8 @@ Register new skills in `jaan-to/context/config.md`:
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| `pm-prd-write` | `/jaan-to:pm-prd-write` | Generate PRD |
-| `your-new-skill` | `/jaan-to:your-new-skill` | Your description |
+| `pm-prd-write` | `/pm-prd-write` | Generate PRD |
+| `your-new-skill` | `/your-new-skill` | Your description |
 ```
 
 ---
@@ -1382,7 +1382,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update output, re-preview, re-write
-- **Option 2**: Run `/jaan-to:learn-add example-minimal-demo "{feedback}"`
+- **Option 2**: Run `/learn-add example-minimal-demo "{feedback}"`
 - **Option 3**: Do both
 
 ---
@@ -1542,7 +1542,7 @@ If yes:
 > "[1] Fix now  [2] Learn for future  [3] Both"
 
 - **Option 1**: Update matrix, re-preview, re-write
-- **Option 2**: Run `/jaan-to:learn-add qa-test-matrix "{feedback}"`
+- **Option 2**: Run `/learn-add qa-test-matrix "{feedback}"`
 - **Option 3**: Do both
 
 ---
@@ -1566,7 +1566,7 @@ If yes:
 Use the skill validator for migration:
 
 ```bash
-/jaan-to:skill-update {skill-name}
+/skill-update {skill-name}
 # → Select option [8] Migrate to v3.0.0
 # → Choose migration approach (auto-fix, interactive, guidance)
 ```
@@ -1688,7 +1688,7 @@ After migration, run validation:
 
 ```bash
 # Use skill validator
-/jaan-to:skill-update {skill-name}
+/skill-update {skill-name}
 ```
 
 Check v3.0.0 compliance:
@@ -1750,7 +1750,7 @@ After migration, test the skill:
 
 ## Tips
 
-- Start with fewer questions—add more via `/jaan-to:learn-add`
+- Start with fewer questions—add more via `/learn-add`
 - Match output format to team expectations
 - Read stack context instead of asking redundant questions
 - Test with real scenarios before committing

@@ -38,7 +38,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### /jaan-to:qa-test-matrix
+### /qa-test-matrix
 
 - **Logical**: `qa-test-matrix`
 - **Description**: Risk-based matrix: P0/P1 flows × states × devices × env (staging/prod-like)
@@ -52,7 +52,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/matrix/{slug}/test-matrix.md`
 
-### /jaan-to:qa-test-cases
+### /qa-test-cases
 
 - **Logical**: `qa-test-cases`
 - **Description**: Test cases from acceptance criteria with edge cases, preconditions, expected results
@@ -70,7 +70,7 @@ flowchart TD
 - **Failure Modes**: Vague steps; missing edge cases; not traceable to requirements
 - **Quality Gates**: Peer review; traceable to requirements; reusable format
 
-### /jaan-to:qa-test-data
+### /qa-test-data
 
 - **Logical**: `qa-test-data`
 - **Description**: Test accounts + permissions, seed data requirements, edge-case data set list
@@ -84,7 +84,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/data/{slug}/test-data.md`
 
-### /jaan-to:qa-e2e-checklist
+### /qa-e2e-checklist
 
 - **Logical**: `qa-e2e-checklist`
 - **Description**: E2E checklist + expected results, preconditions + postconditions, state coverage
@@ -98,7 +98,7 @@ flowchart TD
 - **Input**: [flow]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/e2e/{slug}/e2e-checklist.md`
 
-### /jaan-to:qa-bug-report
+### /qa-bug-report
 
 - **Logical**: `qa-bug-report`
 - **Description**: Structured bug reports with severity, priority, steps to reproduce, expected vs actual
@@ -115,7 +115,7 @@ flowchart TD
 - **Failure Modes**: Vague descriptions; missing repro steps; incorrect severity
 - **Quality Gates**: Developer can reproduce in <5 min; linked to test case
 
-### /jaan-to:qa-bug-triage
+### /qa-bug-triage
 
 - **Logical**: `qa-bug-triage`
 - **Description**: Dedupe + severity + repro hints + next action per issue, cluster by root cause
@@ -129,7 +129,7 @@ flowchart TD
 - **Input**: [issue-list]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/triage/{slug}/bug-triage.md`
 
-### /jaan-to:qa-perf-plan
+### /qa-perf-plan
 
 - **Logical**: `qa-perf-plan`
 - **Description**: Load scenarios + thresholds, tooling checklist, monitoring requirements
@@ -143,7 +143,7 @@ flowchart TD
 - **Input**: [service]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/perf/{slug}/perf-plan.md`
 
-### /jaan-to:qa-perf-bottleneck
+### /qa-perf-bottleneck
 
 - **Logical**: `qa-perf-bottleneck`
 - **Description**: Suspected bottlenecks + checks, next diagnostic steps, quick remediation ideas
@@ -157,7 +157,7 @@ flowchart TD
 - **Input**: [metrics]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/perf/{slug}/bottleneck-hypotheses.md`
 
-### /jaan-to:qa-automation-plan
+### /qa-automation-plan
 
 - **Logical**: `qa-automation-plan`
 - **Description**: Automation plan: what to automate now vs later, flakiness risk, testability changes needed
@@ -171,7 +171,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/automation/{slug}/automation-plan.md`
 
-### /jaan-to:qa-smoke-suite
+### /qa-smoke-suite
 
 - **Logical**: `qa-smoke-suite`
 - **Description**: Smoke tests list (critical paths), environment prerequisites, pass/fail criteria
@@ -185,7 +185,7 @@ flowchart TD
 - **Input**: [product]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/regression/{slug}/smoke-suite.md`
 
-### /jaan-to:qa-regression-runbook
+### /qa-regression-runbook
 
 - **Logical**: `qa-regression-runbook`
 - **Description**: Step-by-step regression runbook: smoke → critical → deep checks with timing/owners
@@ -199,7 +199,7 @@ flowchart TD
 - **Input**: [release]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/regression/{slug}/runbook.md`
 
-### /jaan-to:qa-release-signoff
+### /qa-release-signoff
 
 - **Logical**: `qa-release-signoff`
 - **Description**: Go/No-Go summary with evidence, open risks, mitigations, rollback readiness
@@ -213,7 +213,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/signoff/{slug}/release-signoff.md`
 
-### ✅ /jaan-to:qa-test-generate
+### ✅ /qa-test-generate
 
 - **Logical**: `qa-test-generate`
 - **Description**: Generate runnable Vitest and Playwright test files from BDD test cases and scaffold code
@@ -227,7 +227,7 @@ flowchart TD
 - **Input**: [qa-test-cases] [backend-scaffold | frontend-scaffold]
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/test-generate/{id}-{slug}/`
 
-### ✅ /jaan-to:qa-test-run
+### ✅ /qa-test-run
 
 - **Logical**: `qa-test-run`
 - **Description**: Execute tests across stacks (Node/PHP/Go), diagnose failures, auto-fix simple issues, generate coverage reports

@@ -17,7 +17,7 @@ sources change.
 ## Command Signature
 
 ```
-/jaan-to:ux-flowchart-generate [source_type] [paths...] [goal] [scope?]
+/ux-flowchart-generate [source_type] [paths...] [goal] [scope?]
 ```
 
 **Parameters:**
@@ -299,7 +299,7 @@ Write two files:
 ```markdown
 # UX Flowchart: {Flow Name}
 
-> **Skill:** `/jaan-to:ux-flowchart-generate`
+> **Skill:** `/ux-flowchart-generate`
 > **Source(s):** `{source_type}` — {comma-separated paths}
 > **Goal:** {userflow|systemflow|architecture|stateflow}
 > **Generated:** {ISO-8601 timestamp}
@@ -460,7 +460,7 @@ After generating a flowchart, the user typically proceeds to:
 ### Example A: PRD-only password reset
 
 ```
-/jaan-to:ux-flowchart-generate prd docs/prd-auth.md goal=userflow scope="password reset"
+/ux-flowchart-generate prd docs/prd-auth.md goal=userflow scope="password reset"
 ```
 
 Produces a flowchart with 12 nodes covering forgot-password → email → token → new-password → success,
@@ -470,7 +470,7 @@ rate limiting, token format, and password complexity rules as unspecified.
 ### Example B: Repo-only auth middleware
 
 ```
-/jaan-to:ux-flowchart-generate repo src/middleware/ goal=systemflow scope="auth"
+/ux-flowchart-generate repo src/middleware/ goal=systemflow scope="auth"
 ```
 
 Produces a system flow derived from code analysis: request → extract token → verify JWT →
@@ -480,7 +480,7 @@ without tests get 🟡 Medium. No PRD reference columns populated.
 ### Example C: Mixed checkout with mismatches
 
 ```
-/jaan-to:ux-flowchart-generate mixed docs/prd-checkout.md src/checkout/ goal=userflow
+/ux-flowchart-generate mixed docs/prd-checkout.md src/checkout/ goal=userflow
 ```
 
 Produces a user flow with mismatch callouts: PRD specifies guest checkout but code doesn't

@@ -92,7 +92,7 @@ function SkillCategories() {
       <div className="container">
         <div style={{textAlign: 'center', marginBottom: '2rem'}}>
           <Heading as="h2">Skills by Role</Heading>
-          <p style={{color: '#6b6b6b'}}>51 skills across 13 roles + 1 MCP connector. Run any skill with <code>/jaan-to:skill-name</code></p>
+          <p style={{color: '#6b6b6b'}}>51 skills across 13 roles + 1 MCP connector. Run any skill with <code>/skill-name</code></p>
         </div>
         <div className="row">
           {roles.map(({name, skills}) => (
@@ -103,7 +103,7 @@ function SkillCategories() {
               <ul style={{listStyle: 'none', padding: 0, margin: 0}}>
                 {skills.map((skill) => (
                   <li key={skill} style={{marginBottom: '4px'}}>
-                    <code style={{fontSize: '0.82rem'}}>/jaan-to:{skill}</code>
+                    <code style={{fontSize: '0.82rem'}}>/{skill}</code>
                   </li>
                 ))}
               </ul>
@@ -125,7 +125,7 @@ function QuickExample() {
         <div className="terminal-block">
           <span className="prompt">$</span> <span className="command">claude</span><br />
           <span className="prompt">$</span> <span className="command">/plugin marketplace add parhumm/jaan-to</span><br />
-          <span className="prompt">$</span> <span className="command">/jaan-to:pm-prd-write &quot;user authentication&quot;</span>
+          <span className="prompt">$</span> <span className="command">/pm-prd-write &quot;user authentication&quot;</span>
         </div>
       </div>
     </section>

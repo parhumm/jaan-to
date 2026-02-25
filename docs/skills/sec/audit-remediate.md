@@ -8,7 +8,7 @@ tags: [sec, security, audit, remediate, sarif, cwe, owasp, fixes]
 related: [detect-dev, backend-scaffold, frontend-scaffold, devops-infra-scaffold]
 ---
 
-# /jaan-to:sec-audit-remediate
+# /sec-audit-remediate
 
 > Generate targeted security fixes from detect-dev SARIF findings with regression tests.
 
@@ -16,15 +16,15 @@ related: [detect-dev, backend-scaffold, frontend-scaffold, devops-infra-scaffold
 
 ## Overview
 
-Takes security findings from `/jaan-to:detect-dev` (SARIF format or security summary) and scaffold code to generate targeted fix patches, regression tests, and a remediation report. Supports CWE-mapped fix strategies with severity-based triage and confidence scoring.
+Takes security findings from `/detect-dev` (SARIF format or security summary) and scaffold code to generate targeted fix patches, regression tests, and a remediation report. Supports CWE-mapped fix strategies with severity-based triage and confidence scoring.
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:sec-audit-remediate
-/jaan-to:sec-audit-remediate detect-dev-output [backend-scaffold | frontend-scaffold]
+/sec-audit-remediate
+/sec-audit-remediate detect-dev-output [backend-scaffold | frontend-scaffold]
 ```
 
 | Argument | Required | Description |
@@ -76,7 +76,7 @@ Generates fixes for common vulnerability types:
 ## Workflow Chain
 
 ```
-/jaan-to:detect-dev --> /jaan-to:sec-audit-remediate --> /jaan-to:devops-infra-scaffold (security in CI)
+/detect-dev --> /sec-audit-remediate --> /devops-infra-scaffold (security in CI)
 ```
 
 ---
@@ -85,7 +85,7 @@ Generates fixes for common vulnerability types:
 
 **Input:**
 ```
-/jaan-to:sec-audit-remediate path/to/detect-dev/security.md backend-scaffold
+/sec-audit-remediate path/to/detect-dev/security.md backend-scaffold
 ```
 
 **Output:**
@@ -101,24 +101,24 @@ jaan-to/outputs/sec/remediate/01-auth-hardening/
 
 ## Tips
 
-- Run `/jaan-to:detect-dev` first to generate SARIF findings
+- Run `/detect-dev` first to generate SARIF findings
 - Start with critical/high severity findings for maximum impact
 - Review fix patches before applying to your codebase
-- Use `/jaan-to:devops-infra-scaffold` to add security scanning to CI
+- Use `/devops-infra-scaffold` to add security scanning to CI
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:detect-dev](../detect/detect-dev.md) - Engineering audit with SARIF evidence
-- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code stubs
-- [/jaan-to:devops-infra-scaffold](../devops/infra-scaffold.md) - Generate CI/CD with security scanning
+- [/detect-dev](../detect/detect-dev.md) - Engineering audit with SARIF evidence
+- [/backend-scaffold](../backend/scaffold.md) - Generate backend code stubs
+- [/devops-infra-scaffold](../devops/infra-scaffold.md) - Generate CI/CD with security scanning
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: sec-audit-remediate
-- **Command**: `/jaan-to:sec-audit-remediate`
+- **Command**: `/sec-audit-remediate`
 - **Role**: sec
 - **Output**: `$JAAN_OUTPUTS_DIR/sec/remediate/{id}-{slug}/`

@@ -55,7 +55,7 @@ Co-Authored-By: Claude <noreply@anthropic.com>"
 >
 > For example, if updating `docs-create`:
 > ```
-> /jaan-to:docs-create skill "my-new-feature"
+> /docs-create skill "my-new-feature"
 > ```
 >
 > "Did it work correctly? [y/n]"
@@ -119,7 +119,7 @@ git commit -m "feat(skill): Add {name} skill
 
 - {description}
 - Research-informed: {source_count} sources consulted
-- Auto-generated with /jaan-to:skill-create
+- Auto-generated with /skill-create
 
 Generated with Claude Code
 

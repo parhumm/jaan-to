@@ -8,7 +8,7 @@ tags: [dev, output, integrate, wiring, entry-points, merge, validation]
 related: [dev-project-assemble, devops-deploy-activate, backend-scaffold, frontend-scaffold]
 ---
 
-# /jaan-to:dev-output-integrate
+# /dev-output-integrate
 
 > Bridge generated outputs from jaan-to/outputs/ into operational project locations.
 
@@ -23,8 +23,8 @@ Reads generated jaan-to output files, parses their README placement instructions
 ## Usage
 
 ```
-/jaan-to:dev-output-integrate
-/jaan-to:dev-output-integrate [output-path...]
+/dev-output-integrate
+/dev-output-integrate [output-path...]
 ```
 
 | Argument | Required | Description |
@@ -61,7 +61,7 @@ Also writes files directly into the project (src/, configs, etc.).
 ## Workflow Chain
 
 ```
-/jaan-to:backend-scaffold + /jaan-to:frontend-scaffold + /jaan-to:devops-infra-scaffold --> /jaan-to:dev-output-integrate --> /jaan-to:devops-deploy-activate
+/backend-scaffold + /frontend-scaffold + /devops-infra-scaffold --> /dev-output-integrate --> /devops-deploy-activate
 ```
 
 ---
@@ -70,7 +70,7 @@ Also writes files directly into the project (src/, configs, etc.).
 
 **Input:**
 ```
-/jaan-to:dev-output-integrate jaan-to/outputs/backend/scaffold/01-my-api/
+/dev-output-integrate jaan-to/outputs/backend/scaffold/01-my-api/
 ```
 
 **Output:**
@@ -90,22 +90,22 @@ Integration log: jaan-to/outputs/dev/output-integrate/01-my-api-integration/01-m
 - Run after all scaffold and service skills have generated their outputs
 - Review the integration plan carefully before approving — especially replacements and merges
 - Keep a clean git state before running so you can easily roll back with `git stash`
-- Use `/jaan-to:devops-deploy-activate` next if CI/CD configs were integrated
+- Use `/devops-deploy-activate` next if CI/CD configs were integrated
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:dev-project-assemble](project-assemble.md) - Assemble project from scaffolds
-- [/jaan-to:devops-deploy-activate](../devops/deploy-activate.md) - Activate deployment pipeline
-- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code
-- [/jaan-to:frontend-scaffold](../frontend/scaffold.md) - Generate frontend components
+- [/dev-project-assemble](project-assemble.md) - Assemble project from scaffolds
+- [/devops-deploy-activate](../devops/deploy-activate.md) - Activate deployment pipeline
+- [/backend-scaffold](../backend/scaffold.md) - Generate backend code
+- [/frontend-scaffold](../frontend/scaffold.md) - Generate frontend components
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: dev-output-integrate
-- **Command**: `/jaan-to:dev-output-integrate`
+- **Command**: `/dev-output-integrate`
 - **Role**: dev
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/output-integrate/{id}-{slug}/`

@@ -4,7 +4,7 @@ sidebar_position: 10
 updated_date: 2026-02-23
 ---
 
-# /jaan-to:team-ship
+# /team-ship
 
 > Assemble role-based AI teammates to ship ideas from concept to production.
 
@@ -21,13 +21,13 @@ Uses Claude Code's Agent Teams feature. Each teammate gets its own context, runs
 ## Usage
 
 ```
-/jaan-to:team-ship "AI task manager with natural language input"
-/jaan-to:team-ship --track fast "auth system"
-/jaan-to:team-ship --detect
-/jaan-to:team-ship --roles pm,backend "payment flow"
-/jaan-to:team-ship --dry-run "social feed"
-/jaan-to:team-ship --resume
-/jaan-to:team-ship --track tdd "payment service"
+/team-ship "AI task manager with natural language input"
+/team-ship --track fast "auth system"
+/team-ship --detect
+/team-ship --roles pm,backend "payment flow"
+/team-ship --dry-run "social feed"
+/team-ship --resume
+/team-ship --track tdd "payment service"
 ```
 
 ---
@@ -56,7 +56,7 @@ Before using team-ship:
    agent_teams_enabled: true
    ```
 2. **Set environment variable**: `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`
-3. **Initialize project**: Run `/jaan-to:jaan-init` if not already done
+3. **Initialize project**: Run `/jaan-init` if not already done
 
 ---
 
@@ -103,7 +103,7 @@ Each teammate shuts down after its phase completes to free context.
 | TDD Writer | Test Author (tdd track) | test-cases, test-generate (writes failing tests first) |
 | TDD Implementer | Implementer (tdd track) | scaffold, implement (makes tests pass) |
 
-Role definitions live in `skills/team-ship/roles.md`. New roles are added automatically via `/jaan-to:skill-create`.
+Role definitions live in `skills/team-ship/roles.md`. New roles are added automatically via `/skill-create`.
 
 ---
 
@@ -125,7 +125,7 @@ Each role writes to its own output directory (`jaan-to/outputs/pm/`, `jaan-to/ou
 
 **Input**:
 ```
-/jaan-to:team-ship --track fast "user authentication with OAuth"
+/team-ship --track fast "user authentication with OAuth"
 ```
 
 **What happens**:

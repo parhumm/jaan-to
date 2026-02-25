@@ -7,7 +7,7 @@ related: [detect-dev, detect-design, detect-writing, detect-ux, detect-pack]
 updated_date: 2026-02-09
 ---
 
-# /jaan-to:detect-product
+# /detect-product
 
 > Product reality extraction with evidence-backed features, monetization, and metrics.
 
@@ -22,7 +22,7 @@ Extracts the "product reality" from the repository with evidence-backed detectio
 ## Usage
 
 ```
-/jaan-to:detect-product [repo] [--full]
+/detect-product [repo] [--full]
 ```
 
 | Argument | Required | Description |

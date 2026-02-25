@@ -76,7 +76,7 @@ flowchart TD
 - **Input**: [controls]
 - **Output**: `$JAAN_OUTPUTS_DIR/sec/compliance/{slug}/evidence-pack.md`
 
-### ✅ /jaan-to:sec-audit-remediate
+### ✅ /sec-audit-remediate
 
 - **Logical**: `sec-audit-remediate`
 - **Description**: Generate security fixes from detect-dev SARIF findings with regression tests

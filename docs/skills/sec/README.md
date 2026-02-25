@@ -13,7 +13,7 @@ sidebar_position: 7
 
 | Skill | Description |
 |-------|-------------|
-| [/jaan-to:sec-audit-remediate](audit-remediate.md) | Generate security fixes from detect-dev findings with regression tests |
+| [/sec-audit-remediate](audit-remediate.md) | Generate security fixes from detect-dev findings with regression tests |
 
 ---
 

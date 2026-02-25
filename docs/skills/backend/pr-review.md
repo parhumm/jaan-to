@@ -28,19 +28,19 @@ Findings are confidence-scored with severity-dependent thresholds: CRITICAL >= 9
 
 ```bash
 # Review a GitHub PR by URL
-/jaan-to:backend-pr-review https://github.com/owner/repo/pull/42
+/backend-pr-review https://github.com/owner/repo/pull/42
 
 # Review by shorthand
-/jaan-to:backend-pr-review owner/repo#42
+/backend-pr-review owner/repo#42
 
 # Review a GitLab MR (any host)
-/jaan-to:backend-pr-review https://gitlab.example.com/group/project/-/merge_requests/15
+/backend-pr-review https://gitlab.example.com/group/project/-/merge_requests/15
 
 # GitLab shorthand
-/jaan-to:backend-pr-review owner/repo!15
+/backend-pr-review owner/repo!15
 
 # Review local changes against main
-/jaan-to:backend-pr-review local
+/backend-pr-review local
 ```
 
 ---
@@ -188,7 +188,7 @@ The skill includes stack-specific pattern catalogs loaded on demand:
 2. **Add review-standards.md** - Customize review rules per project via `$JAAN_CONTEXT_DIR/review-standards.md`
 3. **Use full PR URLs** - Provides complete metadata for accurate reviews
 4. **Keep PRs small** - PRs under 500 lines get significantly better review coverage
-5. **Iterate with feedback** - Use `/jaan-to:learn-add backend-pr-review` to improve accuracy over time
+5. **Iterate with feedback** - Use `/learn-add backend-pr-review` to improve accuracy over time
 
 ---
 
@@ -207,16 +207,16 @@ Research document: `docs/research/53-dev-pr-review.md`
 
 ## Related Skills
 
-- [/jaan-to:wp-pr-review](../wp/pr-review.md) - WordPress-specific PR review
-- [/jaan-to:detect-dev](../detect/detect-dev.md) - Engineering audit with OpenSSF scoring
-- [/jaan-to:sec-audit-remediate](../security/sec-audit-remediate.md) - Generate security fixes from findings
+- [/wp-pr-review](../wp/pr-review.md) - WordPress-specific PR review
+- [/detect-dev](../detect/detect-dev.md) - Engineering audit with OpenSSF scoring
+- [/sec-audit-remediate](../security/sec-audit-remediate.md) - Generate security fixes from findings
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: backend-pr-review
-- **Command**: `/jaan-to:backend-pr-review`
+- **Command**: `/backend-pr-review`
 - **Role**: backend
 - **Allowed Tools**: Read, Glob, Grep, Bash(gh/glab/git/curl), Write($JAAN_OUTPUTS_DIR/backend/**)
 - **Output**: `$JAAN_OUTPUTS_DIR/backend/pr-review/{id}-{slug}/`

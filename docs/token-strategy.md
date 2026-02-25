@@ -41,7 +41,7 @@ The plugin's root `CLAUDE.md` loads in every session where the plugin is active.
 | Hard cap | ≤ 150 lines |
 | Current size | ~119 lines |
 
-**Why most content must stay in CLAUDE.md**: Claude Code's path-scoped `.claude/rules/` files do not ship with plugins — they are project-local. Skills are invoked from arbitrary directories, so even project-level scoped rules (e.g., `paths: ["jaan-to/**"]`) would not load when a user invokes `/jaan-to:pm-prd-write` from `/src/app/`. Therefore, all universal behavioral rules (Two-Phase Workflow, Trust boundaries, Skill-First Decision Tree) must remain in CLAUDE.md.
+**Why most content must stay in CLAUDE.md**: Claude Code's path-scoped `.claude/rules/` files do not ship with plugins — they are project-local. Skills are invoked from arbitrary directories, so even project-level scoped rules (e.g., `paths: ["jaan-to/**"]`) would not load when a user invokes `/pm-prd-write` from `/src/app/`. Therefore, all universal behavioral rules (Two-Phase Workflow, Trust boundaries, Skill-First Decision Tree) must remain in CLAUDE.md.
 
 **Tightening strategy**: Consolidate redundant wording and compress prose while preserving all behavioral semantics. No content removal — only reformulation.
 

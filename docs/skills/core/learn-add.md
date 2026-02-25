@@ -3,7 +3,7 @@ title: "learn-add"
 sidebar_position: 4
 ---
 
-# /jaan-to:learn-add
+# /learn-add
 
 > Add a lesson to a skill's LEARN.md file.
 
@@ -18,7 +18,7 @@ Routes your feedback to the appropriate learning file. The lesson is categorized
 ## Usage
 
 ```
-/jaan-to:learn-add {target} "{lesson}"
+/learn-add {target} "{lesson}"
 ```
 
 **Target options**:
@@ -32,17 +32,17 @@ Routes your feedback to the appropriate learning file. The lesson is categorized
 
 **Add to skill**:
 ```
-/jaan-to:learn-add pm-prd-write "Always ask about API versioning"
+/learn-add pm-prd-write "Always ask about API versioning"
 ```
 
 **Add to template**:
 ```
-/jaan-to:learn-add templates/prd "Add rollback plan section"
+/learn-add templates/prd "Add rollback plan section"
 ```
 
 **Add to stack**:
 ```
-/jaan-to:learn-add context/tech "All new services need health check"
+/learn-add context/tech "All new services need health check"
 ```
 
 ---

@@ -72,11 +72,11 @@ codex mcp add context7 -- npx -y @upstash/context7-mcp@latest
 
 To skip MCP during install: `bash scripts/install-codex-skillpack.sh --no-mcp`
 
-**Verify it works:** Run `/jaan-to:dev-docs-fetch react` — if Context7 resolves the library and returns documentation, the MCP connection is active.
+**Verify it works:** Run `/dev-docs-fetch react` — if Context7 resolves the library and returns documentation, the MCP connection is active.
 
 ---
 
-## Using /jaan-to:dev-docs-fetch
+## Using /dev-docs-fetch
 
 The `dev-docs-fetch` skill is the primary way to interact with Context7.
 
@@ -84,10 +84,10 @@ The `dev-docs-fetch` skill is the primary way to interact with Context7.
 
 ```bash
 # Fetch docs for specific libraries
-/jaan-to:dev-docs-fetch fastapi openai react
+/dev-docs-fetch fastapi openai react
 
 # Auto-detect from your tech stack
-/jaan-to:dev-docs-fetch
+/dev-docs-fetch
 
 # The skill reads $JAAN_CONTEXT_DIR/tech.md to find your libraries
 ```
@@ -132,7 +132,7 @@ Cache entries have a **7-day TTL**. After 7 days, entries are marked STALE and w
 
 ```bash
 rm -rf jaan-to/outputs/dev/docs/context7/
-/jaan-to:dev-docs-fetch
+/dev-docs-fetch
 ```
 
 ### File Format

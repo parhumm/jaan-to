@@ -8,7 +8,7 @@ tags: [qa, api, contract, spectral, oasdiff, prism, schemathesis, openapi]
 related: [backend-api-contract, dev-verify, devops-infra-scaffold]
 ---
 
-# /jaan-to:qa-contract-validate
+# /qa-contract-validate
 
 > Validate API contracts through a multi-tool pipeline -- lint, diff, mock, and fuzz.
 
@@ -23,9 +23,9 @@ Runs a 4-stage validation pipeline against OpenAPI/Swagger specs: Spectral for l
 ## Usage
 
 ```
-/jaan-to:qa-contract-validate api/openapi.yaml
-/jaan-to:qa-contract-validate api/openapi.yaml --baseline api/openapi-v1.yaml
-/jaan-to:qa-contract-validate api/openapi.yaml --url http://localhost:3000
+/qa-contract-validate api/openapi.yaml
+/qa-contract-validate api/openapi.yaml --baseline api/openapi-v1.yaml
+/qa-contract-validate api/openapi.yaml --url http://localhost:3000
 ```
 
 | Argument | Required | Description |
@@ -91,7 +91,7 @@ The skill checks availability with `npx --no-install` (npm tools) or version com
 
 **Input:**
 ```
-/jaan-to:qa-contract-validate api/openapi.yaml --baseline api/openapi-v1.yaml --url http://localhost:3000
+/qa-contract-validate api/openapi.yaml --baseline api/openapi-v1.yaml --url http://localhost:3000
 ```
 
 **Output:**
@@ -117,25 +117,25 @@ Aggregate: WARN
 
 ## Tips
 
-- Run `/jaan-to:backend-api-contract` first to generate the OpenAPI spec
+- Run `/backend-api-contract` first to generate the OpenAPI spec
 - Provide `--baseline` to catch breaking changes between versions
 - Start your API locally and use `--url` for live conformance and fuzz testing
-- Add contract validation CI stages via `/jaan-to:devops-infra-scaffold`
+- Add contract validation CI stages via `/devops-infra-scaffold`
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:backend-api-contract](../backend/api-contract.md) - Generate OpenAPI specs
-- [/jaan-to:dev-verify](../dev/verify.md) - Verify build pipeline and services
-- [/jaan-to:devops-infra-scaffold](../devops/infra-scaffold.md) - Add contract validation CI stages
+- [/backend-api-contract](../backend/api-contract.md) - Generate OpenAPI specs
+- [/dev-verify](../dev/verify.md) - Verify build pipeline and services
+- [/devops-infra-scaffold](../devops/infra-scaffold.md) - Add contract validation CI stages
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: qa-contract-validate
-- **Command**: `/jaan-to:qa-contract-validate`
+- **Command**: `/qa-contract-validate`
 - **Role**: qa
 - **Scope**: OpenAPI/Swagger only (v1). GraphQL and gRPC out of scope.
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/contract-validate/{id}-{slug}/`

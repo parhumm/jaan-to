@@ -14,7 +14,7 @@ slug: /skills/data
 
 | Skill | Description |
 |-------|-------------|
-| [/jaan-to:data-gtm-datalayer](gtm-datalayer.md) | Generate GTM tracking code |
+| [/data-gtm-datalayer](gtm-datalayer.md) | Generate GTM tracking code |
 
 ---
 

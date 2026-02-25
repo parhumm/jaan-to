@@ -107,9 +107,9 @@ Also read context files if available:
 
 ### Input Handling
 Accepts 1-3 file paths or descriptions:
-- **backend-api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output: `api.yaml`)
-- **backend-task-breakdown** — Path to BE task breakdown markdown (from `/jaan-to:backend-task-breakdown` output)
-- **backend-data-model** — Path to data model markdown (from `/jaan-to:backend-data-model` output)
+- **backend-api-contract** — Path to OpenAPI YAML (from `/backend-api-contract` output: `api.yaml`)
+- **backend-task-breakdown** — Path to BE task breakdown markdown (from `/backend-task-breakdown` output)
+- **backend-data-model** — Path to data model markdown (from `/backend-data-model` output)
 - **Empty** — Interactive wizard prompting for each
 
 ### Phase 1 Steps
@@ -217,8 +217,8 @@ add_to_index \
 > **Next Steps:**
 > - Copy scaffold files to your project directory
 > - Run `npm install` (or equivalent) to install dependencies
-> - Run `/jaan-to:dev-integration-plan` to plan integration with existing code
-> - Run `/jaan-to:dev-test-plan` to generate test plan
+> - Run `/dev-integration-plan` to plan integration with existing code
+> - Run `/dev-test-plan` to generate test plan
 
 #### Step 12: Capture Feedback
 Use AskUserQuestion:
@@ -226,7 +226,7 @@ Use AskUserQuestion:
 - Header: "Feedback"
 - Options: "Perfect!" — Done / "Needs fixes" — What should I improve? / "Learn from this" — Capture a lesson for future runs
 
-If "Learn from this": Run `/jaan-to:learn-add backend-scaffold "{feedback}"`
+If "Learn from this": Run `/learn-add backend-scaffold "{feedback}"`
 
 ### Key Generation Rules — Node.js/TypeScript (Research-Informed)
 - **Routing**: Use `@fastify/autoload` v6 for file-based route loading — register twice (plugins with `encapsulate: false`, routes encapsulated per resource); add `ignorePattern: /.*\.(?:schema|service)\.ts/` to prevent non-plugin files from being auto-loaded as routes
@@ -376,11 +376,11 @@ Also read context files if available:
 
 ### Input Handling
 Accepts 1-3 file paths or descriptions:
-- **frontend-design** — Path to HTML preview or component description (from `/jaan-to:frontend-design` output)
-- **frontend-task-breakdown** — Path to FE task breakdown (from `/jaan-to:frontend-task-breakdown` output)
-- **backend-api-contract** — Path to OpenAPI YAML (from `/jaan-to:backend-api-contract` output)
+- **frontend-design** — Path to HTML preview or component description (from `/frontend-design` output)
+- **frontend-task-breakdown** — Path to FE task breakdown (from `/frontend-task-breakdown` output)
+- **backend-api-contract** — Path to OpenAPI YAML (from `/backend-api-contract` output)
 - **Empty** — Interactive wizard
-- Cross-role: optionally consumes `/jaan-to:ux-microcopy-write` output
+- Cross-role: optionally consumes `/ux-microcopy-write` output
 
 ### Phase 1 Steps
 
@@ -474,9 +474,9 @@ add_to_index \
 > **Next Steps:**
 > - Copy scaffold files to your project directory
 > - Run `npm install` to install dependencies
-> - Run `/jaan-to:dev-integration-plan` to plan integration with existing code
-> - Run `/jaan-to:dev-test-plan` to generate test plan
-> - Run `/jaan-to:qa-test-cases` to generate test cases
+> - Run `/dev-integration-plan` to plan integration with existing code
+> - Run `/dev-test-plan` to generate test plan
+> - Run `/qa-test-cases` to generate test cases
 
 #### Step 13: Capture Feedback
 Use AskUserQuestion:
@@ -484,7 +484,7 @@ Use AskUserQuestion:
 - Header: "Feedback"
 - Options: "Perfect!" — Done / "Needs fixes" — What should I improve? / "Learn from this" — Capture a lesson for future runs
 
-If "Learn from this": Run `/jaan-to:learn-add frontend-scaffold "{feedback}"`
+If "Learn from this": Run `/learn-add frontend-scaffold "{feedback}"`
 
 ### Key Generation Rules (Research-Informed)
 

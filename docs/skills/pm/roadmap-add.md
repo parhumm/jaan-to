@@ -3,7 +3,7 @@ title: "pm-roadmap-add"
 sidebar_position: 5
 ---
 
-# /jaan-to:pm-roadmap-add
+# /pm-roadmap-add
 
 > Add prioritized items to a project roadmap with codebase-aware context.
 
@@ -24,7 +24,7 @@ When no roadmap exists, bootstraps a new one with your chosen prioritization sys
 ## Usage
 
 ```
-/jaan-to:pm-roadmap-add "add user authentication feature"
+/pm-roadmap-add "add user authentication feature"
 ```
 
 ---
@@ -73,7 +73,7 @@ Questions vary by chosen prioritization system.
 
 **Input**:
 ```
-/jaan-to:pm-roadmap-add "real-time notifications"
+/pm-roadmap-add "real-time notifications"
 ```
 
 **Preview at HARD STOP**:
@@ -92,7 +92,7 @@ Status:       To Do
 ## Tips
 
 - Provide enough context in your item description for accurate priority assessment
-- Run after `/jaan-to:pm-prd-write` to add PRD-derived items to the roadmap
+- Run after `/pm-prd-write` to add PRD-derived items to the roadmap
 - Use specific descriptions to avoid false duplicate matches
 - Review the codebase context scan results — they inform priority assessment
 
@@ -107,5 +107,5 @@ jaan-to/learn/jaan-to-pm-roadmap-add.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add pm-roadmap-add "Always ask about platform constraints"
+/learn-add pm-roadmap-add "Always ask about platform constraints"
 ```

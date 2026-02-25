@@ -8,7 +8,7 @@ tags: [devops, infra, scaffold, cicd, docker, deployment, github-actions, gitlab
 related: [backend-scaffold, frontend-scaffold, detect-dev, sec-audit-remediate]
 ---
 
-# /jaan-to:devops-infra-scaffold
+# /devops-infra-scaffold
 
 > Generate CI/CD workflows, Dockerfiles, and deployment configs from tech.md — you can't ship what you can't deploy.
 
@@ -23,8 +23,8 @@ Generates production-ready infrastructure files from tech stack context: CI/CD p
 ## Usage
 
 ```
-/jaan-to:devops-infra-scaffold
-/jaan-to:devops-infra-scaffold [tech.md]
+/devops-infra-scaffold
+/devops-infra-scaffold [tech.md]
 ```
 
 | Argument | Required | Description |
@@ -82,7 +82,7 @@ Files at `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{id}-{slug}/`:
 ## Workflow Chain
 
 ```
-/jaan-to:dev-project-assemble + /jaan-to:sec-audit-remediate --> /jaan-to:devops-infra-scaffold
+/dev-project-assemble + /sec-audit-remediate --> /devops-infra-scaffold
 ```
 
 ---
@@ -91,7 +91,7 @@ Files at `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{id}-{slug}/`:
 
 **Input:**
 ```
-/jaan-to:devops-infra-scaffold
+/devops-infra-scaffold
 ```
 
 **Output:**
@@ -128,8 +128,8 @@ These stages run in parallel after the standard build/test stages. Each stage is
 ## Tips
 
 - Set up `$JAAN_CONTEXT_DIR/tech.md` for automatic stack detection
-- Run after `/jaan-to:dev-project-assemble` to match the project structure
-- Include `/jaan-to:detect-dev` output for security scanning in CI
+- Run after `/dev-project-assemble` to match the project structure
+- Include `/detect-dev` output for security scanning in CI
 - Review generated secrets and environment variables before deploying
 - Configure endpoint repository variables (`API_URL`, `WEB_URL`) after copying health-check workflow
 - Review secret rotation checklist against actual project secrets
@@ -139,15 +139,15 @@ These stages run in parallel after the standard build/test stages. Each stage is
 
 ## Related Skills
 
-- [/jaan-to:dev-project-assemble](../dev/project-assemble.md) - Assemble project from scaffolds
-- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code
-- [/jaan-to:sec-audit-remediate](../sec/audit-remediate.md) - Generate security fixes
+- [/dev-project-assemble](../dev/project-assemble.md) - Assemble project from scaffolds
+- [/backend-scaffold](../backend/scaffold.md) - Generate backend code
+- [/sec-audit-remediate](../sec/audit-remediate.md) - Generate security fixes
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: devops-infra-scaffold
-- **Command**: `/jaan-to:devops-infra-scaffold`
+- **Command**: `/devops-infra-scaffold`
 - **Role**: devops
 - **Output**: `$JAAN_OUTPUTS_DIR/devops/infra-scaffold/{id}-{slug}/`

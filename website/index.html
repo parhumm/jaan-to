@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>/Jaan-to: Give soul to your ideas</title>
+    <title>/ Give soul to your ideas</title>
     <meta name="description" content="Jaan.to is a workflow layer for Claude Code and Codex. AI handles repetitive work. Humans keep the decisions. Open source.">
     <meta name="keywords" content="Jaan.to, Claude Code, Codex, workflow automation, human-AI collaboration, product teams, open source">
 
@@ -106,6 +106,11 @@
             letter-spacing: 0.05em;
             text-transform: uppercase;
             color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .nav-brand-version:hover {
+            text-decoration: underline;
         }
 
         .nav-brand-wrapper {
@@ -450,6 +455,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            height: 40px;
         }
 
         .hero-install-card h3 img {
@@ -460,7 +466,7 @@
         }
 
         .hero-install-card h3 img.codex-logo {
-            height: 32px;
+            height: 34px;
         }
 
         .hero-install-card h3 img.claude-logo {
@@ -1400,7 +1406,7 @@
                     <img src="favicon_io/favicon-32x32.png" alt="Jaan.to" width="24" height="24">
                     <span class="nav-brand-text">
                         <span class="nav-brand-name">Jaan.to</span>
-                        <span class="nav-brand-version">v7.5.1</span>
+                        <a href="https://docs.jaan.to/changelog-product/" class="nav-brand-version" target="_blank" rel="noopener noreferrer">v7.5.1</a>
                     </span>
                 </a>
                 <div class="nav-github-star" aria-label="GitHub star button for parhumm/jaan-to">
@@ -1421,7 +1427,7 @@
     <!-- Hero -->
     <section class="hero" id="home">
         <div>
-            <h1 class="hero-definition">/Jaan-to:*<br><em style="color:var(--color-accent)">
+            <h1 class="hero-definition">/jaan-to:*<br><em style="color:var(--color-accent)">
             give soul to your ideas
             </em></h1>
             <!-- <h1 class="hero-definition">
@@ -1472,10 +1478,10 @@
                             <pre><code>claude
 /plugin marketplace add parhumm/jaan-to
 /plugin install jaan-to
-/jaan-init
-/team-ship YOUR IDEA: Develop a SaaS platform for ...</code></pre>
+# /jaan-init
+# /team-ship YOUR IDEA: Develop a SaaS platform for ...</code></pre>
                         </div>
-                        <p>Then run <code>/jaan-to:pm-prd-write</code> or any <code>/jaan-to:*</code> skill.</p>
+                        <p>Then run <code>/pm-prd-write</code> or any <code>/jaan-to:*</code> skill.</p>
                     </article>
                     <article class="hero-install-card">
                         <h3>
@@ -1493,8 +1499,8 @@
                             </button>
                             <pre><code>bash &lt;(curl -fsSL https://raw.githubusercontent.com/parhumm/jaan-to/main/scripts/install-codex-skillpack.sh)
 # restart Codex
-/jaan-init
-/pm-prd-write New feature for Google Auth login</code></pre>
+# /jaan-init
+# /pm-prd-write New feature for Google Auth login</code></pre>
                         </div>
                         <p>Use <code>/skills</code>, <code>/jaan-to:*</code>, <code>/jaan-init</code>, or native <code>$skill</code> mentions.</p>
                     </article>
@@ -1502,7 +1508,15 @@
                         <h3>
                             <span class="hero-install-brand">Lite / skill-only</span>
                         </h3>
-                        <pre><code>npx skills add parhumm/jaan-to</code></pre>
+                        <div class="hero-install-code copy-enabled">
+                            <button type="button" class="hero-copy-btn" data-copy-pre aria-label="Copy lite install command">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <rect x="9" y="9" width="10" height="10" rx="2"></rect>
+                                    <path d="M6 15H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1"></path>
+                                </svg>
+                            </button>
+                            <pre><code>npx skills add parhumm/jaan-to</code></pre>
+                        </div>
                         <p>Fast install when you only want the jaan.to skills without full runtime setup.</p>
                     </article>
                 </div>
@@ -1551,47 +1565,7 @@
             </p>
         </div>
     </section>
-
-    <!-- How It Works -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <div style="text-align: center;">
-                <span class="section-label reveal">How It Works</span>
-                <h2 class="section-heading reveal">
-                    <span class="dim">Two phases. One hard stop.</span><br>
-                    Nothing ships without your approval.
-                </h2>
-            </div>
-
-            <div class="phase reveal" style="margin-top: 56px;">
-                <div class="phase-label">Phase 1: Analysis</div>
-                <h3>Read-only. No files written.</h3>
-                <p>The system reads your codebase, loads team context, and asks you clarifying questions. It plans the output structure. Nothing is created yet.</p>
-            </div>
-
-            <div class="hard-stop reveal">
-                <div class="hard-stop-line"></div>
-                <div class="hard-stop-label">Human approval required</div>
-            </div>
-
-            <div class="phase phase-2 reveal">
-                <div class="phase-label">Phase 2: Generation</div>
-                <h3>Only after your explicit approval.</h3>
-                <p>The system generates structured output from tested templates and saves it to a safe, sandboxed directory. Preview first. Always.</p>
-            </div>
-
-            <div class="terminal reveal">
-                <span class="prompt">$</span> <span class="command">/pm-prd-write "add dark mode support"</span><br><br>
-                <span class="dim">&gt; Loading context: tech.md, team.md</span><br>
-                <span class="dim">&gt; Questions before I proceed:</span><br>
-                &nbsp;&nbsp;1. What problem does dark mode solve for your users?<br>
-                &nbsp;&nbsp;2. How will you measure adoption?<br>
-                &nbsp;&nbsp;3. What is explicitly NOT in scope?<br><br>
-                <span class="dim">&gt; [Awaiting your answers...]</span>
-            </div>
-        </div>
-    </section>
-
+    
     <!-- The System -->
     <section class="system" id="system">
         <div class="container-wide">
@@ -1672,19 +1646,25 @@
                             <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/pm-roadmap-add</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Add prioritized items to project roadmap</span>
+                            <span class="catalog-skill-desc">Add prioritized items to any project roadmap</span>
                         </li>
                         <li class="catalog-skill">
                             <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/pm-roadmap-update</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Review and maintain project roadmap</span>
+                            <span class="catalog-skill-desc">Review and maintain project roadmaps</span>
                         </li>
                         <li class="catalog-skill">
                             <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/pm-skill-discover</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Detect repeated workflow patterns and suggest skills to automate them</span>
+                            <span class="catalog-skill-desc">Detect repeated workflow patterns and suggest skills</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/pm-changelog-rewrite</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Changelog rewrite and maintenance workflows</span>
                         </li>
                     </ul>
                 </div>
@@ -1906,39 +1886,39 @@
                         </li>
                         <li class="catalog-skill">
                             <span class="catalog-skill-dot"></span>
+                            <code class="catalog-skill-command">/qa-issue-report</code>
+                            <span class="catalog-skill-sep">&mdash;</span>
+                            <span class="catalog-skill-desc">Report issues to any GitHub/GitLab repository</span>
+                        </li>
+                        <li class="catalog-skill">
+                            <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/qa-test-mutate</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Run mutation testing with multi-stack support and iterative feedback loop</span>
+                            <span class="catalog-skill-desc">Run mutation testing to validate test suite quality</span>
                         </li>
                         <li class="catalog-skill">
                             <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/qa-tdd-orchestrate</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Orchestrate RED/GREEN/REFACTOR TDD cycle with context-isolated agents</span>
+                            <span class="catalog-skill-desc">Orchestrate RED/GREEN/REFACTOR TDD cycle</span>
                         </li>
                         <li class="catalog-skill">
                             <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/qa-contract-validate</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Validate API contracts with Spectral, oasdiff, Prism, and Schemathesis</span>
+                            <span class="catalog-skill-desc">Validate API contracts through 4-tool pipeline</span>
                         </li>
                         <li class="catalog-skill">
                             <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/qa-quality-gate</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Compute composite quality score from upstream skill outputs</span>
-                        </li>
-                        <li class="catalog-skill">
-                            <span class="catalog-skill-dot"></span>
-                            <code class="catalog-skill-command">/qa-issue-report</code>
-                            <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Report issues to any GitHub/GitLab repository with smart context analysis</span>
+                            <span class="catalog-skill-desc">Compute composite quality score from upstream outputs</span>
                         </li>
                         <li class="catalog-skill">
                             <span class="catalog-skill-dot"></span>
                             <code class="catalog-skill-command">/qa-issue-validate</code>
                             <span class="catalog-skill-sep">&mdash;</span>
-                            <span class="catalog-skill-desc">Validate issues against codebase with root cause analysis and threat scanning</span>
+                            <span class="catalog-skill-desc">Validate GitHub/GitLab issues against codebase</span>
                         </li>
                     </ul>
                 </div>
@@ -2145,7 +2125,7 @@
             </div>
 
             <div class="terminal reveal">
-                <span class="prompt">$</span> <span class="command">/jaan-to:team-ship "user auth with OAuth"</span><br><br>
+                <span class="prompt">$</span> <span class="command">/team-ship "user auth with OAuth"</span><br><br>
                 <span class="dim">&gt; Team roster: PM, Backend, Frontend, QA, DevOps</span><br>
                 <span class="dim">&gt; [Awaiting your approval...]</span><br><br>
                 <span class="dim">&gt; PM drafting PRD...</span><br>
@@ -2163,11 +2143,6 @@
                     <span class="team-ship-track-name">Full Track</span>
                     <span class="team-ship-track-meta">7 teammates &middot; 20 skills</span>
                     <span class="team-ship-track-desc">Production-ready</span>
-                </div>
-                <div class="team-ship-track reveal">
-                    <span class="team-ship-track-name">TDD Track</span>
-                    <span class="team-ship-track-meta">--track tdd &middot; mutation testing</span>
-                    <span class="team-ship-track-desc">Test-first development</span>
                 </div>
             </div>
         </div>
@@ -2187,11 +2162,11 @@
             <div class="vision-horizons">
                 <div class="horizon horizon-now reveal">
                     <div class="horizon-label">Now</div>
-                    <p>51 production skills. Learning system that improves from feedback. Two-phase workflow with human approval. Open source, MIT licensed.</p>
+                    <p>53 production skills. Learning system that improves from feedback. Two-phase workflow with human approval. Open source, MIT licensed.</p>
                 </div>
                 <div class="horizon horizon-next reveal">
                     <div class="horizon-label">Next</div>
-                    <p>50+ skills across 12+ product roles. MCP connectors to real systems &mdash; Figma, Jira, GA4, Sentry, Clarity, and more.</p>
+                    <p>60+ skills across 14+ product roles. MCP connectors to real systems &mdash; Figma, Jira, GA4, Sentry, Clarity, and more.</p>
                 </div>
                 <div class="horizon horizon-ahead reveal">
                     <div class="horizon-label">Ahead</div>

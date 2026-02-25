@@ -8,7 +8,7 @@ tags: [dev, backend, data-model, database, schema, constraints, indexes, migrati
 related: [be-task-breakdown, api-contract]
 ---
 
-# /jaan-to:backend-data-model
+# /backend-data-model
 
 > Generate data model documentation with tables, constraints, indexes, retention, and migration notes from entity descriptions.
 
@@ -23,9 +23,9 @@ Analyzes entity descriptions and produces a comprehensive data model document wi
 ## Usage
 
 ```
-/jaan-to:backend-data-model "User, Post, Comment"
-/jaan-to:backend-data-model "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
-/jaan-to:backend-data-model "path/to/schema.sql"
+/backend-data-model "User, Post, Comment"
+/backend-data-model "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
+/backend-data-model "path/to/schema.sql"
 ```
 
 | Argument | Required | Description |
@@ -99,12 +99,12 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to adapt the data model:
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:backend-task-breakdown → /jaan-to:backend-data-model → /jaan-to:backend-api-contract
+/backend-task-breakdown → /backend-data-model → /backend-api-contract
 ```
 
 After generating the data model, the skill suggests:
-- API contract generation with `/jaan-to:backend-api-contract`
-- Backend task breakdown with `/jaan-to:backend-task-breakdown`
+- API contract generation with `/backend-api-contract`
+- Backend task breakdown with `/backend-task-breakdown`
 
 ---
 

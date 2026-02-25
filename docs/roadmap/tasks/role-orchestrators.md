@@ -60,7 +60,7 @@ Two-level agent hierarchy: `team-ship → role orchestrators → sub-skill agent
 - [ ] `--legacy` flag forces old direct-chain behavior
 
 ### Quality & Docs
-- [ ] All 6 orchestrator skills pass `/jaan-to:skill-update` validation
+- [ ] All 6 orchestrator skills pass `/skill-update` validation
 - [ ] Roadmap updated with task reference
 - [ ] Plugin manifest updated (if applicable)
 
@@ -148,12 +148,12 @@ Add `Orchestrator` field:
 
 ## Verification
 
-1. **Dry-run**: `/jaan-to:pm "Build a task manager" --dry-run` → shows planned sub-skills
-2. **Standalone**: `/jaan-to:qa "Run tests"` → assembles QA team, runs appropriate sub-skills
-3. **team-ship integration**: `/jaan-to:team-ship "Build a landing page" --track fast` → delegates to orchestrators
+1. **Dry-run**: `/pm "Build a task manager" --dry-run` → shows planned sub-skills
+2. **Standalone**: `/qa "Run tests"` → assembles QA team, runs appropriate sub-skills
+3. **team-ship integration**: `/team-ship "Build a landing page" --track fast` → delegates to orchestrators
 4. **Extensibility**: Add fake sub-skill to `skills/pm/sub-skills.md` → PM orchestrator discovers it
 5. **Fallback**: Remove Orchestrator field from role → team-ship falls back to direct chain
-6. **Validation**: `/jaan-to:skill-update` passes on all 6 orchestrators
+6. **Validation**: `/skill-update` passes on all 6 orchestrators
 
 ## References
 

@@ -56,9 +56,9 @@ claude
 ```
 
 **NARRATION (continued):**
-> "Then run /jaan-to:jaan-init to activate jaan.to for your project. It creates a context directory with templates, learning files, and config — one command, fully set up."
+> "Then run /jaan-init to activate jaan.to for your project. It creates a context directory with templates, learning files, and config — one command, fully set up."
 
-**VISUAL:** Show `/jaan-to:jaan-init` command and `ls jaan-to/` output with directory structure
+**VISUAL:** Show `/jaan-init` command and `ls jaan-to/` output with directory structure
 
 **ON-SCREEN TEXT:**
 - ✅ One-command activation per project
@@ -69,14 +69,14 @@ claude
 
 ### [00:45 - 01:30] Demo 1: Generate a PRD (45 seconds)
 
-**VISUAL:** Run `/jaan-to:pm-prd-write` command
+**VISUAL:** Run `/pm-prd-write` command
 
 **NARRATION:**
 > "Let's generate a PRD for a user authentication feature. Watch how jaan.to reads your tech stack and team context before generating."
 
 **COMMANDS:**
 ```
-/jaan-to:pm-prd-write "Add OAuth login with Google and GitHub"
+/pm-prd-write "Add OAuth login with Google and GitHub"
 ```
 
 **VISUAL:** Show skill reading context files (tech.md, team.md)
@@ -100,14 +100,14 @@ claude
 
 ### [01:30 - 02:15] Demo 2: Generate User Stories (45 seconds)
 
-**VISUAL:** Run `/jaan-to:pm-story-write` command
+**VISUAL:** Run `/pm-story-write` command
 
 **NARRATION:**
 > "Now let's break this PRD into user stories. jaan.to can reference the PRD we just created."
 
 **COMMANDS:**
 ```
-/jaan-to:pm-story-write from prd at jaan-to/outputs/pm/prd/01-oauth-login/
+/pm-story-write from prd at jaan-to/outputs/pm/prd/01-oauth-login/
 ```
 
 **VISUAL:** Show skill reading PRD and extracting user flows
@@ -129,14 +129,14 @@ claude
 
 ### [02:15 - 02:45] Demo 3: Generate Frontend Tasks (30 seconds)
 
-**VISUAL:** Run `/jaan-to:frontend-task-breakdown` command
+**VISUAL:** Run `/frontend-task-breakdown` command
 
 **NARRATION:**
 > "For implementation, jaan.to can break down frontend tasks from the PRD."
 
 **COMMANDS:**
 ```
-/jaan-to:frontend-task-breakdown from prd at jaan-to/outputs/pm/prd/01-oauth-login/
+/frontend-task-breakdown from prd at jaan-to/outputs/pm/prd/01-oauth-login/
 ```
 
 **VISUAL:** Show skill generating component inventory and tasks
@@ -155,14 +155,14 @@ claude
 
 ### [02:45 - 03:15] Demo 4: Continuous Improvement (30 seconds)
 
-**VISUAL:** Run `/jaan-to:learn-add` command
+**VISUAL:** Run `/learn-add` command
 
 **NARRATION:**
 > "What makes jaan.to unique is the learning system. After using a skill, you can capture lessons."
 
 **COMMANDS:**
 ```
-/jaan-to:learn-add "Always include redirect URI validation in OAuth PRDs - prevents open redirect attacks"
+/learn-add "Always include redirect URI validation in OAuth PRDs - prevents open redirect attacks"
 ```
 
 **VISUAL:** Show lesson being added to `jaan-to/learn/pm-prd-write.learn.md`
@@ -190,10 +190,10 @@ claude
 
 **COMMANDS (flash on screen, don't execute):**
 ```
-/jaan-to:qa-test-cases         # Generate BDD test scenarios
-/jaan-to:data-gtm-datalayer    # GTM tracking code
-/jaan-to:ux-heatmap-analyze    # Analyze user behavior
-/jaan-to:backend-task-breakdown # Backend task breakdown
+/qa-test-cases         # Generate BDD test scenarios
+/data-gtm-datalayer    # GTM tracking code
+/ux-heatmap-analyze    # Analyze user behavior
+/backend-task-breakdown # Backend task breakdown
 ```
 
 **NARRATION (continued):**

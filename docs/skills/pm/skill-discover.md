@@ -3,7 +3,7 @@ title: "pm-skill-discover"
 sidebar_position: 7
 ---
 
-# /jaan-to:pm-skill-discover
+# /pm-skill-discover
 
 > Detect workflow patterns from AI sessions and suggest reusable skills.
 
@@ -17,16 +17,16 @@ Analyzes your recent AI development sessions to detect repeated workflow pattern
 - jaan-to learning file analysis (skill usage frequency)
 - 4-dimension scoring rubric (frequency, time saved, parameterizability, risk)
 - Matching against 10 known workflow archetypes from research
-- Optional auto-invocation of `/jaan-to:skill-create` for selected patterns
+- Optional auto-invocation of `/skill-create` for selected patterns
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:pm-skill-discover
-/jaan-to:pm-skill-discover --days=7
-/jaan-to:pm-skill-discover --days=30 --min-frequency=5 --max-suggestions=3
+/pm-skill-discover
+/pm-skill-discover --days=7
+/pm-skill-discover --days=30 --min-frequency=5 --max-suggestions=3
 ```
 
 ---
@@ -94,7 +94,7 @@ Detected patterns are matched against 10 research-backed workflow archetypes:
 - Data source statistics
 - Discovered patterns with full scoring breakdown
 - Archetype matches
-- Pre-filled `/jaan-to:skill-create` commands for each candidate
+- Pre-filled `/skill-create` commands for each candidate
 
 ---
 
@@ -102,7 +102,7 @@ Detected patterns are matched against 10 research-backed workflow archetypes:
 
 **Input**:
 ```
-/jaan-to:pm-skill-discover --days=14
+/pm-skill-discover --days=14
 ```
 
 **Preview at HARD STOP**:
@@ -130,7 +130,7 @@ TOP SUGGESTIONS
 ## Tips
 
 - Run after at least 2 weeks of active development for meaningful patterns
-- Combine with `/jaan-to:skill-create` for end-to-end discovery-to-creation pipeline
+- Combine with `/skill-create` for end-to-end discovery-to-creation pipeline
 - Re-run monthly to detect new patterns as workflow evolves
 - Use `--min-frequency=5` for high-activity repos to reduce noise
 
@@ -145,5 +145,5 @@ jaan-to/learn/jaan-to-pm-skill-discover.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add pm-skill-discover "Check for monorepo context mixing"
+/learn-add pm-skill-discover "Check for monorepo context mixing"
 ```

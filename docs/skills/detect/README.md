@@ -17,24 +17,24 @@ All detect skills support `--light` (default) and `--full` modes. Light mode pro
 
 ### Light Mode (default)
 ```
-/jaan-to:detect-dev        → $JAAN_OUTPUTS_DIR/detect/dev/summary.md        (1 file)
-/jaan-to:detect-design     → $JAAN_OUTPUTS_DIR/detect/design/summary.md     (1 file)
-/jaan-to:detect-writing    → $JAAN_OUTPUTS_DIR/detect/writing/summary.md    (1 file)
-/jaan-to:detect-product    → $JAAN_OUTPUTS_DIR/detect/product/summary.md    (1 file)
-/jaan-to:detect-ux         → $JAAN_OUTPUTS_DIR/detect/ux/summary.md         (1 file)
+/detect-dev        → $JAAN_OUTPUTS_DIR/detect/dev/summary.md        (1 file)
+/detect-design     → $JAAN_OUTPUTS_DIR/detect/design/summary.md     (1 file)
+/detect-writing    → $JAAN_OUTPUTS_DIR/detect/writing/summary.md    (1 file)
+/detect-product    → $JAAN_OUTPUTS_DIR/detect/product/summary.md    (1 file)
+/detect-ux         → $JAAN_OUTPUTS_DIR/detect/ux/summary.md         (1 file)
                                     ↓
-/jaan-to:detect-pack       → $JAAN_OUTPUTS_DIR/detect/summary.md            (1 file)
+/detect-pack       → $JAAN_OUTPUTS_DIR/detect/summary.md            (1 file)
 ```
 
 ### Full Mode (`--full`)
 ```
-/jaan-to:detect-dev --full        → $JAAN_OUTPUTS_DIR/detect/dev/*.md        (9 files)
-/jaan-to:detect-design --full     → $JAAN_OUTPUTS_DIR/detect/design/*.md     (6 files)
-/jaan-to:detect-writing --full    → $JAAN_OUTPUTS_DIR/detect/writing/*.md    (6 files)
-/jaan-to:detect-product --full    → $JAAN_OUTPUTS_DIR/detect/product/*.md    (7 files)
-/jaan-to:detect-ux --full         → $JAAN_OUTPUTS_DIR/detect/ux/*.md         (7 files)
+/detect-dev --full        → $JAAN_OUTPUTS_DIR/detect/dev/*.md        (9 files)
+/detect-design --full     → $JAAN_OUTPUTS_DIR/detect/design/*.md     (6 files)
+/detect-writing --full    → $JAAN_OUTPUTS_DIR/detect/writing/*.md    (6 files)
+/detect-product --full    → $JAAN_OUTPUTS_DIR/detect/product/*.md    (7 files)
+/detect-ux --full         → $JAAN_OUTPUTS_DIR/detect/ux/*.md         (7 files)
                                            ↓
-/jaan-to:detect-pack --full       → $JAAN_OUTPUTS_DIR/detect/pack/*.md       (4+ files)
+/detect-pack --full       → $JAAN_OUTPUTS_DIR/detect/pack/*.md       (4+ files)
 ```
 
 detect-pack handles mixed inputs: domains can be light or full independently.
@@ -45,12 +45,12 @@ detect-pack handles mixed inputs: domains can be light or full independently.
 
 | Skill | Description | Light | Full |
 |-------|-------------|-------|------|
-| [/jaan-to:detect-dev](detect-dev.md) | Engineering audit with OpenSSF-style scoring | 1 file | 9 files |
-| [/jaan-to:detect-design](detect-design.md) | Design system detection with drift findings | 1 file | 6 files |
-| [/jaan-to:detect-writing](detect-writing.md) | Writing system extraction with NNg tone scoring | 1 file | 6 files |
-| [/jaan-to:detect-product](detect-product.md) | Product reality extraction with 3-layer evidence | 1 file | 7 files |
-| [/jaan-to:detect-ux](detect-ux.md) | UX audit with Nielsen heuristics and journey mapping | 1 file | 7 files |
-| [/jaan-to:detect-pack](detect-pack.md) | Consolidate all detect outputs into scored index | 1 file | 4+ files |
+| [/detect-dev](detect-dev.md) | Engineering audit with OpenSSF-style scoring | 1 file | 9 files |
+| [/detect-design](detect-design.md) | Design system detection with drift findings | 1 file | 6 files |
+| [/detect-writing](detect-writing.md) | Writing system extraction with NNg tone scoring | 1 file | 6 files |
+| [/detect-product](detect-product.md) | Product reality extraction with 3-layer evidence | 1 file | 7 files |
+| [/detect-ux](detect-ux.md) | UX audit with Nielsen heuristics and journey mapping | 1 file | 7 files |
+| [/detect-pack](detect-pack.md) | Consolidate all detect outputs into scored index | 1 file | 4+ files |
 
 ---
 

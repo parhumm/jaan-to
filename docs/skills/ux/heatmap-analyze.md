@@ -3,7 +3,7 @@ title: "ux-heatmap-analyze"
 sidebar_position: 2
 ---
 
-# /jaan-to:ux-heatmap-analyze
+# /ux-heatmap-analyze
 
 > Analyze heatmap CSV exports and screenshots to generate prioritized UX research reports.
 
@@ -24,17 +24,17 @@ Produces a prioritized research report with cross-validated findings, confidence
 
 **With file paths:**
 ```
-/jaan-to:ux-heatmap-analyze path/to/clicks.csv path/to/heatmap.png path/to/page.html "Why are users bouncing?"
+/ux-heatmap-analyze path/to/clicks.csv path/to/heatmap.png path/to/page.html "Why are users bouncing?"
 ```
 
 **With CSV + screenshot only:**
 ```
-/jaan-to:ux-heatmap-analyze data/clicks.csv data/heatmap.png
+/ux-heatmap-analyze data/clicks.csv data/heatmap.png
 ```
 
 **Interactive wizard:**
 ```
-/jaan-to:ux-heatmap-analyze
+/ux-heatmap-analyze
 ```
 
 ---
@@ -141,7 +141,7 @@ jaan-to/learn/jaan-to-ux-heatmap-analyze.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add ux-heatmap-analyze "Always check for thumb-zone bias in mobile data"
+/learn-add ux-heatmap-analyze "Always check for thumb-zone bias in mobile data"
 ```
 
 ---

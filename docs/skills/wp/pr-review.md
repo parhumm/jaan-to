@@ -26,16 +26,16 @@ Findings are confidence-scored (0-100). Only issues with confidence >= 80 appear
 
 ```bash
 # Review a GitHub PR by URL
-/jaan-to:wp-pr-review https://github.com/owner/plugin-name/pull/42
+/wp-pr-review https://github.com/owner/plugin-name/pull/42
 
 # Review by shorthand
-/jaan-to:wp-pr-review owner/plugin-name#42
+/wp-pr-review owner/plugin-name#42
 
 # Review local changes against main
-/jaan-to:wp-pr-review local
+/wp-pr-review local
 
 # GitLab merge request
-/jaan-to:wp-pr-review https://gitlab.com/owner/plugin-name/-/merge_requests/42
+/wp-pr-review https://gitlab.com/owner/plugin-name/-/merge_requests/42
 ```
 
 ---
@@ -165,7 +165,7 @@ The skill includes detailed checklists loaded on demand:
 1. **Provide context** - Use the full PR URL when possible for complete metadata
 2. **Review the diff first** - The skill only reviews changed files, not the entire codebase
 3. **Check project config** - Ensure `phpcs.xml.dist` exists for accurate text domain/prefix detection
-4. **Iterate with feedback** - Use `/jaan-to:learn-add wp-pr-review` to improve accuracy over time
+4. **Iterate with feedback** - Use `/learn-add wp-pr-review` to improve accuracy over time
 
 ---
 
@@ -184,15 +184,15 @@ Research document: `$JAAN_OUTPUTS_DIR/research/67-wp-pr-review.md`
 
 ## Related Skills
 
-- [/jaan-to:detect-dev](../detect/detect-dev.md) - Engineering audit with OpenSSF scoring
-- [/jaan-to:qa-test-cases](../qa/test-cases.md) - Generate test cases from acceptance criteria
+- [/detect-dev](../detect/detect-dev.md) - Engineering audit with OpenSSF scoring
+- [/qa-test-cases](../qa/test-cases.md) - Generate test cases from acceptance criteria
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: wp-pr-review
-- **Command**: `/jaan-to:wp-pr-review`
+- **Command**: `/wp-pr-review`
 - **Role**: wp (WordPress)
 - **Allowed Tools**: Read, Glob, Grep, Bash(gh/glab/git, gh api), Write($JAAN_OUTPUTS_DIR/wp/**)
 - **Output**: `$JAAN_OUTPUTS_DIR/wp/pr/{id}-{slug}/`

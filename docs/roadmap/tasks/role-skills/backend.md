@@ -37,7 +37,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### ✅ /jaan-to:backend-task-breakdown
+### ✅ /backend-task-breakdown
 
 - **Logical**: `backend-task-breakdown`
 - **Description**: BE tasks list, data model notes, reliability considerations
@@ -52,7 +52,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/backend/task-breakdown/{id}-{slug}/{id}-{slug}.md`
 
-### ✅ /jaan-to:backend-data-model
+### ✅ /backend-data-model
 
 - **Logical**: `backend-data-model`
 - **Description**: Tables/collections + fields, constraints + indexes, retention + migration notes
@@ -67,7 +67,7 @@ flowchart TD
 - **Output**: `$JAAN_OUTPUTS_DIR/backend/data-model/{id}-{slug}/{id}-{slug}.md`
 - **Reference**: [`60-backend-data-model.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/60-backend-data-model.md)
 
-### ✅ /jaan-to:backend-api-contract
+### ✅ /backend-api-contract
 
 - **Logical**: `backend-api-contract`
 - **Description**: OpenAPI contract with payloads, errors, versioning, example requests/responses
@@ -82,7 +82,7 @@ flowchart TD
 - **Output**: `$JAAN_OUTPUTS_DIR/backend/api-contract/{id}-{slug}/api.yaml`
 - **Reference**: [`59-backend-api-contract.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/59-backend-api-contract.md)
 
-### /jaan-to:backend-scaffold
+### /backend-scaffold
 
 - **Logical**: `backend-scaffold`
 - **Description**: Generate production-ready backend code from specifications: Fastify routes, Prisma schema, service layer, middleware, validation
@@ -100,7 +100,7 @@ flowchart TD
 - **Reference**: [`63-dev-scaffolds.md`](https://github.com/parhumm/jaan-to/blob/main/jaan-to/outputs/research/63-dev-scaffolds.md)
 - **Plan**: [dev-scaffold-skills.md](../plans/dev-scaffold-skills.md)
 
-### /jaan-to:backend-api-versioning
+### /backend-api-versioning
 
 - **Logical**: `backend-api-versioning`
 - **Description**: Compatibility strategy, migration notes + timeline, deprecation communication plan

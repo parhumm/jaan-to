@@ -408,7 +408,7 @@ This skill writes source code, not structured output documents.
 
 Add after `frontend-scaffold`:
 ```markdown
-| dev-app-develop | `/jaan-to:dev-app-develop` | Full-lifecycle app development from task to deployed code |
+| dev-app-develop | `/dev-app-develop` | Full-lifecycle app development from task to deployed code |
 ```
 
 ---
@@ -441,10 +441,10 @@ README index updated: `jaan-to/outputs/research/README.md`
 6. Edit `scripts/seeds/config.md` — add catalog entry
 7. Create git branch `skill/dev-app-develop`
 8. Commit all files
-9. Invoke `/jaan-to:docs-create` for skill documentation (use `/jaan-to:docs-update` if docs already exist)
-10. Run `/jaan-to:skill-update dev-app-develop` for v3.0.0 compliance
-11. Use `/jaan-to:pm-roadmap-add` to add skill to roadmap (or `/jaan-to:pm-roadmap-update` to sync)
-12. Use `/jaan-to:release-iterate-changelog` to update changelog
+9. Invoke `/docs-create` for skill documentation (use `/docs-update` if docs already exist)
+10. Run `/skill-update dev-app-develop` for v3.0.0 compliance
+11. Use `/pm-roadmap-add` to add skill to roadmap (or `/pm-roadmap-update` to sync)
+12. Use `/release-iterate-changelog` to update changelog
 13. Create PR to `dev`
 
 ---
@@ -456,7 +456,7 @@ README index updated: `jaan-to/outputs/research/README.md`
 2. Frontmatter: name matches dir, description < 120 chars, no `: ` issues, no `model:` field
 3. Required sections: Context Files, Input, Pre-Execution, HARD STOP, Definition of Done
 4. All paths use `$JAAN_*` env vars
-5. `/jaan-to:learn-add` used (not `/update-lessons-learned`)
+5. `/learn-add` used (not `/update-lessons-learned`)
 6. No hardcoded credentials, IPs, or tokens
 
 ### Detection Tables
@@ -488,4 +488,4 @@ README index updated: `jaan-to/outputs/research/README.md`
 26. Environment variable management documented
 
 ### Compliance
-27. Run `/jaan-to:skill-update dev-app-develop` for compliance check
+27. Run `/skill-update dev-app-develop` for compliance check
