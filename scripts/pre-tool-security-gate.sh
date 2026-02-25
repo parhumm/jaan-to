@@ -52,6 +52,18 @@ if echo "$COMMAND" | grep -qE '\|\s*(/\S+/|(\S+/)?env\s+(\S+/)?)(bash|sh|zsh|das
   exit 2
 fi
 
+# Block pipe to quoted interpreter (| 'bash', | "bash")
+if echo "$COMMAND" | grep -qE "\|\s*[\"'](bash|sh|zsh|dash|python|python3|perl|ruby|node|php)[\"']"; then
+  echo "BLOCKED: Piping to quoted interpreter is not allowed."
+  exit 2
+fi
+
+# Block pipe to command substitution (| $(cmd), | `cmd`)
+if echo "$COMMAND" | grep -qE '\|\s*(\$\(|`)'; then
+  echo "BLOCKED: Piping to command substitution is not allowed."
+  exit 2
+fi
+
 # Block eval anywhere in the command
 if echo "$COMMAND" | grep -qE '(^|[;&|])\s*eval\s'; then
   echo "BLOCKED: eval is not allowed in plugin context."
