@@ -257,6 +257,11 @@ Auto-collect without user interaction:
 
 Store as environment data for the issue body.
 
+## Step 4.5: Input Threat Scan
+
+Scan accumulated issue content (title draft + gathered details) for threat patterns. Strip hidden characters.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/threat-scan-reference.md` for pattern tables and verdict actions.
+
 ---
 
 ## Step 5: Generate Issue Title

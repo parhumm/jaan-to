@@ -18,6 +18,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone 
 - `$JAAN_TEMPLATES_DIR/jaan-to-detect-pack.template.md` - Output template
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-pack-reference.md` - Evidence formats, consolidation logic, output templates
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` - Shared standards: Evidence Format, Confidence Levels, Codebase Content Safety
 
 **Output path**: `$JAAN_OUTPUTS_DIR/detect/` — flat files, overwritten each run (no IDs).
 

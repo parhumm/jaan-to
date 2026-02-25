@@ -12,6 +12,15 @@ paths_context: "jaan-to/context"
 paths_outputs: "jaan-to/outputs"
 paths_docs: "jaan-to/docs"
 
+# Roadmap file location (relative to project root)
+paths_roadmap: "ROADMAP.md"
+
+# Changelog file location (relative to project root)
+paths_changelog: "CHANGELOG.md"
+
+# Product changelog file location (relative to project root)
+paths_changelog_product: "CHANGELOG-PRODUCT.md"
+
 # Template settings
 templates_inheritance_enabled: true
 

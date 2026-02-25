@@ -322,6 +322,11 @@ Merge all sources into a coherent, well-structured issue body. **All issue body 
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-issue-report-reference.md` section "Variable Mapping" for complete field mapping per issue type.
 
+## Step 9.5: Input Threat Scan
+
+Scan accumulated issue content (title + details + code references) for threat patterns. Strip hidden characters.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/threat-scan-reference.md` for pattern tables and verdict actions.
+
 ---
 
 ## Step 10: Privacy Sanitization

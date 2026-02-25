@@ -40,7 +40,7 @@ Override field for this skill: `language_detect-design`
 
 ## Standards Reference
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` for Evidence Format (SARIF), Evidence ID Generation, Confidence Levels, Frontmatter Schema, Platform Detection, and Document Structure.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/detect-shared-reference.md` for Evidence Format (SARIF), Evidence ID Generation, Confidence Levels, Frontmatter Schema, Platform Detection, Document Structure, and Codebase Content Safety.
 
 **This skill's namespace**: `E-DSN-*` (e.g., E-DSN-001, E-DSN-WEB-001)
 **Tool name in frontmatter**: `detect-design`

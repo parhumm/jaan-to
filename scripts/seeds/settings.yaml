@@ -13,6 +13,13 @@ version: "3.0"
 # paths_outputs: "jaan-to/outputs"
 # paths_docs: "jaan-to/docs"
 
+# Roadmap & Changelog Locations
+# Default: project root with uppercase filenames
+# Uncomment and modify to change location
+# paths_roadmap: "ROADMAP.md"
+# paths_changelog: "CHANGELOG.md"
+# paths_changelog_product: "CHANGELOG-PRODUCT.md"
+
 # Template Customization
 # Uncomment to use custom template files
 # templates_pm-prd-write_path: "./custom-templates/enterprise-prd.md"

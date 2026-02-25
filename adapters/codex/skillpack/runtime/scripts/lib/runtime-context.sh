@@ -38,6 +38,10 @@ runtime_context_init() {
   export JAAN_CONTEXT_DIR="$(get_validated_path 'paths_context' 'jaan-to/context')"
   export JAAN_OUTPUTS_DIR="$(get_validated_path 'paths_outputs' 'jaan-to/outputs')"
   export JAAN_DOCS_DIR="$(get_validated_path 'paths_docs' 'jaan-to/docs')"
+
+  export JAAN_ROADMAP_PATH="$(get_validated_path 'paths_roadmap' 'ROADMAP.md')"
+  export JAAN_CHANGELOG_PATH="$(get_validated_path 'paths_changelog' 'CHANGELOG.md')"
+  export JAAN_CHANGELOG_PRODUCT_PATH="$(get_validated_path 'paths_changelog_product' 'CHANGELOG-PRODUCT.md')"
 }
 
 runtime_context_print() {
@@ -49,5 +53,8 @@ JAAN_TEMPLATES_DIR=$JAAN_TEMPLATES_DIR
 JAAN_LEARN_DIR=$JAAN_LEARN_DIR
 JAAN_OUTPUTS_DIR=$JAAN_OUTPUTS_DIR
 JAAN_DOCS_DIR=$JAAN_DOCS_DIR
+JAAN_ROADMAP_PATH=$JAAN_ROADMAP_PATH
+JAAN_CHANGELOG_PATH=$JAAN_CHANGELOG_PATH
+JAAN_CHANGELOG_PRODUCT_PATH=$JAAN_CHANGELOG_PRODUCT_PATH
 EOL
 }
