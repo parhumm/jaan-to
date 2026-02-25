@@ -8,7 +8,7 @@ tags: [qa, mutation-testing, stryker, infection, go-mutesting, mutmut, test-qual
 related: [qa-test-generate, qa-test-run, qa-test-cases, devops-infra-scaffold]
 ---
 
-# /jaan-to:qa-test-mutate
+# /qa-test-mutate
 
 > Run mutation testing to validate test suite quality with multi-stack support and iterative feedback.
 
@@ -16,16 +16,16 @@ related: [qa-test-generate, qa-test-run, qa-test-cases, devops-infra-scaffold]
 
 ## Overview
 
-Runs mutation testing against your test suite to measure test effectiveness. Supports StrykerJS (JS/TS), Infection (PHP), go-mutesting (Go), and mutmut (Python). Produces a survivors JSON artifact that feeds directly into `/jaan-to:qa-test-generate --from-mutants` for targeted test generation. In Claude Code, runs an iterative feedback loop that improves mutation score across 2-3 cycles.
+Runs mutation testing against your test suite to measure test effectiveness. Supports StrykerJS (JS/TS), Infection (PHP), go-mutesting (Go), and mutmut (Python). Produces a survivors JSON artifact that feeds directly into `/qa-test-generate --from-mutants` for targeted test generation. In Claude Code, runs an iterative feedback loop that improves mutation score across 2-3 cycles.
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:qa-test-mutate
-/jaan-to:qa-test-mutate path/to/test-generate-output
-/jaan-to:qa-test-mutate tests/
+/qa-test-mutate
+/qa-test-mutate path/to/test-generate-output
+/qa-test-mutate tests/
 ```
 
 | Argument | Required | Description |
@@ -84,7 +84,7 @@ Mutation score comes from the mutation tool output only (never code coverage).
 
 ## Survivors JSON Contract
 
-The survivors JSON file follows schema v1.0 and feeds into `/jaan-to:qa-test-generate --from-mutants`:
+The survivors JSON file follows schema v1.0 and feeds into `/qa-test-generate --from-mutants`:
 
 ```json
 {
@@ -112,7 +112,7 @@ The survivors JSON file follows schema v1.0 and feeds into `/jaan-to:qa-test-gen
 In Claude Code, the skill runs an iterative feedback loop:
 
 1. Run mutations, collect survivors
-2. Feed survivors to `/jaan-to:qa-test-generate --from-mutants`
+2. Feed survivors to `/qa-test-generate --from-mutants`
 3. Re-run mutations with new tests
 4. Stop when delta < 5 points or max 3 iterations reached
 
@@ -123,7 +123,7 @@ Codex runtime runs a single mutation pass only.
 ## Workflow Chain
 
 ```
-/jaan-to:qa-test-generate --> /jaan-to:qa-test-mutate --> /jaan-to:qa-test-generate --from-mutants
+/qa-test-generate --> /qa-test-mutate --> /qa-test-generate --from-mutants
 ```
 
 ---
@@ -132,7 +132,7 @@ Codex runtime runs a single mutation pass only.
 
 **Input:**
 ```
-/jaan-to:qa-test-mutate path/to/test-generate/01-user-auth/
+/qa-test-mutate path/to/test-generate/01-user-auth/
 ```
 
 **Output:**
@@ -155,26 +155,26 @@ Target (80%):    PASS
 
 ## Tips
 
-- Run `/jaan-to:qa-test-generate` first to create test files
+- Run `/qa-test-generate` first to create test files
 - Use the survivors JSON with `--from-mutants` for targeted test improvements
-- Add mutation CI stage via `/jaan-to:devops-infra-scaffold`
+- Add mutation CI stage via `/devops-infra-scaffold`
 - Mutation score is independent of code coverage -- both matter
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:qa-test-generate](test-generate.md) - Generate test files (accepts `--from-mutants`)
-- [/jaan-to:qa-test-run](test-run.md) - Execute tests and generate coverage
-- [/jaan-to:qa-test-cases](test-cases.md) - Generate BDD/Gherkin test cases
-- [/jaan-to:devops-infra-scaffold](../devops/infra-scaffold.md) - Add mutation CI stage
+- [/qa-test-generate](test-generate.md) - Generate test files (accepts `--from-mutants`)
+- [/qa-test-run](test-run.md) - Execute tests and generate coverage
+- [/qa-test-cases](test-cases.md) - Generate BDD/Gherkin test cases
+- [/devops-infra-scaffold](../devops/infra-scaffold.md) - Add mutation CI stage
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: qa-test-mutate
-- **Command**: `/jaan-to:qa-test-mutate`
+- **Command**: `/qa-test-mutate`
 - **Role**: qa
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/test-mutate/{id}-{slug}/`
 - **Runtime**: Claude Code (full feedback loop) / Codex (single pass, degraded)

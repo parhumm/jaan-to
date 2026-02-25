@@ -8,7 +8,7 @@ tags: [dev, project, assemble, scaffold, monorepo, configs, entry-points]
 related: [backend-scaffold, frontend-scaffold, frontend-design]
 ---
 
-# /jaan-to:dev-project-assemble
+# /dev-project-assemble
 
 > Wire backend + frontend scaffold outputs into a runnable project with proper directory tree, configs, and entry points.
 
@@ -16,15 +16,15 @@ related: [backend-scaffold, frontend-scaffold, frontend-design]
 
 ## Overview
 
-Takes scaffold outputs (from `/jaan-to:backend-scaffold` and `/jaan-to:frontend-scaffold`) and assembles them into a working project structure with configs, entry points, provider wiring, and environment setup. Supports monorepo and separate-project layouts, auto-detected from `tech.md`.
+Takes scaffold outputs (from `/backend-scaffold` and `/frontend-scaffold`) and assembles them into a working project structure with configs, entry points, provider wiring, and environment setup. Supports monorepo and separate-project layouts, auto-detected from `tech.md`.
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:dev-project-assemble
-/jaan-to:dev-project-assemble backend-scaffold frontend-scaffold [target-dir]
+/dev-project-assemble
+/dev-project-assemble backend-scaffold frontend-scaffold [target-dir]
 ```
 
 | Argument | Required | Description |
@@ -77,7 +77,7 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect:
 ## Workflow Chain
 
 ```
-/jaan-to:backend-scaffold + /jaan-to:frontend-scaffold --> /jaan-to:dev-project-assemble --> /jaan-to:devops-infra-scaffold
+/backend-scaffold + /frontend-scaffold --> /dev-project-assemble --> /devops-infra-scaffold
 ```
 
 ---
@@ -86,7 +86,7 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect:
 
 **Input:**
 ```
-/jaan-to:dev-project-assemble path/to/backend-scaffold path/to/frontend-scaffold
+/dev-project-assemble path/to/backend-scaffold path/to/frontend-scaffold
 ```
 
 **Output:**
@@ -106,24 +106,24 @@ jaan-to/outputs/dev/project-assemble/01-my-app/
 
 ## Tips
 
-- Run `/jaan-to:backend-scaffold` and `/jaan-to:frontend-scaffold` first
+- Run `/backend-scaffold` and `/frontend-scaffold` first
 - Set up `$JAAN_CONTEXT_DIR/tech.md` to skip detection questions
 - Review the assembly log for wiring decisions before copying to your project
-- Use `/jaan-to:devops-infra-scaffold` next to add CI/CD and Docker
+- Use `/devops-infra-scaffold` next to add CI/CD and Docker
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code from specs
-- [/jaan-to:frontend-scaffold](../frontend/scaffold.md) - Convert designs to React/Next.js components
-- [/jaan-to:devops-infra-scaffold](../devops/infra-scaffold.md) - Generate CI/CD and deployment configs
+- [/backend-scaffold](../backend/scaffold.md) - Generate backend code from specs
+- [/frontend-scaffold](../frontend/scaffold.md) - Convert designs to React/Next.js components
+- [/devops-infra-scaffold](../devops/infra-scaffold.md) - Generate CI/CD and deployment configs
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: dev-project-assemble
-- **Command**: `/jaan-to:dev-project-assemble`
+- **Command**: `/dev-project-assemble`
 - **Role**: dev
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/project-assemble/{id}-{slug}/`

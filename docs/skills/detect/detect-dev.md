@@ -7,7 +7,7 @@ related: [detect-design, detect-writing, detect-product, detect-ux, detect-pack]
 updated_date: 2026-02-23
 ---
 
-# /jaan-to:detect-dev
+# /detect-dev
 
 > Repo engineering audit with machine-parseable findings and OpenSSF-style scoring.
 
@@ -24,7 +24,7 @@ Scans manifest files (package.json, pyproject.toml, go.mod, Cargo.toml, etc.), D
 ## Usage
 
 ```
-/jaan-to:detect-dev [repo] [--full] [--incremental]
+/detect-dev [repo] [--full] [--incremental]
 ```
 
 | Argument | Required | Description |
@@ -106,13 +106,13 @@ When `--incremental` is used, detect-dev reads `$JAAN_OUTPUTS_DIR/detect/dev/.au
 
 **Graceful fallback**: If no state file exists, the commit is unreachable, or the hash is invalid, detect-dev warns and falls back to a full scan. If no files have changed, it exits with "Audit is up to date."
 
-**Post-integration workflow**: After running `/jaan-to:dev-output-integrate`, run `/jaan-to:detect-dev --incremental` to re-audit only the integrated files.
+**Post-integration workflow**: After running `/dev-output-integrate`, run `/detect-dev --incremental` to re-audit only the integrated files.
 
 ---
 
 ## Integration-Aware Evidence
 
-When integration logs exist (from `/jaan-to:dev-output-integrate`), detect-dev tags evidence blocks with an `origin` field:
+When integration logs exist (from `/dev-output-integrate`), detect-dev tags evidence blocks with an `origin` field:
 
 - `origin: integrated` — file was copied into the project by dev-output-integrate
 - `origin: hand-written` — file was not part of any integration

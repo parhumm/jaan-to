@@ -8,7 +8,7 @@ tags: [dev, verify, build, health-check, smoke-test, type-check, runtime, multi-
 related: [dev-output-integrate, dev-project-assemble, devops-deploy-activate, backend-scaffold, frontend-scaffold]
 ---
 
-# /jaan-to:dev-verify
+# /dev-verify
 
 > Validate integrated build pipeline and running services with health checks and smoke tests.
 
@@ -25,11 +25,11 @@ Supports Node.js/TypeScript, PHP, and Go out of the box. Handles monorepos (Turb
 ## Usage
 
 ```
-/jaan-to:dev-verify
-/jaan-to:dev-verify --build-only
-/jaan-to:dev-verify --runtime-only
-/jaan-to:dev-verify --skip-smoke --skip-fix
-/jaan-to:dev-verify --port 4000
+/dev-verify
+/dev-verify --build-only
+/dev-verify --runtime-only
+/dev-verify --skip-smoke --skip-fix
+/dev-verify --port 4000
 ```
 
 | Flag | Description |
@@ -107,13 +107,13 @@ Files at `$JAAN_OUTPUTS_DIR/dev/verify/{id}-{slug}/`:
 ## Workflow Chain
 
 ```
-/jaan-to:dev-output-integrate + /jaan-to:dev-project-assemble
+/dev-output-integrate + /dev-project-assemble
   |
   v
-/jaan-to:dev-verify  (build + runtime)
+/dev-verify  (build + runtime)
   |
   v
-/jaan-to:devops-deploy-activate
+/devops-deploy-activate
 ```
 
 ---
@@ -122,7 +122,7 @@ Files at `$JAAN_OUTPUTS_DIR/dev/verify/{id}-{slug}/`:
 
 **Input:**
 ```
-/jaan-to:dev-verify
+/dev-verify
 ```
 
 **Output:**
@@ -151,18 +151,18 @@ Report: jaan-to/outputs/dev/verify/42-my-project-verify/42-my-project-verify.md
 
 ## Related Skills
 
-- [/jaan-to:dev-output-integrate](output-integrate.md) - Copy generated outputs into project
-- [/jaan-to:dev-project-assemble](project-assemble.md) - Wire scaffolds into runnable project
-- [/jaan-to:devops-deploy-activate](../devops/deploy-activate.md) - Activate deployment pipeline
-- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code
-- [/jaan-to:frontend-scaffold](../frontend/scaffold.md) - Generate frontend components
+- [/dev-output-integrate](output-integrate.md) - Copy generated outputs into project
+- [/dev-project-assemble](project-assemble.md) - Wire scaffolds into runnable project
+- [/devops-deploy-activate](../devops/deploy-activate.md) - Activate deployment pipeline
+- [/backend-scaffold](../backend/scaffold.md) - Generate backend code
+- [/frontend-scaffold](../frontend/scaffold.md) - Generate frontend components
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: dev-verify
-- **Command**: `/jaan-to:dev-verify`
+- **Command**: `/dev-verify`
 - **Role**: dev
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/verify/{id}-{slug}/`
 - **Multi-Stack**: Node.js/TypeScript, PHP, Go

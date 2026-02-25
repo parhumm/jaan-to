@@ -431,7 +431,7 @@ The root file should be a router + invariants. Keep it under ~150–200 lines ma
 
 ## Where things live (short index)
 - Skills: `skills/<domain>/<skill>/SKILL.md`
-- Project activation: `jaan-to/` (exists only when `/jaan-to:jaan-init` has run)
+- Project activation: `jaan-to/` (exists only when `/jaan-init` has run)
 - Outputs: `jaan-to/outputs/`
 - Learning: `jaan-to/learn/`
 - Hooks: `hooks/`

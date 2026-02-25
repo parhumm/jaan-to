@@ -7,7 +7,7 @@ related: [detect-dev, detect-writing, detect-pack]
 updated_date: 2026-02-09
 ---
 
-# /jaan-to:detect-design
+# /detect-design
 
 > Detect real design system in code with drift findings and evidence blocks.
 
@@ -22,7 +22,7 @@ Scans the repository for design system signals: design tokens, component librari
 ## Usage
 
 ```
-/jaan-to:detect-design [repo] [--full]
+/detect-design [repo] [--full]
 ```
 
 | Argument | Required | Description |

@@ -7,7 +7,7 @@ related: [detect-dev, detect-design, detect-writing, detect-product, detect-ux]
 updated_date: 2026-02-23
 ---
 
-# /jaan-to:detect-pack
+# /detect-pack
 
 > Consolidate all detect outputs into unified index with risk heatmap and unknowns backlog.
 
@@ -22,7 +22,7 @@ Reads all detect skill outputs and consolidates them into a unified knowledge in
 ## Usage
 
 ```
-/jaan-to:detect-pack [repo] [--full]
+/detect-pack [repo] [--full]
 ```
 
 | Argument | Required | Description |

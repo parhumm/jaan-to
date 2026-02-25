@@ -11,14 +11,14 @@ sidebar_position: 4
 
 ## Purpose
 
-The `/jaan-to:pm-story-write` skill generates production-ready user stories in Connextra format ("As a [role], I want [action], so that [value]") with Gherkin Given/When/Then acceptance criteria. It enforces INVEST quality standards, provides systematic edge case coverage, and validates stories against Definition of Ready criteria.
+The `/pm-story-write` skill generates production-ready user stories in Connextra format ("As a [role], I want [action], so that [value]") with Gherkin Given/When/Then acceptance criteria. It enforces INVEST quality standards, provides systematic edge case coverage, and validates stories against Definition of Ready criteria.
 
 ---
 
 ## Command
 
 ```bash
-/jaan-to:pm-story-write [input]
+/pm-story-write [input]
 ```
 
 ---
@@ -29,19 +29,19 @@ The skill accepts four input formats:
 
 ### 1. Structured Format
 ```bash
-/jaan-to:pm-story-write "[feature]" "[persona]" "[goal]"
+/pm-story-write "[feature]" "[persona]" "[goal]"
 ```
 
 **Example:**
 ```bash
-/jaan-to:pm-story-write "bulk export feature" "system administrator" "analyze usage data offline"
+/pm-story-write "bulk export feature" "system administrator" "analyze usage data offline"
 ```
 
 ### 2. Narrative Format
 Provide a full feature description in natural language:
 
 ```bash
-/jaan-to:pm-story-write "As an admin I need to export user data to Excel for compliance reporting"
+/pm-story-write "As an admin I need to export user data to Excel for compliance reporting"
 ```
 
 The skill will extract feature, persona, and goal using the 5 Whys technique.
@@ -50,7 +50,7 @@ The skill will extract feature, persona, and goal using the 5 Whys technique.
 Provide a Jira epic or story ID:
 
 ```bash
-/jaan-to:pm-story-write PROJ-123
+/pm-story-write PROJ-123
 ```
 
 The skill will attempt to read context from Jira via MCP and use it to inform the story.
@@ -273,7 +273,7 @@ Summary,Description,Issue Type,Priority,Story Points,Epic Link,Labels
 
 **Input:**
 ```bash
-/jaan-to:pm-story-write "password reset" "web app user" "regain access if forgotten"
+/pm-story-write "password reset" "web app user" "regain access if forgotten"
 ```
 
 **Generated Story:**
@@ -288,7 +288,7 @@ Summary,Description,Issue Type,Priority,Story Points,Epic Link,Labels
 
 **Input:**
 ```bash
-/jaan-to:pm-story-write "bulk export feature" "system administrator" "analyze usage data offline"
+/pm-story-write "bulk export feature" "system administrator" "analyze usage data offline"
 ```
 
 **Generated Story:**
@@ -340,7 +340,7 @@ Summary,Description,Issue Type,Priority,Story Points,Epic Link,Labels
 After generating a story, the skill offers three feedback options:
 
 1. **Fix now** - Apply feedback to current story immediately
-2. **Learn** - Save lesson via `/jaan-to:learn-add` for future improvements
+2. **Learn** - Save lesson via `/learn-add` for future improvements
 3. **Both** - Fix current story AND save lesson
 
 This continuous learning system improves story quality over time.
@@ -350,8 +350,8 @@ This continuous learning system improves story quality over time.
 ## Related
 
 - **Research**: `jaan-to/outputs/research/45-pm-insights-synthesis.md` - Comprehensive framework
-- **PRD Generation**: `/jaan-to:pm-prd-write` - Create full PRDs with success metrics
-- **Learning**: `/jaan-to:learn-add` - Add lessons to improve skill execution
+- **PRD Generation**: `/pm-prd-write` - Create full PRDs with success metrics
+- **Learning**: `/learn-add` - Add lessons to improve skill execution
 
 ---
 

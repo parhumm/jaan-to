@@ -3,7 +3,7 @@ title: "pm-research-about"
 sidebar_position: 3
 ---
 
-# /jaan-to:pm-research-about
+# /pm-research-about
 
 > Deep research on any topic, or add existing file/URL to research index.
 
@@ -23,13 +23,13 @@ The mode is auto-detected from your input.
 ## Usage
 
 ```
-/jaan-to:pm-research-about <topic-or-file-path-or-URL>
+/pm-research-about <topic-or-file-path-or-URL>
 ```
 
 **Examples**:
-- `/jaan-to:pm-research-about "Claude Code hooks best practices"` — deep research
-- `/jaan-to:pm-research-about https://example.com/article` — add URL to index
-- `/jaan-to:pm-research-about jaan-to/outputs/research/my-doc.md` — add file to index
+- `/pm-research-about "Claude Code hooks best practices"` — deep research
+- `/pm-research-about https://example.com/article` — add URL to index
+- `/pm-research-about jaan-to/outputs/research/my-doc.md` — add file to index
 
 ---
 
@@ -128,7 +128,7 @@ Uses **5 adaptive waves** where each wave's focus is determined by findings from
 
 - Updates `jaan-to/outputs/research/README.md` index
 - Git commits the result
-- Captures feedback via `/jaan-to:learn-add`
+- Captures feedback via `/learn-add`
 
 ---
 
@@ -141,5 +141,5 @@ jaan-to/learn/jaan-to-pm-research-about.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add pm-research-about "your feedback here"
+/learn-add pm-research-about "your feedback here"
 ```

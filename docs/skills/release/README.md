@@ -17,7 +17,7 @@ tags: [release, changelog, versioning]
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| [iterate-changelog](iterate-changelog.md) | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact notes and support guidance |
+| [iterate-changelog](iterate-changelog.md) | `/release-iterate-changelog` | Generate changelog with user impact notes and support guidance |
 
 ---
 

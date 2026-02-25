@@ -24,7 +24,7 @@ claude
 jaan-to is opt-in per project. Run this once in each project you want to use it:
 
 ```
-/jaan-to:jaan-init
+/jaan-init
 ```
 
 This creates the `jaan-to/` directory with config, context, templates, outputs, and learning subdirectories. Projects without `jaan-to/` are not affected by the plugin.
@@ -36,7 +36,7 @@ This creates the `jaan-to/` directory with config, context, templates, outputs, 
 Type this command:
 
 ```
-/jaan-to:pm-prd-write "user login feature"
+/pm-prd-write "user login feature"
 ```
 
 ---
@@ -88,7 +88,7 @@ Pattern: `jaan-to/outputs/{role}/{domain}/{slug}/`
 If something could be better, add a lesson:
 
 ```
-/jaan-to:learn-add pm-prd-write "Always ask about password requirements"
+/learn-add pm-prd-write "Always ask about password requirements"
 ```
 
 Next time, the skill remembers.

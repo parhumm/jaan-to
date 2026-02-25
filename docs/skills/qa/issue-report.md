@@ -3,7 +3,7 @@ title: "qa-issue-report"
 sidebar_position: 9
 ---
 
-# /jaan-to:qa-issue-report
+# /qa-issue-report
 
 > Report clear issues to any GitHub/GitLab repo with code references, media, and smart session context.
 
@@ -34,11 +34,11 @@ When invoked mid-session, the skill scans the conversation for errors, stack tra
 ## Usage
 
 ```
-/jaan-to:qa-issue-report "<description>"
-/jaan-to:qa-issue-report "<description>" --repo owner/repo --type bug
-/jaan-to:qa-issue-report "<description>" --submit --label bug,high-priority
-/jaan-to:qa-issue-report "<description>" --attach screenshot.png,error.log
-/jaan-to:qa-issue-report
+/qa-issue-report "<description>"
+/qa-issue-report "<description>" --repo owner/repo --type bug
+/qa-issue-report "<description>" --submit --label bug,high-priority
+/qa-issue-report "<description>" --attach screenshot.png,error.log
+/qa-issue-report
 ```
 
 ---
@@ -122,18 +122,18 @@ Both modes show a copy-paste ready version with a manual submission URL as fallb
 
 **Report a bug from the current session**:
 ```
-/jaan-to:qa-issue-report
+/qa-issue-report
 ```
 The skill scans the conversation and suggests: "It looks like authentication fails after token refresh. Report this?" You approve, and it pre-fills steps to reproduce from the session timeline.
 
 **Report to a specific repo with attachments**:
 ```
-/jaan-to:qa-issue-report "Login button unresponsive on mobile" --repo myorg/frontend --type bug --attach screenshot.png
+/qa-issue-report "Login button unresponsive on mobile" --repo myorg/frontend --type bug --attach screenshot.png
 ```
 
 **Feature request with labels**:
 ```
-/jaan-to:qa-issue-report "Add dark mode support" --type feature --label enhancement,ui
+/qa-issue-report "Add dark mode support" --type feature --label enhancement,ui
 ```
 
 ---

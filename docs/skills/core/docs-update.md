@@ -8,7 +8,7 @@ tags: [skills, core, documentation, audit, staleness]
 related: [docs-create.md, ../../hooks/bootstrap.md]
 ---
 
-# /jaan-to:docs-update
+# /docs-update
 
 > Smart documentation auditing with git-based staleness detection.
 
@@ -25,7 +25,7 @@ related: [docs-create.md, ../../hooks/bootstrap.md]
 ## Usage
 
 ```
-/jaan-to:docs-update [path] [--full] [--fix] [--check-only] [--quick]
+/docs-update [path] [--full] [--fix] [--check-only] [--quick]
 ```
 
 | Argument | Effect |
@@ -109,22 +109,22 @@ related: [docs-create.md, ../../hooks/bootstrap.md]
 
 **Smart staleness check (default)**:
 ```
-/jaan-to:docs-update
+/docs-update
 ```
 
 **Full audit**:
 ```
-/jaan-to:docs-update --full
+/docs-update --full
 ```
 
 **Full audit with auto-fix**:
 ```
-/jaan-to:docs-update --full --fix
+/docs-update --full --fix
 ```
 
 **Check specific path**:
 ```
-/jaan-to:docs-update $JAAN_DOCS_DIR/skills/ --check-only
+/docs-update $JAAN_DOCS_DIR/skills/ --check-only
 ```
 
 ---

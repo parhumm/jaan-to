@@ -15,7 +15,7 @@ Integrate Context7 MCP to fetch, cache, and manage library documentation for dev
 
 ---
 
-## Skill: `/jaan-to:dev-docs-fetch`
+## Skill: `/dev-docs-fetch`
 
 - **Name**: `dev-docs-fetch` (role=dev, domain=docs, action=fetch)
 - **Directory**: `skills/dev-docs-fetch/`
@@ -41,7 +41,7 @@ Integrate Context7 MCP to fetch, cache, and manage library documentation for dev
 ## Subtasks
 
 - [x] Add Context7 MCP server to Claude settings (`.mcp.json`)
-- [x] Create `/jaan-to:dev-docs-fetch` skill (`skills/dev-docs-fetch/SKILL.md`)
+- [x] Create `/dev-docs-fetch` skill (`skills/dev-docs-fetch/SKILL.md`)
   - YAML frontmatter with `allowed-tools`: Bash, Context7 MCP tools, Write, Read
   - `argument-hint: [library-names...]`
   - Pre-execution protocol integration
@@ -123,7 +123,7 @@ cache_ttl: 7 days
 
 ## Integration Points
 
-- **Standalone:** `/jaan-to:dev-docs-fetch fastapi openai`
+- **Standalone:** `/dev-docs-fetch fastapi openai`
 - **Auto-integrated:** Can be called from other dev skills in Phase 1
 - **Silent mode:** Cache hits don't produce output
 

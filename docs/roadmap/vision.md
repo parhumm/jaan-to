@@ -72,12 +72,12 @@ That's it. Every command follows this pattern.
 ### Layers
 
 ```
-YOU USE:     /jaan-to:pm-prd-write "user import feature"
+YOU USE:     /pm-prd-write "user import feature"
                     │
-SKILL READS: ├── skills/jaan-to:pm-prd-write/SKILL.md   (what to do)
+SKILL READS: ├── skills/pm-prd-write/SKILL.md   (what to do)
              ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md  (past lessons)
              ├── context/tech.md                (your tech context)
-             ├── skills/jaan-to:pm-prd-write/template.md (output format)
+             ├── skills/pm-prd-write/template.md (output format)
              └── MCP: Figma, Jira, GitLab       (real system data)
                     │
 OUTPUT:      jaan-to/outputs/pm/user-import/prd.md
@@ -103,7 +103,7 @@ Skills stay generic. MCP provides real context.
 ### How It Works
 
 ```
-Skill: /jaan-to:dev-plan-tech-approach "payment service"
+Skill: /dev-plan-tech-approach "payment service"
                 │
                 ├── MCP: GitLab → reads current repo structure
                 ├── MCP: OpenAPI → reads existing API contracts
@@ -277,17 +277,17 @@ Context files can have learning in `jaan-to/learn/context-{name}.learn.md`:
 
 After any skill run:
 ```
-/jaan-to:learn-add "pm-prd-write" "Always ask about internationalization requirements"
+/learn-add "pm-prd-write" "Always ask about internationalization requirements"
 ```
 
 Or route to template:
 ```
-/jaan-to:learn-add "template-prd" "Add rollback plan section"
+/learn-add "template-prd" "Add rollback plan section"
 ```
 
 Or route to stack:
 ```
-/jaan-to:learn-add "context-tech" "All new services need health check endpoint"
+/learn-add "context-tech" "All new services need health check endpoint"
 ```
 
 ---
@@ -458,7 +458,7 @@ Register in `context/config.md` if needed:
 - devops  # Added
 ```
 
-Done. Commands like `/jaan-to:devops-infra-provision` now work.
+Done. Commands like `/devops-infra-provision` now work.
 
 ---
 
@@ -549,8 +549,8 @@ Every skill has tests. Tests live in `tests/`.
 ### Running Tests
 
 ```
-/jaan-to:test pm-prd-write
-/jaan-to:test --all
+/test pm-prd-write
+/test --all
 ```
 
 ---
@@ -558,12 +558,12 @@ Every skill has tests. Tests live in `tests/`.
 ## Execution Flow
 
 ```
-USER: /jaan-to:pm-prd-write "user import feature"
+USER: /pm-prd-write "user import feature"
 
 1. LOAD
-   ├── skills/jaan-to:pm-prd-write/SKILL.md
+   ├── skills/pm-prd-write/SKILL.md
    ├── jaan-to/learn/jaan-to-pm-prd-write.learn.md (3 lessons)
-   ├── skills/jaan-to:pm-prd-write/template.md
+   ├── skills/pm-prd-write/template.md
    ├── jaan-to/learn/template-prd.learn.md (2 lessons)
    ├── context/tech.md (Python, FastAPI, PostgreSQL)
    ├── context/team.md (2 BE, 2 FE, 2-week sprints)
@@ -721,16 +721,16 @@ That's the entire configuration. No JSON schemas. No nested objects. Just markdo
 ### 1. User Runs Command
 
 ```
-/jaan-to:dev-plan-tech-approach "payment service"
+/dev-plan-tech-approach "payment service"
 ```
 
 ### 2. System Loads Context
 
 ```
 Loading:
-  ✓ skills/jaan-to:dev-plan-tech-approach/SKILL.md
+  ✓ skills/dev-plan-tech-approach/SKILL.md
   ✓ jaan-to/learn/jaan-to-dev-plan-tech-approach.learn.md (3 lessons)
-  ✓ skills/jaan-to:dev-plan-tech-approach/template.md
+  ✓ skills/dev-plan-tech-approach/template.md
   ✓ context/tech.md (Python, FastAPI, PostgreSQL)
   ✓ context/team.md (2 BE, 2 FE, 2-week sprints)
 
@@ -789,7 +789,7 @@ User: "Good, but add performance testing section"
 
 ```
 /{role}-{domain}-{action} [input]
-/jaan-to:{domain}-{action} [input]
+/{domain}-{action} [input]
 ```
 
 ### Key Paths

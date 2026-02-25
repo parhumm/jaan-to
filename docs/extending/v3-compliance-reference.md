@@ -357,7 +357,7 @@ v3.0.0 MIGRATION CHECKLIST
   - Consider {{import:$JAAN_CONTEXT_DIR/tech.md#section}} for tech-aware skills
 
 □ Re-validate with:
-  `/jaan-to:skill-update {name}` → Check v3.0.0 compliance
+  `/skill-update {name}` → Check v3.0.0 compliance
 ```
 
 > "Apply these changes manually, then re-run validation."
@@ -867,7 +867,7 @@ If YES, add to SKILL.md Context Files section:
 Before user testing, validate the created skill:
 
 ```
-/jaan-to:skill-update {skill-name}
+/skill-update {skill-name}
 ```
 
 This checks for:

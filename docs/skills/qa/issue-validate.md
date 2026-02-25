@@ -3,7 +3,7 @@ title: "qa-issue-validate"
 sidebar_position: 10
 ---
 
-# /jaan-to:qa-issue-validate
+# /qa-issue-validate
 
 > Validate GitHub/GitLab issues against codebase with root cause analysis and reproduction scenarios.
 
@@ -35,11 +35,11 @@ The skill treats all issue content as untrusted external input with mandatory th
 ## Usage
 
 ```
-/jaan-to:qa-issue-validate 42
-/jaan-to:qa-issue-validate 42 --repo owner/repo
-/jaan-to:qa-issue-validate https://github.com/owner/repo/issues/42
-/jaan-to:qa-issue-validate "<pasted issue text>"
-/jaan-to:qa-issue-validate 42 --platform gitlab
+/qa-issue-validate 42
+/qa-issue-validate 42 --repo owner/repo
+/qa-issue-validate https://github.com/owner/repo/issues/42
+/qa-issue-validate "<pasted issue text>"
+/qa-issue-validate 42 --platform gitlab
 ```
 
 ---

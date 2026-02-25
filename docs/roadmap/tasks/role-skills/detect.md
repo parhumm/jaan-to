@@ -24,7 +24,7 @@ flowchart TD
 
 **Legend**: Solid = internal | All detect skills converge into detect-pack
 
-### /jaan-to:detect-dev
+### /detect-dev
 
 - **Logical**: `detect-dev`
 - **Description**: Repo engineering audit that outputs machine-parseable + human-readable markdown with frontmatter, Findings (ID/severity/confidence/evidence blocks), and a score summary.
@@ -40,7 +40,7 @@ flowchart TD
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/dev/{stack,architecture,standards,testing,cicd,deployment,security,observability,risks}.md` — each doc MUST include standardized YAML frontmatter + Findings blocks (ID/severity/confidence/evidence)
 
-### /jaan-to:detect-design
+### /detect-design
 
 - **Logical**: `detect-design`
 - **Description**: Detect real design system in code (brand/tokens/components/patterns/a11y) with drift findings and evidence blocks.
@@ -55,7 +55,7 @@ flowchart TD
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/design/{brand,tokens,components,patterns,accessibility,governance}.md`
 
-### /jaan-to:detect-writing
+### /detect-writing
 
 - **Logical**: `detect-writing`
 - **Description**: Detect the current writing system using multi-signal extraction (glob discovery + string classification + heuristic/NLP scoring) and output a canonical writing-system spec.
@@ -74,7 +74,7 @@ flowchart TD
   - `$JAAN_OUTPUTS_DIR/detect/writing/writing-system.md` (primary)
   - Optional split: `$JAAN_OUTPUTS_DIR/detect/writing/{glossary,ui-copy,error-messages,localization,samples}.md`
 
-### /jaan-to:detect-product
+### /detect-product
 
 - **Logical**: `detect-product`
 - **Description**: Evidence-based "product reality" extraction: features, value proposition signals, monetization/entitlements, instrumentation reality, constraints + scored risks.
@@ -89,7 +89,7 @@ flowchart TD
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/product/{overview,features,value-prop,monetization,entitlements,metrics,constraints}.md`
 
-### /jaan-to:detect-ux
+### /detect-ux
 
 - **Logical**: `detect-ux`
 - **Description**: Repo-driven UX audit with journeys/pains + heuristic-based findings, aligned to the same evidence/confidence system as other audits.
@@ -104,7 +104,7 @@ flowchart TD
 - **Input**: [repo]
 - **Output**: `$JAAN_OUTPUTS_DIR/detect/ux/{personas,jtbd,flows,pain-points,heuristics,accessibility,gaps}.md`
 
-### /jaan-to:detect-pack
+### /detect-pack
 
 - **Logical**: `detect-pack`
 - **Description**: Consolidates all detect outputs into an index with standardized metadata, severity buckets, confidence distribution, and a prioritized Unknowns backlog.

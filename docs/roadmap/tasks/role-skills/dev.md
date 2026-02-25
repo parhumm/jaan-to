@@ -47,7 +47,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### /jaan-to:dev-feasibility-check
+### /dev-feasibility-check
 
 - **Logical**: `dev-feasibility-check`
 - **Description**: Risks + dependencies, unknowns + spike recommendations, rough complexity estimate
@@ -61,7 +61,7 @@ flowchart TD
 - **Input**: [prd]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{id}-{slug}/{id}-{slug}.md`
 
-### /jaan-to:dev-arch-proposal
+### /dev-arch-proposal
 
 - **Logical**: `dev-arch-proposal`
 - **Description**: Architecture outline, key choices + tradeoffs, data flow + failure modes
@@ -75,7 +75,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/discovery/{id}-{slug}/{id}-{slug}.md`
 
-### /jaan-to:dev-tech-plan
+### /dev-tech-plan
 
 - **Logical**: `dev-tech-plan`
 - **Description**: Tech approach with architecture, tradeoffs, risks, rollout/rollback, unknowns
@@ -89,7 +89,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/plan/{id}-{slug}/{id}-{slug}.md`
 
-### /jaan-to:dev-integration-plan
+### /dev-integration-plan
 
 - **Logical**: `dev-integration-plan`
 - **Description**: API call sequence, retry policy + failure modes, observability events
@@ -103,7 +103,7 @@ flowchart TD
 - **Input**: [provider] [use-case]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{id}-{slug}/{id}-{slug}.md`
 
-### /jaan-to:dev-integration-mock-stubs
+### /dev-integration-mock-stubs
 
 - **Logical**: `dev-integration-mock-stubs`
 - **Description**: Stub interfaces, fake responses (success/fail), test harness guidance
@@ -117,7 +117,7 @@ flowchart TD
 - **Input**: [provider]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/integration/{id}-{slug}/{id}-{slug}-stubs.md`
 
-### /jaan-to:dev-test-plan
+### /dev-test-plan
 
 - **Logical**: `dev-test-plan`
 - **Description**: Dev-owned test plan: unit/integration/e2e scope, fixtures, mocks, highest-risk scenarios
@@ -131,7 +131,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/test/{id}-{slug}/{id}-{slug}.md`
 
-### /jaan-to:dev-observability-events
+### /dev-observability-events
 
 - **Logical**: `dev-observability-events`
 - **Description**: Log fields + metric names, trace spans suggestions, dashboard checklist
@@ -145,7 +145,7 @@ flowchart TD
 - **Input**: [feature]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{id}-{slug}/{id}-{slug}.md`
 
-### /jaan-to:dev-observability-alerts
+### /dev-observability-alerts
 
 - **Logical**: `dev-observability-alerts`
 - **Description**: Suggested alerts + thresholds, severity levels, noise reduction ideas
@@ -159,7 +159,7 @@ flowchart TD
 - **Input**: [service]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/observability/{id}-{slug}/{id}-{slug}-alerts.md`
 
-### /jaan-to:dev-docs-generate
+### /dev-docs-generate
 
 - **Logical**: `dev-docs-generate`
 - **Description**: Technical documentation: README files, API docs, runbooks, architecture decisions
@@ -177,7 +177,7 @@ flowchart TD
 - **Failure Modes**: Documentation stale; inconsistent formatting; missing context
 - **Quality Gates**: Up-to-date with code; follows style guide; onboarding-friendly
 
-### ✅ /jaan-to:dev-pr-review
+### ✅ /dev-pr-review
 
 - **Logical**: `dev-pr-review`
 - **Description**: PR review pack: summary, risky files, security/perf hints, missing tests, CI failures
@@ -192,7 +192,7 @@ flowchart TD
 - **Input**: [pr-link-or-branch]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/review/{id}-{slug}/{id}-{slug}.md`
 
-### ✅ /jaan-to:dev-project-assemble
+### ✅ /dev-project-assemble
 
 - **Logical**: `dev-project-assemble`
 - **Description**: Wire scaffold outputs into runnable project structure with configs and entry points
@@ -206,7 +206,7 @@ flowchart TD
 - **Input**: [backend-scaffold] [frontend-scaffold] [target-dir]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/project-assemble/{id}-{slug}/`
 
-### ✅ /jaan-to:dev-verify
+### ✅ /dev-verify
 
 - **Logical**: `dev-verify`
 - **Description**: Validate integrated build pipeline and running services with health checks and smoke tests
@@ -220,7 +220,7 @@ flowchart TD
 - **Input**: [project-root] or (auto-detect)
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/verify/{id}-{slug}/`
 
-### /jaan-to:dev-ship-check
+### /dev-ship-check
 
 - **Logical**: `dev-ship-check`
 - **Description**: Pre-ship checklist: flags, migrations, monitoring, rollback, Go/No-Go recommendation
@@ -234,7 +234,7 @@ flowchart TD
 - **Input**: [initiative]
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/release/{id}-{slug}/{id}-{slug}.md`
 
-### /jaan-to:dev-docs-fetch
+### /dev-docs-fetch
 
 - **Logical**: `dev-docs-fetch`
 - **Description**: Fetch and cache library docs via Context7 MCP with smart caching and auto-detect

@@ -8,7 +8,7 @@ tags: [dev, api, openapi, contract, rest, schema, backend]
 related: [be-task-breakdown, fe-task-breakdown]
 ---
 
-# /jaan-to:backend-api-contract
+# /backend-api-contract
 
 > Generate OpenAPI 3.1 contracts from API resource entities.
 
@@ -23,9 +23,9 @@ Analyzes API resource entities and produces a validated OpenAPI 3.1 specificatio
 ## Usage
 
 ```
-/jaan-to:backend-api-contract "User, Post, Comment"
-/jaan-to:backend-api-contract "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
-/jaan-to:backend-api-contract "path/to/schema.sql"
+/backend-api-contract "User, Post, Comment"
+/backend-api-contract "See PRD at jaan-to/outputs/pm/prd/01-user-auth/01-prd-user-auth.md"
+/backend-api-contract "path/to/schema.sql"
 ```
 
 | Argument | Required | Description |
@@ -98,14 +98,14 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to adapt the contract:
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:backend-task-breakdown → /jaan-to:backend-api-contract → /jaan-to:dev-api-versioning
+/backend-task-breakdown → /backend-api-contract → /dev-api-versioning
 ```
 
 After generating the contract, the skill suggests:
 - Mock server with Prism
 - Client SDK generation with Orval
 - Contract testing with Schemathesis
-- Versioning plan with `/jaan-to:dev-api-versioning`
+- Versioning plan with `/dev-api-versioning`
 
 ---
 

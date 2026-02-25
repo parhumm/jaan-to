@@ -8,7 +8,7 @@ tags: [qa, test, generate, vitest, playwright, bdd, gherkin, e2e, unit]
 related: [qa-test-cases, backend-scaffold, frontend-scaffold, backend-service-implement]
 ---
 
-# /jaan-to:qa-test-generate
+# /qa-test-generate
 
 > Produce runnable Vitest unit tests and Playwright E2E specs from BDD test cases and scaffold code.
 
@@ -16,15 +16,15 @@ related: [qa-test-cases, backend-scaffold, frontend-scaffold, backend-service-im
 
 ## Overview
 
-Transforms BDD/Gherkin test cases (from `/jaan-to:qa-test-cases`) into runnable test files using Vitest for unit/integration tests and Playwright for E2E tests. Generates test data factories, MSW mock handlers, page objects, and CI configuration. Uses tag-based routing to map scenarios to the correct test layer.
+Transforms BDD/Gherkin test cases (from `/qa-test-cases`) into runnable test files using Vitest for unit/integration tests and Playwright for E2E tests. Generates test data factories, MSW mock handlers, page objects, and CI configuration. Uses tag-based routing to map scenarios to the correct test layer.
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:qa-test-generate
-/jaan-to:qa-test-generate qa-test-cases backend-scaffold
+/qa-test-generate
+/qa-test-generate qa-test-cases backend-scaffold
 ```
 
 | Argument | Required | Description |
@@ -33,7 +33,7 @@ Transforms BDD/Gherkin test cases (from `/jaan-to:qa-test-cases`) into runnable 
 | backend-scaffold or frontend-scaffold | Yes | Path to scaffold output |
 | backend-api-contract | No | OpenAPI YAML for MSW handler generation |
 | backend-service-implement | No | Service files for deeper unit tests |
-| `--from-mutants` | No | Path to survivors JSON from `/jaan-to:qa-test-mutate` |
+| `--from-mutants` | No | Path to survivors JSON from `/qa-test-mutate` |
 
 When run without arguments, launches an interactive wizard.
 
@@ -84,7 +84,7 @@ Maps Gherkin tags to test layers:
 ## Workflow Chain
 
 ```
-/jaan-to:qa-test-cases + /jaan-to:backend-scaffold --> /jaan-to:qa-test-generate
+/qa-test-cases + /backend-scaffold --> /qa-test-generate
 ```
 
 ---
@@ -93,7 +93,7 @@ Maps Gherkin tags to test layers:
 
 **Input:**
 ```
-/jaan-to:qa-test-generate path/to/test-cases path/to/backend-scaffold
+/qa-test-generate path/to/test-cases path/to/backend-scaffold
 ```
 
 **Output:**
@@ -114,13 +114,13 @@ jaan-to/outputs/qa/test-generate/01-user-auth/
 
 ## Mutation-Guided Mode
 
-Generate targeted tests for surviving mutants identified by `/jaan-to:qa-test-mutate`:
+Generate targeted tests for surviving mutants identified by `/qa-test-mutate`:
 
 ```
-/jaan-to:qa-test-generate --from-mutants path/to/survivors.json
+/qa-test-generate --from-mutants path/to/survivors.json
 ```
 
-The `--from-mutants` flag reads a survivors JSON file (schema v1.0) produced by `/jaan-to:qa-test-mutate`. For each surviving mutant, the skill generates a targeted test that specifically kills that mutant, improving overall mutation score without redundant test bloat.
+The `--from-mutants` flag reads a survivors JSON file (schema v1.0) produced by `/qa-test-mutate`. For each surviving mutant, the skill generates a targeted test that specifically kills that mutant, improving overall mutation score without redundant test bloat.
 
 ---
 
@@ -137,7 +137,7 @@ If the generated output violates pyramid proportions, the skill emits a warning 
 
 ## Tips
 
-- Run `/jaan-to:qa-test-cases` first to generate BDD scenarios
+- Run `/qa-test-cases` first to generate BDD scenarios
 - Provide OpenAPI contract for automatic MSW handler generation
 - Use tag routing to control which test layers are generated
 - Copy generated configs to your project and adjust paths
@@ -146,16 +146,16 @@ If the generated output violates pyramid proportions, the skill emits a warning 
 
 ## Related Skills
 
-- [/jaan-to:qa-test-cases](test-cases.md) - Generate BDD/Gherkin test cases
-- [/jaan-to:qa-test-mutate](test-mutate.md) - Mutation testing to find surviving mutants (input for `--from-mutants` mode)
-- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code stubs
-- [/jaan-to:backend-service-implement](../backend/service-implement.md) - Generate service implementations
+- [/qa-test-cases](test-cases.md) - Generate BDD/Gherkin test cases
+- [/qa-test-mutate](test-mutate.md) - Mutation testing to find surviving mutants (input for `--from-mutants` mode)
+- [/backend-scaffold](../backend/scaffold.md) - Generate backend code stubs
+- [/backend-service-implement](../backend/service-implement.md) - Generate service implementations
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: qa-test-generate
-- **Command**: `/jaan-to:qa-test-generate`
+- **Command**: `/qa-test-generate`
 - **Role**: qa
 - **Output**: `$JAAN_OUTPUTS_DIR/qa/test-generate/{id}-{slug}/`

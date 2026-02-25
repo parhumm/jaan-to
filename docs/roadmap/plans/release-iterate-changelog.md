@@ -225,7 +225,7 @@ Initial lessons from research:
 Add to `scripts/seeds/config.md` Available Skills table:
 
 ```
-| release-iterate-changelog | `/jaan-to:release-iterate-changelog` | Generate changelog with user impact notes and support guidance |
+| release-iterate-changelog | `/release-iterate-changelog` | Generate changelog with user impact notes and support guidance |
 ```
 
 ---
@@ -247,7 +247,7 @@ Add to `scripts/seeds/config.md` Available Skills table:
 
 ## Verification
 
-1. **Manual test**: Run `/jaan-to:release-iterate-changelog` in a git repo with commits — verify it analyzes commits and writes to `$JAAN_OUTPUTS_DIR/CHANGELOG.md`
+1. **Manual test**: Run `/release-iterate-changelog` in a git repo with commits — verify it analyzes commits and writes to `$JAAN_OUTPUTS_DIR/CHANGELOG.md`
 2. **Mode test**: Test each input mode (`create`, `release v1.0.0`, `add "New feature"`, no args)
 3. **Output check**: Verify `$JAAN_OUTPUTS_DIR/CHANGELOG.md` follows Keep a Changelog format
-4. **Validation**: Run `/jaan-to:skill-update release-iterate-changelog` for v3.0.0 compliance
+4. **Validation**: Run `/skill-update release-iterate-changelog` for v3.0.0 compliance

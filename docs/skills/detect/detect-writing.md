@@ -7,7 +7,7 @@ related: [detect-dev, detect-design, detect-product, detect-ux, detect-pack]
 updated_date: 2026-02-09
 ---
 
-# /jaan-to:detect-writing
+# /detect-writing
 
 > Writing system extraction with NNg tone dimensions, UI copy classification, and i18n maturity scoring.
 
@@ -22,7 +22,7 @@ Extracts the writing system from the repository with string discovery, classific
 ## Usage
 
 ```
-/jaan-to:detect-writing [repo] [--full]
+/detect-writing [repo] [--full]
 ```
 
 | Argument | Required | Description |

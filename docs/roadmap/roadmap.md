@@ -67,7 +67,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## v7.4.0 — 2026-02-22
 
-- [x] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
+- [x] Context7 MCP integration + `/dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
 - [x] Dual-runtime MCP support — Codex config.toml auto-configuration, `validate-mcp-servers.sh` parity checks, CI dual-runtime MCP gate
 - [x] MCP infrastructure hardening — config update safety, `.mcp.json` build distribution, stale count fixes
 
@@ -117,7 +117,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 142 skills cataloged across 17 role prefixes. Quick-win skills (no MCP required) are built first, followed by advanced skills that depend on MCP connectors.
 
-All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/jaan-to:skill-update` validation.
+All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, template variables, tech stack integration, and pass `/skill-update` validation.
 
 | Role | Total | Quick Wins | Advanced | File |
 |------|-------|------------|----------|------|
@@ -148,7 +148,7 @@ MCP connectors provide real system context to skills. Skills stay generic; MCP p
 - **Core MCPs (11)**: GA4, GitLab, Jira, Figma, GSC, Clarity, Sentry, BigQuery, Playwright, OpenAPI, dbt Cloud
 - **Extended MCPs (13)**: Notion, Slack, GitHub, Linear, Mixpanel, Confluence, Snowflake, PostgreSQL, Ahrefs, Semrush, LambdaTest, Google Drive, Memory
 - **Infrastructure**: Deferred loading for token savings, Context7 integration, model routing per skill type
-- [x] Context7 MCP integration + `/jaan-to:dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
+- [x] Context7 MCP integration + `/dev-docs-fetch` skill — library docs fetch, smart caching, auto-detect from tech.md → [details](tasks/mcp-context7.md)
 
 ---
 
@@ -192,58 +192,58 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 
 | Command | Description |
 |---------|-------------|
-| `/jaan-to:pm-prd-write` | Generate PRD from initiative |
-| `/jaan-to:pm-research-about` | Deep research or add file/URL to index |
-| `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then AC |
-| `/jaan-to:data-gtm-datalayer` | Generate GTM tracking code |
-| `/jaan-to:detect-dev` | Engineering audit with scored findings |
-| `/jaan-to:detect-design` | Design system detection with drift findings |
-| `/jaan-to:detect-writing` | Writing system extraction with tone scoring |
-| `/jaan-to:detect-product` | Product reality extraction with evidence |
-| `/jaan-to:detect-ux` | UX audit with journey/pain-point findings |
-| `/jaan-to:detect-pack` | Consolidate detect outputs into knowledge index |
-| `/jaan-to:frontend-task-breakdown` | Frontend task breakdown with component hierarchy |
-| `/jaan-to:backend-task-breakdown` | Backend task breakdown from PRDs |
-| `/jaan-to:frontend-design` | Frontend component design |
-| `/jaan-to:backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
-| `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
-| `/jaan-to:backend-pr-review` | Review backend PRs for security, performance, and code quality |
-| `/jaan-to:backend-scaffold` | Generate production-ready backend code from specs |
-| `/jaan-to:frontend-scaffold` | Convert designs to React/Next.js scaffold code |
-| `/jaan-to:ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
-| `/jaan-to:ux-microcopy-write` | Multi-language UX microcopy |
-| `/jaan-to:ux-research-synthesize` | Synthesize UX research findings |
-| `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase |
-| `/jaan-to:qa-test-cases` | Generate test cases from PRDs |
-| `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security and standards |
-| `/jaan-to:dev-project-assemble` | Wire scaffold outputs into runnable project structure |
-| `/jaan-to:backend-service-implement` | Generate service implementations from scaffold stubs |
-| `/jaan-to:qa-test-generate` | Generate runnable Vitest/Playwright tests from BDD cases |
-| `/jaan-to:sec-audit-remediate` | Generate security fixes from detect-dev findings |
-| `/jaan-to:dev-output-integrate` | Copy generated outputs into project with config merging |
-| `/jaan-to:devops-infra-scaffold` | Generate CI/CD, Dockerfiles, deployment configs |
-| `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
-| `/jaan-to:qa-test-run` | Execute tests, diagnose failures, auto-fix, generate coverage reports |
-| `/jaan-to:qa-test-mutate` | Run mutation testing and generate survivor reports |
-| `/jaan-to:qa-tdd-orchestrate` | Orchestrate RED/GREEN/REFACTOR TDD cycle with isolated agents |
-| `/jaan-to:qa-contract-validate` | Validate API contracts with Spectral, oasdiff, Prism, Schemathesis |
-| `/jaan-to:qa-quality-gate` | Compute composite quality score from upstream skill outputs |
-| `/jaan-to:qa-issue-validate` | Validate GitHub/GitLab issues against codebase with RCA |
-| `/jaan-to:qa-issue-report` | Report issues to any GitHub/GitLab repository |
-| `/jaan-to:pm-skill-discover` | Detect repeated workflow patterns and suggest skills |
-| `/jaan-to:dev-verify` | Validate build pipeline and running services with health checks |
-| `/jaan-to:dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
-| `/jaan-to:release-iterate-changelog` | Generate changelog with user impact and support guidance |
-| `/jaan-to:jaan-init` | Initialize jaan-to for a project |
-| `/jaan-to:jaan-issue-report` | Report issues to jaan-to GitHub repo |
-| `/jaan-to:skill-create` | Create new skill with wizard |
-| `/jaan-to:skill-update` | Update existing skill |
-| `/jaan-to:docs-create` | Create documentation with templates |
-| `/jaan-to:docs-update` | Audit and update stale documentation |
-| `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
-| `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
-| `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
-| `/jaan-to:learn-report` | View learning system dashboard |
+| `/pm-prd-write` | Generate PRD from initiative |
+| `/pm-research-about` | Deep research or add file/URL to index |
+| `/pm-story-write` | Generate user stories with Given/When/Then AC |
+| `/data-gtm-datalayer` | Generate GTM tracking code |
+| `/detect-dev` | Engineering audit with scored findings |
+| `/detect-design` | Design system detection with drift findings |
+| `/detect-writing` | Writing system extraction with tone scoring |
+| `/detect-product` | Product reality extraction with evidence |
+| `/detect-ux` | UX audit with journey/pain-point findings |
+| `/detect-pack` | Consolidate detect outputs into knowledge index |
+| `/frontend-task-breakdown` | Frontend task breakdown with component hierarchy |
+| `/backend-task-breakdown` | Backend task breakdown from PRDs |
+| `/frontend-design` | Frontend component design |
+| `/backend-data-model` | Generate data model docs with constraints, indexes, and migrations |
+| `/backend-api-contract` | Generate OpenAPI 3.1 contracts from API entities |
+| `/backend-pr-review` | Review backend PRs for security, performance, and code quality |
+| `/backend-scaffold` | Generate production-ready backend code from specs |
+| `/frontend-scaffold` | Convert designs to React/Next.js scaffold code |
+| `/ux-heatmap-analyze` | Analyze heatmap CSV + screenshots |
+| `/ux-microcopy-write` | Multi-language UX microcopy |
+| `/ux-research-synthesize` | Synthesize UX research findings |
+| `/ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase |
+| `/qa-test-cases` | Generate test cases from PRDs |
+| `/wp-pr-review` | Review WordPress plugin PRs for security and standards |
+| `/dev-project-assemble` | Wire scaffold outputs into runnable project structure |
+| `/backend-service-implement` | Generate service implementations from scaffold stubs |
+| `/qa-test-generate` | Generate runnable Vitest/Playwright tests from BDD cases |
+| `/sec-audit-remediate` | Generate security fixes from detect-dev findings |
+| `/dev-output-integrate` | Copy generated outputs into project with config merging |
+| `/devops-infra-scaffold` | Generate CI/CD, Dockerfiles, deployment configs |
+| `/devops-deploy-activate` | Activate deployment pipeline with secrets and platform provisioning |
+| `/qa-test-run` | Execute tests, diagnose failures, auto-fix, generate coverage reports |
+| `/qa-test-mutate` | Run mutation testing and generate survivor reports |
+| `/qa-tdd-orchestrate` | Orchestrate RED/GREEN/REFACTOR TDD cycle with isolated agents |
+| `/qa-contract-validate` | Validate API contracts with Spectral, oasdiff, Prism, Schemathesis |
+| `/qa-quality-gate` | Compute composite quality score from upstream skill outputs |
+| `/qa-issue-validate` | Validate GitHub/GitLab issues against codebase with RCA |
+| `/qa-issue-report` | Report issues to any GitHub/GitLab repository |
+| `/pm-skill-discover` | Detect repeated workflow patterns and suggest skills |
+| `/dev-verify` | Validate build pipeline and running services with health checks |
+| `/dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
+| `/release-iterate-changelog` | Generate changelog with user impact and support guidance |
+| `/jaan-init` | Initialize jaan-to for a project |
+| `/jaan-issue-report` | Report issues to jaan-to GitHub repo |
+| `/skill-create` | Create new skill with wizard |
+| `/skill-update` | Update existing skill |
+| `/docs-create` | Create documentation with templates |
+| `/docs-update` | Audit and update stale documentation |
+| `/learn-add` | Add lesson to skill's LEARN.md |
+| `/pm-roadmap-add` | Add prioritized items to project roadmap |
+| `/pm-roadmap-update` | Review and maintain project roadmap |
+| `/learn-report` | View learning system dashboard |
 
 ### Key Paths
 
@@ -262,6 +262,6 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 
 | Pattern | Example |
 |---------|---------|
-| Role-based: `{role}-{domain}-{action}` | `/jaan-to:pm-prd-write` |
-| Internal: `{domain}-{action}` | `/jaan-to:skill-create` |
-| Directory: `skills/{skill-name}/` | `skills/jaan-to:pm-prd-write/` |
+| Role-based: `{role}-{domain}-{action}` | `/pm-prd-write` |
+| Internal: `{domain}-{action}` | `/skill-create` |
+| Directory: `skills/{skill-name}/` | `skills/pm-prd-write/` |

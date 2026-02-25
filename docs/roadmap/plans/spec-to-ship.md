@@ -23,7 +23,7 @@ The jaan-to plugin excels at specification generation but produces 0% production
 
 ---
 
-## 1. `/jaan-to:dev-project-assemble` (L-02 — P0)
+## 1. `/dev-project-assemble` (L-02 — P0)
 
 > Wire scaffold outputs into a runnable project with proper directory tree, configs, and entry points.
 
@@ -109,11 +109,11 @@ frontend-design ───┘                          ──→ qa-test-generate
 ```
 
 ### Create via
-`/jaan-to:skill-create dev-project-assemble` — run as dedicated agent
+`/skill-create dev-project-assemble` — run as dedicated agent
 
 ---
 
-## 2. `/jaan-to:backend-service-implement` (L-01 — P0)
+## 2. `/backend-service-implement` (L-01 — P0)
 
 > Generate actual business logic from TODO stubs using specs as the source of truth.
 
@@ -185,11 +185,11 @@ backend-task-breakdown ┘
 ```
 
 ### Create via
-`/jaan-to:skill-create backend-service-implement` — run as dedicated agent
+`/skill-create backend-service-implement` — run as dedicated agent
 
 ---
 
-## 3. `/jaan-to:qa-test-generate` (L-03 — P0)
+## 3. `/qa-test-generate` (L-03 — P0)
 
 > Produce runnable Vitest unit tests and Playwright E2E specs from BDD test cases and scaffold code.
 
@@ -269,7 +269,7 @@ backend-api-contract ───┘
 ```
 
 ### Create via
-`/jaan-to:skill-create qa-test-generate` — run as dedicated agent
+`/skill-create qa-test-generate` — run as dedicated agent
 
 ---
 
@@ -289,7 +289,7 @@ Two-part approach: fix the root cause (scaffold defaults) + remediate existing f
 **Files to modify:**
 - `skills/backend-scaffold/SKILL.md` — update Phase 2 generation rules for auth middleware, add security section
 
-### 4b. `/jaan-to:sec-audit-remediate` (New Skill)
+### 4b. `/sec-audit-remediate` (New Skill)
 
 > Generate targeted security fixes from detect-dev SARIF findings with regression tests.
 
@@ -346,11 +346,11 @@ frontend-scaffold ──┘
 ```
 
 ### Create via
-`/jaan-to:skill-create sec-audit-remediate` — run as dedicated agent
+`/skill-create sec-audit-remediate` — run as dedicated agent
 
 ---
 
-## 5. `/jaan-to:devops-infra-scaffold` (L-05 — P1)
+## 5. `/devops-infra-scaffold` (L-05 — P1)
 
 > Generate CI/CD workflows, Dockerfiles, and deployment configs from tech.md.
 
@@ -426,7 +426,7 @@ detect-dev ─────────┘ (optional, for security gates in CI)
 ```
 
 ### Create via
-`/jaan-to:skill-create devops-infra-scaffold` — run as dedicated agent
+`/skill-create devops-infra-scaffold` — run as dedicated agent
 
 ---
 
@@ -456,7 +456,7 @@ Ship Phase (NEW):
 
 ## Pre-Creation Research (Step 0)
 
-Run `/jaan-to:pm-research-about` for each skill to gather development workflow standards, methods, and best practices. All 6 research tasks run as **parallel dedicated agents** (Auto mode, Deep/100 unique sources each).
+Run `/pm-research-about` for each skill to gather development workflow standards, methods, and best practices. All 6 research tasks run as **parallel dedicated agents** (Auto mode, Deep/100 unique sources each).
 
 | # | Skill | Research Topic | Output File |
 |---|-------|---------------|-------------|
@@ -480,21 +480,21 @@ Run `/jaan-to:pm-research-about` for each skill to gather development workflow s
 ## Execution Plan
 
 ### Phase A: Research (all 6 in parallel) ✅
-Run `/jaan-to:pm-research-about` for each skill — 6 parallel agents, Auto mode, Deep (100 unique sources each). Complete — outputs at `docs/research/69-74`.
+Run `/pm-research-about` for each skill — 6 parallel agents, Auto mode, Deep (100 unique sources each). Complete — outputs at `docs/research/69-74`.
 
 ### Phase B: Skill Creation
-Each new skill is created by invoking `/jaan-to:skill-create` as a **separate dedicated agent**. Each agent receives its corresponding research output as context. The scaffold improvement (4a) is a direct edit to the existing SKILL.md.
+Each new skill is created by invoking `/skill-create` as a **separate dedicated agent**. Each agent receives its corresponding research output as context. The scaffold improvement (4a) is a direct edit to the existing SKILL.md.
 
-`/jaan-to:skill-create` produces: `SKILL.md` + `LEARN.md` (research-seeded) + `template.md` (if applicable). Skills that write code (`dev-project-assemble`, `backend-service-implement`) do NOT need `template.md`.
+`/skill-create` produces: `SKILL.md` + `LEARN.md` (research-seeded) + `template.md` (if applicable). Skills that write code (`dev-project-assemble`, `backend-service-implement`) do NOT need `template.md`.
 
 | Step | Action | Method | Parallelizable |
 |------|--------|--------|----------------|
-| 1 | `dev-project-assemble` | `/jaan-to:skill-create dev-project-assemble` (agent) + R1 research | — |
+| 1 | `dev-project-assemble` | `/skill-create dev-project-assemble` (agent) + R1 research | — |
 | 2 | `backend-scaffold` improvement | Direct edit to `skills/backend-scaffold/SKILL.md` using R4 research | With step 1 |
-| 3 | `backend-service-implement` | `/jaan-to:skill-create backend-service-implement` (agent) + R2 research | With steps 1+2 |
-| 4 | `qa-test-generate` | `/jaan-to:skill-create qa-test-generate` (agent) + R3 research | With step 3 |
-| 5 | `sec-audit-remediate` | `/jaan-to:skill-create sec-audit-remediate` (agent) + R5 research | With steps 3+4 |
-| 6 | `devops-infra-scaffold` | `/jaan-to:skill-create devops-infra-scaffold` (agent) + R6 research | After steps 1-5 |
+| 3 | `backend-service-implement` | `/skill-create backend-service-implement` (agent) + R2 research | With steps 1+2 |
+| 4 | `qa-test-generate` | `/skill-create qa-test-generate` (agent) + R3 research | With step 3 |
+| 5 | `sec-audit-remediate` | `/skill-create sec-audit-remediate` (agent) + R5 research | With steps 3+4 |
+| 6 | `devops-infra-scaffold` | `/skill-create devops-infra-scaffold` (agent) + R6 research | After steps 1-5 |
 
 **Parallel batches:**
 - **Batch 0:** R1 + R2 + R3 + R4 + R5 + R6 (all research in parallel)
@@ -504,19 +504,19 @@ Each new skill is created by invoking `/jaan-to:skill-create` as a **separate de
 
 ### Phase C: Post-Creation (per skill, after each batch)
 
-After each skill is created via `/jaan-to:skill-create`, run these steps:
+After each skill is created via `/skill-create`, run these steps:
 
 | # | Step | Command/Action |
 |---|------|---------------|
-| 1 | Compliance check | `/jaan-to:skill-update {skill-name}` — v3.0.0 frontmatter + structure compliance |
-| 2 | Issue capture | If any issues found during creation or compliance check, fix them, then run `/jaan-to:learn-add` to record the lesson |
+| 1 | Compliance check | `/skill-update {skill-name}` — v3.0.0 frontmatter + structure compliance |
+| 2 | Issue capture | If any issues found during creation or compliance check, fix them, then run `/learn-add` to record the lesson |
 | 3 | Config catalog | Edit `scripts/seeds/config.md` — add skill entry to catalog table |
-| 4 | Documentation | `/jaan-to:docs-create {skill-name}` — generate skill docs page |
-| 5 | Roadmap update | `/jaan-to:pm-roadmap-add` to add skill to roadmap (or `/jaan-to:pm-roadmap-update` to sync existing entries) |
-| 6 | Changelog | `/jaan-to:release-iterate-changelog` — add entries for new skills |
+| 4 | Documentation | `/docs-create {skill-name}` — generate skill docs page |
+| 5 | Roadmap update | `/pm-roadmap-add` to add skill to roadmap (or `/pm-roadmap-update` to sync existing entries) |
+| 6 | Changelog | `/release-iterate-changelog` — add entries for new skills |
 | 7 | Commit + PR | Commit all files, create PR to `dev` |
 
-**Continuous learning rule:** At any point during Phase B or C, if an issue is discovered and fixed (frontmatter error, missing section, wrong path, etc.), immediately run `/jaan-to:learn-add` to capture the lesson before moving on.
+**Continuous learning rule:** At any point during Phase B or C, if an issue is discovered and fixed (frontmatter error, missing section, wrong path, etc.), immediately run `/learn-add` to capture the lesson before moving on.
 
 ### Batch Execution: Step-by-Step Pipeline
 
@@ -527,7 +527,7 @@ Run all 6 skills sequentially. Each skill completes its full lifecycle (Phase B 
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │  SKILL 1: dev-project-assemble                              │
-│  B1. /jaan-to:skill-create dev-project-assemble (agent)     │
+│  B1. /skill-create dev-project-assemble (agent)     │
 │  C1. skill-update → learn-add → config → docs-create        │
 │      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
@@ -537,22 +537,22 @@ Run all 6 skills sequentially. Each skill completes its full lifecycle (Phase B 
 │      → pm-roadmap-update → release-iterate-changelog → commit   │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 3: backend-service-implement                         │
-│  B3. /jaan-to:skill-create backend-service-implement (agent)│
+│  B3. /skill-create backend-service-implement (agent)│
 │  C3. skill-update → learn-add → config → docs-create        │
 │      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 4: qa-test-generate                                  │
-│  B4. /jaan-to:skill-create qa-test-generate (agent)         │
+│  B4. /skill-create qa-test-generate (agent)         │
 │  C4. skill-update → learn-add → config → docs-create        │
 │      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 5: sec-audit-remediate                               │
-│  B5. /jaan-to:skill-create sec-audit-remediate (agent)      │
+│  B5. /skill-create sec-audit-remediate (agent)      │
 │  C5. skill-update → learn-add → config → docs-create        │
 │      → pm-roadmap-add → release-iterate-changelog → commit      │
 ├─────────────────────────────────────────────────────────────┤
 │  SKILL 6: devops-infra-scaffold                             │
-│  B6. /jaan-to:skill-create devops-infra-scaffold (agent)    │
+│  B6. /skill-create devops-infra-scaffold (agent)    │
 │  C6. skill-update → learn-add → config → docs-create        │
 │      → pm-roadmap-add → release-iterate-changelog → commit      │
 └─────────────────────────────────────────────────────────────┘
@@ -562,13 +562,13 @@ Run all 6 skills sequentially. Each skill completes its full lifecycle (Phase B 
 
 ```
 For each skill in [1..6]:
-  1. Create skill          → /jaan-to:skill-create {name} (or direct edit for #2)
-  2. Compliance check      → /jaan-to:skill-update {name}
-  3. Fix issues + learn    → fix → /jaan-to:learn-add (if issues found)
+  1. Create skill          → /skill-create {name} (or direct edit for #2)
+  2. Compliance check      → /skill-update {name}
+  3. Fix issues + learn    → fix → /learn-add (if issues found)
   4. Config catalog        → Edit scripts/seeds/config.md (new skills only)
-  5. Documentation         → /jaan-to:docs-create {name}
-  6. Roadmap               → /jaan-to:pm-roadmap-add (or /jaan-to:pm-roadmap-update)
-  7. Changelog             → /jaan-to:release-iterate-changelog
+  5. Documentation         → /docs-create {name}
+  6. Roadmap               → /pm-roadmap-add (or /pm-roadmap-update)
+  7. Changelog             → /release-iterate-changelog
   8. Commit                → git add + commit to dev branch
   → NEXT SKILL
 ```
@@ -585,7 +585,7 @@ For each skill in [1..6]:
 2. Required sections: Context Files, Input, Pre-Execution, HARD STOP, Definition of Done
 3. All paths use `$JAAN_*` env vars (no hardcoded project paths)
 4. No hardcoded credentials, IPs, or tokens
-5. `/jaan-to:learn-add` referenced (not deprecated `/update-lessons-learned`)
+5. `/learn-add` referenced (not deprecated `/update-lessons-learned`)
 6. LEARN.md exists with seeded lessons (Better Questions, Edge Cases, Workflow, Common Mistakes)
 7. `scripts/seeds/config.md` has catalog entry for the skill
 
@@ -602,7 +602,7 @@ For each skill in [1..6]:
 
 ## Roadmap Integration
 
-Done via `/jaan-to:pm-roadmap-add` or `/jaan-to:pm-roadmap-update` in Phase C step 5. Expected changes:
+Done via `/pm-roadmap-add` or `/pm-roadmap-update` in Phase C step 5. Expected changes:
 
 - Add `dev-project-assemble` to `docs/roadmap/tasks/role-skills/dev.md` in the DEV skills chain
 - Add `backend-service-implement` to `docs/roadmap/tasks/role-skills/backend.md` after `backend-scaffold`

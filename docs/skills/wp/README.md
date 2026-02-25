@@ -17,7 +17,7 @@ tags: [wordpress, skills]
 
 | Skill | Command | Description |
 |-------|---------|-------------|
-| [pr-review](pr-review.md) | `/jaan-to:wp-pr-review` | Review WordPress plugin PRs for security, performance, and standards |
+| [pr-review](pr-review.md) | `/wp-pr-review` | Review WordPress plugin PRs for security, performance, and standards |
 
 ---
 

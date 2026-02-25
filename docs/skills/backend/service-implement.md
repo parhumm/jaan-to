@@ -8,7 +8,7 @@ tags: [dev, backend, service, implement, business-logic, crud, state-machine]
 related: [backend-scaffold, backend-api-contract, backend-data-model, backend-task-breakdown]
 ---
 
-# /jaan-to:backend-service-implement
+# /backend-service-implement
 
 > Bridge spec to code — generate full service implementations with business logic from TODO stubs and upstream specs.
 
@@ -16,15 +16,15 @@ related: [backend-scaffold, backend-api-contract, backend-data-model, backend-ta
 
 ## Overview
 
-Takes scaffold stubs (from `/jaan-to:backend-scaffold`) and upstream specs (API contract, data model, task breakdown) to generate production-ready service implementations with business logic, helpers, error handling, and pagination. Supports Node.js/TypeScript, PHP (Laravel/Symfony), and Go.
+Takes scaffold stubs (from `/backend-scaffold`) and upstream specs (API contract, data model, task breakdown) to generate production-ready service implementations with business logic, helpers, error handling, and pagination. Supports Node.js/TypeScript, PHP (Laravel/Symfony), and Go.
 
 ---
 
 ## Usage
 
 ```
-/jaan-to:backend-service-implement
-/jaan-to:backend-service-implement backend-scaffold backend-api-contract backend-data-model backend-task-breakdown
+/backend-service-implement
+/backend-service-implement backend-scaffold backend-api-contract backend-data-model backend-task-breakdown
 ```
 
 | Argument | Required | Description |
@@ -77,7 +77,7 @@ Files at `$JAAN_OUTPUTS_DIR/backend/service-implement/{id}-{slug}/`:
 ## Workflow Chain
 
 ```
-/jaan-to:backend-scaffold --> /jaan-to:backend-service-implement --> /jaan-to:qa-test-generate
+/backend-scaffold --> /backend-service-implement --> /qa-test-generate
 ```
 
 ---
@@ -86,7 +86,7 @@ Files at `$JAAN_OUTPUTS_DIR/backend/service-implement/{id}-{slug}/`:
 
 **Input:**
 ```
-/jaan-to:backend-service-implement path/to/scaffold path/to/api.yaml path/to/data-model.md
+/backend-service-implement path/to/scaffold path/to/api.yaml path/to/data-model.md
 ```
 
 **Output:**
@@ -104,25 +104,25 @@ jaan-to/outputs/backend/service-implement/01-user-api/
 
 ## Tips
 
-- Run `/jaan-to:backend-scaffold` first to generate the stubs this skill fills in
+- Run `/backend-scaffold` first to generate the stubs this skill fills in
 - Provide all 4 upstream artifacts for best results
 - Review the implementation guide (.md) for business logic decisions
-- Use `/jaan-to:qa-test-generate` to generate tests for the implemented services
+- Use `/qa-test-generate` to generate tests for the implemented services
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:backend-scaffold](scaffold.md) - Generate backend code stubs from specs
-- [/jaan-to:backend-api-contract](api-contract.md) - Generate OpenAPI contracts
-- [/jaan-to:backend-data-model](data-model.md) - Generate data model docs
-- [/jaan-to:qa-test-generate](../qa/test-generate.md) - Generate runnable tests
+- [/backend-scaffold](scaffold.md) - Generate backend code stubs from specs
+- [/backend-api-contract](api-contract.md) - Generate OpenAPI contracts
+- [/backend-data-model](data-model.md) - Generate data model docs
+- [/qa-test-generate](../qa/test-generate.md) - Generate runnable tests
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: backend-service-implement
-- **Command**: `/jaan-to:backend-service-implement`
+- **Command**: `/backend-service-implement`
 - **Role**: dev (backend)
 - **Output**: `$JAAN_OUTPUTS_DIR/backend/service-implement/{id}-{slug}/`

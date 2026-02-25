@@ -28,11 +28,11 @@ Bootstrap checks if the project has been initialized before running. If `jaan-to
 
 ```
 JAAN-TO: Project not initialized.
-Before running any /jaan-to:* skill, recommend running /jaan-init first.
+Before running any /* skill, recommend running /jaan-init first.
 Without initialization, context files (tech.md, team.md, boundaries.md, settings.yaml) are missing and skill output quality will be degraded.
 ```
 
-This message flows through the `SessionStart` hook into the conversation context, prompting the AI to recommend `/jaan-init` before executing any skill. To initialize a project, run `/jaan-to:jaan-init`. Once `jaan-to/` exists, bootstrap runs normally on every session start.
+This message flows through the `SessionStart` hook into the conversation context, prompting the AI to recommend `/jaan-init` before executing any skill. To initialize a project, run `/jaan-init`. Once `jaan-to/` exists, bootstrap runs normally on every session start.
 
 ---
 
@@ -50,9 +50,9 @@ This message flows through the `SessionStart` hook into the conversation context
 4. **Seeds config** — Copies `settings.yaml` from `scripts/seeds/` to `jaan-to/config/` if not present.
 5. **Copies context files** — Copies `.md` seed files from `scripts/seeds/` to `jaan-to/context/` (skips existing).
 
-> **Note**: Templates, learn files, and reference docs (STYLE.md, create-skill.md) are **not** copied during bootstrap. They are loaded from the plugin at runtime (lazy loading). Project-level overrides can be created in `jaan-to/templates/` for templates and via `/jaan-to:learn-add` for learn files.
+> **Note**: Templates, learn files, and reference docs (STYLE.md, create-skill.md) are **not** copied during bootstrap. They are loaded from the plugin at runtime (lazy loading). Project-level overrides can be created in `jaan-to/templates/` for templates and via `/learn-add` for learn files.
 6. **Checks context seeds** — Verifies expected seed files (`tech.md`, `team.md`, `integrations.md`, `config.md`, `boundaries.md`) exist in the plugin.
-7. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/jaan-to:detect-pack` to perform full repo analysis.
+7. **Suggests detect skills** — If `tech.md` still contains `{project-name}` placeholder, suggests running `/detect-pack` to perform full repo analysis.
 
 ---
 
@@ -142,7 +142,7 @@ When custom paths are active, the output includes `"paths_customized": true`.
 
 ## Why It Exists
 
-The plugin needs project-local directories for config, context, templates, outputs, docs, and learning data. Bootstrap creates these directories on first use and seeds context and config files so skills work immediately. Templates and learn files are loaded from the plugin at runtime (lazy loading) — project-level overrides are created only when the user explicitly customizes a template or adds lessons via `/jaan-to:learn-add`. Bootstrap is idempotent — running it multiple times is safe and only creates what's missing. Existing project files are never overwritten.
+The plugin needs project-local directories for config, context, templates, outputs, docs, and learning data. Bootstrap creates these directories on first use and seeds context and config files so skills work immediately. Templates and learn files are loaded from the plugin at runtime (lazy loading) — project-level overrides are created only when the user explicitly customizes a template or adds lessons via `/learn-add`. Bootstrap is idempotent — running it multiple times is safe and only creates what's missing. Existing project files are never overwritten.
 
 ---
 

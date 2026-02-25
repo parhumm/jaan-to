@@ -3,7 +3,7 @@ title: "ux-flowchart-generate"
 sidebar_position: 4
 ---
 
-# /jaan-to:ux-flowchart-generate
+# /ux-flowchart-generate
 
 > Generate GitHub-renderable Mermaid flowcharts from PRDs, docs, codebases, or any combination — with evidence maps and confidence scoring.
 
@@ -25,22 +25,22 @@ Supports four source types (`prd`, `doc`, `repo`, `mixed`) and four diagram goal
 
 **PRD-only user flow:**
 ```
-/jaan-to:ux-flowchart-generate prd docs/prd-auth.md userflow "password reset"
+/ux-flowchart-generate prd docs/prd-auth.md userflow "password reset"
 ```
 
 **Repo-only system flow:**
 ```
-/jaan-to:ux-flowchart-generate repo src/middleware/ systemflow "auth"
+/ux-flowchart-generate repo src/middleware/ systemflow "auth"
 ```
 
 **Mixed mode (PRD + code):**
 ```
-/jaan-to:ux-flowchart-generate mixed docs/prd-checkout.md src/checkout/ userflow
+/ux-flowchart-generate mixed docs/prd-checkout.md src/checkout/ userflow
 ```
 
 **Interactive wizard:**
 ```
-/jaan-to:ux-flowchart-generate
+/ux-flowchart-generate
 ```
 
 ---
@@ -175,7 +175,7 @@ jaan-to/learn/jaan-to-ux-flowchart-generate.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add ux-flowchart-generate "Always validate mermaid syntax before preview"
+/learn-add ux-flowchart-generate "Always validate mermaid syntax before preview"
 ```
 
 ---

@@ -192,8 +192,8 @@ Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C
 
 1. Run `scripts/validate-skills.sh` to ensure all SKILL.md files pass structural validation
 2. Start a fresh session, run `/context` to verify reduced baseline overhead
-3. Invoke `/jaan-to:pm-prd-write test` — verify language settings and pre-execution still work from referenced files
-4. Invoke `/jaan-to:detect-dev` — verify it runs in forked context and returns summary
-5. Invoke `/jaan-to:skill-update` by slash command — verify it still works despite `disable-model-invocation: true`
+3. Invoke `/pm-prd-write test` — verify language settings and pre-execution still work from referenced files
+4. Invoke `/detect-dev` — verify it runs in forked context and returns summary
+5. Invoke `/skill-update` by slash command — verify it still works despite `disable-model-invocation: true`
 6. Check that internal skills (roadmap-add, docs-create, etc.) no longer appear in auto-invocation suggestions
 7. Verify CLAUDE.md loads correctly and behavioral rules are preserved

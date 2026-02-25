@@ -7,7 +7,7 @@ related: [detect-dev, detect-design, detect-writing, detect-product, detect-pack
 updated_date: 2026-02-09
 ---
 
-# /jaan-to:detect-ux
+# /detect-ux
 
 > Repo-driven UX audit with journey mapping and heuristic-based findings.
 
@@ -22,7 +22,7 @@ Performs a UX audit by mapping journeys from actual routes, screens, and state c
 ## Usage
 
 ```
-/jaan-to:detect-ux [repo] [--full]
+/detect-ux [repo] [--full]
 ```
 
 | Argument | Required | Description |

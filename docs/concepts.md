@@ -14,7 +14,7 @@ sidebar_position: 3
 Commands that generate outputs.
 
 - Pattern: `/role-domain-action`
-- Example: `/jaan-to:pm-prd-write`
+- Example: `/pm-prd-write`
 - Output: Markdown files in `jaan-to/outputs/`
 
 Skills follow a two-phase workflow:
@@ -66,7 +66,7 @@ Each skill has a `LEARN.md` file with four categories:
 | Workflow | "Generate metrics JSON alongside PRD" |
 | Common Mistakes | "Don't assume single region" |
 
-Add lessons: `/jaan-to:learn-add {skill} "lesson text"`
+Add lessons: `/learn-add {skill} "lesson text"`
 
 [Learn more](learning/README.md)
 

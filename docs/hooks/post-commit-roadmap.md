@@ -13,9 +13,9 @@ sidebar_position: 4
 
 Roadmap maintenance is now handled explicitly via user-invoked commands:
 
-- `/jaan-to:pm-roadmap-update review` — Cross-reference roadmap against PRDs, stories, and code changes
-- `/jaan-to:pm-roadmap-update mark "<item>" done` — Mark a specific item as complete
-- `/jaan-to:pm-roadmap-add "description"` — Add a new prioritized item
+- `/pm-roadmap-update review` — Cross-reference roadmap against PRDs, stories, and code changes
+- `/pm-roadmap-update mark "<item>" done` — Mark a specific item as complete
+- `/pm-roadmap-add "description"` — Add a new prioritized item
 
 ---
 

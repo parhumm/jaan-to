@@ -25,18 +25,18 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: PM, DATA, GROWTH, UX
 - **Capabilities**: Metrics, funnels, cohorts, anomaly detection, baselines
 - **Skills**:
-  - `/jaan-to:pm-north-star` - baseline data
-  - `/jaan-to:pm-release-review` - KPI deltas
-  - `/jaan-to:data-event-spec` - measurement alignment
-  - `/jaan-to:data-metric-spec` - dimension/metric checks
-  - `/jaan-to:data-funnel-review` - funnel analysis
-  - `/jaan-to:data-experiment-design` - baseline + segments
-  - `/jaan-to:data-anomaly-triage` - anomaly detection
-  - `/jaan-to:data-cohort-analyze` - cohort data
-  - `/jaan-to:growth-weekly-report` - traffic deltas
-  - `/jaan-to:growth-content-optimize` - engagement data
-  - `/jaan-to:ux-heuristic-review` - behavior evidence (with Clarity)
-  - `/jaan-to:ux-competitive-review` - validate assumptions
+  - `/pm-north-star` - baseline data
+  - `/pm-release-review` - KPI deltas
+  - `/data-event-spec` - measurement alignment
+  - `/data-metric-spec` - dimension/metric checks
+  - `/data-funnel-review` - funnel analysis
+  - `/data-experiment-design` - baseline + segments
+  - `/data-anomaly-triage` - anomaly detection
+  - `/data-cohort-analyze` - cohort data
+  - `/growth-weekly-report` - traffic deltas
+  - `/growth-content-optimize` - engagement data
+  - `/ux-heuristic-review` - behavior evidence (with Clarity)
+  - `/ux-competitive-review` - validate assumptions
 
 #### 2. GitLab MCP
 
@@ -44,15 +44,15 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: DEV, QA
 - **Capabilities**: MRs, pipelines, code context, release branches
 - **Skills**:
-  - `/jaan-to:dev-tech-plan` - modules/flags
-  - `/jaan-to:dev-test-plan` - diff impact
-  - `/jaan-to:dev-pr-review` - MR + pipeline
-  - `/jaan-to:dev-ship-check` - pipelines health
-  - `/jaan-to:dev-docs-generate` - code context
-  - `/jaan-to:qa-test-matrix` - impacted areas
-  - `/jaan-to:qa-automation-plan` - automation MRs
-  - `/jaan-to:qa-regression-runbook` - release branch
-  - `/jaan-to:qa-release-signoff` - pipeline status
+  - `/dev-tech-plan` - modules/flags
+  - `/dev-test-plan` - diff impact
+  - `/dev-pr-review` - MR + pipeline
+  - `/dev-ship-check` - pipelines health
+  - `/dev-docs-generate` - code context
+  - `/qa-test-matrix` - impacted areas
+  - `/qa-automation-plan` - automation MRs
+  - `/qa-regression-runbook` - release branch
+  - `/qa-release-signoff` - pipeline status
 
 ### Tier 2: Medium Impact (5-6 skills enabled)
 
@@ -62,12 +62,12 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: PM, QA
 - **Capabilities**: Backlog, bugs, user stories, issue tracking
 - **Skills**:
-  - `/jaan-to:pm-scope-slice` - backlog context
-  - `/jaan-to:pm-story-write` - backlog context
-  - `/jaan-to:qa-bug-triage` - bug list
-  - `/jaan-to:qa-test-cases` - user story context
-  - `/jaan-to:qa-bug-report` - duplicate detection
-  - `/jaan-to:qa-release-signoff` - test evidence
+  - `/pm-scope-slice` - backlog context
+  - `/pm-story-write` - backlog context
+  - `/qa-bug-triage` - bug list
+  - `/qa-test-cases` - user story context
+  - `/qa-bug-report` - duplicate detection
+  - `/qa-release-signoff` - test evidence
 
 #### 4. Figma MCP
 
@@ -75,12 +75,12 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: UX, QA, DEV
 - **Capabilities**: Designs, flows, components, states
 - **Skills**:
-  - `/jaan-to:dev-tech-plan` - optional constraints
-  - `/jaan-to:qa-test-matrix` - flow-states
-  - `/jaan-to:ux-flow-spec` - flow/state extraction
-  - `/jaan-to:ux-microcopy-write` - components + strings
-  - `/jaan-to:ux-research-plan` - flow context
-  - `/jaan-to:ux-heuristic-review` - screens
+  - `/dev-tech-plan` - optional constraints
+  - `/qa-test-matrix` - flow-states
+  - `/ux-flow-spec` - flow/state extraction
+  - `/ux-microcopy-write` - components + strings
+  - `/ux-research-plan` - flow context
+  - `/ux-heuristic-review` - screens
 
 #### 5. GSC MCP (Google Search Console)
 
@@ -88,11 +88,11 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: GROWTH
 - **Capabilities**: Queries, pages, CTR, impressions, indexability
 - **Skills**:
-  - `/jaan-to:growth-content-outline` - opportunity pages + queries
-  - `/jaan-to:growth-keyword-brief` - queries/pages
-  - `/jaan-to:growth-seo-audit` - page CTR/impressions
-  - `/jaan-to:growth-seo-check` - coverage/index diagnostics
-  - `/jaan-to:growth-weekly-report` - traffic deltas
+  - `/growth-content-outline` - opportunity pages + queries
+  - `/growth-keyword-brief` - queries/pages
+  - `/growth-seo-audit` - page CTR/impressions
+  - `/growth-seo-check` - coverage/index diagnostics
+  - `/growth-weekly-report` - traffic deltas
 
 #### 6. Clarity MCP (Microsoft Clarity)
 
@@ -100,11 +100,11 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: PM, UX, DATA
 - **Capabilities**: Session recordings, heatmaps, behavior signals
 - **Skills**:
-  - `/jaan-to:pm-decision-brief` - optional evidence
-  - `/jaan-to:pm-release-review` - UX regressions
-  - `/jaan-to:data-funnel-review` - qualitative insights
-  - `/jaan-to:ux-research-plan` - pain signals
-  - `/jaan-to:ux-heuristic-review` - behavior evidence
+  - `/pm-decision-brief` - optional evidence
+  - `/pm-release-review` - UX regressions
+  - `/data-funnel-review` - qualitative insights
+  - `/ux-research-plan` - pain signals
+  - `/ux-heuristic-review` - behavior evidence
 
 ### Tier 3: Targeted Impact (2-4 skills enabled)
 
@@ -114,10 +114,10 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: DEV, QA, DATA
 - **Capabilities**: Error tracking, stack traces, health monitoring
 - **Skills**:
-  - `/jaan-to:dev-pr-review` - optional regressions
-  - `/jaan-to:dev-ship-check` - health status
-  - `/jaan-to:qa-bug-triage` - optional context
-  - `/jaan-to:data-anomaly-triage` - error correlation
+  - `/dev-pr-review` - optional regressions
+  - `/dev-ship-check` - health status
+  - `/qa-bug-triage` - optional context
+  - `/data-anomaly-triage` - error correlation
 
 #### 8. BigQuery MCP
 
@@ -125,8 +125,8 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: DATA
 - **Capabilities**: Advanced SQL, window functions, large datasets
 - **Skills**:
-  - `/jaan-to:data-cohort-analyze` - optional advanced queries
-  - `/jaan-to:data-dbt-model` - schema context
+  - `/data-cohort-analyze` - optional advanced queries
+  - `/data-dbt-model` - schema context
 
 #### 9. Playwright MCP
 
@@ -134,8 +134,8 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: QA
 - **Capabilities**: Test automation direction, reliability
 - **Skills**:
-  - `/jaan-to:qa-automation-plan` - automation direction
-  - `/jaan-to:qa-regression-runbook` - optional automation
+  - `/qa-automation-plan` - automation direction
+  - `/qa-regression-runbook` - optional automation
 
 ### Tier 4: Single Skill (1 skill enabled)
 
@@ -145,7 +145,7 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: DEV
 - **Capabilities**: API contract validation, schema generation
 - **Skills**:
-  - `/jaan-to:backend-api-contract` - contract generation
+  - `/backend-api-contract` - contract generation
 
 #### 11. dbt Cloud MCP
 
@@ -153,7 +153,7 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Roles**: DATA
 - **Capabilities**: Model management, test results, documentation
 - **Skills**:
-  - `/jaan-to:data-dbt-model` - optional cloud integration
+  - `/data-dbt-model` - optional cloud integration
 
 ---
 
@@ -170,10 +170,10 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with Notion subscription
 - **Capabilities**: Create pages, search workspace, manage databases, unified search
 - **Skills**:
-  - `/jaan-to:pm-prd-write` - PRD storage and templates
-  - `/jaan-to:pm-north-star` - OKR tracking
-  - `/jaan-to:ux-research-synthesize` - Research documentation
-  - `/jaan-to:ux-persona-create` - Persona storage
+  - `/pm-prd-write` - PRD storage and templates
+  - `/pm-north-star` - OKR tracking
+  - `/ux-research-synthesize` - Research documentation
+  - `/ux-persona-create` - Persona storage
   - All roles - Knowledge base access
 - **Setup**: ⭐ Easy - OAuth one-click
 
@@ -184,8 +184,8 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with Slack subscription
 - **Capabilities**: Search messages, post updates, channel management
 - **Skills**:
-  - `/jaan-to:pm-feedback-synthesize` - Feedback channel mining
-  - `/jaan-to:pm-release-review` - Stakeholder notifications
+  - `/pm-feedback-synthesize` - Feedback channel mining
+  - `/pm-release-review` - Stakeholder notifications
   - All roles - Team communication context
 - **Setup**: ⭐ Easy - OAuth one-click
 
@@ -196,11 +196,11 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with GitHub account
 - **Capabilities**: Repo management, PR operations, issue tracking, code search, file operations
 - **Skills**:
-  - `/jaan-to:dev-pr-review` - PR + CI status
-  - `/jaan-to:dev-ship-check` - Actions health
-  - `/jaan-to:dev-docs-generate` - Code context
-  - `/jaan-to:qa-automation-plan` - Automation PRs
-  - `/jaan-to:qa-regression-runbook` - Release branch
+  - `/dev-pr-review` - PR + CI status
+  - `/dev-ship-check` - Actions health
+  - `/dev-docs-generate` - Code context
+  - `/qa-automation-plan` - Automation PRs
+  - `/qa-regression-runbook` - Release branch
 - **Setup**: ⭐ Easy - OAuth or PAT
 
 ### Role-Specific Medium Impact
@@ -212,10 +212,10 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with Linear subscription
 - **Capabilities**: Issue CRUD, project management, cycle tracking, comments
 - **Skills**:
-  - `/jaan-to:pm-scope-slice` - Backlog context
-  - `/jaan-to:pm-story-write` - Issue creation
-  - `/jaan-to:qa-bug-triage` - Bug tracking
-  - `/jaan-to:qa-bug-report` - Duplicate detection
+  - `/pm-scope-slice` - Backlog context
+  - `/pm-story-write` - Issue creation
+  - `/qa-bug-triage` - Bug tracking
+  - `/qa-bug-report` - Duplicate detection
 - **Setup**: ⭐ Easy - OAuth
 - **Note**: Modern teams alternative to Jira
 
@@ -226,11 +226,11 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with Mixpanel account
 - **Capabilities**: Segmentation, funnels, retention, event discovery, anomaly detection, session replay
 - **Skills**:
-  - `/jaan-to:pm-north-star` - Metric tracking
-  - `/jaan-to:data-funnel-review` - Funnel analysis
-  - `/jaan-to:data-cohort-analyze` - Retention analysis
-  - `/jaan-to:data-anomaly-triage` - Anomaly detection
-  - `/jaan-to:data-experiment-design` - A/B test analysis
+  - `/pm-north-star` - Metric tracking
+  - `/data-funnel-review` - Funnel analysis
+  - `/data-cohort-analyze` - Retention analysis
+  - `/data-anomaly-triage` - Anomaly detection
+  - `/data-experiment-design` - A/B test analysis
 - **Setup**: ⭐ Easy - OAuth remote connection
 - **Note**: Best-supported official product analytics MCP
 
@@ -241,9 +241,9 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free with Confluence subscription
 - **Capabilities**: Page creation, search, documentation management
 - **Skills**:
-  - `/jaan-to:pm-prd-write` - PRD storage
-  - `/jaan-to:dev-docs-generate` - Technical documentation
-  - `/jaan-to:pm-release-review` - Release notes
+  - `/pm-prd-write` - PRD storage
+  - `/dev-docs-generate` - Technical documentation
+  - `/pm-release-review` - Release notes
 - **Setup**: ⭐⭐ Medium - API token required
 
 ### Targeted Impact
@@ -255,9 +255,9 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Freemium ($400 credits free)
 - **Capabilities**: Cortex AI, SQL execution, semantic views, object management
 - **Skills**:
-  - `/jaan-to:data-sql-query` - Advanced SQL
-  - `/jaan-to:data-cohort-analyze` - Large dataset analysis
-  - `/jaan-to:data-dbt-model` - Schema context
+  - `/data-sql-query` - Advanced SQL
+  - `/data-cohort-analyze` - Large dataset analysis
+  - `/data-dbt-model` - Schema context
 - **Setup**: ⭐⭐⭐ Medium-Hard - Auth config, role setup
 - **Note**: Enterprise data warehouse with AI features
 
@@ -268,8 +268,8 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free (open-source)
 - **Capabilities**: SQL queries, schema exploration
 - **Skills**:
-  - `/jaan-to:data-sql-query` - Direct database queries
-  - `/jaan-to:data-metric-spec` - Schema validation
+  - `/data-sql-query` - Direct database queries
+  - `/data-metric-spec` - Schema validation
 - **Setup**: ⭐⭐ Medium - Connection string
 
 #### 20. Ahrefs MCP
@@ -279,9 +279,9 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free server; Ahrefs API from $99/mo
 - **Capabilities**: Backlink analysis, keyword research, traffic analysis
 - **Skills**:
-  - `/jaan-to:growth-keyword-brief` - Keyword research
-  - `/jaan-to:growth-content-outline` - Content opportunities
-  - `/jaan-to:growth-seo-audit` - Backlink analysis
+  - `/growth-keyword-brief` - Keyword research
+  - `/growth-content-outline` - Content opportunities
+  - `/growth-seo-audit` - Backlink analysis
 - **Setup**: ⭐⭐ Medium - API key required
 
 #### 21. Semrush MCP
@@ -291,9 +291,9 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free server; Semrush plan from $139/mo
 - **Capabilities**: Domain analytics, keyword metrics, competitor research
 - **Skills**:
-  - `/jaan-to:growth-keyword-brief` - Keyword metrics
-  - `/jaan-to:growth-content-outline` - Competitor content gaps
-  - `/jaan-to:ux-competitive-review` - Competitor analysis
+  - `/growth-keyword-brief` - Keyword metrics
+  - `/growth-content-outline` - Competitor content gaps
+  - `/ux-competitive-review` - Competitor analysis
 - **Setup**: ⭐⭐ Medium - API key required
 
 #### 22. LambdaTest MCP
@@ -303,8 +303,8 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Freemium (limited); Paid from $15/mo
 - **Capabilities**: Cross-browser testing, SmartUI, accessibility testing
 - **Skills**:
-  - `/jaan-to:qa-test-matrix` - Cross-browser coverage
-  - `/jaan-to:qa-automation-plan` - Browser automation strategy
+  - `/qa-test-matrix` - Cross-browser coverage
+  - `/qa-automation-plan` - Browser automation strategy
 - **Setup**: ⭐⭐ Medium - API key, cloud connection
 
 ### Supporting Infrastructure
@@ -316,8 +316,8 @@ MCP (Model Context Protocol) connectors provide real system context to skills. S
 - **Pricing**: Free (open-source)
 - **Capabilities**: Access research files, recordings, docs
 - **Skills**:
-  - `/jaan-to:ux-research-synthesize` - Research file access
-  - `/jaan-to:pm-feedback-synthesize` - Document mining
+  - `/ux-research-synthesize` - Research file access
+  - `/pm-feedback-synthesize` - Document mining
 - **Setup**: ⭐⭐ Medium - OAuth setup
 
 #### 24. Memory MCP (Reference)

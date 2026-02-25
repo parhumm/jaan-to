@@ -8,7 +8,7 @@ tags: [dev, frontend, task-breakdown, ux-handoff, components, atomic-design]
 related: [stack-detect, fe-state-machine]
 ---
 
-# /jaan-to:frontend-task-breakdown
+# /frontend-task-breakdown
 
 > Transform UX design handoffs into production-ready frontend task breakdowns.
 
@@ -23,9 +23,9 @@ Analyzes UX handoffs (Figma links, design descriptions, screenshots, or PRDs) an
 ## Usage
 
 ```
-/jaan-to:frontend-task-breakdown "User profile redesign with settings modal"
-/jaan-to:frontend-task-breakdown "https://figma.com/file/abc123"
-/jaan-to:frontend-task-breakdown "See PRD at jaan-to/outputs/pm/prd/profile-redesign/prd.md"
+/frontend-task-breakdown "User profile redesign with settings modal"
+/frontend-task-breakdown "https://figma.com/file/abc123"
+/frontend-task-breakdown "See PRD at jaan-to/outputs/pm/prd/profile-redesign/prd.md"
 ```
 
 | Argument | Required | Description |
@@ -89,10 +89,10 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to adapt the breakdown for the project's frame
 This skill fits in the dev workflow:
 
 ```
-/jaan-to:dev-tech-plan → /jaan-to:frontend-task-breakdown → /jaan-to:frontend-state-machine
+/dev-tech-plan → /frontend-task-breakdown → /frontend-state-machine
 ```
 
-After generating the task breakdown, the skill suggests running `/jaan-to:frontend-state-machine` for detailed state machine definitions per component.
+After generating the task breakdown, the skill suggests running `/frontend-state-machine` for detailed state machine definitions per component.
 
 ---
 

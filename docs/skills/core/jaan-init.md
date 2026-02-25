@@ -8,7 +8,7 @@ tags: [skills, core, setup, initialization]
 related: [docs-create.md, ../../hooks/bootstrap.md]
 ---
 
-# /jaan-to:jaan-init
+# /jaan-init
 
 > Activate jaan-to for the current project with directory setup and seed files.
 
@@ -25,7 +25,7 @@ Projects without `jaan-to/` are not affected by the plugin.
 ## Usage
 
 ```
-/jaan-to:jaan-init
+/jaan-init
 ```
 
 No arguments required. Run once per project.
@@ -75,7 +75,7 @@ Also adds `jaan-to/` to `.gitignore` (creates the file if missing).
 
 **Input**:
 ```
-/jaan-to:jaan-init
+/jaan-init
 ```
 
 **First run** (files are seeded):
@@ -104,8 +104,8 @@ Bootstrap runs automatically on each session.
 ## Next Steps After Init
 
 1. Edit `jaan-to/context/tech.md` with your project's tech stack
-2. Run `/jaan-to:detect-pack` for automatic project analysis
-3. Run any skill: `/jaan-to:pm-prd-write "feature name"`
+2. Run `/detect-pack` for automatic project analysis
+3. Run any skill: `/pm-prd-write "feature name"`
 
 ---
 
@@ -114,7 +114,7 @@ Bootstrap runs automatically on each session.
 - Run once per project — bootstrap handles subsequent sessions automatically
 - Existing files are never overwritten by bootstrap
 - Customize paths in `jaan-to/config/settings.yaml` if defaults don't fit
-- If `tech.md` still has `{project-name}` placeholder, run `/jaan-to:detect-pack`
+- If `tech.md` still has `{project-name}` placeholder, run `/detect-pack`
 
 ---
 

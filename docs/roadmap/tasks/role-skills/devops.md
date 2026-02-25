@@ -22,7 +22,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### ✅ /jaan-to:devops-infra-scaffold
+### ✅ /devops-infra-scaffold
 
 - **Logical**: `devops-infra-scaffold`
 - **Description**: Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack

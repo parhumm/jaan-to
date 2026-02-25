@@ -105,7 +105,7 @@ Replace with generic placeholders unless the user explicitly included them.
 ### Safe to Keep
 Do NOT sanitize (helps maintainers debug):
 - jaan-to version number (e.g., `5.0.0`)
-- Skill names and commands (e.g., `/jaan-to:pm-prd-write`)
+- Skill names and commands (e.g., `/pm-prd-write`)
 - Hook names (e.g., `session-start`, `post-tool-use`)
 - OS type (e.g., `Darwin`, `Linux`)
 - Error message text (after stripping paths and tokens)
@@ -157,7 +157,7 @@ Use these keyword patterns to auto-detect issue type from the user's description
 |----------|------|
 | broken, error, crash, fails, wrong, bug, doesn't work | `bug` |
 | add, new, would be nice, request, missing feature, wish | `feature` |
-| skill, `/jaan-to:`, command, workflow, generate | `skill` |
+| skill, `/`, command, workflow, generate | `skill` |
 | docs, documentation, readme, guide, typo, unclear | `docs` |
 
 ### Type-to-Label Mapping

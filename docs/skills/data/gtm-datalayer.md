@@ -3,7 +3,7 @@ title: "data-gtm-datalayer"
 sidebar_position: 2
 ---
 
-# /jaan-to:data-gtm-datalayer
+# /data-gtm-datalayer
 
 > Generate production-ready GTM tracking code with enforced naming conventions.
 
@@ -23,17 +23,17 @@ Enforces lowercase-kebab-case naming and suggests improvements for clarity.
 
 **Interactive wizard:**
 ```
-/jaan-to:data-gtm-datalayer
+/data-gtm-datalayer
 ```
 
 **With PRD:**
 ```
-/jaan-to:data-gtm-datalayer jaan-to/outputs/pm/user-auth/prd.md
+/data-gtm-datalayer jaan-to/outputs/pm/user-auth/prd.md
 ```
 
 **With description:**
 ```
-/jaan-to:data-gtm-datalayer "track subscription modal impressions and button clicks"
+/data-gtm-datalayer "track subscription modal impressions and button clicks"
 ```
 
 ---
@@ -125,7 +125,7 @@ Unclear names (like "btn1") prompt for clarification.
 
 **Input**:
 ```
-/jaan-to:data-gtm-datalayer
+/data-gtm-datalayer
 ```
 
 **Questions**:
@@ -178,7 +178,7 @@ jaan-to/learn/data-gtm-datalayer.learn.md
 
 Add feedback:
 ```
-/jaan-to:learn-add data-gtm-datalayer "Always ask about error states"
+/learn-add data-gtm-datalayer "Always ask about error states"
 ```
 
 ---

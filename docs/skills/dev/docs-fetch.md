@@ -8,7 +8,7 @@ tags: [dev, docs, context7, mcp, cache, library-docs, tech-agnostic]
 related: [dev-verify, backend-scaffold, frontend-scaffold, dev-project-assemble]
 ---
 
-# /jaan-to:dev-docs-fetch
+# /dev-docs-fetch
 
 > Fetch and cache library documentation via Context7 MCP with auto-detect and smart caching.
 
@@ -25,7 +25,7 @@ This is the first MCP-powered skill in jaan-to (Phase 7).
 ## Prerequisites
 
 - Context7 MCP server configured (`.mcp.json` for Claude Code, `~/.codex/config.toml` for Codex — both auto-configured during install)
-- Project initialized with `/jaan-to:jaan-init`
+- Project initialized with `/jaan-init`
 - `npx` available in PATH (for MCP server installation)
 
 ---
@@ -33,8 +33,8 @@ This is the first MCP-powered skill in jaan-to (Phase 7).
 ## Usage
 
 ```
-/jaan-to:dev-docs-fetch fastapi openai react
-/jaan-to:dev-docs-fetch
+/dev-docs-fetch fastapi openai react
+/dev-docs-fetch
 ```
 
 | Input | Behavior |
@@ -120,10 +120,10 @@ cache_ttl: 7 days
 $JAAN_CONTEXT_DIR/tech.md (auto-detect)
   |
   v
-/jaan-to:dev-docs-fetch  (fetch + cache)
+/dev-docs-fetch  (fetch + cache)
   |
   v
-/jaan-to:backend-scaffold, /jaan-to:frontend-scaffold, etc.
+/backend-scaffold, /frontend-scaffold, etc.
 ```
 
 ---
@@ -132,7 +132,7 @@ $JAAN_CONTEXT_DIR/tech.md (auto-detect)
 
 **Input:**
 ```
-/jaan-to:dev-docs-fetch fastapi sqlalchemy
+/dev-docs-fetch fastapi sqlalchemy
 ```
 
 **Output:**
@@ -164,17 +164,17 @@ Cache: jaan-to/outputs/dev/docs/context7/
 
 ## Related Skills
 
-- [/jaan-to:dev-verify](verify.md) - Validate build pipeline and services
-- [/jaan-to:dev-project-assemble](project-assemble.md) - Wire scaffolds into runnable project
-- [/jaan-to:backend-scaffold](../backend/scaffold.md) - Generate backend code
-- [/jaan-to:frontend-scaffold](../frontend/scaffold.md) - Generate frontend components
+- [/dev-verify](verify.md) - Validate build pipeline and services
+- [/dev-project-assemble](project-assemble.md) - Wire scaffolds into runnable project
+- [/backend-scaffold](../backend/scaffold.md) - Generate backend code
+- [/frontend-scaffold](../frontend/scaffold.md) - Generate frontend components
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: dev-docs-fetch
-- **Command**: `/jaan-to:dev-docs-fetch`
+- **Command**: `/dev-docs-fetch`
 - **Role**: dev
 - **Output**: `$JAAN_OUTPUTS_DIR/dev/docs/context7/`
 - **MCP Required**: Context7 (`resolve-library-id`, `get-library-docs`)

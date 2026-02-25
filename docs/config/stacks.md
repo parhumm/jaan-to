@@ -91,7 +91,7 @@ Describe external tool setup.
 ## How Skills Use Stacks
 
 ```
-Skill: /jaan-to:pm-prd-write "payment feature"
+Skill: /pm-prd-write "payment feature"
        │
        ├── Reads tech.md → Knows you use PostgreSQL
        ├── Reads team.md → Knows 2-week sprints
@@ -106,5 +106,5 @@ Edit the markdown files directly. Changes apply to the next skill run.
 
 If you learn something should always be in stack context:
 ```
-/jaan-to:learn-add context/tech "All services need health check endpoint"
+/learn-add context/tech "All services need health check endpoint"
 ```

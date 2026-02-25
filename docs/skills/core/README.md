@@ -14,13 +14,13 @@ slug: /skills/core
 
 | Command | Description |
 |---------|-------------|
-| [/jaan-to:learn-add](learn-add.md) | Add lesson to skill's LEARN.md |
-| [/jaan-to:docs-create](docs-create.md) | Create new documentation |
-| [/jaan-to:docs-update](docs-update.md) | Audit and fix documentation |
-| [/jaan-to:skill-create](skill-create.md) | Create new skill with wizard |
-| [/jaan-to:skill-update](skill-update.md) | Update existing skill |
-| [/jaan-to:jaan-init](jaan-init.md) | Activate jaan-to for the current project |
-| [/jaan-to:jaan-issue-report](jaan-issue-report.md) | Report issues to jaan-to GitHub repo |
+| [/learn-add](learn-add.md) | Add lesson to skill's LEARN.md |
+| [/docs-create](docs-create.md) | Create new documentation |
+| [/docs-update](docs-update.md) | Audit and fix documentation |
+| [/skill-create](skill-create.md) | Create new skill with wizard |
+| [/skill-update](skill-update.md) | Update existing skill |
+| [/jaan-init](jaan-init.md) | Activate jaan-to for the current project |
+| [/jaan-issue-report](jaan-issue-report.md) | Report issues to jaan-to GitHub repo |
 
 ---
 

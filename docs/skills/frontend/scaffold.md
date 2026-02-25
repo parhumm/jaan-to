@@ -8,7 +8,7 @@ tags: [dev, frontend, scaffold, react, nextjs, tailwind, typescript, api-hooks]
 related: [frontend-design, frontend-task-breakdown, backend-api-contract]
 ---
 
-# /jaan-to:frontend-scaffold
+# /frontend-scaffold
 
 > Convert designs to React/Next.js components with TailwindCSS, TypeScript, and typed API client hooks.
 
@@ -23,8 +23,8 @@ Generates production-ready frontend scaffolds from upstream artifacts (design ou
 ## Usage
 
 ```
-/jaan-to:frontend-scaffold
-/jaan-to:frontend-scaffold frontend-design frontend-task-breakdown backend-api-contract
+/frontend-scaffold
+/frontend-scaffold frontend-design frontend-task-breakdown backend-api-contract
 ```
 
 | Argument | Required | Description |
@@ -87,7 +87,7 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect:
 ## Workflow Chain
 
 ```
-/jaan-to:frontend-design → /jaan-to:frontend-task-breakdown → /jaan-to:frontend-scaffold → /jaan-to:qa-test-cases
+/frontend-design → /frontend-task-breakdown → /frontend-scaffold → /qa-test-cases
 ```
 
 ---
@@ -96,7 +96,7 @@ Reads `$JAAN_CONTEXT_DIR/tech.md` to auto-detect:
 
 **Input:**
 ```
-/jaan-to:frontend-scaffold path/to/design.html path/to/tasks.md path/to/api.yaml
+/frontend-scaffold path/to/design.html path/to/tasks.md path/to/api.yaml
 ```
 
 **Output:**
@@ -115,7 +115,7 @@ jaan-to/outputs/frontend/scaffold/01-user-dashboard/
 
 ## Tips
 
-- Run `/jaan-to:frontend-task-breakdown` first to plan the component inventory
+- Run `/frontend-task-breakdown` first to plan the component inventory
 - Provide an API contract for automatic TypeScript type and hook generation
 - Set up `$JAAN_CONTEXT_DIR/tech.md` to skip framework questions
 - Copy scaffold files to your project directory and run `npm install`
@@ -124,15 +124,15 @@ jaan-to/outputs/frontend/scaffold/01-user-dashboard/
 
 ## Related Skills
 
-- [/jaan-to:frontend-design](design.md) - Create component designs
-- [/jaan-to:frontend-task-breakdown](task-breakdown.md) - Plan component inventory
-- [/jaan-to:backend-api-contract](../backend/api-contract.md) - Generate OpenAPI contracts
+- [/frontend-design](design.md) - Create component designs
+- [/frontend-task-breakdown](task-breakdown.md) - Plan component inventory
+- [/backend-api-contract](../backend/api-contract.md) - Generate OpenAPI contracts
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: frontend-scaffold
-- **Command**: `/jaan-to:frontend-scaffold`
+- **Command**: `/frontend-scaffold`
 - **Role**: dev (frontend)
 - **Output**: `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`

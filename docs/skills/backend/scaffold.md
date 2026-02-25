@@ -8,7 +8,7 @@ tags: [dev, backend, scaffold, routes, services, validation, prisma, fastify]
 related: [backend-api-contract, backend-task-breakdown, backend-data-model]
 ---
 
-# /jaan-to:backend-scaffold
+# /backend-scaffold
 
 > Generate production-ready backend code with routes, data models, service layers, and validation.
 
@@ -23,8 +23,8 @@ Generates production-ready backend scaffolds from upstream specs (API contracts,
 ## Usage
 
 ```
-/jaan-to:backend-scaffold
-/jaan-to:backend-scaffold backend-api-contract backend-task-breakdown backend-data-model
+/backend-scaffold
+/backend-scaffold backend-api-contract backend-task-breakdown backend-data-model
 ```
 
 | Argument | Required | Description |
@@ -107,7 +107,7 @@ When the scaffold detects an existing test framework, it adapts its recommendati
 ## Workflow Chain
 
 ```
-/jaan-to:backend-api-contract → /jaan-to:backend-task-breakdown → /jaan-to:backend-scaffold → /jaan-to:qa-test-cases
+/backend-api-contract → /backend-task-breakdown → /backend-scaffold → /qa-test-cases
 ```
 
 ---
@@ -116,7 +116,7 @@ When the scaffold detects an existing test framework, it adapts its recommendati
 
 **Input:**
 ```
-/jaan-to:backend-scaffold path/to/api.yaml path/to/tasks.md path/to/data-model.md
+/backend-scaffold path/to/api.yaml path/to/tasks.md path/to/data-model.md
 ```
 
 **Output:**
@@ -136,24 +136,24 @@ jaan-to/outputs/backend/scaffold/01-user-api/
 
 ## Tips
 
-- Run `/jaan-to:backend-api-contract` and `/jaan-to:backend-data-model` first for best results
+- Run `/backend-api-contract` and `/backend-data-model` first for best results
 - Set up `$JAAN_CONTEXT_DIR/tech.md` to skip stack detection questions
 - Copy scaffold files to your project directory and install dependencies
-- Use `/jaan-to:frontend-scaffold` to generate matching frontend code
+- Use `/frontend-scaffold` to generate matching frontend code
 
 ---
 
 ## Related Skills
 
-- [/jaan-to:backend-api-contract](api-contract.md) - Generate OpenAPI contracts
-- [/jaan-to:backend-data-model](data-model.md) - Generate data model docs
-- [/jaan-to:backend-task-breakdown](task-breakdown.md) - Convert PRDs into backend tasks
+- [/backend-api-contract](api-contract.md) - Generate OpenAPI contracts
+- [/backend-data-model](data-model.md) - Generate data model docs
+- [/backend-task-breakdown](task-breakdown.md) - Convert PRDs into backend tasks
 
 ---
 
 ## Technical Details
 
 - **Logical Name**: backend-scaffold
-- **Command**: `/jaan-to:backend-scaffold`
+- **Command**: `/backend-scaffold`
 - **Role**: dev (backend)
 - **Output**: `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/`

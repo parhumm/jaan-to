@@ -13,10 +13,10 @@ sidebar_position: 1
 
 | Skill | Description |
 |-------|-------------|
-| [/jaan-to:ux-heatmap-analyze](heatmap-analyze.md) | Analyze heatmap data for UX insights |
-| [/jaan-to:ux-flowchart-generate](flowchart-generate.md) | Generate Mermaid flowcharts from PRD/docs/codebase with evidence maps |
-| [/jaan-to:ux-microcopy-write](microcopy-write.md) | Generate multi-language microcopy packs for UI components |
-| [/jaan-to:ux-research-synthesize](research-synthesize.md) | Synthesize UX research findings into themed insights and recommendations |
+| [/ux-heatmap-analyze](heatmap-analyze.md) | Analyze heatmap data for UX insights |
+| [/ux-flowchart-generate](flowchart-generate.md) | Generate Mermaid flowcharts from PRD/docs/codebase with evidence maps |
+| [/ux-microcopy-write](microcopy-write.md) | Generate multi-language microcopy packs for UI components |
+| [/ux-research-synthesize](research-synthesize.md) | Synthesize UX research findings into themed insights and recommendations |
 
 ---
 

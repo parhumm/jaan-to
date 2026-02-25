@@ -102,7 +102,7 @@ Two output templates:
 
 Add row to Available Skills table:
 ```
-| ux-flowchart-generate | `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase with evidence maps |
+| ux-flowchart-generate | `/ux-flowchart-generate` | Generate Mermaid flowcharts from PRD/docs/codebase with evidence maps |
 ```
 
 ## Output Structure
@@ -119,7 +119,7 @@ $JAAN_OUTPUTS_DIR/ux/diagrams/{id}-{slug}/
 2. Write all files
 3. Validate v3.0.0 compliance (all `$JAAN_*` env vars, no hardcoded paths)
 4. Validate against `docs/extending/create-skill.md` spec
-5. Create docs via `/jaan-to:docs-create`
+5. Create docs via `/docs-create`
 6. Commit and create PR to `dev`
 
 ## Key Design Decisions
@@ -136,8 +136,8 @@ $JAAN_OUTPUTS_DIR/ux/diagrams/{id}-{slug}/
 
 ## Verification
 
-1. Run `/jaan-to:skill-update ux-flowchart-generate` to validate v3.0.0 compliance
-2. Test with example: `/jaan-to:ux-flowchart-generate prd path/to/prd.md userflow`
+1. Run `/skill-update ux-flowchart-generate` to validate v3.0.0 compliance
+2. Test with example: `/ux-flowchart-generate prd path/to/prd.md userflow`
 3. Verify output files created in correct structure
 4. Verify Mermaid renders on GitHub
 5. Verify evidence map has entries for all diagram nodes

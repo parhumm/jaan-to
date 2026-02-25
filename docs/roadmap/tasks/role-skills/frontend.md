@@ -31,7 +31,7 @@ flowchart TD
 
 **Legend**: Solid = internal | Dashed = cross-role exit | Gray nodes = other roles
 
-### ✅ /jaan-to:frontend-task-breakdown
+### ✅ /frontend-task-breakdown
 
 - **Logical**: `frontend-task-breakdown`
 - **Description**: FE tasks list (components, screens, states), estimate bands, risks + dependencies
@@ -46,7 +46,7 @@ flowchart TD
 - **Input**: [ux-handoff]
 - **Output**: `$JAAN_OUTPUTS_DIR/frontend/task-breakdown/{id}-{slug}/`
 
-### /jaan-to:frontend-state-machine
+### /frontend-state-machine
 
 - **Logical**: `frontend-state-machine`
 - **Description**: UI states + transitions, events that trigger transitions, edge-case behavior
@@ -60,7 +60,7 @@ flowchart TD
 - **Input**: [screen]
 - **Output**: `$JAAN_OUTPUTS_DIR/frontend/state-machine/{id}-{slug}/`
 
-### /jaan-to:frontend-scaffold
+### /frontend-scaffold
 
 - **Logical**: `frontend-scaffold`
 - **Description**: Convert HTML design previews to React v19 / Next.js v15 components with TailwindCSS v4, TypeScript, and state management
