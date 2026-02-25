@@ -97,6 +97,12 @@ if echo "$COMMAND" | grep -qE '\{[^}]+,[^}]+\}\s*\|'; then
   exit 2
 fi
 
+# Block brace expansion with args piped to shell interpreter ({echo,payload} file | bash)
+if echo "$COMMAND" | grep -qE '\{[^}]+,[^}]+\}.*\|\s*(bash|sh|zsh|dash|python|python3|perl|ruby|node|php)'; then
+  echo "BLOCKED: Brace expansion piped to shell interpreter is not allowed."
+  exit 2
+fi
+
 # Block process substitution as command argument (cat <(...), bash <(...))
 # Allows redirect-from-process-sub: done < <(cmd) — used by plugin scripts
 if echo "$COMMAND" | grep -qE '\w\s*[<>]\('; then
