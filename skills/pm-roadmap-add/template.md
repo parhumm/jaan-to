@@ -45,13 +45,14 @@
 
 ### {Milestone or Theme Name}
 
-| # | Item | Priority | Status | Owner | Target | Dependencies |
-|---|------|----------|--------|-------|--------|--------------|
-| 1 | {item_title} | {priority_label} | To Do | {owner} | {Now/Next/Later} | {deps or "None"} |
+| # | Item | Priority | Status | Owner | Target | Dependencies | Issue |
+|---|------|----------|--------|-------|--------|--------------|-------|
+| 1 | {item_title} | {priority_label} | To Do | {owner} | {Now/Next/Later} | {deps or "None"} | {[#N](url) or "—"} |
 
 **{item_title}**
 - **Description**: {brief description of what and why}
 - **Priority**: {score_or_category} ({system_name})
+- **Issue**: {[#N](url) or "None"}
 - **Success Metrics**: {how to measure if this worked}
 - **Notes**: {additional context}
 

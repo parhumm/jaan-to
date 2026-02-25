@@ -233,7 +233,13 @@ Release Management:
 ┌─────────────────────────────────────────────────────────┐
 │  /jaan-to:release-iterate-changelog                     │
 │  "Generate changelog from git history"                  │
-└─────────────────────────────────────────────────────────┘
+└────────────────┬────────────────────────────────────────┘
+                 │
+                 ├──> /jaan-to:pm-changelog-rewrite (Auto-invoked)
+                 │    "Transform into user-facing product changelog"
+                 │
+                 └──> /jaan-to:qa-issue-report (Suggested)
+                      "Post supportive comment on closed issues"
 ```
 
 ### Skill Development Flow
@@ -357,7 +363,8 @@ These skills don't typically call others:
 | `/jaan-to:ux-heatmap-analyze` | Heatmap analysis | Standalone (requires CSV/screenshot) |
 | `/jaan-to:ux-flowchart-generate` | Generate Mermaid flowcharts | Standalone or from PRD |
 | `/jaan-to:frontend-design` | Create frontend interfaces | Standalone or from PRD |
-| `/jaan-to:release-iterate-changelog` | Generate changelog | Standalone (from git history) |
+| `/jaan-to:release-iterate-changelog` | Generate changelog | Standalone → /pm-changelog-rewrite |
+| `/jaan-to:pm-changelog-rewrite` | Product changelog | Auto-invoked by release-iterate-changelog |
 | `/jaan-to:jaan-init` | Initialize jaan-to for project | Run once per project |
 | `/jaan-to:jaan-issue-report` | Report bugs/issues | Standalone |
 | `/jaan-to:qa-issue-report` | Report issues to any repo | Standalone |
@@ -379,7 +386,7 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 51 skills grouped by role.
+All 52 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
@@ -388,6 +395,7 @@ All 51 skills grouped by role.
 | | `/jaan-to:pm-research-about` | Deep research on any topic |
 | | `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
 | | `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
+| | `/jaan-to:pm-changelog-rewrite` | Transform technical changelog into product changelog |
 | **backend** | `/jaan-to:backend-task-breakdown` | Convert PRD into backend tasks |
 | | `/jaan-to:backend-data-model` | Generate data model docs from entities |
 | | `/jaan-to:backend-api-contract` | Generate OpenAPI 3.1 contracts |
@@ -456,4 +464,4 @@ Skills may invoke agents automatically:
 
 ---
 
-**Last Updated:** 2026-02-22
+**Last Updated:** 2026-02-25
