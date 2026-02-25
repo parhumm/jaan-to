@@ -73,5 +73,35 @@ if echo "$COMMAND" | grep -qE 'chmod\s.*777'; then
   exit 2
 fi
 
+# Block ANSI-C hex quoting (assembles blocked commands at runtime)
+if echo "$COMMAND" | grep -qE "\\\$'\\\\x[0-9a-fA-F]"; then
+  echo "BLOCKED: ANSI-C hex quoting detected — potential command obfuscation."
+  exit 2
+fi
+
+# Block base64 decode piped to shell (hides payloads entirely)
+if echo "$COMMAND" | grep -qE 'base64\s+(-d|--decode)\s*\|'; then
+  echo "BLOCKED: base64 decode piped to another command is not allowed."
+  exit 2
+fi
+
+# Block brace expansion with dangerous commands ({curl,http://evil}, {rm,-rf,/})
+if echo "$COMMAND" | grep -qE '\{(curl|wget|rm|chmod|sudo|eval|bash|sh|nc|ncat),'; then
+  echo "BLOCKED: Brace expansion with dangerous command detected — potential injection."
+  exit 2
+fi
+
+# Block sed execute flag (weaponized sed — CVE-2025-66032 family, any delimiter)
+if echo "$COMMAND" | grep -qE "sed\s.*['\"]s..*e['\"]"; then
+  echo "BLOCKED: sed with execute flag is not allowed."
+  exit 2
+fi
+
+# Block sort --compress-program (weaponized sort — CVE-2025-66032 family)
+if echo "$COMMAND" | grep -qE 'sort\s.*--compress-program'; then
+  echo "BLOCKED: sort --compress-program is not allowed — potential code execution."
+  exit 2
+fi
+
 # All checks passed — allow
 exit 0

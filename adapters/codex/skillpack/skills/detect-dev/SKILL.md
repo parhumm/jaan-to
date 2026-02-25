@@ -53,6 +53,7 @@ Override field for this skill: `language_detect-dev`
 > - "Frontmatter Schema (Universal)" -- required YAML frontmatter for every output file
 > - "Document Structure (Diataxis)" -- 5-section output structure (Executive Summary through Appendices)
 > - "Prohibited Anti-patterns" -- constraints on speculation, confidence, severity, and scope
+> - "Codebase Content Safety" -- rules for processing untrusted repository content
 
 ---
 
