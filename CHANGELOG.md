@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [7.6.0] - 2026-02-26
+
 ### Added
 - **`frontend-story-generate` skill** — Generate CSF3 Storybook stories for components with automatic CVA variant detection. Supports MCP graceful degradation (Storybook MCP for conventions, shadcn MCP for prop types, or source-reading fallback). Includes scan mode to find components missing stories
 - **`frontend-visual-verify` skill** — Visually verify components using Playwright MCP with dual output modes: `visual-mode` (accessibility tree + screenshot scoring, 0-10 scale) and `static-mode` (code-review-only, score=N/A). Localhost-only by default; external URLs require explicit confirmation

@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.5.1 (53 skills) | **Next:** v7.6.0 (56 skills)
+**Latest:** v7.6.0 (56 skills)
 
 ---
 
@@ -55,6 +55,8 @@ For complete release history, see [CHANGELOG.md](/changelog).
 - [x] UI workflow guide and shared reference — End-to-end Storybook + shadcn + Playwright visual development workflow
 - [x] Design system context seed (`design.md`) — Component library, design tokens, Storybook conventions, MCP config
 - [x] Enhanced `frontend-design`, `frontend-scaffold`, `detect-design`, `dev-verify`, `jaan-init`, `team-ship` for UI workflow
+- [x] OpenAPI integration across 12 skills — `--contract` flag, shared `openapi-integration-reference.md`, Orval/MSW/Scalar patterns, `team-ship` full track API contract flow
+- [x] License change — Switched from MIT to proprietary license across all skills
 - [x] 56 skills total (was 53 in v7.5.1)
 
 ---

@@ -8,18 +8,27 @@ For technical details, see [CHANGELOG.md](/changelog/).
 
 ## Unreleased
 
+---
+
+## 7.6.0 — 2026-02-26
+
 ### New
 - **Storybook story generation** — Automatically generate Storybook stories for your components with `/frontend-story-generate`. Detects component variants, covers all states (loading, error, empty, success), and works with or without MCP servers.
 - **Visual component verification** — Verify components look correct using Playwright screenshots and accessibility analysis with `/frontend-visual-verify`. Two modes: full visual verification (with Playwright) or code-review-only when Playwright isn't available.
 - **UI bug fix workflow** — Diagnose and fix UI bugs with `/frontend-component-fix`. Generates safe patch files (never edits your source directly) and offers a one-click flow to integrate and verify the fix.
+- **OpenAPI-powered development** — 12 skills now accept `--contract` to read your OpenAPI spec and generate API-aware code. Frontend scaffold produces typed API clients (Orval), mock servers (MSW), and API docs (Scalar). Team workflows flow contracts from backend to frontend to QA automatically.
 - **Product changelog** — Full product changelog covering all versions, now available on the documentation website.
 
 ### Improved
-- **Smarter frontend skills** — Design and scaffold skills now automatically generate Storybook stories alongside components when Storybook is detected in your project.
-- **Better project initialization** — `/jaan-init` now detects your UI stack (React, Vue, Svelte, Storybook, shadcn) and suggests relevant setup.
-- **Build verification** — `/dev-verify` now checks Storybook builds and dev server health alongside your main build pipeline.
-- **Team orchestration** — Frontend teammates now generate stories as part of delivery. New visual QA role verifies integrated components in team workflows.
-- **Design audit accuracy** — `/detect-design` now assesses MCP readiness and detects Storybook tooling signals for better recommendations.
+- **Smarter frontend skills** — Design and scaffold skills now generate Storybook stories alongside components when Storybook is detected.
+- **Better project initialization** — `/jaan-init` detects your UI stack (React, Vue, Svelte, Storybook, shadcn) and suggests relevant setup.
+- **Build verification** — `/dev-verify` checks Storybook builds and dev server health alongside your main pipeline.
+- **Team orchestration** — Frontend teammates generate stories as part of delivery. New visual QA role verifies components. QA now validates API contracts. Full track flows API specs from backend to frontend to QA.
+- **Design audit accuracy** — `/detect-design` assesses MCP readiness and detects Storybook tooling signals for better recommendations.
+- **API-aware skills across the pipeline** — Test cases, PR reviews, task breakdowns, and project assembly skills now understand your API contract for smarter, more accurate output.
+
+### Important
+- **License change** — jaan.to is now under a proprietary license. See LICENSE for details.
 
 ---
 
