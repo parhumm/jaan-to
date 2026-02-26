@@ -29,8 +29,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Research: Swagger tooling for AI-driven development** — Comprehensive Swagger/OpenAPI tooling analysis for AI-enhanced workflows ([Research #84](docs/research/84-swagger-tooling-ai-driven-development.md))
 
 ### Changed
-- **`frontend-design` skill** — Now generates CSF3 Storybook stories alongside HTML preview when Storybook is detected in the project
-- **`frontend-scaffold` skill** — Scaffold output now includes story files and CSF3 patterns section when Storybook is detected
+- **`frontend-design` skill** — Now generates CSF3 Storybook stories alongside HTML preview when Storybook is detected; added `--contract` flag for response shape awareness from API specs
+- **`frontend-scaffold` skill** — Scaffold output now includes story files and CSF3 patterns when Storybook is detected; generates Orval config, MSW handlers, and browser/server setup files when API contract provided
 - **`detect-design` skill** — Added Storybook & component tooling signals detection plus MCP readiness assessment (Ready/Partial/Not Configured scoring)
 - **`dev-verify` skill** — Added package-manager-aware Storybook build verification and dev server health checks
 - **`jaan-init` skill** — Added UI stack detection (React/Vue/Svelte, Storybook, shadcn) with design.md seeding and MCP configuration guidance
@@ -39,10 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`qa-test-cases` skill** — Added optional `--contract` flag to generate endpoint-specific BDD scenarios from OpenAPI specs (request validation, error codes, auth boundaries, pagination)
 - **`qa-test-run` skill** — Added `--contract` tier that delegates to `qa-contract-validate` (no tool duplication). Fixed missing `--mutation` in argument-hint
 - **`backend-pr-review` skill** — Added contract drift detection (Step 3.5) comparing route changes against OpenAPI spec
-- **`frontend-scaffold` skill** — Generates Orval config, MSW handlers, and browser/server setup files when API contract provided
 - **`frontend-story-generate` skill** — Added `--contract` flag for MSW handler generation in stories (4 variants: success, loading, error, empty)
 - **`frontend-task-breakdown` skill** — Added `--contract` flag for API integration task mapping
-- **`frontend-design` skill** — Added `--contract` flag for response shape awareness from API specs
 - **`frontend-visual-verify` skill** — Added MSW handler detection advisory note
 - **`frontend-component-fix` skill** — Added contract alignment check in root cause analysis
 - **`dev-project-assemble` skill** — Added Scalar API documentation page generation for Node.js/Next.js projects

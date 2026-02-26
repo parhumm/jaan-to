@@ -2,18 +2,18 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-7.4.0-blue.svg)](.claude-plugin/plugin.json)
+[![Version](https://img.shields.io/badge/version-7.6.0-blue.svg)](.claude-plugin/plugin.json)
 [![Proprietary License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-49-orange.svg)](skills/)
-[![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
+[![Skills](https://img.shields.io/badge/skills-56-orange.svg)](skills/)
+[![Agents](https://img.shields.io/badge/agents-3-yellow.svg)](docs/agents/README.md)
 
 ### Plugin Contents
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Skills** | 49 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
-| **Agents** | 2 | quality-reviewer, context-scout |
+| **Skills** | 56 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
+| **Agents** | 3 | quality-reviewer, context-scout, visual-reviewer |
 | **Hooks** | 7 | Setup, SessionStart, PreToolUse, PostToolUse, Stop, TaskCompleted, TeammateIdle |
 | **Output Styles** | 2 | enterprise-doc, concise-summary |
 
