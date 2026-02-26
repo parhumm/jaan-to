@@ -92,6 +92,7 @@ This directory contains structured summaries of research on Claude Code best pra
 | [82](./82-the-mcp-foundation-four-servers-one-coherent-context-layer.md)      | AI-driven UI Development: MCP Foundation & Architecture         | Strategic architecture for MCP-powered UI development: 4-server MCP foundation (shadcn, Storybook, Playwright, Figma), CLAUDE.md progressive disclosure, Skills-vs-MCP philosophy, Storybook 9 autonomous correction loop, CVA component patterns, token budget management (20k MCP target), multi-agent orchestration, visual verification with Chromatic, and 10 anti-patterns to avoid. |
 | [83](./83-integrating-postman-openapi.md)                                     | Integrating Postman and OpenAPI into the jaan-to AI workflow    | OpenAPI specs as AI-readable contracts, Postman for interactive testing, MCP server configuration (Postman + OpenAPI + REST API), code generation with Orval/openapi-typescript, MSW mocking for Storybook, contract testing with Spectral/Schemathesis, jaan-to Skills/hooks/slash commands for API-first pipeline. |
 | [84](./84-swagger-tooling-ai-driven-development.md)                           | Swagger tooling for AI-driven development with Claude Code      | Scalar vs Swagger UI for API docs rendering, VS Code extensions replacing Swagger Editor, Orval/@hey-api vs Swagger Codegen for TypeScript, SwaggerHub/Redocly/Bump.sh platform comparison, MCP server availability, jaan-to integration with Skills/hooks/slash commands, Storybook 9 API docs embedding. |
+| [85](./85-cli-firs-saas-architecture-security-migration.md)                   | Converting jaan-to into a CLI-first SaaS                        | Pull-based agent architecture, OPA-style policy bundles, Sigstore-signed skill packages, OS-level sandboxing (Landlock/Seatbelt), skill.yaml manifest spec, 7-layer security threat model, secrets management, telemetry privacy, benchmarking scorecard, 4-phase migration plan (~6-9 months). |
 
 ## Quick Topic Finder
 
@@ -146,6 +147,7 @@ This directory contains structured summaries of research on Claude Code best pra
 ### Security
 - [78-jaanto-security-guardrails-prompt-injection.md](./78-jaanto-security-guardrails-prompt-injection.md) - Prompt injection defense: blocklist bypass, MCP attack surface, TOCTOU, sandboxing
 - [79-jaanto-security-guardrails-blueprint.md](./79-jaanto-security-guardrails-blueprint.md) - Security guardrails blueprint: defense-in-depth, skill guardrails standard, 90-day MVP
+- [85-cli-firs-saas-architecture-security-migration.md](./85-cli-firs-saas-architecture-security-migration.md) - CLI-first SaaS: agent architecture, Sigstore signing, OS sandboxing, 7-layer threat model, migration plan
 
 ### PR Review Automation
 - [04-laravel-pr-agents.md](./04-laravel-pr-agents.md)
@@ -187,6 +189,7 @@ This directory contains structured summaries of research on Claude Code best pra
 - [59-backend-api-contract.md](./59-backend-api-contract.md) - OpenAPI 3.1 contract generation with validation tooling & AI guardrails
 - [83-integrating-postman-openapi.md](./83-integrating-postman-openapi.md) - OpenAPI + Postman + MCP integration for API-first development pipeline
 - [84-swagger-tooling-ai-driven-development.md](./84-swagger-tooling-ai-driven-development.md) - Swagger tool landscape: Scalar, VS Code extensions, TypeScript code generators
+- [85-cli-firs-saas-architecture-security-migration.md](./85-cli-firs-saas-architecture-security-migration.md) - CLI-first SaaS architecture: control-plane patterns, skill registry, OPA policies, benchmarking
 - [60-backend-data-model.md](./60-backend-data-model.md) - AI data modeling: NLP→DDL, migrations, indexing, multi-tenancy, schema evolution
 - [66-release-iterate-changelog.md](./66-release-iterate-changelog.md) - Changelog & release skill: Keep a Changelog, SemVer, Conventional Commits, git tags, MCP releases
 
