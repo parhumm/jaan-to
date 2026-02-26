@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`frontend-story-generate` skill** — Generate CSF3 Storybook stories for components with automatic CVA variant detection. Supports MCP graceful degradation (Storybook MCP for conventions, shadcn MCP for prop types, or source-reading fallback). Includes scan mode to find components missing stories
+- **`frontend-visual-verify` skill** — Visually verify components using Playwright MCP with dual output modes: `visual-mode` (accessibility tree + screenshot scoring, 0-10 scale) and `static-mode` (code-review-only, score=N/A). Localhost-only by default; external URLs require explicit confirmation
+- **`frontend-component-fix` skill** — Diagnose and fix UI bugs with output-only safety model (generates patch artifacts, never edits source directly). Guided single-run mode chains fix → integrate → verify in one approval
+- **`visual-reviewer` agent** — Lightweight haiku model agent for code-level visual review (semantic HTML, accessibility, design system consistency)
+- **Story coverage advisory hook** — Read-only PostToolUse hook suggests story generation when components are written without companion Storybook stories
+- **Product changelog** — Full product changelog (CHANGELOG-PRODUCT.md) covering all versions from 1.0.0 to 7.5.1, with product changelog page added to the documentation website
+- **MCP connector documentation** — Setup guides for Storybook MCP, shadcn MCP, and Playwright MCP connectors
+- **UI workflow guide** — End-to-end guide for setting up the Storybook + shadcn + Playwright visual development workflow
+- **Design system context seed** — New `design.md` seed template for component library, design tokens, Storybook conventions, and MCP server configuration
+- **Shared UI workflow reference** — `frontend-ui-workflow-reference.md` with CSF3 format spec, CVA detection patterns, MCP degradation patterns, and visual scoring rubric (shared across 5+ skills)
+- **Research: Storybook + shadcn + Claude Code** — Comprehensive guide for AI-powered component development workflow ([Research #81](docs/research/81-storybook-shadcn-claude-code-guide.md))
+- **Research: MCP foundation architecture** — Architecture analysis of four MCP servers creating a coherent context layer ([Research #82](docs/research/82-the-mcp-foundation-four-servers-one-coherent-context-layer.md))
+
+### Changed
+- **`frontend-design` skill** — Now generates CSF3 Storybook stories alongside HTML preview when Storybook is detected in the project
+- **`frontend-scaffold` skill** — Scaffold output now includes story files and CSF3 patterns section when Storybook is detected
+- **`detect-design` skill** — Added Storybook & component tooling signals detection plus MCP readiness assessment (Ready/Partial/Not Configured scoring)
+- **`dev-verify` skill** — Added package-manager-aware Storybook build verification and dev server health checks
+- **`jaan-init` skill** — Added UI stack detection (React/Vue/Svelte, Storybook, shadcn) with design.md seeding and MCP configuration guidance
+- **`team-ship` integration** — Frontend role now includes `frontend-story-generate` in both fast and full tracks. New `visual-qa` role for Phase 3 visual verification. Fixed QA teammate prompt to pass scaffold paths to `qa-test-generate`
+- **Plugin marketplace** — Updated from 53 to 56 skills with new skill paths registered
+
 ---
 
 ## [7.5.1] - 2026-02-25
