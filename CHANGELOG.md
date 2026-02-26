@@ -20,6 +20,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Shared UI workflow reference** — `frontend-ui-workflow-reference.md` with CSF3 format spec, CVA detection patterns, MCP degradation patterns, and visual scoring rubric (shared across 5+ skills)
 - **Research: Storybook + shadcn + Claude Code** — Comprehensive guide for AI-powered component development workflow ([Research #81](docs/research/81-storybook-shadcn-claude-code-guide.md))
 - **Research: MCP foundation architecture** — Architecture analysis of four MCP servers creating a coherent context layer ([Research #82](docs/research/82-the-mcp-foundation-four-servers-one-coherent-context-layer.md))
+- **OpenAPI integration across pipeline** — 12 skills now accept `--contract` for API-aware development. New shared reference (`openapi-integration-reference.md`) provides cross-skill Orval, MSW, and Scalar patterns. `frontend-scaffold` generates 4 API integration artifacts (Orval config, MSW handlers, MSW browser/server setup). `team-ship` full track flows API contracts from backend to frontend and QA teammates
+- **Research: OpenAPI/Postman integration** — Best practices for OpenAPI-first development with Orval, MSW, and Scalar tooling ([Research #83](docs/research/83-integrating-postman-openapi.md))
+- **Research: Swagger tooling for AI-driven development** — Comprehensive Swagger/OpenAPI tooling analysis for AI-enhanced workflows ([Research #84](docs/research/84-swagger-tooling-ai-driven-development.md))
 
 ### Changed
 - **`frontend-design` skill** — Now generates CSF3 Storybook stories alongside HTML preview when Storybook is detected in the project
@@ -29,6 +32,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **`jaan-init` skill** — Added UI stack detection (React/Vue/Svelte, Storybook, shadcn) with design.md seeding and MCP configuration guidance
 - **`team-ship` integration** — Frontend role now includes `frontend-story-generate` in both fast and full tracks. New `visual-qa` role for Phase 3 visual verification. Fixed QA teammate prompt to pass scaffold paths to `qa-test-generate`
 - **Plugin marketplace** — Updated from 53 to 56 skills with new skill paths registered
+- **`qa-test-cases` skill** — Added optional `--contract` flag to generate endpoint-specific BDD scenarios from OpenAPI specs (request validation, error codes, auth boundaries, pagination)
+- **`qa-test-run` skill** — Added `--contract` tier that delegates to `qa-contract-validate` (no tool duplication). Fixed missing `--mutation` in argument-hint
+- **`backend-pr-review` skill** — Added contract drift detection (Step 3.5) comparing route changes against OpenAPI spec
+- **`frontend-scaffold` skill** — Generates Orval config, MSW handlers, and browser/server setup files when API contract provided
+- **`frontend-story-generate` skill** — Added `--contract` flag for MSW handler generation in stories (4 variants: success, loading, error, empty)
+- **`frontend-task-breakdown` skill** — Added `--contract` flag for API integration task mapping
+- **`frontend-design` skill** — Added `--contract` flag for response shape awareness from API specs
+- **`frontend-visual-verify` skill** — Added MSW handler detection advisory note
+- **`frontend-component-fix` skill** — Added contract alignment check in root cause analysis
+- **`dev-project-assemble` skill** — Added Scalar API documentation page generation for Node.js/Next.js projects
+- **`dev-output-integrate` skill** — Added OpenAPI-aware integration (Orval config, MSW setup, Storybook preview MSW initialization). New allowed-tools: `Bash(npx msw:*)`, `Write(orval.config.ts)`, `Write/Edit(.storybook/**)`
+- **`team-ship` orchestration** — QA full track now includes `qa-contract-validate`. Per-track dependency resolution for contract handoff. Frontend prompt resequenced for API contract wait
+- **License** — Switched from MIT to proprietary license across all skills
 
 ---
 
