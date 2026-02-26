@@ -50,6 +50,9 @@ jaan-to makes **no network calls** by default. The only skills that access the n
 - `pm-research-about` — uses `WebSearch` and `WebFetch` for public web research
 - `jaan-issue-report` — uses `gh` CLI to submit issues to GitHub (with explicit user approval)
 - `devops-deploy-activate` — uses platform CLIs (`gh`, `vercel`, `railway`, `fly`) for deployment setup
+- `frontend-visual-verify` — uses Playwright MCP to navigate **localhost-only** URLs (default: `localhost:*`, `127.0.0.1:*`). External domains require explicit per-URL user confirmation. Playwright MCP config enforces this via `network.allowedOrigins`.
+
+**Output-only safety note**: `frontend-component-fix` generates patch artifacts under `$JAAN_OUTPUTS_DIR` only. It does NOT edit project source files directly. Patches are applied through `dev-output-integrate` which has proper `Edit(src/**)` permissions and conflict detection.
 
 No telemetry, analytics, or data is sent to jaan-to servers. There are no jaan-to servers.
 

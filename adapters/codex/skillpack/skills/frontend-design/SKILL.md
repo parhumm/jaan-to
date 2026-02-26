@@ -20,6 +20,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_TEMPLATES_DIR/jaan-to-frontend-design.template.md` - Output template
 - `$JAAN_LEARN_DIR/jaan-to-frontend-design.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-ui-workflow-reference.md` - Shared UI workflow reference (CSF3 format, visual scoring)
 
 ## Input
 
@@ -96,6 +97,12 @@ Read `$JAAN_CONTEXT_DIR/tech.md` if available:
 3. Note framework version for API compatibility
 4. Identify styling approach from tech.md:
    - Tailwind CSS, CSS Modules, styled-components, Sass, vanilla CSS, etc.
+
+**Storybook detection** (check alongside tech stack):
+- `Glob: .storybook/main.*` — Storybook installed?
+- `Grep: "storybook" package.json` — Storybook in devDependencies?
+- `Glob: src/**/*.stories.tsx` — Existing stories?
+- If detected: set `storybook_available = true` (used in Steps 5, 7b, 10.5)
 
 **If tech.md missing or incomplete:**
 - Ask: "Which framework? (React/Vue/Svelte/Vanilla JS)"
@@ -192,6 +199,7 @@ Framework:    {React/Vue/Vanilla}
 Type:         {hero/card/form/etc}
 Styling:      {Tailwind/CSS Modules/etc}
 Scope:        Component + Preview (default)
+Storybook:    {yes — will generate CSF3 story / no — skipping}
 
 Key Features:
 - {feature_1}
@@ -318,6 +326,23 @@ Create standalone HTML preview showing the component in action:
 - Error/loading states (if applicable)
 - Dark mode (if supported)
 
+## Step 7b: Generate Story File (Conditional)
+
+**Skip if** `storybook_available = false`.
+
+When Storybook detected in Step 2, generate a CSF3 story file alongside the component:
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-ui-workflow-reference.md`
+> section "CSF3 Story Format Spec" for the base template and rules.
+
+1. Read existing `*.stories.tsx` files to match project conventions
+2. Generate CSF3 story with `Meta<typeof ComponentName>` + `StoryObj<typeof meta>`
+3. Cover states from Component State Coverage Matrix: Default, Loading, Error, Empty, variants
+4. If component uses CVA: generate one story per variant value (see "CVA Variant Detection" in reference)
+5. Map props to argTypes controls (see "argTypes Controls" in reference)
+
+**Story file**: `{id}-{slug}-stories.tsx`
+
 ## Step 8: Generate Documentation
 
 Read template: `$JAAN_TEMPLATES_DIR/jaan-to-frontend-design.template.md`
@@ -387,6 +412,7 @@ OUTPUT_FOLDER="${SUBDOMAIN_DIR}/${NEXT_ID}-${slug}"
 MAIN_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}.md"
 CODE_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}-code.{jsx|vue|html}"
 PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}-preview.html"
+STORIES_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}-stories.tsx"  # if storybook_available
 ```
 
 **Preview output configuration:**
@@ -397,6 +423,7 @@ PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}-preview.html"
 >   - {NEXT_ID}-{slug}.md (documentation)
 >   - {NEXT_ID}-{slug}-code.{ext} (code)
 >   - {NEXT_ID}-{slug}-preview.html (preview)
+>   - {NEXT_ID}-{slug}-stories.tsx (CSF3 stories — if Storybook detected)
 
 ## Step 11: Write Output
 
@@ -414,7 +441,10 @@ PREVIEW_FILE="${OUTPUT_FOLDER}/${NEXT_ID}-${slug}-preview.html"
 4. **Write preview file:**
    Write standalone preview to `$PREVIEW_FILE`
 
-5. **Update subdomain index:**
+5. **Write stories file** (if `storybook_available`):
+   Write CSF3 stories to `$STORIES_FILE`
+
+6. **Update subdomain index:**
    ```bash
    source "${CLAUDE_PLUGIN_ROOT}/scripts/lib/index-updater.sh"
    add_to_index \
@@ -442,6 +472,8 @@ Present follow-up workflow options:
 > **Next Steps:**
 > - Copy code from `{CODE_FILE}` to your project
 > - Open `{PREVIEW_FILE}` in browser to see live preview
+> - Run `/jaan-to:frontend-visual-verify` to visually verify the component (requires Storybook + Playwright MCP)
+> - Run `/jaan-to:frontend-story-generate` to generate additional stories for more component states
 > - Run `/jaan-to:qa-test-cases "{MAIN_FILE}"` to generate test cases
 > - Run `/jaan-to:frontend-task-breakdown` if you need integration tasks for larger feature
 
@@ -476,6 +508,7 @@ If "Learn from this":
 - [ ] Framework matches tech.md (or user choice)
 - [ ] Documentation complete with all required sections
 - [ ] Preview file works (if scope includes preview)
+- [ ] CSF3 stories generated (if Storybook detected)
 - [ ] Output follows v3.0.0 structure (ID, folder, index)
 - [ ] Index updated with executive summary
 - [ ] User approved final result
