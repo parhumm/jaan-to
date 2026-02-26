@@ -14,7 +14,7 @@
   "plugins": [
     {
       "name": "jaan-to",
-      "description": "AI-powered plugin with 53 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, mutation testing, TDD orchestration, contract validation, quality gates, issue validation, skill discovery, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
+      "description": "AI-powered plugin with 56 skills across 13 roles. Spec-to-ship pipeline: scaffold code, implement services, generate tests, audit security, deploy infrastructure. Plus PRDs, user stories, task breakdowns, data models, API contracts, detect suite, UX research, WordPress PR review, mutation testing, TDD orchestration, contract validation, quality gates, issue validation, skill discovery, and changelog generation. Features: two-phase workflow with human approval, quality-reviewer agent, context-scout agent, token optimization, LEARN.md continuous improvement system.",
       "version": "7.5.1",
       "author": {
         "name": "Parhum Khoshbakht",
@@ -94,9 +94,12 @@
         "./skills/devops-infra-scaffold",
         "./skills/docs-create",
         "./skills/docs-update",
+        "./skills/frontend-component-fix",
         "./skills/frontend-design",
         "./skills/frontend-scaffold",
+        "./skills/frontend-story-generate",
         "./skills/frontend-task-breakdown",
+        "./skills/frontend-visual-verify",
         "./skills/jaan-init",
         "./skills/jaan-issue-report",
         "./skills/learn-add",

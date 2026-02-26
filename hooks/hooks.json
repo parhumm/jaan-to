@@ -86,6 +86,16 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/story-coverage-check.sh",
+            "timeout": 5
+          }
+        ]
       }
     ],
     "TaskCompleted": [

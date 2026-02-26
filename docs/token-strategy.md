@@ -175,11 +175,13 @@ Aggressive but quality-safe optimization based on [Research #75](research/75-tok
 
 | Metric | Value | Headroom |
 |--------|-------|----------|
-| Description budget | 10,282 / 15,000 chars | 31% remaining (~19 more skills) |
-| Auto-invocable skills | 30 / 35 cap | 5 more before cap |
+| Description budget | ~10,609 / 15,000 chars | 29% remaining (~16 more skills) |
+| Auto-invocable skills | 33 / 35 cap | 2 more before cap |
 | CLAUDE.md | 119 / 150 lines | 31 lines free |
 | Largest SKILL.md | ~507 lines / 600 cap | 93 lines before cap |
-| Total skill lines | ~19,800 across 49 skills | Median ~440 lines |
+| Total skill lines | ~21,000 across 56 skills | Median ~440 lines |
+
+**UI workflow addition (v7.6)**: 3 new auto-invocable skills (`frontend-story-generate`, `frontend-visual-verify`, `frontend-component-fix`) added ~327 chars to description budget and 3 auto-invocable slots. A shared reference file (`docs/extending/frontend-ui-workflow-reference.md`, ~200 lines) avoids duplicating CSF3 patterns, visual scoring rubric, and MCP degradation logic across the 3 skills.
 
 > **Note:** Description budget increased from 8,409 to 10,282 chars due to Agent Skills enrichment (adding "Use when" trigger phrases to all 44 descriptions). 13 overlong SKILL.md files were refactored below 500 lines via reference extraction.
 

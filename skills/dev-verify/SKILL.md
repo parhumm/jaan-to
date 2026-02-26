@@ -1,7 +1,7 @@
 ---
 name: dev-verify
 description: Validate integrated build pipeline and running services with health checks and smoke tests. Use when verifying project builds.
-allowed-tools: Read, Glob, Grep, Bash(pnpm:*), Bash(npm:*), Bash(yarn:*), Bash(composer:*), Bash(go:*), Bash(npx tsc:*), Bash(turbo:*), Bash(curl:*), Bash(docker compose:*), Bash(docker:*), Bash(lsof:*), Bash(nc:*), Bash(ss:*), Bash(ls:*), Bash(mkdir:*), Write($JAAN_OUTPUTS_DIR/dev/verify/**), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(composer.json), Edit(jaan-to/config/settings.yaml)
+allowed-tools: Read, Glob, Grep, Bash(pnpm:*), Bash(npm:*), Bash(yarn:*), Bash(composer:*), Bash(go:*), Bash(npx tsc:*), Bash(npx storybook:*), Bash(turbo:*), Bash(curl:*), Bash(docker compose:*), Bash(docker:*), Bash(lsof:*), Bash(nc:*), Bash(ss:*), Bash(ls:*), Bash(mkdir:*), Write($JAAN_OUTPUTS_DIR/dev/verify/**), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(composer.json), Edit(jaan-to/config/settings.yaml)
 argument-hint: [--build-only | --runtime-only] [--skip-smoke] [--skip-fix] [--port PORT]
 license: MIT
 compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
@@ -94,6 +94,8 @@ Read `$JAAN_CONTEXT_DIR/tech.md` `#current-stack` section. If missing, invoke `c
 | Go / Chi | 8080 | GET /health | HTTP JSON |
 | Go / stdlib | 8080 | GET /health | HTTP JSON |
 
+| Storybook (dev server) | 6006 | GET / | HTTP HTML |
+
 | tech.md Database/Cache | Default Port | Health Command | Protocol |
 |---|---|---|---|
 | PostgreSQL | 5432 | pg_isready -U $user | TCP + CLI |
@@ -119,7 +121,8 @@ Present scope summary:
 1. Read `package.json` / `composer.json` / `go.mod` for dependency manifest
 2. Detect monorepo structure (`turbo.json`, `pnpm-workspace.yaml`)
 3. Check ORM config (`prisma/schema.prisma`, `drizzle.config.ts`)
-4. Detect config-implied build dependencies (pattern from `dev-project-assemble`):
+4. Detect Storybook config (`.storybook/` directory)
+5. Detect config-implied build dependencies (pattern from `dev-project-assemble`):
    - `next.config.ts` → `reactCompiler: true` → requires `babel-plugin-react-compiler`
    - `next.config.ts` → `@next/mdx` import → requires `@next/mdx` + `@mdx-js/react`
    - `composer.json` → `laravel/octane` → requires `swoole` or `roadrunner`
@@ -149,6 +152,7 @@ Skip if `--build-only`.
 - Which dependencies to install
 - Which build command to execute
 - ORM generate step needed?
+- Storybook build needed? (if `.storybook/` detected)
 
 **Runtime plan** (if not `--build-only`):
 - For each discovered service, map to check type from detection tables
@@ -236,6 +240,20 @@ For each auto-fixable error:
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-verify-reference.md` section "Build Pipeline Sequences" for per-stack build order with conditional ORM steps.
 
+## Step 10b: Storybook Build Verification
+
+Skip if `.storybook/` was not detected in Step 3.
+
+1. Read `package.json` `scripts` for a Storybook build script:
+   - Look for `build-storybook`, `storybook:build`, or similar
+   - If found: `{pkg_manager} run {script_name}`
+   - If not found: `{pkg_manager} run build-storybook` as fallback
+2. Collect build output; categorize errors using Step 8 table
+3. If Storybook dev server is running on port 6006, health-check it:
+   - `nc -z -w 2 localhost 6006`
+   - If up: `curl -s -o /dev/null -w "%{http_code}" --max-time 5 http://localhost:6006/`
+   - Expected: HTTP 200
+
 Present build results:
 ```
 BUILD RESULTS
@@ -244,6 +262,7 @@ Type Check:    {errors_before} → {errors_after} errors
 Auto-Fixed:    {count} issues
 Remaining:     {count} errors
 Full Build:    ✓ Pass / ✗ Failed at {stage}
+Storybook:     ✓ Pass / ✗ Failed / ⊘ Not detected
 ```
 
 If `--build-only`: skip to Step 15 (Quality Check).

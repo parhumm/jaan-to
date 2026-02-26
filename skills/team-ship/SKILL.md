@@ -287,7 +287,8 @@ Update checkpoint: phase=3, role statuses.
 Lead runs directly:
 1. `/jaan-to:dev-verify` — build + runtime validation
 2. If tests failed in QA: present results, offer fix-and-retry cycle
-3. `/jaan-to:release-iterate-changelog` — generate changelog
+3. If visual-qa role was active: read visual verification report, present summary to user
+4. `/jaan-to:release-iterate-changelog` — generate changelog
 
 ## Step 13: Cleanup
 

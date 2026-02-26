@@ -20,6 +20,7 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 - `$JAAN_TEMPLATES_DIR/jaan-to-frontend-scaffold.template.md` - Output template
 - `$JAAN_LEARN_DIR/jaan-to-frontend-scaffold.learn.md` - Past lessons (loaded in Pre-Execution)
 - `${CLAUDE_PLUGIN_ROOT}/docs/extending/language-protocol.md` - Language resolution protocol
+- `${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-ui-workflow-reference.md` - Shared UI workflow reference (CSF3 format)
 
 ## Input
 
@@ -91,6 +92,12 @@ Read `$JAAN_CONTEXT_DIR/tech.md`:
 - Extract state management, testing tools
 - If tech.md missing: ask framework/styling via AskUserQuestion
 
+**Storybook detection** (check alongside tech stack):
+- `Glob: .storybook/main.*` — Storybook installed?
+- `Grep: "storybook" package.json` — Storybook in devDependencies?
+- `Glob: src/**/*.stories.tsx` — Existing stories pattern?
+- If detected: set `storybook_available = true` (used in Steps 5, Phase 2 Output, Step 8)
+
 ## Step 3: Design System Check
 
 Read `$JAAN_CONTEXT_DIR/design.md` and `$JAAN_CONTEXT_DIR/brand.md` if available:
@@ -130,6 +137,10 @@ API HOOKS ({count})
 TYPES ({count})
 ───────────────
 {list of TypeScript interfaces from API schemas}
+
+STORIES ({count} — if Storybook detected)
+──────────────────────────────────────────
+{list of CSF3 story files to generate, one per component}
 ```
 
 ---
@@ -162,6 +173,7 @@ All files in `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`:
 ├── {id}-{slug}-types.ts               # TypeScript interfaces from API schemas
 ├── {id}-{slug}-pages.tsx               # Page layouts / routes
 ├── {id}-{slug}-config.ts              # Package.json + tsconfig + tailwind config
+├── {id}-{slug}-stories.tsx            # CSF3 Storybook stories (if Storybook detected)
 └── {id}-{slug}-readme.md              # Setup + run instructions
 ```
 
@@ -185,6 +197,7 @@ Validate generated output against checklist:
 - [ ] Accessibility: ARIA, semantic HTML, keyboard nav
 - [ ] No anti-patterns present in generated code
 - [ ] Framework-implied build dependencies included (e.g., `babel-plugin-react-compiler` when `reactCompiler: true`)
+- [ ] CSF3 stories generated for each component (if `storybook_available`) — see `${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-ui-workflow-reference.md` section "CSF3 Story Format Spec"
 
 If any check fails, fix before preview.
 
@@ -241,8 +254,9 @@ add_to_index \
 > **Next Steps:**
 > - Copy scaffold files to your project directory
 > - Run `npm install` to install dependencies
-> - Run `/jaan-to:dev-integration-plan` to plan integration with existing code
-> - Run `/jaan-to:dev-test-plan` to generate test plan
+> - Run `/jaan-to:frontend-story-generate` to generate additional Storybook stories
+> - Run `/jaan-to:frontend-visual-verify` to visually verify components (requires Playwright MCP)
+> - Run `/jaan-to:dev-output-integrate` to integrate scaffold into project
 > - Run `/jaan-to:qa-test-cases` to generate test cases
 
 ## Step 13: Capture Feedback
@@ -309,6 +323,17 @@ If "Learn from this": Run `/jaan-to:learn-add frontend-scaffold "{feedback}"`
 - Server Actions for internal mutations; Route Handlers (`route.ts`) for external consumers
 - ESLint 9 flat config (`eslint.config.mjs`) replaces `.eslintrc.json`
 
+**CSF3 Story Patterns** (when `storybook_available`):
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-ui-workflow-reference.md`
+> for CSF3 format spec, CVA variant detection, argTypes controls, and state coverage matrix.
+
+- Generate one `{ComponentName}.stories.tsx` per component
+- Use `Meta<typeof Component>` + `StoryObj<typeof meta>` pattern
+- Cover: Default, Loading, Error, Empty, each CVA variant
+- Declarative `args` objects only (no render functions)
+- Match existing story conventions from project's `*.stories.tsx` files
+
 ## Anti-Patterns to NEVER Generate
 
 **React 19**: `useEffect` for data fetching, `forwardRef`, manual memoization (`useMemo`/`useCallback`/`React.memo`), `defaultProps`, `PropTypes`, `<Context.Provider>`
@@ -344,6 +369,7 @@ If "Learn from this": Run `/jaan-to:learn-add frontend-scaffold "{feedback}"`
 - [ ] Accessibility: ARIA, semantic HTML, keyboard nav
 - [ ] TailwindCSS v4 CSS-first config
 - [ ] Responsive mobile-first breakpoints
+- [ ] CSF3 stories generated per component (if Storybook detected)
 - [ ] Setup README complete
 - [ ] Output follows v3.0.0 structure
 - [ ] Index updated with executive summary

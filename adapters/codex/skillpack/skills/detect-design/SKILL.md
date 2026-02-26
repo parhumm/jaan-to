@@ -255,6 +255,13 @@ Map discovered tokens to categories:
 - Glob: `**/*.stories.{tsx,jsx,ts,js,mdx}` — Storybook stories
 - Glob: `.storybook/**` — Storybook configuration
 
+### Storybook & Component Tooling Signals
+- Grep in `.storybook/main.*` for `addon-mcp` — MCP addon integration
+- Grep in `.storybook/main.*` for `experimentalComponentsManifest` — component manifest generation
+- Detect CSF version: grep for `satisfies Meta` or `satisfies StoryObj` (CSF3) vs `export default { title:` without `satisfies` (CSF2) in `**/*.stories.{tsx,jsx,ts,js}`
+- Grep in `**/src/**/*.{tsx,jsx,ts,js}` for `cva(` — Class Variance Authority usage
+- Glob: `components.json` — shadcn/ui presence; if found, extract `style`, `tailwind`, `aliases` fields
+
 ### Component Inventory
 For each component directory, extract:
 - Component name and file path
@@ -311,6 +318,26 @@ Classify components:
 - Check for visual regression testing (chromatic, percy, backstop)
 - Look for design system documentation conventions
 - Check for token versioning or release process
+
+### MCP Readiness Assessment
+
+Check `.mcp.json` (project root) for MCP server entries:
+
+| Entry | Grep Pattern | What It Means |
+|-------|-------------|---------------|
+| storybook-mcp | `storybook-mcp` or `@anthropic/storybook-mcp` | Storybook components exposed via MCP |
+| shadcn | `shadcn` or `@anthropic/shadcn-mcp` | shadcn/ui registry available via MCP |
+| playwright | `playwright` or `@anthropic/playwright-mcp` | Browser automation available via MCP |
+
+**Scoring**:
+- **Ready** (all 3 configured): Full MCP integration for design system tooling
+- **Partial** (1-2 configured): Some MCP servers present, gaps noted
+- **Not Configured** (0 or no `.mcp.json`): No MCP integration detected
+
+Cross-reference with Step 2 signals:
+- If `addon-mcp` found in Storybook config but no `storybook-mcp` in `.mcp.json` → flag as misconfiguration
+- If `components.json` (shadcn) found but no `shadcn` MCP entry → flag as opportunity
+- Record MCP readiness score and individual server statuses for governance output
 
 ## Step 7: Detect Drift
 
@@ -433,7 +460,7 @@ Write 6 output files using the template:
 | `$JAAN_OUTPUTS_DIR/detect/design/components{suffix}.md` | Component inventory and patterns |
 | `$JAAN_OUTPUTS_DIR/detect/design/patterns{suffix}.md` | UI patterns and conventions |
 | `$JAAN_OUTPUTS_DIR/detect/design/accessibility{suffix}.md` | A11y implementation findings (scoped to repo evidence) |
-| `$JAAN_OUTPUTS_DIR/detect/design/governance{suffix}.md` | Design system governance signals |
+| `$JAAN_OUTPUTS_DIR/detect/design/governance{suffix}.md` | Design system governance signals (includes MCP Readiness section) |
 
 **Note**: `{suffix}` is empty for single-platform mode, or `-{platform}` for multi-platform mode.
 
