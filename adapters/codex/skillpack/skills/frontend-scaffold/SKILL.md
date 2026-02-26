@@ -173,8 +173,48 @@ All files in `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`:
 ├── {id}-{slug}-pages.tsx               # Page layouts / routes
 ├── {id}-{slug}-config.ts              # Package.json + tsconfig + tailwind config
 ├── {id}-{slug}-stories.tsx            # CSF3 Storybook stories (if Storybook detected)
+├── {id}-{slug}-orval-config.ts         # → project root: orval.config.ts
+├── {id}-{slug}-msw-handlers.ts         # → src/mocks/handlers.ts
+├── {id}-{slug}-msw-browser.ts          # → src/mocks/browser.ts
+├── {id}-{slug}-msw-server.ts           # → src/mocks/server.ts
 └── {id}-{slug}-readme.md              # Setup + run instructions
 ```
+
+Include **Source → Destination** mapping table in `{id}-{slug}-readme.md` for `dev-output-integrate` to consume.
+
+## Step 6.5: Generate API Integration Layer (if backend-api-contract provided)
+
+When an API contract (OpenAPI spec) is available from inputs:
+
+1. **Generate `{id}-{slug}-orval-config.ts`** — Orval configuration:
+   - `input.target`: relative path to the spec file
+   - `output.client`: `'react-query'` (TanStack Query v5)
+   - `output.target`: `'./src/lib/api/generated'`
+   - `output.schemas`: `'./src/lib/api/schemas'`
+   - `output.mock`: `true` (generates MSW handlers)
+   - `output.mode`: `'tags-split'`
+
+2. **Generate `{id}-{slug}-msw-handlers.ts`** — MSW request handlers from spec:
+   - For each endpoint: success handler (200/201), error handler (4xx/5xx with RFC 9457 shape)
+   - Import pattern: `import { http, HttpResponse } from 'msw'`
+
+3. **Generate `{id}-{slug}-msw-browser.ts`** — MSW browser setup:
+   ```typescript
+   import { setupWorker } from 'msw/browser';
+   import { handlers } from './handlers';
+   export const worker = setupWorker(...handlers);
+   ```
+
+4. **Generate `{id}-{slug}-msw-server.ts`** — MSW Node.js server setup:
+   ```typescript
+   import { setupServer } from 'msw/node';
+   import { handlers } from './handlers';
+   export const server = setupServer(...handlers);
+   ```
+
+5. **Update `{id}-{slug}-config.ts`**: add to devDependencies: `orval`, `msw`, `msw-storybook-addon`. Add script: `"generate:api": "orval --config ./orval.config.ts"`.
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/openapi-integration-reference.md` for Orval config patterns, MSW handler patterns, and flat output conventions.
 
 ## Step 7: Generate Content
 

@@ -238,6 +238,52 @@ Pattern for detecting Storybook in a project (used by multiple skills).
 
 ---
 
+## MSW + Storybook Integration
+
+### Prerequisites
+
+- `msw` (v2.x) and `msw-storybook-addon` in devDependencies
+- `.storybook/preview.ts` initialized with `initialize()` and `mswLoader`
+
+### Story pattern for API-dependent components
+
+Each API-dependent component gets 4 stories with MSW handlers:
+
+| Story | Handler Behavior | Tests |
+|-------|-----------------|-------|
+| Default | Returns spec-conformant success response | Happy path rendering |
+| Loading | `delay('infinite')` | Loading/skeleton states |
+| Error | Returns RFC 9457 error (status 500) | Error boundary/fallback |
+| Empty | Returns empty collection `{ data: [] }` | Empty state UI |
+
+### Handler format in stories
+
+```typescript
+export const Default: Story = {
+  parameters: {
+    msw: {
+      handlers: [
+        http.get('/api/endpoint', () => {
+          return HttpResponse.json({ data: [...] });
+        }),
+      ],
+    },
+  },
+};
+```
+
+### Storybook preview setup
+
+```typescript
+// .storybook/preview.ts
+import { initialize, mswLoader } from 'msw-storybook-addon';
+initialize({ onUnhandledRequest: 'warn' });
+const preview: Preview = { loaders: [mswLoader] };
+export default preview;
+```
+
+---
+
 ## Related
 
 - [Storybook MCP Connector](../mcp/storybook.md)

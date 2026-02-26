@@ -64,6 +64,7 @@ In static-mode, the report header states: "Static analysis only — visual verif
 - **Localhost-only default** — Only navigates to `localhost:*` and `127.0.0.1:*`; external URLs require per-URL user confirmation
 - **Visual scoring rubric** — 6 categories: layout, typography, color, spacing, responsiveness, accessibility
 - **Honest static-mode** — Never claims visual pass/fail without Playwright
+- **API dependency note** — Flags components with API dependencies that may need MSW handlers for proper Storybook rendering
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: dev-output-integrate
 description: Copy generated jaan-to outputs into project locations with entry point wiring and validation. Use when integrating generated code.
-allowed-tools: Read, Glob, Grep, Write(src/**), Write(apps/**), Write(prisma/**), Write(test/**), Write(tests/**), Write(.github/**), Write(docker/**), Write(deploy/**), Write(package.json), Write(tsconfig.json), Write(vitest.config.*), Write(playwright.config.*), Write(next.config.*), Write(tailwind.config.*), Write(.gitignore), Write(.dockerignore), Write(Dockerfile*), Write(docker-compose*), Write(turbo.json), Write($JAAN_OUTPUTS_DIR/dev/output-integrate/**), Write($JAAN_OUTPUTS_DIR/.last-integration-manifest), Bash(pnpm install:*), Bash(pnpm run:*), Bash(npm install:*), Bash(npm run:*), Bash(npx tsc:*), Bash(ls:*), Bash(mkdir:*), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(next.config.*), Edit(turbo.json)
+allowed-tools: Read, Glob, Grep, Write(src/**), Write(apps/**), Write(prisma/**), Write(test/**), Write(tests/**), Write(.github/**), Write(docker/**), Write(deploy/**), Write(package.json), Write(tsconfig.json), Write(vitest.config.*), Write(playwright.config.*), Write(next.config.*), Write(tailwind.config.*), Write(.gitignore), Write(.dockerignore), Write(Dockerfile*), Write(docker-compose*), Write(turbo.json), Write($JAAN_OUTPUTS_DIR/dev/output-integrate/**), Write($JAAN_OUTPUTS_DIR/.last-integration-manifest), Bash(pnpm install:*), Bash(pnpm run:*), Bash(npm install:*), Bash(npm run:*), Bash(npx tsc:*), Bash(ls:*), Bash(mkdir:*), Bash(npx msw:*), Write(orval.config.ts), Edit(orval.config.ts), Write(.storybook/**), Edit(.storybook/**), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(next.config.*), Edit(turbo.json)
 argument-hint: [output-path...] or (interactive scan)
 disable-model-invocation: true
 license: PROPRIETARY
@@ -120,6 +120,23 @@ For route-level files:
 3. Check for existing files at destination — classify as REPLACE
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-output-integrate-reference.md` section "Route File Wiring" for per-stack detection tables and wiring rules.
+
+## Step 4c: Detect API Tooling Integration Needs
+
+When integrating outputs that include `*-orval-config.ts` or `*-msw-*` files:
+
+1. **Orval config**: Place `orval.config.ts` at project root (from `{id}-{slug}-orval-config.ts`)
+2. **MSW handlers**: Place at `src/mocks/handlers.ts` (from `{id}-{slug}-msw-handlers.ts`)
+3. **MSW browser setup**: Place at `src/mocks/browser.ts` (from `{id}-{slug}-msw-browser.ts`)
+4. **MSW server setup**: Place at `src/mocks/server.ts` (from `{id}-{slug}-msw-server.ts`)
+5. **Storybook MSW initialization**:
+   - Glob for `.storybook/preview.{ts,tsx,js,mjs,cjs}`
+   - If found: Edit to add MSW initialization (`import { initialize, mswLoader } from 'msw-storybook-addon'`)
+   - If not found: Write new `.storybook/preview.ts` with MSW setup
+6. **MSW service worker**: Run `npx msw init public/ --save` to install the service worker
+7. **Package.json**: Add `"generate:api": "orval --config ./orval.config.ts"` to scripts section
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/openapi-integration-reference.md` for Storybook preview setup patterns and flat output conventions.
 
 ## Step 5: Present Integration Plan
 
@@ -336,6 +353,7 @@ This enables the integration-drift-check hook to detect outputs created after th
 > - Run `/jaan-to:devops-deploy-activate` if CI/CD configs were integrated
 > - Run `/jaan-to:qa-test-generate` to generate tests for integrated code
 > - Run `/jaan-to:release-iterate-changelog` to document the integration
+> - If API tooling was integrated: "Run `npx orval` to generate typed API client from spec"
 
 ## Step 15: Capture Feedback
 

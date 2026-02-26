@@ -81,10 +81,10 @@ Your job: design and scaffold the frontend from the PRD.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /frontend-task-breakdown "{prd_path}"
-2. Wait for API contract from Backend teammate (they will message you)
-3. /frontend-scaffold "{task_breakdown_path}"
-4. /frontend-design "{screen_descriptions}"
+1. Wait for API contract from Backend teammate (they will message you with api_contract_path)
+2. /frontend-task-breakdown "{prd_path}" --contract "{api_contract_path}"
+3. /frontend-scaffold "{task_breakdown_path}" --contract "{api_contract_path}"
+4. /frontend-design "{screen_descriptions}" --contract "{api_contract_path}"
 
 After scaffold is ready: message QA teammate with scaffold path.
 
@@ -115,13 +115,15 @@ Your job: ensure quality through test planning and execution.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /qa-test-cases "{prd_path}"
-2. Wait for scaffold code from Backend and Frontend teammates (they will message you with scaffold_path)
+1. /qa-test-cases "{prd_path}" --contract "{api_contract_path}"
+2. Wait for scaffold code from Backend and Frontend teammates (they will message you with scaffold_path).
+   Also wait for api_contract_path from Backend teammate.
 3. /qa-test-generate "{test_cases_path}" "{backend_scaffold_path}" "{frontend_scaffold_path}"
 4. Wait for lead to confirm integration is complete
 5. /qa-test-run
+6. /qa-contract-validate "{api_contract_path}"
 
-Message the lead with test results (pass/fail + coverage).
+Message the lead with test results (pass/fail + coverage + contract validation status).
 
 Output directory: $JAAN_OUTPUTS_DIR/qa/
 ```
@@ -230,6 +232,7 @@ The lead builds a dependency graph from `roles.md` and resolves execution order:
 1. Parse roles.md → extract all roles for selected track
 2. Build dependency edges:
    For each role:
+     Read "Depends on" — if per-track (fast:/full:), use entry matching selected track
      If "Depends on" contains a role output key → add edge (dependency_role → this_role)
 3. Topological sort → phased execution groups:
    Phase 1: Roles with depends_on = "user-input" or "repo"
@@ -245,7 +248,7 @@ The lead builds a dependency graph from `roles.md` and resolves execution order:
 |-----------|------------|-------------|
 | prd_path | pm | backend, frontend, qa, ux |
 | stories_path | pm | backend, qa |
-| api_contract_path | backend | frontend |
+| api_contract_path | backend | frontend, qa |
 | scaffold_path (backend) | backend | qa, lead (integration) |
 | scaffold_path (frontend) | frontend | qa, lead (integration) |
 | flowchart_paths | ux | frontend |

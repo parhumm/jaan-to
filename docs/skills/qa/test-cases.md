@@ -29,6 +29,9 @@ The `/qa-test-cases` skill transforms acceptance criteria into comprehensive BDD
 
 # Interactive wizard
 /qa-test-cases
+
+# With API contract for endpoint-specific BDD scenarios
+/qa-test-cases "path/to/prd.md" --contract "path/to/openapi.yaml"
 ```
 
 ---
@@ -42,6 +45,15 @@ Generates **minimum 10 test cases per acceptance criterion**:
 - **2 edge case tests** - From 5 priority categories
 
 **Output Format**: BDD/Gherkin (with ISTQB conversion notes for Xray/TestRail/Azure DevOps)
+
+---
+
+## Arguments
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| acceptance-criteria | Yes | AC text, PRD path, or Jira ticket ID |
+| `--contract` | Optional | Path to OpenAPI spec from `/backend-api-contract` output. Enables endpoint-specific BDD scenario generation. |
 
 ---
 

@@ -2,7 +2,7 @@
 name: frontend-design
 description: Create distinctive, production-grade frontend interfaces with bold design choices and working code. Use when designing UI components.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [component-description-or-requirements]
+argument-hint: [component-description-or-requirements] [--contract backend-api-contract-path]
 license: PROPRIETARY
 ---
 
@@ -29,7 +29,10 @@ Accepts any of:
 - **Component description** — "Create a hero section for SaaS landing page"
 - **Detailed requirements** — "Build a pricing card component with 3 tiers, hover effects, CTA buttons"
 - **PRD reference** — Path to PRD file with frontend requirements
+- **--contract {path}** — Optional OpenAPI contract path (from /jaan-to:backend-api-contract output)
 - **Empty** — Start interactive wizard
+
+**Contract parsing**: If `--contract` present, extract path first, validate file exists and contains `openapi:` or `swagger:` key, then parse remaining positional argument as component description or requirements.
 
 If no input provided, ask: "What component should I design and build?"
 
@@ -69,6 +72,8 @@ Use extended reasoning for:
 ## Step 1: Parse Component Request
 
 Analyze the provided input to extract:
+
+- If API contract available via `--contract`: read the spec and extract relevant response schemas to inform data shape in component templates. Use actual field names and types from the spec for realistic mock data.
 
 **Build initial understanding:**
 ```

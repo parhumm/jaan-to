@@ -122,6 +122,8 @@ Impact:       {what else might be affected}
 Confidence:   {high/medium/low}
 ```
 
+- **Contract alignment check**: If the fix involves data shape changes (renamed fields, new/removed properties, changed types), check against the API contract (glob for `specs/openapi.yaml`, `$JAAN_OUTPUTS_DIR/backend/api-contract/`). Flag if the component's expected data shape diverges from the spec — this may indicate a contract update is needed rather than a component fix.
+
 If confidence is low, ask clarifying questions before proceeding.
 
 ## Step 5: Plan Fix

@@ -46,6 +46,11 @@ Product Development Flow:
                  │     │
                  │     └──> /backend-api-contract
                  │          "OpenAPI 3.1 contract from entities"
+                 │           │
+                 │           ├──> /frontend-scaffold (Orval/MSW output)
+                 │           ├──> /frontend-task-breakdown (API integration tasks)
+                 │           ├──> /frontend-story-generate (MSW handlers)
+                 │           └──> /qa-test-cases (endpoint-specific BDD scenarios)
                  │
                  ├──> /qa-test-cases
                  │    "Generate BDD test cases from PRD"
@@ -61,6 +66,7 @@ Frontend UI Development:
 /frontend-design ──┐
                    ├──> /frontend-story-generate
 /frontend-scaffold ┘    "Generate CSF3 stories"
+/backend-api-contract ──> /frontend-story-generate (MSW handlers)
                               │
                               └──> /frontend-visual-verify
                                    "Visual verification via Playwright"

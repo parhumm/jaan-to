@@ -100,7 +100,7 @@ Use extended reasoning for:
 ## Step 4: Build Team Roster
 
 For each selected role from roles.md:
-1. Extract: Title, Model, Skills (for selected track), Phase, Dependencies, Messages
+1. Extract: Title, Model, Skills (for selected track), Phase, Dependencies (for selected track), Messages
 2. Build dependency graph
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/team-ship-reference.md`
@@ -266,7 +266,9 @@ If integration fails: update checkpoint (status=paused), present error to user.
 ## Step 11: Spawn Phase 3 Teammates
 
 After integration succeeds, spawn Phase 3 roles from roster:
-- QA teammate: message to proceed with `qa-test-generate` → `qa-test-run`
+- QA teammate: message to proceed with:
+  - Fast track: `qa-test-generate` → `qa-test-run`
+  - Full track: `qa-test-generate` → `qa-test-run` → `qa-contract-validate "{api_contract_path}"`
 - DevOps teammate (spawn)
 - Security teammate (spawn, full track only)
 
