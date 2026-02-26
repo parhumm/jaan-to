@@ -90,6 +90,8 @@ This directory contains structured summaries of research on Claude Code best pra
 | [80](./80-building-skill-discovery-across-ai-coding-tools.md)                 | Building skill discovery across AI coding tools                 | Claude Code/Codex/Cursor integration surfaces, hooks & session parsing, event schemas, PrefixSpan mining, scoring rubrics, local-first MVP architecture |
 | [81](./81-storybook-shadcn-claude-code-guide.md)                              | Storybook + shadcn/ui + Claude Code Setup Guide                 | Practical setup guide for Storybook 9 + shadcn/ui + Claude Code with 3 MCP servers (shadcn, Storybook addon-mcp, Playwright), CLAUDE.md conventions, custom slash commands (/new-component, /fix-ui, /design-review), and visual verification workflows for controllable AI-driven UI development. |
 | [82](./82-the-mcp-foundation-four-servers-one-coherent-context-layer.md)      | AI-driven UI Development: MCP Foundation & Architecture         | Strategic architecture for MCP-powered UI development: 4-server MCP foundation (shadcn, Storybook, Playwright, Figma), CLAUDE.md progressive disclosure, Skills-vs-MCP philosophy, Storybook 9 autonomous correction loop, CVA component patterns, token budget management (20k MCP target), multi-agent orchestration, visual verification with Chromatic, and 10 anti-patterns to avoid. |
+| [83](./83-integrating-postman-openapi.md)                                     | Integrating Postman and OpenAPI into the jaan-to AI workflow    | OpenAPI specs as AI-readable contracts, Postman for interactive testing, MCP server configuration (Postman + OpenAPI + REST API), code generation with Orval/openapi-typescript, MSW mocking for Storybook, contract testing with Spectral/Schemathesis, jaan-to Skills/hooks/slash commands for API-first pipeline. |
+| [84](./84-swagger-tooling-ai-driven-development.md)                           | Swagger tooling for AI-driven development with Claude Code      | Scalar vs Swagger UI for API docs rendering, VS Code extensions replacing Swagger Editor, Orval/@hey-api vs Swagger Codegen for TypeScript, SwaggerHub/Redocly/Bump.sh platform comparison, MCP server availability, jaan-to integration with Skills/hooks/slash commands, Storybook 9 API docs embedding. |
 
 ## Quick Topic Finder
 
@@ -174,6 +176,8 @@ This directory contains structured summaries of research on Claude Code best pra
 - [74-dev-cicd-infra-scaffold-generation.md](./74-dev-cicd-infra-scaffold-generation.md) - CI/CD scaffolds: GitHub Actions, Docker multi-stage, docker-compose, deployment configs
 - [81-storybook-shadcn-claude-code-guide.md](./81-storybook-shadcn-claude-code-guide.md) - Storybook 9 + shadcn/ui + Claude Code: MCP setup, slash commands, visual verification
 - [82-the-mcp-foundation-four-servers-one-coherent-context-layer.md](./82-the-mcp-foundation-four-servers-one-coherent-context-layer.md) - shadcn/ui CVA patterns, Storybook Component Manifest, TweakCN theming, Chromatic regression
+- [83-integrating-postman-openapi.md](./83-integrating-postman-openapi.md) - OpenAPI specs as AI contracts, Postman MCP, Orval code gen, MSW mocking, Spectral/Schemathesis
+- [84-swagger-tooling-ai-driven-development.md](./84-swagger-tooling-ai-driven-development.md) - Scalar vs Swagger UI, VS Code extensions, Orval/@hey-api, platform comparison, Storybook embedding
 
 ### Documentation & Architecture
 - [05-ai-os-gap-analysis.md](./05-ai-os-gap-analysis.md)
@@ -181,6 +185,8 @@ This directory contains structured summaries of research on Claude Code best pra
 - [17-twelve-factor-app.md](./17-twelve-factor-app.md)
 - [48-dev-docs-generate.md](./48-dev-docs-generate.md)
 - [59-backend-api-contract.md](./59-backend-api-contract.md) - OpenAPI 3.1 contract generation with validation tooling & AI guardrails
+- [83-integrating-postman-openapi.md](./83-integrating-postman-openapi.md) - OpenAPI + Postman + MCP integration for API-first development pipeline
+- [84-swagger-tooling-ai-driven-development.md](./84-swagger-tooling-ai-driven-development.md) - Swagger tool landscape: Scalar, VS Code extensions, TypeScript code generators
 - [60-backend-data-model.md](./60-backend-data-model.md) - AI data modeling: NLP→DDL, migrations, indexing, multi-tenancy, schema evolution
 - [66-release-iterate-changelog.md](./66-release-iterate-changelog.md) - Changelog & release skill: Keep a Changelog, SemVer, Conventional Commits, git tags, MCP releases
 
