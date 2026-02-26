@@ -185,11 +185,11 @@ fi
 echo ""
 
 # ─────────────────────────────────────────────────────
-# Agent Skills Standard Compliance
+# Skill Standard Compliance
 # ─────────────────────────────────────────────────────
 
 echo "═══════════════════════════════════════"
-echo "  Agent Skills Standard Compliance"
+echo "  Skill Standard Compliance"
 echo "═══════════════════════════════════════"
 echo ""
 
@@ -210,23 +210,6 @@ if [ "$MISSING_LICENSE" -eq 0 ]; then
   echo "✓ All skills have license field"
 else
   echo "::warning::$MISSING_LICENSE skills missing license field"
-fi
-
-# Check compatibility field in all SKILL.md
-MISSING_COMPAT=0
-for skill_dir in "$SKILLS_DIR"/*/; do
-  skill_file="$skill_dir/SKILL.md"
-  [ -f "$skill_file" ] || continue
-  skill_name="$(basename "$skill_dir")"
-  if ! grep -q '^compatibility:' "$skill_file"; then
-    echo "  ⚠ Missing 'compatibility:' field in $skill_name"
-    MISSING_COMPAT=$((MISSING_COMPAT + 1))
-  fi
-done
-if [ "$MISSING_COMPAT" -eq 0 ]; then
-  echo "✓ All skills have compatibility field"
-else
-  echo "::warning::$MISSING_COMPAT skills missing compatibility field"
 fi
 
 # Check "Use when" or "Use to" trigger phrases in descriptions
@@ -278,7 +261,7 @@ done
 if [ "$INVALID_NAMES" -eq 0 ]; then
   echo "✓ All skill names are spec-compliant"
 else
-  echo "::error::$INVALID_NAMES skill names violate Agent Skills naming spec"
+  echo "::error::$INVALID_NAMES skill names violate naming spec"
   AS_ERRORS=$((AS_ERRORS + INVALID_NAMES))
 fi
 
@@ -299,6 +282,6 @@ fi
 
 echo ""
 if [ "$AS_ERRORS" -gt 0 ]; then
-  echo "::error::$AS_ERRORS Agent Skills standard errors (blocking)"
+  echo "::error::$AS_ERRORS skill standard errors (blocking)"
   exit 1
 fi

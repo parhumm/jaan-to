@@ -3,8 +3,8 @@ name: pm-changelog-rewrite
 description: Transform technical changelog into user-focused product changelog. Use when preparing release communications.
 allowed-tools: Read, Glob, Grep, Bash(git remote get-url:*), Bash(git add:*), Bash(git commit:*), Write(CHANGELOG-PRODUCT.md), Write($JAAN_OUTPUTS_DIR/CHANGELOG-PRODUCT.md), Edit(CHANGELOG-PRODUCT.md), Edit($JAAN_OUTPUTS_DIR/CHANGELOG-PRODUCT.md), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[(no args) | release vX.Y.Z | full]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
+disable-model-invocation: true
 ---
 
 # pm-changelog-rewrite

@@ -19,9 +19,12 @@ Skills request context, MCP provides real data. No hallucinating file structures
 
 ## Available Connectors
 
-| Connector | Status | Skills Enabled | Skill |
-|-----------|--------|----------------|-------|
+| Connector | Status | Skills Enabled | Skills |
+|-----------|--------|----------------|--------|
 | [Context7](context7.md) | Available | 1 | `dev-docs-fetch` |
+| [Storybook MCP](storybook.md) | Available | 4 | `frontend-story-generate`, `frontend-visual-verify`, `frontend-component-fix`, `frontend-design` |
+| [shadcn MCP](shadcn.md) | Available | 2 | `frontend-story-generate`, `frontend-component-fix` |
+| [Playwright MCP](playwright.md) | Available | 2 | `frontend-visual-verify`, `frontend-component-fix` |
 
 ---
 

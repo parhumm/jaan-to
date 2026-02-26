@@ -46,12 +46,36 @@ Product Development Flow:
                  │     │
                  │     └──> /backend-api-contract
                  │          "OpenAPI 3.1 contract from entities"
+                 │           │
+                 │           ├──> /frontend-scaffold (Orval/MSW output)
+                 │           ├──> /frontend-task-breakdown (API integration tasks)
+                 │           ├──> /frontend-story-generate (MSW handlers)
+                 │           └──> /qa-test-cases (endpoint-specific BDD scenarios)
                  │
                  ├──> /qa-test-cases
                  │    "Generate BDD test cases from PRD"
                  │
                  └──> /data-gtm-datalayer
                       "GTM tracking code from PRD"
+```
+
+### UI Workflow Chain
+
+```
+Frontend UI Development:
+/frontend-design ──┐
+                   ├──> /frontend-story-generate
+/frontend-scaffold ┘    "Generate CSF3 stories"
+/backend-api-contract ──> /frontend-story-generate (MSW handlers)
+                              │
+                              └──> /frontend-visual-verify
+                                   "Visual verification via Playwright"
+                                        │
+                                        └──> /frontend-component-fix (if issues found)
+                                             "Generate patch artifacts"
+                                                  │
+                                                  └──> /dev-output-integrate
+                                                       "Apply patches to source"
 ```
 
 ### Research Flow
@@ -386,7 +410,7 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 53 skills grouped by role.
+All 56 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
@@ -405,6 +429,9 @@ All 53 skills grouped by role.
 | **frontend** | `/frontend-task-breakdown` | Frontend task breakdown from PRD |
 | | `/frontend-scaffold` | Convert designs to React/Next.js components |
 | | `/frontend-design` | Create production-grade frontend interfaces |
+| | `/frontend-story-generate` | Generate CSF3 Storybook stories for components |
+| | `/frontend-visual-verify` | Visual verification via Playwright MCP |
+| | `/frontend-component-fix` | Diagnose and fix UI bugs with patch artifacts |
 | **ux** | `/ux-research-synthesize` | Synthesize UX research findings |
 | | `/ux-microcopy-write` | Generate multi-language UI microcopy |
 | | `/ux-heatmap-analyze` | Analyze heatmap data |

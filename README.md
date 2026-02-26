@@ -2,19 +2,18 @@
 
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
-[![Version](https://img.shields.io/badge/version-7.4.0-blue.svg)](.claude-plugin/plugin.json)
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Version](https://img.shields.io/badge/version-7.6.0-blue.svg)](.claude-plugin/plugin.json)
+[![Proprietary License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-49-orange.svg)](skills/)
-[![Agent Skills](https://img.shields.io/badge/npx%20skills-compatible-brightgreen.svg)](https://skills.sh)
-[![Agents](https://img.shields.io/badge/agents-2-yellow.svg)](docs/agents/README.md)
+[![Skills](https://img.shields.io/badge/skills-56-orange.svg)](skills/)
+[![Agents](https://img.shields.io/badge/agents-3-yellow.svg)](docs/agents/README.md)
 
 ### Plugin Contents
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Skills** | 49 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
-| **Agents** | 2 | quality-reviewer, context-scout |
+| **Skills** | 56 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
+| **Agents** | 3 | quality-reviewer, context-scout, visual-reviewer |
 | **Hooks** | 7 | Setup, SessionStart, PreToolUse, PostToolUse, Stop, TaskCompleted, TeammateIdle |
 | **Output Styles** | 2 | enterprise-doc, concise-summary |
 
@@ -139,23 +138,6 @@ cd ./dist/jaan-to-codex
 
 Claude Code installation, command namespace (`/jaan-to:*`), and plugin behavior remain unchanged.
 Codex support is added as a thin adapter and runner layer without changing Claude runtime contracts.
-
-### Agent Skills (Cross-Platform)
-
-Install skills via the [Agent Skills](https://skills.sh) ecosystem — works across Claude Code, Cursor, VS Code, GitHub Copilot, and 18+ agents:
-
-```bash
-# Install all 49 skills
-npx skills add parhumm/jaan-to
-
-# Install a specific skill
-npx skills add parhumm/jaan-to --skill pm-prd-write
-
-# Browse available skills
-npx skills find "product requirements"
-```
-
-> **Note:** This installs skill definitions only. For the full jaan.to experience (hooks, agents, config system, learning), use the [Claude Code installation flow](#claude-code-quick-install) instead.
 
 ### First run
 The bootstrap hook automatically creates `jaan-to/` in your project with:
@@ -733,7 +715,7 @@ You should see `jaan-to` with version `7.x.x`. If not, reinstall:
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for details.
+Proprietary. All rights reserved. See [LICENSE](LICENSE) for details.
 
 ---
 

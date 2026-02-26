@@ -177,3 +177,39 @@ Apply tags systematically (research Section 2):
 - **@priority-critical/high/medium/low** - By risk
 - **@REQ-{id}** - Traceability to source AC
 - **@{category}** - Edge case category (@empty-state, @concurrency, @state-transition, etc.)
+
+---
+
+## API Contract-Driven Test Generation
+
+When `--contract` provides an OpenAPI spec, the skill extracts endpoint metadata to auto-seed test scenarios.
+
+### Extraction targets
+
+| Spec Element | Test Scenario Type |
+|-------------|-------------------|
+| `required` fields in request body | Missing field → 422 |
+| `minLength`/`maxLength` | Boundary values (min-1, min, max, max+1) |
+| `enum` values | Each valid value + invalid value |
+| `format: email/uri/uuid` | Valid format + malformed format |
+| Documented 4xx responses | One scenario per status code |
+| Documented 5xx responses | Error handling verification |
+| `securitySchemes` | Unauthenticated, expired, wrong scope |
+| Pagination parameters | Empty page, last page, oversized limit |
+
+### Example: endpoint → BDD scenarios
+
+Given endpoint `POST /tasks` with schema:
+```yaml
+required: [title]
+properties:
+  title: { minLength: 1, maxLength: 200 }
+  status: { enum: [todo, in_progress, done] }
+```
+
+Auto-generated scenario seeds:
+- Given valid task data, When POST /tasks, Then 201 Created
+- Given missing title, When POST /tasks, Then 422 Validation Error
+- Given title with 201 chars, When POST /tasks, Then 422 Validation Error
+- Given status "invalid", When POST /tasks, Then 422 Validation Error
+- Given no auth token, When POST /tasks, Then 401 Unauthorized

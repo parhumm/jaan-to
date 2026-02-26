@@ -2,10 +2,9 @@
 name: dev-project-assemble
 description: Wire scaffold outputs into runnable project structure with configs and entry points. Use when assembling project from scaffolds.
 allowed-tools: Read, Glob, Grep, Write(src/**), Write(prisma/**), Write(package.json), Write(tsconfig.json), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.gitignore), Write($JAAN_OUTPUTS_DIR/dev/project-assemble/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [backend-scaffold, frontend-scaffold] [target-dir]
+argument-hint: [backend-scaffold, frontend-scaffold] [backend-api-contract] [target-dir]
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # dev-project-assemble
@@ -30,6 +29,7 @@ Accepts 2-3 file paths or descriptions plus optional target directory:
 - **backend-scaffold** -- Path to backend scaffold output folder (from `/jaan-to:backend-scaffold` output: `$JAAN_OUTPUTS_DIR/backend/scaffold/{id}-{slug}/`)
 - **frontend-scaffold** -- Path to frontend scaffold output folder (from `/jaan-to:frontend-scaffold` output: `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`)
 - **frontend-design** -- Path to HTML previews (from `/jaan-to:frontend-design` output, optional)
+- **backend-api-contract** — Optional OpenAPI spec path (from /jaan-to:backend-api-contract output). Enables API documentation page generation.
 - **target-dir** -- Target project directory (default: current working directory)
 - **Empty** -- Interactive wizard prompting for each
 
@@ -337,6 +337,40 @@ Parse `{id}-{slug}-pages.tsx` and split per route:
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-project-assemble-reference.md` section "Build Plugin Detection" for multi-stack config-implied dependency detection.
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/dev-project-assemble-reference.md` section "Config File Content Patterns" for .env.example, .gitignore, and monorepo-specific config content.
+
+## Step 10.4: Generate API Documentation Page (if backend-api-contract provided AND Node.js/TS)
+
+**Condition**: Only when `backend-api-contract` is in inputs AND `$JAAN_CONTEXT_DIR/tech.md` indicates Node.js/TypeScript stack.
+
+### Next.js projects:
+1. Generate `src/app/reference/route.ts` — Scalar API reference route:
+   ```typescript
+   import { ApiReference } from '@scalar/nextjs-api-reference';
+   const config = { url: '/api/openapi.json', theme: 'moon' };
+   export const GET = ApiReference(config);
+   ```
+2. Generate `src/app/api/openapi/route.ts` — spec serving route:
+   ```typescript
+   import { NextResponse } from 'next/server';
+   import yaml from 'js-yaml';
+   import fs from 'fs';
+   import path from 'path';
+   export async function GET() {
+     const filePath = path.join(process.cwd(), 'specs/openapi.yaml');
+     const fileContent = fs.readFileSync(filePath, 'utf8');
+     const spec = yaml.load(fileContent);
+     return NextResponse.json(spec);
+   }
+   ```
+3. Add `@scalar/nextjs-api-reference` and `js-yaml` to `package.json` dependencies
+
+### Other Node.js (Express/Fastify):
+- Add setup instructions to readme output (no direct file writes)
+
+### Non-Node stacks:
+- Emit API docs setup instructions in output readme only — do NOT attempt writes
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/openapi-integration-reference.md` section "Scalar API Documentation".
 
 ## Step 11: Quality Check
 

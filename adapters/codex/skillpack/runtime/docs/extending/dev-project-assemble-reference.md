@@ -296,3 +296,27 @@ dist/
 - `cmd/api/main.go` -- Wire dependencies, start server
 - `internal/{feature}/handler.go`, `service.go`, `repository.go`
 - Manual DI in `main.go` (no framework)
+
+## API Documentation Setup (Node.js/TS)
+
+When `backend-api-contract` is provided and the project is Node.js/TypeScript:
+
+### Scalar (recommended over Swagger UI)
+
+| Feature | Scalar | Swagger UI |
+|---------|--------|-----------|
+| Bundle size | ~66kB | ~500kB |
+| Dark mode | Built-in | Plugin required |
+| Try-it-out | Built-in | Built-in |
+| Stars | 30.8k+ | Legacy |
+
+### Next.js setup files
+
+| File | Purpose |
+|------|---------|
+| `src/app/reference/route.ts` | Scalar API reference page |
+| `src/app/api/openapi/route.ts` | Serves OpenAPI spec as JSON |
+
+### Non-Node stacks
+
+For PHP/Laravel, Go, Python: include setup instructions in output readme only. Do not generate framework-specific code outside Node.js/TS stack.

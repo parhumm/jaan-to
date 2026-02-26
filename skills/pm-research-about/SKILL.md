@@ -3,8 +3,7 @@ name: pm-research-about
 description: Deep research on any topic, or add existing file/URL to research index. Use when researching topics or building knowledge bases.
 allowed-tools: Task, WebSearch, WebFetch, Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/research/**), Edit($JAAN_OUTPUTS_DIR/research/**), Bash(git add:*), Bash(git commit:*)
 argument-hint: <topic-or-file-path-or-URL>
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # pm-research-about

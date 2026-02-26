@@ -4,8 +4,7 @@ description: Report bugs, feature requests, or skill issues to the jaan-to GitHu
 allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(uname *), Bash(awk *), Bash(rm -f /tmp/jaan-issue-body-*), Bash(mkdir -p $JAAN_OUTPUTS_DIR/jaan-issues/*), Write($JAAN_OUTPUTS_DIR/jaan-issues/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "<issue-description> [--type bug|feature|skill|docs] [--submit | --no-submit]"
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # jaan-issue-report

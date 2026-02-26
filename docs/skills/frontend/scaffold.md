@@ -51,6 +51,15 @@ Files at `$JAAN_OUTPUTS_DIR/frontend/scaffold/{id}-{slug}/`:
 | `{id}-{slug}-config.ts` | Package.json + tsconfig + tailwind config |
 | `{id}-{slug}-readme.md` | Setup + run instructions |
 
+When `backend-api-contract` is provided, additional API integration files are generated:
+
+| File | Content |
+|------|---------|
+| `{id}-{slug}-orval-config.ts` | Orval configuration for API client generation |
+| `{id}-{slug}-msw-handlers.ts` | MSW request handlers for all spec endpoints |
+| `{id}-{slug}-msw-browser.ts` | MSW browser setup (setupWorker) |
+| `{id}-{slug}-msw-server.ts` | MSW Node.js server setup (setupServer) |
+
 ---
 
 ## What It Asks

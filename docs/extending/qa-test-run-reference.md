@@ -259,3 +259,29 @@ Total line: `total:    (statements)    80.0%`
 6. **Track auto-fix results separately** -- report which tests were fixed vs which still fail.
 7. **Parse coverage before next tier** -- coverage output may be overwritten by subsequent tiers.
 8. **Use test DB only** -- never run tests against production or staging databases.
+
+---
+
+## Contract Validation Tier
+
+The `--contract` tier delegates API contract validation to `/jaan-to:qa-contract-validate` rather than executing contract tools directly.
+
+### Rationale
+
+- `qa-test-run` does not have Spectral/oasdiff/Prism/Schemathesis in its `allowed-tools`
+- `qa-contract-validate` is the sole owner of contract validation logic
+- Delegation prevents ownership duplication and tool drift
+
+### Contract discovery
+
+Search order:
+1. `specs/openapi.yaml` or `specs/openapi.json` in project root
+2. `$JAAN_OUTPUTS_DIR/backend/api-contract/**/openapi.yaml`
+
+### Output report integration
+
+| Contract Status | Report Entry |
+|----------------|-------------|
+| Contract found, delegation suggested | "DELEGATED to qa-contract-validate" |
+| No contract found | "SKIPPED (no contract)" |
+| Never | "PASS" (contract tier cannot pass within qa-test-run) |

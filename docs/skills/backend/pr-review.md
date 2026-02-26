@@ -114,6 +114,7 @@ Groups findings by severity, includes risk-scored file ranking, generates action
 | **Testing** | Missing tests for new endpoints/services |
 | **Database** | Migration safety, query patterns, schema issues |
 | **Performance** | Unbounded queries, resource leaks, missing pagination |
+| **Contract Drift Detection** | When an OpenAPI spec exists in the project, checks for misalignment between route implementations and the API contract (new routes not in spec, changed response shapes, missing error handlers) |
 
 ---
 

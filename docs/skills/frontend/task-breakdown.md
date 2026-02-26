@@ -26,11 +26,13 @@ Analyzes UX handoffs (Figma links, design descriptions, screenshots, or PRDs) an
 /frontend-task-breakdown "User profile redesign with settings modal"
 /frontend-task-breakdown "https://figma.com/file/abc123"
 /frontend-task-breakdown "See PRD at jaan-to/outputs/pm/prd/profile-redesign/prd.md"
+/frontend-task-breakdown "UX handoff description" --contract "path/to/openapi.yaml"
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | ux-handoff | Yes | Figma link, design description, screenshot path, PRD path, or feature name |
+| `--contract` | Optional | Path to OpenAPI spec. Adds API integration sub-tasks per component. |
 
 ---
 

@@ -32,6 +32,7 @@ Takes scaffold outputs (from `/backend-scaffold` and `/frontend-scaffold`) and a
 | backend-scaffold | No | Path to backend scaffold output folder |
 | frontend-scaffold | No | Path to frontend scaffold output folder |
 | frontend-design | No | Path to HTML previews (optional) |
+| backend-api-contract | Optional | Path to OpenAPI spec. Enables API documentation page generation (Scalar for Next.js). |
 | target-dir | No | Target project directory (default: cwd) |
 
 When run without arguments, launches an interactive wizard.
@@ -48,6 +49,8 @@ Files at `$JAAN_OUTPUTS_DIR/dev/project-assemble/{id}-{slug}/`:
 | Project files | Entry points, configs, .env.example, .gitignore |
 
 Supports monorepo (Turborepo/Nx) and separate project layouts.
+
+When an API contract is provided and the project is Node.js/TypeScript, generates a Scalar API reference page at `/reference`.
 
 ---
 

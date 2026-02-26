@@ -2,9 +2,8 @@
 name: frontend-task-breakdown
 description: Generate frontend task breakdowns from UX handoffs with component inventory and state matrices. Use when planning frontend work.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/task-breakdown/**), Bash(cp:*), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [ux-handoff-description-or-figma-link]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+argument-hint: [ux-handoff-description-or-figma-link] [--contract backend-api-contract-path]
+license: PROPRIETARY
 ---
 
 # frontend-task-breakdown
@@ -30,6 +29,9 @@ Accepts any of:
 - **Screenshot path** — Path to screenshot image(s)
 - **PRD reference** — Path to PRD file with frontend requirements
 - **Feature name** — Brief feature description for breakdown
+- **--contract {path}** — Optional OpenAPI contract path (from /jaan-to:backend-api-contract output)
+
+**Contract parsing**: If `--contract` present, extract path first, validate file exists and contains `openapi:` or `swagger:` key, then parse remaining positional argument as UX handoff description or Figma link.
 
 If no input provided, ask: "What feature or UX handoff should I break down?"
 
@@ -153,6 +155,21 @@ Templates:  {count}
 Pages:      {count}
 Total:      {total_count} components
 ```
+
+## Step 3.5: API Integration Mapping (if --contract provided)
+
+When an API contract is available:
+
+1. For each component identified in Step 3, check if it consumes API data:
+   - Match component data needs against spec endpoints
+   - Identify: GET endpoints for data display, POST/PUT for mutations, DELETE for removal actions
+2. Generate "API Integration" sub-tasks for each API-dependent component:
+   - Create typed API hook (via Orval-generated hooks or manual TanStack Query)
+   - Add MSW mock handler for the endpoint
+   - Wire hook into component with loading/error/empty states
+3. Flag risk items: components needing API data where the contract endpoint doesn't exist yet
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/openapi-integration-reference.md` for code generation decision tree.
 
 ## Step 4: State Enumeration
 

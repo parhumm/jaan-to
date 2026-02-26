@@ -26,11 +26,13 @@ Generates working component code (HTML/CSS/JS, React, Vue, vanilla) with bold de
 /frontend-design "Hero section for SaaS landing page"
 /frontend-design "Pricing card component with 3 tiers and hover effects"
 /frontend-design "Login form for admin panel"
+/frontend-design "component description" --contract "path/to/openapi.yaml"
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | component-description | Yes | Component description, detailed requirements, or PRD path |
+| `--contract` | Optional | Path to OpenAPI spec. Informs data shapes in component templates from actual API response schemas. |
 
 ---
 

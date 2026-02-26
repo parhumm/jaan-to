@@ -18,6 +18,8 @@ related: [dev-project-assemble, devops-deploy-activate, backend-scaffold, fronte
 
 Reads generated jaan-to output files, parses their README placement instructions, and copies them into the correct project locations. Handles config file merging (package.json, tsconfig.json), entry point wiring (plugin registration, imports), dependency installation, and post-integration validation. Always shows diffs and gets approval before overwriting.
 
+- **OpenAPI-Aware Integration**: When outputs include Orval/MSW files, handles placement of API config (`orval.config.ts`), mock handlers (`src/mocks/`), Storybook MSW initialization (`.storybook/preview.*`), and MSW service worker installation.
+
 ---
 
 ## Usage

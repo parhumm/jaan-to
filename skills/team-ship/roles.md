@@ -62,12 +62,12 @@ Each role section defines:
 - **Track**: fast, full
 - **Model**: sonnet
 - **Skills**:
-  - fast: [dev-docs-fetch, frontend-scaffold]
-  - full: [dev-docs-fetch, frontend-task-breakdown, frontend-scaffold, frontend-design]
+  - fast: [dev-docs-fetch, frontend-scaffold, frontend-story-generate]
+  - full: [dev-docs-fetch, frontend-task-breakdown, frontend-scaffold, frontend-design, frontend-story-generate]
 - **Phase**: 2 (design+build)
 - **Depends on**: prd_path, api_contract_path (from backend)
-- **Outputs to share**: scaffold_path
-- **Messages**: QA (scaffold ready)
+- **Outputs to share**: scaffold_path, story_paths
+- **Messages**: QA (scaffold ready), Lead (stories ready for visual verification)
 - **Shutdown after**: Phase 2
 
 ## qa
@@ -77,9 +77,11 @@ Each role section defines:
 - **Model**: sonnet
 - **Skills**:
   - fast: [qa-test-generate, qa-test-run, qa-issue-validate]
-  - full: [qa-test-cases, qa-test-generate, qa-test-run, qa-issue-validate]
+  - full: [qa-test-cases, qa-test-generate, qa-test-run, qa-contract-validate, qa-issue-validate]
 - **Phase**: 2 (test-cases) + 3 (test-gen/run after integration)
-- **Depends on**: prd_path, scaffold_paths (from backend + frontend)
+- **Depends on**:
+  - fast: prd_path, scaffold_paths (from backend + frontend)
+  - full: prd_path, scaffold_paths (from backend + frontend), api_contract_path (from backend)
 - **Outputs to share**: test_results_path
 - **Messages**: Lead (tests pass/fail)
 - **Shutdown after**: Phase 3
@@ -106,6 +108,18 @@ Each role section defines:
 - **Depends on**: integrated_code
 - **Outputs to share**: audit_path
 - **Messages**: Lead (audit complete)
+- **Shutdown after**: Phase 3
+
+## visual-qa
+
+- **Title**: Visual QA Engineer
+- **Track**: full
+- **Model**: sonnet
+- **Skills**: [frontend-visual-verify]
+- **Phase**: 3 (quality, after integration)
+- **Depends on**: integrated_code
+- **Outputs to share**: visual_verify_path
+- **Messages**: Lead (visual verification report ready)
 - **Shutdown after**: Phase 3
 
 ---

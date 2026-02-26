@@ -3,8 +3,7 @@ name: backend-pr-review
 description: Review backend PRs for security, performance, code quality, and testing gaps across any stack. Use when reviewing backend pull requests.
 allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(gh api:*), Bash(glab mr diff:*), Bash(glab mr view:*), Bash(glab mr comment:*), Bash(curl:*), Bash(git diff:*), Bash(git log:*), Bash(git fetch:*), Write($JAAN_OUTPUTS_DIR/backend/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: <pr-url | owner/repo#number | local>
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # backend-pr-review
@@ -187,6 +186,21 @@ Run grep patterns against **changed backend files ONLY**. This is the high-signa
 
 Store all grep matches with file paths and line numbers for contextual analysis in Step 4.
 
+## Step 3.5: Contract Drift Check
+
+If an OpenAPI spec exists in the project (glob for `specs/openapi.yaml`, `specs/openapi.json`, `docs/openapi.yaml`):
+
+1. Extract route paths from the OpenAPI spec (all `paths:` entries)
+2. Extract route definitions from changed files in the diff (detect route patterns per framework: Express `router.get()`, Fastify `fastify.route()`, Next.js `app/api/**/route.ts`, Laravel `Route::*`)
+3. Compare:
+   - **New routes not in spec**: route added in code but no corresponding path in OpenAPI → WARNING
+   - **Changed response shapes**: response body structure in code differs from schema in spec → WARNING
+   - **Missing error handlers**: spec documents 4xx/5xx responses but handler doesn't implement them → INFO
+
+Report findings with severity ≥85% confidence. Tag as `contract-drift`.
+
+> This check uses existing Read/Glob tools only. Full contract validation (Spectral, oasdiff, Schemathesis) is handled by `/jaan-to:qa-contract-validate`.
+
 ## Step 4: Two-Pass LLM Analysis
 
 ### Safety Instructions
@@ -257,6 +271,7 @@ Re-evaluate all Pass 1 findings with broader context. Apply **variable confidenc
 | Framework anti-pattern with functional impact | WARNING |
 | Missing tests for new public endpoints | WARNING |
 | Destructive migration without rollback | WARNING |
+| **contract-drift**: spec-implementation misalignment | WARNING (≥85% confidence) |
 | Style improvement with no functional impact | INFO |
 | Minor code quality suggestion | INFO |
 

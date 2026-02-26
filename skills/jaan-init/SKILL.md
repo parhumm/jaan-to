@@ -4,8 +4,7 @@ description: Initialize jaan-to for the current project with directory setup and
 allowed-tools: Read, Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bootstrap.sh), Edit(.gitignore)
 argument-hint: (no arguments)
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # jaan-init
@@ -119,7 +118,35 @@ Next steps:
 - Run any skill: /jaan-to:pm-prd-write "feature name"
 ```
 
-## Step 5: Capture Feedback
+## Step 5: Detect UI Stack
+
+Check the project root for frontend indicators:
+
+- `package.json` containing `react`, `vue`, or `svelte` in dependencies/devDependencies
+- `components/` or `src/components/` directory
+- `.storybook/` directory (Storybook installed)
+- `components.json` (shadcn/ui configured)
+
+**If any frontend indicator found**, append to the Step 4 output:
+
+```
+Frontend stack detected. Consider seeding `jaan-to/context/design.md`
+for design system context.
+
+For enhanced frontend skills, configure Storybook MCP, shadcn MCP,
+and Playwright MCP.
+
+Available frontend skills:
+  /jaan-to:frontend-design
+  /jaan-to:frontend-scaffold
+  /jaan-to:frontend-story-generate
+  /jaan-to:frontend-visual-verify
+  /jaan-to:frontend-component-fix
+```
+
+**If no frontend indicator found**, skip silently.
+
+## Step 6: Capture Feedback
 
 Ask the user:
 ```

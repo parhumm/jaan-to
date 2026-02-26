@@ -2,9 +2,8 @@
 name: qa-test-run
 description: Execute tests, diagnose failures, auto-fix simple issues, generate coverage reports. Use when running and debugging test suites.
 allowed-tools: Read, Glob, Grep, Bash(npm test:*), Bash(npm run test:*), Bash(npm run lint:*), Bash(npx vitest:*), Bash(npx jest:*), Bash(npx playwright:*), Bash(npx tsc:*), Bash(npx prisma generate:*), Bash(pnpm test:*), Bash(pnpm run test:*), Bash(pnpm run lint:*), Bash(pnpm exec:*), Bash(yarn test:*), Bash(yarn run test:*), Bash(composer test:*), Bash(composer dump-autoload:*), Bash(go test:*), Bash(go generate:*), Bash(go mod tidy:*), Bash(go tool cover:*), Bash(php artisan test:*), Bash(php artisan migrate:*), Bash(vendor/bin/phpunit:*), Bash(vendor/bin/pest:*), Write($JAAN_OUTPUTS_DIR/qa/test-run/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [qa-test-generate-output | test-directory] [--unit | --integration | --e2e | --all]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+argument-hint: [qa-test-generate-output | test-directory] [--unit | --integration | --e2e | --mutation | --contract | --all]
+license: PROPRIETARY
 ---
 
 # qa-test-run
@@ -27,8 +26,10 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 Accepts 1-2 arguments:
 - **qa-test-generate output** (preferred) -- Path to qa-test-generate output directory (from `/jaan-to:qa-test-generate`)
 - **test directory** -- Path to existing test directory in the project
-- **Tier filter** (optional) -- `--unit`, `--integration`, `--e2e`, `--mutation`, or `--all` (default: `--all`)
+- **Tier filter** (optional) -- `--unit`, `--integration`, `--e2e`, `--mutation`, `--contract`, or `--all` (default: `--all`)
 - **Empty** -- Interactive wizard prompting for test location and tier
+
+**Tier flags**: `--mutation` runs mutation testing (StrykerJS/Infection/go-mutesting). `--contract` delegates API contract validation to `/jaan-to:qa-contract-validate`. `--all` includes all tiers including mutation and contract.
 
 IMPORTANT: The input above is your starting point. Determine mode and proceed accordingly.
 
@@ -225,6 +226,16 @@ For each tier:
 5. If failures detected → proceed to Step 8 (diagnose) before next tier
 
 **Important**: Use `--reporter=json` (Vitest), `--reporter=json` (Playwright), `--log-junit` (PHPUnit), or `-json` (Go) for machine-parseable output. Never rely on text output parsing.
+
+## Step 7.5: Contract Validation Delegation (if --contract or --all)
+
+When `--contract` tier is selected (explicitly or via `--all`):
+1. Discover API contract: glob for `specs/openapi.yaml`, `specs/openapi.json`, check `$JAAN_OUTPUTS_DIR/backend/api-contract/`
+2. If contract found: **suggest running** `/jaan-to:qa-contract-validate "{contract_path}"` — do NOT execute Spectral/oasdiff/Prism/Schemathesis directly (those tools are not in this skill's allowed-tools)
+3. If contract not found: skip with info message "No API contract discovered — contract validation skipped"
+4. In output report: include contract validation status as "DELEGATED to qa-contract-validate" or "SKIPPED (no contract)" — never report "PASS" for contract tier
+
+> Contract validation tools (Spectral, oasdiff, Prism, Schemathesis) are exclusively owned by `qa-contract-validate`. This skill delegates rather than duplicates.
 
 ## Step 8: Diagnose Failures
 

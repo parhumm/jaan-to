@@ -3,8 +3,7 @@ name: pm-skill-discover
 description: Detect repeated workflow patterns from AI sessions and suggest skills to automate them. Use when optimizing workflows.
 allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(wc:*), Bash(jq:*), Bash(git log:*), Write($JAAN_OUTPUTS_DIR/pm/skill-discover/**), Edit(jaan-to/config/settings.yaml), Task
 argument-hint: [--days=N] [--min-frequency=N] [--max-suggestions=N]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # pm-skill-discover

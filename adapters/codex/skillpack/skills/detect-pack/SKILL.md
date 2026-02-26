@@ -4,8 +4,8 @@ description: Consolidate all detect outputs into unified index with risk heatmap
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**), Write($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone support for analysis mode.
+license: PROPRIETARY
+disable-model-invocation: true
 ---
 
 # detect-pack

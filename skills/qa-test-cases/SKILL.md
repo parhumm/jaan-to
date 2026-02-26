@@ -2,9 +2,8 @@
 name: qa-test-cases
 description: Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB techniques. Use when writing test specifications.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch, Edit(jaan-to/config/settings.yaml)
-argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)] [--contract backend-api-contract-path]
+license: PROPRIETARY
 ---
 
 # qa-test-cases
@@ -28,6 +27,9 @@ Input modes:
 2. **PRD path**: Path to PRD file (from /jaan-to:pm-prd-write output)
 3. **Jira ID**: Story ID (if Jira MCP available)
 4. **Interactive**: Empty arguments triggers wizard
+5. **--contract {path}** — Optional OpenAPI contract path (from /jaan-to:backend-api-contract output)
+
+**Contract parsing**: If `--contract` present, extract path first, validate file exists and contains `openapi:` or `swagger:` key, then parse remaining arguments by modes 1-4 above.
 
 IMPORTANT: The input above is your starting point. Determine mode and proceed accordingly.
 
@@ -108,6 +110,20 @@ If AC is vague, ask these questions before proceeding:
 4. "What happens on system/network failure mid-operation?"
 5. "Are there concurrent user scenarios to consider?"
 6. "What permissions/roles are required for this action?"
+
+## Step 1.5: API Contract Extraction (if --contract provided)
+
+When an API contract is provided:
+1. Read the OpenAPI spec file
+2. Extract: endpoints (paths + methods), request/response schemas, error codes (4xx/5xx), auth schemes
+3. For each endpoint, auto-generate test scenario seeds:
+   - Request body validation: `minLength`, `maxLength`, `enum`, `required` constraints from schema
+   - Error response scenarios: one per documented 4xx/5xx status code
+   - Auth boundary: unauthenticated access, expired token, insufficient scope
+   - Pagination edge cases: empty page, last page, invalid cursor (if pagination parameters exist)
+4. These seeds feed into Step 2 as additional acceptance criteria alongside the PRD/user stories
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/openapi-integration-reference.md` for contract discovery patterns.
 
 ## Step 2: Apply Test Design Techniques
 
@@ -537,4 +553,5 @@ If no: Complete
 - [ ] Main file written: `{id}-test-cases-{slug}.md`
 - [ ] Quality checklist written: `{id}-test-cases-quality-checklist-{slug}.md`
 - [ ] Index updated
+- [ ] If API contract provided, every documented endpoint has at least 1 test scenario
 - [ ] User approved

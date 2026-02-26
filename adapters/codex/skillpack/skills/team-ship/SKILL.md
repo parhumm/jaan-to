@@ -4,8 +4,7 @@ description: Assemble role-based AI teammates to ship ideas from concept to prod
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[initiative] [--track fast|full] [--detect] [--roles role1,role2] [--dry-run] [--resume]"
 context: fork
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # team-ship
@@ -101,7 +100,7 @@ Use extended reasoning for:
 ## Step 4: Build Team Roster
 
 For each selected role from roles.md:
-1. Extract: Title, Model, Skills (for selected track), Phase, Dependencies, Messages
+1. Extract: Title, Model, Skills (for selected track), Phase, Dependencies (for selected track), Messages
 2. Build dependency graph
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/team-ship-reference.md`
@@ -267,7 +266,9 @@ If integration fails: update checkpoint (status=paused), present error to user.
 ## Step 11: Spawn Phase 3 Teammates
 
 After integration succeeds, spawn Phase 3 roles from roster:
-- QA teammate: message to proceed with `qa-test-generate` → `qa-test-run`
+- QA teammate: message to proceed with:
+  - Fast track: `qa-test-generate` → `qa-test-run`
+  - Full track: `qa-test-generate` → `qa-test-run` → `qa-contract-validate "{api_contract_path}"`
 - DevOps teammate (spawn)
 - Security teammate (spawn, full track only)
 
@@ -287,7 +288,8 @@ Update checkpoint: phase=3, role statuses.
 Lead runs directly:
 1. `/jaan-to:dev-verify` — build + runtime validation
 2. If tests failed in QA: present results, offer fix-and-retry cycle
-3. `/jaan-to:release-iterate-changelog` — generate changelog
+3. If visual-qa role was active: read visual verification report, present summary to user
+4. `/jaan-to:release-iterate-changelog` — generate changelog
 
 ## Step 13: Cleanup
 

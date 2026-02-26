@@ -3,6 +3,18 @@
     "context7": {
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp@latest"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    },
+    "storybook-mcp": {
+      "transport": "http",
+      "url": "http://localhost:6006/mcp"
+    },
+    "shadcn": {
+      "command": "npx",
+      "args": ["shadcn@latest", "mcp"]
     }
   }
 }

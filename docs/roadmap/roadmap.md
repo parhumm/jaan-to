@@ -16,8 +16,8 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (53 shipped across 17 role prefixes) | In Progress |
-| 7 | MCP connectors (1/24 shipped) | In Progress |
+| 6 | Role skills (56 shipped across 17 role prefixes) | In Progress |
+| 7 | MCP connectors (1 full + 3 docs-only / 24 cataloged) | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation (1/7 done) | Partial |
 
@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.5.1 (53 skills) | **Next:** v7.6.0 (53+ skills)
+**Latest:** v7.6.0 (56 skills)
 
 ---
 
@@ -35,11 +35,29 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 - [ ] Role Orchestrator Skills — 6 per-role orchestrator skills (`/pm`, `/ux`, `/dev`, `/qa`, `/devops`, `/sec`) using Claude Code Agent Teams. Each orchestrator coordinates all sub-skills within its role via dynamic discovery (`sub-skills.md`). Update `team-ship` to delegate to orchestrators as meta-orchestrator with backward-compatible fallback. → [details](tasks/role-orchestrators.md)
 - [ ] Skill Lifecycle Automation — 5 workflow automation skills discovered via `pm-skill-discover` (est. ~333 min/week savings):
-  - [ ] `dev-adapter-sync` (Must) — Mirror skill files from skills/ to adapters/codex/ automatically
+  - [ ] `dev-adapter-sync` (Must, Quick Win) — Mirror skill files from skills/ to adapters/codex/ automatically. High priority: manual `build-codex-skillpack.sh` is a repeated friction point in every PR
   - [ ] `dev-skill-batch-update` (Must) — Apply uniform changes across all SKILL.md files at once
   - [ ] `dev-docs-sync` (Should) — Auto-sync CHANGELOG, roadmap, DEPENDENCIES, READMEs, marketplace.json
   - [ ] `qa-skill-validate` (Should) — Validate skills, diagnose failures, auto-fix
   - [ ] `devops-adapter-rebuild` (Could) — Rebuild codex adapter after changes
+
+---
+
+## v7.6.0 — 2026-02-26
+
+- [x] `frontend-story-generate` skill — Generate CSF3 Storybook stories with automatic CVA variant detection and MCP graceful degradation
+- [x] `frontend-visual-verify` skill — Visually verify components using Playwright MCP with visual-mode and static-mode scoring
+- [x] `frontend-component-fix` skill — Diagnose and fix UI bugs with output-only safety model and guided single-run mode
+- [x] `visual-reviewer` agent — Lightweight haiku model agent for code-level visual review
+- [x] Story coverage advisory hook — Read-only PostToolUse hook for Storybook story suggestions
+- [x] Product changelog (CHANGELOG-PRODUCT.md) — Full product changelog covering all versions
+- [x] MCP connector documentation — Storybook MCP, shadcn MCP, and Playwright MCP setup guides
+- [x] UI workflow guide and shared reference — End-to-end Storybook + shadcn + Playwright visual development workflow
+- [x] Design system context seed (`design.md`) — Component library, design tokens, Storybook conventions, MCP config
+- [x] Enhanced `frontend-design`, `frontend-scaffold`, `detect-design`, `dev-verify`, `jaan-init`, `team-ship` for UI workflow
+- [x] OpenAPI integration across 12 skills — `--contract` flag, shared `openapi-integration-reference.md`, Orval/MSW/Scalar patterns, `team-ship` full track API contract flow
+- [x] License change — Switched from MIT to proprietary license across all skills
+- [x] 56 skills total (was 53 in v7.5.1)
 
 ---
 
@@ -135,7 +153,7 @@ All new skills must follow v3.0.0 patterns: `$JAAN_*` environment variables, tem
 
 **Priority** (by research rank): qa-test-cases (#1), data-sql-query (#2), ux-research-synthesize (#8), qa-bug-report (#10), growth-meta-write (#12). Full priority list in [tasks/role-skills.md](tasks/role-skills.md#priority-order-by-research-rank).
 
-**Completed work**: 53 skills shipped across v4.0.0–v7.5.0 — see [CHANGELOG.md](/changelog) for details.
+**Completed work**: 56 skills shipped across v4.0.0–v7.6.0 — see [CHANGELOG.md](/changelog) for details.
 
 ---
 
@@ -231,6 +249,9 @@ Build jaan-to as an independent CLI app using the Claude Agent SDK (TypeScript).
 | `/qa-issue-validate` | Validate GitHub/GitLab issues against codebase with RCA |
 | `/qa-issue-report` | Report issues to any GitHub/GitLab repository |
 | `/pm-skill-discover` | Detect repeated workflow patterns and suggest skills |
+| `/frontend-story-generate` | Generate CSF3 Storybook stories with CVA variant detection |
+| `/frontend-visual-verify` | Visually verify components using Playwright MCP |
+| `/frontend-component-fix` | Diagnose and fix UI bugs with output-only safety model |
 | `/dev-verify` | Validate build pipeline and running services with health checks |
 | `/dev-docs-fetch` | Fetch and cache library docs via Context7 MCP (Phase 7) |
 | `/release-iterate-changelog` | Generate changelog with user impact and support guidance |
