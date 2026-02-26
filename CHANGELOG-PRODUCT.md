@@ -6,6 +6,23 @@ For technical details, see [CHANGELOG.md](/changelog/).
 
 ---
 
+## Unreleased
+
+### New
+- **Storybook story generation** — Automatically generate Storybook stories for your components with `/frontend-story-generate`. Detects component variants, covers all states (loading, error, empty, success), and works with or without MCP servers.
+- **Visual component verification** — Verify components look correct using Playwright screenshots and accessibility analysis with `/frontend-visual-verify`. Two modes: full visual verification (with Playwright) or code-review-only when Playwright isn't available.
+- **UI bug fix workflow** — Diagnose and fix UI bugs with `/frontend-component-fix`. Generates safe patch files (never edits your source directly) and offers a one-click flow to integrate and verify the fix.
+- **Product changelog** — Full product changelog covering all versions, now available on the documentation website.
+
+### Improved
+- **Smarter frontend skills** — Design and scaffold skills now automatically generate Storybook stories alongside components when Storybook is detected in your project.
+- **Better project initialization** — `/jaan-init` now detects your UI stack (React, Vue, Svelte, Storybook, shadcn) and suggests relevant setup.
+- **Build verification** — `/dev-verify` now checks Storybook builds and dev server health alongside your main build pipeline.
+- **Team orchestration** — Frontend teammates now generate stories as part of delivery. New visual QA role verifies integrated components in team workflows.
+- **Design audit accuracy** — `/detect-design` now assesses MCP readiness and detects Storybook tooling signals for better recommendations.
+
+---
+
 ## 7.5.1 — 2026-02-25
 
 ### New
