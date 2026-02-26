@@ -88,6 +88,8 @@ This directory contains structured summaries of research on Claude Code best pra
 | [78](./78-jaanto-security-guardrails-prompt-injection.md)                     | Security hardening Jaan.to against prompt injection and sandbox escape | Blocklist bypass taxonomy, MCP attack surface, TOCTOU path validation, kernel sandboxing, YAML hardening |
 | [79](./79-jaanto-security-guardrails-blueprint.md)                            | Jaan.to Security Guardrails Blueprint                           | Defense-in-depth architecture, skill guardrails standard, prompt injection playbook, 90-day MVP |
 | [80](./80-building-skill-discovery-across-ai-coding-tools.md)                 | Building skill discovery across AI coding tools                 | Claude Code/Codex/Cursor integration surfaces, hooks & session parsing, event schemas, PrefixSpan mining, scoring rubrics, local-first MVP architecture |
+| [81](./81-storybook-shadcn-claude-code-guide.md)                              | Storybook + shadcn/ui + Claude Code Setup Guide                 | Practical setup guide for Storybook 9 + shadcn/ui + Claude Code with 3 MCP servers (shadcn, Storybook addon-mcp, Playwright), CLAUDE.md conventions, custom slash commands (/new-component, /fix-ui, /design-review), and visual verification workflows for controllable AI-driven UI development. |
+| [82](./82-the-mcp-foundation-four-servers-one-coherent-context-layer.md)      | AI-driven UI Development: MCP Foundation & Architecture         | Strategic architecture for MCP-powered UI development: 4-server MCP foundation (shadcn, Storybook, Playwright, Figma), CLAUDE.md progressive disclosure, Skills-vs-MCP philosophy, Storybook 9 autonomous correction loop, CVA component patterns, token budget management (20k MCP target), multi-agent orchestration, visual verification with Chromatic, and 10 anti-patterns to avoid. |
 
 ## Quick Topic Finder
 
@@ -136,6 +138,8 @@ This directory contains structured summaries of research on Claude Code best pra
 - [53-dev-pr-review.md](./53-dev-pr-review.md) - PR review automation with risk scoring & security patterns
 - [61-detect-pack.md](./61-detect-pack.md) - Repo-analysis output schemas & writing system detection standards
 - [80-building-skill-discovery-across-ai-coding-tools.md](./80-building-skill-discovery-across-ai-coding-tools.md) - Skill discovery: Claude Code/Codex/Cursor hooks, event schemas, PrefixSpan mining, local-first MVP
+- [81-storybook-shadcn-claude-code-guide.md](./81-storybook-shadcn-claude-code-guide.md) - Storybook 9 + shadcn/ui + Claude Code setup with 3 MCP servers & visual verification
+- [82-the-mcp-foundation-four-servers-one-coherent-context-layer.md](./82-the-mcp-foundation-four-servers-one-coherent-context-layer.md) - MCP foundation architecture: 4 servers, token budgets, Skills-vs-MCP, autonomous correction loops
 
 ### Security
 - [78-jaanto-security-guardrails-prompt-injection.md](./78-jaanto-security-guardrails-prompt-injection.md) - Prompt injection defense: blocklist bypass, MCP attack surface, TOCTOU, sandboxing
@@ -168,6 +172,8 @@ This directory contains structured summaries of research on Claude Code best pra
 - [72-dev-secure-backend-scaffold-hardening.md](./72-dev-secure-backend-scaffold-hardening.md) - Secure scaffolds: jose JWT, httpOnly cookies, CSRF, rate limiting, OWASP Top 10
 - [73-dev-sarif-security-remediation-automation.md](./73-dev-sarif-security-remediation-automation.md) - SARIF remediation: CWE mapping, CodeQL/Semgrep/Snyk fixes, regression tests, CI gates
 - [74-dev-cicd-infra-scaffold-generation.md](./74-dev-cicd-infra-scaffold-generation.md) - CI/CD scaffolds: GitHub Actions, Docker multi-stage, docker-compose, deployment configs
+- [81-storybook-shadcn-claude-code-guide.md](./81-storybook-shadcn-claude-code-guide.md) - Storybook 9 + shadcn/ui + Claude Code: MCP setup, slash commands, visual verification
+- [82-the-mcp-foundation-four-servers-one-coherent-context-layer.md](./82-the-mcp-foundation-four-servers-one-coherent-context-layer.md) - shadcn/ui CVA patterns, Storybook Component Manifest, TweakCN theming, Chromatic regression
 
 ### Documentation & Architecture
 - [05-ai-os-gap-analysis.md](./05-ai-os-gap-analysis.md)
