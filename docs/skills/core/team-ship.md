@@ -69,6 +69,9 @@ Phase 1 → PM defines: PRD + stories
         → HARD STOP: User approves PRD
 Phase 2 → Build team works in parallel:
           Backend, Frontend, QA, UX (full track)
+        → Contract handoff (full track): Backend teammate produces
+          api_contract_path → consumed by Frontend (scaffold, design,
+          task-breakdown) and QA (test-cases, contract-validate).
 Phase 3 → Integration + DevOps + Security
 Phase 4 → Verify, changelog, cleanup
 ```
@@ -97,7 +100,7 @@ Each teammate shuts down after its phase completes to free context.
 | UX | UX Designer | flowchart-generate, microcopy-write |
 | Backend | Backend Engineer | task-breakdown, data-model, api-contract, scaffold |
 | Frontend | Frontend Engineer | task-breakdown, scaffold, design |
-| QA | QA Engineer | test-cases, test-generate, test-run |
+| QA | QA Engineer | test-cases, test-generate, test-run, contract-validate |
 | DevOps | DevOps Engineer | infra-scaffold, deploy-activate |
 | Security | Security Engineer | audit-remediate |
 | TDD Writer | Test Author (tdd track) | test-cases, test-generate (writes failing tests first) |

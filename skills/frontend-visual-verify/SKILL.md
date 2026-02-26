@@ -136,6 +136,8 @@ Visual:
   [ ] Dark mode (if applicable)
 ```
 
+- **API dependency check**: If the component imports API hooks (`useQuery`, `useMutation`, `fetch`) or references API endpoints, add an info-level note: "Component has API dependencies — verify MSW handlers are configured for Storybook stories. See /jaan-to:frontend-story-generate --contract."
+
 ---
 
 # HARD STOP — Review Verification Plan

@@ -2,7 +2,7 @@
 name: frontend-story-generate
 description: Generate CSF3 Storybook stories for components with variant coverage and state matrices. Use when creating component stories.
 allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(mkdir:*), Bash(stat:*), mcp__storybook-mcp__get-ui-building-instructions, mcp__storybook-mcp__list-all-components, mcp__storybook-mcp__get-component-documentation, mcp__shadcn__get_component_details, mcp__shadcn__list_shadcn_components, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: "[component-path or frontend-design/frontend-scaffold output]"
+argument-hint: "[component-path or frontend-design/frontend-scaffold output] [--contract backend-api-contract-path]"
 license: PROPRIETARY
 disable-model-invocation: true
 ---
@@ -29,6 +29,9 @@ Accepts any of:
 - **frontend-design output** — Path to design output folder (reads code file + preview)
 - **frontend-scaffold output** — Path to scaffold output folder (reads components file)
 - **Empty** — Scan project for components missing stories
+- **--contract {path}** — Optional OpenAPI contract path (from /jaan-to:backend-api-contract output)
+
+**Contract parsing**: If `--contract` present, extract path first, validate file exists and contains `openapi:` or `swagger:` key, then parse remaining positional argument as component-path or upstream output.
 
 If no input provided, ask: "Which component should I generate stories for? (path, or 'scan' to find components without stories)"
 
@@ -113,6 +116,17 @@ For each target component:
    - If stories exist: analyze for convention patterns (meta format, naming, args style)
    - Note conventions to maintain consistency
 
+## Step 2.5: Detect API Dependencies (if --contract provided)
+
+1. Grep component files for API-related imports: `useQuery`, `useMutation`, `useSuspenseQuery`, `fetch(`, `axios.`, `createClient`
+2. Map detected API calls to spec endpoints by URL pattern matching
+3. For each API-dependent component, note:
+   - Endpoint(s) consumed
+   - Expected response shape (from spec schemas)
+   - Error states to mock (from spec error responses)
+
+This data drives MSW handler selection in Step 5.
+
 ## Step 3: Plan Story Coverage
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/frontend-ui-workflow-reference.md`
@@ -182,6 +196,19 @@ For each component, generate a CSF3 story file:
 6. Add `includeStories` / `excludeStories` if data exports needed
 7. Match existing project conventions (from Step 2.4)
 
+### API-Dependent Component Stories
+
+For components identified in Step 2.5 as API-dependent:
+- Import MSW handlers: `import { http, HttpResponse, delay } from 'msw'`
+- Add `parameters.msw.handlers` to each story with per-story overrides
+- Generate 4 stories per API-dependent component:
+  - **Default** (success): handler returns spec-conformant response data
+  - **Loading** (infinite delay): `await delay('infinite')` to test loading states
+  - **Error** (500): handler returns RFC 9457 error response
+  - **Empty** (empty data): handler returns empty array/null for collection endpoints
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/openapi-integration-reference.md` section "MSW + Storybook Integration" for handler patterns and `parameters.msw.handlers` format.
+
 ## Step 6: Generate Documentation
 
 Read template: `$JAAN_TEMPLATES_DIR/jaan-to-frontend-story-generate.template.md`
@@ -203,6 +230,7 @@ Fill sections:
 - [ ] Import paths are correct
 - [ ] Component name matches source export
 - [ ] `tags: ['autodocs']` present
+- [ ] API-dependent components have MSW handlers in stories
 
 If any check fails, fix before proceeding.
 

@@ -80,6 +80,7 @@ This collapses the 3-skill chain into a single approval.
 - **Before/after diff** — Every fix includes a clear diff showing what changed and why
 - **MCP integration** — Optionally uses Playwright for before screenshots and Storybook for component docs
 - **Preserves API** — Never changes props interface in a fix
+- **Contract alignment** — When fixing data shape issues, checks against the API contract to determine if the component or the spec needs updating
 
 ---
 

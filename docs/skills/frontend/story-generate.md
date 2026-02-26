@@ -26,11 +26,13 @@ Creates Component Story Format 3 (CSF3) Storybook stories for React components. 
 /frontend-story-generate "src/components/Button.tsx"
 /frontend-story-generate "jaan-to/outputs/frontend/scaffold/01-dashboard/"
 /frontend-story-generate
+/frontend-story-generate "path/to/component" --contract "path/to/openapi.yaml"
 ```
 
 | Argument | Required | Description |
 |----------|----------|-------------|
 | component-path | No | Path to component file, frontend-design output, or frontend-scaffold output |
+| `--contract` | Optional | Path to OpenAPI spec. Enables MSW handler generation in stories for API-dependent components. |
 
 When run without arguments, scans the project for components missing stories.
 
@@ -55,6 +57,7 @@ Files at `$JAAN_OUTPUTS_DIR/frontend/story/{id}-{slug}/`:
 - **MCP graceful degradation** — Uses Storybook MCP and shadcn MCP when available; falls back to source reading
 - **Scan mode** — When run without arguments, finds components missing `.stories.tsx` siblings
 - **CSF3 format** — `Meta<typeof Component>` + `StoryObj<typeof meta>` pattern with declarative args
+- **API-dependent components** — For components with API dependencies, generates 4 story variants (Default, Loading, Error, Empty) with MSW handlers
 
 ---
 

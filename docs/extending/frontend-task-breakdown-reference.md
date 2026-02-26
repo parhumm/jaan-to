@@ -165,3 +165,26 @@ Targets and optimization tasks (applicable when scope = Production or In between
 | INP | ≤200ms | useTransition for non-urgent, debounce handlers |
 | CLS | ≤0.1 | explicit dimensions, aspect-ratio, font swap |
 | Bundle | <{budget}kb | code splitting, tree shaking, dynamic imports |
+
+---
+
+## API Integration Mapping
+
+When `--contract` provides an OpenAPI spec, the task breakdown includes API integration tasks per component.
+
+### Per-component API tasks
+
+For each component consuming API data:
+
+| Task | Description |
+|------|-------------|
+| Create API hook | Use Orval-generated hook or write TanStack Query hook with types from spec |
+| Add MSW handler | Mock endpoint response for Storybook stories and tests |
+| Wire to component | Connect hook to component, handle loading/error/empty states |
+| Add error boundary | Wrap API-dependent components in error boundary |
+
+### Risk flagging
+
+If a component needs data from an endpoint that doesn't exist in the spec:
+- Flag as **risk item** in the task breakdown
+- Note: "API endpoint not yet defined — coordinate with backend"
