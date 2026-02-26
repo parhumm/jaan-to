@@ -304,3 +304,35 @@ export const env = envSchema.parse(process.env);
 ```
 
 Place at `src/env.ts` or `src/config/env.ts` depending on project convention.
+
+## OpenAPI-Specific Integration
+
+When `frontend-scaffold` output includes API tooling files (`*-orval-config.ts`, `*-msw-*`), additional integration steps apply.
+
+### File placement
+
+| Source File | Destination | Tool |
+|------------|-------------|------|
+| `{id}-{slug}-orval-config.ts` | `orval.config.ts` (project root) | `Write(orval.config.ts)` |
+| `{id}-{slug}-msw-handlers.ts` | `src/mocks/handlers.ts` | `Write(src/**)` |
+| `{id}-{slug}-msw-browser.ts` | `src/mocks/browser.ts` | `Write(src/**)` |
+| `{id}-{slug}-msw-server.ts` | `src/mocks/server.ts` | `Write(src/**)` |
+
+### Storybook MSW setup
+
+1. Detect preview file: `.storybook/preview.{ts,tsx,js,mjs,cjs}`
+2. If exists: `Edit(.storybook/**)` to add MSW initialization
+3. If not: `Write(.storybook/preview.ts)` with full MSW setup
+
+### MSW service worker
+
+```bash
+npx msw init public/ --save
+```
+
+This writes `mockServiceWorker.js` to `public/` — a static file that intercepts network requests in the browser.
+
+### Package.json updates
+
+- Add `"generate:api": "orval --config ./orval.config.ts"` to `scripts`
+- Suggest adding `orval`, `msw`, `msw-storybook-addon` to devDependencies if not present
