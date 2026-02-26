@@ -3,8 +3,7 @@ name: qa-test-mutate
 description: Run mutation testing to validate test suite quality with multi-stack support. Use when verifying test effectiveness.
 allowed-tools: Read, Glob, Grep, Bash(npx stryker:*), Bash(vendor/bin/infection:*), Bash(go-mutesting:*), Bash(mutmut:*), Bash(npx vitest:*), Bash(npm test:*), Write($JAAN_OUTPUTS_DIR/qa/test-mutate/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[test-suite-path | qa-test-generate-output | (interactive)]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 context: fork
 disable-model-invocation: true
 ---

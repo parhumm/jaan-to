@@ -10,8 +10,7 @@ hooks:
         - type: command
           command: "${CLAUDE_PLUGIN_ROOT}/scripts/validate-roadmap.sh"
           timeout: 5000
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # pm-roadmap-update

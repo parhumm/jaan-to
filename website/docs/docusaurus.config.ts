@@ -161,7 +161,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a>. Open source under MIT License.`,
+      copyright: `Created by <a href="https://www.linkedin.com/in/parhumm/">Parhum Khoshbakht</a>. All rights reserved.`,
     },
     prism: {
       theme: prismThemes.github,

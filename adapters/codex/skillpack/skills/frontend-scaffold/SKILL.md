@@ -3,8 +3,7 @@ name: frontend-scaffold
 description: Convert designs to React/Next.js components with TailwindCSS, TypeScript, and typed API hooks. Use when scaffolding frontend from designs.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [frontend-design, frontend-task-breakdown, backend-api-contract]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # frontend-scaffold

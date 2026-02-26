@@ -3,8 +3,7 @@ name: qa-test-generate
 description: Generate runnable Vitest and Playwright test files from BDD test cases and scaffold code. Use when generating test implementations.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/test-generate/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [qa-test-cases, backend-scaffold | frontend-scaffold]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # qa-test-generate

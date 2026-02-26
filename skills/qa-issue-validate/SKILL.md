@@ -3,8 +3,7 @@ name: qa-issue-validate
 description: Validate GitHub/GitLab issues against codebase with RCA and reproduction scenarios. Use when triaging issues.
 allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh repo view *), Bash(gh issue view *), Bash(gh issue comment *), Bash(gh issue close *), Bash(gh issue edit *), Bash(gh issue list *), Bash(gh label create *), Bash(glab auth status *), Bash(curl *), Bash(git remote *), Bash(git log *), Bash(git branch *), Bash(rm -f /tmp/qa-issue-validate-*), Bash(mkdir -p $JAAN_OUTPUTS_DIR/qa/issue-validate/*), Bash(cat *), Write($JAAN_OUTPUTS_DIR/qa/issue-validate/**), Write(/tmp/qa-issue-validate-*), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "<issue-id-or-url-or-text> [--repo owner/repo] [--platform github|gitlab]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # qa-issue-validate

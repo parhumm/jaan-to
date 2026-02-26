@@ -217,7 +217,7 @@ claude
 - **jaan.to**
 - Give soul to your workflow
 - github.com/parhumm/jaan-to
-- MIT License
+- Proprietary License
 
 **NARRATION (continued):**
 > "Give soul to your workflow. Try jaan.to today."

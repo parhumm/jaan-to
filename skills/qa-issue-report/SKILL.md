@@ -3,8 +3,7 @@ name: qa-issue-report
 description: Report clear issues to any GitHub/GitLab repo with code refs and media. Use when filing bugs or feature requests.
 allowed-tools: Read, Glob, Grep, Bash(gh auth status *), Bash(gh issue create *), Bash(gh label create *), Bash(gh repo view *), Bash(glab auth status *), Bash(glab issue create *), Bash(glab label create *), Bash(curl *), Bash(git remote *), Bash(git branch *), Bash(git log *), Bash(uname *), Bash(node -v *), Bash(python3 --version *), Bash(go version *), Bash(rustc --version *), Bash(java -version *), Bash(php -v *), Bash(ruby -v *), Bash(dotnet --version *), Bash(rm -f /tmp/qa-issue-*), Bash(mkdir -p $JAAN_OUTPUTS_DIR/qa-issues/*), Bash(cat *), Write($JAAN_OUTPUTS_DIR/qa-issues/**), Write(/tmp/qa-issue-*), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "<issue-description> [--repo owner/repo] [--type bug|feature|improvement|question] [--submit | --no-submit] [--label l1,l2] [--attach path1,path2]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # qa-issue-report

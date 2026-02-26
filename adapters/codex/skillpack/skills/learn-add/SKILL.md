@@ -4,8 +4,7 @@ description: Add a lesson to a skill LEARN.md file, routing feedback to skill, t
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(git add:*), Bash(git commit:*), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[target] [lesson]"
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # learn-add

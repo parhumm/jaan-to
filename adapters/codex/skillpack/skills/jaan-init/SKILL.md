@@ -4,8 +4,7 @@ description: Initialize jaan-to for the current project with directory setup and
 allowed-tools: Read, Bash(${CLAUDE_PLUGIN_ROOT}/scripts/bootstrap.sh), Edit(.gitignore)
 argument-hint: (no arguments)
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # jaan-init

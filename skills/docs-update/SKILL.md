@@ -4,8 +4,7 @@ description: Audit and maintain documentation quality using smart staleness chec
 allowed-tools: Read, Glob, Grep, Write($JAAN_DOCS_DIR/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_DOCS_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(git add:*), Bash(git commit:*), Bash(git log:*), Bash(git mv:*)
 argument-hint: "[path] [--full] [--fix] [--check-only] [--quick]"
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # docs-update

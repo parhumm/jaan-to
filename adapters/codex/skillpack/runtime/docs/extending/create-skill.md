@@ -300,8 +300,7 @@ name: {skill-name}
 description: {1-2 sentence purpose. Keep under 120 chars. Include "Use when" trigger phrase. No colons.}
 allowed-tools: {tool-list}
 argument-hint: {expected-format}
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 ```
 
@@ -311,18 +310,15 @@ compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init 
 | `description` | string | Yes | 1-2 sentence purpose (max 120 chars), must include "Use when/to/for" trigger phrase, no colons |
 | `allowed-tools` | string | Yes | Comma-separated tool permissions |
 | `argument-hint` | string | Yes | Shows expected input format |
-| `license` | string | Yes | License identifier (use `MIT` to match plugin license) |
-| `compatibility` | string | Yes | Environment requirements for the skill |
+| `license` | string | Yes | License identifier (use `PROPRIETARY`) |
 
-### Agent Skills Standard Compliance
-
-jaan-to skills follow the [Agent Skills open standard](https://agentskills.io/specification) for cross-agent compatibility. All skills MUST meet:
+### Skill Naming & Description Standards
 
 **Naming:** Lowercase alphanumeric + hyphens only, no consecutive hyphens, 1-64 chars, must match directory name.
 
 **Description:** Include "Use when" trigger phrase, no colons, max 120 chars. Pattern: `"<what it does>. Use when <trigger>."`
 
-**Required fields:** `license: MIT`, `compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.`
+**Required fields:** `license: PROPRIETARY`
 
 **Marketplace:** New skills MUST be added to `.claude-plugin/marketplace.json` `plugins[0].skills[]` array as `"./skills/{name}"`.
 
@@ -1212,8 +1208,7 @@ Accumulated lessons from past executions.
 - [ ] Has `description` without colons (`:`)
 - [ ] Has `allowed-tools` with valid tool patterns
 - [ ] Has `argument-hint` showing expected format
-- [ ] Has `license: MIT`
-- [ ] Has `compatibility` field
+- [ ] Has `license: PROPRIETARY`
 - [ ] Skill added to `.claude-plugin/marketplace.json` `plugins[0].skills[]`
 
 ### Body Checklist

@@ -261,10 +261,10 @@ fi
 echo ""
 
 # ─────────────────────────────────────────────────────────────
-# Check 11: Agent Skills Standard Compliance
+# Check 11: Skill Standard Compliance
 # ─────────────────────────────────────────────────────────────
 
-echo "Check 11: Agent Skills Standard Compliance"
+echo "Check 11: Skill Standard Compliance"
 echo "────────────────────────────────────────────────────────"
 
 INVALID_NAMES=0
@@ -272,12 +272,12 @@ for skill_dir in "$PLUGIN_ROOT"/skills/*/; do
   [ -d "$skill_dir" ] || continue
   skill_name="$(basename "$skill_dir")"
   if [[ ! "$skill_name" =~ ^[a-z0-9]([a-z0-9-]*[a-z0-9])?$ ]] || [[ "$skill_name" =~ -- ]] || [ ${#skill_name} -gt 64 ]; then
-    echo "  ⚠ Invalid Agent Skills name: $skill_name"
+    echo "  ⚠ Invalid skill name: $skill_name"
     INVALID_NAMES=$((INVALID_NAMES + 1))
   fi
 done
 if [ $INVALID_NAMES -eq 0 ]; then
-  echo "  ✓ All skill names comply with Agent Skills naming spec"
+  echo "  ✓ All skill names comply with naming spec"
 else
   echo "  ⚠ $INVALID_NAMES names violate naming spec (advisory)"
   WARNINGS=$((WARNINGS + 1))
@@ -302,12 +302,11 @@ MISSING_FIELDS=0
 for skill in "$PLUGIN_ROOT"/skills/*/SKILL.md; do
   [ -f "$skill" ] || continue
   grep -q '^license:' "$skill" || MISSING_FIELDS=$((MISSING_FIELDS + 1))
-  grep -q '^compatibility:' "$skill" || MISSING_FIELDS=$((MISSING_FIELDS + 1))
 done
 if [ $MISSING_FIELDS -eq 0 ]; then
-  echo "  ✓ All skills have license and compatibility fields"
+  echo "  ✓ All skills have license field"
 else
-  echo "  ⚠ $MISSING_FIELDS missing Agent Skills fields (advisory)"
+  echo "  ⚠ $MISSING_FIELDS skills missing license field (advisory)"
   WARNINGS=$((WARNINGS + 1))
 fi
 echo ""

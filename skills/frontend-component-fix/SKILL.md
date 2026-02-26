@@ -3,8 +3,7 @@ name: frontend-component-fix
 description: Diagnose and fix UI bugs by generating patch artifacts routed through dev-output-integrate. Use when fixing component issues.
 allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(mkdir:*), Bash(stat:*), Bash(diff:*), mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__playwright__browser_take_screenshot, mcp__storybook-mcp__get-component-documentation, mcp__storybook-mcp__get-story-urls, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[bug-description] [--component path] [--screenshot path]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 disable-model-invocation: true
 ---
 
