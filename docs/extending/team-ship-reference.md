@@ -81,8 +81,8 @@ Your job: design and scaffold the frontend from the PRD.
 Read the PRD at: {prd_path}
 
 Run these jaan-to skills in order:
-1. /frontend-task-breakdown "{prd_path}" --contract "{api_contract_path}"
-2. Wait for API contract from Backend teammate (they will message you)
+1. Wait for API contract from Backend teammate (they will message you with api_contract_path)
+2. /frontend-task-breakdown "{prd_path}" --contract "{api_contract_path}"
 3. /frontend-scaffold "{task_breakdown_path}" --contract "{api_contract_path}"
 4. /frontend-design "{screen_descriptions}" --contract "{api_contract_path}"
 

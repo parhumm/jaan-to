@@ -2,9 +2,9 @@
 
 > Cross-skill patterns for API-aware development. Skills reference this instead of duplicating OpenAPI logic.
 
-**Consumers**: `frontend-scaffold`, `frontend-story-generate`, `frontend-task-breakdown`, `frontend-design`, `dev-project-assemble`, `dev-output-integrate`, `qa-test-cases`, `backend-pr-review`
+**Consumers**: `frontend-scaffold`, `frontend-story-generate`, `frontend-task-breakdown`, `dev-project-assemble`, `dev-output-integrate`, `qa-test-cases`
 
-**Not covered here**: Contract validation tools (Spectral, oasdiff, Prism, Schemathesis) — see `qa-contract-validate-reference.md`.
+**Not covered here**: Contract validation tools (Spectral, oasdiff, Prism, Schemathesis) — see `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-contract-validate-reference.md`.
 
 ---
 
