@@ -169,38 +169,71 @@ update_codex_mcp_config() {
   stripped_file="$(mktemp)"
   strip_mcp_block "$config_file" "$stripped_file"
 
-  # Skip if user already configured any managed server outside managed block (e.g., via codex mcp add)
-  if grep -qE '^\[mcp_servers\.(context7|playwright|storybook-mcp|shadcn)\]' "$stripped_file" 2>/dev/null; then
-    # Persist stripped content so stale managed blocks are removed.
+  # Per-server merge: check each managed server individually.
+  # Servers already in user config (outside managed block) are preserved;
+  # only missing servers are added to the managed block.
+  local servers_to_add=()
+  local servers_user_managed=()
+  local managed_servers=("context7" "playwright" "storybook-mcp" "shadcn")
+
+  for server in "${managed_servers[@]}"; do
+    if grep -qE "^\[mcp_servers\.${server}\]" "$stripped_file" 2>/dev/null; then
+      servers_user_managed+=("$server")
+    else
+      servers_to_add+=("$server")
+    fi
+  done
+
+  # If ALL managed servers are already user-configured, skip entirely
+  if [ "${#servers_to_add[@]}" -eq 0 ]; then
     mkdir -p "$(dirname "$config_file")"
     cat "$stripped_file" > "$config_file"
-    echo "MCP servers already configured in $config_file (user-managed). Removed managed block and skipped."
+    echo "All MCP servers user-managed in $config_file. Removed stale managed block."
     MCP_CONFIG_UPDATED=0
     rm -f "$stripped_file"
     return 0
   fi
 
+  # Build managed block with only the servers that need to be added
   local block_file
   block_file="$(mktemp)"
-  cat > "$block_file" <<EOF
-$MCP_BLOCK_START
+  {
+    echo "$MCP_BLOCK_START"
+    for server in "${servers_to_add[@]}"; do
+      case "$server" in
+        context7)
+          cat <<'TOML'
 [mcp_servers.context7]
 command = "npx"
 args = ["-y", "@upstash/context7-mcp@latest"]
-
+TOML
+          ;;
+        playwright)
+          cat <<'TOML'
 [mcp_servers.playwright]
 command = "npx"
 args = ["@playwright/mcp@latest"]
-
+TOML
+          ;;
+        storybook-mcp)
+          cat <<'TOML'
 [mcp_servers.storybook-mcp]
 type = "url"
 url = "http://localhost:6006/mcp"
-
+TOML
+          ;;
+        shadcn)
+          cat <<'TOML'
 [mcp_servers.shadcn]
 command = "npx"
 args = ["shadcn@latest", "mcp"]
-$MCP_BLOCK_END
-EOF
+TOML
+          ;;
+      esac
+      echo ""
+    done
+    echo "$MCP_BLOCK_END"
+  } > "$block_file"
 
   mkdir -p "$(dirname "$config_file")"
   if [ -s "$stripped_file" ]; then
@@ -212,6 +245,9 @@ EOF
   fi
 
   MCP_CONFIG_UPDATED=1
+  echo "MCP servers configured:"
+  [ "${#servers_to_add[@]}" -gt 0 ] && echo "  Added (managed): ${servers_to_add[*]}"
+  [ "${#servers_user_managed[@]}" -gt 0 ] && echo "  Preserved (user-managed): ${servers_user_managed[*]}"
   rm -f "$stripped_file" "$block_file"
 }
 

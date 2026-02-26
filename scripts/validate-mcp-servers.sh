@@ -75,7 +75,16 @@ for skill_file in "$SKILLS_DIR"/*/SKILL.md; do
   skill_name="$(basename "$(dirname "$skill_file")")"
 
   # Extract mcp__ tool references from allowed-tools frontmatter
-  mcp_tools="$(awk '/^---$/{n++; next} n==1 && /^allowed-tools:/{sub(/^allowed-tools: */, ""); print; exit}' "$skill_file" | grep -oE 'mcp__[a-zA-Z0-9_]+__[a-zA-Z0-9_-]+' || true)"
+  # Regex allows hyphens in server names (e.g., storybook-mcp) and wildcards in tool names (e.g., mcp__shadcn__*)
+  allowed_tools_line="$(awk '/^---$/{n++; next} n==1 && /^allowed-tools:/{sub(/^allowed-tools: */, ""); print; exit}' "$skill_file")"
+  mcp_tools="$(echo "$allowed_tools_line" | grep -oE 'mcp__[a-zA-Z0-9_-]+__[a-zA-Z0-9_*-]+' || true)"
+
+  # Safety check: if allowed-tools mentions mcp__ but regex extracted nothing, warn about unparseable reference
+  if [ -z "$mcp_tools" ] && echo "$allowed_tools_line" | grep -q 'mcp__' 2>/dev/null; then
+    echo "  ::warning::C2 [$skill_name] has mcp__ in allowed-tools but no tools could be parsed"
+    WARNINGS=$((WARNINGS + 1))
+    continue
+  fi
 
   [ -z "$mcp_tools" ] && continue
 
