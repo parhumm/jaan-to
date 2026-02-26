@@ -3,8 +3,7 @@ name: frontend-story-generate
 description: Generate CSF3 Storybook stories for components with variant coverage and state matrices. Use when creating component stories.
 allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(mkdir:*), Bash(stat:*), mcp__storybook-mcp__get-ui-building-instructions, mcp__storybook-mcp__list-all-components, mcp__storybook-mcp__get-component-documentation, mcp__shadcn__get_component_details, mcp__shadcn__list_shadcn_components, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[component-path or frontend-design/frontend-scaffold output]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 disable-model-invocation: true
 ---
 

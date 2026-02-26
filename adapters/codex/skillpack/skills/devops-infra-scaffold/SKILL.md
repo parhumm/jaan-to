@@ -3,8 +3,7 @@ name: devops-infra-scaffold
 description: Generate CI/CD workflows, Dockerfiles, and deployment configs from tech stack. Use when scaffolding infrastructure.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/devops/infra-scaffold/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[tech.md | (interactive)]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # devops-infra-scaffold

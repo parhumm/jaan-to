@@ -3,8 +3,7 @@ name: ux-flowchart-generate
 description: Generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence maps. Use when creating user flow diagrams.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Bash(cp:*), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [source_type] [paths...] [goal] [scope?]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # ux-flowchart-generate

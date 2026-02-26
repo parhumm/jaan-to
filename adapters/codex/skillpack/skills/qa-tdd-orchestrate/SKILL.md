@@ -3,8 +3,7 @@ name: qa-tdd-orchestrate
 description: Orchestrate RED/GREEN/REFACTOR TDD cycle with context-isolated agents. Use when implementing features test-first.
 allowed-tools: Read, Glob, Grep, Task, AskUserQuestion, Write($JAAN_OUTPUTS_DIR/qa/tdd-orchestrate/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: "[feature-description | acceptance-criteria | qa-test-cases-output]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 context: fork
 disable-model-invocation: true
 codex-support: false

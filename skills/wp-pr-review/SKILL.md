@@ -6,8 +6,7 @@ description: Review WordPress plugin PRs for security, performance, WPCS standar
 allowed-tools: Read, Glob, Grep, Bash(gh pr diff:*), Bash(gh pr view:*), Bash(gh pr comment:*), Bash(gh api:*), Bash(glab mr diff:*), Bash(glab mr comment:*), Bash(git diff:*), Bash(git log:*), Write($JAAN_OUTPUTS_DIR/wp/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: <pr-url | owner/repo#number | local>
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # wp-pr-review

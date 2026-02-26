@@ -8,7 +8,6 @@ LOG_FILE="$(mktemp /tmp/jaan-to-test-output-XXXXXX)"
 PASSED=0
 FAILED=0
 WARNINGS=0
-TOTAL=5
 
 cleanup() {
   rm -f "$LOG_FILE"
@@ -46,7 +45,9 @@ run_test "Phase 1 E2E" "$SCRIPT_DIR/phase1-e2e.sh"
 run_test "Phase 2 E2E" "$SCRIPT_DIR/phase2-e2e.sh"
 run_test "Phases 3-5 E2E" "$SCRIPT_DIR/phase3-5-e2e.sh"
 run_test "Unified Integration" "$SCRIPT_DIR/integration-all-phases.sh"
-run_test "Agent Skills Compliance" "$SCRIPT_DIR/agent-skills-compliance-e2e.sh"
+run_test "Skill Standard Compliance" "$SCRIPT_DIR/skill-standard-compliance-e2e.sh"
+
+TOTAL=$((PASSED + FAILED))
 
 echo ""
 echo "=============================================="

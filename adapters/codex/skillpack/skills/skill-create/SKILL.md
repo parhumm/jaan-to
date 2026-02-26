@@ -4,8 +4,7 @@ description: Guide users through creating new jaan-to skills step-by-step. Use w
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write(skills/**), Write(docs/**), Write($JAAN_OUTPUTS_DIR/**), Edit($JAAN_TEMPLATES_DIR/**), Edit($JAAN_LEARN_DIR/**), Edit(jaan-to/config/settings.yaml), Bash(bash scripts/prepare-skill-pr.sh*), Bash(git checkout:*), Bash(git branch:*), Bash(git add:*), Bash(git commit:*), Bash(git push:*), Bash(gh pr create:*)
 argument-hint: [optional-skill-idea]
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # skill-create
@@ -291,8 +290,7 @@ Use template from `$JAAN_TEMPLATES_DIR/jaan-to-skill-create.template.md`:
    - description: from Step 3 (must include "Use when" trigger phrase, no colons)
    - allowed-tools: based on needs from Step 5
    - argument-hint: from Step 4
-   - license: MIT
-   - compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+   - license: PROPRIETARY
    - **DO NOT add `model:` field** (use inherited default)
 
 2. Fill markdown body:

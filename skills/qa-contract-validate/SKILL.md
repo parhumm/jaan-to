@@ -3,8 +3,7 @@ name: qa-contract-validate
 description: Validate API contracts with Spectral, oasdiff, and Schemathesis pipeline. Use when verifying API spec compliance.
 allowed-tools: Read, Glob, Grep, Bash(npx @stoplight/spectral-cli:*), Bash(oasdiff:*), Bash(npx @stoplight/prism-cli:*), Bash(schemathesis:*), Write($JAAN_OUTPUTS_DIR/qa/contract-validate/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[openapi-spec-path] [--baseline baseline-spec] [--url api-url]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 context: fork
 disable-model-invocation: true
 ---

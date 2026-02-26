@@ -100,19 +100,12 @@ jobs:
           fi
           echo "✓ Hook stdout within ${MAX_CHARS} char cap"
 
-      - name: Agent Skills standard compliance
+      - name: Skill standard compliance
         run: |
           ERRORS=0
           for skill in skills/*/SKILL.md; do
             if ! grep -q '^license:' "$skill"; then
               echo "::error::Missing 'license:' in $(basename "$(dirname "$skill")")"
-              ERRORS=$((ERRORS+1))
-            fi
-          done
-
-          for skill in skills/*/SKILL.md; do
-            if ! grep -q '^compatibility:' "$skill"; then
-              echo "::error::Missing 'compatibility:' in $(basename "$(dirname "$skill")")"
               ERRORS=$((ERRORS+1))
             fi
           done
@@ -132,7 +125,7 @@ jobs:
             ERRORS=$((ERRORS+1))
           fi
 
-          [ $ERRORS -eq 0 ] && echo "✓ Agent Skills compliance passed" || exit 1
+          [ $ERRORS -eq 0 ] && echo "✓ Skill compliance passed" || exit 1
 
       - name: Check MCP dual-runtime parity
         run: |

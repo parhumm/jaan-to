@@ -3,8 +3,7 @@ name: frontend-visual-verify
 description: Visual verification of UI components via Storybook snapshots and Playwright MCP. Use when verifying component rendering.
 allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(mkdir:*), Bash(stat:*), mcp__playwright__browser_navigate, mcp__playwright__browser_snapshot, mcp__playwright__browser_take_screenshot, mcp__playwright__browser_tabs, mcp__storybook-mcp__get-story-urls, Write($JAAN_OUTPUTS_DIR/frontend/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[storybook-url or component-path or frontend-design output]"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 disable-model-invocation: true
 ---
 

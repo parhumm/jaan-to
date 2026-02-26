@@ -3,8 +3,7 @@ name: qa-quality-gate
 description: Compute composite quality score from test, security, and audit outputs. Use when deciding review depth.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/quality-gate/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: "[upstream-output-paths...] (1-4 paths from qa-test-run, detect-dev, sec-audit-remediate, backend-pr-review)"
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 disable-model-invocation: true
 ---
 

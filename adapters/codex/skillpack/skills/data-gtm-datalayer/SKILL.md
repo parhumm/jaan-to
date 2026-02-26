@@ -4,8 +4,7 @@ description: Generate production-ready GTM tracking code with dataLayer pushes a
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
 argument-hint: [prd-path | tracking-description | (interactive)]
 disable-model-invocation: true
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # data-gtm-datalayer

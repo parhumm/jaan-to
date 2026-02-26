@@ -4,8 +4,7 @@ description: Repo-driven UX audit with journey mapping and heuristic-based findi
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml), Edit($JAAN_CONTEXT_DIR/**)
 argument-hint: "[repo] [--full]"
 context: fork
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone support for analysis mode.
+license: PROPRIETARY
 ---
 
 # detect-ux

@@ -3,8 +3,7 @@ name: dev-verify
 description: Validate integrated build pipeline and running services with health checks and smoke tests. Use when verifying project builds.
 allowed-tools: Read, Glob, Grep, Bash(pnpm:*), Bash(npm:*), Bash(yarn:*), Bash(composer:*), Bash(go:*), Bash(npx tsc:*), Bash(npx storybook:*), Bash(turbo:*), Bash(curl:*), Bash(docker compose:*), Bash(docker:*), Bash(lsof:*), Bash(nc:*), Bash(ss:*), Bash(ls:*), Bash(mkdir:*), Write($JAAN_OUTPUTS_DIR/dev/verify/**), Task, AskUserQuestion, Edit(src/**), Edit(apps/**), Edit(package.json), Edit(tsconfig.json), Edit(composer.json), Edit(jaan-to/config/settings.yaml)
 argument-hint: [--build-only | --runtime-only] [--skip-smoke] [--skip-fix] [--port PORT]
-license: MIT
-compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+license: PROPRIETARY
 ---
 
 # dev-verify
