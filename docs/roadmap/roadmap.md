@@ -17,7 +17,7 @@ sidebar_position: 1
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
 | 6 | Role skills (56 shipped across 17 role prefixes) | In Progress |
-| 7 | MCP connectors (4/24 shipped) | In Progress |
+| 7 | MCP connectors (1 full + 3 docs-only / 24 cataloged) | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation (1/7 done) | Partial |
 
@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.6.0 (56 skills) | **Next:** v7.7.0
+**Latest:** v7.5.1 (53 skills) | **Next:** v7.6.0 (56 skills)
 
 ---
 
@@ -35,7 +35,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 - [ ] Role Orchestrator Skills — 6 per-role orchestrator skills (`/pm`, `/ux`, `/dev`, `/qa`, `/devops`, `/sec`) using Claude Code Agent Teams. Each orchestrator coordinates all sub-skills within its role via dynamic discovery (`sub-skills.md`). Update `team-ship` to delegate to orchestrators as meta-orchestrator with backward-compatible fallback. → [details](tasks/role-orchestrators.md)
 - [ ] Skill Lifecycle Automation — 5 workflow automation skills discovered via `pm-skill-discover` (est. ~333 min/week savings):
-  - [ ] `dev-adapter-sync` (Must) — Mirror skill files from skills/ to adapters/codex/ automatically
+  - [ ] `dev-adapter-sync` (Must, Quick Win) — Mirror skill files from skills/ to adapters/codex/ automatically. High priority: manual `build-codex-skillpack.sh` is a repeated friction point in every PR
   - [ ] `dev-skill-batch-update` (Must) — Apply uniform changes across all SKILL.md files at once
   - [ ] `dev-docs-sync` (Should) — Auto-sync CHANGELOG, roadmap, DEPENDENCIES, READMEs, marketplace.json
   - [ ] `qa-skill-validate` (Should) — Validate skills, diagnose failures, auto-fix
