@@ -169,12 +169,12 @@ update_codex_mcp_config() {
   stripped_file="$(mktemp)"
   strip_mcp_block "$config_file" "$stripped_file"
 
-  # Skip if user already configured context7 outside managed block (e.g., via codex mcp add)
-  if grep -q '^\[mcp_servers\.context7\]' "$stripped_file" 2>/dev/null; then
+  # Skip if user already configured any managed server outside managed block (e.g., via codex mcp add)
+  if grep -qE '^\[mcp_servers\.(context7|playwright|storybook-mcp|shadcn)\]' "$stripped_file" 2>/dev/null; then
     # Persist stripped content so stale managed blocks are removed.
     mkdir -p "$(dirname "$config_file")"
     cat "$stripped_file" > "$config_file"
-    echo "Context7 MCP already configured in $config_file (user-managed). Removed managed block and skipped."
+    echo "MCP servers already configured in $config_file (user-managed). Removed managed block and skipped."
     MCP_CONFIG_UPDATED=0
     rm -f "$stripped_file"
     return 0
@@ -187,6 +187,18 @@ $MCP_BLOCK_START
 [mcp_servers.context7]
 command = "npx"
 args = ["-y", "@upstash/context7-mcp@latest"]
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]
+
+[mcp_servers.storybook-mcp]
+type = "url"
+url = "http://localhost:6006/mcp"
+
+[mcp_servers.shadcn]
+command = "npx"
+args = ["shadcn@latest", "mcp"]
 $MCP_BLOCK_END
 EOF
 
