@@ -5,6 +5,7 @@ allowed-tools: Read, Glob, Grep, Bash(git remote get-url:*), Bash(git add:*), Ba
 argument-hint: "[(no args) | release vX.Y.Z | full]"
 license: MIT
 compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+disable-model-invocation: true
 ---
 
 # pm-changelog-rewrite

@@ -5,6 +5,7 @@ allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(mkdir:*), Bash(stat:*), Bash(d
 argument-hint: "[bug-description] [--component path] [--screenshot path]"
 license: MIT
 compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+disable-model-invocation: true
 ---
 
 # frontend-component-fix

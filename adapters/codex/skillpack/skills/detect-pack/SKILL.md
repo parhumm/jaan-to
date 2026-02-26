@@ -6,6 +6,7 @@ argument-hint: "[repo] [--full]"
 context: fork
 license: MIT
 compatibility: Designed for Claude Code with jaan-to plugin. Partial standalone support for analysis mode.
+disable-model-invocation: true
 ---
 
 # detect-pack

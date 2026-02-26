@@ -5,6 +5,7 @@ allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(mkdir:*), Bash(stat:*), mcp__p
 argument-hint: "[storybook-url or component-path or frontend-design output]"
 license: MIT
 compatibility: Designed for Claude Code with jaan-to plugin. Requires jaan-init setup.
+disable-model-invocation: true
 ---
 
 # frontend-visual-verify
