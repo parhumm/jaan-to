@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.5.1 (53 skills) | **Next:** v7.6.0 (53+ skills)
+**Latest:** v7.5.1 (53 skills) | **Next:** v7.6.0 (56 skills)
 
 ---
 

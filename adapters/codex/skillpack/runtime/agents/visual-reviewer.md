@@ -1,6 +1,5 @@
 ---
 name: visual-reviewer
-model: haiku
 description: Use this agent for lightweight visual review tasks when a full frontend-visual-verify run is unnecessary. Reviews component code for accessibility, semantic HTML, and design system consistency without requiring Playwright MCP.
 
 <example>
