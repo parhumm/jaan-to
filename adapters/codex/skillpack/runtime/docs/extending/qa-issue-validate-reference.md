@@ -197,8 +197,6 @@ Verdict: {verdict} ({confidence} confidence)
 Severity: {severity}
 
 Generated with [Jaan.to](https://jaan.to)
-
-Co-Authored-By: Jaan.to <noreply@jaan.to>
 EOF
 )"
 ```
