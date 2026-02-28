@@ -97,8 +97,6 @@ Sources: {N} sources consulted
 Research method: Adaptive 5-wave approach
 
 Generated with 💓 [Jaan.to](https://jaan.to)
-
-Co-Authored-By: Jaan.to <noreply@jaan.to>
 EOF
 )"
 ```
@@ -116,8 +114,6 @@ docs(research): Add {title} to index
 Category: {category}
 
 Generated with 💓 [Jaan.to](https://jaan.to)
-
-Co-Authored-By: Jaan.to <noreply@jaan.to>
 COMMITMSG
 )"
 ```

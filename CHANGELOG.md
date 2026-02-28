@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.6.1] - 2026-02-28
+
+### Fixed
+- **Co-author attribution cleanup** — Removed `Co-Authored-By: Jaan.to <noreply@jaan.to>` from commit template examples in reference docs (4 files, 6 occurrences)
+- **README badges** — Updated badge URLs and consolidated duplicate CHANGELOG entries
+
+### Added
+- **Research: CLI-first SaaS architecture** — Architecture patterns for CLI-first SaaS products ([Research #40](docs/research/40-ai-workflow-claude-code-settings-official.md))
+
+---
+
 ## [7.6.0] - 2026-02-26
 
 ### Added
