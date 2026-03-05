@@ -102,10 +102,16 @@ If no gap-reports directory exists, default to cycle 1.
 CYCLE_BRANCH="cycle/$(printf '%02d' "$CYCLE_NUMBER")"
 git checkout dev
 git pull origin dev
-git checkout -b "$CYCLE_BRANCH"
+if git show-ref --verify --quiet "refs/heads/$CYCLE_BRANCH"; then
+  git checkout "$CYCLE_BRANCH"
+else
+  git checkout -b "$CYCLE_BRANCH"
+fi
 ```
 
-Confirm: "Created branch `$CYCLE_BRANCH` from `dev`."
+If the branch already exists (retry after failure), switch to it. Otherwise create it.
+
+Confirm: "On branch `$CYCLE_BRANCH` (from `dev`)."
 
 ## Step 0.4: Security Baseline
 
@@ -144,7 +150,7 @@ This invokes the full pm-sprint-plan workflow:
 
 After pm-sprint-plan completes, read the sprint plan artifact:
 ```bash
-SPRINT_PLAN=$(ls -t $JAAN_OUTPUTS_DIR/pm/sprint-plan/*/\*.md 2>/dev/null | head -1)
+SPRINT_PLAN=$(find "$JAAN_OUTPUTS_DIR/pm/sprint-plan" -name '*.md' -not -name 'README.md' -type f 2>/dev/null | sort -r | head -1)
 ```
 
 Verify it contains:

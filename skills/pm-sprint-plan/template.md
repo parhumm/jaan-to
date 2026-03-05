@@ -4,16 +4,28 @@ version: 1
 created: {date}
 focus: {focus_area}
 bottleneck: {stage_name}
+progress:
+  specification: {0-100}
+  scaffold: {0-100}
+  production_code: {0-100}
+  tests: {0-100}
+  infrastructure: {0-100}
 queue_count: {count}
 queue:
-  - skill: {skill_name}
+  - id: 1
+    skill: {skill_name}
     role: {role}
     args: "{arguments}"
     group: {group_number}
     depends_on: []
+    roadmap_ref: "{original_roadmap_line}"
 closing_skills:
   - detect-pack
   - release-iterate-changelog
+deferred:
+  - title: "{deferred_item}"
+    reason: "{why_deferred}"
+    priority_boost: true
 ---
 
 # Sprint Plan — {focus_area}
