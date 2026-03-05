@@ -426,10 +426,11 @@ The sprint track (`--track sprint`) reads a pre-generated sprint plan artifact f
    ```
 
 2. Parse YAML frontmatter — extract:
-   - `queue[]` — ordered skill execution list
+   - `queue[]` — ordered skill execution list (each item has `id`, `skill`, `role`, `args`, `group`, `depends_on`, `roadmap_ref`)
    - `closing_skills[]` — always-run skills at end
    - `focus` — sprint focus area (used as initiative)
    - `bottleneck` — current project stage
+   - `progress` — (optional, omitted if gap reports unavailable) progress matrix percentages
 
 3. Build dynamic roster:
    - For each unique `role` in queue → create teammate entry

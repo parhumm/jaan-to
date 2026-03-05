@@ -99,7 +99,7 @@ If no gap-reports directory exists, default to cycle 1.
 ## Step 0.3: Create Cycle Branch
 
 ```bash
-CYCLE_BRANCH="cycle/$(printf '%02d' $CYCLE_NUMBER)"
+CYCLE_BRANCH="cycle/$(printf '%02d' "$CYCLE_NUMBER")"
 git checkout dev
 git pull origin dev
 git checkout -b "$CYCLE_BRANCH"
@@ -111,7 +111,7 @@ Confirm: "Created branch `$CYCLE_BRANCH` from `dev`."
 
 Verify no secrets in tracked files before any commits:
 ```bash
-git diff --name-only HEAD 2>/dev/null | xargs grep -liE '(sk-|ghp_|token=|password=|api_key=|secret=)' 2>/dev/null || true
+git diff --name-only HEAD 2>/dev/null | tr '\n' '\0' | xargs -0 grep -liE '(sk-|ghp_|token=|password=|api_key=|secret=)' 2>/dev/null || true
 ```
 
 If matches found → **STOP**: "Security risk detected. Remove secrets before proceeding."
@@ -125,8 +125,10 @@ If matches found → **STOP**: "Security risk detected. Remove secrets before pr
 Pass through user arguments to pm-sprint-plan:
 
 ```
-/pm-sprint-plan {--focus_if_provided} {--tasks_if_provided}
+/pm-sprint-plan [--focus {focus}] [--tasks {tasks}]
 ```
+
+Forward `--focus` and `--tasks` from the user's original `/team-sprint` arguments. Omit flags the user did not provide.
 
 This invokes the full pm-sprint-plan workflow:
 1. Reads project state (ROADMAP, gap-reports, scorecards, tech.md)
@@ -152,6 +154,11 @@ Verify it contains:
 
 If verification fails → "Sprint plan artifact is invalid. Re-run `/pm-sprint-plan`."
 
+### Error Recovery — Planning Phase
+
+- **pm-sprint-plan fails or user rejects plan**: Skill stops. Branch `cycle/XX` remains. User can re-run `/team-sprint` to re-plan on the same branch.
+- **Artifact verification fails**: Skill stops. User must run `/pm-sprint-plan` manually to regenerate, then re-run `/team-sprint`.
+
 ---
 
 # PHASE 2: Execution
@@ -172,6 +179,11 @@ team-ship reads the sprint plan artifact and:
 5. Records checkpoint for resume
 
 **Wait for team-ship to complete.** This is the autonomous execution phase.
+
+### Error Recovery — Execution Phase
+
+- **team-ship fails mid-execution**: Proceed to Phase 3 with partial results. Gap report captures incomplete items. Commit whatever completed successfully.
+- **All items fail**: Proceed to Phase 3. Gap report documents all failures with reasons. PR description notes zero completions.
 
 ## Step 2.2: Commit Execution Results
 

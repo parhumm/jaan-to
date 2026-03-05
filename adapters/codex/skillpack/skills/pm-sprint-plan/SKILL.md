@@ -279,23 +279,48 @@ version: 1
 created: {date}
 focus: {focus_area}
 bottleneck: {stage_name}
+progress:                       # Omit section entirely if gap reports unavailable
+  specification: {0-100}
+  scaffold: {0-100}
+  production_code: {0-100}
+  tests: {0-100}
+  infrastructure: {0-100}
 queue_count: {count}
 queue:
-  - skill: {skill_name}
+  - id: 1
+    skill: {skill_name}
     role: {role}
     args: "{arguments}"
     group: {group_number}
     depends_on: []
-  - skill: {skill_name}
+    roadmap_ref: "{original_roadmap_line}"
+  - id: 2
+    skill: {skill_name}
     role: {role}
     args: "{arguments}"
     group: {group_number}
-    depends_on: [{dependency_ids}]
+    depends_on: [1]
+    roadmap_ref: "{original_roadmap_line}"
 closing_skills:
   - detect-pack
   - release-iterate-changelog
+deferred:                       # Omit if no items deferred
+  - title: "{deferred_item}"
+    reason: "{why_deferred}"
+    priority_boost: true
 ---
 ```
+
+### Validate Before Writing
+
+Before writing the artifact, verify:
+- `queue_count` equals actual `queue` array length
+- All `depends_on` IDs reference valid `id` values in the queue
+- `group` numbers are sequential (1, 2, 3...) with no gaps
+- Items within the same group do NOT depend on each other
+- `closing_skills` is present and non-empty
+
+If validation fails → present errors to user, do NOT write. Offer to fix.
 
 ### Update Subdomain Index
 
