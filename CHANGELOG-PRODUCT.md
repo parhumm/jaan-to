@@ -10,6 +10,23 @@ For technical details, see [CHANGELOG.md](/changelog/).
 
 ---
 
+## 7.7.0 — 2026-03-05
+
+### New
+- **Sprint planning skill** — Assess your project's progress and build a prioritized sprint plan with `/pm-sprint-plan`. Calculates completion percentages across spec, scaffold, code, test, and infra dimensions, classifies your biggest bottleneck, and builds a focused execution queue of up to 12 tasks.
+- **Team sprint orchestration** — Run full development sprints from planning to PR with `/team-sprint`. Automatically chains sprint planning with team execution — creates a cycle branch, spawns AI teammates for each task group, runs verification gates, and opens a PR when the sprint is complete.
+- **Sprint track for team-ship** — New `--track sprint` option for `/team-ship` that reads sprint plan artifacts and dynamically assembles Agent Teams based on the prioritized execution queue, with verification gates between task groups.
+
+---
+
+## 7.6.1 — 2026-02-28
+
+### Fixed
+- **Cleaner commit messages** — Removed auto-generated co-author attribution lines from commit template examples.
+- **README badge links** — Fixed badge URLs and consolidated duplicate changelog entries.
+
+---
+
 ## 7.6.0 — 2026-02-26
 
 ### New
