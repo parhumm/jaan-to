@@ -134,7 +134,7 @@ If `--focus` argument provided, override auto-detected bottleneck.
 For each unchecked ROADMAP item:
 1. Analyze the task description
 2. Map to one or more jaan-to skill invocations
-3. Determine which role(s) are needed (pm, backend, frontend, qa, devops, sec)
+3. Determine which role(s) are needed (pm, backend, frontend, qa, devops, security)
 
 If `--tasks` filter is active, only include matching items.
 

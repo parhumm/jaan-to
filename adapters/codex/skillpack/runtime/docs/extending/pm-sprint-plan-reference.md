@@ -179,7 +179,7 @@ queue_count: number       # Total items in queue
 queue:                    # Ordered execution queue
   - id: number            # Sequential (1-based)
     skill: string         # jaan-to skill name
-    role: string          # pm|backend|frontend|qa|devops|sec
+    role: string          # pm|backend|frontend|qa|devops|security
     args: string          # Skill arguments
     group: number         # Execution group (1-based)
     source: number        # Priority source (1-7)
