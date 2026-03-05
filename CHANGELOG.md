@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+---
+
+## [7.7.0] - 2026-03-05
+
 ### Added
 - **`pm-sprint-plan` skill** — Assess project progress and build a prioritized sprint plan from ROADMAP gaps. Calculates progress matrix (spec/scaffold/code/test/infra %), classifies bottleneck via state machine, and builds prioritized execution queue (7 priority sources, max 12 items). Includes reference doc with scoring algorithms and output schema
 - **`team-sprint` skill** — Full development sprint cycle orchestrator from planning to PR. Chains `pm-sprint-plan` for assessment and `team-ship --track sprint` for execution. Owns git lifecycle (cycle branch creation, ROADMAP marking, gap report, PR to dev)
