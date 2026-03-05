@@ -266,6 +266,30 @@ Release Management:
                       "Post supportive comment on closed issues"
 ```
 
+### Sprint Cycle Flow
+
+```
+Sprint Orchestration:
+┌─────────────────────────────────────────────────────────┐
+│  /team-sprint                                   │
+│  "Full development sprint cycle"                        │
+└────────────────┬────────────────────────────────────────┘
+                 │
+                 ├──> /pm-sprint-plan
+                 │    "Assess progress, build execution queue"
+                 │    (ROADMAP.md required, gap-reports optional)
+                 │
+                 ├──> /team-ship --track sprint
+                 │    "Execute sprint plan via Agent Teams"
+                 │    (reads sprint plan artifact)
+                 │
+                 ├──> /release-iterate-changelog
+                 │    "Update changelog after sprint"
+                 │
+                 └──> Gap report + PR to dev
+                      (cycle branch → dev via PR)
+```
+
 ### Skill Development Flow
 
 ```
@@ -410,7 +434,7 @@ These skills are referenced but not yet implemented:
 
 ## Complete Skill Inventory
 
-All 56 skills grouped by role.
+All 58 skills grouped by role.
 
 | Role | Skill | Purpose |
 |------|-------|---------|
@@ -420,6 +444,7 @@ All 56 skills grouped by role.
 | | `/pm-roadmap-add` | Add prioritized items to project roadmap |
 | | `/pm-roadmap-update` | Review and maintain project roadmap |
 | | `/pm-changelog-rewrite` | Transform technical changelog into product changelog |
+| | `/pm-sprint-plan` | Assess progress and build sprint plan from ROADMAP |
 | **backend** | `/backend-task-breakdown` | Convert PRD into backend tasks |
 | | `/backend-data-model` | Generate data model docs from entities |
 | | `/backend-api-contract` | Generate OpenAPI 3.1 contracts |
@@ -468,6 +493,8 @@ All 56 skills grouped by role.
 | | `/learn-add` | Capture lessons learned |
 | | `/jaan-init` | Initialize jaan-to for project |
 | | `/jaan-issue-report` | Report bugs/issues |
+| **team** | `/team-ship` | Orchestrate multi-role agent teams |
+| | `/team-sprint` | Full development sprint cycle |
 
 ---
 
@@ -491,4 +518,4 @@ Skills may invoke agents automatically:
 
 ---
 
-**Last Updated:** 2026-02-25
+**Last Updated:** 2026-03-05

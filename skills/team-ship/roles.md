@@ -7,7 +7,7 @@
 
 Each role section defines:
 - **Title**: Human-readable role name
-- **Track**: Which tracks include this role (fast, full, or both)
+- **Track**: Which tracks include this role (fast, full, sprint, or combinations)
 - **Model**: AI model for teammate (inherit = use lead's model)
 - **Skills**: Ordered skill chains per track
 - **Phase**: Pipeline phase (1=define, 2=design+build, 3=ship+quality)
@@ -21,7 +21,7 @@ Each role section defines:
 ## pm
 
 - **Title**: Product Manager
-- **Track**: fast, full
+- **Track**: fast, full (NOT sprint — sprint plan replaces PM phase)
 - **Model**: inherit
 - **Skills**: [pm-research-about, pm-prd-write, pm-story-write, pm-roadmap-add, pm-skill-discover]
 - **Phase**: 1 (define)
@@ -45,7 +45,7 @@ Each role section defines:
 ## backend
 
 - **Title**: Backend Engineer
-- **Track**: fast, full
+- **Track**: fast, full, sprint
 - **Model**: sonnet
 - **Skills**:
   - fast: [dev-docs-fetch, backend-task-breakdown, backend-scaffold]
@@ -59,7 +59,7 @@ Each role section defines:
 ## frontend
 
 - **Title**: Frontend Engineer
-- **Track**: fast, full
+- **Track**: fast, full, sprint
 - **Model**: sonnet
 - **Skills**:
   - fast: [dev-docs-fetch, frontend-scaffold, frontend-story-generate]
@@ -73,7 +73,7 @@ Each role section defines:
 ## qa
 
 - **Title**: QA Engineer
-- **Track**: fast, full
+- **Track**: fast, full, sprint
 - **Model**: sonnet
 - **Skills**:
   - fast: [qa-test-generate, qa-test-run, qa-issue-validate]
@@ -89,7 +89,7 @@ Each role section defines:
 ## devops
 
 - **Title**: DevOps Engineer
-- **Track**: fast, full
+- **Track**: fast, full, sprint
 - **Model**: sonnet
 - **Skills**: [devops-infra-scaffold, devops-deploy-activate]
 - **Phase**: 3 (ship)
@@ -101,7 +101,7 @@ Each role section defines:
 ## security
 
 - **Title**: Security Engineer
-- **Track**: full
+- **Track**: full, sprint
 - **Model**: sonnet
 - **Skills**: [sec-audit-remediate]
 - **Phase**: 3 (quality)
@@ -121,6 +121,12 @@ Each role section defines:
 - **Outputs to share**: visual_verify_path
 - **Messages**: Lead (visual verification report ready)
 - **Shutdown after**: Phase 3
+
+---
+
+## Sprint Track Notes
+
+For `--track sprint`, skill chains are **dynamic** — determined by the sprint plan artifact, not hardcoded above. Each role is only spawned if it appears in the plan's execution queue. The skill chain for each role is the filtered subset of queue items assigned to that role. Sprint track also includes verification gates between task groups (see team-ship-reference.md "Sprint Track Execution").
 
 ---
 
