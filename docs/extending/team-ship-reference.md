@@ -409,3 +409,88 @@ total_estimate = (
 # Haiku teammates cost ~30% of Sonnet teammates
 haiku_factor = 0.3
 ```
+
+---
+
+## Sprint Track Execution
+
+### Overview
+
+The sprint track (`--track sprint`) reads a pre-generated sprint plan artifact from `pm-sprint-plan` and executes the skill queue using Agent Teams. Unlike other tracks (fast/full), the sprint track has **dynamic** skill chains determined by the plan rather than hardcoded in roles.md.
+
+### Plan Consumption
+
+1. Find latest sprint plan:
+   ```bash
+   SPRINT_PLAN=$(ls -t $JAAN_OUTPUTS_DIR/pm/sprint-plan/*/*.md 2>/dev/null | head -1)
+   ```
+
+2. Parse YAML frontmatter — extract:
+   - `queue[]` — ordered skill execution list
+   - `closing_skills[]` — always-run skills at end
+   - `focus` — sprint focus area (used as initiative)
+   - `bottleneck` — current project stage
+
+3. Build dynamic roster:
+   - For each unique `role` in queue → create teammate entry
+   - Skill chains = queue items filtered by role
+   - Phase = group number from plan
+
+### Sprint Teammate Prompt Template
+
+```
+You are the {Role} for this sprint cycle.
+Sprint focus: {focus}
+Tech context: {tech_context_summary}
+
+Your skill queue (execute in order):
+{numbered_skill_list_for_this_role}
+
+For each skill:
+1. Run the skill with the specified arguments
+2. Record the output path
+3. Message the lead with: skill name, status (pass/fail), output path
+
+When all your skills are complete, message the lead with "DONE".
+
+Output directory: $JAAN_OUTPUTS_DIR/{role}/
+```
+
+### Verification Gates
+
+After each task group completes:
+
+1. **Test gate**: If test commands are detected in `$JAAN_CONTEXT_DIR/tech.md`, run them:
+   ```bash
+   # Detected from tech.md or package.json scripts
+   {test_command}
+   ```
+   If tests fail → pause queue, notify user, offer options:
+   - [1] Fix and continue
+   - [2] Skip and continue
+   - [3] Abort sprint
+
+2. **Build gate**: If build commands exist, verify build succeeds:
+   ```bash
+   {build_command}
+   ```
+
+3. **Checkpoint update**: Save current group status to checkpoint.yaml
+
+### Sprint Track Differences
+
+| Aspect | fast/full/tdd | sprint |
+|--------|---------------|--------|
+| Input | Initiative text | Sprint plan artifact |
+| Skill chains | Hardcoded in roles.md | Dynamic from plan |
+| PM phase | Runs PRD workflow | Skipped (plan exists) |
+| Group ordering | Fixed phases 1-4 | Dynamic from plan groups |
+| Verification | End-of-pipeline | Between every group |
+| Closing skills | detect-pack + changelog | From plan closing_skills |
+
+### Error Handling
+
+- **Plan not found**: Stop with message, suggest `/pm-sprint-plan`
+- **Invalid plan schema**: Stop with validation errors
+- **Skill execution failure**: Record failure, continue with next item, flag in final report
+- **All items failed**: Stop sprint, present error summary, suggest debugging steps

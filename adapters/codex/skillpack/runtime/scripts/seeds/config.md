@@ -75,6 +75,8 @@
 | dev-output-integrate | `/jaan-to:dev-output-integrate` | Copy generated jaan-to outputs into project locations with entry point wiring and validation |
 | dev-verify | `/jaan-to:dev-verify` | Validate integrated build pipeline and running services with health checks and smoke tests |
 | devops-deploy-activate | `/jaan-to:devops-deploy-activate` | Activate deployment pipeline with secrets, platform provisioning, and supply chain hardening |
+| pm-sprint-plan | `/jaan-to:pm-sprint-plan` | Assess progress and build prioritized sprint plan from ROADMAP gaps |
+| team-sprint | `/jaan-to:team-sprint` | Run full development sprint cycle from planning to PR |
 
 ## Language
 - language: ask
