@@ -2,7 +2,7 @@
 name: team-ship
 description: Assemble role-based AI teammates to ship ideas from concept to production via agent teams. Use when orchestrating multi-role delivery.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: "[initiative] [--track fast|full] [--detect] [--roles role1,role2] [--dry-run] [--resume]"
+argument-hint: "[initiative] [--track fast|full|sprint] [--detect] [--roles role1,role2] [--dry-run] [--resume]"
 context: fork
 license: PROPRIETARY
 ---
@@ -31,6 +31,7 @@ license: PROPRIETARY
 | `--track fast` | 8-skill fast track: PM → Backend → Frontend → QA → DevOps |
 | `--track full` | 20-skill full track: all roles, all design steps (default) |
 | `--track tdd` | TDD track: qa-test-cases → qa-tdd-orchestrate → qa-test-mutate → qa-quality-gate |
+| `--track sprint` | Sprint track: reads sprint plan artifact from pm-sprint-plan, executes dynamic skill queue |
 | `--detect` | Detect audit mode: 5 parallel auditors → detect-pack |
 | `--roles role1,role2` | Custom role selection from roles.md |
 | `--dry-run` | Display planned team structure without spawning |
@@ -87,8 +88,24 @@ Use extended reasoning for:
 ## Step 2: Parse Arguments
 
 1. Extract `initiative` text (everything not a flag)
-2. Determine track: `--track fast`, `--track full` (default), `--detect`, or `--roles`
+2. Determine track: `--track fast`, `--track full` (default), `--track sprint`, `--detect`, or `--roles`
 3. Check for `--dry-run` flag
+
+### Sprint Track Mode
+
+If `--track sprint`:
+1. Read the latest sprint plan artifact:
+   ```bash
+   SPRINT_PLAN=$(ls -t $JAAN_OUTPUTS_DIR/pm/sprint-plan/*/*.md 2>/dev/null | head -1)
+   ```
+2. If not found → "No sprint plan found. Run `/pm-sprint-plan` first."
+3. Parse YAML frontmatter for `queue` array and `closing_skills`
+4. Build team roster dynamically from queue roles (only spawn roles that appear in the queue)
+5. Override initiative text with sprint plan focus area
+6. Skip PM teammate (Phase 1) — sprint plan replaces PRD
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/team-ship-reference.md`
+> section "Sprint Track Execution" for plan consumption and verification gate logic.
 
 ## Step 3: Read Role Catalog
 

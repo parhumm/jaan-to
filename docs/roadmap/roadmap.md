@@ -16,7 +16,7 @@ sidebar_position: 1
 | 1-3 | Foundation, migration, customization | Done (see [CHANGELOG.md](/changelog)) |
 | 4 | Development workflow | Planned |
 | 5 | Detect & Knowledge Pack (6 skills) | **Done** |
-| 6 | Role skills (56 shipped across 17 role prefixes) | In Progress |
+| 6 | Role skills (58 shipped across 17 role prefixes) | In Progress |
 | 7 | MCP connectors (1 full + 3 docs-only / 24 cataloged) | In Progress |
 | 8 | Testing and polish | Planned |
 | 9 | Distribution & CLI transformation (1/7 done) | Partial |
@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.6.0 (56 skills)
+**Latest:** v7.7.0 (58 skills)
 
 ---
 
@@ -40,6 +40,15 @@ For complete release history, see [CHANGELOG.md](/changelog).
   - [ ] `dev-docs-sync` (Should) — Auto-sync CHANGELOG, roadmap, DEPENDENCIES, READMEs, marketplace.json
   - [ ] `qa-skill-validate` (Should) — Validate skills, diagnose failures, auto-fix
   - [ ] `devops-adapter-rebuild` (Could) — Rebuild codex adapter after changes
+
+---
+
+## v7.7.0 — 2026-03-05
+
+- [x] `pm-sprint-plan` skill — Assess project progress and build prioritized sprint plan from roadmap gaps with progress matrix and execution queue
+- [x] `team-sprint` skill — Full sprint cycle orchestrator from planning to PR, chaining pm-sprint-plan and team-ship --track sprint
+- [x] `team-ship --track sprint` — New sprint track that reads sprint plan artifacts and dynamically spawns Agent Teams based on execution queue
+- [x] 58 skills total (was 56 in v7.6.1)
 
 ---
 
