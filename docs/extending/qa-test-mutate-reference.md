@@ -66,12 +66,23 @@ vendor/bin/infection --version
 # Full run
 vendor/bin/infection --min-msi=60 --min-covered-msi=80 --threads=4
 
+# Incremental (PR scope -- changed lines only, 3.3x speedup)
+vendor/bin/infection --threads=max \
+  --git-diff-filter=AM --git-diff-base=main \
+  --only-covering-test-cases --min-msi=70
+
 # With specific config
 vendor/bin/infection --configuration=infection.json5
 
 # Show log
 vendor/bin/infection --logger-json=infection-log.json
 ```
+
+**Incremental flags**:
+- `--git-diff-filter=AM`: Only Added/Modified files
+- `--git-diff-base=main`: Compare against main branch
+- `--git-diff-lines`: Mutate only changed lines (not whole files) -- even more granular
+- `--only-covering-test-cases`: Run only tests that cover each mutant line (major speedup)
 
 **Config template** (`infection.json5`):
 ```json5
@@ -213,17 +224,34 @@ strategy:
     include:
       - stack: node
         cmd: npx stryker run
+        cmd_incremental: npx stryker run --incremental
         score_file: reports/mutation/mutation.json
+        concurrency: "concurrency: N in stryker.config.mjs"
       - stack: php
-        cmd: vendor/bin/infection --logger-json=infection-log.json
+        cmd: vendor/bin/infection --logger-json=infection-log.json --threads=max
+        cmd_incremental: vendor/bin/infection --logger-json=infection-log.json --threads=max --git-diff-filter=AM --git-diff-base=main --only-covering-test-cases
         score_file: infection-log.json
+        concurrency: "--threads=max"
       - stack: go
         cmd: go-mutesting ./...
+        cmd_incremental: go-mutesting ./...  # No incremental support
         score_file: stdout
+        concurrency: "N/A (sequential)"
       - stack: python
         cmd: mutmut run && mutmut results
+        cmd_incremental: mutmut run && mutmut results  # No incremental support
         score_file: stdout
+        concurrency: "N/A (sequential)"
 ```
+
+### Performance Optimization Summary
+
+| Stack | Incremental | Concurrency | Per-Test Targeting | Expected Speedup |
+|-------|------------|-------------|-------------------|-----------------|
+| JS/TS (StrykerJS) | `--incremental` (94% reuse) | `concurrency: N` | `coverageAnalysis: 'perTest'` | 5-10x on re-runs |
+| PHP (Infection) | `--git-diff-lines` | `--threads=max` | `--only-covering-test-cases` | 3.3x |
+| Go | None | None | None | N/A |
+| Python (mutmut) | SQLite cache (automatic) | None (community fork) | None | ~1.5x on re-runs |
 
 ---
 

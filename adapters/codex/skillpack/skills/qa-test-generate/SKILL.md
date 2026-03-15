@@ -1,6 +1,6 @@
 ---
 name: qa-test-generate
-description: Generate runnable Vitest and Playwright test files from BDD test cases and scaffold code. Use when generating test implementations.
+description: Generate runnable test files from BDD test cases and scaffold code. Use when creating test implementations.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/test-generate/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
 argument-hint: [qa-test-cases, backend-scaffold | frontend-scaffold]
 license: PROPRIETARY
@@ -292,6 +292,18 @@ Use AskUserQuestion:
 ---
 
 # PHASE 2: Generation (Write Phase)
+
+## Step 4.5: Generation Performance Strategy
+
+Apply these patterns to reduce generation time and token overhead:
+
+**Batch Generation**: Generate 3-5 related test scenarios per reasoning pass rather than one-at-a-time. Group by service/component to share setup context and reduce prompt repetition.
+
+**Fixture Reuse**: Share test data factories across test files. Generate a single `{entity}.factory.ts` per domain entity and import across unit/integration/E2E rather than duplicating setup code per test file.
+
+**Template-Driven Generation**: Use the standardized step templates from BDD binding patterns (research Section 1) as starting points. Templates reduce prompt token overhead compared to free-form generation.
+
+**Incremental Generation**: When re-running after AC changes, only regenerate tests for changed/new acceptance criteria. Preserve existing passing test files and append new ones.
 
 ## Step 5: Generate Config Files
 

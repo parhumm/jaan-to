@@ -132,6 +132,16 @@ Use AskUserQuestion:
 
 # PHASE 2: Execution (Write Phase)
 
+## Step 3.5: Performance Optimization
+
+**Parallel Tool Execution**: Spectral, oasdiff, Prism, and Schemathesis are independent with no data dependencies between them. When multiple tools are available, execute them concurrently (e.g., parallel Bash calls or Task-based sub-agents) and aggregate results after all complete.
+
+**Incremental Validation**: When `--baseline` is provided, use oasdiff to identify changed endpoints first. Then scope Schemathesis fuzzing to only those endpoints using `--endpoint` filter, avoiding full-spec fuzzing on unchanged paths.
+
+**Schemathesis Speed Tuning**: For large specs, constrain fuzzing with `--workers=4 --max-examples=50 --stateful=links` to bound execution time while maintaining coverage quality.
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-contract-validate-reference.md` section "Performance Optimization" for parallel execution patterns and Schemathesis tuning options.
+
 ## Step 4: Run Spectral Lint (if available)
 
 ```bash

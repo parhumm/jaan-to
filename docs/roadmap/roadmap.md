@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.7.0 (58 skills)
+**Latest:** v7.7.1 (58 skills)
 
 ---
 
@@ -40,6 +40,13 @@ For complete release history, see [CHANGELOG.md](/changelog).
   - [ ] `dev-docs-sync` (Should) — Auto-sync CHANGELOG, roadmap, DEPENDENCIES, READMEs, marketplace.json
   - [ ] `qa-skill-validate` (Should) — Validate skills, diagnose failures, auto-fix
   - [ ] `devops-adapter-rebuild` (Could) — Rebuild codex adapter after changes
+
+---
+
+## v7.7.1 — 2026-03-15
+
+- [x] QA Performance Optimization — Apply research #86/#87 findings across 7 qa-* skills and 3 reference docs (parallelization, incremental mutation, coverage tool selection, fail-fast, batch generation, early-termination)
+- [x] QA skill description compliance — Fix 3 descriptions exceeding 120-char limit, remove 4 uncited percentage claims
 
 ---
 

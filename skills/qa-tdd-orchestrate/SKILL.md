@@ -185,6 +185,14 @@ Isolation is enforced at three levels:
 
 ## Step 4: Execute Double-Loop TDD
 
+### 4.0 Performance Optimization
+
+**Parallel Component Execution**: When multiple components have no data dependencies, run their TDD cycles concurrently via separate Task agents. Each agent handles a full RED/GREEN/REFACTOR cycle independently. Merge results after all complete.
+
+**Outer Loop Batching**: Run all AC acceptance tests once upfront before starting inner cycles. Only TDD components whose acceptance tests fail. This avoids unnecessary cycles for already-passing ACs.
+
+**Handoff Optimization**: Compress test runner output in handoff manifests -- include only failure messages and assertion diffs, exclude verbose logs and stack traces. This significantly reduces Task prompt token overhead.
+
 ### 4.1 Outer Loop (BDD Acceptance)
 
 For each acceptance criterion:

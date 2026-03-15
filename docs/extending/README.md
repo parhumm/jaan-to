@@ -69,6 +69,13 @@ Extracted reference material loaded on demand by skills (see [Token Strategy](..
 | [ux-research-templates.md](ux-research-templates.md) | ux-research-synthesize |
 | [research-methodology.md](research-methodology.md) | pm-research-about |
 | [v3-compliance-reference.md](v3-compliance-reference.md) | skill-create |
+| [qa-test-run-reference.md](qa-test-run-reference.md) | qa-test-run |
+| [qa-test-mutate-reference.md](qa-test-mutate-reference.md) | qa-test-mutate |
+| [qa-contract-validate-reference.md](qa-contract-validate-reference.md) | qa-contract-validate |
+| [qa-test-cases-reference.md](qa-test-cases-reference.md) | qa-test-cases |
+| [qa-tdd-orchestrate-reference.md](qa-tdd-orchestrate-reference.md) | qa-tdd-orchestrate |
+| [qa-issue-report-reference.md](qa-issue-report-reference.md) | qa-issue-report |
+| [qa-issue-validate-reference.md](qa-issue-validate-reference.md) | qa-issue-validate |
 | [openapi-integration-reference.md](openapi-integration-reference.md) | Cross-skill (frontend-scaffold, frontend-story-generate, dev-project-assemble, dev-output-integrate) |
 
 ---

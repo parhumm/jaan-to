@@ -56,6 +56,116 @@
 
 ---
 
+## Parallel Execution Strategy
+
+### When to Parallelize
+
+- **Unit tests**: Almost always safe to parallelize (stateless by design)
+- **Integration tests**: Safe if each test uses isolated DB transactions or test containers
+- **E2E tests**: Playwright handles parallelism via separate browser workers with zero shared state
+
+### Per-Stack Configuration
+
+**Vitest** (fastest config for CI):
+```typescript
+// vitest.config.ts
+export default defineConfig({
+  test: {
+    pool: 'threads',
+    poolOptions: { threads: { maxThreads: 8, minThreads: 4 } },
+    isolate: false,        // Disable for stateless unit tests only
+    fileParallelism: true,
+    maxConcurrency: 10,    // For .concurrent tests
+  },
+})
+```
+
+**Playwright** (CI-optimized with sharding):
+```typescript
+// playwright.config.ts
+export default defineConfig({
+  fullyParallel: true,
+  workers: process.env.CI ? 4 : undefined,
+  maxFailures: process.env.CI ? 10 : undefined,
+  retries: process.env.CI ? 2 : 0,
+  use: {
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+  },
+})
+```
+CI sharding: `npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}`
+
+**PHPUnit + ParaTest**:
+```bash
+# Install: composer require --dev brianium/paratest
+vendor/bin/paratest -p8 --runner WrapperRunner
+# Laravel: php artisan test --parallel --processes=4
+```
+
+**Go**:
+```go
+func TestAPICreate(t *testing.T) {
+    t.Parallel() // Mark I/O-bound tests as parallel-safe
+}
+```
+```bash
+go test ./... -parallel 128 -p 16 -count=1
+```
+Caution: Lightweight CPU-bound unit tests may be slower with `t.Parallel()` due to goroutine scheduling overhead.
+
+**pytest-xdist**:
+```bash
+pip install pytest-xdist
+pytest -n auto --dist loadscope  # Group by module (keeps fixtures together)
+pytest -n 8 --dist load          # Max throughput
+```
+
+### Coverage Tool Performance Comparison
+
+| Stack | Provider | Overhead vs Baseline | Branch Coverage | Recommendation |
+|-------|----------|---------------------|-----------------|----------------|
+| JS/TS | V8 (`@vitest/coverage-v8`) | ~10% | Block-level | **CI default** -- no instrumentation needed |
+| JS/TS | Istanbul (`@vitest/coverage-istanbul`) | ~300% | Statement-level | Local only when V8 accuracy insufficient |
+| PHP | PCOV | ~34% (18.9s vs 14.0s baseline) | Line only | **CI default** -- 2.8x faster than Xdebug |
+| PHP | Xdebug 3 (line mode) | ~280% (53.5s) | Line + branch | Local debugging only |
+| PHP | Xdebug 3 (path mode) | ~950% (146.8s) | Full path | Never in CI |
+| Go | `go test -cover` (set mode) | <1% | N/A | **Always** -- compile-time rewriting |
+| Go | `go test -cover` (atomic mode) | ~3-5% | N/A | Required for parallel tests |
+| Python | coverage.py (line) | ~200-300% | Line | Default |
+| Python | coverage.py (branch) | ~500% | Branch | Only when needed |
+
+Benchmarks from Sebastian Bergmann (PHP, Dec 2025) and Vitest v3.2.0+ docs.
+
+### E2E Authentication Caching (Playwright storageState)
+
+Authenticate once in a setup project, reuse session across all tests:
+
+```typescript
+// auth.setup.ts
+import { test as setup } from '@playwright/test';
+setup('authenticate', async ({ request }) => {
+  await request.post('/api/login', {
+    form: { user: 'testuser', password: 'pass123' },
+  });
+  await request.storageState({ path: '.auth/user.json' });
+});
+```
+
+```typescript
+// playwright.config.ts projects
+projects: [
+  { name: 'setup', testMatch: /.*\.setup\.ts/ },
+  {
+    name: 'chromium',
+    dependencies: ['setup'],
+    use: { storageState: '.auth/user.json' },
+  },
+],
+```
+
+---
+
 ## Health Check Matrix
 
 ### Node.js
@@ -246,6 +356,25 @@ Total line: `total:    (statements)    80.0%`
 | Re-Run Failed Only | Re-Run Specific File | Re-Run Specific Test |
 |-------------------|---------------------|---------------------|
 | `go test -json -run "TestName" ./package/...` | `go test -json ./package/...` | `go test -json -run "^TestSpecific$" ./package/...` |
+
+---
+
+## Changed Code Only (Selective Execution)
+
+Run only tests affected by recent code changes for faster feedback loops:
+
+| Stack | Command | How It Works |
+|-------|---------|-------------|
+| JS/TS (Vitest) | `npx vitest --changed HEAD~1` | Uses git diff to find changed source files, runs related tests |
+| JS/TS (Jest) | `npx jest --changedSince=main` | Runs tests related to files changed since branch point |
+| JS/TS (Playwright) | `npx playwright test --grep @smoke` | Tag-based selection (no automatic changed-file detection) |
+| PHP | `vendor/bin/phpunit --filter="TestClassName"` | Manual filter (no native git-diff integration) |
+| Go | `go test $(go list ./... \| grep -f <(git diff --name-only main \| sed 's|/[^/]*$||' \| sort -u))` | Shell pipeline matching changed packages |
+| Python | `pytest --lf` (last failed) or `pytest-testmon` | `testmon` tracks code-to-test mapping automatically |
+
+**Monorepo tools** (Nx, Turborepo) provide affected-project detection automatically:
+- Nx: `npx nx affected --target=test`
+- Turborepo: `npx turbo run test --filter=...[HEAD~1]`
 
 ---
 
