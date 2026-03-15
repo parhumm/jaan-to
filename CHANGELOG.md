@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **qa-* skills** — Add performance optimization guidance (parallelization, incremental mutation, coverage tool selection, fail-fast, E2E auth caching, batch generation, early-termination) based on research #86 and #87. Affected skills: qa-test-run, qa-test-mutate, qa-contract-validate, qa-test-generate, qa-test-cases, qa-tdd-orchestrate, qa-quality-gate
 - **qa-* reference docs** — Add parallel execution strategies, coverage tool benchmarks, incremental mutation commands, Schemathesis tuning to qa-test-run-reference, qa-test-mutate-reference, qa-contract-validate-reference
 
+### Fixed
+- **qa-* skill descriptions** — Shorten 3 descriptions exceeding 120-char V3.4 limit (qa-test-cases, qa-test-generate, qa-test-run) and remove 4 uncited percentage claims from inline text
+
 ---
 
 ## [7.7.0] - 2026-03-05
