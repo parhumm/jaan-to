@@ -117,6 +117,52 @@ rules:
 
 ---
 
+## Performance Optimization
+
+### Parallel Tool Execution
+
+All four pipeline tools are independent and can run concurrently:
+
+```yaml
+# GitHub Actions — parallel contract validation
+jobs:
+  spectral:
+    runs-on: ubuntu-latest
+    steps:
+      - run: npx --no-install @stoplight/spectral-cli lint api.yaml --format json > spectral.json
+  oasdiff:
+    runs-on: ubuntu-latest
+    steps:
+      - run: oasdiff breaking --fail-on ERR main:api.yaml api.yaml --format json > oasdiff.json
+  schemathesis:
+    runs-on: ubuntu-latest
+    steps:
+      - run: schemathesis run --url $API_URL api.yaml --workers=4 --max-examples=50 --format json > schema.json
+  aggregate:
+    needs: [spectral, oasdiff, schemathesis]
+    steps:
+      - run: echo "Aggregate results from all tools"
+```
+
+### Schemathesis Performance Tuning
+
+| Flag | Effect | Default | Recommended CI |
+|------|--------|---------|---------------|
+| `--workers=N` | Parallel fuzz threads | 1 | 4 |
+| `--max-examples=N` | Max test cases per endpoint | unlimited | 50 |
+| `--stateful=links` | Follow API links for stateful testing | none | links |
+| `--hypothesis-max-iterations=N` | Cap property-based iterations | unlimited | 200 |
+
+**Incremental fuzzing**: Use oasdiff to identify changed endpoints, then scope Schemathesis:
+```bash
+# Get changed endpoints from oasdiff
+CHANGED=$(oasdiff diff main:api.yaml api.yaml --format json | jq -r '.paths[].path')
+# Fuzz only changed endpoints
+schemathesis run --url $API_URL api.yaml --endpoint "$CHANGED" --workers=4 --max-examples=50
+```
+
+---
+
 ## Aggregate Status Logic
 
 | Spectral | oasdiff | Prism | Schemathesis | Aggregate |

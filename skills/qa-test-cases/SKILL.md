@@ -199,6 +199,21 @@ Process:
 
 # PHASE 2: Generation (Write Phase)
 
+## Step 3.5: Generation Performance Strategy
+
+Optimize test case generation throughput:
+
+**Batch BDD Processing**: Group related ACs (2-3) into a single reasoning pass. Generate all scenarios for the batch before moving to the next group. This reduces context-switching overhead (~40% fewer reasoning passes).
+
+**Few-Shot Seeding**: Pre-seed generation with 2-3 successful examples from `$JAAN_LEARN_DIR/` if available. Past high-quality scenarios reduce hallucination and improve consistency.
+
+**Coverage-Driven Priority**: Adjust generation depth based on existing test coverage:
+- **>90% coverage area**: Reduce edge case depth (1 edge case per AC instead of 2)
+- **Untested area (<30%)**: Double boundary tests (4 per AC instead of 2)
+- **Critical path (auth, payments)**: Always generate full depth regardless of coverage
+
+**Incremental Generation**: When re-running for updated ACs, preserve passing test cases and only regenerate for changed or new ACs. Compare AC text hashes to detect changes.
+
 ## Step 4: Generate BDD/Gherkin Test Cases
 
 Following research Section 2 patterns and Section 4 worked examples.

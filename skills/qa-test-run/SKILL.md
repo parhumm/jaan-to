@@ -214,16 +214,47 @@ For environment values (DB URLs, API keys), use AskUserQuestion to get actual va
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-run-reference.md` section "Auto-Fix Procedures" for per-stack step-by-step procedures.
 
-## Step 7: Execute Tests Sequentially
+## Step 7: Execute Tests
 
 Run tests in order: **unit → integration → E2E**
 
+### 7.0 Performance Optimization
+
+Apply per-stack parallel execution and coverage tool selection for speed:
+
+**Parallel Execution** (add flags to commands from Step 5):
+
+| Stack | Runner | Parallel Flag | Speedup |
+|-------|--------|--------------|---------|
+| JS/TS | Vitest | `pool: 'threads'` + `--no-isolate` (stateless tests) | threads 14% faster than forks |
+| JS/TS | Playwright | `fullyParallel: true`, `workers: 4`, `--shard=X/Y` in CI | 40min → 5-7min (4 shards) |
+| PHP | ParaTest | `vendor/bin/paratest -p8 --runner WrapperRunner` | 5x (20min → 4min) |
+| Go | go test | `t.Parallel()` + `-parallel 128 -p 16` | 3x on I/O-bound tests |
+| Python | pytest-xdist | `-n auto --dist loadscope` | 5x with 8 cores |
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-run-reference.md` section "Parallel Execution Strategy" for per-stack config examples and trade-offs.
+
+**Coverage Tool Selection** (prefer fast providers in CI):
+
+| Stack | Fast Provider | Overhead | Slow Provider | Overhead |
+|-------|--------------|----------|---------------|----------|
+| JS/TS | V8 (`@vitest/coverage-v8`) | ~10% | Istanbul | ~300% |
+| PHP | PCOV | ~34% (1.3x) | Xdebug 3 | ~280% (3.8x) |
+| Go | `go test -cover` (native) | <1-5% | N/A | N/A |
+
+Rule: Use fast provider in CI; use slow provider locally only when branch/path coverage or debugging is needed.
+
+**E2E Auth Caching** (Playwright): Use `storageState` to authenticate once and reuse across tests. Avoids redundant login UI flows per test.
+
+**Fail-Fast**: Set `maxFailures` in Playwright config. If >80% of a tier fails, halt tier and diagnose before continuing (likely setup issue).
+
 For each tier:
 1. Run the test command with JSON/XML reporter for reliable parsing
-2. Capture stdout, stderr, and exit code
-3. Parse results into structured format
-4. Record pass/fail/skip counts
-5. If failures detected → proceed to Step 8 (diagnose) before next tier
+2. Apply parallel flags from table above when available
+3. Capture stdout, stderr, and exit code
+4. Parse results into structured format
+5. Record pass/fail/skip counts
+6. If failures detected → proceed to Step 8 (diagnose) before next tier
 
 **Important**: Use `--reporter=json` (Vitest), `--reporter=json` (Playwright), `--log-junit` (PHPUnit), or `-json` (Go) for machine-parseable output. Never rely on text output parsing.
 

@@ -117,13 +117,37 @@ Based on stack and framework availability:
 2. **Framework unavailable**: Report status, suggest installation, output with `mutation_score: null`
 
 Configure mutation run parameters:
-- **Scope**: Changed files only (incremental) OR full project
-- **Thresholds** (from `jaan-to/config/settings.yaml` or defaults):
+
+**Scope Decision**:
+- **PR context** → incremental (changed files only) for fast feedback
+- **Nightly / full audit** → full project for comprehensive coverage
+
+**Incremental Mode** (apply when scope = incremental):
+
+| Stack | Incremental Flag | Effect |
+|-------|-----------------|--------|
+| JS/TS (StrykerJS) | `incremental: true`, `incrementalFile: '.stryker-tmp/incremental.json'` | Reuses ~94% of previous results via diff-match-patch |
+| PHP (Infection) | `--git-diff-lines --git-diff-base=main --only-covering-test-cases` | Mutates only touched lines, runs only covering tests (3.3x speedup) |
+| Go | N/A | No incremental support -- full runs only |
+| Python | N/A | No incremental support -- full runs only |
+
+**Concurrency** (always apply):
+
+| Stack | Concurrency Flag | Notes |
+|-------|-----------------|-------|
+| JS/TS (StrykerJS) | `concurrency: N`, `coverageAnalysis: 'perTest'` | Per-test analysis runs only tests covering each mutant |
+| PHP (Infection) | `--threads=max` | Uses all available CPU cores |
+| Go | N/A | Sequential execution only |
+| Python | N/A | Sequential (community fork only) |
+
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-mutate-reference.md` sections "Mutation Run Commands" and "CI Integration Patterns" for per-stack commands and config examples.
+
+**Thresholds** (from `jaan-to/config/settings.yaml` or defaults):
   - Break CI: 60% mutation score
   - Target (new code): 80%
   - Critical paths (payments, auth): 90%
 
-> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-mutate-reference.md` section "Scoring Rubric and Thresholds" for configurable threshold table and CI integration patterns.
+> **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-mutate-reference.md` section "Scoring Rubric and Thresholds" for configurable threshold table.
 
 ---
 
@@ -230,7 +254,7 @@ If survivors artifact is empty OR mutation run failed:
 
 > **Codex runtime**: Skip this entire section. Single mutation pass only.
 
-For each iteration (max 2-3, stop if delta < 5 points):
+For each iteration (max 2-3, stop if delta < 5 points or delta < 2 points on iteration 2+):
 
 ### 6.1: Feed Survivors to Test Generator
 

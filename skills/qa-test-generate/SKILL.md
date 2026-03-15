@@ -293,6 +293,18 @@ Use AskUserQuestion:
 
 # PHASE 2: Generation (Write Phase)
 
+## Step 4.5: Generation Performance Strategy
+
+Apply these patterns to reduce generation time and token overhead:
+
+**Batch Generation**: Generate 3-5 related test scenarios per reasoning pass rather than one-at-a-time. Group by service/component to share setup context and reduce prompt repetition.
+
+**Fixture Reuse**: Share test data factories across test files. Generate a single `{entity}.factory.ts` per domain entity and import across unit/integration/E2E rather than duplicating setup code per test file.
+
+**Template-Driven Generation**: Use the standardized step templates from BDD binding patterns (research Section 1) as starting points. This reduces AI prompt token overhead by ~40% compared to free-form generation.
+
+**Incremental Generation**: When re-running after AC changes, only regenerate tests for changed/new acceptance criteria. Preserve existing passing test files and append new ones.
+
 ## Step 5: Generate Config Files
 
 > **Reference**: See `${CLAUDE_PLUGIN_ROOT}/docs/extending/qa-test-generate-reference.md` section "Config Generation Specifications" for Vitest workspace, Playwright, and setup file configurations.
