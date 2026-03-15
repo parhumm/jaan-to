@@ -191,7 +191,7 @@ Isolation is enforced at three levels:
 
 **Outer Loop Batching**: Run all AC acceptance tests once upfront before starting inner cycles. Only TDD components whose acceptance tests fail. This avoids unnecessary cycles for already-passing ACs.
 
-**Handoff Optimization**: Compress test runner output in handoff manifests -- include only failure messages and assertion diffs, exclude verbose logs and stack traces. This reduces Task prompt token overhead by ~60%.
+**Handoff Optimization**: Compress test runner output in handoff manifests -- include only failure messages and assertion diffs, exclude verbose logs and stack traces. This significantly reduces Task prompt token overhead.
 
 ### 4.1 Outer Loop (BDD Acceptance)
 

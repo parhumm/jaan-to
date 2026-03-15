@@ -1,6 +1,6 @@
 ---
 name: qa-test-cases
-description: Generate production-ready BDD/Gherkin test cases from acceptance criteria using ISTQB techniques. Use when writing test specifications.
+description: Generate BDD/Gherkin test cases from acceptance criteria with ISTQB techniques. Use when writing test specs.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch, Edit(jaan-to/config/settings.yaml)
 argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)] [--contract backend-api-contract-path]
 license: PROPRIETARY
@@ -203,7 +203,7 @@ Process:
 
 Optimize test case generation throughput:
 
-**Batch BDD Processing**: Group related ACs (2-3) into a single reasoning pass. Generate all scenarios for the batch before moving to the next group. This reduces context-switching overhead (~40% fewer reasoning passes).
+**Batch BDD Processing**: Group related ACs (2-3) into a single reasoning pass. Generate all scenarios for the batch before moving to the next group. This reduces context-switching overhead by batching related work.
 
 **Few-Shot Seeding**: Pre-seed generation with 2-3 successful examples from `$JAAN_LEARN_DIR/` if available. Past high-quality scenarios reduce hallucination and improve consistency.
 
