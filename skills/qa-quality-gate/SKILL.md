@@ -127,6 +127,14 @@ Report: "Score based on {N}/6 available signals."
 composite = sum(normalized_signal[i] * adjusted_weight[i]) for all non-null signals
 ```
 
+### Early-Termination
+
+If 3 or more signals score below 0.6 after normalization, skip remaining signal computation and route directly to "full human review". This avoids unnecessary computation when the outcome is already determined.
+
+### Delta Detection
+
+When a previous quality gate output exists for the same feature/PR, compare composite scores. If `|current - previous| < 0.05`, report "no significant change" and carry forward the previous routing recommendation. This prevents redundant reviews on minor score fluctuations.
+
 ## Step 4: Determine Routing Recommendation
 
 | Score | Recommendation | Action |
