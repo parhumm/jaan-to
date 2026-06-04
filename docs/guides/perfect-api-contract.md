@@ -16,7 +16,7 @@ sidebar_position: 5
 
 "Swagger" today is an ecosystem, not a format. The format is **OpenAPI 3.1** (full JSON Schema 2020-12 alignment), and one `specs/openapi.yaml` should drive the entire stack:
 
-```
+```text
 specs/openapi.yaml  →  types (openapi-typescript / Orval)
                     →  typed hooks + Zod validators (Orval / @hey-api)
                     →  mock servers (Prism standalone, MSW in-app/Storybook)
@@ -56,7 +56,7 @@ For every artifact, apply this filter:
 
 Split anything reused; keep the root spec as an index. The OpenAPI Initiative's rule: *"If the same piece of YAML appears more than once, move it to `components`."*
 
-```
+```text
 specs/
 ├── openapi.yaml              # index — references domain files via $ref
 ├── paths/
