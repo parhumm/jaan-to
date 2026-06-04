@@ -208,4 +208,8 @@ This directory contains structured summaries of research on Claude Code best pra
 
 ## Related Resources
 
+- **Perfect CLAUDE.md Guide**: [../guides/perfect-claude-md.md](../guides/perfect-claude-md.md) - Best practices, anti-patterns & checklist synthesized from researches 01, 05, 06, 07, 08, 11, 14, 24, 33, 40, 62, 82
+- **Perfect MCP Guide**: [../guides/perfect-mcp.md](../guides/perfect-mcp.md) - Best practices, anti-patterns & checklist synthesized from researches 27, 37, 78, 82
+- **Perfect API Contract Guide**: [../guides/perfect-api-contract.md](../guides/perfect-api-contract.md) - Best practices, anti-patterns & checklist synthesized from researches 59, 83, 84
+- **Perfect Prompt-Injection Defense Guide**: [../guides/perfect-prompt-injection-defense.md](../guides/perfect-prompt-injection-defense.md) - Best practices, anti-patterns & checklist synthesized from researches 78, 79
 - **Consolidated Document**: CONSOLIDATED.md - All key points merged without duplication (not yet available)
