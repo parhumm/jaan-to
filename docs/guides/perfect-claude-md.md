@@ -1,3 +1,8 @@
+---
+title: "Perfect CLAUDE.md"
+sidebar_position: 3
+---
+
 # The Perfect CLAUDE.md — Best Practices, Anti-Patterns & Checklist
 
 > A synthesized reference for writing high-quality `CLAUDE.md` files.

@@ -1,3 +1,8 @@
+---
+title: "Perfect API Contract"
+sidebar_position: 5
+---
+
 # The Perfect API Contract — OpenAPI/Swagger Best Practices, Anti-Patterns & Checklist
 
 > A synthesized reference for designing, generating, and operating API contracts in an AI-driven workflow.

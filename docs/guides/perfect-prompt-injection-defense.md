@@ -1,3 +1,8 @@
+---
+title: "Perfect Prompt-Injection Defense"
+sidebar_position: 6
+---
+
 # The Perfect Prompt-Injection Defense — Best Practices, Anti-Patterns & Checklist
 
 > A synthesized reference for hardening an LLM/agent system against prompt injection and data exfiltration.

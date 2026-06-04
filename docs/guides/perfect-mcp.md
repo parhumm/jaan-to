@@ -1,3 +1,8 @@
+---
+title: "Perfect MCP"
+sidebar_position: 4
+---
+
 # The Perfect MCP — Best Practices, Anti-Patterns & Checklist
 
 > A synthesized reference for configuring, securing, and operating MCP servers in a Claude Code workflow.
