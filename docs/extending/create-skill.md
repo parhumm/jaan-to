@@ -1300,7 +1300,7 @@ Simplest valid skill structure:
 name: example-minimal-demo
 description: Demonstrate minimal skill structure.
 allowed-tools: Read, Write($JAAN_OUTPUTS_DIR/example/**)
-argument-hint: [topic]
+argument-hint: "[topic]"
 ---
 
 # example-minimal-demo
@@ -1400,7 +1400,7 @@ Complete skill with all v3.0.0 patterns:
 name: qa-test-matrix
 description: Generate comprehensive test matrix from feature requirements.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write($JAAN_OUTPUTS_DIR/qa/**)
-argument-hint: [feature-name-or-prd-path]
+argument-hint: "[feature-name-or-prd-path]"
 ---
 
 # qa-test-matrix

@@ -270,7 +270,7 @@ description: |
   Analyze Microsoft Clarity heatmap and session data for UX insights.
   Auto-triggers on: clarity analysis, heatmap review, session patterns
 allowed-tools: Read, Glob, Grep, Write(jaan-to/**), Bash(python:*)
-argument-hint: [csv-path-or-session-url]
+argument-hint: "[csv-path-or-session-url]"
 ---
 ```
 

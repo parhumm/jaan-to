@@ -2,7 +2,7 @@
 name: dev-project-assemble
 description: Wire scaffold outputs into runnable project structure with configs and entry points. Use when assembling project from scaffolds.
 allowed-tools: Read, Glob, Grep, Write(src/**), Write(prisma/**), Write(package.json), Write(tsconfig.json), Write(next.config.*), Write(tailwind.config.*), Write(.env.example), Write(.gitignore), Write($JAAN_OUTPUTS_DIR/dev/project-assemble/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [backend-scaffold, frontend-scaffold] [backend-api-contract] [target-dir]
+argument-hint: "[backend-scaffold, frontend-scaffold] [backend-api-contract] [target-dir]"
 disable-model-invocation: true
 license: PROPRIETARY
 ---

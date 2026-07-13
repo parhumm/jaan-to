@@ -2,7 +2,7 @@
 name: qa-test-generate
 description: Generate runnable test files from BDD test cases and scaffold code. Use when creating test implementations.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/test-generate/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [qa-test-cases, backend-scaffold | frontend-scaffold]
+argument-hint: "[qa-test-cases, backend-scaffold | frontend-scaffold]"
 license: PROPRIETARY
 ---
 

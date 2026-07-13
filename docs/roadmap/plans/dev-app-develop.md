@@ -30,7 +30,7 @@ This is the **first "action skill"** in jaan-to — it writes source code to the
 name: dev-app-develop
 description: Full-lifecycle app development from task selection through implementation, testing, and deployment.
 allowed-tools: Read, Glob, Grep, Task, WebSearch, Write, Edit, AskUserQuestion, Bash(git:*), Bash(gh:*), Bash(npm:*), Bash(npx:*), Bash(yarn:*), Bash(pnpm:*), Bash(pip:*), Bash(python:*), Bash(pytest:*), Bash(go:*), Bash(cargo:*), Bash(composer:*), Bash(php:*), Bash(make:*), Bash(docker:*), Bash(curl:*), Bash(semgrep:*), Bash(trivy:*)
-argument-hint: [task-id or task-description]
+argument-hint: "[task-id or task-description]"
 ---
 ```
 

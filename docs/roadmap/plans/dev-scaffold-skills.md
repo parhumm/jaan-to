@@ -65,7 +65,7 @@ These issues were identified by deep verification against plugin standards and r
 name: backend-scaffold
 description: Generate production-ready backend code from specs: routes, data model, service layer, validation.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [backend-api-contract, backend-task-breakdown, backend-data-model]
+argument-hint: "[backend-api-contract, backend-task-breakdown, backend-data-model]"
 ```
 
 ### Context Files
@@ -332,7 +332,7 @@ The skill reads tech.md `#current-stack` to determine which stack to generate:
 name: frontend-scaffold
 description: Convert designs to React/Next.js components with TailwindCSS, TypeScript, and typed API client hooks.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/dev/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [frontend-design, frontend-task-breakdown, backend-api-contract]
+argument-hint: "[frontend-design, frontend-task-breakdown, backend-api-contract]"
 ```
 
 ### Context Files

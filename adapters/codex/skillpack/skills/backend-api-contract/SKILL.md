@@ -2,7 +2,7 @@
 name: backend-api-contract
 description: Generate OpenAPI 3.1 contracts with schemas, RFC 9457 errors, versioning, and examples. Use when defining API contracts from entities.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/api-contract/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [entities-or-prd-path]
+argument-hint: "[entities-or-prd-path]"
 license: PROPRIETARY
 ---
 

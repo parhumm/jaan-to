@@ -183,7 +183,7 @@ Commands live in `.claude/commands/` as markdown files:
 ```markdown
 ---
 allowed-tools: Bash(npm run:*), Bash(git:*)
-argument-hint: [ticket-id] [--dry-run]
+argument-hint: "[ticket-id] [--dry-run]"
 description: Create PR from Jira ticket with linked requirements
 model: claude-sonnet-4-20250514
 ---
@@ -488,7 +488,7 @@ For human-in-the-loop confirmation via Telegram:
 ```markdown
 ---
 allowed-tools: mcp__figma__*, mcp__jira__*, mcp__api-spec__*, Bash(git:*)
-argument-hint: [figma-url] [--create-tickets]
+argument-hint: "[figma-url] [--create-tickets]"
 description: Create PRD from Figma design with API context, optionally create Jira tickets
 ---
 

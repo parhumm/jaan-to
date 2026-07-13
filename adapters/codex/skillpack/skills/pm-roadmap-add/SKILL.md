@@ -2,7 +2,7 @@
 name: pm-roadmap-add
 description: Add prioritized items to a project roadmap with codebase review and duplication check. Use when planning product direction.
 allowed-tools: Read, Glob, Grep, Write(ROADMAP.md), Write($JAAN_OUTPUTS_DIR/pm/roadmap/**), Edit(ROADMAP.md), Edit($JAAN_OUTPUTS_DIR/pm/roadmap/**), Bash(cp:*), Bash(git add:*), Bash(git commit:*), Bash(git remote get-url:*), Edit(jaan-to/config/settings.yaml)
-argument-hint: [item-description]
+argument-hint: "[item-description]"
 hooks:
   PreToolUse:
     - matcher: "Write"

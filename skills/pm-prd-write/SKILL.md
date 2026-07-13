@@ -2,7 +2,7 @@
 name: pm-prd-write
 description: Generate a Product Requirements Document from an initiative description. Use when defining product scope or feature requirements.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(cp:*), Edit(jaan-to/config/settings.yaml)
-argument-hint: [initiative-description]
+argument-hint: "[initiative-description]"
 hooks:
   PreToolUse:
     - matcher: "Write"
