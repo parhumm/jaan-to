@@ -120,6 +120,7 @@
         "./skills/pm-roadmap-add",
         "./skills/pm-roadmap-update",
         "./skills/pm-skill-discover",
+        "./skills/pm-workflow-audit",
         "./skills/sec-audit-remediate",
         "./skills/skill-create",
         "./skills/skill-update",

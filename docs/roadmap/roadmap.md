@@ -33,6 +33,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## Unreleased
 
+- [~] AI-Workflow Engineering — `pm-workflow-audit` skill: reads a project's real AI history (Claude Code + Codex + Cursor sessions/plans/memory via the shared `session-reader.sh`), inventories its entire existing AI setup, and produces a phased conversion plan toward a reliable, evaluated, safe AI workflow. Ships with the [Perfect AI Workflow guide](../guides/perfect-ai-workflow.md), three review/verify/standards agents (eval-gated), and `validate-security.sh` rule A7. Slice 1 (skill + reader + guide + agents + Codex packaging) landed; remaining: semantic eval harness (S2) + `team-ship` workflow-remediation track (S4).
 - [ ] Role Orchestrator Skills — 6 per-role orchestrator skills (`/pm`, `/ux`, `/dev`, `/qa`, `/devops`, `/sec`) using Claude Code Agent Teams. Each orchestrator coordinates all sub-skills within its role via dynamic discovery (`sub-skills.md`). Update `team-ship` to delegate to orchestrators as meta-orchestrator with backward-compatible fallback. → [details](tasks/role-orchestrators.md)
 - [ ] Skill Lifecycle Automation — 5 workflow automation skills discovered via `pm-skill-discover` (est. ~333 min/week savings):
   - [ ] `dev-adapter-sync` (Must, Quick Win) — Mirror skill files from skills/ to adapters/codex/ automatically. High priority: manual `build-codex-skillpack.sh` is a repeated friction point in every PR
