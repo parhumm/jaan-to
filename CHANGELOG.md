@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.8.0] - 2026-07-14
+
+### Added
+- **`pm-workflow-audit` skill** — Reads a project's real AI history (Claude Code + Codex + Cursor sessions/plans/memory via the shared, cross-OS, format-detecting, read-only `scripts/lib/session-reader.sh`) and inventories its entire existing AI setup (skills, commands, MCP, agents, CLAUDE.md, AGENTS.md, rules), then produces a phased, reviewed, standards-checked conversion plan toward a reliable, evaluated, safe AI workflow. Breaks the lethal trifecta by design (no curl/network/exec; SQLite read only through a hardened wrapper)
+- **Review/verify/standards agents** — `workflow-plan-reviewer`, `workflow-plan-verifier`, `workflow-standards-auditor` (read-only, `model: haiku`; eval-gated — the skill runs them inline by default)
+- **Perfect AI Workflow guide** (`docs/guides/perfect-ai-workflow.md`) — build-order philosophy (simplest agent → evals → improve → specialized agents only where evals prove value → autonomy → monitor), synthesized from research #76, #77, #80
+- **Eval harness** (`scripts/test/eval/pm-workflow-audit/`) — session-reader contract test, deterministic plan grader, golden-expectations rubric, runner
+- **`validate-security.sh` rule A7** — blocks exec-capable binaries (`sqlite3`, `awk`, bare `bash`, …) in a skill's `allowed-tools`
+
+### Changed
+- **`pm-skill-discover`** — fixed the flat-layout Claude session glob (`projects/<slug>/*.jsonl`, not `sessions/`) and adopted the shared session reader; bidirectional cross-links with `pm-workflow-audit`
+- **Codex skillpack** — now packages the cited `docs/guides`, `docs/research/*`, and strategy docs so `${CLAUDE_PLUGIN_ROOT}/docs/...` citations resolve on the Codex runtime
+- **`team-ship`** — added opt-in `--roles=remediation` to execute a workflow-audit plan (human-gated)
+- **Plugin marketplace** — updated from 58 to 59 skills
+
+### Fixed
+- **`jaan-issue-report`** — removed a dead `Bash(awk *)` permission grant (least-privilege)
+- **`validate-outputs.sh`** — now skips git-ignored paths, so the plugin repo's own gitignored `jaan-to/` scratch outputs no longer cause false failures in plugin-standards Check 15
+
+---
+
 ## [7.7.1] - 2026-03-15
 
 ### Changed

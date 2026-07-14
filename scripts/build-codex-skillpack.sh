@@ -81,6 +81,22 @@ mkdir -p "$RUNTIME_DIR/docs"
 copy_file "$PLUGIN_ROOT/docs/STYLE.md" "$RUNTIME_DIR/docs/STYLE.md"
 copy_dir "$PLUGIN_ROOT/docs/extending" "$RUNTIME_DIR/docs/extending"
 
+# Runtime-referenced docs cited by skills via ${CLAUDE_PLUGIN_ROOT}/docs/... —
+# package them so those citations resolve on the Codex runtime (not just extending/).
+copy_dir  "$PLUGIN_ROOT/docs/guides"                "$RUNTIME_DIR/docs/guides"
+copy_file "$PLUGIN_ROOT/docs/security-strategy.md"  "$RUNTIME_DIR/docs/security-strategy.md"
+copy_file "$PLUGIN_ROOT/docs/token-strategy.md"     "$RUNTIME_DIR/docs/token-strategy.md"
+mkdir -p "$RUNTIME_DIR/docs/roadmap"
+copy_file "$PLUGIN_ROOT/docs/roadmap/vision.md"     "$RUNTIME_DIR/docs/roadmap/vision.md"
+# Cited research summaries (provenance for skill/reference citations). Keep this
+# list in sync with research files referenced by shipped skills at runtime.
+mkdir -p "$RUNTIME_DIR/docs/research"
+for _r in 62 75 76 77 78 79 80; do
+  for _f in "$PLUGIN_ROOT"/docs/research/"${_r}"-*.md; do
+    [ -f "$_f" ] && copy_file "$_f" "$RUNTIME_DIR/docs/research/$(basename "$_f")"
+  done
+done
+
 copy_file "$PLUGIN_ROOT/adapters/codex/jaan-to" "$RUNTIME_DIR/jaan-to"
 chmod +x "$RUNTIME_DIR/jaan-to"
 copy_file "$PLUGIN_ROOT/adapters/codex/AGENTS.md" "$RUNTIME_DIR/AGENTS.md"

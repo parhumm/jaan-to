@@ -187,6 +187,18 @@ For `--track sprint`, skill chains are **dynamic** — determined by the sprint 
 - **Outputs to share**: detect_product_path
 - **Shutdown after**: Phase 1
 
+## remediation
+
+- **Title**: Workflow Remediation
+- **Track**: remediation (opt-in via `--roles=remediation`; excluded from default fast/full/sprint runs)
+- **Model**: inherit
+- **Skills**: [skill-create, qa-tdd-orchestrate, qa-quality-gate, sec-audit-remediate]
+- **Phase**: 2 (build)
+- **Depends on**: workflow_audit_plan (the phased plan produced by `pm-workflow-audit`)
+- **Outputs to share**: remediation_log
+- **Messages**: Lead (each remediation phase complete, for human approval before the next)
+- **Shutdown after**: Phase 2
+
 ---
 
 ## Future Roles (add when skills ship)

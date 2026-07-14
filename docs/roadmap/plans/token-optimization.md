@@ -197,3 +197,37 @@ Execute: Step 0 (Init Guard) → A (Load Lessons) → B (Resolve Template) → C
 5. Invoke `/skill-update` by slash command — verify it still works despite `disable-model-invocation: true`
 6. Check that internal skills (roadmap-add, docs-create, etc.) no longer appear in auto-invocation suggestions
 7. Verify CLAUDE.md loads correctly and behavioral rules are preserved
+
+---
+
+## Step 7 (Follow-up, 2026-07-14): Extend `context: fork` beyond detect skills
+
+**Source**: Field feedback (LinkedIn, M. Ketabdar — large clinical project). Observation: on a long
+spec → build chain, each heavy SKILL.md loaded earlier stays resident and its tokens are re-sent on
+every later step, raising latency and cost.
+
+**Current state**: `context: fork` now covers 11 of 59 skills — the `detect-*`/audit family (Step 2)
+plus `pm-workflow-audit`, `qa-contract-validate`, `qa-tdd-orchestrate`, `qa-test-mutate`, `team-ship`.
+The heavy **spec/build** skills that get chained in a normal delivery flow (`pm-prd-write`,
+`backend-scaffold`, `frontend-scaffold`, `backend-service-implement`, `backend-api-contract`,
+`backend-data-model`, `devops-infra-scaffold`, …) do **not** fork, so their full body persists in the
+main context.
+
+**Design constraint (important)**: `context: fork` runs the skill in an isolated subagent that cannot
+drive an interactive HARD STOP with the user. jaan.to's Two-Phase Workflow requires human approval
+before write. So a skill is fork-eligible only if it produces **bounded file output without needing a
+mid-run user gate in the main conversation** — or if its approval gate is redesigned to happen in the
+parent after the fork returns a preview.
+
+**Proposed work**:
+1. Classify each heavy spec/build skill as: (a) fork-eligible as-is, (b) fork-eligible after moving its
+   HARD STOP to the parent (fork returns preview → parent gates → parent writes), or (c) not eligible.
+2. Apply `context: fork` to category (a).
+3. For category (b), define the "fork returns preview, parent approves+writes" pattern once in
+   `docs/extending/` and apply it.
+4. Re-measure `/context` baseline and a representative spec→build chain before/after.
+
+**Expected savings**: 30–48K tokens per forked heavy-skill invocation kept out of the main context,
+compounding across a multi-skill chain.
+
+**Tracking**: GitHub issue #192.

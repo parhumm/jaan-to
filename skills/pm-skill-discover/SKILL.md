@@ -77,7 +77,7 @@ Gather structural metadata from three sources. Extract action types and timestam
 
 ### Source A: Claude Code Session Transcripts
 
-1. Glob `~/.claude/projects/*/sessions/*.jsonl` for session files
+1. Glob `~/.claude/projects/*/*.jsonl` for session files. NOTE: transcripts are **flat** in each project dir (`projects/<slug>/<session-id>.jsonl`), NOT under a `sessions/` subfolder; subagent transcripts live deeper at `<session-id>/subagents/agent-*.jsonl` — exclude them from the session count. For cross-tool presence/format detection (incl. Codex), you may also run the shared reader: `bash "${CLAUDE_PLUGIN_ROOT}/scripts/lib/session-reader.sh" discover --days={days}`.
 2. Filter to files modified within the last N days (from `--days` parameter)
 3. From each JSONL entry, extract only:
    - `tool_name` (e.g., Read, Write, Edit, Bash, Grep, Glob)
@@ -340,6 +340,7 @@ After report is written, ask:
 
 ## Skill Alignment
 
+- Scope: this skill answers "what repeated patterns should become skills." For a full workflow-reliability conversion plan (evals, safety, autonomy, phased build order), run `/jaan-to:pm-workflow-audit`.
 - Two-phase workflow with HARD STOP for human approval
 - Template-driven output structure
 - Generic across all tech stacks and project types

@@ -8,7 +8,7 @@ This Codex package is generated from the same shared source as the Claude plugin
 - Shared templates and lessons: `skills/*/template.md`, `skills/*/LEARN.md`
 - Shared runtime utilities: `scripts/`
 - Shared config defaults: `config/defaults.yaml`
-- Shared references: `docs/extending/`, `docs/STYLE.md`
+- Shared references: `docs/extending/`, `docs/STYLE.md`, `docs/guides/`, `docs/security-strategy.md`, `docs/token-strategy.md`, `docs/roadmap/vision.md`, and cited `docs/research/*` (packaged so `${CLAUDE_PLUGIN_ROOT}/docs/...` citations resolve)
 
 Only thin runtime adapters differ by target:
 - Claude adapter: `.claude-plugin/`, `hooks/`, `CLAUDE.md`
