@@ -92,7 +92,7 @@ copy_file "$PLUGIN_ROOT/docs/roadmap/vision.md"     "$RUNTIME_DIR/docs/roadmap/v
 # list in sync with research files referenced by shipped skills at runtime.
 mkdir -p "$RUNTIME_DIR/docs/research"
 for _r in 62 75 76 77 78 79 80; do
-  for _f in "$PLUGIN_ROOT"/docs/research/${_r}-*.md; do
+  for _f in "$PLUGIN_ROOT"/docs/research/"${_r}"-*.md; do
     [ -f "$_f" ] && copy_file "$_f" "$RUNTIME_DIR/docs/research/$(basename "$_f")"
   done
 done

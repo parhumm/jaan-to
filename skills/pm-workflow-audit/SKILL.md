@@ -1,7 +1,7 @@
 ---
 name: pm-workflow-audit
 description: Audit AI history and existing workflow, then plan a reliable, evaluated, safe AI system. Use when maturing AI workflows.
-allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(wc:*), Bash(jq:*), Bash(git log:*), Bash(bash scripts/lib/session-reader.sh:*), Write($JAAN_OUTPUTS_DIR/pm/workflow-audit/**), Edit(jaan-to/config/settings.yaml), Task
+allowed-tools: Read, Glob, Grep, Bash(ls:*), Bash(wc:*), Bash(jq:*), Bash(git log:*), Bash(mkdir:*), Bash(bash scripts/lib/session-reader.sh:*), Write($JAAN_OUTPUTS_DIR/pm/workflow-audit/**), Edit(jaan-to/config/settings.yaml), Task, AskUserQuestion
 argument-hint: [--days=N] [--tools=claude,codex,cursor] [--depth=quick|full]
 license: PROPRIETARY
 context: fork
@@ -70,7 +70,7 @@ Use extended reasoning for workflow-graph reconstruction, trifecta mapping, know
 
 ## Step 1: Cross-tool, cross-OS session / plan / memory discovery
 
-Run the shared, read-only, metadata-only reader (it detects OS + format + version and degrades gracefully):
+Run the shared, read-only, metadata-only reader (it detects OS + format + version and degrades gracefully). Substitute only a **validated bounded integer** for `{days}` (default 14) and **allowlisted names** (`claude`, `codex`, `cursor`) for `{tools}` — the reader is a fixed wrapper that re-validates both and passes them as argv, never `eval`ing input:
 
 ```bash
 bash "${CLAUDE_PLUGIN_ROOT}/scripts/lib/session-reader.sh" discover --days={days} --tools={tools} --project="$PWD"
@@ -84,7 +84,7 @@ If a tool is absent or in an unknown format, note it and continue — never fail
 
 ## Step 2: Existing-workflow inventory (map & align)
 
-Enumerate the project's **entire** existing AI setup and classify each item into exactly one component (single source of truth). Delegate the read-only enumeration to the `context-scout` agent via `Task` (it has the right `Read/Glob/Grep`+git tools); reserve Step 1's reader for this skill.
+Enumerate the project's **entire** existing AI setup and classify each item into exactly one component (single source of truth). Delegate the read-only enumeration to the `context-scout` agent via `Task` (it has the right `Read/Glob/Grep`+git tools); reserve Step 1's reader for this skill. The inventory is **metadata-only**: capture component names, types, counts, and classifications — **never** raw prompts, code, or secrets/tokens (e.g. from `.mcp.json`/`settings.json`). Instruct `context-scout` to return redacted structural metadata only and to scrub any credential-like value it encounters.
 
 Inventory these layers and classify per the **knowledge-type → component** table:
 - Context: `CLAUDE.md`, `.claude/CLAUDE.md`, `CLAUDE.local.md`, `~/.claude/CLAUDE.md`, `AGENTS.md`, `.cursor/rules`
@@ -105,7 +105,7 @@ For each, record: what exists, its component class, overlap/duplication, prose-o
 ## Step 3: Current-state audit + implicit-knowledge mining
 
 - If `$JAAN_OUTPUTS_DIR/detect/dev/` or `/detect/product/` exist, **consume** them for the current-state picture. Else (and if `--depth=full`), offer to run `/jaan-to:detect-dev` / `/jaan-to:detect-product` or `/jaan-to:team-ship --detect` first.
-- Mine correction history: `git log --oneline --since="{days} days ago" --stat` for repeated file-groups and repeated corrections. Every repeated correction is an **unencoded Rule, Method, or Template** — list them as encoding candidates.
+- Mine correction history: `git log --oneline --since="{days} days ago" --stat` for repeated file-groups and repeated corrections. **Hash changed file paths (SHA-256, per Safety Rules) before grouping, analyzing, or reporting — never expose raw paths from `--stat`.** Every repeated correction is an **unencoded Rule, Method, or Template** — list them as encoding candidates.
 
 ## Step 4: Execution graph + trifecta map (skip if `--depth=quick`)
 
@@ -136,7 +136,7 @@ Fold confirmed findings + standards remediations into the plan.
 
 Present the preview:
 
-```
+```text
 WORKFLOW AUDIT — CONVERSION PLAN (preview)
 ══════════════════════════════════════════
 Tools read: {claude ✓ / codex ✓(sqlite) / cursor —}  | Window: {days}d

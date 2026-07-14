@@ -51,7 +51,7 @@ fi
 
 echo "── Test 1: present stores (Claude flat + Codex sqlite) ──"
 OUT="$(HOME="$FAKE_HOME" CLAUDE_CONFIG_DIR="$FAKE_HOME/.claude" CODEX_HOME="$FAKE_HOME/.codex" bash "$READER" discover --days=3650 --tools=claude,codex 2>/dev/null)"
-echo "$OUT" | jq -e . >/dev/null 2>&1 && ok "reader emits valid JSON" || bad "reader emits valid JSON"
+if echo "$OUT" | jq -e . >/dev/null 2>&1; then ok "reader emits valid JSON"; else bad "reader emits valid JSON"; fi
 assert_eq "os detected"            "true"  "$(echo "$OUT" | jq -r '(.os|length>0)')"
 assert_eq "claude present"         "true"  "$(echo "$OUT" | jq -r '.tools.claude.present')"
 assert_eq "claude layout flat"     "flat"  "$(echo "$OUT" | jq -r '.tools.claude.layout')"
@@ -68,7 +68,7 @@ fi
 echo "── Test 2: total absence degrades gracefully ──"
 EMPTY="$(mktemp -d)"; trap 'rm -rf "$FAKE_HOME" "$EMPTY"' EXIT
 OUT2="$(HOME="$EMPTY" CLAUDE_CONFIG_DIR="$EMPTY/.claude" CODEX_HOME="$EMPTY/.codex" bash "$READER" discover 2>/dev/null)"
-echo "$OUT2" | jq -e . >/dev/null 2>&1 && ok "valid JSON when nothing present" || bad "valid JSON when nothing present"
+if echo "$OUT2" | jq -e . >/dev/null 2>&1; then ok "valid JSON when nothing present"; else bad "valid JSON when nothing present"; fi
 assert_eq "claude absent"  "false" "$(echo "$OUT2" | jq -r '.tools.claude.present')"
 assert_eq "codex absent"   "false" "$(echo "$OUT2" | jq -r '.tools.codex.present')"
 assert_eq "cursor absent"  "false" "$(echo "$OUT2" | jq -r '.tools.cursor.present')"
