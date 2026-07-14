@@ -212,4 +212,5 @@ This directory contains structured summaries of research on Claude Code best pra
 - **Perfect MCP Guide**: [../guides/perfect-mcp.md](../guides/perfect-mcp.md) - Best practices, anti-patterns & checklist synthesized from researches 27, 37, 78, 82
 - **Perfect API Contract Guide**: [../guides/perfect-api-contract.md](../guides/perfect-api-contract.md) - Best practices, anti-patterns & checklist synthesized from researches 59, 83, 84
 - **Perfect Prompt-Injection Defense Guide**: [../guides/perfect-prompt-injection-defense.md](../guides/perfect-prompt-injection-defense.md) - Best practices, anti-patterns & checklist synthesized from researches 78, 79
+- **Perfect Deployment Guide**: [../guides/perfect-deployment.md](../guides/perfect-deployment.md) - Best practices, anti-patterns & checklist synthesized from researches 17, 68, 74
 - **Consolidated Document**: CONSOLIDATED.md - All key points merged without duplication (not yet available)
