@@ -43,6 +43,7 @@
 | pm-story-write | `/jaan-to:pm-story-write` | Generate user stories with Given/When/Then ACs |
 | pm-roadmap-update | `/jaan-to:pm-roadmap-update` | Review and maintain project roadmap |
 | pm-skill-discover | `/jaan-to:pm-skill-discover` | Detect workflow patterns and suggest new skills |
+| pm-workflow-audit | `/jaan-to:pm-workflow-audit` | Audit AI history and plan a reliable AI workflow |
 | detect-dev | `/jaan-to:detect-dev` | Repo engineering audit with scored findings |
 | detect-design | `/jaan-to:detect-design` | Design system detection with drift findings |
 | detect-writing | `/jaan-to:detect-writing` | Writing system extraction with tone scoring |

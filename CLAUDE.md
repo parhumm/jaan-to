@@ -66,6 +66,7 @@ Opt-in per project: run `/jaan-to:jaan-init` to activate. Projects without `jaan
 - Detection/Audit: `detect-dev`, `detect-design`, `detect-ux`, `detect-product`, `detect-writing`, `detect-pack`
 - Specification: `pm-*`, `ux-*`, `backend-*`, `frontend-*`, `qa-*`
 - Implementation: `*-scaffold`, `*-implement`, `*-generate`, `*-integrate`, `*-deploy`
+- AI-Workflow Engineering: `pm-workflow-audit` (audit AI history + existing setup → phased conversion plan; uses agents `workflow-plan-reviewer`, `workflow-plan-verifier`, `workflow-standards-auditor`)
 
 ### Generic & Scalable
 

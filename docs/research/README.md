@@ -212,4 +212,5 @@ This directory contains structured summaries of research on Claude Code best pra
 - **Perfect MCP Guide**: [../guides/perfect-mcp.md](../guides/perfect-mcp.md) - Best practices, anti-patterns & checklist synthesized from researches 27, 37, 78, 82
 - **Perfect API Contract Guide**: [../guides/perfect-api-contract.md](../guides/perfect-api-contract.md) - Best practices, anti-patterns & checklist synthesized from researches 59, 83, 84
 - **Perfect Prompt-Injection Defense Guide**: [../guides/perfect-prompt-injection-defense.md](../guides/perfect-prompt-injection-defense.md) - Best practices, anti-patterns & checklist synthesized from researches 78, 79
+- **Perfect AI Workflow Guide**: [../guides/perfect-ai-workflow.md](../guides/perfect-ai-workflow.md) - Build-order philosophy (simplest agent → evals → improve → specialized agents only where evals prove value → autonomy → monitor); synthesized from researches 76, 77, 80 (security/token pillars link out to the prompt-injection and token guides). Runnable via `/jaan-to:pm-workflow-audit`.
 - **Consolidated Document**: CONSOLIDATED.md - All key points merged without duplication (not yet available)

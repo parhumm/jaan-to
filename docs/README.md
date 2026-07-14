@@ -55,6 +55,7 @@ See [Getting Started](getting-started.md) for full walkthrough.
 | [Perfect MCP](guides/perfect-mcp.md) | Best practices, anti-patterns & checklist for MCP servers |
 | [Perfect API Contract](guides/perfect-api-contract.md) | Best practices, anti-patterns & checklist for OpenAPI/Swagger |
 | [Perfect Prompt-Injection Defense](guides/perfect-prompt-injection-defense.md) | Best practices, anti-patterns & checklist for LLM/agent security |
+| [Perfect AI Workflow](guides/perfect-ai-workflow.md) | Best practices, anti-patterns & checklist for converting a project into a reliable, evaluated, safe AI workflow |
 | [Roadmap](roadmap/roadmap.md) | Version history and tasks |
 | [Research](research/README.md) | Deep research library |
 | [Style Guide](https://github.com/parhumm/jaan-to/blob/main/docs/STYLE.md) | Documentation standards |
