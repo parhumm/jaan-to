@@ -26,6 +26,15 @@ if [[ ! -d "$OUTPUTS_DIR" ]]; then
   exit 1
 fi
 
+# Skip validation if the outputs dir is git-ignored (e.g. the plugin repo's own
+# jaan-to/ scratch instance, which is absent from a clean CI checkout). A real
+# user project where jaan-to/outputs is tracked is validated normally; outside a
+# git repo, nothing is skipped.
+if git check-ignore -q "$OUTPUTS_DIR" 2>/dev/null; then
+  echo "✓ '$OUTPUTS_DIR' is git-ignored (local scratch outputs) — skipping structure validation"
+  exit 0
+fi
+
 # Check 1: Each subdomain has README.md
 echo "Check 1: Subdomain indexes..."
 SUBDOMAIN_COUNT=0

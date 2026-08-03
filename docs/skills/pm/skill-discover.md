@@ -133,6 +133,7 @@ TOP SUGGESTIONS
 - Combine with `/skill-create` for end-to-end discovery-to-creation pipeline
 - Re-run monthly to detect new patterns as workflow evolves
 - Use `--min-frequency=5` for high-activity repos to reduce noise
+- For a full workflow-reliability conversion plan (evals, safety, autonomy, phased build order), run [`/pm-workflow-audit`](./workflow-audit.md) — this skill only surfaces individual skill candidates. Both share the cross-tool session reader (`scripts/lib/session-reader.sh`).
 
 ---
 

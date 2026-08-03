@@ -33,4 +33,8 @@ website/docs/build/
 website/docs/.docusaurus/
 website/docs/.cache-loader/
 website/docs/src/pages/changelog.md
+website/docs/src/pages/changelog-product.md
 website/docs/src/pages/contributing.md
+
+# MCP tool artifacts
+.playwright-mcp/

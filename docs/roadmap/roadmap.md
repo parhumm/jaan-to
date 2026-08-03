@@ -43,6 +43,12 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ---
 
+## v7.8.0 — 2026-07-14
+
+- [x] AI-Workflow Engineering — `pm-workflow-audit` skill: reads a project's real AI history (Claude Code + Codex + Cursor sessions/plans/memory via the shared `session-reader.sh`), inventories its entire existing AI setup, and produces a phased, reviewed, standards-checked conversion plan toward a reliable, evaluated, safe AI workflow. Shipped with the [Perfect AI Workflow guide](../guides/perfect-ai-workflow.md), three review/verify/standards agents (eval-gated), an eval harness, and `validate-security.sh` rule A7. Slice 1 (skill + reader + guide + agents + Codex packaging) landed; follow-ups: semantic eval harness (S2) + `team-ship` workflow-remediation execution (S4, opt-in role added).
+
+---
+
 ## v7.7.1 — 2026-03-15
 
 - [x] QA Performance Optimization — Apply research #86/#87 findings across 7 qa-* skills and 3 reference docs (parallelization, incremental mutation, coverage tool selection, fail-fast, batch generation, early-termination)

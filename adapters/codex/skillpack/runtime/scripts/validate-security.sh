@@ -116,6 +116,26 @@ check_skill_permissions() {
       echo "  ::warning::A5 [$skill_name] Broad Bash scope (node/npx/npm install) — verify justified"
       WARNINGS=$((WARNINGS + 1))
     fi
+
+    # A7: Exec/egress-capable binary granted directly in allowed-tools.
+    # sqlite3/.shell, awk, perl, python, ruby, etc. can run arbitrary shell,
+    # write files, and make network calls — a prefix grant (Bash(sqlite3:*)) or
+    # a bare-shell wildcard (Bash(bash:*)) cannot constrain that, so it silently
+    # re-introduces trifecta leg C. Allowed: script-scoped grants that run a
+    # specific vetted script, e.g. Bash(bash scripts/lib/session-reader.sh:*).
+    # Fire only on ARBITRARY-arg grants (Bash(sqlite3:*) / Bash(awk *)); a
+    # binary scoped to a safe subcommand (Bash(python3 --version *)) is fine.
+    if echo "$tools" | grep -qE 'Bash\((sqlite3|awk|gawk|perl|python3?|ruby|env|xargs|ssh|scp)(:\*|[[:space:]]+\*)' \
+       || echo "$tools" | grep -qE 'Bash\((bash|sh|zsh)(:\*|[[:space:]]+\*)' \
+       || echo "$tools" | grep -qE 'Bash\(find[^)]*-exec'; then
+      if [ "$level" = "BLOCKING" ]; then
+        echo "  ::error::A7 [$skill_name] Exec/egress-capable binary in allowed-tools — read via a scoped script wrapper instead, e.g. Bash(bash scripts/lib/<name>.sh:*)"
+        ERRORS=$((ERRORS + 1))
+      else
+        echo "  ::warning::A7 [$skill_name] Exec/egress-capable binary in allowed-tools (local skill)"
+        WARNINGS=$((WARNINGS + 1))
+      fi
+    fi
   done
 
   # A6: Hardcoded credentials in skill bodies
