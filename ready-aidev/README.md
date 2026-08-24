@@ -1,8 +1,11 @@
 # Ready — Design Archive
 
-> Nine documents, ~19,000 lines, tracing one product from open research question to frozen build spec.
+> Ten documents, ~19,400 lines. Nine trace one product from open research question to a frozen build
+> spec; the tenth turns that spec's first three milestones into an executable build.
 >
-> **Current authority: [9-ready-plan-v5.4-frozen.md](docs/9-ready-plan-v5.4-frozen.md). Everything else is history.**
+> **Spec authority: [9-ready-plan-v5.4-frozen.md](docs/9-ready-plan-v5.4-frozen.md).
+> Build plan: [10-ready-impliment-v5.4.md](docs/10-ready-impliment-v5.4.md).
+> Documents 1–8 are history.**
 
 ---
 
@@ -25,7 +28,8 @@ substitutions only — zero architectural deltas.
 
 | Document | Why |
 |----------|-----|
-| **[9 — Ready, Implementation Baseline v5.4 (FROZEN)](docs/9-ready-plan-v5.4-frozen.md)** | The build spec. Frozen 2026-08-23: *"begin implementation. Start M0 today."* Locked decisions (D-nn / P-nn), 25 invariants each with a named enforcing test, milestones M0–M9, spikes S-01–S-09, experiments E-01–E-06, ADRs 001–053. Its §0 carries a defect-by-defect changelog of **every** prior version, so the eight superseded siblings need not be read to understand it. |
+| **[9 — Ready, Implementation Baseline v5.4 (FROZEN)](docs/9-ready-plan-v5.4-frozen.md)** | *What to build.* The spec. Frozen 2026-08-23: *"begin implementation. Start M0 today."* Locked decisions (D-nn / P-nn), 25 invariants each with a named enforcing test, milestones M0–M9, spikes S-01–S-09, experiments E-01–E-06, ADRs 001–053. Its §0 carries a defect-by-defect changelog of **every** prior version, so the eight superseded siblings need not be read to understand it. |
+| **[10 — Implementation Plan: M0 through M2](docs/10-ready-impliment-v5.4.md)** | *How to build the first third of it.* Turns the spec's three unblocked milestones into a task-ordered build: repo bootstrap, module-by-module design, exit-criteria-to-test mapping, and a master execution sequence. Stops where the spec's gates do — M3 needs spikes S-05/S-06 and E-03 labels, M4 needs S-01–S-04/S-07/S-08. |
 
 Remaining uncertainty is discharged by spikes and experiments writing ADR supersedes — explicitly
 **not** by another architecture version (§1, rule 4).
@@ -44,7 +48,8 @@ Remaining uncertainty is discharged by spikes and experiments writing ADR supers
 | 6 | [aidev — Implementation Baseline v5.0](docs/6-aidev-plan-v5-final.md) | The consistency freeze. v4.0's decisions were right but ten sections still described the v2/v3 world — a plan that *"is not a baseline — it is two plans in one file."* This pass propagates them everywhere. | Superseded |
 | 7 | [aidev — Implementation Baseline v5.1 (FROZEN)](docs/7-aidev-plan-v5.1-frozen.md) | Six-defect correctness patch, then the freeze. Three P0s: the `BROKERED_TOOLS` sandbox loophole, the assessment `UNIQUE` collision, and `SUCCEEDED` effects surviving rollback. | Superseded |
 | 8 | [aidev — Implementation Baseline v5.3 (FROZEN)](docs/8-aidev-plan-v5.3-frozen.md) | The GO-to-implementation patch: `attempt_seq` rollback watermark, one rollback primitive, agent-config opt-in deleted. Adds Appendix A2, the typing order for M0–M2. | Superseded |
-| 9 | [Ready — Implementation Baseline v5.4 (FROZEN)](docs/9-ready-plan-v5.4-frozen.md) | **Canonical.** v5.3 renamed `aidev` → Ready, plus §1.1 resolving the `READY` naming collision. Zero architectural deltas. | **Current** |
+| 9 | [Ready — Implementation Baseline v5.4 (FROZEN)](docs/9-ready-plan-v5.4-frozen.md) | **Canonical spec.** v5.3 renamed `aidev` → Ready, plus §1.1 resolving the `READY` naming collision. Zero architectural deltas. | **Current** |
+| 10 | [Ready — Implementation Plan: M0 through M2](docs/10-ready-impliment-v5.4.md) | **The build plan.** Not another design version — an execution plan derived from doc 9. Eight parts: bootstrap, M0 skeleton, shared foundations, M1 workspace, M2 security substrate, master sequence, definition of done, M3 follow-ups. | **Active** |
 
 ---
 
@@ -57,12 +62,18 @@ and fixes, so the chain is auditable end to end.
 doc 1 · deep research
    │
    ▼
-v1.0 ──→ v2.0 ──→ v3.0 ──→ (v4.0) ──→ v5.0 ──→ v5.1 ──→ v5.3 ──→ v5.4
-#2       #4       #5       no doc     #6       #7       #8       #9
-         ▲                                     └────── frozen ──────┘
-         │                                                       canonical
-doc 3 · performance research — a critique of v1.0, folded in at v2.0
+v1.0 ──→ v2.0 ──→ v3.0 ──→ (v4.0) ──→ v5.0 ──→ v5.1 ──→ v5.3 ──→ v5.4 ──→ build
+#2       #4       #5       no doc     #6       #7       #8       #9       #10
+         ▲                                     └────── frozen ──────┘       │
+         │                                                    canonical     │
+doc 3 · performance research — a critique of v1.0, folded in at v2.0        │
+                                                                            ▼
+                                          M0–M2, executed in a separate repo
 ```
+
+Doc 10 is **not** a v5.5. It adds no decision and reverses none; it reads the frozen spec and says
+what to type, in what order. Where the spec underdetermines something it marks a *flagged
+resolution* and stays inside D-01…D-40 / P-01…P-41 and I-01…I-25.
 
 | Version | Doc | Pass | What it changed |
 |---------|-----|------|-----------------|
@@ -87,7 +98,8 @@ titled *"From v5.1 → v5.3."*
 
 | Your goal | Path |
 |-----------|------|
-| **Build it** | Doc [9](docs/9-ready-plan-v5.4-frozen.md) alone. §2.2 Definition of Done, §2.4 invariants, §3 locked decisions, §18 milestones, Appendix A2 for the M0–M2 typing order. §24 lists the spikes gating M3 and M4. |
+| **Build M0–M2 today** | Doc [10](docs/10-ready-impliment-v5.4.md) start to finish, with doc [9](docs/9-ready-plan-v5.4-frozen.md) open beside it as the normative reference. Doc 10 Part 6 is the master execution sequence; Part 7 is the definition of done for the whole arc. |
+| **Build past M2** | Doc [9](docs/9-ready-plan-v5.4-frozen.md). §2.2 Definition of Done, §2.4 invariants, §3 locked decisions, §18 milestones. §24 lists the spikes gating M3 and M4 — doc 10 Part 8 says which to kick off during late M2. |
 | **Understand why it looks like this** | Doc [9](docs/9-ready-plan-v5.4-frozen.md) §0 — seven delta tables covering v1.0 → v5.4 — then doc [1](docs/1-aidev-deep-research-report.md) for architectural rationale and doc [3](docs/3-aidev-at_R0_R1_The_Achievable_Frontier_Under_Cold_Start_and_Cache.md) for why the performance targets moved. |
 | **Challenge a decision** | Doc [1](docs/1-aidev-deep-research-report.md) holds the rejected alternatives (Temporal, LangGraph, vector DBs, agent swarms) and the evidence against them; doc [3](docs/3-aidev-at_R0_R1_The_Achievable_Frontier_Under_Cold_Start_and_Cache.md) holds the cost arithmetic. Then read doc [9](docs/9-ready-plan-v5.4-frozen.md) §1 rule 4 — the answer is a spike and an ADR supersede, not a v5.5. |
 | **Review security or architecture** | Doc [9](docs/9-ready-plan-v5.4-frozen.md) §6 architecture, §12 state and recovery, §14 Action Broker and sandboxing, §15A environment provisioning. |
@@ -137,6 +149,8 @@ These will mislead a reader who opens a document without this index.
 - **Doc 9's changelog is not a verbatim historical record.** §0.2–§0.7 describe v2.0–v4.0 defects in the *new* vocabulary — §0.6 writes `.ready/memory/*.md` for a defect doc 5 records as `.aidev/memory/*.md`. Accurate about substance; wrong about wording. Quote the older document when the exact phrasing matters.
 - **Doc 9's header says uncertainty is resolved by "S-01…S-08"**, while §24 defines nine spikes. S-09 arrived with the rename and the header was not updated; the S-09 row is also separated from its table by a blank line, so it renders as an orphan.
 - **Doc [1](docs/1-aidev-deep-research-report.md) carries 45 unresolved inline citation markers** that render as `citeturn19search2…` where source links should be. Claims are attributed in prose (Agentless, SWE-agent, SWE-Bench Pro, OWASP, NIST, SLSA, OpenTelemetry); the links are not recoverable from the file.
+- **Doc [10](docs/10-ready-impliment-v5.4.md) builds somewhere else.** It targets a new standalone repo at `~/Projects/jaan-to-ready` (`git@github.com:parhumm/jaan-to-ready.git`). This `ready-aidev/` folder stays a design archive — *"nothing is written there."* Do not start typing code into jaan-to.
+- **Doc 10's `-v5.4` names its input, not its own version**, and its filename misspells *implement* as `impliment` — grepping the folder for "implement" will not find it. Its scope is M0–M2 only; M3 onward is not planned in it, by design.
 - **Filenames are not authoritative.** Every plan states its version and status in its first five lines. Where a filename and a body disagree, the body wins.
 
 ---
