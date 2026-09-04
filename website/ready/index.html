@@ -1,0 +1,1293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>READY AI DEV | Verify AI code before you accept it</title>
+  <meta name="description" content="READY runs Claude Code or Codex changes in an isolated worktree, verifies the exact result, and gives you evidence and a diff before you accept it.">
+  <meta name="theme-color" content="#f7f1e7">
+  <meta property="og:title" content="READY AI DEV">
+  <meta property="og:description" content="Do not trust done. Verify the change.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ready.jaan.to/">
+  <link rel="canonical" href="https://ready.jaan.to/">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: oklch(96.8% 0.016 79);
+      --paper-deep: oklch(92.5% 0.027 73);
+      --ink: oklch(23% 0.018 54);
+      --ink-soft: oklch(43% 0.018 54);
+      --line: oklch(78% 0.028 70);
+      --coral: oklch(65% 0.205 36);
+      --coral-dark: oklch(51% 0.18 34);
+      --coral-soft: oklch(89% 0.07 45);
+      --yellow: oklch(86% 0.14 88);
+      --yellow-soft: oklch(93% 0.07 91);
+      --mint: oklch(73% 0.11 157);
+      --mint-soft: oklch(92% 0.04 156);
+      --warn: oklch(71% 0.16 70);
+      --surface: oklch(98.5% 0.009 78);
+      --focus: oklch(48% 0.2 265);
+      --shadow: 0 20px 55px oklch(32% 0.03 55 / 0.12);
+      --font-sans: "Avenir Next", Avenir, "Segoe UI", Helvetica, Arial, sans-serif;
+      --font-mono: ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --page: min(1180px, calc(100vw - 32px));
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 88px;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px),
+        var(--paper);
+      background-size: 48px 48px;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(90deg, var(--paper) 0 8%, transparent 22% 78%, var(--paper) 92% 100%);
+      pointer-events: none;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+    code { font-family: var(--font-mono); font-variant-ligatures: none; }
+
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 1000;
+      padding: 10px 14px;
+      background: var(--ink);
+      color: var(--surface);
+      transform: translateY(-160%);
+      transition: transform 180ms var(--ease-out);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .shell {
+      width: var(--page);
+      margin-inline: auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid var(--line);
+      background: oklch(96.8% 0.016 79 / 0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      background: var(--coral);
+      color: var(--surface);
+      clip-path: polygon(50% 0, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+      font-size: 0.9rem;
+      font-weight: 900;
+    }
+
+    .brand em {
+      color: var(--coral-dark);
+      font-size: 0.7rem;
+      font-style: normal;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 0.87rem;
+      font-weight: 650;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:not(.button):hover { color: var(--coral-dark); }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 11px 18px;
+      border: 1.5px solid var(--ink);
+      border-radius: 8px;
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 140ms var(--ease-out), box-shadow 140ms var(--ease-out), background 140ms linear;
+    }
+
+    .button:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 5px 5px 0 var(--ink);
+    }
+
+    .button:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+    }
+
+    .button-primary {
+      background: var(--coral);
+      color: var(--ink);
+    }
+
+    .button-small {
+      min-height: 40px;
+      padding: 8px 14px;
+      box-shadow: 2px 2px 0 var(--ink);
+      font-size: 0.84rem;
+    }
+
+    main { overflow: clip; }
+
+    .hero {
+      min-height: calc(100svh - 70px);
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(380px, 0.88fr);
+      align-items: center;
+      gap: clamp(44px, 7vw, 100px);
+      padding-block: clamp(64px, 9vw, 128px);
+    }
+
+    .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border: 1px solid var(--ink);
+      background: var(--yellow);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transform: rotate(-1deg);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--coral-dark);
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    h1 {
+      max-width: 760px;
+      margin-top: 24px;
+      font-size: clamp(3.35rem, 8vw, 7.5rem);
+      font-weight: 850;
+      letter-spacing: -0.072em;
+      line-height: 0.84;
+      text-wrap: balance;
+    }
+
+    h1 .line-two {
+      display: block;
+      margin-top: 0.2em;
+      color: var(--coral-dark);
+      font-size: 0.56em;
+      letter-spacing: -0.055em;
+      line-height: 1;
+    }
+
+    .hero-copy {
+      max-width: 56ch;
+      margin-top: 28px;
+      color: var(--ink-soft);
+      font-size: clamp(1.06rem, 1.5vw, 1.28rem);
+      line-height: 1.55;
+      text-wrap: pretty;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .hero-note {
+      margin-top: 20px;
+      color: var(--ink-soft);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    .receipt-wrap {
+      position: relative;
+      transform: rotate(1.2deg);
+    }
+
+    .receipt-wrap::before {
+      content: "verified evidence";
+      position: absolute;
+      right: -54px;
+      top: 12%;
+      z-index: 2;
+      color: var(--coral-dark);
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      transform: rotate(8deg);
+    }
+
+    .receipt {
+      position: relative;
+      padding: clamp(22px, 3vw, 38px);
+      border: 1.5px solid var(--ink);
+      background: var(--surface);
+      box-shadow: 12px 14px 0 var(--yellow), var(--shadow);
+    }
+
+    .receipt::after {
+      content: "";
+      position: absolute;
+      right: 9%;
+      bottom: -19px;
+      width: 54%;
+      height: 22px;
+      background: var(--surface);
+      clip-path: polygon(0 0, 4% 100%, 8% 0, 12% 100%, 16% 0, 20% 100%, 24% 0, 28% 100%, 32% 0, 36% 100%, 40% 0, 44% 100%, 48% 0, 52% 100%, 56% 0, 60% 100%, 64% 0, 68% 100%, 72% 0, 76% 100%, 80% 0, 84% 100%, 88% 0, 92% 100%, 96% 0, 100% 100%, 100% 0);
+    }
+
+    .receipt-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 18px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .receipt-title {
+      font-size: clamp(1.2rem, 2.5vw, 1.75rem);
+      font-weight: 850;
+      letter-spacing: -0.035em;
+      text-transform: uppercase;
+    }
+
+    .receipt-label {
+      display: block;
+      color: var(--ink-soft);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .state {
+      padding: 6px 9px;
+      border: 1px solid var(--ink);
+      background: var(--mint-soft);
+      color: oklch(38% 0.1 155);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 850;
+    }
+
+    .receipt-list { margin-top: 8px; }
+
+    .receipt-row {
+      display: grid;
+      grid-template-columns: 24px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      min-height: 50px;
+      border-bottom: 1px dashed var(--line);
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .is-visible .receipt-row {
+      animation: row-in 420ms var(--ease-out) forwards;
+      animation-delay: calc(var(--i) * 90ms);
+    }
+
+    .row-check {
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border: 1px solid oklch(46% 0.1 155);
+      border-radius: 50%;
+      background: var(--mint-soft);
+      color: oklch(38% 0.1 155);
+      font-size: 0.7rem;
+      font-weight: 900;
+    }
+
+    .receipt-row strong {
+      display: block;
+      font-size: 0.84rem;
+      line-height: 1.25;
+    }
+
+    .receipt-row small {
+      display: block;
+      overflow: hidden;
+      color: var(--ink-soft);
+      font-family: var(--font-mono);
+      font-size: 0.64rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pass {
+      color: oklch(38% 0.1 155);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: 800;
+    }
+
+    .receipt-foot {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 20px;
+    }
+
+    .stamp {
+      padding: 7px 13px;
+      border: 3px solid oklch(45% 0.12 155);
+      color: oklch(40% 0.11 155);
+      font-size: 1.25rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      transform: rotate(-3deg);
+    }
+
+    @keyframes row-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .band {
+      border-block: 1.5px solid var(--ink);
+      background: var(--yellow);
+    }
+
+    .proof-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .proof-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 82px;
+      padding: 18px 24px;
+      font-weight: 720;
+    }
+
+    .proof-item + .proof-item { border-left: 1px solid var(--ink); }
+
+    .proof-symbol {
+      flex: 0 0 auto;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--surface);
+      font-weight: 900;
+    }
+
+    .section {
+      padding-block: clamp(76px, 10vw, 144px);
+    }
+
+    .section-kicker {
+      color: var(--coral-dark);
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      max-width: 16ch;
+      margin-top: 12px;
+      font-size: clamp(2.35rem, 5.5vw, 5.3rem);
+      font-weight: 830;
+      letter-spacing: -0.058em;
+      line-height: 0.95;
+      text-wrap: balance;
+    }
+
+    .section-lead {
+      max-width: 60ch;
+      margin-top: 22px;
+      color: var(--ink-soft);
+      font-size: clamp(1rem, 1.4vw, 1.18rem);
+      text-wrap: pretty;
+    }
+
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-top: 48px;
+      border: 1.5px solid var(--ink);
+      background: var(--surface);
+      box-shadow: 9px 9px 0 var(--coral-soft);
+    }
+
+    .compare-column { padding: clamp(24px, 4vw, 46px); }
+    .compare-column + .compare-column { border-left: 1.5px solid var(--ink); }
+    .compare-column.ready-side { background: var(--yellow-soft); }
+
+    .compare-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      font-size: 1rem;
+      font-weight: 820;
+    }
+
+    .compare-title span {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 700;
+    }
+
+    .compare-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .compare-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 12px;
+      padding-block: 18px;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .compare-list li:last-child { border-bottom: 0; }
+
+    .compare-list strong { display: block; font-size: 0.93rem; }
+    .compare-list p { margin-top: 3px; color: var(--ink-soft); font-size: 0.87rem; }
+
+    .workflow-section {
+      border-block: 1.5px solid var(--ink);
+      background: var(--surface);
+    }
+
+    .workflow-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(320px, 0.48fr);
+      gap: 64px;
+      align-items: end;
+    }
+
+    .provider-panel {
+      padding: 22px;
+      border: 1.5px solid var(--ink);
+      background: var(--paper);
+      box-shadow: 6px 6px 0 var(--yellow);
+    }
+
+    .provider-label {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+
+    .provider-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 4px;
+      border: 1px solid var(--ink);
+      background: var(--surface);
+    }
+
+    .provider-tab {
+      min-height: 44px;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      font-weight: 760;
+      cursor: pointer;
+    }
+
+    .provider-tab[aria-pressed="true"] {
+      background: var(--ink);
+      color: var(--surface);
+    }
+
+    .provider-status {
+      min-height: 42px;
+      margin-top: 12px;
+      color: var(--ink-soft);
+      font-size: 0.77rem;
+    }
+
+    .provider-status strong { color: var(--coral-dark); }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(120px, 1fr));
+      gap: 0;
+      margin-top: 54px;
+      overflow-x: auto;
+      padding: 4px 4px 18px;
+      scrollbar-color: var(--coral) var(--paper-deep);
+    }
+
+    .phase {
+      position: relative;
+      min-height: 188px;
+      padding: 24px 20px;
+      border: 1.5px solid var(--ink);
+      background: var(--paper);
+    }
+
+    .phase + .phase { border-left: 0; }
+
+    .phase:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      right: -15px;
+      top: 22px;
+      z-index: 3;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      background: var(--yellow);
+      font-weight: 900;
+    }
+
+    .phase-no {
+      color: var(--coral-dark);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+
+    .phase h3 {
+      margin-top: 28px;
+      font-size: 1rem;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+    }
+
+    .phase p {
+      margin-top: 10px;
+      color: var(--ink-soft);
+      font-size: 0.8rem;
+      line-height: 1.45;
+    }
+
+    .phase-ready { background: var(--mint-soft); }
+
+    .repair-loop {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 14px;
+      width: min(720px, 100%);
+      margin: 22px auto 0;
+      padding: 15px 18px;
+      border: 1px dashed var(--coral-dark);
+      background: var(--coral-soft);
+      font-size: 0.82rem;
+    }
+
+    .repair-loop strong { color: var(--coral-dark); }
+    .repair-arrow { font-weight: 900; }
+
+    .exit-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: min(720px, 100%);
+      margin: 16px auto 0;
+    }
+
+    .exit-item {
+      padding: 14px 16px;
+      border: 1px solid var(--ink);
+      background: var(--yellow-soft);
+      font-size: 0.78rem;
+    }
+
+    .exit-item strong { display: block; }
+
+    .benefit-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.72fr) minmax(340px, 0.58fr);
+      gap: clamp(48px, 8vw, 120px);
+      align-items: start;
+    }
+
+    .benefit-list {
+      display: grid;
+      margin-top: 42px;
+      border-top: 1.5px solid var(--ink);
+    }
+
+    .benefit {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 18px;
+      padding-block: 24px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .benefit-no {
+      color: var(--coral-dark);
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 850;
+    }
+
+    .benefit h3 { font-size: 1.1rem; }
+    .benefit p { margin-top: 5px; color: var(--ink-soft); font-size: 0.93rem; }
+
+    .limits {
+      position: sticky;
+      top: 104px;
+      padding: 28px;
+      border: 1.5px solid var(--ink);
+      background: var(--yellow-soft);
+      box-shadow: 8px 8px 0 var(--coral-soft);
+      transform: rotate(0.6deg);
+    }
+
+    .limits h3 {
+      font-size: 1.45rem;
+      letter-spacing: -0.035em;
+    }
+
+    .limits ul {
+      display: grid;
+      gap: 14px;
+      margin: 22px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .limits li {
+      display: grid;
+      grid-template-columns: 22px 1fr;
+      gap: 10px;
+      font-size: 0.86rem;
+    }
+
+    .limits li::before {
+      content: "!";
+      width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--warn);
+      color: var(--ink);
+      font-size: 0.7rem;
+      font-weight: 900;
+    }
+
+    .install-section {
+      border-block: 1.5px solid var(--ink);
+      background: var(--coral);
+      color: var(--ink);
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: 0.72fr 1fr;
+      gap: clamp(48px, 8vw, 120px);
+      align-items: center;
+    }
+
+    .install-section .section-kicker,
+    .install-section .section-lead { color: var(--ink); }
+
+    .install-section .section-lead { opacity: 0.84; }
+
+    .install-grid > *,
+    .command-box { min-width: 0; }
+
+    .command-box {
+      border: 1.5px solid var(--ink);
+      background: var(--ink);
+      box-shadow: 10px 10px 0 var(--yellow);
+      color: var(--surface);
+    }
+
+    .command-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 48px;
+      padding: 8px 10px 8px 18px;
+      border-bottom: 1px solid oklch(43% 0.018 54);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+    }
+
+    .command-head span { min-width: 0; }
+
+    .copy-button {
+      min-height: 34px;
+      padding: 6px 10px;
+      border: 1px solid var(--surface);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--surface);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      cursor: pointer;
+    }
+
+    .copy-button:hover { background: oklch(35% 0.025 54); }
+    .copy-button[data-state="copied"] { background: oklch(42% 0.11 155); }
+
+    pre {
+      max-width: 100%;
+      margin: 0;
+      padding: 24px;
+      overflow-x: auto;
+      font-size: clamp(0.72rem, 1.3vw, 0.86rem);
+      line-height: 1.8;
+      white-space: pre;
+    }
+
+    .install-note {
+      margin-top: 16px;
+      color: var(--ink);
+      font-size: 0.78rem;
+      opacity: 0.86;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 0.62fr 1fr;
+      gap: clamp(48px, 8vw, 120px);
+      align-items: start;
+    }
+
+    .faq-list { border-top: 1.5px solid var(--ink); }
+
+    details { border-bottom: 1px solid var(--line); }
+
+    summary {
+      min-height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 16px;
+      font-weight: 760;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "+";
+      flex: 0 0 auto;
+      color: var(--coral-dark);
+      font-family: var(--font-mono);
+      font-size: 1.3rem;
+      transition: transform 220ms var(--ease-out);
+    }
+
+    details[open] summary::after { transform: rotate(45deg); }
+
+    details p {
+      max-width: 64ch;
+      padding: 0 40px 22px 0;
+      color: var(--ink-soft);
+      font-size: 0.9rem;
+    }
+
+    .final-cta {
+      padding-block: clamp(64px, 9vw, 112px);
+      border-top: 1.5px solid var(--ink);
+      background: var(--yellow);
+    }
+
+    .final-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .final-inner h2 { max-width: 12ch; margin-top: 0; }
+    .final-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    footer {
+      padding-block: 28px max(28px, env(safe-area-inset-bottom));
+      background: var(--ink);
+      color: var(--surface);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      font-size: 0.78rem;
+    }
+
+    .footer-links { display: flex; gap: 20px; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 650ms var(--ease-out), transform 650ms var(--ease-out);
+    }
+
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-copy { max-width: 62ch; }
+      .receipt-wrap { width: min(620px, 94%); margin-inline: auto; }
+      .receipt-wrap::before { right: -22px; }
+      .workflow-head, .benefit-layout, .install-grid, .faq-grid { grid-template-columns: 1fr; }
+      .provider-panel { width: min(520px, 100%); }
+      .limits { position: static; transform: none; }
+      .final-inner { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 720px) {
+      :root { --page: min(100% - 24px, 1180px); }
+      .nav-links a:not(.button) { display: none; }
+      .brand em { display: none; }
+      .hero { padding-block: 52px 80px; }
+      h1 { font-size: clamp(3.1rem, 18vw, 5.4rem); }
+      .hero-actions { display: grid; }
+      .button { width: 100%; }
+      .receipt-wrap { width: 100%; transform: none; }
+      .receipt-wrap::before { display: none; }
+      .receipt { box-shadow: 6px 8px 0 var(--yellow); }
+      .proof-strip { grid-template-columns: 1fr; }
+      .proof-item + .proof-item { border-left: 0; border-top: 1px solid var(--ink); }
+      .compare-grid { grid-template-columns: 1fr; }
+      .compare-column + .compare-column { border-left: 0; border-top: 1.5px solid var(--ink); }
+      .section { padding-block: 72px; }
+      .flow { grid-template-columns: repeat(6, minmax(152px, 1fr)); margin-inline: -12px; }
+      .repair-loop { grid-template-columns: 1fr; }
+      .repair-arrow { display: none; }
+      .exit-row { grid-template-columns: 1fr; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+    }
+
+    @media (max-width: 420px) {
+      .nav-inner { min-height: 62px; }
+      .nav-links .button { min-height: 38px; padding: 7px 10px; font-size: 0.75rem; }
+      .receipt { padding: 18px; }
+      .receipt-head, .receipt-foot { align-items: flex-start; flex-direction: column; }
+      .receipt-row { grid-template-columns: 22px minmax(0, 1fr); padding-block: 8px; }
+      .receipt-row .pass { grid-column: 2; }
+      .provider-panel { padding: 16px; }
+      .compare-column { padding: 22px 18px; }
+      pre { padding: 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      .reveal, .receipt-row { opacity: 1; transform: none; }
+    }
+
+    @media (prefers-contrast: more) {
+      :root { --line: oklch(48% 0.028 54); }
+      .button, .receipt, .compare-grid, .phase, .provider-panel, .limits, .command-box { border-width: 2px; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="shell nav-inner">
+      <a class="brand" href="#top" aria-label="READY AI DEV home">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span>READY</span>
+        <em>AI DEV</em>
+      </a>
+      <div class="nav-links">
+        <a href="#compare">Why READY</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#limits">Limits</a>
+        <a class="button button-small" href="#install">Install</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <section class="shell hero" id="top">
+      <div>
+        <span class="eyebrow">Early testing · macOS</span>
+        <h1>Don’t trust “done.” <span class="line-two">Verify the change.</span></h1>
+        <p class="hero-copy">Claude Code or Codex proposes a patch. READY checks the exact result in a separate worktree, then gives you the evidence and diff before your project changes.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#install">Install READY <span aria-hidden="true">↓</span></a>
+          <a class="button" href="https://github.com/parhumm/jaan-to-ready">Star on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="hero-note">Local control plane. Original checkout stays untouched.</p>
+      </div>
+
+      <div class="receipt-wrap reveal" aria-label="Example offline verification receipt">
+        <article class="receipt">
+          <header class="receipt-head">
+            <div>
+              <span class="receipt-label">Offline fixture · example evidence</span>
+              <h2 class="receipt-title">Change receipt</h2>
+            </div>
+            <span class="state">VERIFIED</span>
+          </header>
+          <div class="receipt-list">
+            <div class="receipt-row" style="--i: 0">
+              <span class="row-check" aria-hidden="true">✓</span>
+              <div><strong>Isolated worktree</strong><small>ready-owned workspace</small></div>
+              <span class="pass">PASS</span>
+            </div>
+            <div class="receipt-row" style="--i: 1">
+              <span class="row-check" aria-hidden="true">✓</span>
+              <div><strong>Patch identity</strong><small>base and result hashes match</small></div>
+              <span class="pass">PASS</span>
+            </div>
+            <div class="receipt-row" style="--i: 2">
+              <span class="row-check" aria-hidden="true">✓</span>
+              <div><strong>Project checks</strong><small>parse · tests · types · lint</small></div>
+              <span class="pass">PASS</span>
+            </div>
+            <div class="receipt-row" style="--i: 3">
+              <span class="row-check" aria-hidden="true">✓</span>
+              <div><strong>Secret scan</strong><small>changed files inspected</small></div>
+              <span class="pass">PASS</span>
+            </div>
+            <div class="receipt-row" style="--i: 4">
+              <span class="row-check" aria-hidden="true">✓</span>
+              <div><strong>Original checkout</strong><small>clean and unchanged</small></div>
+              <span class="pass">PASS</span>
+            </div>
+          </div>
+          <footer class="receipt-foot">
+            <div><span class="receipt-label">Evidence binds</span><code>tree · context · env · plan</code></div>
+            <strong class="stamp">READY</strong>
+          </footer>
+        </article>
+      </div>
+    </section>
+
+    <aside class="band" aria-label="Current readiness">
+      <div class="shell proof-strip">
+        <div class="proof-item"><span class="proof-symbol" aria-hidden="true">✓</span>Offline workflow tested</div>
+        <div class="proof-item"><span class="proof-symbol" aria-hidden="true">⌂</span>Runs locally on your laptop</div>
+        <div class="proof-item"><span class="proof-symbol" aria-hidden="true">!</span>Real providers still gated</div>
+      </div>
+    </aside>
+
+    <section class="shell section" id="compare">
+      <p class="section-kicker">Why add READY?</p>
+      <h2>Conversation is not verification.</h2>
+      <p class="section-lead">Claude Code and Codex can run checks. READY makes passing evidence a required state transition, separate from the model’s answer.</p>
+
+      <div class="compare-grid reveal">
+        <article class="compare-column">
+          <h3 class="compare-title"><span>01</span> Typical direct session</h3>
+          <ul class="compare-list">
+            <li><span aria-hidden="true">→</span><div><strong>Agent edits your checkout</strong><p>Your active working tree changes during the session.</p></div></li>
+            <li><span aria-hidden="true">→</span><div><strong>Checks stay conversational</strong><p>You ask, the agent runs tools, and reports the result.</p></div></li>
+            <li><span aria-hidden="true">→</span><div><strong>“Done” is the handoff</strong><p>You reconstruct the evidence from the chat and Git.</p></div></li>
+          </ul>
+        </article>
+        <article class="compare-column ready-side">
+          <h3 class="compare-title"><span>02</span> With READY</h3>
+          <ul class="compare-list">
+            <li><span aria-hidden="true">✓</span><div><strong>Patch lands in isolation</strong><p>Your original checkout stays unchanged.</p></div></li>
+            <li><span aria-hidden="true">✓</span><div><strong>Checks run independently</strong><p>READY verifies the resulting tree, not the claim.</p></div></li>
+            <li><span aria-hidden="true">✓</span><div><strong>Evidence is the handoff</strong><p>Review the receipt and diff, then choose what to keep.</p></div></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="workflow-section" id="workflow">
+      <div class="shell section">
+        <div class="workflow-head">
+          <div>
+            <p class="section-kicker">The workflow</p>
+            <h2>One path from request to evidence.</h2>
+          </div>
+          <div class="provider-panel" aria-labelledby="provider-label">
+            <p class="provider-label" id="provider-label">Choose the worker for each run</p>
+            <div class="provider-tabs" role="group" aria-label="Provider example">
+              <button class="provider-tab" type="button" aria-pressed="true" data-provider="claude">Claude Code</button>
+              <button class="provider-tab" type="button" aria-pressed="false" data-provider="codex">Codex</button>
+            </div>
+            <p class="provider-status" aria-live="polite"><strong>Claude example:</strong> Sonnet, medium effort. Real use stays locked until this exact provider version passes READY’s safety check.</p>
+          </div>
+        </div>
+
+        <div class="flow reveal" aria-label="READY workflow phases">
+          <article class="phase"><span class="phase-no">01</span><h3>Choose</h3><p>Select Claude Code or Codex for this run. READY records the choice.</p></article>
+          <article class="phase"><span class="phase-no">02</span><h3>Prepare</h3><p>Create isolation, assemble bounded context, and load policy.</p></article>
+          <article class="phase"><span class="phase-no">03</span><h3>Implement</h3><p>The selected model returns a structured patch.</p></article>
+          <article class="phase"><span class="phase-no">04</span><h3>Post-diff</h3><p>Inspect the actual change and reassess risk.</p></article>
+          <article class="phase"><span class="phase-no">05</span><h3>Verify</h3><p>Run applicable checks against the exact result.</p></article>
+          <article class="phase phase-ready"><span class="phase-no">06</span><h3>Ready</h3><p>Store evidence. You review the diff and decide.</p></article>
+        </div>
+
+        <div class="repair-loop reveal">
+          <strong>Checks fail</strong>
+          <span>One bounded repair can return through post-diff and verification.</span>
+          <span class="repair-arrow" aria-hidden="true">↺</span>
+        </div>
+        <div class="exit-row reveal">
+          <div class="exit-item"><strong>Blocked human</strong>A specific policy decision needs your approval.</div>
+          <div class="exit-item"><strong>Escalated</strong>Unsafe, unsupported, or still failing. READY stops.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell section" id="limits">
+      <div class="benefit-layout">
+        <div>
+          <p class="section-kicker">Practical benefits</p>
+          <h2>Know what worked before you accept it.</h2>
+          <div class="benefit-list">
+            <article class="benefit"><span class="benefit-no">01</span><div><h3>Verify the result</h3><p>Checks run against the patched tree and produce stored evidence.</p></div></article>
+            <article class="benefit"><span class="benefit-no">02</span><div><h3>Keep your checkout clean</h3><p>AI changes stay in a READY-owned worktree until you review them.</p></div></article>
+            <article class="benefit"><span class="benefit-no">03</span><div><h3>Fail closed</h3><p>No passing evidence means no READY state and no result branch.</p></div></article>
+            <article class="benefit"><span class="benefit-no">04</span><div><h3>Choose per run</h3><p>Select Claude Code or Codex. READY never switches silently.</p></div></article>
+          </div>
+        </div>
+
+        <aside class="limits">
+          <p class="section-kicker">Current limits</p>
+          <h3>Early testing means early testing.</h3>
+          <ul>
+            <li>Validated locally on macOS. Python and Node projects have first-class checks.</li>
+            <li>Passing checks reduce uncertainty. They cannot prove product correctness.</li>
+            <li>Real Claude and Codex runs remain disabled until provider safety validation passes.</li>
+            <li>No automatic model routing, merge, push, deploy, or publication.</li>
+            <li>Start with a disposable clone and review every result.</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="install-section" id="install">
+      <div class="shell section install-grid">
+        <div>
+          <p class="section-kicker">Install the early test</p>
+          <h2>Prove the local workflow first.</h2>
+          <p class="section-lead">Install from GitHub, run the offline fixture, then inspect the receipt and diff. No model call is required.</p>
+        </div>
+        <div>
+          <div class="command-box">
+            <div class="command-head"><span>macOS · Python 3.12+ · Git · uv</span><button class="copy-button" type="button" data-copy aria-label="Copy installation commands">Copy</button></div>
+            <pre><code id="install-command">git clone https://github.com/parhumm/jaan-to-ready.git
+cd jaan-to-ready
+uv tool install --force .
+ready doctor</code></pre>
+          </div>
+          <p class="install-note">Then follow the offline acceptance walkthrough in the <a href="https://github.com/parhumm/jaan-to-ready#first-run-safe-offline-acceptance">README</a>. Real model calls require separate, explicit approval.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell section" id="faq">
+      <div class="faq-grid">
+        <div>
+          <p class="section-kicker">Short answers</p>
+          <h2>Before you try it.</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Is READY another coding model?</summary>
+            <p>No. Claude Code or Codex proposes the patch. READY owns isolation, policy, workflow state, verification, evidence, and review delivery.</p>
+          </details>
+          <details>
+            <summary>Can I switch between Claude and Codex?</summary>
+            <p>Yes, between runs. You choose one enabled provider, model, and effort for a run. READY records that choice and does not silently switch midway.</p>
+          </details>
+          <details>
+            <summary>Does READY guarantee the change is correct?</summary>
+            <p>No. It proves that configured checks passed for the exact result. Good checks and human review still matter.</p>
+          </details>
+          <details>
+            <summary>Does it edit my current checkout?</summary>
+            <p>No. READY works in its own Git worktree. After review, you can export a patch or keep a result branch.</p>
+          </details>
+          <details>
+            <summary>Can I use my existing subscriptions?</summary>
+            <p>READY is designed to accept supported ChatGPT and Claude subscription logins only. It rejects API and pay-as-you-go identities. Real-provider use remains gated during early testing.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta">
+      <div class="shell final-inner">
+        <h2>Bring evidence to AI coding.</h2>
+        <div class="final-actions">
+          <a class="button button-primary" href="#install">Install READY</a>
+          <a class="button" href="https://github.com/parhumm/jaan-to-ready">Review the code <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-inner">
+      <p>READY AI DEV · An early-test project from jaan.to</p>
+      <div class="footer-links">
+        <a href="https://github.com/parhumm/jaan-to-ready">GitHub</a>
+        <a href="https://jaan.to">jaan.to</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const reveal = (elements) => {
+      if (!('IntersectionObserver' in window)) {
+        elements.forEach((element) => element.classList.add('is-visible'));
+        return;
+      }
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      elements.forEach((element) => observer.observe(element));
+    };
+
+    reveal(document.querySelectorAll('.reveal'));
+
+    const providerCopy = {
+      claude: '<strong>Claude example:</strong> Sonnet, medium effort. Real use stays locked until this exact provider version passes READY’s safety check.',
+      codex: '<strong>Codex example:</strong> GPT-5.4, medium effort. Real use stays locked until this exact provider version passes READY’s safety check.'
+    };
+
+    const providerTabs = [...document.querySelectorAll('.provider-tab')];
+    const providerStatus = document.querySelector('.provider-status');
+    providerTabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => {
+        providerTabs.forEach((item) => item.setAttribute('aria-pressed', String(item === tab)));
+        providerStatus.innerHTML = providerCopy[tab.dataset.provider];
+      });
+      tab.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'ArrowRight' ? (index + 1) % providerTabs.length : (index - 1 + providerTabs.length) % providerTabs.length;
+        providerTabs[next].focus();
+        providerTabs[next].click();
+      });
+    });
+
+    const copyButton = document.querySelector('[data-copy]');
+    const installCommand = document.querySelector('#install-command').textContent;
+    copyButton.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(installCommand);
+        copyButton.textContent = 'Copied';
+        copyButton.dataset.state = 'copied';
+        setTimeout(() => {
+          copyButton.textContent = 'Copy';
+          delete copyButton.dataset.state;
+        }, 1800);
+      } catch {
+        const selection = window.getSelection();
+        const range = document.createRange();
+        range.selectNodeContents(document.querySelector('#install-command'));
+        selection.removeAllRanges();
+        selection.addRange(range);
+        copyButton.textContent = 'Selected';
+      }
+    });
+  </script>
+</body>
+</html>
