@@ -27,7 +27,7 @@ sidebar_position: 1
 
 For complete release history, see [CHANGELOG.md](/changelog).
 
-**Latest:** v7.7.1 (58 skills)
+**Latest:** v7.8.1 (59 skills)
 
 ---
 
@@ -40,6 +40,14 @@ For complete release history, see [CHANGELOG.md](/changelog).
   - [ ] `dev-docs-sync` (Should) — Auto-sync CHANGELOG, roadmap, DEPENDENCIES, READMEs, marketplace.json
   - [ ] `qa-skill-validate` (Should) — Validate skills, diagnose failures, auto-fix
   - [ ] `devops-adapter-rebuild` (Could) — Rebuild codex adapter after changes
+
+---
+
+## v7.8.1 — 2026-09-05
+
+- [x] Security gate false positives — `pre-tool-security-gate.sh` execute-flag rule anchored to the substitution delimiter (a pipe-delimited `sed` followed by `sort` and `head` is no longer blocked); `BLOCKED:` reasons moved to stderr so Claude Code shows them; regression test wired into `run-all-tests.sh`
+- [x] Research #88 — free/local tools to cut Claude Code token usage
+- [x] READY AI DEV — design archive, M0–M2 plan and landing page (`website/ready/`)
 
 ---
 

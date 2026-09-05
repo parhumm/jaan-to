@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [7.8.1] - 2026-09-05
+
+### Fixed
+- **Security gate false positives** (`scripts/pre-tool-security-gate.sh`) — the "sed execute flag" rule was unanchored: a pipe-delimited substitution such as `s#a#b#` followed later in the same command by further pipes and a letter e (`sort`, `head`) was blocked as `s///e`. The rule now anchors the flag to the substitution's closing delimiter. Regression test `scripts/test/pre-tool-security-gate-test.sh`, wired into `scripts/test/run-all-tests.sh`
+- **Security gate reasons were invisible** — every `BLOCKED:` message went to stdout, which Claude Code discards for PreToolUse hooks, so the model saw only "hook error: No stderr output" and retried blind. Reasons now go to stderr
+
+### Added
+- **Research #88** — free/local open-source tools to cut Claude Code token usage (`docs/research/88-token-optimization-free-local-open-source-tools.md`)
+- **READY AI DEV** — design archive, M0–M2 implementation plan and landing page (`website/ready/`)
+
+---
+
 ## [7.8.0] - 2026-07-14
 
 ### Added
