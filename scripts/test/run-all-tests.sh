@@ -46,6 +46,7 @@ run_test "Phase 2 E2E" "$SCRIPT_DIR/phase2-e2e.sh"
 run_test "Phases 3-5 E2E" "$SCRIPT_DIR/phase3-5-e2e.sh"
 run_test "Unified Integration" "$SCRIPT_DIR/integration-all-phases.sh"
 run_test "Skill Standard Compliance" "$SCRIPT_DIR/skill-standard-compliance-e2e.sh"
+run_test "Security Gate Regression" "$SCRIPT_DIR/pre-tool-security-gate-test.sh"
 
 TOTAL=$((PASSED + FAILED))
 
