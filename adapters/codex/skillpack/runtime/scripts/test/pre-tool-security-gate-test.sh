@@ -68,6 +68,12 @@ expect_allow "print flag only" \
   "$S -n 's/^socket[[:space:]]*//p' out.txt"
 expect_allow "plain git status" \
   "git status --short"
+expect_allow "escaped delimiters whose segment looks like flags" \
+  "$S 's/\\/home\\/me /x/' file"
+expect_allow "escaped delimiters, double quotes" \
+  "$S \"s/\\/usr\\/pie/x/\" file"
+expect_allow "two substitutions, no execute flag" \
+  "$S 's/a/b/g;s/c/d/' file"
 
 echo -e "\n[Block] real execute flags and privileged deletes, reason on stderr"
 expect_block "execute flag, slash delimiter" \
@@ -76,6 +82,19 @@ expect_block "execute flag combined with g, hash delimiter" \
   "$S -e \"s#a#b#ge\" file"
 expect_block "execute flag, pipe delimiter, after a pipe" \
   "cat f | $S 's|a|b|e'"
+expect_block "execute flag followed by another command" \
+  "$S 's/x/y/e;s/a/b/' file"
+expect_block "execute flag with GNU i flag" \
+  "$S 's/x/y/ei' file"
+expect_block "execute flag with m flag" \
+  "$S 's/x/y/em' file"
+expect_block "execute flag then w file" \
+  "$S 's/x/y/ew /tmp/o' file"
+expect_block "execute flag then trailing space" \
+  "$S 's/x/y/e ' file"
+expect_block "execute flag then newline before the closing quote" \
+  "$S 's/x/y/e
+' file"
 expect_block "privileged delete" \
   "$SU rm file"
 

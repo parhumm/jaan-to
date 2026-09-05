@@ -135,7 +135,11 @@ fi
 # pipe delimiter, followed later in the pipeline by two more pipes and any word containing the letter
 # e (sort, head, grep ...), was blocked — a false positive on ordinary read-only commands, each one
 # costing the model a wasted full-context turn (fixed 2026-09-05).
-if echo "$COMMAND" | grep -qE "sed\s.*['\"]s(.)[^'\"]*\1[^'\"]*\1[gIp0-9]*e[gIp0-9]*['\"]"; then
+# Pattern and replacement may not cross a quote, and a backslash always consumes the next character,
+# so an escaped delimiter (s/\/usr\/me /x/) cannot pose as the closing one. The flag list is GNU's
+# (g p i I m M digits) and the e must be followed by more flags and then a quote, ';', '}', whitespace,
+# a w flag or end of line — otherwise s/x/y/e;... or s/x/y/e  slipped through.
+if echo "$COMMAND" | grep -qE "sed\s.*['\"]s(.)(\\\\.|[^'\"\\\\])*\1(\\\\.|[^'\"\\\\])*\1[gpiImM0-9]*e[gpiImM0-9]*(['\";}[:space:]w]|\$)"; then
   echo "BLOCKED: sed with execute flag is not allowed." >&2
   exit 2
 fi
