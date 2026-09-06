@@ -2,7 +2,7 @@
 name: dev-docs-fetch
 description: Fetch and cache library docs via Context7 MCP with auto-detect. Use when fetching technical documentation.
 allowed-tools: Read, Glob, Grep, Bash(find:*), Bash(stat:*), Bash(mkdir:*), Bash(date:*), Bash(ls:*), mcp__context7__resolve-library-id, mcp__context7__get-library-docs, Write($JAAN_OUTPUTS_DIR/dev/docs/context7/**), AskUserQuestion
-argument-hint: [library-names...]
+argument-hint: "[library-names...]"
 license: PROPRIETARY
 ---
 

@@ -2,7 +2,7 @@
 name: data-gtm-datalayer
 description: Generate production-ready GTM tracking code with dataLayer pushes and HTML attributes. Use when adding analytics tracking.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Edit(jaan-to/config/settings.yaml)
-argument-hint: [prd-path | tracking-description | (interactive)]
+argument-hint: "[prd-path | tracking-description | (interactive)]"
 disable-model-invocation: true
 license: PROPRIETARY
 ---

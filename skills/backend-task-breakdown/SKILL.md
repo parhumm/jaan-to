@@ -2,7 +2,7 @@
 name: backend-task-breakdown
 description: Convert a PRD into structured backend development tasks with reliability patterns. Use when planning backend work from requirements.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/task-breakdown/**), Task, Edit(jaan-to/config/settings.yaml)
-argument-hint: [prd-path] OR [feature-description]
+argument-hint: "[prd-path] OR [feature-description]"
 license: PROPRIETARY
 ---
 

@@ -2,7 +2,7 @@
 name: backend-service-implement
 description: Generate service implementations with business logic from specs and scaffold stubs. Use when implementing backend services.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/backend/service-implement/**), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [backend-scaffold, backend-api-contract, backend-data-model, backend-task-breakdown]
+argument-hint: "[backend-scaffold, backend-api-contract, backend-data-model, backend-task-breakdown]"
 license: PROPRIETARY
 ---
 

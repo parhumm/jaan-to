@@ -2,7 +2,7 @@
 name: qa-test-cases
 description: Generate BDD/Gherkin test cases from acceptance criteria with ISTQB techniques. Use when writing test specs.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/qa/**), Task, WebSearch, Edit(jaan-to/config/settings.yaml)
-argument-hint: [acceptance-criteria | prd-path | jira-id | (interactive)] [--contract backend-api-contract-path]
+argument-hint: "[acceptance-criteria | prd-path | jira-id | (interactive)] [--contract backend-api-contract-path]"
 license: PROPRIETARY
 ---
 

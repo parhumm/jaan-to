@@ -46,7 +46,7 @@ my-skill/
 ---
 name: my-skill
 description: What this skill does
-argument-hint: [issue-number]
+argument-hint: "[issue-number]"
 disable-model-invocation: true
 user-invocable: false
 allowed-tools: Read, Grep, Glob

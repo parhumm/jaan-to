@@ -2,7 +2,7 @@
 name: pm-story-write
 description: Generate user stories with Given/When/Then acceptance criteria following INVEST principles. Use when writing user stories from PRDs.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/**), Bash(cp:*), Task, Edit(jaan-to/config/settings.yaml)
-argument-hint: [feature] [persona] [goal] OR [epic-id]
+argument-hint: "[feature] [persona] [goal] OR [epic-id]"
 license: PROPRIETARY
 ---
 

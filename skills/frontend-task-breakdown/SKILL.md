@@ -2,7 +2,7 @@
 name: frontend-task-breakdown
 description: Generate frontend task breakdowns from UX handoffs with component inventory and state matrices. Use when planning frontend work.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/frontend/task-breakdown/**), Bash(cp:*), Task, WebSearch, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [ux-handoff-description-or-figma-link] [--contract backend-api-contract-path]
+argument-hint: "[ux-handoff-description-or-figma-link] [--contract backend-api-contract-path]"
 license: PROPRIETARY
 ---
 

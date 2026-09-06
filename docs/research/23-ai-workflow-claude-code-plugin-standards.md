@@ -252,7 +252,7 @@ Enterprise (wins) > CLI flags > Project local > Project shared > User
 ```yaml
 ---
 allowed-tools: Bash(npm:*), mcp__jira__*
-argument-hint: [required] [--optional]
+argument-hint: "[required] [--optional]"
 description: One-line for autocomplete
 model: claude-sonnet-4-20250514  # Optional override
 ---

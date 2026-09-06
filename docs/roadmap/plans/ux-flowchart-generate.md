@@ -20,7 +20,7 @@ The `ux-flowchart-generate` skill generates GitHub-renderable Mermaid flowcharts
 name: ux-flowchart-generate
 description: Generate GitHub-renderable Mermaid flowcharts from PRD/docs/codebase with evidence maps and confidence scoring.
 allowed-tools: Read, Glob, Grep, Write($JAAN_OUTPUTS_DIR/ux/**), Task, AskUserQuestion, Edit(jaan-to/config/settings.yaml)
-argument-hint: [source_type] [paths...] [goal] [scope?]
+argument-hint: "[source_type] [paths...] [goal] [scope?]"
 ---
 ```
 
