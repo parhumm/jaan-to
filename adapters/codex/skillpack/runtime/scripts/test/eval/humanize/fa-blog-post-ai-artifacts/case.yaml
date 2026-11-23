@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: fa-blog-post-ai-artifacts
+expected_outcome: |
+  post-final.md is a semi-formal Persian blog post about the cafe with no chat artifacts, no stock
+  openers or closers, no نه تنها…بلکه, no em dashes, correct ZWNJ, Persian ی/ک and Persian digits, and
+  every fact kept.
+context:
+  scaffold_script: place-files.sh

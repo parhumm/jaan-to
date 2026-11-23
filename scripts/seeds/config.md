@@ -34,6 +34,7 @@
 | pm-prd-write | `/jaan-to:pm-prd-write` | Generate PRD from initiative |
 | pm-roadmap-add | `/jaan-to:pm-roadmap-add` | Add prioritized items to project roadmap |
 | learn-add | `/jaan-to:learn-add` | Add lesson to skill's LEARN.md |
+| humanize | `/jaan-to:humanize` | Rewrite or audit English/Persian text that sounds AI-written |
 | docs-create | `/jaan-to:docs-create` | [Internal] Create documentation |
 | docs-update | `/jaan-to:docs-update` | [Internal] Audit and fix documentation |
 | skill-create | `/jaan-to:skill-create` | [Internal] Create new skill with wizard |
