@@ -33,6 +33,7 @@ For complete release history, see [CHANGELOG.md](/changelog).
 
 ## Unreleased
 
+- [x] Writing — `humanize` skill: rewrites or audits English and Persian text that reads as AI-written, keeping every fact. Language packs (`en`, `fa`) with sign catalogs, a bundled checker for tells, fact drift and hidden characters, a Persian orthography pass, deterministic script tests in `run-all-tests.sh` and 9 semantic eval cases. → [docs](../skills/core/humanize.md)
 - [ ] Role Orchestrator Skills — 6 per-role orchestrator skills (`/pm`, `/ux`, `/dev`, `/qa`, `/devops`, `/sec`) using Claude Code Agent Teams. Each orchestrator coordinates all sub-skills within its role via dynamic discovery (`sub-skills.md`). Update `team-ship` to delegate to orchestrators as meta-orchestrator with backward-compatible fallback. → [details](tasks/role-orchestrators.md)
 - [ ] Skill Lifecycle Automation — 5 workflow automation skills discovered via `pm-skill-discover` (est. ~333 min/week savings):
   - [ ] `dev-adapter-sync` (Must, Quick Win) — Mirror skill files from skills/ to adapters/codex/ automatically. High priority: manual `build-codex-skillpack.sh` is a repeated friction point in every PR
