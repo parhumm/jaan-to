@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: fa-request-en-email
+expected_outcome: |
+  The English email is rewritten in English (routed to the English pack) without chat leftovers, signed Niloufar, every fact kept; the reply to the user is in Persian.
+context:
+  scaffold_script: place-files.sh

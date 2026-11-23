@@ -1,0 +1,7 @@
+schema_version: "1.1"
+name: fa-casual-caption-keep-verse
+expected_outcome: |
+  caption-final.md is a short, warm Instagram caption in written colloquial Persian, keeps the Hafez
+  couplet word for word, drops the administrative register and AI vocabulary, and keeps every fact.
+context:
+  scaffold_script: place-files.sh

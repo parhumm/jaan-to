@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: arabic-out-of-scope
+expected_outcome: |
+  The text is recognised as Arabic, which the humanize skill does not cover; the user is told so, and any edit keeps Arabic spelling instead of applying Persian cleanup.
+context:
+  scaffold_script: place-files.sh

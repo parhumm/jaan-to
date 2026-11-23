@@ -1,0 +1,7 @@
+Background: Sleep plays a pivotal role in adolescent well-being, and understanding its intricate interplay with academic outcomes is crucial in today's ever-evolving educational landscape.
+
+Methods: We conducted a comprehensive analysis of data from 312 secondary-school students in three districts, who were followed for 18 months. Sleep duration was measured with wrist actigraphy, and academic performance was assessed through standardized test scores.
+
+Results: Our findings underscore the significant relationship between sleep and achievement. Students sleeping fewer than 7 hours per night were more likely to score in the lowest quartile (odds ratio 1.42, 95% CI 1.08–1.87, p = 0.03), highlighting the multifaceted impact of sleep on learning. The association remained after adjustment for household income.
+
+Conclusions: Shorter sleep was associated with lower academic performance. These results serve as a testament to the transformative potential of sleep-focused interventions, paving the way for a brighter future for students everywhere.

@@ -21,6 +21,7 @@ slug: /skills/core
 | [/skill-update](skill-update.md) | Update existing skill |
 | [/jaan-init](jaan-init.md) | Activate jaan-to for the current project |
 | [/jaan-issue-report](jaan-issue-report.md) | Report issues to jaan-to GitHub repo |
+| [/humanize](humanize.md) | Rewrite or audit English/Persian text that sounds AI-written |
 
 ---
 

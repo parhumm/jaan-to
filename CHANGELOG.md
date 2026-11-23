@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`/jaan-to:humanize`** — rewrite or audit English and Persian text that sounds AI-written, keeping every fact. Routes by the text's language to an English or Persian pack (`skills/humanize/references/{en,fa}/`), previews the plan at a HARD STOP, then verifies the rewrite with the bundled `check_tells.py` (strong tells, medium clusters, fact drift, quotations, hidden characters). Persian adds an orthography pass and lint (`persian_cleanup.py`, `fa_lint.py`, MIT). Outputs go to `$JAAN_OUTPUTS_DIR/writing/humanize/`. Script self-tests in `scripts/test/humanize-scripts-test.sh`; eval cases in `scripts/test/eval/humanize/`
+
 ---
 
 ## [7.8.1] - 2026-09-05

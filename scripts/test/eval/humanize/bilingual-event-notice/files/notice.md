@@ -1,0 +1,5 @@
+## Open House at Sarv Library / روز درهای باز کتابخانه سرو
+
+In today's fast-paced world, libraries are more than just places to borrow books — they are vibrant hubs of community and learning. Join us on Friday, 4 December 2026, from 10:00 to 16:00 at Sarv Library, 27 Golestan Street, for a day that seamlessly blends tours, a children's reading corner, and a used-book sale. Entry is free, and the first 50 visitors will receive a tote bag. Don't miss this unique opportunity to unlock the full potential of your local library!
+
+در دنیای پرشتاب امروز، کتابخانه‌ها نه تنها مکانی برای امانت گرفتن کتاب هستند، بلکه به قطب‌های پویای اجتماع و یادگیری تبدیل شده‌اند. ما شما را دعوت می‌کنیم تا روز جمعه ۱۳ آذر ۱۴۰۵، از ساعت ۱۰ تا ۱۶، در کتابخانه سرو، خیابان گلستان، پلاک ۲۷، در رویدادی شرکت کنید که بازدید از کتابخانه، گوشه کتاب‌خوانی کودکان و فروش کتاب دست‌دوم را به‌طور یکپارچه ترکیب می‌کند. ورود رایگان می‌باشد و به ۵۰ بازدیدکننده اول یک کیسه پارچه‌ای هدیه داده خواهد شد. این فرصت بی‌نظیر را برای بهره‌گیری از تمام ظرفیت‌های کتابخانه محله‌تان از دست ندهید!
