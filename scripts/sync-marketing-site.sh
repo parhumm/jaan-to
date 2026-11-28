@@ -9,8 +9,8 @@ PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 INDEX="$PLUGIN_ROOT/website/index.html"
 DRY_RUN="${1:-}"
 
-# --- 1. Extract latest version from CHANGELOG.md ---
-VERSION=$(grep -m1 '^\#\# \[' "$PLUGIN_ROOT/CHANGELOG.md" | sed 's/.*\[\(.*\)\].*/\1/')
+# --- 1. Extract latest released version from CHANGELOG.md (skips [Unreleased]) ---
+VERSION=$(grep -m1 '^## \[[0-9]' "$PLUGIN_ROOT/CHANGELOG.md" | sed 's/.*\[\(.*\)\].*/\1/')
 if [[ -z "$VERSION" ]]; then
   echo "ERROR: Could not extract version from CHANGELOG.md" >&2
   exit 1

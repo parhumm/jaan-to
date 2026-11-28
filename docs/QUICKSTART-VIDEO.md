@@ -211,7 +211,7 @@ claude
 **VISUAL:** Show terminal with jaan.to logo or GitHub page
 
 **NARRATION:**
-> "jaan.to is open source and free to use. Install it from the Claude Code marketplace, or visit github.com/parhumm/jaan-to for documentation and examples."
+> "Install jaan.to from the Claude Code marketplace, or visit github.com/parhumm/jaan-to for documentation and examples."
 
 **ON-SCREEN TEXT:**
 - **jaan.to**
@@ -306,7 +306,6 @@ jaan.to is a Claude Code plugin that automates product workflows with 18 AI-powe
 • Context-aware (reads your tech stack and team setup)
 • 18 skills across PM, Dev, UX, QA, Data
 • Learning system for continuous improvement
-• Open source and free to use
 
 🔗 Links:
 • GitHub: https://github.com/parhumm/jaan-to
@@ -337,7 +336,6 @@ Give soul to your workflow. Try jaan.to today.
 - Developer tools
 - Productivity
 - Workflow automation
-- Open source
 - SaaS tools
 
 **Thumbnail:**

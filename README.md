@@ -3,7 +3,7 @@
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
 [![Version](https://img.shields.io/badge/version-7.6.0-blue.svg)](.claude-plugin/plugin.json)
-[![Proprietary License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![Proprietary License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE.md)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
 [![Skills](https://img.shields.io/badge/skills-60-orange.svg)](skills/)
 [![Agents](https://img.shields.io/badge/agents-3-yellow.svg)](docs/agents/README.md)
@@ -679,7 +679,7 @@ Define → Design → Build → Quality → Ship
 
 ## Contributing
 
-jaan.to is open source. To extend:
+To extend jaan.to:
 
 1. Read [Creating Skills](docs/extending/create-skill.md)
 2. Use `/jaan-to:skill-create` to scaffold a new skill
@@ -726,7 +726,7 @@ You should see `jaan-to` with version `7.x.x`. If not, reinstall:
 
 ## License
 
-Proprietary. All rights reserved. See [LICENSE](LICENSE) for details.
+Proprietary. All rights reserved. See [LICENSE](LICENSE.md) for details.
 
 ---
 

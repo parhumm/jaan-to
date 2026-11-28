@@ -16,7 +16,7 @@ jobs:
         run: |
           mkdir -p /tmp/marketing-site
           cp website/index.html /tmp/marketing-site/
-          cp -r website/favicon_io /tmp/marketing-site/
+          cp -r website/favicon_io website/assets /tmp/marketing-site/
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
