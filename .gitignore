@@ -38,3 +38,6 @@ website/docs/src/pages/contributing.md
 
 # MCP tool artifacts
 .playwright-mcp/
+
+# Python bytecode (skill scripts)
+__pycache__/

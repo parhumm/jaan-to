@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: stakeholder-email-chat-artifacts
+expected_outcome: |
+  email.txt is a plain, direct team email with every chat artifact, tool token, tracking parameter and
+  placeholder removed, all facts (three vendors, March 14, $4,800, plan link) kept, nothing invented,
+  and the sender name left as a flag rather than made up.
+context:
+  scaffold_script: place-files.sh

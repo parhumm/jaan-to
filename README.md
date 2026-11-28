@@ -3,16 +3,16 @@
 **AI-powered skills for PM, Data, QA, Dev workflows. PRD generation, GTM tracking, documentation management, and more.**
 
 [![Version](https://img.shields.io/badge/version-7.6.0-blue.svg)](.claude-plugin/plugin.json)
-[![Proprietary License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![Proprietary License](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE.md)
 [![Claude Code Plugin](https://img.shields.io/badge/Plugin-Claude%20Code-purple.svg)](https://claude.ai)
-[![Skills](https://img.shields.io/badge/skills-56-orange.svg)](skills/)
+[![Skills](https://img.shields.io/badge/skills-60-orange.svg)](skills/)
 [![Agents](https://img.shields.io/badge/agents-3-yellow.svg)](docs/agents/README.md)
 
 ### Plugin Contents
 
 | Component | Count | Description |
 |-----------|-------|-------------|
-| **Skills** | 56 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
+| **Skills** | 60 | PM, Dev, Backend, Frontend, QA, UX, Data, Detect, WordPress, Release, Security, DevOps, Core |
 | **Agents** | 3 | quality-reviewer, context-scout, visual-reviewer |
 | **Hooks** | 7 | Setup, SessionStart, PreToolUse, PostToolUse, Stop, TaskCompleted, TeammateIdle |
 | **Output Styles** | 2 | enterprise-doc, concise-summary |
@@ -199,6 +199,17 @@ See [Recommended Permissions](#recommended-permissions) below for examples of co
 **Example:**
 ```
 /jaan-to:docs-create "API integration guide"
+```
+
+### Writing
+
+| Command | Description | Output |
+|---------|-------------|--------|
+| `/jaan-to:humanize` | Rewrite or audit English/Persian text that sounds AI-written, keeping every fact | `jaan-to/outputs/writing/humanize/{id}-{slug}/` |
+
+**Example:**
+```
+/jaan-to:humanize draft-email.md --audit
 ```
 
 ### Research
@@ -668,7 +679,7 @@ Define → Design → Build → Quality → Ship
 
 ## Contributing
 
-jaan.to is open source. To extend:
+To extend jaan.to:
 
 1. Read [Creating Skills](docs/extending/create-skill.md)
 2. Use `/jaan-to:skill-create` to scaffold a new skill
@@ -715,7 +726,7 @@ You should see `jaan-to` with version `7.x.x`. If not, reinstall:
 
 ## License
 
-Proprietary. All rights reserved. See [LICENSE](LICENSE) for details.
+Proprietary. All rights reserved. See [LICENSE](LICENSE.md) for details.
 
 ---
 

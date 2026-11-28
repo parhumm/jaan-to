@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: fa-admin-letter-register
+expected_outcome: |
+  nameh-final.md is still a formal administrative letter with its correct conventions (subject line,
+  greeting, request formula, closing), but without bureaucratic filler, می‌باشد-type verbs or calques,
+  and with every fact kept.
+context:
+  scaffold_script: place-files.sh
